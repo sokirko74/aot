@@ -305,7 +305,7 @@ void CMorphwizardView::OnFind()
 		if (find_what == "") return;
 		ChangeHistory(find_what);
 		UpdateData(FALSE);
-		std::string find_what_u8 = utf16_to_utf8(std::wstring(find_what));
+		std::string find_what_u8 = wstring_to_utf8(std::wstring(find_what));
 		Trim(find_what_u8);
 
 		CWizardProgressMeter meter(*GetWizard());
@@ -380,12 +380,12 @@ void CMorphwizardView::OnRemove()
 
 std::string CMorphwizardView::ToInnerEncoding(CString strText) const
 {
-	return utf16_to_utf8((LPCTSTR)strText);
+	return wstring_to_utf8((LPCTSTR)strText);
 }
 
 CString CMorphwizardView::FromInnerEncoding(std::string s) const
 {
-	return utf8_to_utf16(s).c_str();
+	return utf8_to_wstring(s).c_str();
 }
 
 
@@ -555,7 +555,7 @@ void CMorphwizardView::OnToolsSaveListFile()
 {
 	CFileDialog D(FALSE, _T("txt"), _T("wordlist.txt"));
 	if (D.DoModal() != IDOK) return;
-	FILE* fp = fopen(utf16_to_utf8((const TCHAR*)D.GetPathName()).c_str(), "wb");
+	FILE* fp = fopen(wstring_to_utf8((const TCHAR*)D.GetPathName()).c_str(), "wb");
 
 	for (auto& p: found_paradigms)
 	{
@@ -627,7 +627,7 @@ void CMorphwizardView::OnToolsExport()
 	try {
 		CFileDialog D(FALSE, _T("slf"), _T("paradigms.slf"));
 		if (D.DoModal() != IDOK) return;
-		std::ofstream fp(utf16_to_utf8((const TCHAR*)D.GetPathName()).c_str(), std::ios::binary);
+		std::ofstream fp(wstring_to_utf8((const TCHAR*)D.GetPathName()).c_str(), std::ios::binary);
 		if (!fp.is_open())
 		{
 			AfxMessageBox(_T("Cannot open file"));
@@ -690,7 +690,7 @@ void CMorphwizardView::OnToolsImport()
 		bool bTestMode = ::MessageBox(0, _T("Test it or import?"), _T("MorphWizard"), MB_YESNO) == IDYES;
 
 		GetWizard()->m_bFullTrace = false;
-		path = utf16_to_utf8((const TCHAR*)D.GetNextPathName(pos));
+		path = wstring_to_utf8((const TCHAR*)D.GetNextPathName(pos));
 		FILE* fp = fopen(path.c_str(), "r");
 		if (!fp)
 		{

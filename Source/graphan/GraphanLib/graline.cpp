@@ -474,7 +474,7 @@ size_t CGraLine::ReadWord(size_t Offset, const CGraphmatFile *G, uint32_t &PageN
         SetPunct();
     } else
         /* if it is a hard delimiter */
-    if (ispunct((BYTE) In[Offset]) || is_pseudo_graph((BYTE) In[Offset])) {
+    if (std::iswpunct(In[Offset]) || is_pseudo_graph((BYTE) In[Offset])) {
         for (int ch1 = In[Offset];
              (In[Offset] == ch1) && (ulen < CriticalTokenLength);
              Offset++,

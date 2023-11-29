@@ -194,7 +194,7 @@ void CreateLockFile(std::string fileName)
 	fprintf (fp,"Time = %s\n", CTime::GetCurrentTime().Format( "%H : %M" )); 
 	CString UserName = getenv("USERNAME");
     if (!UserName.IsEmpty())
-		fprintf (fp, "UserName = %s\n", utf16_to_utf8((const TCHAR*)UserName).c_str());
+		fprintf (fp, "UserName = %s\n", wstring_to_utf8((const TCHAR*)UserName).c_str());
 	fclose(fp);
 };
 	

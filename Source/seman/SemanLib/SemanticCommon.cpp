@@ -1850,7 +1850,7 @@ void SetSpacesAndRegisterInSentence(std::string& str)
 	{
 		std::string word = tok.val();
 		bool is_punct = (word.size() == 1)
-			&& ispunct((unsigned char)word[0]) != 0
+			&& std::iswpunct(word[0]) != 0
 			&& !strchr("(){}<>\"", word[0]);
 		if (is_punct && last_is_punct) continue;
 		last_is_punct = is_punct;
@@ -1866,14 +1866,14 @@ void SetSpacesAndRegisterInSentence(std::string& str)
 
 // Первая буква предложения всегда должна быть прописной
 // (проходим начальные знаки препинания (типа кавычки)
-	auto wstr = utf8_to_utf16(str);
+	auto wstr = utf8_to_wstring(str);
 	for (size_t k = 0; k < wstr.size(); k++)
-		if (!ispunct(wstr[k]))
+		if (!std::iswpunct(wstr[k]))
 			if (IsUnicodeAlpha(wstr[k])) {
 				wstr[k] = toupper_utf32(wstr[k]);
 				break;
 			}
-	str = utf16_to_utf8(wstr);
+	str = wstring_to_utf8(wstr);
 }
 
 

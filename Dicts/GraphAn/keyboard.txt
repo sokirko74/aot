@@ -13,17 +13,17 @@ ALT
 CONTROL
 
 [keys]
-PgUp
+PGUP
 F1
 F2
 @
-Page Down
-ScrLock 
-Scroll Lock
-Caps Lock
-CapsLock
-Num Lock
-NumLock
-Del
-Delete
+PAGE DOWN
+SCRLOCK 
+SCROLL LOCK
+CAPS LOCK
+CAPSLOCK
+NUM LOCK
+NUMLOCK
+DEL
+DELETE
 

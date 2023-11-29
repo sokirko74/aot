@@ -223,9 +223,9 @@ inline CSemStructureBuilder&	GetSemBuilder()
 }
 
 inline std::string _U8(CString s) {
-	return utf16_to_utf8((const TCHAR*)s);
+	return wstring_to_utf8((const TCHAR*)s);
 }
 
 inline CString _U16(std::string s) {
-	return utf8_to_utf16(s.c_str()).c_str();
+	return utf8_to_wstring(s.c_str()).c_str();
 }

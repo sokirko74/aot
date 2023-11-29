@@ -72,7 +72,7 @@ void CRusSemWord::InitWordFeatures(const CSentence* piSent, long WordNo) {
     SetWord(W.m_strWord);
     m_GraphDescrs = " " + W.BuildGraphemDescr() + " ";
 
-    m_IsPunct = !GetWord().empty() && ispunct((BYTE)GetWord()[0]);
+    m_IsPunct = !GetWord().empty() && std::iswpunct(GetWord()[0]);
     m_ILE = m_GraphDescrs.find(" LLE ") != std::string::npos;
     m_ArabicNumber = m_GraphDescrs.find("DC ") != std::string::npos;
     if (m_ILE) SetFormGrammems(rAllCases);
@@ -88,7 +88,7 @@ void CRusSemWord::InitWordFeatures(const CSentence* piSent, long WordNo) {
     m_PostPuncts = "";
     for (long i = WordNo + 1; i < piSent->m_Words.size(); i++) {
         std::string w = piSent->m_Words[i].m_strWord;
-        if (!w.empty() && ispunct((BYTE)w[0]))
+        if (!w.empty() && std::iswpunct(w[0]))
             m_PostPuncts += w;
         else
             break;

@@ -859,7 +859,7 @@ bool CGraphmatFile :: FindKeySequence (const char* title, size_t i,size_t HB, si
 			i++;
 		};
 
-		bool ObororCharIsPunct = ispunct((unsigned char)*title) != 0;
+		bool ObororCharIsPunct = std::iswpunct((unsigned char)*title) != 0;
 
 		long space_size = strspn (title," ");
 		title += space_size;
@@ -894,7 +894,7 @@ bool CGraphmatFile::IsKey(size_t LB, size_t HB, size_t& GraLast) const
   int ch1 =  (unsigned char)GetUnits()[LB].GetToken()[0];
   int ch2 =  (unsigned char)ReverseChar((unsigned char)GetUnits()[LB].GetToken()[0], m_Language);
   GraLast = LB+1;
-  if (ispunct (ch1)) return false;  
+  if (std::iswpunct (ch1)) return false;  
 
   long i=0;
   for (; i < m_pDicts->m_Keys.size(); i++)
@@ -1101,14 +1101,9 @@ static void InitEnglishNameSlot (CGraphmatFile& C)
 	   {
 			if (C.HasDescr(i, OLw)) continue;
 
-			const char* UpperUnit = C.GetUppercaseToken(i);
-
-			std::vector<CEnglishName>::const_iterator It = lower_bound (C.m_pDicts->m_EnglishNames.begin(), C.m_pDicts->m_EnglishNames.end(), UpperUnit, EnglishNameLess());
-
-			if	(		 (It != C.m_pDicts->m_EnglishNames.end())
-					&&	!strcmp(It->name, UpperUnit)
-				)
-			C.GetUnit(i).SetEnglishName();
+			auto& word = C.GetUpperString(i);
+			if	(C.m_pDicts->m_EnglishNames.find(word) != C.m_pDicts->m_EnglishNames.end())
+				C.GetUnit(i).SetEnglishName();
 	
 	   };
 };

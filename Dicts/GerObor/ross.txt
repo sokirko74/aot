@@ -104,10 +104,10 @@ GF1     = 1  VP
           2  < NP
 GF2     = 1  >> G
 ============
-TITLE        = anlãßlich+G
+TITLE        = anläßlich+G
 SENSE       = 1
 TIME_CREATE       = 9/3/3 11:55:44
-CONTENT =  anlãßlich
+CONTENT =  anläßlich
 GF      = 1  PRP
 SF      = 1  MODL
 VAL     =  MODL , А2 , А1
@@ -656,10 +656,10 @@ GF1     = 1  VP
           2  < NP
 GF2     = 1  >> D
 ============
-TITLE        = gemãß+D
+TITLE        = gemäß+D
 SENSE       = 1
 TIME_CREATE       = 9/3/3 11:55:44
-CONTENT =  gemãß
+CONTENT =  gemäß
 GF      = 1  PRP
 SF      = 1  MODL
 VAL     =  MODL , А2 , А1
@@ -953,10 +953,10 @@ GF1     = 1  VP
 GF2     = 1  >> G
           2  >> D
 ============
-TITLE        = lãngs+G
+TITLE        = längs+G
 SENSE       = 1
 TIME_CREATE       = 9/3/3 11:55:44
-CONTENT =  lãngs
+CONTENT =  längs
 GF      = 1  PRP
 SF      = 1  LOK
 VAL     =  LOK , А2 , А1
@@ -965,10 +965,10 @@ GF1     = 1  VP
 GF2     = 1  >> G
           2  >> D
 ============
-TITLE        = lãngsseits+G
+TITLE        = längsseits+G
 SENSE       = 1
 TIME_CREATE       = 9/3/3 11:55:44
-CONTENT =  lãngsseits
+CONTENT =  längsseits
 GF      = 1  PRP
 SF      = 1  LOK
 VAL     =  LOK , А2 , А1
@@ -1080,10 +1080,10 @@ GF1     = 1  VP
           2  < NP
 GF2     = 1  >> D
 ============
-TITLE        = nãchst+D
+TITLE        = nächst+D
 SENSE       = 1
 TIME_CREATE       = 9/3/3 11:55:44
-CONTENT =  nãchst
+CONTENT =  nächst
 GF      = 1  PRP
 SF      = 1  LOK
 VAL     =  LOK , А2 , А1
@@ -1097,7 +1097,7 @@ AUTHOR       = alex
 REDACT       = alex
 TIME_CREATE       = 20/3/3 14:32:7
 CONTENT =  ob
-EXM     =  er fragte sie, ob sie noch kãme
+EXM     =  er fragte sie, ob sie noch käme
 GF      = 1  KON_unt
 VAL     =  CONTEN , А1 , А2
 GF1     = 1  SENT
@@ -1259,10 +1259,10 @@ GF1     = 1  VP
           2  < NP
 GF2     = 1  >> G
 ============
-TITLE        = seitwãrts+G
+TITLE        = seitwärts+G
 SENSE       = 1
 TIME_CREATE       = 9/3/3 11:55:44
-CONTENT =  seitwãrts
+CONTENT =  seitwärts
 GF      = 1  PRP
 SF      = 1  MODL
           2  LOK
@@ -1361,7 +1361,7 @@ AUTHOR       = alex
 REDACT       = alex
 TIME_CREATE       = 15/4/3 14:46:26
 CONTENT =  teils  ... teils
-EXM     =  Er kauft teils Autos, teils Fahrrãder.
+EXM     =  Er kauft teils Autos, teils Fahrräder.
 GF      = 1  DISKONT_KON
 ============
 TITLE        = trotz+G
@@ -1666,22 +1666,22 @@ VAL     =  COMP , А1 , А2
 GF1     = 1  SENT
 GF2     = 1  SUBCLAUSE
 ============
-TITLE        = wãhrend
+TITLE        = während
 SENSE       = 1
 AUTHOR       = alex
 REDACT       = alex
 TIME_CREATE       = 20/3/3 15:17:56
-CONTENT =  wãhrend
+CONTENT =  während
 EXM     =  w. sie verreist waren, hat man bei ihnen eingebrochen.
 GF      = 1  KON_unt
 VAL     =  TIME , А1 , А2
 GF1     = 1  SENT
 GF2     = 1  SUBCLAUSE
 ============
-TITLE        = wãhrend+G
+TITLE        = während+G
 SENSE       = 1
 TIME_CREATE       = 9/3/3 11:55:44
-CONTENT =  wãhrend
+CONTENT =  während
 GF      = 1  PRP
 SF      = 1  TIME
 VAL     =  TIME , А2 , А1

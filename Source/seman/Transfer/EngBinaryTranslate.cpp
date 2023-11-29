@@ -601,12 +601,12 @@ struct CTransliteration {
 	}
 	std::string transliterate(std::string str) const {
 		MakeUpperUtf8(str);
-		auto s32 = convert_utf8_to_utf32(str);
-		const std::u32string before_e = U"УЕЪЫАОЭЯИЬЮ";
+		auto wstr = utf8_to_wstring(str);
+		const std::wstring before_e = U"УЕЪЫАОЭЯИЬЮ";
 		std::string res;
 		uint32_t prev_ch = 0;
-		for (size_t i = 0; i < s32.length(); i++) {
-			auto ch = s32[i];
+		for (size_t i = 0; i < wstr.length(); i++) {
+			auto ch = wstr[i];
 			if (ch == U'Е')
 				if (before_e.find(prev_ch) != std::string::npos)
 					res += "Ye";

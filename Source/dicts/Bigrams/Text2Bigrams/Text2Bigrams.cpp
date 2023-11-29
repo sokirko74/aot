@@ -114,7 +114,7 @@ interp_t DeletePunctuationMarks(const interp_t& Tokens)
 		for (size_t LineNo = 0; LineNo < SentSize; LineNo++)
 		{
 			std::string  Word = (*it)[LineNo];
-			if (ispunct((BYTE)Word[0]))
+			if (std::iswpunct(Word[0]))
 				continue;
 			else
 				lemmas.push_back(Word);

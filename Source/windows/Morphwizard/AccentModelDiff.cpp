@@ -85,8 +85,8 @@ void CAccentModelDiff::OnBnClickedAnalyse()
 		return;
 	}
 	const CFlexiaModel& flexia_model = GetWizard()->m_FlexiaModels[flexia_model_no];
-	CString s1 = utf8_to_utf16(GetWizard()->mrd_to_slf(base, flexia_model, m_AccentModel1, UnknownAccent, 79)).c_str();
-	CString s2 = utf8_to_utf16(GetWizard()->mrd_to_slf(base, flexia_model, m_AccentModel2, UnknownAccent, 79)).c_str();
+	CString s1 = utf8_to_wstring(GetWizard()->mrd_to_slf(base, flexia_model, m_AccentModel1, UnknownAccent, 79)).c_str();
+	CString s2 = utf8_to_wstring(GetWizard()->mrd_to_slf(base, flexia_model, m_AccentModel2, UnknownAccent, 79)).c_str();
 	auto lines1 = StringSplit(s1, "\r\n");
 	auto lines2 = StringSplit(s2, "\r\n");
 	m_Results = "Different accents:\r\n";

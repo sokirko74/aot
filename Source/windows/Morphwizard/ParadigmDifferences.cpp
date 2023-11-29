@@ -63,7 +63,7 @@ void CParadigmDifferences::OnBnClickedAnalyse()
             return;
     }
     std::string s = GetWizard()->show_differences_in_two_paradigms(m_Paradigm1,m_Paradigm2);
-    m_Results = utf8_to_utf16(s).c_str();
+    m_Results = utf8_to_wstring(s).c_str();
     UpdateData(FALSE);
 }
 

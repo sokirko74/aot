@@ -54,6 +54,7 @@ struct EnglishNameLess
 
 
 class CGraphanDicts {
+	void _add_oborot(CGraphemOborot o);
 public:
 
 	MorphLanguageEnum m_Language;
@@ -83,8 +84,8 @@ public:
 
 
 	// John, Bill
-	std::vector<CEnglishName>	m_EnglishNames;
-	bool		ReadENames (std::string FileName);
+	std::unordered_set<std::string>	m_EnglishNames;
+	void ReadENames (std::string path);
 	
 
 	mutable _share_pointer_t<CDictionary*>	m_pOborDictionary;

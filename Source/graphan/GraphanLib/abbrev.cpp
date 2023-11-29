@@ -73,34 +73,29 @@ bool AbbrevIsGreaterThanString (const CAbbrevItem& X, const CStrToCompare& Str)
 
 const char* NumberPlace = "/:D";
 
-static bool ReadAbbrevationsFromOneFile(std::string FileName, std::vector<CAbbrev>& V, MorphLanguageEnum langua)
+static bool ReadAbbrevationsFromOneFile(std::string path, std::vector<CAbbrev>& V, MorphLanguageEnum langua)
 {
-    FILE* fp = fopen(FileName.c_str(), "rb");
-	if (!fp) return false;
-
-    char buffer[AbbrevSize];
-	while (fgets (buffer, AbbrevSize, fp))
+    std::ifstream inp(path);
+	if (!inp.good()) {
+		throw CExpc("cannot open file %s", path.c_str());
+	}
+    std::string line;
+	while (std::getline(inp, line))
     {   
-		std::string s = buffer;	
-        
+		Trim(line);
 		{
-			int index = s.find("//");
+			int index = line.find("//");
 			if (index != std::string::npos)
-				s.erase(index);
+				line.erase(index);
 		};
-		Trim(s);
-		if (s.empty()) continue;
-		RmlMakeUpper(s, langua);
+		if (line.empty()) continue;
+		auto s = convert_from_utf8(MakeUpperUtf8(line).c_str(), langua);
 
 		CAbbrev Abbrev;
-
-		StringTokenizer tok(s.c_str(), " ");
-		while (tok())
+		for (auto& item_str: split_string(s, ' '))
 		{
 			CAbbrevItem item;
-
-			item.m_ItemStr = tok.val();;
-			
+			item.m_ItemStr = item_str;
 			if (item.m_ItemStr ==  NumberPlace) 
 				item.m_Type = abNumber;
 			else
@@ -111,12 +106,11 @@ static bool ReadAbbrevationsFromOneFile(std::string FileName, std::vector<CAbbre
 				item.m_Type = abAny;
 			else
 				item.m_Type = abString;
-
 			Abbrev.push_back(item);
 		};
 	    V.push_back (Abbrev);
     };   
-    fclose (fp);
+    inp.close();
 	return true;
 };
 
@@ -129,12 +123,12 @@ bool CGraphanDicts::ReadAbbrevations()
 	m_Abbrevs.clear();
 
 	// English abbreviation are common part
-	ReadAbbrevationsFromOneFile(MakeFName(FileName,"eng"),m_Abbrevs, m_Language);
+	ReadAbbrevationsFromOneFile(MakeFName(FileName,"eng"),m_Abbrevs, morphEnglish);
 
 	if (m_Language == morphGerman)
-		ReadAbbrevationsFromOneFile(MakeFName(FileName,"ger"),m_Abbrevs, m_Language);
-	else
-		ReadAbbrevationsFromOneFile(MakeFName(FileName,"rus"),m_Abbrevs, m_Language);
+		ReadAbbrevationsFromOneFile(MakeFName(FileName,"ger"),m_Abbrevs, morphGerman);
+	else if (m_Language == morphRussian)
+		ReadAbbrevationsFromOneFile(MakeFName(FileName,"rus"),m_Abbrevs, morphRussian);
 
 	
 
@@ -176,7 +170,7 @@ bool CGraphanDicts::ReadKeyboard(std::string FileName)
 {
   m_Keys.clear();
   m_KeyModifiers.clear();
-  FILE* fp = fopen((const char*)FileName.c_str(), "r");
+  FILE* fp = fopen(FileName.c_str(), "r");
 
   if (fp ==0 ) return true;
   char s[100];
@@ -206,7 +200,6 @@ bool CGraphanDicts::ReadKeyboard(std::string FileName)
 		   }
 		   else
 		   {
-			   RmlMakeUpper(s, m_Language);
 			   m_Keys.push_back(q);
 		   };
    };   

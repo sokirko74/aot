@@ -71,7 +71,7 @@ LRESULT CNewTextEntry::OnWizardNext()
 	   AfxMessageBox (_T("The text entry cannot be empty"));
 	   return -1;
    };
-   auto unit_str_u8 = utf16_to_utf8((const TCHAR*)m_UnitStr);
+   auto unit_str_u8 = wstring_to_utf8((const TCHAR*)m_UnitStr);
    uint16_t UnitNo = GetRoss()->LocateUnit (unit_str_u8.c_str(), MeanNum);
    if (UnitNo  != ErrUnitNo)
    {

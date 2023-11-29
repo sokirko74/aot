@@ -311,7 +311,7 @@ std::string  CSemanticStructure::GetNodeLemStr(size_t NodeNo) const
 	std::string S;
 	for (size_t i = 0; i < N.GetWordsSize(); i++)
 	{
-		if (!ispunct((BYTE)N.GetWord(i).GetWord()[0]))
+		if (!std::iswpunct(N.GetWord(i).GetWord()[0]))
 		{
 			S = S + N.GetWord(i).m_Lemma + std::string(" ");
 		}

@@ -67,7 +67,7 @@ BOOL CMorphwizardDoc::DoFileSave()
 	}
 	catch(CExpc e)
 	{
-		AfxMessageBox(utf8_to_utf16(e.what()).c_str());
+		AfxMessageBox(utf8_to_wstring(e.what()).c_str());
 		return FALSE;
 	}
 	return TRUE;
@@ -93,8 +93,8 @@ void CMorphwizardDoc::Serialize(CArchive& ar)
 		cIni.Init();
 		CWizardProgressMeter meter(m_Wizard);
 		GetWizard()->load_wizard(
-			utf16_to_utf8((const TCHAR *)ar.GetFile()->GetFilePath()).c_str(), 
-			utf16_to_utf8((const TCHAR*)dlgLogin.m_name).c_str(),
+			wstring_to_utf8((const TCHAR *)ar.GetFile()->GetFilePath()).c_str(), 
+			wstring_to_utf8((const TCHAR*)dlgLogin.m_name).c_str(),
 			((CMorphwizardApp*)AfxGetApp())->UsePredict,
 			false);
 		cIni.Exit();
@@ -217,7 +217,7 @@ BOOL CMorphwizardDoc::SaveModified()
 		{
 			m_slfDocs.GetNextAssoc(pos,doc,doc1);
 			if( doc->IsModified() )
-				s += CString(utf8_to_utf16(doc->GetLemmaUtf8()).c_str()) + _T(",\n");
+				s += CString(utf8_to_wstring(doc->GetLemmaUtf8()).c_str()) + _T(",\n");
 		}
 	}
 

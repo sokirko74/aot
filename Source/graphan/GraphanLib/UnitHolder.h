@@ -76,6 +76,7 @@ public:
 	const char*	GetUnitUpperBufferStart() const;
 	const char*	GetUppercaseToken(uint32_t LineNo) const;
 	std::string		GetToken(uint32_t LineNo) const;
+	std::string		GetUpperString(uint32_t LineNo) const;
 	size_t		GetTokensCount() const;
 	uint32_t		GetTokenInputOffset(uint32_t LineNo) const;
 	BYTE		GetTokenLength(uint32_t LineNo) const;

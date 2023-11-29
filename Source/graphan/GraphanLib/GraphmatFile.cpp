@@ -95,10 +95,12 @@ bool CGraphmatFile::LoadDicts ()
 
 			pDicts->m_pOborDictionary.SetPointer(new CDictionary, true);
 			std::string Path;
-			if (m_Language != morphGerman) 
+			if (m_Language == morphRussian) 
 				Path = GetRegistryString("Software\\Dialing\\Obor\\DictPath").c_str();
-			else
+			else if (m_Language == morphGerman)
 				Path = GetRegistryString("Software\\Dialing\\GerObor\\DictPath").c_str();
+			else 
+				Path = GetRegistryString("Software\\Dialing\\EngObor\\DictPath").c_str();
 			try {
 				pDicts->m_pOborDictionary.m_Pointer->Load(Path.c_str());
 			}

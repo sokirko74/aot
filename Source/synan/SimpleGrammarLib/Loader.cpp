@@ -100,7 +100,7 @@ void CWorkGrammar::AddToken(CTokenItem I) {
     assert (!I.m_TokenStr.empty());
     MakeUpperUtf8(I.m_TokenStr);
 
-    I.m_bPunctuation = (ispunct((BYTE) I.m_TokenStr[0]) != 0);
+    I.m_bPunctuation = (std::iswpunct(I.m_TokenStr[0]) != 0);
 
     m_TokenList.push_back(I);
 };

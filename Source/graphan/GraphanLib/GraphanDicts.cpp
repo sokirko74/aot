@@ -53,34 +53,21 @@ void CGraphanDicts ::FreeData()
 	m_Abbrevs.clear();
 };
 
-bool CGraphanDicts:: ReadENames (std::string FileName)
+void CGraphanDicts::ReadENames (std::string path)
 {
-	assert (m_Language != morphUnknown);
-   FILE* EnamesFp = MOpen (FileName.c_str(),RD_MODE);
-   char s[MaxNameSize];
-   while (fgets (s, MaxNameSize, EnamesFp))
+   assert (m_Language != morphUnknown);
+   std::ifstream inp(path);
+   if (!inp.good()) {
+	   throw CExpc("cannot open file %s", path.c_str());
+   }
+   std::string s;
+   while (std::getline(inp, s))
    {
-	   
-	   while (    (strlen (s) > 0)
-		       && isspace ((unsigned char)s[strlen(s) -1])
-			 )
-	   s[strlen(s) -1] = 0;
-
-	   if (strlen (s) == 0) continue;
-
-       CEnglishName N;
-	   strcpy  (N.name, s);
-
-	   RmlMakeUpper(N.name, m_Language);
-
-	   m_EnglishNames.push_back(N);
+	   Trim(s);
+	   if (s.empty()) continue;
+	   m_EnglishNames.insert(convert_from_utf8(s.c_str(), m_Language));
    };
-
-   sort (m_EnglishNames.begin(),m_EnglishNames.end(), EnglishNameLess());
-      
-   fclose (EnamesFp);  
-
-   return true;
+   inp.close();
 };
 
 

@@ -41,12 +41,12 @@ void CRusSemStructure::AddCollocHyp (long StartNodeNo,
 					long NextItemNo = ItemNo+1;
 					while	(		(NextItemNo < Colloc.Items.size()) 
 								&&	(		Colloc.Items[NextItemNo].IsHole() 
-										||	(ispunct((BYTE)Colloc.Items[NextItemNo].Item[0]))
+										||	std::iswpunct(Colloc.Items[NextItemNo].Item[0])
 									)
 							)
 					{
 						if (!Colloc.Items[NextItemNo].IsHole())
-							if (ispunct((BYTE)Colloc.Items[NextItemNo].Item[0]))
+							if (std::iswpunct(Colloc.Items[NextItemNo].Item[0]))
 							{
 								/*
 								Здесь приходится рассматривать два случая:
@@ -59,7 +59,7 @@ void CRusSemStructure::AddCollocHyp (long StartNodeNo,
 								*/
 								if (	(StartNodeNo +1 != Clause.m_EndNodeNo)
 										&&	m_Nodes[StartNodeNo +1].IsWordContainer()
-										&&	ispunct((BYTE)m_Nodes[StartNodeNo +1].m_Words[0].GetWord()[0])
+										&&	std::iswpunct(m_Nodes[StartNodeNo +1].m_Words[0].GetWord()[0])
 									)
 									break;
 								else

@@ -56,21 +56,22 @@ size_t  CGraphmatFile :: FindOborotto (size_t FirstGraLineNo, size_t HB, short& 
 	return MaxEndLineNo;
 };
 
-void NormalizeOborotStr (const CGraphanDicts& C, std::string& S)
+static void NormalizeOborotStr(std::string& s_utf8)
 {
-	
-	RmlMakeUpper( S, C.m_Language );
+	MakeUpperUtf8(s_utf8);
+	auto S = utf8_to_wstring(s_utf8);
+
 	int len = S.length();
 	int i = 0;
-	std::string Norm;
+	std::wstring Norm;
 	while (i < len )
 	{
-		std::string token;
+		std::wstring token;
 		while	(	
 						(i < len)
-					&&	(		is_alpha((BYTE)S[i])
-							||	isdigit((BYTE)S[i])
-							||	((BYTE)S[i] == '-')
+					&&	(		IsUnicodeAlpha(S[i])
+							||	isdigit(S[i])
+							||	(S[i] == '-')
 						)
 				)
 		{
@@ -79,33 +80,40 @@ void NormalizeOborotStr (const CGraphanDicts& C, std::string& S)
 		};
 		if (token.empty())
 		{
-			while ((i < len) && ispunct((BYTE)S[i]))
+			while ((i < len) && std::iswpunct(S[i]))
 			{
 				token += S[i];
 				i++;
 			};
 			if (token.empty())
 			{
-				if (isspace((BYTE)S[i]) ) 
+				if (isspace(S[i]) ) 
 				{
 					i++;
 					continue;
 				}
 				else
 				{
-					throw CExpc ("Cannot parse oborot " + S);
+					throw CExpc ("Cannot parse oborot " + s_utf8);
 				};
 			};
 
 		}
-		Norm += token + " ";
+		Norm += token + std::wstring(1, ' ');
 	};
-
-	Trim(Norm);
-	S = Norm;
+	s_utf8 = wstring_to_utf8(Norm);
+	Trim(s_utf8);
 };
 
-void  CGraphanDicts:: BuildOborot (const std::string& s, int OborotNo, bool bFixedFet)
+void CGraphanDicts::_add_oborot(CGraphemOborot o) {
+	
+	NormalizeOborotStr(o.m_UnitStr);
+	o.m_UnitStr = convert_from_utf8(o.m_UnitStr.c_str(), m_Language);
+	if (find(m_Oborottos.begin(), m_Oborottos.end(), o.m_UnitStr) == m_Oborottos.end())
+		m_Oborottos.push_back(o);
+}
+
+void  CGraphanDicts::BuildOborot (const std::string& s, int OborotNo, bool bFixedFet)
 {
 	size_t i = s.find("(");
 	if (i == s.npos) 
@@ -116,21 +124,19 @@ void  CGraphanDicts:: BuildOborot (const std::string& s, int OborotNo, bool bFix
 			O.m_bFixedFet = bFixedFet;
 			O.m_UnitNo = OborotNo;
 			O.m_UnitStr = s;
-			NormalizeOborotStr(*this, O.m_UnitStr);
-			if (find(m_Oborottos.begin(),  m_Oborottos.end(), O.m_UnitStr) == m_Oborottos.end())
-				m_Oborottos.push_back(O);
+			_add_oborot(O);
 
-
-			// приравниваем "в контакте с" и "в контакте со"
-			std::string q = " " +  O.m_UnitStr;
-			q = q.substr(q.length() - 2, 2);
-			// если заканчивается на предлог "с", "в" или "к"
-			if ( (q ==  _R(" К")) || (q ==  _R(" С")) || (q ==  _R(" В")) )
-			{
-				O.m_UnitStr += _R("О");
-				if (find(m_Oborottos.begin(),  m_Oborottos.end(), O.m_UnitStr) == m_Oborottos.end())
-					m_Oborottos.push_back(O);
-			};
+			if (m_Language == morphRussian) {
+				// приравниваем "в контакте с" и "в контакте со"
+				std::string q = " " + O.m_UnitStr;
+				q = q.substr(q.length() - 2, 2);
+				// если заканчивается на предлог "с", "в" или "к"
+				if ((q == " К") || (q == " С") || (q == " В"))
+				{
+					O.m_UnitStr += "О";
+					_add_oborot(O);
+				};
+			}
 		};
 	}
 	else
@@ -138,9 +144,7 @@ void  CGraphanDicts:: BuildOborot (const std::string& s, int OborotNo, bool bFix
 		size_t k = s.find (")");
 		if (k == s.npos)
 		{
-			char Error[250];
-			sprintf (Error, "Error in parenthesis  in oborot %s", s.c_str());
-			ErrorMessage(Error);
+			throw CExpc("Error in parenthesis  in oborot %s", s.c_str());
 		};
 		size_t last_j = i;
         for (size_t j =i+1; j <= k; j++)
@@ -159,7 +163,6 @@ void  CGraphanDicts:: BuildOborot (const std::string& s, int OborotNo, bool bFix
 		  };
 
 		};
-
 	};
 
 };
@@ -218,11 +221,14 @@ void BuildOborottosIndex (CGraphanDicts& C)
 
 	for (OborotNo=0; OborotNo < C.m_Oborottos.size(); OborotNo++)
 	{
-		for (int k = 0; k<C.m_Oborottos[OborotNo].m_TokenIds.size(); k++)
-			C.m_Oborottos[OborotNo].m_TokenIds[k] = T[ C.m_Oborottos[OborotNo].m_TokenIds[k] ];
-
-		assert (!C.m_Oborottos[OborotNo].m_TokenIds.empty());
-		C.m_OborottosFirstWordIndex[ C.m_Oborottos[OborotNo].m_TokenIds[0] ].push_back((uint16_t)OborotNo);
+		auto& c = C.m_Oborottos[OborotNo];
+		for (auto& k : c.m_TokenIds) {
+			k = T[k];
+		}
+		if (c.m_TokenIds.empty()) {
+			throw CExpc("fail to build oborot %s", convert_to_utf8(c.m_UnitStr, C.m_Language));
+		}
+		C.m_OborottosFirstWordIndex[ c.m_TokenIds[0] ].push_back((uint16_t)OborotNo);
 	};
 
 };
@@ -252,7 +258,7 @@ void  CGraphanDicts :: BuildOborottos ()
 		for (size_t k = GetOborDic()->GetUnitStartPos(i); k <= GetOborDic()->GetUnitLastPos(i); k++)
 			if (GetOborDic()->GetCortege(k).m_FieldNo == content_field_no)
 			{
-				std::string q = _R(GetOborDic()->GetDomItemStr(k, 0));
+				std::string q = GetOborDic()->GetDomItemStr(k, 0);
 				BuildOborot(q, i, HasFixedFet);
 			}
 	}

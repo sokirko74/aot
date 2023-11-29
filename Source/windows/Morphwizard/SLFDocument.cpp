@@ -186,7 +186,7 @@ BOOL CSLFDocument::SaveModified()
 	{
 		auto mess = Format("%s at line %i\nExit without save?", e.what(), m_GotoLine);
 
-		switch (AfxMessageBox (utf8_to_utf16(mess).c_str(), MB_OKCANCEL) )
+		switch (AfxMessageBox (utf8_to_wstring(mess).c_str(), MB_OKCANCEL) )
 		{
 		   case IDCANCEL:return FALSE;  	  	   
 		   case IDOK: return TRUE;
@@ -221,10 +221,10 @@ void CSLFDocument::update_saved_paradigm()
 	m_SaveCommonGrammems = m_CommonGrammems;	
 	m_SavePrefixes = m_Prefixes;	
 	if (m_Paradigm.m_FlexiaModelNo != UnknownParadigmNo)
-		m_ParadigmComments = utf8_to_utf16(GetWizard()->m_FlexiaModels[m_Paradigm.m_FlexiaModelNo].m_Comments).c_str();
+		m_ParadigmComments = utf8_to_wstring(GetWizard()->m_FlexiaModels[m_Paradigm.m_FlexiaModelNo].m_Comments).c_str();
 
 	if (m_ParadigmText.GetLength() > 0)
-		SetPathName(utf8_to_utf16(GetSavedLemma()).c_str());
+		SetPathName(utf8_to_wstring(GetSavedLemma()).c_str());
 }
 
 //----------------------------------------------------------------------------

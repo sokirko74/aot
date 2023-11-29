@@ -300,7 +300,7 @@ void CGrammarItem::AddAttribute(std::string Name, std::string Value, MorphLangua
 
 		if ((m_TokenType == OTHER_TOKEN_TYPE) && !m_Token.empty())
 		{
-			if (ispunct((BYTE)m_Token[0]))
+			if (std::iswpunct(m_Token[0]))
 				m_TokenType = PUNCTUAT;
 			else
 				if (isdigit((BYTE)m_Token[0]))

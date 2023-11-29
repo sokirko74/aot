@@ -10,5 +10,5 @@
 
 inline std::string WstrToUtf8Str(CStringW wide_string) {
 	std::wstring w(wide_string);
-	return utf16_to_utf8(w);
+	return wstring_to_utf8(w);
 }

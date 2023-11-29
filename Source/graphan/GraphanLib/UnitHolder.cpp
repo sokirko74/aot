@@ -323,6 +323,13 @@ std::string  CUnitHolder::GetToken(uint32_t LineNo) const
 	return std::string(s);
 };
 
+std::string  CUnitHolder::GetUpperString(uint32_t LineNo) const
+{
+	size_t off = ((GetUnits()[LineNo].GetToken() + LineNo) - GetUnitBufferStart());
+	size_t len = GetUnits()[LineNo].GetTokenLength();
+	return std::string(GetUnitUpperBufferStart() + off, GetUnitUpperBufferStart() + off + len);
+};
+
 	
 size_t	CUnitHolder::GetTokensCount() const 
 {

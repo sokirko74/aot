@@ -50,7 +50,7 @@ try{
 	UpdateData(TRUE);
 	CTempArticle A(m_pActiveRossDoc->GetRoss());
 
-	std::string field_u8 = utf16_to_utf8((const wchar_t*)m_FieldStr);
+	std::string field_u8 = wstring_to_utf8((const wchar_t*)m_FieldStr);
 	BYTE EngFieldNo = m_pActiveRossDoc->GetRoss()->GetFieldNoByFieldStr(field_u8.c_str());
 
 	std::vector<CRossDoc*> RossDocs;

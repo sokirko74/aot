@@ -175,7 +175,7 @@ void CSemanticStrView::PasteClipboard()
 
 	CopyMemory( wstr, hMem, GlobalSize(hMem));
 	wstr[GlobalSize(hMem)] = 0;
-	std::string utf8 = utf16_to_utf8(std::wstring(wstr));
+	std::string utf8 = wstring_to_utf8(std::wstring(wstr));
 	std::string str1251 = convert_from_utf8(utf8.c_str(), morphRussian);
     CString Q = str1251.c_str();
 	char cmd[5200];

@@ -536,7 +536,7 @@ void CSLFView::OnBnClickedChangeParadigm()
 	};
 	GetWizard()->change_prd_info(GetDocument()->m_Paradigm, Lemma, ParadigmNo, UnknownParadigmNo, true);
 	auto paradigm = GetWizard()->mrd_to_slf(Lemma.c_str(), new_par, GetDocument()->m_Paradigm.m_AccentModelNo, GetDocument()->m_Paradigm.m_AuxAccent, 50);
-	GetDocument()->m_ParadigmText = utf8_to_utf16(paradigm).c_str();
+	GetDocument()->m_ParadigmText = utf8_to_wstring(paradigm).c_str();
 	UpdateData(FALSE);
 	m_pRichView->RedrawLines();
 

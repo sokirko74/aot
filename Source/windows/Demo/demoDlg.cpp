@@ -245,7 +245,7 @@ void UnicoodeMakeLower(CStringW& s) {
 
 CString BuildCString(MorphLanguageEnum langua, std::string s)
 {
-	return utf8_to_utf16(convert_to_utf8(s, langua)).c_str();
+	return utf8_to_wstring(convert_to_utf8(s, langua)).c_str();
 }
 
 

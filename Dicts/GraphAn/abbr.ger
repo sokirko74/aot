@@ -1,14 +1,14 @@
-//  Åach token in this file should be  separated by a space. Otherwise it 
+//  Ã…ach token in this file should be  separated by a space. Otherwise it 
 // would not be recognized as an abbreviation. For example:
 // Mr. 
 // would  be treated as one token, while Graphan module divides it into
 // two tokens. So in this file it should be written as follows:
 // Mr . 
 
-a . a . O //am angeführten Ort
+a . a . O //am angefÃ¼hrten Ort
 a . A . // auf Anfrage
-Abk . //Abkürzung
-a . D . //außer Dienst
+Abk . //AbkÃ¼rzung
+a . D . //auÃŸer Dienst
 a . G . //auf Gegenseitigkeit
 Anh . //Anhang
 Anl . //Anlage
@@ -37,9 +37,9 @@ ver . di //Vereinte Dienstleistungsgewerkschaft
 v . u . Z . //vor unserer Zeitrechnung
 wzbw . //was zu beweisen war
 z . B . //zum Beispiel
-zus . //zusätzlich
-zusätzl . //zusätzlich
-zushg . //zusammenhängend
+zus . //zusÃ¤tzlich
+zusÃ¤tzl . //zusÃ¤tzlich
+zushg . //zusammenhÃ¤ngend
 Mill . /:a
 ASanI . /:a
 Abdr . /:a
@@ -54,7 +54,7 @@ Abschr . /:a
 Acad . /:a
 Acc . /:a
 Accad . /:a
-Achtjähr . /:a
+AchtjÃ¤hr . /:a
 Adv . /:a
 Aesth . /:a
 Ak . /:a
@@ -66,7 +66,7 @@ Amer . /:a
 Amerik . /:a
 Amtsnachf . /:a
 Anf . /:a
-Anfängl . /:a
+AnfÃ¤ngl . /:a
 Angekl . /:a
 Angeles . /:a
 Anh . /:a
@@ -99,7 +99,7 @@ Ausw . /:a
 Aut . /:a
 Autobiogr . /:a
 Autogr . /:a
-Außenst . /:a
+AuÃŸenst . /:a
 Av . /:a
 Az . /:a
 Bach-Ausg . /:a
@@ -115,8 +115,8 @@ Barock-M . /:a
 Bau-K . /:a
 Bauakad . /:a
 Baumann . /:a
-Baßklar . /:a
-Baßst . /:a
+BaÃŸklar . /:a
+BaÃŸst . /:a
 Bb . /:a
 Bc . /:a
 Bd . /:a
@@ -157,15 +157,15 @@ Bt . /:a
 Buch-M . /:a
 Buddh . /:a
 Bulg . /:a
-Bußps . /:a
+BuÃŸps . /:a
 Byz . /:a
 Bzw . /:a
-Bänkelgsg . /:a
-Bö . /:a
-Bücherslg . /:a
-Bühnenauff . /:a
-Bühnenkomp . /:a
-Bühnenkompos . /:a
+BÃ¤nkelgsg . /:a
+BÃ¶ . /:a
+BÃ¼cherslg . /:a
+BÃ¼hnenauff . /:a
+BÃ¼hnenkomp . /:a
+BÃ¼hnenkompos . /:a
 Ca . /:a
 Cal . /:a
 Cath . /:a
@@ -213,8 +213,8 @@ Ct . /:a
 Ctm . /:a
 Cts . /:a
 Cz . /:a
-Cäcilien-Ver . /:a
-Cäcilienver . /:a
+CÃ¤cilien-Ver . /:a
+CÃ¤cilienver . /:a
 Darst . /:a
 Dat . /:a
 Dep . /:a
@@ -231,7 +231,7 @@ Dipl . /:a
 Dispos . /:a
 Diss . /:a
 Diz . /:a
-Diözesanmus . /:a
+DiÃ¶zesanmus . /:a
 Dok . /:a
 Domarch . /:a
 Dombibl . /:a
@@ -246,7 +246,7 @@ Durchkompos . /:a
 Durchschn . /:a
 Dyn . /:a
 Dz . /:a
-Dép . /:a
+DÃ©p . /:a
 Ebd . /:a
 Ehrbg . /:a
 Ehrenmitgl . /:a
@@ -264,16 +264,16 @@ Entwickl . /:a
 Ep . /:a
 Epist . /:a
 Erb-S . /:a
-Ergänzungsbd . /:a
+ErgÃ¤nzungsbd . /:a
 Erh . /:a
 Erl . /:a
 Ersch . /:a
 Erstauff . /:a
 Erstausg . /:a
-Erstveröff . /:a
+ErstverÃ¶ff . /:a
 Erw . /:a
 Erwachsenen-T . /:a
-Eröffn . /:a
+ErÃ¶ffn . /:a
 Et . /:a
 Etc . /:a
 Eth . /:a
@@ -285,7 +285,7 @@ Ew . /:a
 ExComm . /:a
 Exp . /:a
 Expl . /:a
-Eßl . /:a
+EÃŸl . /:a
 FMk . /:a
 Fachlit . /:a
 Fachzss . /:a
@@ -316,8 +316,8 @@ Fragm . /:a
 Frankfurt/M . /:a
 Frankfurt/O . /:a
 FrankfurtM . /:a
-Französ . /:a
-Franç . /:a
+FranzÃ¶s . /:a
+FranÃ§ . /:a
 Frauen-Ch . /:a
 Frcs . /:a
 Freiburg/Br . /:a
@@ -328,7 +328,7 @@ Friedr . /:a
 Frkr . /:a
 Frs . /:a
 Frz . /:a
-Frç . /:a
+FrÃ§ . /:a
 Fss . /:a
 Ft . /:a
 Fugenkompos . /:a
@@ -339,7 +339,7 @@ Gastprof . /:a
 Gattg . /:a
 Geb . /:a
 Gedr . /:a
-Gefäßfl . /:a
+GefÃ¤ÃŸfl . /:a
 Gegenst . /:a
 Gegr . /:a
 Geistl . /:a
@@ -348,7 +348,7 @@ Gelegentl . /:a
 GemCh . /:a
 Gemeinde-Gsg . /:a
 Gemeindegsg . /:a
-Gemäldeslg . /:a
+GemÃ¤ldeslg . /:a
 General-Sup . /:a
 Generalsekr . /:a
 Ges . /:a
@@ -370,12 +370,12 @@ Goldberg-Var . /:a
 Gp . /:a
 Gr . /:a
 Griech . /:a
-Groß-B . /:a
+GroÃŸ-B . /:a
 Grundl . /:a
 Grundlagen-F . /:a
 Grundst . /:a
 Gruppen-T . /:a
-Gründungsmitgl . /:a
+GrÃ¼ndungsmitgl . /:a
 Gsg . /:a
 GsgB . /:a
 Gsge . /:a
@@ -436,8 +436,8 @@ Hymnengsg . /:a
 Hymnenkompos . /:a
 Hymnenslg . /:a
 Hz . /:a
-Händel-Ausg . /:a
-Händel-Ges . /:a
+HÃ¤ndel-Ausg . /:a
+HÃ¤ndel-Ges . /:a
 IG/Gew . /:a
 Il . /:a
 Inc . /:a
@@ -549,8 +549,8 @@ Kunstgsg . /:a
 Kunstmus . /:a
 Kunstslg . /:a
 Kunstwiss . /:a
-Kurfürstl . /:a
-Königl . /:a
+KurfÃ¼rstl . /:a
+KÃ¶nigl . /:a
 Landes-K . /:a
 Landesbibl . /:a
 Landesmus . /:a
@@ -596,7 +596,7 @@ Ltda . /:a
 LuE . /:a
 Luth . /:a
 Lw . /:a
-Längsfl . /:a
+LÃ¤ngsfl . /:a
 MCh . /:a
 MLex . /:a
 MTh . /:a
@@ -622,20 +622,20 @@ Messenkomp . /:a
 Messenkompos . /:a
 Metaphys . /:a
 Mezzosopr . /:a
-Meß-O . /:a
-Meßgsg . /:a
-Meßgsge . /:a
-Meßkat . /:a
-Meßkompos . /:a
+MeÃŸ-O . /:a
+MeÃŸgsg . /:a
+MeÃŸgsge . /:a
+MeÃŸkat . /:a
+MeÃŸkompos . /:a
 Mf . /:a
 MfG . /:a
 Mg . /:a
 Mgr . /:a
-Militärkpm . /:a
-Militärorch . /:a
-Millionenhöhe . /:a
+MilitÃ¤rkpm . /:a
+MilitÃ¤rorch . /:a
+MillionenhÃ¶he . /:a
 Min . /:a
-Ministerpräs . /:a
+MinisterprÃ¤s . /:a
 Mio . /:a
 Misc . /:a
 Mitarb . /:a
@@ -689,18 +689,18 @@ Musikslgn . /:a
 Musikver . /:a
 Musikzs . /:a
 Musikzss . /:a
-Musikästh . /:a
+MusikÃ¤sth . /:a
 Musterbeisp . /:a
 Mw . /:a
 MwSt . /:a
 Mwst . /:a
 Mysap . /:a
-Männergesangver . /:a
-Männergsg . /:a
-Männerst . /:a
-Mém . /:a
-Mü . /:a
-Münsterorg . /:a
+MÃ¤nnergesangver . /:a
+MÃ¤nnergsg . /:a
+MÃ¤nnerst . /:a
+MÃ©m . /:a
+MÃ¼ . /:a
+MÃ¼nsterorg . /:a
 Nachdr . /:a
 Nachf . /:a
 Nachm . /:a
@@ -733,7 +733,7 @@ Nouv . /:a
 Nov . /:a
 Nr . /:a
 Nrn . /:a
-Nördl . /:a
+NÃ¶rdl . /:a
 Ober-St . /:a
 Oberkpm . /:a
 Odenkompos . /:a
@@ -806,7 +806,7 @@ Privatslgn . /:a
 Progr . /:a
 Prov . /:a
 Proz . /:a
-Präs . /:a
+PrÃ¤s . /:a
 Ps . /:a
 Psychol . /:a
 Pt . /:a
@@ -817,8 +817,8 @@ PuF . /:a
 Publ . /:a
 Pv . /:a
 Pw . /:a
-PÖ . /:a
-Päd . /:a
+PÃ– . /:a
+PÃ¤d . /:a
 QdE . /:a
 Qu . /:a
 Quaest . /:a
@@ -855,8 +855,8 @@ Rud . /:a
 Rundfunkorch . /:a
 Rundgsg . /:a
 Rundschau . /:a
-Röm . /:a
-Römerberg . /:a
+RÃ¶m . /:a
+RÃ¶merberg . /:a
 S/W-Abb . /:a
 SFr . /:a
 Sa . /:a
@@ -873,9 +873,9 @@ Sbdn . /:a
 Sc . /:a
 Sch . /:a
 Schl . /:a
-Schließl . /:a
-Schloßorg . /:a
-Schlußtl . /:a
+SchlieÃŸl . /:a
+SchloÃŸorg . /:a
+SchluÃŸtl . /:a
 Schn . /:a
 Schnabelfl . /:a
 Schr . /:a
@@ -886,7 +886,7 @@ Schulgsg . /:a
 Schulorch . /:a
 Schw . /:a
 Schwed . /:a
-Schülerorch . /:a
+SchÃ¼lerorch . /:a
 Sdr . /:a
 Sdrn . /:a
 Sek . /:a
@@ -930,7 +930,7 @@ Spr . /:a
 Sprechgsg . /:a
 Sprechst . /:a
 Spvgg . /:a
-Spät-MA . /:a
+SpÃ¤t-MA . /:a
 Sr . /:a
 St . /:a
 StGB . /:a
@@ -970,12 +970,12 @@ Symphonie-Orch . /:a
 Symphonieorch . /:a
 Syst . /:a
 Sz . /:a
-Sächs . /:a
-Sämtl . /:a
-Sängerver . /:a
-Säuglings-T . /:a
-Süd-A . /:a
-Südl . /:a
+SÃ¤chs . /:a
+SÃ¤mtl . /:a
+SÃ¤ngerver . /:a
+SÃ¤uglings-T . /:a
+SÃ¼d-A . /:a
+SÃ¼dl . /:a
 Taf . /:a
 Tafelkl . /:a
 Tanjug . /:a
@@ -1002,7 +1002,7 @@ Theor . /:a
 Thlr . /:a
 Thomasorg . /:a
 Thuk . /:a
-Théol . /:a
+ThÃ©ol . /:a
 Tierhr . /:a
 Titel-S . /:a
 Titelaufl . /:a
@@ -1019,7 +1019,7 @@ Trauergsg . /:a
 Trioson . /:a
 Trp . /:a
 Tsd . /:a
-Tägl . /:a
+TÃ¤gl . /:a
 Umarb . /:a
 Unabh . /:a
 Ung . /:a
@@ -1032,7 +1032,7 @@ Unterst . /:a
 Urauff . /:a
 Urk . /:a
 Urspr . /:a
-Ursprüngl . /:a
+UrsprÃ¼ngl . /:a
 Urtextausg . /:a
 Usw . /:a
 UuH . /:a
@@ -1050,8 +1050,8 @@ Verlagsprogr . /:a
 Vermutl . /:a
 Verw . /:a
 Verz . /:a
-Veränd . /:a
-Veröff . /:a
+VerÃ¤nd . /:a
+VerÃ¶ff . /:a
 Vesper-Ps . /:a
 Vesperps . /:a
 Vf . /:a
@@ -1062,7 +1062,7 @@ Vir . /:a
 Vize-Kpm . /:a
 Vizedir . /:a
 Vizekpm . /:a
-Vizepräs . /:a
+VizeprÃ¤s . /:a
 Vl . /:a
 Vld . /:a
 Vldf . /:a
@@ -1115,11 +1115,11 @@ Wiss . /:a
 Wissensch . /:a
 Wochenbl . /:a
 Wwe . /:a
-Württ . /:a
+WÃ¼rtt . /:a
 Xen . /:a
 Xll . /:a
 Zeitabschn . /:a
-Zeitgenöss . /:a
+ZeitgenÃ¶ss . /:a
 Zeitschr . /:a
 Zentralbibl . /:a
 Zit . /:a
@@ -1135,7 +1135,7 @@ Zugtrp . /:a
 Zungenst . /:a
 Zus . /:a
 Zw . /:a
-abendländ . /:a
+abendlÃ¤nd . /:a
 abgedr . /:a
 abrufbar . /:a
 ac . /:a
@@ -1154,8 +1154,8 @@ akad . /:a
 akadem . /:a
 allegor . /:a
 allg . /:a
-allmähl . /:a
-alltägl . /:a
+allmÃ¤hl . /:a
+alltÃ¤gl . /:a
 altchristl . /:a
 altdt . /:a
 altengl . /:a
@@ -1165,39 +1165,39 @@ altgriech . /:a
 altind . /:a
 altital . /:a
 altnord . /:a
-altröm . /:a
+altrÃ¶m . /:a
 altspan . /:a
-altägypt . /:a
+altÃ¤gypt . /:a
 amer . /:a
 amerik . /:a
 amerikan . /:a
 amtl . /:a
-anfängl . /:a
+anfÃ¤ngl . /:a
 angebl . /:a
 angelangt . /:a
 angelockt . /:a
-angelsächs . /:a
+angelsÃ¤chs . /:a
 angew . /:a
-anläßl . /:a
+anlÃ¤ÃŸl . /:a
 anno . /:a
 anschaul . /:a
 anschl . /:a
 apc . /:a
 aram . /:a
-archäol . /:a
+archÃ¤ol . /:a
 arr . /:a
 assyr . /:a
 att . /:a
 auff . /:a
 aufgef . /:a
-ausführl . /:a
+ausfÃ¼hrl . /:a
 ausg . /:a
 ausgew . /:a
 ausst . /:a
 autobiogr . /:a
 autogr . /:a
-außereurop . /:a
-außerordentl . /:a
+auÃŸereurop . /:a
+auÃŸerordentl . /:a
 av . /:a
 bFr . /:a
 babyl . /:a
@@ -1215,7 +1215,7 @@ ber . /:a
 bes . /:a
 besterh . /:a
 betr . /:a
-beträchtl . /:a
+betrÃ¤chtl . /:a
 bew . /:a
 bewegl . /:a
 bez . /:a
@@ -1236,8 +1236,8 @@ burgund . /:a
 byz . /:a
 bzgl . /:a
 bzw . /:a
-bäuerl . /:a
-bürgerl . /:a
+bÃ¤uerl . /:a
+bÃ¼rgerl . /:a
 ca . /:a
 cath . /:a
 cec . /:a
@@ -1286,8 +1286,8 @@ durchkomp . /:a
 durchschn . /:a
 dynam . /:a
 dz . /:a
-dän . /:a
-dép . /:a
+dÃ¤n . /:a
+dÃ©p . /:a
 ebd . /:a
 ebda . /:a
 ecc . /:a
@@ -1298,14 +1298,14 @@ ehem . /:a
 ehemal . /:a
 eigenhd . /:a
 eigentl . /:a
-eigentüml . /:a
+eigentÃ¼ml . /:a
 eindringl . /:a
 eingel . /:a
 einger . /:a
 einheim . /:a
 einheitl . /:a
 einschl . /:a
-einschließl . /:a
+einschlieÃŸl . /:a
 elektr . /:a
 empir . /:a
 engl . /:a
@@ -1343,7 +1343,7 @@ ffr . /:a
 ffrs . /:a
 fg . /:a
 fhg . /:a
-figürl . /:a
+figÃ¼rl . /:a
 fil . /:a
 fl . /:a
 fluxx . /:a
@@ -1352,28 +1352,28 @@ fortgef . /:a
 fortges . /:a
 fortschrittl . /:a
 fragm . /:a
-französ . /:a
-franç . /:a
+franzÃ¶s . /:a
+franÃ§ . /:a
 frcs . /:a
 fre . /:a
 freik . /:a
 frs . /:a
 frz . /:a
-fränk . /:a
-frç . /:a
-frühchristl . /:a
-frühgot . /:a
+frÃ¤nk . /:a
+frÃ§ . /:a
+frÃ¼hchristl . /:a
+frÃ¼hgot . /:a
 ft . /:a
 fu-berlin . /:a
-fälschl . /:a
-fünfst . /:a
-fürstl . /:a
+fÃ¤lschl . /:a
+fÃ¼nfst . /:a
+fÃ¼rstl . /:a
 geb . /:a
-gebräuchl . /:a
+gebrÃ¤uchl . /:a
 gedr . /:a
 geg . /:a
-gegenständl . /:a
-gegensätzl . /:a
+gegenstÃ¤ndl . /:a
+gegensÃ¤tzl . /:a
 gegr . /:a
 geistl . /:a
 gelbl . /:a
@@ -1386,7 +1386,7 @@ gesch . /:a
 geschichtl . /:a
 geschl . /:a
 gesellschaftl . /:a
-gewöhnl . /:a
+gewÃ¶hnl . /:a
 gez . /:a
 ggf . /:a
 ggfs . /:a
@@ -1397,13 +1397,13 @@ gov . /:a
 gr . /:a
 grch . /:a
 griech . /:a
-großbürgerl . /:a
-grundsätzl . /:a
+groÃŸbÃ¼rgerl . /:a
+grundsÃ¤tzl . /:a
 gsg . /:a
-gén . /:a
+gÃ©n . /:a
 habil . /:a
 handwerkl . /:a
-hauptsächl . /:a
+hauptsÃ¤chl . /:a
 hd . /:a
 hebr . /:a
 heidn . /:a
@@ -1414,7 +1414,7 @@ hfl . /:a
 hg . /:a
 histor . /:a
 hl . /:a
-holländ . /:a
+hollÃ¤nd . /:a
 hom . /:a
 hrg . /:a
 hrsg . /:a
@@ -1422,8 +1422,8 @@ hrz . /:a
 hs . /:a
 http/www . /:a
 hu-berlin . /:a
-häusl . /:a
-höf . /:a
+hÃ¤usl . /:a
+hÃ¶f . /:a
 ib . /:a
 icf . /:a
 ikonolog . /:a
@@ -1451,8 +1451,8 @@ jr . /:a
 jugendl . /:a
 jun . /:a
 jur . /:a
-jährl . /:a
-jüd . /:a
+jÃ¤hrl . /:a
+jÃ¼d . /:a
 kWh . /:a
 kaiserl . /:a
 kannVgl . /:a
@@ -1461,7 +1461,7 @@ kg . /:a
 kgl . /:a
 kirchl . /:a
 kl . /:a
-kleinbürgerl . /:a
+kleinbÃ¼rgerl . /:a
 km . /:a
 km/Std . /:a
 kom . /:a
@@ -1479,10 +1479,10 @@ kulturgeschichtl . /:a
 kulturhist . /:a
 kunstgeschichtl . /:a
 kunsthist . /:a
-kurfürstl . /:a
-königl . /:a
-körperl . /:a
-künstl . /:a
+kurfÃ¼rstl . /:a
+kÃ¶nigl . /:a
+kÃ¶rperl . /:a
+kÃ¼nstl . /:a
 l'Acad . /:a
 l'Org . /:a
 l'hist . /:a
@@ -1503,11 +1503,11 @@ liturg . /:a
 lt . /:a
 luth . /:a
 lyr . /:a
-ländl . /:a
+lÃ¤ndl . /:a
 m/Sek . /:a
 madr . /:a
 mathem . /:a
-maßgebl . /:a
+maÃŸgebl . /:a
 mdr . /:a
 mechan . /:a
 med . /:a
@@ -1533,18 +1533,18 @@ mySAP . /:a
 mysap . /:a
 myst . /:a
 mytholog . /:a
-männl . /:a
-mögl . /:a
+mÃ¤nnl . /:a
+mÃ¶gl . /:a
 nG . /:a
 nKr . /:a
 nachgedr . /:a
 nachm . /:a
-nachrücken . /:a
-nachträgl . /:a
+nachrÃ¼cken . /:a
+nachtrÃ¤gl . /:a
 namentl . /:a
 natl . /:a
 naturwiss . /:a
-natürl . /:a
+natÃ¼rl . /:a
 ndl . /:a
 nebenamtl . /:a
 neubearb . /:a
@@ -1557,17 +1557,17 @@ neuzeitl . /:a
 nichtliturg . /:a
 niederdt . /:a
 niederl . /:a
-niederländ . /:a
+niederlÃ¤nd . /:a
 nld . /:a
 nom . /:a
 nordamerik . /:a
 norddt . /:a
 nordwestl . /:a
-nordöstl . /:a
+nordÃ¶stl . /:a
 norw . /:a
 nouv . /:a
 nzz . /:a
-nördl . /:a
+nÃ¶rdl . /:a
 oberital . /:a
 oec . /:a
 offensichtl . /:a
@@ -1580,7 +1580,7 @@ pCt . /:a
 paed . /:a
 pathet . /:a
 pers . /:a
-persönl . /:a
+persÃ¶nl . /:a
 pf . /:a
 pflanzl . /:a
 pfte . /:a
@@ -1600,7 +1600,7 @@ posth . /:a
 pp . /:a
 praep . /:a
 prakt . /:a
-preuß . /:a
+preuÃŸ . /:a
 princ . /:a
 priv . /:a
 programmat . /:a
@@ -1612,8 +1612,8 @@ ps . /:a
 psychol . /:a
 psycholog . /:a
 publ . /:a
-päd . /:a
-päpstl . /:a
+pÃ¤d . /:a
+pÃ¤pstl . /:a
 rd . /:a
 rec . /:a
 relig . /:a
@@ -1621,11 +1621,11 @@ rer . /:a
 resp . /:a
 romant . /:a
 rsp . /:a
-rumän . /:a
+rumÃ¤n . /:a
 rz . /:a
-räuml . /:a
-röm . /:a
-rötl . /:a
+rÃ¤uml . /:a
+rÃ¶m . /:a
+rÃ¶tl . /:a
 s/w-Abb . /:a
 sFr . /:a
 sKr . /:a
@@ -1634,11 +1634,11 @@ saec . /:a
 satir . /:a
 sc . /:a
 sch . /:a
-schließl . /:a
+schlieÃŸl . /:a
 schol . /:a
 schriftl . /:a
 schwed . /:a
-schwäb . /:a
+schwÃ¤b . /:a
 sci . /:a
 scil . /:a
 sechsst . /:a
@@ -1660,32 +1660,32 @@ soziolog . /:a
 sp . /:a
 spezif . /:a
 spr . /:a
-spätgot . /:a
-spätlat . /:a
-spätma . /:a
-spätmittelalterl . /:a
-spätromant . /:a
+spÃ¤tgot . /:a
+spÃ¤tlat . /:a
+spÃ¤tma . /:a
+spÃ¤tmittelalterl . /:a
+spÃ¤tromant . /:a
 sr . /:a
 st . /:a
 staatl . /:a
-stadtröm . /:a
+stadtrÃ¶m . /:a
 stat . /:a
 stellv . /:a
 stilkrit . /:a
-städtebaul . /:a
+stÃ¤dtebaul . /:a
 svw . /:a
 symmetr . /:a
 symph . /:a
 syr . /:a
 systemat . /:a
-sächs . /:a
-sämtl . /:a
-süddt . /:a
-südl . /:a
-südwestl . /:a
-südöstl . /:a
+sÃ¤chs . /:a
+sÃ¤mtl . /:a
+sÃ¼ddt . /:a
+sÃ¼dl . /:a
+sÃ¼dwestl . /:a
+sÃ¼dÃ¶stl . /:a
 tKr . /:a
-tatsächl . /:a
+tatsÃ¤chl . /:a
 techn . /:a
 teilw . /:a
 tekton . /:a
@@ -1695,7 +1695,7 @@ th . /:a
 themat . /:a
 theol . /:a
 theoret . /:a
-théol . /:a
+thÃ©ol . /:a
 tiscover . /:a
 tr . /:a
 trag . /:a
@@ -1703,8 +1703,8 @@ transpon . /:a
 trav . /:a
 trop . /:a
 tschech . /:a
-tägl . /:a
-türk . /:a
+tÃ¤gl . /:a
+tÃ¼rk . /:a
 ua . /:a
 umgearb . /:a
 unabh . /:a
@@ -1713,17 +1713,17 @@ ung . /:a
 ungar . /:a
 ungedr . /:a
 ungewiss . /:a
-ungewöhnl . /:a
+ungewÃ¶hnl . /:a
 univ . /:a
 unterschiedl . /:a
 unv . /:a
-unveröff . /:a
+unverÃ¶ff . /:a
 unvoll . /:a
 unvollst . /:a
 uraufgef . /:a
 urkundl . /:a
 urspr . /:a
-ursprüngl . /:a
+ursprÃ¼ngl . /:a
 usf . /:a
 usw . /:a
 utop . /:a
@@ -1737,7 +1737,7 @@ verf . /:a
 vergl . /:a
 vermutl . /:a
 verschiedentl . /:a
-veröff . /:a
+verÃ¶ff . /:a
 vf . /:a
 vgl . /:a
 vielst . /:a
@@ -1748,13 +1748,13 @@ vld . /:a
 voc . /:a
 vok . /:a
 vol . /:a
-volkstüml . /:a
+volkstÃ¼ml . /:a
 vollplast . /:a
 vollst . /:a
 vorbildl . /:a
 vorklass . /:a
 vornehml . /:a
-vorzügl . /:a
+vorzÃ¼gl . /:a
 vs . /:a
 wahrscheinl . /:a
 weibl . /:a
@@ -1765,47 +1765,47 @@ wesentl . /:a
 westeurop . /:a
 westl . /:a
 wg . /:a
-widersprüchl . /:a
+widersprÃ¼chl . /:a
 wirdVgl . /:a
 wirkl . /:a
 wiss . /:a
 wissenschaftl . /:a
 ww . /:a
-wöchentl . /:a
+wÃ¶chentl . /:a
 zB . /:a
 zahlr . /:a
 zeitl . /:a
 zierl . /:a
 zit . /:a
 zus . /:a
-zusätzl . /:a
+zusÃ¤tzl . /:a
 zw . /:a
 zweitl . /:a
 zykl . /:a
 zylindr . /:a
-Ähnl . /:a
-Änd . /:a
-Äolshf . /:a
-Ästh . /:a
-Öffentl . /:a
-Österr . /:a
-Östl . /:a
-Üb . /:a
-Übertr . /:a
-Übs . /:a
-Übtr . /:a
-ähnl . /:a
-ästh . /:a
-äußerl . /:a
-öffentl . /:a
-örtl . /:a
-österr . /:a
-östl . /:a
-üb . /:a
-überarb . /:a
-übl . /:a
-übs . /:a
-übtr . /:a
+Ã„hnl . /:a
+Ã„nd . /:a
+Ã„olshf . /:a
+Ã„sth . /:a
+Ã–ffentl . /:a
+Ã–sterr . /:a
+Ã–stl . /:a
+Ãœb . /:a
+Ãœbertr . /:a
+Ãœbs . /:a
+Ãœbtr . /:a
+Ã¤hnl . /:a
+Ã¤sth . /:a
+Ã¤uÃŸerl . /:a
+Ã¶ffentl . /:a
+Ã¶rtl . /:a
+Ã¶sterr . /:a
+Ã¶stl . /:a
+Ã¼b . /:a
+Ã¼berarb . /:a
+Ã¼bl . /:a
+Ã¼bs . /:a
+Ã¼btr . /:a
 d . h . /:a
 Q . /:a
 W . /:a
@@ -1836,7 +1836,7 @@ N . /:a
 M . /:a
 /:D . JANUAR
 /:D . FEBRUAR
-/:D . MÄRZ
+/:D . MÃ„RZ
 /:D . APRIL
 /:D . MAI
 /:D . Juni
@@ -1846,27 +1846,27 @@ M . /:a
 /:D . OKTOBER
 /:D . NOVEMBER
 /:D . DEZEMBER
-ÜBTR . /:A 
-ÜBS . /:A 
-ÜBL . /:A 
-ÜBERTR . /:A 
-ÜBERARB . /:A 
-ÜB . /:A 
-ÖSTL . /:A 
-ÖSTERR . /:A 
-ÖRTL . /:A 
-ÖFFENTL . /:A 
-ÄUßERL . /:A 
-ÄSTH . /:A 
-ÄOLSHF . /:A 
-ÄND . /:A 
-ÄHNL . /:A 
+ÃœBTR . /:A 
+ÃœBS . /:A 
+ÃœBL . /:A 
+ÃœBERTR . /:A 
+ÃœBERARB . /:A 
+ÃœB . /:A 
+Ã–STL . /:A 
+Ã–STERR . /:A 
+Ã–RTL . /:A 
+Ã–FFENTL . /:A 
+Ã„UÃŸERL . /:A 
+Ã„STH . /:A 
+Ã„OLSHF . /:A 
+Ã„ND . /:A 
+Ã„HNL . /:A 
 ZYLINDR . /:A 
 ZYKL . /:A 
 ZWEITL . /:A 
 ZW . /:A 
-ZUSÄTZL . /:A 
-ZUSÄTZL . 
+ZUSÃ„TZL . /:A 
+ZUSÃ„TZL . 
 ZUSHG . 
 ZUS . /:A 
 ZUS . 
@@ -1885,7 +1885,7 @@ ZIERL . /:A
 ZENTRALBIBL . /:A 
 ZEITSCHR . /:A 
 ZEITL . /:A 
-ZEITGENÖSS . /:A 
+ZEITGENÃ–SS . /:A 
 ZEITABSCHN . /:A 
 ZB . /:A 
 ZAHLR . /:A 
@@ -1896,8 +1896,8 @@ Y . /:A
 XLL . /:A 
 XEN . /:A 
 X . /:A 
-WÜRTT . /:A 
-WÖCHENTL . /:A 
+WÃœRTT . /:A 
+WÃ–CHENTL . /:A 
 WZBW . 
 WY . 
 WWE . /:A 
@@ -1914,7 +1914,7 @@ WIRDVGL . /:A
 WINKEL-HF . /:A 
 WIEDERAUFL . /:A 
 WIDMUNGSVORR . /:A 
-WIDERSPRÜCHL . /:A 
+WIDERSPRÃœCHL . /:A 
 WG . /:A 
 WESTL . /:A 
 WESTEUROP . /:A 
@@ -1944,7 +1944,7 @@ VULG . /:A
 VT . 
 VSE . /:A 
 VS . /:A 
-VORZÜGL . /:A 
+VORZÃœGL . /:A 
 VORW . /:A 
 VORTR . /:A 
 VORSTANDSMITGL . /:A 
@@ -1956,7 +1956,7 @@ VORBER . /:A
 VORB . /:A 
 VOLLST . /:A 
 VOLLPLAST . /:A 
-VOLKSTÜML . /:A 
+VOLKSTÃœML . /:A 
 VOLKSGSGE . /:A 
 VOLKSGSG . /:A 
 VOLKSAUSG . /:A 
@@ -1975,7 +1975,7 @@ VO . /:A
 VLDF . /:A 
 VLD . /:A 
 VL . /:A 
-VIZEPRÄS . /:A 
+VIZEPRÃ„S . /:A 
 VIZEKPM . /:A 
 VIZEDIR . /:A 
 VIZE-KPM . /:A 
@@ -1990,8 +1990,8 @@ VGL . /:A
 VF . /:A 
 VESPERPS . /:A 
 VESPER-PS . /:A 
-VERÖFF . /:A 
-VERÄND . /:A 
+VERÃ–FF . /:A 
+VERÃ„ND . /:A 
 VERZ . /:A 
 VERW . /:A 
 VERSCHIEDENTL . /:A 
@@ -2019,7 +2019,7 @@ UTOP . /:A
 USW . /:A 
 USF . /:A 
 URTEXTAUSG . /:A 
-URSPRÜNGL . /:A 
+URSPRÃœNGL . /:A 
 URSPR . /:A 
 URKUNDL . /:A 
 URK . /:A 
@@ -2027,7 +2027,7 @@ URAUFGEF . /:A
 URAUFF . /:A 
 UNVOLLST . /:A 
 UNVOLL . /:A 
-UNVERÖFF . /:A 
+UNVERÃ–FF . /:A 
 UNV . /:A 
 UNTERST . /:A 
 UNTERSCHIEDL . /:A 
@@ -2035,7 +2035,7 @@ UNTERS . /:A
 UNTERRICHTSLIT . /:A 
 UNTERABT . /:A 
 UNIV . /:A 
-UNGEWÖHNL . /:A 
+UNGEWÃ–HNL . /:A 
 UNGEWISS . /:A 
 UNGEDR . /:A 
 UNGAR . /:A 
@@ -2048,8 +2048,8 @@ UA . /:A
 U . /:A 
 U . S . /:U 
 U . S . 
-TÜRK . /:A 
-TÄGL . /:A 
+TÃœRK . /:A 
+TÃ„GL . /:A 
 TSD . /:A 
 TSCHECH . /:A 
 TRP . /:A 
@@ -2073,7 +2073,7 @@ TITELAUFL . /:A
 TITEL-S . /:A 
 TISCOVER . /:A 
 TIERHR . /:A 
-THéOL . /:A 
+THÃ©OL . /:A 
 THUK . /:A 
 THOMASORG . /:A 
 THLR . /:A 
@@ -2101,7 +2101,7 @@ TEKTON . /:A
 TEILW . /:A 
 TEILAUSG . /:A 
 TECHN . /:A 
-TATSÄCHL . /:A 
+TATSÃ„CHL . /:A 
 TANZORCH . /:A 
 TANZKOMPOS . /:A 
 TANZKOMP . /:A 
@@ -2109,15 +2109,15 @@ TANJUG . /:A
 TAFELKL . /:A 
 TAF . /:A 
 T . /:A 
-SÜDÖSTL . /:A 
-SÜDWESTL . /:A 
-SÜDL . /:A 
-SÜDDT . /:A 
-SÜD-A . /:A 
-SÄUGLINGS-T . /:A 
-SÄNGERVER . /:A 
-SÄMTL . /:A 
-SÄCHS . /:A 
+SÃœDÃ–STL . /:A 
+SÃœDWESTL . /:A 
+SÃœDL . /:A 
+SÃœDDT . /:A 
+SÃœD-A . /:A 
+SÃ„UGLINGS-T . /:A 
+SÃ„NGERVER . /:A 
+SÃ„MTL . /:A 
+SÃ„CHS . /:A 
 SZ . /:A 
 SYSTEMAT . /:A 
 SYST . /:A 
@@ -2136,7 +2136,7 @@ SVW .
 SUPPL . /:A 
 SUITENKOMPOS . /:A 
 SUBSKR . /:A 
-STÄDTEBAUL . /:A 
+STÃ„DTEBAUL . /:A 
 STV . /:A 
 STRQU . /:A 
 STREUBESITZ . /:A 
@@ -2154,7 +2154,7 @@ STELLV . /:A
 STD . /:A 
 STB . /:A 
 STAT . /:A 
-STADTRÖM . /:A 
+STADTRÃ–M . /:A 
 STADTORG . /:A 
 STADTORCH . /:A 
 STADTBIBL . /:A 
@@ -2169,12 +2169,12 @@ ST . /:A
 ST . 
 SR . /:A 
 SQ . 
-SPÄTROMANT . /:A 
-SPÄTMITTELALTERL . /:A 
-SPÄTMA . /:A 
-SPÄTLAT . /:A 
-SPÄTGOT . /:A 
-SPÄT-MA . /:A 
+SPÃ„TROMANT . /:A 
+SPÃ„TMITTELALTERL . /:A 
+SPÃ„TMA . /:A 
+SPÃ„TLAT . /:A 
+SPÃ„TGOT . /:A 
+SPÃ„T-MA . /:A 
 SPVGG . /:A 
 SPRECHST . /:A 
 SPRECHGSG . /:A 
@@ -2235,8 +2235,8 @@ SDR . /:A
 SD S . D . 
 SCIL . /:A 
 SCI . /:A 
-SCHÜLERORCH . /:A 
-SCHWÄB . /:A 
+SCHÃœLERORCH . /:A 
+SCHWÃ„B . /:A 
 SCHWED . /:A 
 SCHW . /:A 
 SCHULORCH . /:A 
@@ -2248,9 +2248,9 @@ SCHR . /:A
 SCHOL . /:A 
 SCHNABELFL . /:A 
 SCHN . /:A 
-SCHLUßTL . /:A 
-SCHLOßORG . /:A 
-SCHLIEßL . /:A 
+SCHLUÃŸTL . /:A 
+SCHLOÃŸORG . /:A 
+SCHLIEÃŸL . /:A 
 SCHL . /:A 
 SCH . /:A 
 SC . /:A 
@@ -2271,16 +2271,16 @@ SA . /:A
 S/W-ABB . /:A 
 S . /:A 
 S . C . 
-RÖTL . /:A 
-RÖMERBERG . /:A 
-RÖM . /:A 
-RÄUML . /:A 
+RÃ–TL . /:A 
+RÃ–MERBERG . /:A 
+RÃ–M . /:A 
+RÃ„UML . /:A 
 RZ . /:A 
 RUS . /:A 
 RUNDSCHAU . /:A 
 RUNDGSG . /:A 
 RUNDFUNKORCH . /:A 
-RUMÄN . /:A 
+RUMÃ„N . /:A 
 RUD . /:A 
 RTHLRN . /:A 
 RTHLR . /:A 
@@ -2328,9 +2328,9 @@ QT .
 QDE . /:A 
 Q . /:A 
 Q . E . D . 
-PÖ . /:A 
-PÄPSTL . /:A 
-PÄD . /:A 
+PÃ– . /:A 
+PÃ„PSTL . /:A 
+PÃ„D . /:A 
 PW . /:A 
 PV . /:A 
 PUF . /:A 
@@ -2343,7 +2343,7 @@ PT .
 PSYCHOLOG . /:A 
 PSYCHOL . /:A 
 PS . /:A 
-PRÄS . /:A 
+PRÃ„S . /:A 
 PROZ . /:A 
 PROVENZ . /:A 
 PROV . /:A 
@@ -2359,7 +2359,7 @@ PRIVATAUFF . /:A
 PRIVAT-E . /:A 
 PRIV . /:A 
 PRINC . /:A 
-PREUß . /:A 
+PREUÃŸ . /:A 
 PRAKT . /:A 
 PRAEP . /:A 
 PP . /:A 
@@ -2392,7 +2392,7 @@ PFG . /:A
 PFD . /:A 
 PF . /:A 
 PESTHL . /:A 
-PERSÖNL . /:A 
+PERSÃ–NL . /:A 
 PERSONALAUSST . /:A 
 PERS . /:A 
 PERGAMENT-HS . /:A 
@@ -2446,7 +2446,7 @@ OBERKPM . /:A
 OBERITAL . /:A 
 OBER-ST . /:A 
 O . /:A 
-NÖRDL . /:A 
+NÃ–RDL . /:A 
 NZZ . /:A 
 NRN . /:A 
 NR . /:A 
@@ -2457,7 +2457,7 @@ NOTENBEISP . /:A
 NOTENAUSG . /:A 
 NOTENANH . /:A 
 NORW . /:A 
-NORDÖSTL . /:A 
+NORDÃ–STL . /:A 
 NORDWESTL . /:A 
 NORDDT . /:A 
 NORDAMERIK . /:A 
@@ -2466,7 +2466,7 @@ NOM . /:A
 NO . 
 NLD . /:A 
 NKR . /:A 
-NIEDERLÄND . /:A 
+NIEDERLÃ„ND . /:A 
 NIEDERL . /:A 
 NIEDERDT . /:A 
 NICHTLITURG . /:A 
@@ -2488,7 +2488,7 @@ NEBENAMTL . /:A
 NEB . 
 NDL . /:A 
 NAZ . /:A 
-NATÜRL . /:A 
+NATÃœRL . /:A 
 NATURWISS . /:A 
 NATURTRP . /:A 
 NATURSTUD . /:A 
@@ -2500,9 +2500,9 @@ NATIONALKONS . /:A
 NATIONALBIBL . /:A 
 NAMENTL . /:A 
 NACHW . /:A 
-NACHTRÄGL . /:A 
+NACHTRÃ„GL . /:A 
 NACHTR . /:A 
-NACHRÜCKEN . /:A 
+NACHRÃœCKEN . /:A 
 NACHR . /:A 
 NACHM . /:A 
 NACHGEDR . /:A 
@@ -2515,21 +2515,21 @@ N . J .
 N . H . 
 N . D . 
 N . C . 
-MéM . /:A 
-MÜNSTERORG . /:A 
-MÜ . /:A 
-MÖGL . /:A 
-MÄNNL . /:A 
-MÄNNERST . /:A 
-MÄNNERGSG . /:A 
-MÄNNERGESANGVER . /:A 
+MÃ©M . /:A 
+MÃœNSTERORG . /:A 
+MÃœ . /:A 
+MÃ–GL . /:A 
+MÃ„NNL . /:A 
+MÃ„NNERST . /:A 
+MÃ„NNERGSG . /:A 
+MÃ„NNERGESANGVER . /:A 
 MYTHOLOG . /:A 
 MYST . /:A 
 MYSAP . /:A 
 MWST . /:A 
 MW . /:A 
 MUSTERBEISP . /:A 
-MUSIKÄSTH . /:A 
+MUSIKÃ„STH . /:A 
 MUSIKZSS . /:A 
 MUSIKZS . /:A 
 MUSIKVER . /:A 
@@ -2598,12 +2598,12 @@ MISS .
 MISC . /:A 
 MIO . /:A 
 MINN . 
-MINISTERPRÄS . /:A 
+MINISTERPRÃ„S . /:A 
 MIN . /:A 
-MILLIONENHÖHE . /:A 
+MILLIONENHÃ–HE . /:A 
 MILL . /:A 
-MILITÄRORCH . /:A 
-MILITÄRKPM . /:A 
+MILITÃ„RORCH . /:A 
+MILITÃ„RKPM . /:A 
 MIL . 
 MICH . 
 MI . 
@@ -2612,11 +2612,11 @@ MGR . /:A
 MG . /:A 
 MFG . /:A 
 MF . /:A 
-MEßKOMPOS . /:A 
-MEßKAT . /:A 
-MEßGSGE . /:A 
-MEßGSG . /:A 
-MEß-O . /:A 
+MEÃŸKOMPOS . /:A 
+MEÃŸKAT . /:A 
+MEÃŸGSGE . /:A 
+MEÃŸGSG . /:A 
+MEÃŸ-O . /:A 
 MEZZOSOPR . /:A 
 METAPHYS . /:A 
 MESSENKOMPOS . /:A 
@@ -2639,7 +2639,7 @@ MD . /:A
 MD . 
 MCH . /:A 
 MCC . /:A 
-MAßGEBL . /:A 
+MAÃŸGEBL . /:A 
 MATTH . /:A 
 MATHEM . /:A 
 MATERIALSLG . /:A 
@@ -2656,8 +2656,8 @@ M/SEK . /:A
 M . /:A 
 M . W . 
 M . E . 
-LÄNGSFL . /:A 
-LÄNDL . /:A 
+LÃ„NGSFL . /:A 
+LÃ„NDL . /:A 
 LYR . /:A 
 LW . /:A 
 LUTH . /:A 
@@ -2725,13 +2725,13 @@ L'ORG . /:A
 L'HIST . /:A 
 L'ACAD . /:A 
 L . /:A 
-KÜNSTL . /:A 
-KÖRPERL . /:A 
-KÖNIGL . /:A 
+KÃœNSTL . /:A 
+KÃ–RPERL . /:A 
+KÃ–NIGL . /:A 
 KY . 
 KWH . /:A 
 KUS . /:A 
-KURFÜRSTL . /:A 
+KURFÃœRSTL . /:A 
 KUNSTWISS . /:A 
 KUNSTSLG . /:A 
 KUNSTMUS . /:A 
@@ -2781,7 +2781,7 @@ KM .
 KLOSTERKOMP . /:A 
 KLOSTERBIBL . /:A 
 KLEINP . /:A 
-KLEINBÜRGERL . /:A 
+KLEINBÃœRGERL . /:A 
 KLAPPENHR . /:A 
 KL . /:A 
 KIRCHL . /:A 
@@ -2818,8 +2818,8 @@ KAMMERORG . /:A
 KAISERL . /:A 
 K . /:A 
 K . A . 
-JÜD . /:A 
-JÄHRL . /:A 
+JÃœD . /:A 
+JÃ„HRL . /:A 
 JZ . /:A 
 JUR . /:A 
 JUN . /:A 
@@ -2891,10 +2891,10 @@ I . E .
 I . D . R . 
 I . A . W . 
 I . A . 
-HÖF . /:A 
-HÄUSL . /:A 
-HÄNDEL-GES . /:A 
-HÄNDEL-AUSG . /:A 
+HÃ–F . /:A 
+HÃ„USL . /:A 
+HÃ„NDEL-GES . /:A 
+HÃ„NDEL-AUSG . /:A 
 HZ . /:A 
 HYMNENSLG . /:A 
 HYMNENKOMPOS . /:A 
@@ -2912,7 +2912,7 @@ HR . /:A
 HONORARPROF . /:A 
 HONORAR-PROF . /:A 
 HOM . /:A 
-HOLLÄND . /:A 
+HOLLÃ„ND . /:A 
 HOFORG . /:A 
 HOFORCH . /:A 
 HOFKPM . /:A 
@@ -2948,7 +2948,7 @@ HB . /:A
 HAUSKOMP . /:A 
 HAUSARCH . /:A 
 HAUPTTL . /:A 
-HAUPTSÄCHL . /:A 
+HAUPTSÃ„CHL . /:A 
 HAUPTST . /:A 
 HAUPTORG . /:A 
 HAUPTABSCHN . /:A 
@@ -2962,21 +2962,21 @@ HABSCHR . /:A
 HABIL . /:A 
 H . /:A 
 H . C . 
-GéN . /:A 
+GÃ©N . /:A 
 GYMN . /:A 
 GT . /:A 
 GSGN . /:A 
 GSGE . /:A 
 GSGB . /:A 
 GSG . /:A 
-GRÜNDUNGSMITGL . /:A 
+GRÃœNDUNGSMITGL . /:A 
 GRUPPEN-T . /:A 
-GRUNDSÄTZL . /:A 
+GRUNDSÃ„TZL . /:A 
 GRUNDST . /:A 
 GRUNDLAGEN-F . /:A 
 GRUNDL . /:A 
-GROßBÜRGERL . /:A 
-GROß-B . /:A 
+GROÃŸBÃœRGERL . /:A 
+GROÃŸ-B . /:A 
 GRIECH . /:A 
 GRCH . /:A 
 GR . /:A 
@@ -2993,7 +2993,7 @@ GH . /:A
 GGFS . /:A 
 GGF . /:A 
 GEZ . /:A 
-GEWÖHNL . /:A 
+GEWÃ–HNL . /:A 
 GEWISSENS-F . /:A 
 GEWANDHAUSORCH . /:A 
 GEWAHRSAM . /:A 
@@ -3013,7 +3013,7 @@ GEOMETR . /:A
 GENERALSEKR . /:A 
 GENERAL-SUP . /:A 
 GEN . 
-GEMÄLDESLG . /:A 
+GEMÃ„LDESLG . /:A 
 GEMEINDEGSG . /:A 
 GEMEINDE-GSG . /:A 
 GEMCH . /:A 
@@ -3022,13 +3022,13 @@ GELEGENHEITSKOMPOS . /:A
 GELBL . /:A 
 GEISTL . /:A 
 GEGR . /:A 
-GEGENSÄTZL . /:A 
-GEGENSTÄNDL . /:A 
+GEGENSÃ„TZL . /:A 
+GEGENSTÃ„NDL . /:A 
 GEGENST . /:A 
 GEG . /:A 
-GEFÄßFL . /:A 
+GEFÃ„ÃŸFL . /:A 
 GEDR . /:A 
-GEBRÄUCHL . /:A 
+GEBRÃ„UCHL . /:A 
 GEB . /:A 
 GATTG . /:A 
 GASTPROF . /:A 
@@ -3038,18 +3038,18 @@ GASTDGT . /:A
 GAL . 
 GA . 
 G . /:A 
-FÜRSTL . /:A 
-FÜNFST . /:A 
-FÄLSCHL . /:A 
+FÃœRSTL . /:A 
+FÃœNFST . /:A 
+FÃ„LSCHL . /:A 
 FUGENKOMPOS . /:A 
 FU-BERLIN . /:A 
 FT . /:A 
 FT . 
 FSS . /:A 
-FRç . /:A 
-FRÜHGOT . /:A 
-FRÜHCHRISTL . /:A 
-FRÄNK . /:A 
+FRÃ§ . /:A 
+FRÃœHGOT . /:A 
+FRÃœHCHRISTL . /:A 
+FRÃ„NK . /:A 
 FRZ . /:A 
 FRS . /:A 
 FRKR . /:A 
@@ -3062,8 +3062,8 @@ FRE . /:A
 FRCS . /:A 
 FRCH . /:A 
 FRAUEN-CH . /:A 
-FRANç . /:A 
-FRANZÖS . /:A 
+FRANÃ§ . /:A 
+FRANZÃ–S . /:A 
 FRANKFURTM . /:A 
 FRANKFURT/O . /:A 
 FRANKFURT/M . /:A 
@@ -3084,7 +3084,7 @@ FL .
 FK . /:A 
 FILMKOMP . /:A 
 FIL . /:A 
-FIGÜRL . /:A 
+FIGÃœRL . /:A 
 FIGURALGSG . /:A 
 FIG . 
 FHG . /:A 
@@ -3114,7 +3114,7 @@ FACHZSS . /:A
 FACHLIT . /:A 
 F . /:A 
 F . A . Z . 
-EßL . /:A 
+EÃŸL . /:A 
 EXT . 
 EXPL . /:A 
 EXP . /:A 
@@ -3139,10 +3139,10 @@ ET . /:A
 EST . /:A 
 EST . 
 ESQ . 
-ERÖFFN . /:A 
+ERÃ–FFN . /:A 
 ERWACHSENEN-T . /:A 
 ERW . /:A 
-ERSTVERÖFF . /:A 
+ERSTVERÃ–FF . /:A 
 ERSTAUSG . /:A 
 ERSTAUNL . /:A 
 ERSTAUFF . /:A 
@@ -3151,7 +3151,7 @@ EROT . /:A
 ERL . /:A 
 ERHEBL . /:A 
 ERH . /:A 
-ERGÄNZUNGSBD . /:A 
+ERGÃ„NZUNGSBD . /:A 
 ERGANGEN . /:A 
 ERFORDERL . /:A 
 ERFASST . /:A 
@@ -3172,7 +3172,7 @@ EINZELGSGE . /:A
 EINZELAUSST . /:A 
 EINZELAUSG . /:A 
 EINW . /:A 
-EINSCHLIEßL . /:A 
+EINSCHLIEÃŸL . /:A 
 EINSCHL . /:A 
 EINL . /:A 
 EINHEITL . /:A 
@@ -3181,7 +3181,7 @@ EINGER . /:A
 EINGEL . /:A 
 EINF . /:A 
 EINDRINGL . /:A 
-EIGENTÜML . /:A 
+EIGENTÃœML . /:A 
 EIGENTL . /:A 
 EIGENHD . /:A 
 EHRENMITGL . /:A 
@@ -3199,8 +3199,8 @@ EBD . /:A
 E . /:A 
 E . V . 
 E . KM . 
-DéP . /:A 
-DÄN . /:A 
+DÃ©P . /:A 
+DÃ„N . /:A 
 DZ . /:A 
 DYNAM . /:A 
 DYN . /:A 
@@ -3229,7 +3229,7 @@ DOK . /:A
 DLR . /:A 
 DLR . 
 DKR . /:A 
-DIÖZESANMUS . /:A 
+DIÃ–ZESANMUS . /:A 
 DIZ . /:A 
 DIV . 
 DIST . 
@@ -3264,8 +3264,8 @@ DARST . /:A
 D . /:A 
 D . I . 
 D . H . /:A 
-CÄCILIENVER . /:A 
-CÄCILIEN-VER . /:A 
+CÃ„CILIENVER . /:A 
+CÃ„CILIEN-VER . /:A 
 CZ . /:A 
 CU . 
 CTS . /:A 
@@ -3339,19 +3339,19 @@ CALIF .
 CAL . /:A 
 CA . /:A 
 C . /:A 
-BÜRGERL . /:A 
-BÜHNENKOMPOS . /:A 
-BÜHNENKOMP . /:A 
-BÜHNENAUFF . /:A 
-BÜCHERSLG . /:A 
-BÖ . /:A 
-BÄUERL . /:A 
-BÄNKELGSG . /:A 
+BÃœRGERL . /:A 
+BÃœHNENKOMPOS . /:A 
+BÃœHNENKOMP . /:A 
+BÃœHNENAUFF . /:A 
+BÃœCHERSLG . /:A 
+BÃ– . /:A 
+BÃ„UERL . /:A 
+BÃ„NKELGSG . /:A 
 BZW . /:A 
 BZW . 
 BZGL . /:A 
 BYZ . /:A 
-BUßPS . /:A 
+BUÃŸPS . /:A 
 BURGUND . /:A 
 BULGAR . /:A 
 BULG . /:A 
@@ -3384,7 +3384,7 @@ BEZW . /:A
 BEZ . /:A 
 BEWEGL . /:A 
 BEW . /:A 
-BETRÄCHTL . /:A 
+BETRÃ„CHTL . /:A 
 BETR . /:A 
 BESTERH . /:A 
 BESTALLUNGSURK . /:A 
@@ -3407,8 +3407,8 @@ BDE . /:A
 BD . /:A 
 BC . /:A 
 BB . /:A 
-BAßST . /:A 
-BAßKLAR . /:A 
+BAÃŸST . /:A 
+BAÃŸKLAR . /:A 
 BAYR . /:A 
 BAUMANN . /:A 
 BAUAKAD . /:A 
@@ -3428,9 +3428,9 @@ B . /:A
 AZ . /:A 
 AVG . 
 AV . /:A 
-AUßERORDENTL . /:A 
-AUßEREUROP . /:A 
-AUßENST . /:A 
+AUÃŸERORDENTL . /:A 
+AUÃŸEREUROP . /:A 
+AUÃŸENST . /:A 
 AUTOGR . /:A 
 AUTOBIOGR . /:A 
 AUT . /:A 
@@ -3439,7 +3439,7 @@ AUSST . /:A
 AUSL . /:A 
 AUSGEW . /:A 
 AUSG . /:A 
-AUSFÜHRL . /:A 
+AUSFÃœHRL . /:A 
 AUP . /:A 
 AUGSB . /:A 
 AUG . /:A 
@@ -3459,7 +3459,7 @@ ARIZ .
 ARISTOT . /:A 
 ARISTOPH . /:A 
 ARIST . /:A 
-ARCHÄOL . /:A 
+ARCHÃ„OL . /:A 
 ARB . /:A 
 ARAM . /:A 
 APR . /:A 
@@ -3476,29 +3476,29 @@ ANON .
 ANNO . /:A 
 ANMERK . /:A 
 ANM . /:A 
-ANLÄßL . /:A 
+ANLÃ„ÃŸL . /:A 
 ANL . /:A 
 ANL . 
 ANH . /:A 
 ANH . 
 ANGEW . /:A 
-ANGELSÄCHS . /:A 
+ANGELSÃ„CHS . /:A 
 ANGELOCKT . /:A 
 ANGELES . /:A 
 ANGELANGT . /:A 
 ANGEKL . /:A 
 ANGEBL . /:A 
-ANFÄNGL . /:A 
+ANFÃ„NGL . /:A 
 ANF . /:A 
 AMTSNACHF . /:A 
 AMTL . /:A 
 AMERIKAN . /:A 
 AMERIK . /:A 
 AMER . /:A 
-ALTÄGYPT . /:A 
+ALTÃ„GYPT . /:A 
 ALTST . /:A 
 ALTSPAN . /:A 
-ALTRÖM . /:A 
+ALTRÃ–M . /:A 
 ALTNORD . /:A 
 ALTITAL . /:A 
 ALTIND . /:A 
@@ -3508,8 +3508,8 @@ ALTFRANZ . /:A
 ALTENGL . /:A 
 ALTDT . /:A 
 ALTCHRISTL . /:A 
-ALLTÄGL . /:A 
-ALLMÄHL . /:A 
+ALLTÃ„GL . /:A 
+ALLMÃ„HL . /:A 
 ALLG . /:A 
 ALLEGOR . /:A 
 ALA . 
@@ -3526,7 +3526,7 @@ ADV . /:A
 ADMIN . /:A 
 ACQ . /:A 
 ACHTST . /:A 
-ACHTJÄHR . /:A 
+ACHTJÃ„HR . /:A 
 ACCOMP . /:A 
 ACCAD . /:A 
 ACC . /:A 
@@ -3543,7 +3543,7 @@ ABHANDL . /:A
 ABH . /:A 
 ABGEDR . /:A 
 ABG . /:A 
-ABENDLÄND . /:A 
+ABENDLÃ„ND . /:A 
 ABDR . /:A 
 A . /:A 
 A . G . 
@@ -3552,4 +3552,3 @@ A . A . O
 A . A . 
 ( ? ) 
 ( ! ) 
-
