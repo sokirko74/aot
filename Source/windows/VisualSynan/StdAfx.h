@@ -12,7 +12,6 @@
 
 
 #include "morph_dict/common/utilit.h"
-#include "windows/common/windows_unicode.h"
 #include <tchar.h>
 #include <map>
 

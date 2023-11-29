@@ -70,8 +70,8 @@ void AddRelOperators (const CRusSemNode& Node, std::string& Result)
 	for (size_t i=0; i < Node.m_RelOperators.size(); i++)
 	{
 			std::string s = Node.m_RelOperators[i];
-			RmlMakeLower(s,morphRussian);
-			Result = s+" "+Result;
+			MakeLowerUtf8(s,morphRussian);
+			Result = s + " " + Result;
 	};
 };
 
@@ -128,7 +128,7 @@ std::string SynthRecursive(const CRusSemStructure& R, int NodeNo, bool bRoot)
 		UnitStr = convert_from_utf8(UnitStr.c_str(), morphRussian);
 		std::string Delim = "...";
 		int index = UnitStr.find(Delim);
-		RmlMakeLower(UnitStr,morphRussian);
+		MakeLowerUtf8(UnitStr,morphRussian);
 		if (index != std::string::npos)
 			Result = UnitStr.substr(0, index) +std::string(" ")+ left + std::string(" , ") + UnitStr.substr(index+Delim.length()) +" "+ right;
 	};

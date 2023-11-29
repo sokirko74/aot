@@ -538,19 +538,7 @@ void	CUnitHolder::MakeOneWord(size_t StartLineNo, size_t EndLineNo)
 		size_t upper_rest_offset = GetUppercaseToken(StartLineNo+1) - GetUnitUpperBufferStart();
 		m_UnitBufUpper.erase(m_UnitBufUpper.begin()+upper_rest_offset,m_UnitBufUpper.begin()+upper_rest_offset+(EndLineNo-StartLineNo-1));
 	}
-
-
-	//  check uppercase buffer
-	if (StartLineNo+2 < m_Units.size())
-	{
-		const char* check = GetUppercaseToken(StartLineNo+2);
-		std::string s = GetToken(StartLineNo+2);
-		RmlMakeUpper(s, m_Language);
-		assert(check == s);
-	};
 };
-
-
 
 
 void CUnitHolder::SetOborotNo(size_t LineNo, short OborotNo)

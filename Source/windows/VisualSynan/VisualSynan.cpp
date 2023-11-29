@@ -61,7 +61,7 @@ public:
 	{
 		CString S = pszParam;
 		MorphLanguageEnum l;
-		std::string utfstr = WstrToUtf8Str(pszParam);
+		std::string utfstr = wstring_to_utf8(std::wstring(pszParam));
 		if (GetLanguageByString(utfstr.c_str(), l))
 			m_Language = l;
 		CCommandLineInfo::ParseParam(pszParam, bFlag, bLast);

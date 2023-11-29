@@ -201,17 +201,6 @@ CString GetStrByLanguage(MorphLanguageEnum l)
 	return "";
 };
 
-inline bool check_language (std::string s, int Lang)
-{
-	switch (Lang) {
-		case morphRussian:  return IsRussian(s);
-		case morphEnglish:  return IsEnglish(s);
-		case morphGerman:  return  IsGerman(s);
-	};
-	assert (false);
-	return false;
-};
-
 inline MorphLanguageEnum InterfaceToEnum ( int Lang)
 {
 	switch (Lang) {
@@ -288,7 +277,7 @@ bool CDemoDlg::BuildParadigmsForOneLanguage(MorphLanguageEnum langua, CString sr
 		}
 	}
 	else {
-		std::string utf8_str = WstrToUtf8Str(src_str);
+		std::string utf8_str = wstring_to_utf8((const TCHAR*)src_str);
 		std::string rml_str = convert_from_utf8(utf8_str.c_str(), langua);
 		piLemmatizer->CreateParadigmCollection(false, rml_str, iswupper(src_str[0]), true, paradigms);
 	}
@@ -335,7 +324,7 @@ bool CDemoDlg::BuildParadigmsForOneLanguage(MorphLanguageEnum langua, CString sr
 			{
 				grammems_mask_t grammems;
 				piAgram->GetGrammems(type_ancode.c_str(), grammems);
-				result = BuildCString(langua, piAgram->GrammemsToStr(grammems));
+				result = utf8_to_wstring(piAgram->GrammemsToStr(grammems)).c_str();
 				m_ctrlResults.SetItemText(i, COLUMN_TYPE, result);
 			}
 		}
@@ -343,15 +332,15 @@ bool CDemoDlg::BuildParadigmsForOneLanguage(MorphLanguageEnum langua, CString sr
 		m_ctrlResults.SetItemText(i, COLUMN_NORM, BuildCString(langua, paradigm.GetWordForm(0)));
 		try
 		{
-			result = BuildCString(langua, paradigm.GetSrcAncode());
+			result = utf8_to_wstring(paradigm.GetSrcAncode()).c_str();
 		}
 		catch (...)
 		{
-			result = BuildCString(langua, paradigm.GetAncode(0));
+			result = utf8_to_wstring(paradigm.GetAncode(0)).c_str();
 		}
 		m_ctrlResults.SetItemText(i, COLUMN_ANCODE, result);
 
-		result = BuildCString(langua, paradigm.GetGramInfoStr(piAgram));
+		result = utf8_to_wstring(paradigm.GetGramInfoStr(piAgram)).c_str();
 		m_ctrlResults.SetItemText(i, COLUMN_FORM, result);
 	}
 	return bFoundSomething;
@@ -393,9 +382,9 @@ void CDemoDlg::OnButtonFind()
 	try
 	{
 		if (!OnlyDigits) {
-			auto utf8str = WstrToUtf8Str((const TCHAR*)src_str);
+			auto utf8str = wstring_to_utf8((const TCHAR*)src_str);
 			try {
-				if (!check_language(convert_from_utf8(utf8str.c_str(), langua), langua))
+				if (!CheckLanguage(utf8str, langua))
 					continue;
 			}
 			catch (convert_exception e) {

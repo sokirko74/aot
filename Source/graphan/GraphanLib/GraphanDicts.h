@@ -124,7 +124,7 @@ public:
 
 	StringVector m_Extensions;
 	bool			IsExtension(const char * UpperStr, BYTE Len) const;
-	bool		  ReadExtensions(std::string FileName);
+	void ReadExtensions(std::string path);
 	
 
 

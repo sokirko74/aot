@@ -6,7 +6,6 @@
 #include "demoDlg.h"
 #include "Splash.h"
 #include "morph_dict/common/utilit.h"
-#include "windows/common/windows_unicode.h"
 
 
 
@@ -34,7 +33,7 @@ public:
 	{
 		CString S = pszParam;
 		MorphLanguageEnum l;
-		if (GetLanguageByString(WstrToUtf8Str((const TCHAR*)S),l))
+		if (GetLanguageByString(wstring_to_utf8((const TCHAR*)S),l))
 			m_Language = l;
 		CCommandLineInfo::ParseParam(pszParam, bFlag, bLast);
 	};

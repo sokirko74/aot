@@ -84,12 +84,7 @@ bool CGraphmatFile::LoadDicts ()
 			return false;
 		};
 
-		if ( !pDicts->ReadExtensions(GetRegistryString("Software\\Dialing\\Graphan\\Extensions")) )
-		{
-			m_LastError = "Cannot load Extensions file";
-			return false;
-		};
-
+		pDicts->ReadExtensions(GetRegistryString("Software\\Dialing\\Graphan\\Extensions"));
 		if (m_pDicts->m_pOborDictionary.m_Pointer == 0)
 		{
 
