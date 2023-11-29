@@ -169,7 +169,7 @@ bool	CRusSemStructure::RussianSynthesis(std::string& Result) const
 	{
 		str += NewStructure.RussianSynthesisOfNode(roots[RootNo]);
 	};
-	::SetSpacesAndRegisterInSentence(str, morphRussian);
+	::SetSpacesAndRegisterInSentence(str);
 	NewStructure.SetLastSentencePunctuationMark(str);
 	Result = str;
 	return true;

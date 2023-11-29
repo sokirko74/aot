@@ -27,13 +27,13 @@ void get_id(CMorphanHolder& holder, std::string str, grammems_mask_t  grammems, 
 		if ((grammems & holder.m_pGramTab->GetAllGrammems(p.GetCommonAncode().c_str())) != grammems) {
 			continue;
 		};
-		std::string norm = p.GetWordForm(0);
-		EngRusMakeLower(norm);
-		if (norm != word_s8) {
+		auto norm = convert_to_utf8(p.GetWordForm(0), holder.m_CurrentLanguage);
+		MakeLowerUtf8(norm);
+		if (norm != str) {
 			res.push_back(p.GetParadigmId());
 		}
 		else {
-			std::cerr << "ignore perf-nonperf pair " << convert_to_utf8(word_s8, morphRussian) << "\n";
+			std::cerr << "ignore perf-nonperf pair " << norm << "\n";
 		}
 	}
 }

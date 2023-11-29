@@ -157,7 +157,6 @@ int BuildBigrams(int argc, char* argv[])
 	for (size_t i=3; i<argc; i++)
 	{
 		std::string s = argv[i];
-		EngMakeLower(s);
 		if (		(s == "-help") 
 				||	(s == "--help") 
 				||	(s == "/?") 

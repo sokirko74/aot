@@ -1246,7 +1246,7 @@ bool CRusSemStructure::SetLemmasToReplace(std::string LemmasToReplace)
 {
 	m_SynthLemmaToReplace.clear();
 
-	RmlMakeUpper(LemmasToReplace, morphRussian);
+	MakeUpperUtf8(LemmasToReplace);
 	StringTokenizer tok(LemmasToReplace.c_str(), ";");
 	while (tok())
 	{

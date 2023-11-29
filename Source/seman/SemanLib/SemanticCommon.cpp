@@ -1783,7 +1783,7 @@ bool CSynRealization::HasThePrep(uint16_t UnitNo) const
 
 //==============================
 
-void SetSpacesAndRegisterInSentence(std::string& str, MorphLanguageEnum Langua)
+void SetSpacesAndRegisterInSentence(std::string& str)
 {
 	/*
 	 При выставлении запятых для вводных слов некоторые запятые могут оказать в самом
@@ -1864,17 +1864,16 @@ void SetSpacesAndRegisterInSentence(std::string& str, MorphLanguageEnum Langua)
 		tok_count++;
 	}
 
-	// Первая буква предложения всегда должна быть прописной
+// Первая буква предложения всегда должна быть прописной
 // (проходим начальные знаки препинания (типа кавычки)
-	size_t k = 0;
-	for (; k < str.size(); k++)
-		if (!ispunct((BYTE)str[k]))
-			break;
-
-	if (k < str.size())
-		if (is_lower_alpha((BYTE)str[k], Langua))
-			str[k] = ReverseChar((BYTE)str[k], Langua);
-
+	auto wstr = utf8_to_utf16(str);
+	for (size_t k = 0; k < wstr.size(); k++)
+		if (!ispunct(wstr[k]))
+			if (IsUnicodeAlpha(wstr[k])) {
+				wstr[k] = toupper_utf32(wstr[k]);
+				break;
+			}
+	str = utf16_to_utf8(wstr);
 }
 
 

@@ -827,7 +827,7 @@ void MoveDopRelationsBack(T &SemStr) {
 
 extern bool IsLocSemRel(const std::string &S);
 
-extern void SetSpacesAndRegisterInSentence(std::string &str, MorphLanguageEnum Langua);
+extern void SetSpacesAndRegisterInSentence(std::string &str);
 
 const std::string SIMILAR_NUMERALS_STR = "ОДНОР_ЧИСЛ";
 const std::string NUMERALS_STR = "КОЛИЧ";

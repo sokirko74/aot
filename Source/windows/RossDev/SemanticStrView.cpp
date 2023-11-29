@@ -334,7 +334,7 @@ bool ThreadFinish;
 std::string fc_Graph;
 bool bAnswer = false;
 
-UINT FindSituationsInThread    ( LPVOID pParam )
+UINT FindSituationsInThread(LPVOID pParam )
 {
 	bAnswer = false; 
 	log (std::string("\nFindSituationsInThread"));
@@ -351,7 +351,7 @@ UINT FindSituationsInThread    ( LPVOID pParam )
 		std::string text = "";
 		if (argv[2] != 0) text = argv[2];
 		Trim(text);
-		text = convert_to_utf8(text, morphRussian);
+		//text = convert_to_utf8(text, morphRussian);
 		if (text.empty()) 
 		{
 			ThreadFinish = true;

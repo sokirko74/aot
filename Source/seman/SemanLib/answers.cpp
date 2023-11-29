@@ -117,7 +117,7 @@ bool	CRusSemStructure::SemanticAnswer(std::string& Result, const std::vector<CRu
 			// generating answer
 			CRusSemStructure NewStructure = SavedSentences[i];
 			Result = NewStructure.RussianSynthesisOfNode(NodeNo);
-			::SetSpacesAndRegisterInSentence(Result, morphRussian);
+			::SetSpacesAndRegisterInSentence(Result);
 			return true;
 		};
 	}

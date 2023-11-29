@@ -2,23 +2,33 @@
 #include "dicts/StructDictLib/Ross.h"
 #include "dicts/StructDictLib/TempArticle.h"
 #include "morph_dict/common/argparse.h"
+#include "../../SemanLib/SemanticRusStructure.h"
 
 #define DOCTEST_CONFIG_IMPLEMENT
 #include "morph_dict/contrib/doctest/doctest.h"
 
 
-
-
 TEST_CASE("transliteration") {
 	translate_helper t;
 	CEngSemWord w;
-	w.m_Word = "мама";
+	w.SetWord("мама");
 	t.transliterate(w);
-	CHECK("mama" == w.m_Word);
-	w.m_Word = "пуепе";
+	CHECK("mama" == w.GetWord());
+	w.SetWord("пуепе");
 	w.m_Lemma  = "";
 	t.transliterate(w);
-	CHECK("puyepe" == w.m_Word);
+	CHECK("puyepe" == w.GetWord());
+}
+
+TEST_CASE("fix_case") {
+	std::string s = "mother , comes .";
+	SetSpacesAndRegisterInSentence(s);
+	CHECK("Mother, comes" == s);
+
+	s = "<Quote>мама пришла .</Quote>";
+	SetSpacesAndRegisterInSentence(s);
+	CHECK("\"Мама пришла .\"" == s);
+
 }
 
 

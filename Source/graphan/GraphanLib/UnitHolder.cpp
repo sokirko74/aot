@@ -280,7 +280,7 @@ void  CUnitHolder :: BuildUnitBufferUpper ()
 		m_UnitBufUpper.insert(m_UnitBufUpper.end(), m_Units[i].GetToken(), m_Units[i].GetToken()+m_Units[i].GetTokenLength());
 		m_UnitBufUpper.push_back(0);
 	};
-	GerEngRusMakeUpperTemplate(m_UnitBufUpper, m_Language, m_UnitBufUpper.size());
+	MakeUpperVector(m_UnitBufUpper, m_Language);
 
 };
 

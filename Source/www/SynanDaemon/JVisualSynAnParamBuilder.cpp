@@ -125,7 +125,7 @@ void JVisualSynAnParamBuilder::AddVariants(std::vector<SSynVariant2Groups>& allS
 			group.m_IsGroup = false;
 			group.m_IsSubj = false;
 			group.m_strDescr = m_pSyntaxHolder->GetClauseTypeDescr(Clause,  i->m_ClauseTypeNo);
-			EngRusMakeLower(group.m_strDescr);
+			MakeLowerUtf8(group.m_strDescr);
 			synVariants[j].m_Groups.push_back(group);
 		}
 
@@ -149,7 +149,7 @@ void JVisualSynAnParamBuilder::AddGroup(std::vector<SSynVariant2Groups>& synVari
 		group.m_IsGroup = true;
 		group.m_IsSubj = false;
 		group.m_strDescr = m_pSyntaxHolder->m_Synan.GetOpt()->GetGroupNameByIndex(piGroup.m_GroupType);
-		EngRusMakeLower(group.m_strDescr);
+		MakeLowerUtf8(group.m_strDescr);
 		v.m_Groups.push_back(group);
 	}
 }

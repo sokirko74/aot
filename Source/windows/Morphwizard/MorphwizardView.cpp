@@ -676,102 +676,93 @@ void CMorphwizardView::OnToolsExport()
 void CMorphwizardView::OnToolsImport()
 {
 	int line_no = 0;
-	CString PathName;
+	std::string path;
 
 	try {
 		CFileDialog D(TRUE, _T("slf"), _T("paradigms.slf"), OFN_ALLOWMULTISELECT | OFN_HIDEREADONLY | OFN_OVERWRITEPROMPT);
 		TCHAR file_buffer[10000];
 		file_buffer[0] = 0;
 		D.m_ofn.lpstrFile = file_buffer;
-		D.m_ofn.nMaxFile = 10000;
+		D.m_ofn.nMaxFile = 1;
 		if (D.DoModal() != IDOK) return;
 		POSITION pos = D.GetStartPosition();
 		if (pos == 0) return;
 		bool bTestMode = ::MessageBox(0, _T("Test it or import?"), _T("MorphWizard"), MB_YESNO) == IDYES;
 
 		GetWizard()->m_bFullTrace = false;
-		PathName = D.GetNextPathName(pos);
-		while (true) // all selected files 
+		path = utf16_to_utf8((const TCHAR*)D.GetNextPathName(pos));
+		FILE* fp = fopen(path.c_str(), "r");
+		if (!fp)
 		{
+			throw CExpc("Cannot open file");
+		};
+		LOGI << "import file " << path;
 
-			FILE* fp = fopen(utf16_to_utf8((const TCHAR*)PathName).c_str(), "r");
-			if (!fp)
+		CProgressMeterRML meter;
+		meter.SetFileMaxPos(fp);
+		CString info = (bTestMode ? _T("Testing file ") : _T("Importing file "));
+		info += FromInnerEncoding(path);
+		meter.SetInfo(info);
+
+		int ParadigmCount = 0;
+		std::string Errors;
+		line_no = 0;
+		bool bError;
+		CDumpParadigm P(GetWizard());
+		while (P.ReadNextParadigmFromFile(fp, line_no, bError, Errors))
+		{
+			if (!bError)
 			{
-				AfxMessageBox(_T("Cannot open file"));
-				return;
-			};
-
-			LOGI << "import file " << PathName;
-
-			CProgressMeterRML meter;
-			meter.SetFileMaxPos(fp);
-			CString info = (bTestMode ? "Test" : "Import");
-			info += "ing file " + PathName + "...";
-			meter.SetInfo(info);
-
-			int ParadigmCount = 0;
-			std::string Errors;
-			line_no = 0;
-			bool bError;
-			CDumpParadigm P(GetWizard());
-			while (P.ReadNextParadigmFromFile(fp, line_no, bError, Errors))
-			{
-				if (!bError)
+				int line_no_err = 0;
+				ParadigmCount++;
+				try
 				{
-					int line_no_err = 0;
-					ParadigmCount++;
-					try
+					if (bTestMode)
 					{
-						if (bTestMode)
-						{
-							GetWizard()->check_slf(P.m_SlfStr, line_no_err);
-						}
-						else
-						{
-							uint16_t SessionNo = GetWizard()->RegisterSession(P.m_Session);
-							GetWizard()->add_lemma_to_dict(P.m_SlfStr, P.m_TypeGrammemsStr, P.m_PrefixesStr, line_no_err, SessionNo);
-						};
-
-						meter.SetFilePos();
+						GetWizard()->check_slf(P.m_SlfStr, line_no_err);
 					}
-					catch (std::exception c)
+					else
 					{
-						Errors += Format("%s (%s:%i) \n", c.what(), (const TCHAR*)PathName, P.m_FirstSlfLineNo + line_no_err);
-					}
-					catch (...)
-					{
-						Errors += Format("error at %s:%i \n", (const TCHAR*)PathName, P.m_FirstSlfLineNo + line_no_err);
+						uint16_t SessionNo = GetWizard()->RegisterSession(P.m_Session);
+						GetWizard()->add_lemma_to_dict(P.m_SlfStr, P.m_TypeGrammemsStr, P.m_PrefixesStr, line_no_err, SessionNo);
 					};
 
+					meter.SetFilePos();
 				}
-			}
-			fclose(fp);
-			if (!Errors.empty())
-			{
-				try {
-					std::string ErrorFile = MakeFName(ToInnerEncoding(PathName).c_str(), "err");
-					FILE* fp = fopen(ErrorFile.c_str(), "w");
-					fprintf(fp, "%s", Errors.c_str());
-					fclose(fp);
-					ErrorMessage(Format("Errors were written to file %s", ErrorFile.c_str()));
+				catch (std::exception& c)
+				{
+					Errors += Format("%s (%s:%i) \n", c.what(), path.c_str(), P.m_FirstSlfLineNo + line_no_err);
 				}
-				catch (...) {
-					AfxMessageBox(_T("Cannot write errors to paradigms.err "));
-				}
-			}
-			else
-			{
-				auto mess = Format("Successfully %s %i paradigms from \"%s\"", bTestMode ? "tested" : "imported", ParadigmCount, PathName);
-				ErrorMessage("Confirmation", mess);
-			};
-			if (pos == 0) break;
-			PathName = D.GetNextPathName(pos);
-		} // all selected files
+				catch (...)
+				{
+					Errors += Format("error at %s:%i \n", path.c_str(), P.m_FirstSlfLineNo + line_no_err);
+				};
 
+			}
+		}
+		fclose(fp);
+		if (!Errors.empty())
+		{
+			try {
+				std::string ErrorFile = MakeFName(path.c_str(), "err");
+				FILE* fp = fopen(ErrorFile.c_str(), "w");
+				fprintf(fp, "%s", Errors.c_str());
+				fclose(fp);
+				ErrorMessage(Format("Errors were written to file %s", ErrorFile.c_str()));
+			}
+			catch (...) {
+				AfxMessageBox(_T("Cannot write errors to paradigms.err "));
+			}
+		}
+		else
+		{
+			auto mess = Format("Successfully %s %i paradigms from \"%s\"", bTestMode ? "tested" : "imported", ParadigmCount, path.c_str());
+			ErrorMessage("Confirmation", mess);
+		};
 	}
 	catch (...)
 	{
-		ErrorMessage(Format("some error has occurred (file=%s, line=%i", PathName, line_no));
+		ErrorMessage(Format("some error has occurred (file=%s, line=%i", path.c_str(), line_no));
 	};
 	GetWizard()->m_bFullTrace = true;
 }

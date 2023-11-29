@@ -84,8 +84,8 @@ STDMETHODIMP CCOMLemmatizer::CreateParadigmCollectionFromForm(/*[in]*/ BSTR form
 STDMETHODIMP CCOMLemmatizer::CheckABC(BSTR Word, BOOL* Result) 
 {
 	std::string wordStr = (const char*)_bstr_t(Word);
+	MakeUpperUtf8(wordStr)
 	wordStr = convert_from_utf8(wordStr.c_str(), m_pLemmatizer->m_Language);
-	RmlMakeUpper(wordStr, m_pLemmatizer->GetLanguage());
 	*Result =  m_pLemmatizer->CheckABC(wordStr) ?  TRUE : FALSE;
 	return S_OK;
 };

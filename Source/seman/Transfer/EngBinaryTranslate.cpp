@@ -453,11 +453,12 @@ long  translate_helper::GetParadigmIdByLemma(MorphLanguageEnum langua, std::stri
 	Trim(lemma);
 	const CLemmatizer* lemmatizer = GetLemmatizer(langua);
 	const CAgramtab* GramTab = GetGramTab(langua);
-	lemma = convert_from_utf8(lemma.c_str(), langua);
-	RmlMakeUpper(lemma, langua);
 
+	MakeUpperUtf8(lemma, langua);
+	lemma = convert_from_utf8(lemma.c_str(), langua);
+	
 	if (!lemmatizer->CheckABC(lemma.c_str()))
-		return -1;
+		return UnknownParadigmId;
 
 	try
 	{
