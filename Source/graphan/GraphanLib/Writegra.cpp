@@ -15,43 +15,38 @@ std::string CGraphmatFile :: GetGraphematicalLine (size_t LineNo) const
 	const CGraLine& L = GetUnits()[LineNo];
 	std::string result;
 
-	{
-		if (!L.IsSoft())
-		{ 
-			if (!L.IsNotPrint()
-				&& (L.GetToken() != NULL)
-				&& (L.GetToken()[0] != 0)
-				) 
-			{
-				result.append(L.GetToken(), L.GetTokenLength());
+	if (!L.IsSoft())
+	{ 
+		if (!L.IsNotPrint()
+			&& (L.GetToken() != NULL)
+			&& (L.GetToken()[0] != 0)
+			) 
+		{
+			result.append(L.GetToken(), L.GetTokenLength());
+		}
+		else {
+			if (LineNo == 0) {
+				result.append(1, ' ');
 			}
 			else {
-				if (LineNo == 0) {
-					result.append(1, ' ');
-				}
-				else {
-					result.append(1, GraphematicalSPACE);
-				}
+				result.append(1, GraphematicalSPACE);
 			}
-		}  
-		else
-		{ 
-			for (size_t k=0; k<L.GetTokenLength(); ++k)
-				switch ((unsigned char)L.GetToken()[k]) 
-				{
-					case ' '  : result.append(1, GraphematicalSPACE); break;
-					case '\t' : result.append(1, GraphematicalTAB); break;
-					case '\n' : result.append(1, GraphematicalEOLN); break;
-					case '\r' :  break;
-					default   : assert (false); break;
-				};
-		};
+		}
+	}  
+	else
+	{ 
+		for (size_t k=0; k<L.GetTokenLength(); ++k)
+			switch ((unsigned char)L.GetToken()[k]) 
+			{
+				case ' '  : result.append(1, GraphematicalSPACE); break;
+				case '\t' : result.append(1, GraphematicalTAB); break;
+				case '\n' : result.append(1, GraphematicalEOLN); break;
+				case '\r' :  break;
+				default   : assert (false); break;
+			};
+	};
 
-		result.append(std::max(1, 32 - (int)result.length()), ' ');
-	}
-	
-	
-	result.append(Format("%zu %zu", L.GetInputOffset(), L.GetTokenLength()));
+	result.append(Format("\t%zu %zu\t", L.GetInputOffset(), L.GetTokenLength()));
 
 	// write descriptors 
 	for (int l = 0; l < 63; l++) {

@@ -6,12 +6,12 @@ const int ODesLen    = 9;                   /* the length of unit's descriptor *
 const char DesArray[NumberOfGraphematicalDescriptors][ODesLen] = 
 {
 		     
-    	     "BEG","RLE", "LLE","DEL","PUN",//the first position :  //0-4
+    	     "dummy","RLE", "LLE","DEL","PUN",//the first position :  //0-4
 		     "DC", "DSC","EA","_UNK_", // 5-8
 		     //the second position :
 		     "SPC","HYP","EOLN","EOP", //9-12
 		     "PLP","AA", "aa", "Aa", // 13-16
-			 "NAM?", "OPN","CLS", // 17-19
+			 "dummy", "OPN","CLS", // 17-19
 			 "EMSYM", "BUL", "INDENT", // 20-22
              "dummy", "#QUOTED", "PAR_SYM", // 23-25
 

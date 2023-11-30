@@ -57,7 +57,7 @@ static bool IsPartFio(const CMAPost& C, const CFIOItem& I, const CPostLemWord& W
 		case fiOrdinal:  return pH->HasPos(NUMERAL_P)
 			&& Word.m_bFirstUpperAlpha //отбрасываем "Петр первый" вместо "Петр Первый"
 			&& !isdigit((BYTE)Word.m_strWord[0]);
-		case fiProbName:  return Word.HasDes(ONam);
+		case fiProbName:  return Word.m_Register != LowLow;
 		default:  return pH->GetLemma() == I.m_ItemStr;
 	}
 

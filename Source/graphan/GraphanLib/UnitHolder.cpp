@@ -100,6 +100,10 @@ size_t CUnitHolder::FindSpace (size_t i, size_t HB) const
 
 size_t CUnitHolder::BSpace (size_t i, size_t LB) const
 {
+	if (i == 0) {
+		return 0;
+	}
+	i--;
 	for ( ; (i>LB) && m_Units[i].IsSpace(); i--);
 
 	return i;
@@ -116,6 +120,12 @@ size_t CUnitHolder::PSoft (size_t i, size_t HB) const
 
 size_t CUnitHolder::BSoft (size_t i) const
 {
+	if (i == 0) {
+		return 0;
+	}
+
+	i--;
+
 	for ( ; (i>0) && m_Units[i].IsSoft(); i--);
 
 	return i;
@@ -157,7 +167,6 @@ bool CUnitHolder::IsOneCloseQuotationMark (size_t i) const
 
 bool CUnitHolder::IsOneOpenQuotationMark (size_t i) const
 {
-	if (i == 0) return false;
 	BYTE z = (BYTE)m_Units[i].GetToken()[0];
 	return     (m_Units[i].GetTokenLength() == 1)
 		&& (     (z == (BYTE)'"')
@@ -248,8 +257,8 @@ bool CUnitHolder::IsOneFullStop (size_t i) const
 bool  CUnitHolder::EmptyLineBeforeGraph (size_t i, size_t HB) const
 {
 	if ((i == 0) || m_Units[i].IsSoft()) return false;
-	size_t k = BSpace (i-1,0);
-	if ((k == 0) || (!m_Units[k].IsEOLN()))  return false;
+	size_t k = BSpace (i, 0);
+	if (!m_Units[k].IsEOLN())  return false;
     if (   (m_Units[k].GetTokenLength()>2)
 		|| (    (m_Units[k].GetTokenLength() == 2)
 		        && (m_Units[k].GetToken()[0] == '\n')
@@ -257,7 +266,7 @@ bool  CUnitHolder::EmptyLineBeforeGraph (size_t i, size_t HB) const
 	    ) return true; 
 	k--;
 	if ( k ==  0 ) return false;
-	k = BSpace ( k,0 ); 
+	k = BSpace (k + 1, 0); 
 	return m_Units[k].IsEOLN();
 };
 
@@ -275,9 +284,9 @@ void  CUnitHolder :: BuildUnitBufferUpper ()
 {
 	m_UnitBufUpper.clear();
 
-	for (int i = 0; i<m_Units.size(); i++)
+	for (auto& u: m_Units)
 	{
-		m_UnitBufUpper.insert(m_UnitBufUpper.end(), m_Units[i].GetToken(), m_Units[i].GetToken()+m_Units[i].GetTokenLength());
+		m_UnitBufUpper.insert(m_UnitBufUpper.end(), u.GetToken(), u.GetToken() + u.GetTokenLength());
 		m_UnitBufUpper.push_back(0);
 	};
 	MakeUpperVector(m_UnitBufUpper, m_Language);
@@ -350,12 +359,6 @@ BYTE	CUnitHolder::GetTokenLength(uint32_t LineNo) const
 void	CUnitHolder::InitTokenBuffer()
 {
 	FreeTable();
-
-	// the first line of the graphematical table has a special meaining
-	CGraLine C;
-	m_Units.push_back(C);
-	SetDes(0,OBeg);
-
 	//  While  building gra-table we use pointers into m_TokenBuf, 
 	// that's why we should allocate only once m_TokenBuf in the very beginning. 
 	// No reallocations are possible.
@@ -551,7 +554,6 @@ void CUnitHolder::SetOborotNo(size_t LineNo, short OborotNo)
 
 short CUnitHolder::GetOborotNo(size_t LineNo) const
 {
-	if (LineNo == 0) return -1;
 	std::map<size_t, short>::const_iterator it = m_FoundOborots.find(m_Units[LineNo].GetInputOffset());
 	if ( it == m_FoundOborots.end() )
 		return -1;

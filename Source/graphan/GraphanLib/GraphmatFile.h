@@ -58,10 +58,6 @@ class CGraphmatFile : public CUnitHolder {
 
     int DealFIO(size_t i, size_t HB);
 
-    int DealShortFIO(size_t i, size_t HB);
-
-    void DealNames(size_t LB, size_t HB);
-
     void DealSentBreaker();
 
     void InitNonContextDescriptors(CGraLine &L);
@@ -110,7 +106,6 @@ public:
 
     bool m_bFilterUnprintableSymbols;
 
-    bool m_bRecognizeShortFIOs;
     // max length of sentence
     size_t m_MaxSentenceLength;
 

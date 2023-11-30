@@ -106,7 +106,7 @@ bool CMAPost::LoadWords(const CLemmatizedText* piInTextItems)
 
 		for (; i < piInTextItems->m_PlmItems.size(); i++)
 		{
-			const char* strPlmLine = piInTextItems->m_PlmItems[i].c_str();
+			auto strPlmLine = piInTextItems->m_PlmItems[i];
 			if (!CheckIfHomonymPlmLine(strPlmLine))
 			{
 				//  reading the first homonym and word's  properties 
@@ -1170,7 +1170,7 @@ void CMAPost::InsertComma(CLineIter it)
 {
 	CPostLemWord P(m_pRusGramTab);
 	int dummy;
-	P.ProcessPlmLineForTheFirstHomonym(", 0 0 PUN", dummy);
+	P.ProcessPlmLineForTheFirstHomonym(",\t0 0\tPUN", dummy);
 	m_Words.insert(it, P);
 };
 

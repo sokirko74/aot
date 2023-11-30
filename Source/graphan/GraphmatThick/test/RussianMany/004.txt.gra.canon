@@ -1,3 +1,2 @@
-                                0 0 BEG DOC
-/                               0 1 PUN FILE1
-home/a.txt                      1 10 LLE aa CS? SENT_END FILE2
+/	0 1	 PUN FILE1
+home/a.txt	1 10	 LLE aa CS? SENT_END FILE2

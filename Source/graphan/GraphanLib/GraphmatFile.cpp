@@ -30,7 +30,6 @@ CGraphmatFile :: CGraphmatFile()
 	m_bUseIndention = true;
 	m_bFilterUnprintableSymbols = false;
 	m_MaxSentenceLength = 9000;
-	m_bRecognizeShortFIOs = false;
 }
 
 
@@ -133,18 +132,6 @@ bool CGraphmatFile::LoadDicts ()
 	};
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
 void CGraphmatFile :: GraphmatMain ()
 {
 	if (0x500000 < GetInputBuffer().size())
@@ -179,8 +166,9 @@ void CGraphmatFile :: GraphmatMain ()
 		}
 		else
 		{
-			assert (!GetUnits().empty());
-			GetUnit(GetUnits().size() -1).SetSingleSpaceAfter();
+			if (!GetUnits().empty()) {
+				GetUnit(GetUnits().size() - 1).SetSingleSpaceAfter();
+			}
 		};
 	}
 
@@ -190,7 +178,7 @@ void CGraphmatFile :: GraphmatMain ()
 
 
 	size_t Count = GetUnits().size();
-	for (size_t i=1; i< Count; i++)  
+	for (size_t i=0; i< Count; i++)  
 		InitNonContextDescriptors(GetUnit(i));
 
 	

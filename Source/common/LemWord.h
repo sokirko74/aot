@@ -10,7 +10,7 @@ class CLemWord
 	
 
     uint64_t   m_GraDescrs;
-    int		ProcessGraphematicalDescriptors(const char* LineStr);
+    void		ProcessGraphematicalDescriptors(const std::string& s);
 public:
 
 	// ======= Graphematics ======================	
@@ -58,8 +58,8 @@ public:
 	CLemWord(); 
 	
 	void DeleteOborotMarks();
-	bool AddNextHomonym(const char* strPlmLine);
-	bool ProcessPlmLineForTheFirstHomonym(const char* strPlmLine,  int& OborotNo);
+	bool AddNextHomonym(const std::string& strPlmLine);
+	bool ProcessPlmLineForTheFirstHomonym(std::string strPlmLine,  int& OborotNo);
 	bool HasDes(Descriptors g) const;
     void DelDes(Descriptors g);
     void AddDes(Descriptors g);

@@ -1,7 +1,6 @@
-                                0 0 BEG DOC
-ч                               0 1 RLE aa BUL INDENT RE1
-.                               1 1 PUN
-1                               3 1 DC
-ст                              5 2 RLE aa
-.                               7 1 PUN
-2                               9 1 DC CS? SENT_END RE2
+ч	0 1	 RLE aa RE1
+.	1 1	 PUN
+1	3 1	 DC
+ст	5 2	 RLE aa
+.	7 1	 PUN
+2	9 1	 DC CS? SENT_END RE2

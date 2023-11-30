@@ -21,7 +21,7 @@ void CLemmatizedText::CreateFromTokemized(const CGraphmatFile* Gr)
 	lem_results.reserve(5);
 
 	bool bInFixedExpression = false;
-		
+	
 	for (size_t lineNo = 0; lineNo < Gr->GetTokensCount(); lineNo++)
 	{
 		std::string strProcess  = Gr->GetGraphematicalLine(lineNo);
@@ -32,7 +32,7 @@ void CLemmatizedText::CreateFromTokemized(const CGraphmatFile* Gr)
 			bInFixedExpression = true;
 		};
 
-		if (bInFixedExpression || Gr->HasDescr(lineNo, OBeg))
+		if (bInFixedExpression)
 		{
 			m_PlmItems.push_back(strProcess);
 			if (Gr->HasDescr(lineNo, OEXPR2))	
@@ -47,14 +47,14 @@ void CLemmatizedText::CreateFromTokemized(const CGraphmatFile* Gr)
 					!Gr->HasDescr(lineNo, OLw), true, lem_results);
 
 			if (lem_results.empty() ) {
-				m_PlmItems.push_back(strProcess+ Format(" -?? %s ?? -1 0",Gr->GetUppercaseToken(lineNo)) );
+				m_PlmItems.push_back(strProcess + Format("\t-?? %s ?? -1 0",Gr->GetUppercaseToken(lineNo)) );
 			}
 			else
 				for( int i=0; i < lem_results.size(); i++ )
 				{
 					std::string line;
 					if (i > 0) line = 	"  ";
-                    line +=  strProcess + " " + lem_results[i].FormatAsInPlmLine();
+                    line +=  strProcess + "\t" + lem_results[i].FormatAsInPlmLine();
 					m_PlmItems.push_back(line);
 				}
 		}

@@ -1,4 +1,3 @@
-                                0 0 BEG DOC
-control                         0 7 LLE aa KEY1
--                               7 1 PUN HYP
-PgUp                            8 4 LLE Aa NAM? CS? SENT_END KEY2
+control	0 7	 LLE aa KEY1
+-	7 1	 PUN HYP
+PgUp	8 4	 LLE Aa CS? SENT_END KEY2

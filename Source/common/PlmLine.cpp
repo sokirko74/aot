@@ -14,7 +14,6 @@ CPlmLine::CPlmLine ()
 	m_bToDelete = false;
 	m_bFI1 = false;;
 	m_bFI2 = false;
-	m_bName = false;;
 	m_bSent2 = false;
 	m_bHyphenWord = false;
 	m_bMorphName = false;
@@ -58,19 +57,6 @@ bool  IsHomonym(const char* str)
 }
 
 
-std::string GetWordForm(const std::string& LineStr)
-{
-	int ii = 0;
-	if( IsHomonym(LineStr.c_str()) )
-		ii = 2;
-	int word_len = strcspn(LineStr.c_str() + ii," ");
-	if (word_len == 0) return "";
-	return LineStr.substr(ii, word_len);
-};
-
-
-
-
 bool CPlmLine::HasGraDescr(const char* GraphDescr) const
 {
   int i =  m_GraphDescr.find(GraphDescr);
@@ -109,7 +95,7 @@ void CPlmLine :: DeleteOb1()
 		m_GraphDescr.erase(i,7);
 
 		while	(			(i < m_GraphDescr.length())
-					&&		(isdigit((unsigned char)m_GraphDescr[i]))
+					&&		(std::isdigit(m_GraphDescr[i]))
 				)
 		m_GraphDescr.erase(i, 1);
 	};
@@ -154,56 +140,28 @@ bool init_flag(std::string& GraphDescr, const char* flag_str)
   return true;
 };
 
-bool CPlmLine :: LoadPlmLineFromString (std::string LineStr, bool bStartLine, const CAgramtab* pRusGramTab) 
+bool CPlmLine :: LoadPlmLineFromString (std::string LineStr, const CAgramtab* pRusGramTab) 
 {
 	m_bToDelete = false;
 	m_bQuoteMarks = false;
 	
-	if (!bStartLine)
-	{
-		m_bHomonym = (LineStr[0] == ' ');
+	m_bHomonym = (LineStr[0] == ' ');
 
-		Trim(LineStr);
-		SetWord(::GetWordForm(LineStr) );
-	}
-	else
-	{
-		m_bHomonym = false;
-		SetWord( "" );
+	Trim(LineStr);
+	auto columns = split_string(LineStr, '\t');
+	assert(columns.size() == 3 || columns.size() == 4);
+	SetWord(columns[0]);
 
-	};
-
-
-	long i = 1; // the first char can be a space (if this line contains a homonym)
-	for (; i < LineStr.length(); i++)
-		if (!isspace((BYTE) LineStr[i]))
-			break;
-
-	if (sscanf (LineStr.c_str()+i, "%i %i", &m_FilePosition, &m_TokenLengthInFile) != 2)
+	if (sscanf (columns[1].c_str(), "%i %i", &m_FilePosition, &m_TokenLengthInFile) != 2)
 		return false;
 
-	// pass all numbers
-	for (; i < LineStr.length(); i++)
-		 if (		(isdigit((BYTE) LineStr[i]) == 0)
-				&&	(isspace((BYTE) LineStr[i]) == 0)
-				&&	(((BYTE)LineStr[i]) != '-')
-			)
-			break;
-
-	int MorphSignPos = GetMorphSignPosition(LineStr.c_str()+i);
-	if (MorphSignPos == -1)
-		MorphSignPos = LineStr.length();
-	else
-		MorphSignPos += i; // make MorphSignPos an absolute offset in LineStr
-
-	m_GraphDescr = LineStr.substr (i, MorphSignPos - i);
 	/* вставим пробел в начало, потому что часто ищут графету с пробелом в начале,
 	например, " ЛЕ"*/
-	m_GraphDescr = " " + m_GraphDescr;
+	m_GraphDescr = " " + columns[2];
 
-	if (MorphSignPos != LineStr.length())
+	if (columns.size() == 4)
 	{
-		StringTokenizer tok(LineStr.c_str()+MorphSignPos," ");
+		StringTokenizer tok(columns[3].c_str(), " ");
 
 		if (!tok() ) return false;
 		std::string MorphSign  = tok.val();
@@ -250,7 +208,6 @@ bool CPlmLine :: LoadPlmLineFromString (std::string LineStr, bool bStartLine, co
 
 	m_bFI1 = init_flag (m_GraphDescr, "FAM1");
 	m_bFI2 = init_flag (m_GraphDescr, "FAM2");
-	m_bName = init_flag (m_GraphDescr, "NAM?");
 	m_bSent2 = init_flag (m_GraphDescr, "SENT_END");
 	int hyphen_occur = m_Word.find("-");
 	m_bHyphenWord = (hyphen_occur != std::string::npos) && ( (m_TokenType == RLE) ||(m_TokenType == LLE));
@@ -322,8 +279,6 @@ std::string CPlmLine :: GetStr ()  const
 		Result +=  " FAM1 ";
 	if (m_bFI2) 
 		Result +=  " FAM2 ";
-	if (m_bName) 
-		Result +=  " NAM? ";
 	if (m_bSent2) 
 		Result +=  " SENT_END ";
 

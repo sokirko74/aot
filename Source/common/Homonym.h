@@ -60,7 +60,7 @@ public:
 	bool	IsLeftNounModifier() const;
 	void	DeleteOborotMarks();
 
-	bool	ProcessLemmaAndGrammems(const char* strLemma);
+	bool	ProcessLemmaAndGrammems(std::string& strLemma);
 	void	SetLemma(std::string Lemma);
 	const std::string& GetLemma() const;
 	std::string	GetGrammemsStr() const;

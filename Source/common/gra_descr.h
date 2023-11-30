@@ -10,7 +10,7 @@
 
 enum Descriptors 
 {
-	 OBeg  = 0, 
+	 ODummy  = 0, //unused
 	 ORLE   = 1, 
 	 OLLE  = 2, 
 	 ODel  = 3, 
@@ -27,7 +27,7 @@ enum Descriptors
 	 OUp   = 14, 
 	 OLw   = 15, 
 	 OUpLw = 16, 
-	 ONam  = 17, 
+	 ODummy17  = 17, 
 	 OOpn  = 18, 
 	 OCls  = 19,
 	 ONil  = 20, 

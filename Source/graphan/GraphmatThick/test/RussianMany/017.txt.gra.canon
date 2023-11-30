@@ -1,6 +1,5 @@
-                                0 0 BEG DOC
-Т                               0 1 RLE AA BUL INDENT FAM1
-.                               1 1 PUN
-Т                               2 1 RLE AA
-.                               3 1 PUN
-Иванов                          4 6 RLE Aa NAM? CS? SENT_END FAM2
+Иванов	0 6	 RLE Aa FAM1
+Т	7 1	 RLE AA
+.	8 1	 PUN
+Т	9 1	 RLE AA
+.	10 1	 PUN CS? SENT_END FAM2

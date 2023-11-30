@@ -101,7 +101,7 @@ inline void AdjustRubiconsInSpaceCompact  (const CGraphmatFile& C, size_t &Start
 		EndNo = StartNo - 1;
 	 else
 		{	 
-			 StartNo = C.BSpace(StartNo, EndNo);
+			 StartNo = C.BSpace(StartNo + 1, EndNo);
 			 if (EndNo ==  StartNo) 
 	        	StartNo = EndNo+1;
 			  else
@@ -843,11 +843,11 @@ void CGraphmatFile :: MacSynHierarchy ()
 	// ===================    Writing results ========================
 	// ===============================================================
 
-	for (i=0; i < CSL.size(); i++)
-		if (CSL[i].m_GraLineNoToMark < GetUnits().size()) 
-			SetDes(CSL[i].m_GraLineNoToMark, CSL[i].m_Type);
-		   
-
+	for (auto& c : CSL) {
+		if (c.m_GraLineNoToMark < GetUnits().size())
+			if (c.m_Type != CS_Doc)
+				SetDes(c.m_GraLineNoToMark, c.m_Type);
+	}
 
 	if (!m_XmlMacSynOutputFile.empty())
 		WriteXmlMacSyn (CSL, m_XmlMacSynOutputFile.c_str());

@@ -1,6 +1,5 @@
-                                0 0 BEG DOC
-..                              0 2 PUN PLP FILE1
-\                               2 1 PUN
-drivers                         3 7 LLE aa
-\                               10 1 PUN
-text.txt                        11 8 LLE aa CS? SENT_END FILE2
+..	0 2	 PUN PLP FILE1
+\	2 1	 PUN
+drivers	3 7	 LLE aa
+\	10 1	 PUN
+text.txt	11 8	 LLE aa CS? SENT_END FILE2

@@ -18,7 +18,6 @@ const size_t BigTextLengthInFilledLines  = 100;
 // пункты перечисления
 bool CGraphmatFile::DealBullet (size_t i, size_t HB)
 {
-	if (i == 0)    return false;
 	if (i  >= HB )  return false;
 
 	// проверяем, является ли данная графема перечислителем
@@ -26,7 +25,7 @@ bool CGraphmatFile::DealBullet (size_t i, size_t HB)
 
 	if (HasDescr(i,OBullet)) return false;
 	size_t nt = PassSpace(i+1,HB);
-	size_t nh = BSpace(i-1);
+	size_t nh = BSpace(i);
 	// перед перечислителя должен стоять конец строки 
 	if ((nh > 0) && !GetUnits()[nh].IsEOLN()) return false;
 
@@ -100,7 +99,7 @@ bool CGraphmatFile::DealAsteriskBullet (size_t LB, size_t HB)
 		// удостоверяемся, что данная графема  не вошла  в графематические группы
 		if (GetUnits()[i].IsGrouped() || HasDescr(i,OBullet)) continue;
 
-		size_t nh = BSpace(i-1);
+		size_t nh = BSpace(i);
 
 		size_t nt = PassSpace(i+1,HB);
 
@@ -141,10 +140,9 @@ bool CGraphmatFile::DealAsteriskBullet (size_t LB, size_t HB)
 
 bool DealIndention  (CGraphmatFile& G, size_t i, size_t Offset, const std::vector<uint16_t>& LeftMargins)
 {
-	if (i == 0) return true;
 	if ( G.GetUnits()[i].IsSoft()) return true;
 
-	size_t nh = G.BSpace(i-1);
+	size_t nh = G.BSpace(i);
 
 	if (!G.GetUnits()[nh].IsGrouped())
 		if (G.GetUnits()[nh].IsEOLN() )
@@ -185,7 +183,7 @@ int  CGraphmatFile::DealBulletsWithTwoBrackets (size_t StartPos, size_t EndPos)
   size_t BulletWordNo = nt;
 
   // удостоверяемся, что данная графема  не вошла  в графематические группы
-  size_t  nh = (i>0) ? BSpace(i-1) : 0;
+  size_t  nh = (i>0) ? BSpace(i) : 0;
 
   // перед перечислителем должен стоять конец строки 
   if (   !GetUnits()[nh].IsEOLN()
@@ -272,9 +270,8 @@ void CGraphmatFile::DealOborotto(size_t  HB)
 	std::string s;
 	std::vector<uint16_t> OborotIds;
 	OborotIds.resize(HB);
-
-	int i=1;
-	for (; i<HB; i++)
+		
+	for (int i = 0; i<HB; i++)
 	{
 		s = GetUppercaseToken(i);
 		StringVector::const_iterator it = lower_bound(m_pDicts->m_OborotTokens.begin(),  m_pDicts->m_OborotTokens.end(), s);
@@ -287,7 +284,7 @@ void CGraphmatFile::DealOborotto(size_t  HB)
 			OborotIds[i] = 0xffff;
 	};
 
-	for (i=1; i<HB; i++)
+	for (int i=0; i<HB; i++)
 	if (		!GetUnits()[i].IsSoft() 
 			&&	(OborotIds[i] != 0xffff)
 		)
@@ -469,102 +466,10 @@ bool  CanBeRussianInitial(const CGraphmatFile&C, size_t LineNo)
 };
 
 
-int CGraphmatFile::DealShortFIO(size_t i, size_t HB)
-{
-	// Сохранение начала проверяемой части предложения
-	size_t nh = i,nt;
-		
-	// Первая строка не может быть началом ФИО
-	if (nh == 0) return nh+1;
-
-	// Выделение первой буквы в инициалах
-	if ((i == HB) || !CanBeRussianInitial(*this, nh)) 
-		return nh+1;
-
-	if (HasDescr(i,OEXPR1) != HasDescr(i,OEXPR2))  
-		return nh+1;
-
-	// Получение указателя на следующее непустое слово
-	i = PSoft(i+1,HB);
-
-	// Проверка на наличие точки
-	if ((i == HB) || (!IsOneFullStop(i))) 
-		return nh+1;
-
-	// Получение указателя на третье непустое слово
-	size_t l = PSoft(i+1,HB);
-
-	// Определение положения предшествующего выражения
-	size_t k = BSoft(nh-1);
-
-	bool flag_surname_is_after = 
-		(l <= HB)
-		&& FirstUpper(l) 
-		&& !HasIndention(nh,l)
-		&& (GetUnits()[l].GetTokenLength() > 1)
-
-		//// иначе "Т.Е. ОТКАЗАТЬСЯ" будет ФИО
-		&& (HasDescr(l,OEXPR1) == HasDescr(l,OEXPR2));
-
-	bool flag_surname_is_before = 
-		FirstUpper(k) 
-		&& !HasIndention(k,i) 
-		&& (GetUnits()[k].GetTokenLength() > 1)
-
-		//// иначе "Т.Е. ОТКАЗАТЬСЯ" будет ФИО
-		&& (HasDescr(k,OEXPR1) == HasDescr(k,OEXPR2));
-
-	if (!flag_surname_is_before && !flag_surname_is_after)
-		return nh+1;
-
-	if (flag_surname_is_after && flag_surname_is_after)
-	{
-		// берем число линий в первой последовательности
-		int num1 = CountEndL (nh,l);
-		int num2 = CountEndL (k,i);
-		// считаем число строк, разделяющих фамилию и инициалы 
-		if (num1 < num2)
-			flag_surname_is_before = 0;
-		else
-			if (num1 > num2)
-				flag_surname_is_after = 0;
-			else
-			{
-				num1 = CountSpaces (nh,l);
-				num2 = CountSpaces (k,i);
-				if (num1 < num2)
-					flag_surname_is_before = 0;
-				else
-					flag_surname_is_after = 0;
-			}
-	}
-
-	// остался только один вариант
-	if (flag_surname_is_before)
-	{ 
-		nh = k;
-		nt = i;  
-	}
-	else
-	{
-		nt = l;
-	}
-
-	// Установка начала и конца ФИО
-	SetDes(nh,OFAM1);
-	SetDes(nt,OFAM2);
-	SetState(nh,nt+1,stGrouped);
-
-	return nt+1;
-}
-
 int CGraphmatFile::DealFIO (size_t i,size_t HB)
 {
 	// Сохранение начала проверяемой части предложения
 	size_t nh = i,nt;
-
-	// Первое слово в первой строке не может быть началом фамилии
-	if  (nh == 0) return nh+1;
 
 	// Проверка на наличие одиночной заглавной буквы 
 	if ((i == HB) || !CanBeRussianInitial(*this, nh)) return nh+1;
@@ -594,7 +499,7 @@ int CGraphmatFile::DealFIO (size_t i,size_t HB)
 	size_t l = PSoft(i+1,HB);
 
 	// Определение положения предшествующего выражения
-	size_t k = BSoft(nh-1);
+	size_t k = BSoft(nh);
 
 	bool flag_surname_is_after = 
 						(l < HB)
@@ -663,7 +568,7 @@ void CalculateLMarg (const CGraphmatFile& G, std::vector<uint16_t>& gLeftMargins
 	uint16_t lm = 0;
 	gLeftMargins.resize(G.GetUnits().size());
 	size_t HB = G.GetUnits().size();
-	for (size_t i=1; i<HB; i++)
+	for (size_t i=0; i<HB; i++)
 	{
 		gLeftMargins[i] = lm;
 	    lm += G.GetUnits()[i].GetScreenLength();
@@ -671,29 +576,6 @@ void CalculateLMarg (const CGraphmatFile& G, std::vector<uint16_t>& gLeftMargins
 			lm = 0;
 	}
 }
-
-
-
-void CGraphmatFile::DealNames (size_t LB, size_t  HB)
-{
-    int flEOS=1;
-    for (size_t i = LB; i<HB; i++)
-    {
-        if (!flEOS && HasDescr(i,OUpLw)) 
-            SetDes (i,ONam);
-
-        if(!GetUnits()[i].IsSoft()) 
-            flEOS = HasDescr(i,OSentEnd);
-    }
-}
-
-
-
-
-
-
-
-
 
 
 /*
@@ -730,10 +612,10 @@ bool CanBeFileName(const CGraphmatFile& F, size_t LB)
 
 void CGraphmatFile::DealExtensionsAndLocalFileNames(size_t LB, size_t  HB)
 {
-	assert (LB > 0);
+	assert (LB >= 0);
 	int LastTokenNo = LB;
 	if (LastTokenNo >= HB)  return;
-	size_t StartToken;
+	int StartToken;
 	if (IsOneFullStop(LastTokenNo)) 
 	{
 		// if extension is not part of the name
@@ -776,7 +658,7 @@ void CGraphmatFile::DealExtensionsAndLocalFileNames(size_t LB, size_t  HB)
 	и "drivers\*.txt" 
 
 	*/
-	while (StartToken > 1)
+	while (StartToken > 0)
 	{
 		if (!CanBeFileName(*this, StartToken)) 
 		{
@@ -787,14 +669,18 @@ void CGraphmatFile::DealExtensionsAndLocalFileNames(size_t LB, size_t  HB)
 
 		//THISIS~1.TXT
 		if (	GetUnits()[StartToken].IsChar('~') 
-				&&	StartToken > 1
+				&&	StartToken > 0
 				&& CanBeFileName(*this, StartToken-1) 
 			) 
 		{
-			StartToken -=2; 
+			StartToken -= 2; 
 		};
 		
 
+
+		if (StartToken < 0) {
+			break;
+		}
 
 		if (		!GetUnits()[StartToken].IsChar('\\')
 				&&	!GetUnits()[StartToken].IsChar('/')
@@ -807,8 +693,8 @@ void CGraphmatFile::DealExtensionsAndLocalFileNames(size_t LB, size_t  HB)
 		
 
 	}
-	if (StartToken == 0)
-		StartToken++;
+	if (StartToken < 0)
+		StartToken = 0;
 
 	if (StartToken > LastTokenNo) return;
 
@@ -883,7 +769,7 @@ bool CGraphmatFile :: FindKeySequence (const char* title, size_t i,size_t HB, si
 	if (*title || k != 0) 
 		return false;
 
-	GraLast  =  BSoft(i-1)+1;
+	GraLast  =  BSoft(i) + 1;
 	return  true;
 }
 
@@ -992,7 +878,7 @@ void CGraphmatFile::DealKeySequence(size_t LB, size_t  HB)
  	    if (GetUnits()[i].IsSoft())   i++;
 	};
 	if ((i ==  HB) || !HasDescr(i, OKey2))
-	  i = BSoft(i-1);
+	  i = BSoft(i);
 	if (i-LB < 2)  return;
   
 
@@ -1094,7 +980,7 @@ void CGraphmatFile::DealGermanDividedCompounds(size_t LB, size_t  HB)
 
 static void InitEnglishNameSlot (CGraphmatFile& C)
 {
-	for (size_t i=1; i< C.GetUnits().size(); i++)  
+	for (size_t i=0; i< C.GetUnits().size(); i++)  
 	   if (   !C.GetUnits()[i].IsSoft() 
 		   && !C.HasDescr(i,OPun)
 		   )
@@ -1160,16 +1046,6 @@ int CGraphmatFile::InitContextDescriptors (size_t LB, size_t HB)
 		throw;
 	};
 
-	//  === Имена собственные (Им?) =====
-	try {
-		DealNames (LB,HB);
-	}
-	catch (...)
-	{
-		m_LastError = "CGraphmatFile::DealNames has crushed!";
-		throw;
-	};
-
 	try {
 		for (size_t i=LB; i<HB; i++)
 			DealEnglishStyleFIO (i, HB);
@@ -1212,7 +1088,7 @@ int CGraphmatFile::InitContextDescriptors (size_t LB, size_t HB)
 
 
 	try {
-		for (size_t  i=1; i<HB; i++)
+		for (size_t  i=0; i<HB; i++)
 			DealAbbrev(i,HB);
 	}
 	catch (...)
@@ -1236,7 +1112,7 @@ int CGraphmatFile::InitContextDescriptors (size_t LB, size_t HB)
 
 	// ============  расширения файлов
 	try {
-		for (size_t i=HB-1; i>0; i--)
+		for (int i=HB-1; i>=0; i--)
 			DealExtensionsAndLocalFileNames(i,HB);
 	}
 	catch (...)
@@ -1285,29 +1161,13 @@ int CGraphmatFile::InitContextDescriptors (size_t LB, size_t HB)
 	//  === ФИО  =====
 	try {
 		for (size_t i=LB; i<HB;)
-				i = DealFIO (i,HB);
+			i = DealFIO (i,HB);
 	}
 	catch (...)
 	{
 		m_LastError = "CGraphmatFile::DealFIO has crushed!";
 		throw;
 	};
-
-	// ==== Короткая форма ФИО ====
-	if (m_bRecognizeShortFIOs)
-	{
-		try {
-			for (size_t i=LB; i<HB;)
-				i = DealShortFIO(i,HB);
-		}
-		catch (...)
-		{
-			m_LastError = "CGraphmatFile::DealShortFIO has crushed!";
-			throw;
-		};
-	}
-
-
 
 	try {
 		DealAsteriskBullet (LB, HB);

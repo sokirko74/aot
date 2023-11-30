@@ -53,6 +53,7 @@ int main(int argc, const char **argv) {
         }
 
         for (auto& p : file_pairs) {
+            LOGI << "process file " << p.first;
             int dummy;
             if (!H.GetMorphology(p.first, true, dummy)) {
                 return 1;

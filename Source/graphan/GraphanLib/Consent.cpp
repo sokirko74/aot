@@ -96,13 +96,13 @@ bool CConSent::InitBasicInformation()
 
 	m_HardGraphStartNo = m_GraFile->PSoft(m_StartNo, m_GraFile->GetUnits().size());
 	assert(m_HardGraphStartNo < m_GraFile->GetUnits().size());
-	m_HardGraphEndNo = m_GraFile->BSoft(m_EndNo);
+	m_HardGraphEndNo = m_GraFile->BSoft(m_EndNo + 1);
 	assert(m_HardGraphEndNo > 0);
 
 	if (IsSoft())
 		m_GraLineNoToMark = m_EndNo;
 	else
-		m_GraLineNoToMark = m_GraFile->HasDescr(m_HardGraphEndNo, OPun) ? m_HardGraphEndNo : m_GraFile->BSpace(m_EndNo);
+		m_GraLineNoToMark = m_GraFile->HasDescr(m_HardGraphEndNo, OPun) ? m_HardGraphEndNo : m_GraFile->BSpace(m_EndNo + 1);
 
 
 	m_bFirstUpper = m_GraFile->HasDescr(m_HardGraphEndNo, OUp);

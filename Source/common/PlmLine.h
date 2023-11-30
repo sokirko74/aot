@@ -37,7 +37,6 @@ public:
 	bool	m_bFI1;
 	bool	m_bFI2;
 	
-	bool	m_bName;
 	bool	m_bSent2;
 	bool	m_bOborot1;
 	bool	m_bOborot2;
@@ -50,7 +49,7 @@ public:
 
 	CPlmLine ();
 
-	bool    LoadPlmLineFromString (std::string Buffer, bool bStartLine, const CAgramtab* pRusGramTab);
+	bool    LoadPlmLineFromString (std::string Buffer, const CAgramtab* pRusGramTab);
 	std::string  GetStr() const;
 	void	DeleteDescr(const char* Descr);
 	void	DeleteOb1();

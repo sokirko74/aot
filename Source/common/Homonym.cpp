@@ -93,13 +93,9 @@ std::string	CHomonym::GetGrammemsStr() const
 	return GetGrammemsByAncodes();
 };
 
-
-
-
-
-bool CHomonym::ProcessLemmaAndGrammems(const char* CurrStr)
+bool CHomonym::ProcessLemmaAndGrammems(std::string& CurrStr)
 {
-	StringTokenizer tok(CurrStr," ");
+	StringTokenizer tok(CurrStr.c_str(),  " ");
 
 	//  if it a punctuation mark then return true, and do not try to find lemma and morph. information
 	if( !tok() ) return true;

@@ -33,13 +33,10 @@ bool CLemWord::HasDes(Descriptors g) const
 }
 
 // returns the end point of the graphematical descriptors
-int CLemWord::ProcessGraphematicalDescriptors(const char* LineStr)
+void CLemWord::ProcessGraphematicalDescriptors(const std::string& s)
 {
-	size_t MorphSignPos = GetMorphSignPosition(LineStr);
-	if (MorphSignPos == -1)
-		MorphSignPos = strlen(LineStr);
 
-    m_GraDescrs = parse_gra_descriptors(std::string (LineStr, MorphSignPos).c_str(), m_UnparsedGraphemDescriptorsStr);
+    m_GraDescrs = parse_gra_descriptors(s.c_str(), m_UnparsedGraphemDescriptorsStr);
 
 	m_bSpace =			HasDes(OSpc) 
 					||	HasDes(OEOLN) 
@@ -75,8 +72,7 @@ int CLemWord::ProcessGraphematicalDescriptors(const char* LineStr)
 
     m_bWord  = !bRomanNumber && (HasDes(ORLE) || HasDes(OLLE)); 
 
-	return (int)MorphSignPos;
-
+	
 }
 
 void rtrim (char* s, size_t* len)
@@ -87,33 +83,18 @@ void rtrim (char* s, size_t* len)
  }
 
 
-bool CLemWord::AddNextHomonym(const char* sPlmLine)
+bool CLemWord::AddNextHomonym(const std::string& strPlmLine)
 {
-    char buffer[CriticalGraphemLineLength*2];
-    assert (strlen(sPlmLine) < CriticalGraphemLineLength*2);
-    strcpy(buffer, sPlmLine);
-    char* strPlmLine = buffer;
+	auto columns = split_string(strPlmLine, '\t');
+	assert(columns.size() == 4);
 
-	assert (strPlmLine[0] == ' ');
-	assert (strPlmLine[1] == ' ');
-	strPlmLine += 2;
-
-    assert ( GetHomonymsCount() );
-	
-	size_t iPlmLineLen = strlen(strPlmLine);
-	rtrim(strPlmLine,&iPlmLineLen);
-
-	size_t iFirstFieldLen = strcspn(strPlmLine," ");
-
-	size_t iSomeUnusefulDigitsLen = strspn(strPlmLine + iFirstFieldLen," -1234567890");
+    assert ( GetHomonymsCount() > 0);
 
 	CHomonym* pHomonym = AddNewHomonym();
 
-	strPlmLine += iFirstFieldLen + iSomeUnusefulDigitsLen;
+	ProcessGraphematicalDescriptors(columns[2]);
 
-	int MorphSectionOffset = ProcessGraphematicalDescriptors(strPlmLine);
-
-	if (!pHomonym->ProcessLemmaAndGrammems(strPlmLine+MorphSectionOffset)) return false;
+	if (!pHomonym->ProcessLemmaAndGrammems(columns[3])) return false;
 
     {
         const CHomonym* pFirstHom = GetHomonym(0);
@@ -140,34 +121,19 @@ int ParseOborotNo(const std::string& Descriptors)
 };
 
 
-bool CLemWord::ProcessPlmLineForTheFirstHomonym(const char* sPlmLine, int& OborotNo)
+bool CLemWord::ProcessPlmLineForTheFirstHomonym(std::string sPlmLine, int& OborotNo)
 {
-    char buffer[CriticalGraphemLineLength*2];
-    assert (strlen(sPlmLine) < CriticalGraphemLineLength*2);
-    strcpy(buffer, sPlmLine);
-    char* strPlmLine = buffer;
-
-
     // откусываю признаки конца строки, если они появились
-    size_t iPlmLineLen = strlen(strPlmLine);
-    rtrim(strPlmLine,&iPlmLineLen);
+	Trim(sPlmLine);
+	auto columns = split_string(sPlmLine, '\t');
+	assert(columns.size() == 3 || columns.size() == 4);
+    SetWordStr(columns[0]);
 
-    size_t iFirstFieldLen = strcspn(strPlmLine," ");
-    char WordBuffer[CriticalTokenLength+1];
-    strncpy(WordBuffer, strPlmLine, iFirstFieldLen);
-    WordBuffer[iFirstFieldLen] = '\0';
-    SetWordStr(WordBuffer);
-
-
-    size_t iSomeUnusefulDigitsLen = strspn(strPlmLine + iFirstFieldLen," -1234567890");
-
-    //  reading file position of an item from graline
-    if (sscanf(strPlmLine + iFirstFieldLen, "%i %i", &m_GraphematicalUnitOffset, &m_TokenLengthInFile) != 2)
+	//  reading file position of an item from graline
+    if (sscanf(columns[1].c_str(), "%i %i", &m_GraphematicalUnitOffset, &m_TokenLengthInFile) != 2)
         return false;
 
-    strPlmLine += iFirstFieldLen + iSomeUnusefulDigitsLen;
-
-    int MorphSectionOffset = ProcessGraphematicalDescriptors(strPlmLine);
+    ProcessGraphematicalDescriptors(columns[2]);
 
     if( m_bSpace )
         return true;
@@ -187,10 +153,10 @@ bool CLemWord::ProcessPlmLineForTheFirstHomonym(const char* sPlmLine, int& Oboro
     if (HasDes(OEXPR2))
         OborotNo = -1;
 
-    if( MorphSectionOffset == strlen(strPlmLine) )
+	if (columns.size() == 3)
         pHomonym->SetLemma(m_strWord);
     else
-        if (!pHomonym->ProcessLemmaAndGrammems(strPlmLine+MorphSectionOffset))
+        if (!pHomonym->ProcessLemmaAndGrammems(columns[3]))
             return false;
 
     InitLevelSpecific(pHomonym);
@@ -199,9 +165,6 @@ bool CLemWord::ProcessPlmLineForTheFirstHomonym(const char* sPlmLine, int& Oboro
         ||	(m_strWord == "'")
         )
         DelDes(OPun);
-
-
-
 
     if (pHomonym->m_LemSign != '+')
         m_bPredicted = true;

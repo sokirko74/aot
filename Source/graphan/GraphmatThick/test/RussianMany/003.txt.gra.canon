@@ -1,4 +1,3 @@
-                                0 0 BEG DOC
-test2                           0 5 DSC FILE1
-.                               5 1 PUN
-txt                             6 3 LLE aa CS? SENT_END FILE2
+test2	0 5	 DSC FILE1
+.	5 1	 PUN
+txt	6 3	 LLE aa CS? SENT_END FILE2

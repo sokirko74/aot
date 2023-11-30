@@ -6,7 +6,7 @@
 static size_t  FindSentEndAfterParagraph (const CGraphmatFile &F, size_t StartPos, size_t EndPos)
 {
 	 // pass  paragraph indention, if it exists
-     size_t k =  F.BSoft (StartPos);
+     size_t k =  F.BSoft (StartPos + 1);
 
 	 // if we are still on the soft delimiter, then we should exit
 	 // since the very beginning of the text was already processed
@@ -121,7 +121,7 @@ bool CheckGermanSentenceBreak(CGraphmatFile& G, size_t WordNo)
 			//den 8. Mai
 			//Das 5.  Corps
 			// This full stop is not considered a sentence break.
-			int i  = G.BSoft(WordNo-2);
+			int i  = G.BSoft(WordNo-1);
 			if (i > 0) 
 				if (binary_search(Articles,Articles+ArticlesCount, std::string(G.GetUppercaseToken(i))) )
 					return false;
@@ -401,6 +401,6 @@ void CGraphmatFile::DealSentBreaker ()
 	I go to the forest (!)
 	Here the close bracket will be marked with OSentEnd, (not "!")
 	*/
-	SetSentMarkers(*this, BSoft(EndPos - 1), EndPos, SentenceOpenBracket, bSentenceQuotationMarks, StartSentenceOffset);
+	SetSentMarkers(*this, BSoft(EndPos), EndPos, SentenceOpenBracket, bSentenceQuotationMarks, StartSentenceOffset);
 };
 

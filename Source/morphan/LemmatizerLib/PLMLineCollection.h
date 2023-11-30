@@ -23,8 +23,8 @@ public:
 	
 };
 
-inline bool CheckIfHomonymPlmLine(const char* strPlmLine)
+inline bool CheckIfHomonymPlmLine(const std::string& strPlmLine)
 {
-	return( strPlmLine[0] == ' ') ;
+	return strPlmLine[0] == ' ';
 }
 

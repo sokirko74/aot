@@ -188,10 +188,9 @@ size_t CInputSentence::ReadSentence ( const CLemmatizedText&	PlmLines, size_t St
 	for (size_t i=StartLineNo; i<EndLineNo ; i++)
 	{
 		CInputHomonym Homonym;
-		if (!Homonym.LoadPlmLineFromString(PlmLines.m_PlmItems[i].c_str(), i==0, m_pGramTab))
+		if (!Homonym.LoadPlmLineFromString(PlmLines.m_PlmItems[i].c_str(), m_pGramTab))
 		{
-			ErrorMessage ("Cannot parse "+ PlmLines.m_PlmItems[i]);
-			return EndLineNo;
+			throw CExpc ("Cannot parse "+ PlmLines.m_PlmItems[i]);
 		};
 		if (Homonym.m_TokenType == OTHER_TOKEN_TYPE) continue;
 

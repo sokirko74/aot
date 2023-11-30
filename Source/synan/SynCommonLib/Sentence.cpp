@@ -355,8 +355,7 @@ bool ReadSentence(CSentence &S, const CLemmatizedText *piPLMLinePtr, size_t &Lin
 
     int OborotNo = -1;
 
-    for (; LineNo < piPLMLinePtr->m_PlmItems.size(); LineNo++) {
-        const char *strPlmLine = piPLMLinePtr->m_PlmItems[LineNo].c_str();
+    for (auto & strPlmLine : piPLMLinePtr->m_PlmItems) {
         if (!CheckIfHomonymPlmLine(strPlmLine)) {
             // if the previous  word was  the last in the sentence, then exit
             if (!S.m_Words.empty() && S.m_Words.back().HasDes(OSentEnd))
