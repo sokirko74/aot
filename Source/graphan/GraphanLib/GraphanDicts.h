@@ -14,44 +14,6 @@ const int MaxSpaceWordLen = 100;
 
 const size_t MaxNameSize = 100;
 
-class CEnglishName {
-public:
-
-	char name[MaxNameSize];
-
-	//bool operator==(const CEnglishName& X) const
-	//{ return strcmp (name, X.name) == 0;};
-
-	//bool operator<(const CEnglishName& X) const
-	//{ return strcmp (name, X.name) < 0;};
-
-};
-
-struct EnglishNameLess 
-{
-	bool	operator () (const CEnglishName& X1, const char* X2) const
-	{
-		return strcmp(X1.name,X2) < 0;
-	};
-	bool	operator () (const char* X1, const CEnglishName& X2) const
-	{
-		return strcmp(X1,X2.name) < 0;
-	};
-	bool	operator () (const CEnglishName& X1, const CEnglishName& X2) const
-	{
-		return strcmp(X1.name,X2.name) < 0;
-	};
-};
-//inline bool EnglishNameLess (const CEnglishName& _Y, const char* X) 
-//{ 
-//	return strcmp (_Y.name, X) < 0;
-//};
-
-
-
-
-
-
 
 class CGraphanDicts {
 	void _add_oborot(CGraphemOborot o);

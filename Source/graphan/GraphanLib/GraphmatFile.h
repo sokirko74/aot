@@ -75,7 +75,6 @@ class CGraphmatFile : public CUnitHolder {
 
 public:
     const CGraphanDicts *m_pDicts;
-    bool m_bConvertRussianJo2Je;
 
     size_t m_MinParOfs;
     size_t m_MaxParOfs;

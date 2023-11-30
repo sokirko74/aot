@@ -28,7 +28,6 @@ CGraphmatFile :: CGraphmatFile()
 	m_bEmptyLineIsSentenceDelim = true;
 	m_bUseParagraphTagToDivide = false;
 	m_bUseIndention = true;
-	m_bConvertRussianJo2Je = false;
 	m_bFilterUnprintableSymbols = false;
 	m_MaxSentenceLength = 9000;
 	m_bRecognizeShortFIOs = false;
@@ -195,14 +194,6 @@ void CGraphmatFile :: GraphmatMain ()
 		InitNonContextDescriptors(GetUnit(i));
 
 	
-	if (m_bConvertRussianJo2Je)
-	{
-		size_t Count = GetUnits().size();
-		for (size_t i=1; i< Count; i++)  
-			if (HasDescr(i, ORLE))
-				ConvertJO2Je(const_cast<char*>(GetUnit(i).GetToken()), GetUnit(i).GetTokenLength());
-	};
-
 	BuildUnitBufferUpper();
 
 	InitContextDescriptors (0,GetUnits().size());  
