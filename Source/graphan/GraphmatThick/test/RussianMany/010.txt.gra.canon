@@ -1,5 +1,0 @@
-C:	0 2	 DSC FILE1
-\	2 1	 PUN
-test.txt	3 8	 LLE aa
-\	11 1	 PUN
-tst.txt	12 7	 LLE aa CS? SENT_END FILE2

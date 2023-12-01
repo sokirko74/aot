@@ -57,8 +57,9 @@ void CGraphmatFile::FreeDicts()
 
 
 
-bool CGraphmatFile::LoadDicts ()
+bool CGraphmatFile::LoadDicts (MorphLanguageEnum langua)
 {
+	m_Language = langua;
 	try {
 
 		if (!m_pDicts)
@@ -162,7 +163,7 @@ void CGraphmatFile :: GraphmatMain ()
 			AddUnit(NewLine);  
 			CurrOutBufOffset += NewLine.GetTokenLength();
 			if (NewLine.IsPageBreak() )
-				SetPageNumber(GetUnits().size() - 1,PageNumber);
+				GetUnit(GetUnits().size() - 1).SetPageNumber((short)PageNumber);
 		}
 		else
 		{
@@ -176,10 +177,8 @@ void CGraphmatFile :: GraphmatMain ()
 	// больше TBuf не нужен, так что освобождаем память
 	ClearInputBuffer();
 
-
-	size_t Count = GetUnits().size();
-	for (size_t i=0; i< Count; i++)  
-		InitNonContextDescriptors(GetUnit(i));
+	for (size_t i=0; i< GetUnits().size(); i++)
+		GetUnit(i).InitNonContextDescriptors(m_bForceToRus);
 
 	
 	BuildUnitBufferUpper();
@@ -193,21 +192,16 @@ void CGraphmatFile :: GraphmatMain ()
 		DealSentBreaker();
 	}
 	
-	if   (!m_GraOutputFile.empty())
-	{
-		WriteGraphMat (m_GraOutputFile.c_str());
-	}
 };
 
 
 void CGraphmatFile::LoadStringToGraphan(const std::string& szBuffer)
 {
-	m_GraOutputFile = "";
 	m_XmlMacSynOutputFile = "";
 
 	if (!InitInputBuffer(szBuffer)) 
 	{
-		throw CExpc ("Cannot init inpur buffer for %i bytes", szBuffer.length());
+		throw CExpc ("Cannot init input buffer for %i bytes", szBuffer.length());
 	};
 
 	GraphmatMain();
@@ -269,19 +263,22 @@ MorphLanguageEnum CGraphmatFile::GetTokenLanguage (int LineNo) const
 };
 
 
-bool CGraphmatFile :: StartsFixedOborot(size_t LineNo) const
-{
-	short OborotNo = GetOborotNo(LineNo);
-	return		(OborotNo != -1)
-			&&	m_pDicts->m_Oborottos[OborotNo].m_bFixedFet;
-};
-
-
 const CDictionary* CGraphmatFile :: GetOborDic() const
 {
 	assert(m_pDicts);
 	return m_pDicts->GetOborDic();
 };
+
+void CGraphmatFile::WriteGraphMat(std::string filename) const
+{
+	std::ofstream outp(filename, std::ios::binary);
+
+	for (auto& unit : GetUnits())
+	{
+		outp << unit.GetGraphematicalLine() << "\n";
+	};
+}
+
 
 
 

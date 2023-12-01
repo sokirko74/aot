@@ -22,8 +22,8 @@ bool ProcessHyphenWords(const CLemmatizer* lemmatizer, CGraphmatFile* piGraphmat
 
                                   // it is not possible to create a hyphen word when this part of the text has an intersection
                                   // with an oborot which is marked as "fixed" in the dictionary
-                                  &&	!piGraphmatFile->StartsFixedOborot(LineNo))
-                           &&	!piGraphmatFile->StartsFixedOborot(LineNo-1)
+                                  &&	!piGraphmatFile->HasDescr(LineNo, OFixedOborot))
+                           &&	!piGraphmatFile->HasDescr(LineNo-1, OFixedOborot)
                     )
             {
                 //  creating a concatenation if it possible
@@ -32,7 +32,7 @@ bool ProcessHyphenWords(const CLemmatizer* lemmatizer, CGraphmatFile* piGraphmat
 
                 // it is not possible to create a hyphen word  when this part of the text has an intersection
                 // with an oborot which is marked as "fixed" in the dictionary
-                if (piGraphmatFile->StartsFixedOborot(NextWord)) continue;
+                if (piGraphmatFile->HasDescr(NextWord, OFixedOborot)) continue;
 
                 if (lemmatizer->GetLanguage() != piGraphmatFile->GetTokenLanguage(NextWord)) continue;
                 std::string HyphenWord = piGraphmatFile->GetToken(LineNo-1)+"-"+piGraphmatFile->GetToken(NextWord);
@@ -76,8 +76,7 @@ void CGraphanAndMorphanHolder::LoadGraphanAndLemmatizer(MorphLanguageEnum langua
 {
 	DeleteProcessors();
 	m_Graphan.FreeDicts();
-	m_Graphan.m_Language = langua;
-    if (!m_Graphan.LoadDicts())
+    if (!m_Graphan.LoadDicts(langua))
 	{	
 		throw CExpc("Cannot load graphan");
 	}

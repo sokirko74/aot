@@ -1,16 +1,10 @@
-// ==========  This file is under  LGPL, the GNU Lesser General Public Licence
-// ==========  Dialing Graphematical Module (www.aot.ru)
-// ==========  Copyright by Alexey Sokirko (1996-2001)
+#pragma once
 
-// this head is imported by midl
-#ifndef  Descriptors_h
-#define Descriptors_h
-
-#ifndef __GRAPHANLib_LIBRARY_DEFINED__
+#include <string>
 
 enum Descriptors 
 {
-	 ODummy  = 0, //unused
+	 OFirstUnused  = 0, //unused
 	 ORLE   = 1, 
 	 OLLE  = 2, 
 	 ODel  = 3, 
@@ -33,7 +27,7 @@ enum Descriptors
 	 ONil  = 20, 
 	 OBullet = 21, 
 	 OPar    = 22,
-	 ODUMMY_PLEASE_USE_ME = 23, 
+	 OFixedOborot = 23,
 	 OQuoted = 24, 
 	 OParagraph = 25,
 
@@ -47,7 +41,7 @@ enum Descriptors
 	 CS_Doc     = 32, 
     
      OSentEnd  = 33,
-     ORoman   = 34, 
+     ORoman   = 34,  // iniitalized in Mapost
 
 	 OEXPR1    = 35, 
 	 OEXPR2    = 36,    
@@ -66,9 +60,16 @@ enum Descriptors
      NumberOfGraphematicalDescriptors = 49
 	 
 };
-#endif
 
+extern bool IsFirstMemberOfPairDesciptor(Descriptors d);
+extern bool IsSecondMemberOfPairDesciptor(Descriptors d);
+extern Descriptors GetSecondMemberByTheFirst(Descriptors d);
+extern Descriptors GetFirstMemberByTheSecond(Descriptors d);
+extern uint64_t parse_gra_descriptors(const char* s, std::string& unparsed);
+extern const char* GetDescriptorStr(int DescriptorNo);
 
+// max length of the token
+const size_t CriticalTokenLength = 255;
 
-
-#endif
+// length of the token and its graphematical descriptors 
+const size_t CriticalGraphemLineLength = CriticalTokenLength*2;

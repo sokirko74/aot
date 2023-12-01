@@ -1,7 +1,0 @@
-Bill	0 4	 LLE Aa FAM1
-J	5 1	 LLE AA
-.	6 1	 PUN
-Bush	8 4	 LLE Aa SENT_END FAM2
-¶¶¶¶¶	12 5	 DEL EOLN CS?
-Bill	17 4	 LLE Aa FAM1
-Bush	22 4	 LLE Aa CS? SENT_END FAM2

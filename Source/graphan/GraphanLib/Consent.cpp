@@ -84,7 +84,7 @@ inline bool CConSent::SetUsualLawDocumentDivision()
 	if (!GetUnit(k).IsSpace()) return false;
 	k++;
 	if (k >= nt) return false;
-	return m_GraFile->IsBulletWord(k);
+	return m_GraFile->GetUnits()[k].IsBulletWord();
 }
 
 

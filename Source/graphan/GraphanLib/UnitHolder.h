@@ -15,13 +15,14 @@ class CUnitHolder
 	std::vector<char>			m_UnitBufUpper;
 	std::vector<BYTE>			m_InputBuffer;
 
-	std::map<size_t, short>		m_FoundOborots;
-	std::map<size_t, uint32_t>		m_FoundPageBreaks;
-public:
-	const std::vector<CGraLine>& GetUnits() const	{ return m_Units; 	};
+protected: 
 	CGraLine& GetUnit(size_t UnitNo);
+
+public:
+	const std::vector<CGraLine>& GetUnits() const;
 	const std::vector<char>& GetUnitBuf() const;
 	const std::vector<BYTE>& GetInputBuffer() const;
+	std::string GetTokenUtf8(size_t line_no) const;
 
 	MorphLanguageEnum		m_Language;
 
@@ -29,7 +30,7 @@ public:
 	// graphematical descriptors
 	void	SetState (size_t LB, size_t HB, uint16_t state);
 	void	SetDes(size_t x, Descriptors des);
-	bool	HasDescr (size_t i, graph_descr_t descr)  const	{ return (m_Units[i].GetDescriptors() & _QM (descr)) > 0; }
+	bool	HasDescr(size_t i, Descriptors descr) const;
 
 
 	// group graphematical descriptors
@@ -48,17 +49,7 @@ public:
 	size_t	BSoft (size_t i) const;
 
 	// simple predicates	
-	bool	IsHyphen(size_t x)  const; 
-	bool	is_latin_alpha (int ch) const; 
-	bool	is_lowercase (int ch) const; 
-	bool	is_uppercase (int ch) const; 
 	bool	StrSuperCompare (int UnitNo, const char* s) const; 
-	bool	IsOneAlpha(size_t x) const;
-	bool	IsOneChar(size_t x, int i) const; 
-	bool	IsOneULet(size_t x) const; 
-	bool	FirstUpper(size_t x) const; 
-	bool	IsBulletWord (size_t x) const; 
-	bool	IsOneFullStop (size_t i) const;
 	bool	EmptyLineBeforeGraph (size_t i, size_t HB) const;
 	bool	IsQuestionOrExclamationMarks (size_t i) const; 
 	bool	IsSentenceEndMark (size_t  i) const;
@@ -88,14 +79,9 @@ public:
 
 	void		MakeOneWord(size_t StartLineNo, size_t EndLineNo);
 	void		ClearPairDescriptors(size_t StartLineNo, size_t EndLineNo);
+	bool IsOneFullStop(size_t i) const;
 
 
-
-	void	SetOborotNo(size_t LineNo, short OborotNo);
-	short	GetOborotNo(size_t LineNo) const;
-
-	void	SetPageNumber(size_t LineNo, uint32_t PageNumber);
-	uint32_t	GetPageNumber(size_t LineNo) const;
 };
 
 

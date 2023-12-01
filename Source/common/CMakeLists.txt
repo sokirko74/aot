@@ -8,8 +8,6 @@ set(my_SOURCES
         Chunk.h
         cortege.h
         gra_descr.h
-        gra_descr_primitives.h
-        Graspace.h
         Homonym.h
         http_server.h
         LemWord.h

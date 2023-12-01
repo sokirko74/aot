@@ -9,7 +9,6 @@ add_library(GraphanLib
         GraphanDicts.cpp
         GraphmatFile.cpp
         HtmlConv.cpp
-        Nc_desc.cpp
         Oborots.cpp
         Sentences.cpp
         StdAfx.cpp
@@ -37,3 +36,5 @@ target_link_libraries(GraphanLib
 if (BUILD_DICTS)
     add_dependencies (GraphanLib Obor GerObor EngObor)
 endif()
+
+add_subdirectory (tests)

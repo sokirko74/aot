@@ -4,7 +4,7 @@
 
 #include "StdGraph.h"
 #include  "UnitHolder.h"
-#include  "../../common/gra_descr_primitives.h"
+#include  "../../common/gra_descr.h"
 
 
 /* сравнивает строки с помощью предиката IsSuperEqualChar */
@@ -181,38 +181,10 @@ void CUnitHolder::SetDes(size_t x, Descriptors des)
 	m_Units[x].SetDes(des);
 };
 
+bool CUnitHolder::HasDescr(size_t i, Descriptors descr)  const {
+	return m_Units[i].HasDes(descr); 
+}
 
-bool  CUnitHolder::IsHyphen(size_t x)  const 
-{
-	return  HasDescr(x,OHyp) && m_Units[x].GetTokenLength() == 1;
-};
-
-
-bool		CUnitHolder::is_latin_alpha (int ch) const 
-{
-		if (m_Language == morphGerman)
-			return is_german_alpha(ch);
-		else
-			return is_english_alpha(ch);
-};
-
-bool		CUnitHolder::is_lowercase (int ch) const 
-{
-	if (m_Language == morphGerman)
-		return is_german_lower(ch);
-	else
-		return is_russian_lower(ch) || is_english_lower(ch);
-
-};
-
-bool		CUnitHolder::is_uppercase (int ch) const 
-{
-	if (m_Language == morphGerman)
-		return is_german_upper(ch);
-	else
-		return is_russian_upper(ch) || is_english_upper(ch);
-
-};
 
 bool CUnitHolder::StrSuperCompare (int UnitNo, const char* s) const 
 {
@@ -222,32 +194,6 @@ bool CUnitHolder::StrSuperCompare (int UnitNo, const char* s) const
 };
 
 
-bool  CUnitHolder::IsOneAlpha(size_t x) const
-{
-	return  ((HasDescr(x,ORLE) || HasDescr(x,OLLE)) && (m_Units[x].GetTokenLength()==1))
-		|| ( (m_Units[x].GetTokenLength()==1) &&  is_latin_alpha((unsigned char)m_Units[x].GetToken()[0]) );
-};
-
-bool  CUnitHolder::IsOneChar(size_t x, int i) const 
-{
-	return   m_Units[x].GetTokenLength() == 1 && m_Units[x].GetToken()[0] == i;
-};
-
-
-bool  CUnitHolder::FirstUpper(size_t x) const 
-{
-	return  HasDescr(x,OUp) || HasDescr(x,OUpLw); 
-};
-
-bool CUnitHolder::IsBulletWord (size_t x) const 
-{
-	return HasDescr(x,ODigits) || IsOneAlpha(x);
-};
-
-bool CUnitHolder::IsOneFullStop (size_t i) const
-{
-	return (m_Units[i].GetTokenLength() == 1)  &&  (m_Units[i].GetToken()[0] == '.');
-};
 
 
 //  i - пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ  пїЅпїЅпїЅпїЅпїЅпїЅ.
@@ -275,8 +221,6 @@ void CUnitHolder::FreeTable()
 {
 	m_Units.clear();
 	m_TokenBuf.clear();
-	m_FoundOborots.clear();
-	m_FoundPageBreaks.clear();
 }
 
 
@@ -406,6 +350,17 @@ const std::vector<char>& CUnitHolder::GetUnitBuf() const
 	return m_TokenBuf; 
 };
 
+const std::vector<CGraLine>& CUnitHolder::GetUnits() const
+{ 
+	
+	return m_Units; 
+};
+
+std::string CUnitHolder::GetTokenUtf8(size_t line_no) const {
+	std::string s(m_Units[line_no].GetToken(), m_Units[line_no].GetTokenLength());
+	return convert_to_utf8(s, m_Language);
+}
+
 const std::vector<BYTE>& CUnitHolder::GetInputBuffer() const 
 { 
 	return m_InputBuffer; 
@@ -422,7 +377,7 @@ void	CUnitHolder::ClearPairDescriptors(size_t StartLineNo, size_t EndLineNo)
 	for (size_t LineNo=StartLineNo; LineNo<EndLineNo; LineNo++)
 		for (uint8_t des=0; des<64; des++)
 			if (des != OSentEnd)
-			if (HasDescr(LineNo, des))
+			if (HasDescr(LineNo, (Descriptors)des))
 			if (IsFirstMemberOfPairDesciptor((Descriptors)des))
 			{
 				Descriptors dual_descr = GetSecondMemberByTheFirst((Descriptors)des);
@@ -484,7 +439,7 @@ void	CUnitHolder::MakeOneWord(size_t StartLineNo, size_t EndLineNo)
 	for (size_t LineNo=StartLineNo+1; LineNo<EndLineNo; LineNo++)
 		for (size_t i=0; i<64; i++)
 			if	(		IsEndTextPeriodDescriptor((Descriptors)i) 
-					&&	HasDescr(LineNo, i)
+					&&	HasDescr(LineNo, (Descriptors)i)
 				)
 			SetDes(StartLineNo, (Descriptors)i);
 
@@ -521,7 +476,7 @@ void	CUnitHolder::MakeOneWord(size_t StartLineNo, size_t EndLineNo)
 			upper_out[m_Units[StartLineNo+1].GetTokenLength()] = 0;
 		};
 
-		SetOborotNo(StartLineNo+1,-1);
+		GetUnit(StartLineNo + 1).SetOborot(-1, false);
 		if (EndLineNo-StartLineNo > 2)
 		{
 			//  erasing NULLs from the upper m_UnitBufUpper, which were addeded after each line
@@ -544,38 +499,7 @@ void	CUnitHolder::MakeOneWord(size_t StartLineNo, size_t EndLineNo)
 };
 
 
-void CUnitHolder::SetOborotNo(size_t LineNo, short OborotNo)
+bool CUnitHolder::IsOneFullStop(size_t i) const
 {
-	if (OborotNo == -1)
-		m_FoundOborots.erase(m_Units[LineNo].GetInputOffset());
-	else
-		m_FoundOborots[m_Units[LineNo].GetInputOffset()] = OborotNo;
-}
-
-short CUnitHolder::GetOborotNo(size_t LineNo) const
-{
-	std::map<size_t, short>::const_iterator it = m_FoundOborots.find(m_Units[LineNo].GetInputOffset());
-	if ( it == m_FoundOborots.end() )
-		return -1;
-	else
-		return it->second;
-}
-
-void	CUnitHolder::SetPageNumber(size_t LineNo, uint32_t PageNumber)
-{
-	if (PageNumber == UnknownPageNumber)
-		m_FoundPageBreaks.erase(m_Units[LineNo].GetInputOffset());
-	else
-		m_FoundPageBreaks[m_Units[LineNo].GetInputOffset()] = PageNumber;
-
-}
-
-uint32_t	CUnitHolder::GetPageNumber(size_t LineNo) const
-{
-	std::map<size_t, uint32_t>::const_iterator it = m_FoundPageBreaks.find(m_Units[LineNo].GetInputOffset());
-	if ( it == m_FoundPageBreaks.end() )
-		return UnknownPageNumber;
-	else
-		return it->second;
-
-}
+	return (GetUnits()[i].GetTokenLength() == 1) && (GetUnits()[i].GetToken()[0] == '.');
+};

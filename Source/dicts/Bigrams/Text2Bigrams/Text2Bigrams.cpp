@@ -209,16 +209,12 @@ try
 {
 
 	CGraphmatFile Graphan;
-	Graphan.m_Language = Langua;
-	
-
-	if (!Graphan.LoadDicts())
+	if (!Graphan.LoadDicts(Langua))
 	{
 		fprintf (stderr,"Cannot load dictionaries \n");
 		return 1;
 	};
 
-	Graphan.m_bUseParagraphTagToDivide = true;
 	Graphan.m_bUseIndention = false;
 	Graphan.m_MaxSentenceLength = 1000;
 

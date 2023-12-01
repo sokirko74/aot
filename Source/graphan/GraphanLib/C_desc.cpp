@@ -21,7 +21,7 @@ bool CGraphmatFile::DealBullet (size_t i, size_t HB)
 	if (i  >= HB )  return false;
 
 	// проверяем, является ли данная графема перечислителем
-	if (!IsBulletWord (i))  return false;
+	if (!GetUnits()[i].IsBulletWord())  return false;
 
 	if (HasDescr(i,OBullet)) return false;
 	size_t nt = PassSpace(i+1,HB);
@@ -63,7 +63,7 @@ bool CGraphmatFile::DealBullet (size_t i, size_t HB)
 
 	if (HasDescr (nt,OPun)) return false;
 
-	if (IsBulletWord (nt))  
+	if (GetUnits()[nt].IsBulletWord())  
 		SetState(i,nt+1,stGrouped);
 
 	SetDes (i,OBullet);
@@ -178,7 +178,7 @@ int  CGraphmatFile::DealBulletsWithTwoBrackets (size_t StartPos, size_t EndPos)
   if (nt == EndPos) return false;
     
    // проверяем, является ли данная графема перечислителем
-  if (!IsBulletWord(nt) )  return false;
+  if (!GetUnits()[nt].IsBulletWord() )  return false;
 
   size_t BulletWordNo = nt;
 
@@ -289,10 +289,7 @@ void CGraphmatFile::DealOborotto(size_t  HB)
 			&&	(OborotIds[i] != 0xffff)
 		)
 	{
-		short OborotNo = -1;
-		size_t nt = FindOborotto (i,HB, OborotNo, OborotIds); 
-		if (OborotNo != -1)
-			SetOborotNo(i, OborotNo);
+		size_t nt = FindOborotto (i, HB, OborotIds); 
 		
 		if ((nt - i) == 0) continue;
 		SetDes(i,OEXPR1);
@@ -503,7 +500,7 @@ int CGraphmatFile::DealFIO (size_t i,size_t HB)
 
 	bool flag_surname_is_after = 
 						(l < HB)
-					&& FirstUpper(l) 
+					&& GetUnits()[l].FirstUpper() 
 					&& !HasIndention(nh,l)
 					&& (GetUnits()[l].GetTokenLength() > 1)
 
@@ -511,7 +508,7 @@ int CGraphmatFile::DealFIO (size_t i,size_t HB)
 					&& (HasDescr(l,OEXPR1) == HasDescr(l,OEXPR2));
 
 	bool flag_surname_is_before = 
-					FirstUpper(k) 
+					GetUnits()[k].FirstUpper() 
 				&& !HasIndention(k,i) 
 				&& (GetUnits()[k].GetTokenLength() > 1)
 
@@ -797,7 +794,7 @@ bool CGraphmatFile::IsKey(size_t LB, size_t HB, size_t& GraLast) const
 
   if (i < m_pDicts->m_Keys.size())
 	  return true;
- if  (IsOneAlpha(LB))
+ if  (GetUnits()[LB].IsOneAlpha())
  {
 	  
 	   GraLast = LB+1;
@@ -850,7 +847,7 @@ void CGraphmatFile::DealSimpleKey(size_t LB, size_t  HB)
 	 ) return;
 
   if (    (LB+1 == GraLast)
-	   && IsOneAlpha(LB)
+	   && GetUnits()[LB].IsOneAlpha()
 	 )
 	 return;
 
@@ -965,10 +962,7 @@ void CGraphmatFile::DealGermanDividedCompounds(size_t LB, size_t  HB)
 			SetState(LB,i+1,stGrouped);
 			return;
 		};
-				
-				
-
-		if (!IsOneChar(i, (BYTE)',')) break;
+		if (!GetUnits()[i].IsComma()) break;
 		i = PSoft(i+1, HB);
 		if (i == HB) break;
 	};
@@ -978,18 +972,18 @@ void CGraphmatFile::DealGermanDividedCompounds(size_t LB, size_t  HB)
 
 
 
-static void InitEnglishNameSlot (CGraphmatFile& C)
+void CGraphmatFile::InitEnglishNameSlot()
 {
-	for (size_t i=0; i< C.GetUnits().size(); i++)  
-	   if (   !C.GetUnits()[i].IsSoft() 
-		   && !C.HasDescr(i,OPun)
+	for (size_t i=0; i< GetUnits().size(); i++)  
+	   if (   !GetUnits()[i].IsSoft() 
+		   && !HasDescr(i,OPun)
 		   )
 	   {
-			if (C.HasDescr(i, OLw)) continue;
+			if (HasDescr(i, OLw)) continue;
 
-			auto& word = C.GetUpperString(i);
-			if	(C.m_pDicts->m_EnglishNames.find(word) != C.m_pDicts->m_EnglishNames.end())
-				C.GetUnit(i).SetEnglishName();
+			auto& word = GetUpperString(i);
+			if	(m_pDicts->m_EnglishNames.find(word) != m_pDicts->m_EnglishNames.end())
+				GetUnit(i).SetEnglishName();
 	
 	   };
 };
@@ -1015,7 +1009,7 @@ int CGraphmatFile::InitContextDescriptors (size_t LB, size_t HB)
 	m_LastError = "";
 	
 	try {
-		InitEnglishNameSlot(*this);
+		InitEnglishNameSlot();
 	}
 	catch (...)
 	{

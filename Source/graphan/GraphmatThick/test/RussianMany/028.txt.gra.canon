@@ -1,8 +1,0 @@
-Мама	0 4	 RLE Aa
-(	5 1	 PUN OPN ABB1
-!	6 1	 PUN
-)	7 1	 PUN CLS ABB2
-мыла	9 4	 RLE aa
-  	13 2	 DEL SPC
-раму	15 4	 RLE aa
-.	19 1	 PUN CS? SENT_END

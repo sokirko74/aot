@@ -13,7 +13,7 @@ const char DesArray[NumberOfGraphematicalDescriptors][ODesLen] =
 		     "PLP","AA", "aa", "Aa", // 13-16
 			 "dummy", "OPN","CLS", // 17-19
 			 "EMSYM", "BUL", "INDENT", // 20-22
-             "dummy", "#QUOTED", "PAR_SYM", // 23-25
+             "FIXED", "#QUOTED", "PAR_SYM", // 23-25
 
              // macrosyntax
              "CS?","CS","QUA","CS_PRNT","HDNG","CS_AUX","DOC", // 26-32

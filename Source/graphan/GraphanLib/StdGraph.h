@@ -9,7 +9,6 @@
 #pragma warning (disable  : 4786)
 
 #include "morph_dict/common/utilit.h"
-#include "common/Graspace.h"
 #include "common/gra_descr.h"
 
 

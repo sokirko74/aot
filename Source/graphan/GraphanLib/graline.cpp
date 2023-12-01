@@ -4,6 +4,7 @@
 
 #include "StdGraph.h"
 #include  "../../common/gra_descr.h"
+#include  "../../common/single_byte_encoding.h"
 #include  "graline.h"
 #include  "GraphmatFile.h"
 #include "GraphanDicts.h"
@@ -15,6 +16,30 @@ CGraLine::CGraLine() {
     m_Descriptors = 0;
     ulen = slen = 0;
     m_InputOffset = 0;
+    m_PageNumber = UnknownPageNumber;
+    m_OborotNo = -1;
+    m_Language = morphUnknown;
+};
+
+BYTE CGraLine::GetTokenLength() const { 
+    return ulen; 
+};
+
+const char* CGraLine::GetToken() const { 
+    return unit; 
+};
+
+
+BYTE CGraLine::GetScreenLength() const { 
+    return slen; 
+};
+
+uint32_t CGraLine::GetInputOffset() const { 
+    return m_InputOffset; 
+};
+
+uint64_t CGraLine::GetDescriptors() const { 
+    return m_Descriptors; 
 };
 
 bool CGraLine::HasMacroSyntaxDelimiter() const {
@@ -65,6 +90,10 @@ int CGraLine::ToInt() const {
     return atoi(s);
 };
 
+bool CGraLine::IsBulletWord() const
+{
+    return HasDes(ODigits) || IsOneAlpha();
+};
 
 bool CGraLine::IsNotPrint() const {
     return (m_Status & stNotPrint) != 0;
@@ -73,6 +102,24 @@ bool CGraLine::IsNotPrint() const {
 bool CGraLine::IsEnglishName() const {
     return (m_Status & stEnglishName) != 0;
 };
+
+bool  CGraLine::IsOneAlpha() const
+{
+    return  ((HasDes(ORLE) || HasDes(OLLE)) && (GetTokenLength() == 1))
+        || ((GetTokenLength() == 1) && is_latin_alpha((unsigned char)GetToken()[0]));
+};
+
+bool  CGraLine::IsComma() const
+{
+    return GetTokenLength() == 1 && GetToken()[0] == (BYTE)',';
+};
+
+
+bool  CGraLine::FirstUpper() const
+{
+    return  HasDes(OUp) || HasDes(OUpLw);
+};
+
 
 bool CGraLine::IsIdent() const {
     return (m_Status & stIdent) != 0;
@@ -112,6 +159,24 @@ bool CGraLine::IsElectronicAddress() const {
 
 bool CGraLine::IsChar(int c) const {
     return (ulen == 1) && (unit[0] == c);
+};
+
+bool CGraLine::is_lowercase(int ch) const
+{
+    if (m_Language == morphGerman)
+        return is_german_lower(ch);
+    else
+        return is_russian_lower(ch) || is_english_lower(ch);
+
+};
+
+bool CGraLine::is_uppercase(int ch) const
+{
+    if (m_Language == morphGerman)
+        return is_german_upper(ch);
+    else
+        return is_russian_upper(ch) || is_english_upper(ch);
+
 };
 
 bool CGraLine::IsAsterisk() const {
@@ -185,6 +250,10 @@ void CGraLine::DelDes(Descriptors d) {
 
 void CGraLine::SetDes(Descriptors d) {
     m_Descriptors |= _QM(d);
+};
+
+bool CGraLine::HasDes(Descriptors d) const {
+    return (m_Descriptors & _QM(d)) > 0;
 };
 
 
@@ -305,6 +374,8 @@ size_t CGraLine::LengthUntilDelimiters(const char *s, const CGraphmatFile *G) {
 // читает из буфера b в структуру L
 size_t CGraLine::ReadWord(size_t Offset, const CGraphmatFile *G, uint32_t &PageNumber) {
     PageNumber = UnknownPageNumber;
+    assert(G->m_Language < 8); // see bit field  optimization
+    m_Language = G->m_Language;
     const char *s;
     const char *In = (const char *) &(G->GetInputBuffer()[0]);
     char *Out = const_cast<char *>(unit);
@@ -348,87 +419,6 @@ size_t CGraLine::ReadWord(size_t Offset, const CGraphmatFile *G, uint32_t &PageN
 
         } while ((In[Offset] == '\n') && (ulen < CriticalTokenLength));
         SetEOLN();
-    } else
-        /* if it is a "</p>" (comes  from html) */
-    if (G->m_bUseParagraphTagToDivide
-        && !strncmp(In + Offset, "</p>", 4)
-            ) {
-        memset(Out, ' ', 4);
-        ulen = 4;
-        slen = 1;
-        SetSpace();
-        SetParagraphTag();
-        assert (IsParagraphTag());
-        Offset += 4;
-    } else
-        // &nbsp
-    if (!strncmp(In + Offset, "&nbsp;", 6)
-        || !strncmp(In + Offset, "&NBSP,", 6)
-            ) {
-
-        while (!strncmp(In + Offset, "&nbsp;", 6)
-               || !strncmp(In + Offset, "&NBSP,", 6)
-                ) {
-            if (ulen + 6 >= CriticalTokenLength) break;
-            memset(Out + ulen, ' ', 6);
-            ulen += 6;
-            slen++;
-            Offset += 6;
-
-        };
-        SetSpace();
-
-    } else
-        // <br>
-    if (!strncmp(In + Offset, "<br>;", 4)
-        || !strncmp(In + Offset, "<BR>,", 4)
-            ) {
-        Out[ulen] = '\n';
-        ulen += 1;
-        slen += 1;
-        SetEOLN();
-        Offset += 4;
-    } else
-        // <pb 1>
-    if (!strncmp(In + Offset, "</textarea>", strlen("</textarea>"))) {
-        SetTextAreaEnd();
-        SetSpace();
-        int l = strlen("</textarea>");
-        memset(Out, ' ', l);
-        ulen += l;
-        slen += l;
-        Offset += l;
-    } else
-        // <pb 1>
-    if (!strncmp(In + Offset, "<pb ", 3)
-        && isdigit((BYTE) In[Offset + 4])
-            ) {
-        sscanf(In + Offset + 4, "%zu", &PageNumber);
-
-
-        SetSpace();
-        SetPageBreak();
-
-        memset(Out, ' ', 4);
-        ulen += 4;
-        slen += 4;
-        Offset += 4;
-        while (isdigit(In[Offset])
-               || isspace(In[Offset])
-                ) {
-            Out[ulen] = ' ';
-            ulen++;
-            slen++;
-            Offset++;
-            if (ulen + 1 >= CriticalTokenLength)
-                break;
-        };
-        if (In[Offset] == '>') {
-            Out[ulen] = ' ';
-            ulen++;
-            slen++;
-            Offset++;
-        }
     } else
         /*  if TCP/IP occurs ..*/
     if (G->m_pDicts->FindInIdents(In + Offset, len) && len <= CriticalTokenLength) {
@@ -552,4 +542,248 @@ size_t CGraLine::ReadWord(size_t Offset, const CGraphmatFile *G, uint32_t &PageN
 
     return Offset;
 }
+
+void CGraLine::SetOborot(short oborotNo, bool bFixed) {
+    m_OborotNo = oborotNo;
+    if (m_OborotNo != -1 && bFixed) {
+        SetDes(OFixedOborot);
+    }
+    else {
+        DelDes(OFixedOborot);
+    }
+}
+
+short CGraLine::GetPageNumber() const
+{
+    return m_PageNumber;
+}
+
+void CGraLine::SetPageNumber(short page) {
+    m_PageNumber = page;
+}
+
+std::string CGraLine::GetGraphematicalLine() const
+{
+    std::string result;
+
+    if (!IsSoft())
+    {
+        if (!IsNotPrint()
+            && (GetToken() != NULL)
+            && (GetToken()[0] != 0)
+            )
+        {
+            result.append(GetToken(), GetTokenLength());
+        }
+        else {
+            result.append(1, GraphematicalSPACE);
+        }
+    }
+    else
+    {
+        for (size_t k = 0; k < GetTokenLength(); ++k)
+            switch (GetToken()[k])
+            {
+            case ' ': result.append(1, GraphematicalSPACE); break;
+            case '\t': result.append(1, GraphematicalTAB); break;
+            case '\n': result.append(1, GraphematicalEOLN); break;
+            case '\r':  break;
+            default: assert(false); break;
+            };
+    };
+
+    result.append(Format("\t%zu %zu\t", GetInputOffset(), GetTokenLength()));
+
+    // write descriptors 
+    for (int l = 0; l < 63; l++) {
+        if ((GetDescriptors() & _QM(l)) > 0)
+        {
+            result.append(" ");
+            result.append(GetDescriptorStr(l));
+        };
+    }
+
+    if (m_OborotNo != -1)
+    {
+        result.append(Format(" EXPR_NO%zu", m_OborotNo));
+    }
+
+    if (IsPageBreak())
+    {
+        result.append(Format(" PGBR%zu", m_PageNumber));
+    }
+
+    if (IsParagraphTag())
+    {
+        result.append(" PARTAG");
+    }
+    return convert_to_utf8(result, m_Language);
+};
+
+bool CGraLine::is_latin_alpha(int ch) const
+{
+    if (m_Language == morphGerman)
+        return is_german_alpha(ch);
+    else
+        return is_english_alpha(ch);
+};
+
+void CGraLine::InitNonContextDescriptors(bool b_force_to_rus)
+{
+    bool	fl_ra = false,  /* rus alpha */
+        fl_la = false,  /* lat alpha */
+        fl_lw = false,  /* lower alpha */
+        fl_up = false,  /* upper alpha */
+        fl_decimal_number = false;
+
+    size_t TokenLength = GetTokenLength();
+    const char* Token = GetToken();
+    BYTE first_char = (BYTE)Token[0];
+
+
+    if (IsSpace())
+    {
+        SetDes(ODel);
+        SetDes(OSpc);
+        return;
+    }
+
+    if (IsEOLN())
+    {
+        SetDes(ODel);
+        SetDes(OEOLN);
+        return;
+    }
+
+    if (IsIdent())
+    {
+        SetDes(ONumChar);
+        return;
+    }
+
+    if (IsElectronicAddress())
+    {
+        SetDes(OElectAddr);
+        SetDes(ONumChar);
+        return;
+    }
+
+
+    if (IsNotPrint())
+    {
+        SetDes(ODel);
+        if (IsParagraphChar())
+            SetDes(OParagraph);
+        else
+            SetDes(ONil);
+
+        return;
+    }
+
+
+
+    if (IsPunct())
+    {
+
+        SetDes(OPun);
+
+        int BracketClassNo = isbracket(first_char);
+
+        if (BracketClassNo)
+            SetDes((BracketClassNo == 1) ? OOpn : OCls);
+        else
+            if (first_char == cHyphenChar)
+                SetDes(OHyp);
+
+
+        if (TokenLength > 1)
+            SetDes(OPlu);
+
+        return;
+    }
+    bool has_hyphen = false;
+    for (int i = 0; i < TokenLength; i++)
+    {
+        if ((BYTE)Token[i] == Apostrophe) continue;
+        if ((BYTE)Token[i] == cHyphenChar) has_hyphen = true;
+        if (m_Language == morphRussian)
+        {
+            if (is_russian_alpha((BYTE)Token[i]))
+                fl_ra = true;
+            else
+                if (is_latin_alpha((BYTE)Token[i]))
+                    fl_la = true;
+        }
+        else
+            fl_la = fl_la || is_latin_alpha((BYTE)Token[i]);
+
+        fl_decimal_number = fl_decimal_number || isdigit((BYTE)Token[i]);
+
+        if ((m_Language != morphGerman)
+            || (((BYTE)Token[i] != szlig) // ignore these symbols, they are equal in uppercase an in lowercase
+                && ((BYTE)Token[i] != Nu)
+                )
+            )
+        {
+            fl_lw = fl_lw || is_lowercase((BYTE)Token[i]);
+            fl_up = fl_up || is_uppercase((BYTE)Token[i]);
+        };
+
+    }
+
+    if (!fl_decimal_number
+        && (fl_ra || fl_la)
+        )
+    {
+        // встретились русские и латинские буквы, 
+        // но нет дефиса, чтобы не трогать "IP-адрес"
+        if (fl_ra && fl_la && !has_hyphen)
+            if (!b_force_to_rus) // если не надо приводить к русскому алфавиту
+                SetDes(OUnk); // установить дескриптор "вопрос"
+            else // попробовать привести слово к русскому алфав.
+            {
+                char s[255];
+                if (!force_to_rus(s, Token, TokenLength)) // если не удалось привести
+                    SetDes(OUnk);
+                else
+                {
+                    memcpy(const_cast<char*>(Token), s, TokenLength); // приводим
+                    SetDes(ORLE);  // говорим, что это русская лексема
+                }
+            }
+        else
+            if (fl_ra)
+                SetDes(ORLE);
+            else
+                SetDes(OLLE);
+
+        if (fl_lw && !fl_up)
+            SetDes(OLw);
+
+        if (!fl_lw && fl_up)
+            SetDes(OUp);
+
+        if (fl_lw && is_uppercase(first_char))
+            SetDes(OUpLw);
+
+        return;
+    }
+
+    if (((BYTE)first_char == '\'')
+        && (TokenLength == 1)
+        )
+    {
+        SetDes(ODel);
+        SetDes(OPun);
+    };
+
+
+    if ((fl_decimal_number && !fl_la && !fl_ra))
+        SetDes(ODigits);
+
+    if (fl_decimal_number && (fl_ra || fl_la)) SetDes(ONumChar);
+
+    if (GetDescriptors() == 0) SetDes(OUnk);
+}
+
 

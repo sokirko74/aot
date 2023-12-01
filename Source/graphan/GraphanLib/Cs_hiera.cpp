@@ -468,7 +468,7 @@ inline bool TestHeadingLastLetter (int  ch)
       имя документа */
 inline bool TestHeadingFirstLetter (int ch, const CGraphmatFile* GraFile) 
 {
-	return (strchr("-;({\0",ch) == NULL) && !GraFile->is_lowercase(ch); 
+	return (strchr("-;({\0", ch) == NULL) && !is_lower_alpha(ch, GraFile->m_Language);
 }
 
 
@@ -784,10 +784,6 @@ void  WriteXmlMacSyn (const std::vector<CConSent>& CSL, const  char* Filename)
 
 void CGraphmatFile :: MacSynHierarchy ()
 {
-// ===============================================================
-// ===================			Recognition		========================
-// ===============================================================
-
 	std::vector<CConSent> CSL;
 
 	// если файл пуст надо выйти

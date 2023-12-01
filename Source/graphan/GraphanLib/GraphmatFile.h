@@ -30,7 +30,7 @@ class CGraphmatFile : public CUnitHolder {
 
     bool DealAbbrev(size_t StartPos, size_t EndPos);
 
-    size_t FindOborotto(size_t i, size_t HB, short &OborotNo, std::vector<uint16_t> &OborortIds) const;
+    size_t FindOborotto(size_t i, size_t HB, const std::vector<uint16_t> &OborortIds);
 
     void DealOborotto(size_t HB);
 
@@ -60,14 +60,17 @@ class CGraphmatFile : public CUnitHolder {
 
     void DealSentBreaker();
 
-    void InitNonContextDescriptors(CGraLine &L);
-
     void GraphmatMain();
 
     int InitContextDescriptors(size_t LB, size_t HB);
 
     void MacSynHierarchy();
 
+    void InitEnglishNameSlot();
+
+    bool CheckSentenceStart(size_t StartSent, size_t EndPos) const;
+
+    int FindSentenceStart(size_t WordNo, size_t EndPos) const;
 
 public:
     const CGraphanDicts *m_pDicts;
@@ -77,8 +80,6 @@ public:
     size_t m_TabSize;
     // максимальное число  строк в одном условно предложении
     size_t m_MaxUpLen;
-    // file for graphematical table
-    std::string m_GraOutputFile;
     // file for macro-syntax
     std::string m_XmlMacSynOutputFile;
     // Нужно ли запускать делилку на предложения.
@@ -115,7 +116,7 @@ public:
     ~CGraphmatFile();
 
     // processing
-    bool LoadDicts();
+    bool LoadDicts(MorphLanguageEnum langua);
 
     void LoadStringToGraphan(const std::string &szBuffer);
 
@@ -125,14 +126,11 @@ public:
 
     const std::string &GetLastError() const;
 
-    std::string GetGraphematicalLine(size_t NumLine) const;
-
     MorphLanguageEnum GetTokenLanguage(int LineNo) const;
-
-    bool StartsFixedOborot(size_t LineNo) const;
 
     const CDictionary *GetOborDic() const;
 
-    void WriteGraphMat(const char *FName) const;
+    void WriteGraphMat(std::string FName) const;
+
 };
 

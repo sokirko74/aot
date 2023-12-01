@@ -49,7 +49,7 @@ static bool CheckComma (CGraphmatFile& F, size_t Sent1No, size_t Sent2No)
 	if  (Sent1No >= F.GetUnits().size()) return true;
 	if  (Sent2No >= F.GetUnits().size()) return true;
 	for (size_t j=Sent1No; j < Sent2No;  j++)
-		if	(		F.IsOneChar(j, (unsigned char)',') 
+		if	(		F.GetUnits()[j].IsComma()
 				||	F.HasDescr(j, OSentEnd)
 			) 
 	return false;
@@ -144,6 +144,41 @@ bool IsLastInGroupOrFree(const CGraphmatFile& F, size_t i)
 			|| !F.GetUnits()[i].IsGrouped();
 };
 
+int  CGraphmatFile::FindSentenceStart(size_t WordNo, size_t EndPos) const {
+	int StartSent;
+	if (!GetUnits()[WordNo].IsSpace())
+		StartSent = PPunct(WordNo, EndPos);
+	else
+		StartSent = PSoft(WordNo, EndPos); // assert ( GetUnits()[WordNo].IsTextAreaEnd() );
+
+
+	if (StartSent == EndPos) return -1; // end of file has a special processing
+
+	StartSent--;
+
+	// the end of sentence  cannot be at the very beginning of the line
+	if (GetUnits()[StartSent - 1].IsEOLN()) return -1;
+
+	// search for the next sentence start
+	for (;StartSent < EndPos; StartSent++)
+	{
+		if (GetUnits()[StartSent].IsWordOrNumberOrAbbr()) break;
+	};
+
+	return StartSent;
+}
+
+bool  CGraphmatFile::CheckSentenceStart(size_t StartSent, size_t EndPos) const {
+	// if the next sentence  starts with a word then its first char should be uppercase
+	if (StartSent >= EndPos) return true;
+	if (HasDescr(StartSent, OLw)) {
+		return false;
+	}
+	if (HasDescr(StartSent, ODigits))
+		if (StartSent > 1 && GetUnits()[StartSent - 2].IsWordOrNumberOrAbbr()) //Number after Abbr: "ст. 129 УК РФ"
+			return false;
+	return true;
+}
 
 void CGraphmatFile::DealSentBreaker ()
 {
@@ -265,13 +300,13 @@ void CGraphmatFile::DealSentBreaker ()
 				if (GetUnits()[StartSent].IsWordOrNumberOrAbbr())
 					break;
 
-			if (CheckComma(*this, WordNo, StartSent))
+			if (CheckComma(*this, WordNo, StartSent) && CheckSentenceStart(StartSent, EndPos))
 			{
 				SetSentMarkers(*this, WordNo, StartSent, SentenceOpenBracket, bSentenceQuotationMarks, StartSentenceOffset);
 				WordNo = StartSent-1;
+				CountOfSentence++;
 			};
 
-			CountOfSentence++;
 			InnerOpenBracket = 0;
 		}
 		else
@@ -283,34 +318,11 @@ void CGraphmatFile::DealSentBreaker ()
 				&&	!HasDescr (WordNo, OBullet)
 			)
 		{
-			size_t StartSent;
-			if (!GetUnits()[WordNo].IsSpace())
-				StartSent = PPunct(WordNo, EndPos);
-			else
-				StartSent = PSoft(WordNo, EndPos); // assert ( GetUnits()[WordNo].IsTextAreaEnd() );
-			
-
-			if (   StartSent == EndPos ) continue; // end of file has a special processing
-
-			StartSent--;
-						
-			// the end of sentence  cannot be at the very beginning of the line
-			if  (GetUnits()[StartSent-1].IsEOLN ()) continue;
-
-			// search for the next sentence start
-			for (;StartSent < EndPos;	StartSent++)
-			{
-				if (GetUnits()[StartSent].IsWordOrNumberOrAbbr()) break; 
-			};
-
-			
+			int StartSent = FindSentenceStart(WordNo, EndPos);
+			if (   StartSent == -1 ) continue; // end of file has a special processing
 		
 			// if the next sentence  starts with a word then its first char should be uppercase
-			if	(       StartSent<EndPos 
-					&& (  (HasDescr (StartSent, ORLE) || HasDescr (StartSent, OLLE))
-					&&  !(HasDescr (StartSent, OUp) || HasDescr (StartSent, OUpLw))
-					|| StartSent > 1 && HasDescr (StartSent, ODigits) && GetUnits()[StartSent - 2].IsWordOrNumberOrAbbr()) //Number after Abbr: "ст. 129 УК РФ"
-				)
+			if	(!CheckSentenceStart(StartSent, EndPos))
 				continue;
 
 			
@@ -333,10 +345,10 @@ void CGraphmatFile::DealSentBreaker ()
 
 
 			// commas  are prohibited between sentences
-			if (!CheckComma(*this, WordNo, StartSent)) continue;
+			if (!CheckComma(*this, WordNo, (size_t)StartSent)) continue;
 
 			size_t  SentEnd = WordNo;
-			if (		InnerOpenBracket != 0 )
+			if ( InnerOpenBracket != 0 )
 			{
 				/*
 				if there was an open bracket before the sentence  and  there is a matching close bracket after it,
@@ -367,7 +379,7 @@ void CGraphmatFile::DealSentBreaker ()
 					continue;
 			
 			
-			SetSentMarkers(*this, SentEnd, StartSent, SentenceOpenBracket, bSentenceQuotationMarks, StartSentenceOffset);
+			SetSentMarkers(*this, SentEnd, (size_t)StartSent, SentenceOpenBracket, bSentenceQuotationMarks, StartSentenceOffset);
 			
 			WordNo = StartSent-1;
 

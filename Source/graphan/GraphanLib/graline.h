@@ -59,25 +59,31 @@ class CGraLine {
     uint64_t m_Descriptors;
     uint16_t m_Status;
     uint32_t m_InputOffset;
+    short m_OborotNo;
+
+    // memory optimization
+    short m_PageNumber:13;
+    MorphLanguageEnum m_Language: 3; 
 
     size_t LengthUntilDelimiters(const char *s, const CGraphmatFile *G);
+    bool is_latin_alpha(int ch) const;
+    bool IsNotPrint() const;
 
 public:
 
     CGraLine();
 
-    BYTE GetTokenLength() const { return ulen; };
+    BYTE GetTokenLength() const;
 
-    const char *GetToken() const { return unit; };
+    const char* GetToken() const;
 
-    BYTE GetScreenLength() const { return slen; };
+    BYTE GetScreenLength() const;
 
-    uint32_t GetInputOffset() const { return m_InputOffset; };
+    uint32_t GetInputOffset() const;
 
-    uint64_t GetDescriptors() const { return m_Descriptors; };
+    uint64_t GetDescriptors() const;
 
-    bool IsNotPrint() const;
-
+    
     // we leave these function in the header, since VC doesn't want to make them inline
     bool IsSpace() const { return (m_Status & stSpace) != 0; };
 
@@ -152,6 +158,8 @@ public:
 
     void SetDes(Descriptors d);
 
+    bool HasDes(Descriptors d) const;
+
     void MakeSpaces(size_t SpacesLength);
 
     void AddStatus(uint16_t add_state);
@@ -163,4 +171,22 @@ public:
     size_t ReadWord(size_t Offset, const CGraphmatFile *G, uint32_t &PageNumber);
 
     bool IsSingleSpaceToDelete() const;
+
+    void SetOborot(short oborotNo, bool fixed);
+
+    short GetPageNumber() const;
+
+    void SetPageNumber(short page);
+
+    std::string GetGraphematicalLine() const;
+
+    void InitNonContextDescriptors(bool force_to_rus);
+
+    bool IsBulletWord() const;
+    bool IsOneAlpha() const;
+    bool IsComma() const;
+    bool FirstUpper() const;
+    bool is_lowercase(int ch) const;
+    bool is_uppercase(int ch) const;
+
 };

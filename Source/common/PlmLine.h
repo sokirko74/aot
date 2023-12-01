@@ -4,7 +4,7 @@
 
 #pragma once 
 
-#include "../common/Graspace.h"
+#include "../common/gra_descr.h"
 class  CAgramtab;
 
 enum MainTokenTypeEnum {RLE=0, LLE=1, NUM_TOKEN=2, NUM_CHAR=3, PUNCTUAT=4, ROMAN_NUM=5, OTHER_TOKEN_TYPE=6};

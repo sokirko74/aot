@@ -8,8 +8,7 @@ CMorphanHolder holder;
 
 CLemmatizedText get_plm_lines(std::string s) {
 	CGraphmatFile gra;
-	gra.m_Language = morphGerman;
-	gra.LoadDicts();
+	gra.LoadDicts(morphGerman);
 	gra.LoadStringToGraphan(s);
 	CLemmatizedText t;
 	t.m_pLemmatizer = holder.m_pLemmatizer;

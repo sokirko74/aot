@@ -24,10 +24,10 @@ void CLemmatizedText::CreateFromTokemized(const CGraphmatFile* Gr)
 	
 	for (size_t lineNo = 0; lineNo < Gr->GetTokensCount(); lineNo++)
 	{
-		std::string strProcess  = Gr->GetGraphematicalLine(lineNo);
+		std::string strProcess  = Gr->GetUnits()[lineNo].GetGraphematicalLine();
 
 		//=====   do not lemmatize oborots with EXPR=Fixed!
-		if (Gr->StartsFixedOborot(lineNo))
+		if (Gr->HasDescr(lineNo, OFixedOborot))
 		{
 			bInFixedExpression = true;
 		};

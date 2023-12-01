@@ -1,5 +1,0 @@
-drivers	0 7	 LLE aa FILE1
-\	7 1	 PUN
-*	8 1	 PUN
-.	9 1	 PUN
-txt	10 3	 LLE aa CS? SENT_END FILE2
