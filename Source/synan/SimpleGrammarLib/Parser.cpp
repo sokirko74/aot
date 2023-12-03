@@ -585,7 +585,6 @@ std::vector<std::string> CWorkGrammar::FilterHomonymsByGrammar(const CLemmatized
 	PlmLines.SaveToFile("input.lem");
 	size_t Count = PlmLines.m_PlmItems.size();
 	std::vector<std::string >  result;
-	result.push_back(PlmLines.m_PlmItems[0]);
 
 	CInputSentenceGLR Sentence(m_pGramTab);
 	

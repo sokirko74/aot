@@ -41,13 +41,13 @@ void CLemmatizedText::CreateFromTokemized(const CGraphmatFile* Gr)
 		};
 		if (m_pLemmatizer->GetLanguage() == Gr->GetTokenLanguage(lineNo))
 		{
-			std::string word = Gr->GetToken(lineNo);
+			std::string word = convert_from_utf8(Gr->GetTokenUtf8(lineNo).c_str(), m_pLemmatizer->GetLanguage());
 			m_pLemmatizer->CreateParadigmCollection(false, 
 					word, 
 					!Gr->HasDescr(lineNo, OLw), true, lem_results);
 
 			if (lem_results.empty() ) {
-				m_PlmItems.push_back(strProcess + Format("\t-?? %s ?? -1 0",Gr->GetUppercaseToken(lineNo)) );
+				m_PlmItems.push_back(strProcess + Format("\t-?? %s ?? -1 0", Gr->GetUpperString(lineNo)) );
 			}
 			else
 				for( int i=0; i < lem_results.size(); i++ )
@@ -62,10 +62,6 @@ void CLemmatizedText::CreateFromTokemized(const CGraphmatFile* Gr)
 		{
 			m_PlmItems.push_back(strProcess);
 		}
-	}
-
-	for (auto& i : m_PlmItems) {
-		i =  convert_to_utf8(i, m_pLemmatizer->m_Language);
 	}
 }
 

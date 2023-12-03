@@ -234,15 +234,12 @@ bool CPlmLine :: LoadPlmLineFromString (std::string LineStr, const CAgramtab* pR
 
 };
 
-
-
 std::string CPlmLine :: GetStr ()  const
 {
 
 	std::string Result = m_Word;
 	if (m_bHomonym) Result = "  "+Result;
-	Result += " ";
-    Result += Format (" %i %i ", m_FilePosition, m_TokenLengthInFile);
+	Result += Format("\t%i %i\t", m_FilePosition, m_TokenLengthInFile);
 
 
 	if (m_TokenType != OTHER_TOKEN_TYPE)
@@ -284,7 +281,7 @@ std::string CPlmLine :: GetStr ()  const
 
 	if (m_MorphSign != 0)
 	{
-		Result += m_MorphSign+m_CommonGramCode + " " + m_Lemma + " " + GetGramCodes() + " ";
+		Result += std::string("\t") + m_MorphSign + m_CommonGramCode + " " + m_Lemma + " " + GetGramCodes() + " ";
 		Result +=  m_ParadigmId + " " + m_HomoWeight;
 	};
 

@@ -240,36 +240,36 @@ bool CGraphmatFile::DealEnglishStyleFIO (size_t StartPos, size_t EndPos)
 /*
 	Building units like  "Bill Bush"
 */
-static bool DealSimpleEnglishNames (CGraphmatFile& C, size_t StartPos, size_t EndPos)
+bool CGraphmatFile::DealSimpleEnglishNames (size_t StartPos)
 {
 	size_t  i = StartPos;
-	if (!(C.GetUnits()[i].IsEnglishName())) return false;
+	if (!(GetUnits()[i].IsEnglishName())) return false;
 
-	for (i++;(i<EndPos) && C.GetUnits()[i].IsSoft(); i++)
-		if (		C.GetUnits()[i].IsParagraphTag()
-				||	C.HasDescr(i, OPar)
+	for (i++;(i<m_Tokens.size()) && GetUnits()[i].IsSoft(); i++)
+		if (		GetUnits()[i].IsParagraphTag()
+				||	HasDescr(i, OPar)
 			)
 		return false;
 
-	if (	(i == EndPos) 
-		|| !C.HasDescr(i, OLLE) 
-		|| !C.HasDescr(i, OUpLw)
+	if (	(i == m_Tokens.size())
+		|| !HasDescr(i, OLLE) 
+		|| !HasDescr(i, OUpLw)
 		) return  false;
-	if (C.HasGrouped(StartPos,i+1)) return false;
+	if (HasGrouped(StartPos,i+1)) return false;
 
-	C.SetDes (StartPos, OFAM1);
-	C.SetDes (i, OFAM2);
-	C.SetState(StartPos,i+1,stGrouped);
+	SetDes (StartPos, OFAM1);
+	SetDes (i, OFAM2);
+	SetState(StartPos,i+1,stGrouped);
 	return true;
 };
 
 
-void CGraphmatFile::DealOborotto(size_t  HB)
+void CGraphmatFile::DealOborotto()
 {
 	std::vector<uint16_t> OborotIds;
-	OborotIds.resize(HB);
+	OborotIds.resize(m_Tokens.size());
 		
-	for (int i = 0; i<HB; i++)
+	for (int i = 0; i<m_Tokens.size(); i++)
 	{
 		auto s = GetUpperString(i);
 		StringVector::const_iterator it = lower_bound(m_pDicts->m_OborotTokens.begin(),  m_pDicts->m_OborotTokens.end(), s);
@@ -282,12 +282,12 @@ void CGraphmatFile::DealOborotto(size_t  HB)
 			OborotIds[i] = 0xffff;
 	};
 
-	for (int i=0; i<HB; i++)
+	for (int i=0; i<m_Tokens.size(); i++)
 	if (		!GetUnits()[i].IsSoft() 
 			&&	(OborotIds[i] != 0xffff)
 		)
 	{
-		size_t nt = FindOborotto (i, HB, OborotIds); 
+		size_t nt = FindOborotto (i, m_Tokens.size(), OborotIds);
 		
 		if ((nt - i) == 0) continue;
 		SetDes(i,OEXPR1);
@@ -961,9 +961,6 @@ void CGraphmatFile::DealGermanDividedCompounds(size_t LB, size_t  HB)
 
 };
 
-
-
-
 void CGraphmatFile::InitEnglishNameSlot()
 {
 	for (size_t i=0; i< GetUnits().size(); i++)  
@@ -981,239 +978,134 @@ void CGraphmatFile::InitEnglishNameSlot()
 };
 
 
+void CGraphmatFile::DealIdents() {
+	for (size_t i = 0; i < GetUnits().size(); i++) {
+		auto pair_it = m_pDicts->m_Idents.equal_range(m_Tokens[i].GetTokenUpper());
+		size_t max_len = 0;
+		for (auto it = pair_it.first; it != pair_it.second; ++it) {
+			bool good = true;
+			for (size_t k = 1; k < it->second.m_tokens.size(); ++k) {
+				if (m_Tokens[k + i].GetTokenUpper() != it->second.m_tokens[k].GetTokenUpper()) {
+					good = false;
+					break;
+				}
+			}
+			if (good && it->second.m_tokens.size() > max_len) {
+				max_len = it->second.m_tokens.size();
+			}
+		}
+		if (max_len > 0) {
+			MakeOneWord(i, i + max_len);
+			m_Tokens[i].SetStatus(stIdent);
+			i += max_len - 1;
+		}
+	}
+};
 
-int CGraphmatFile::InitContextDescriptors (size_t LB, size_t HB)
-{
+
+
+void CGraphmatFile::InitContextDescriptors () {
 
 	int NumOfFilledLines = 0;   //  число непустых строк
 
-	uint16_t		FuzzyMinSpace;  /* This variable is the fuzzy min left margin.
-	It is used to determine indentions  of the text
-	when the text is more than BigTextLengthInFilledLines */
-
-	uint16_t		MinSpace = 100;    /* This variable is the min left margin
-	of the whole text, it will be used for
-	determintation of indentions. */
-
-
+	uint16_t		FuzzyMinSpace;  
+	// This variable is the fuzzy min left margin.
+	//It is used to determine indentions  of the text
+	//when the text is more than BigTextLengthInFilledLines
 	
+	uint16_t		MinSpace = 100;    
+	// This variable is the min left margin
+	//of the whole text, it will be used for
+	//determintation of indentions. 
 
-	m_LastError = "";
-	
-	try {
-		InitEnglishNameSlot();
-	}
-	catch (...)
-	{
-		m_LastError = "CGraphmatFile::InitEnglishNameSlot has crushed!";
-		throw;
-	};
+	DealIdents();
 
+	InitEnglishNameSlot();
 
-	//  === Смещение от левого края =====
 	std::vector<uint16_t> gLeftMargins;
-	try{
-		CalculateLMarg(*this, gLeftMargins);
+	CalculateLMarg(*this, gLeftMargins);
+	
+	DealOborotto ();
+	
+	for (size_t i = 0; i < m_Tokens.size(); i++) {
+		DealEnglishStyleFIO(i, m_Tokens.size());
 	}
-	catch (...)
-	{
-		m_LastError = "CGraphmatFile::CalculateLMarg has crushed!";
-		throw;
-	};
-
-
-	//  === Обороты =====
-	try {
-		DealOborotto (HB);
+	
+	for (size_t i = 0; i < m_Tokens.size(); i++) {
+		DealSimpleEnglishNames(i);
 	}
-	catch (...)
-	{
-		m_LastError = "CGraphmatFile::DealOborotto has crushed!";
-		throw;
-	};
-
-	try {
-		for (size_t i=LB; i<HB; i++)
-			DealEnglishStyleFIO (i, HB);
+	
+	MapCorrectMinSpace (*this, 1, m_Tokens.size(), FuzzyMinSpace,MinSpace, NumOfFilledLines, gLeftMargins);
+	
+	DealModifierKey(0, m_Tokens.size());
+	
+	for (size_t i = 0; i < m_Tokens.size(); i++) {
+		DealAbbrev(i, m_Tokens.size());
 	}
-	catch (...)
-	{
-		m_LastError = "CGraphmatFile::DealEnglishStyleFIO has crushed!";
-		throw;
-	};
-
-	try {
-		for (size_t i=LB; i<HB; i++)
-			DealSimpleEnglishNames(*this, i, HB);
+	
+	for (size_t i = 0; i < m_Tokens.size(); i++) {
+		DealReferences(i, m_Tokens.size());
 	}
-	catch (...)
-	{
-		m_LastError = "CGraphmatFile::DealSimpleEnglishNames has crushed!";
-		throw;
-	};
-
-	try{
-		//  === Минимальный левый отступ =====
-			MapCorrectMinSpace (*this, LB+1,HB, FuzzyMinSpace,MinSpace, NumOfFilledLines, gLeftMargins);
-	}
-	catch (...)
-	{
-		m_LastError = "CGraphmatFile::MapCorrectMinSpace has crushed!";
-		throw;
-	};
-
-
-	try {
-		DealModifierKey(LB,HB);
-	}
-	catch (...)
-	{
-		m_LastError = "CGraphmatFile::DealModifierKey has crushed!";
-		throw;
-	};
-
-
-	try {
-		for (size_t  i=0; i<HB; i++)
-			DealAbbrev(i,HB);
-	}
-	catch (...)
-	{
-		m_LastError = "CGraphmatFile::DealAbbrev has crushed!";
-		throw;
-	};
-
-
-	//  === Реф-отрезки =====
-	try {
-		for (size_t  i=LB; i<HB; i++)
-			DealReferences(i,HB);
-	}
-	catch (...)
-	{
-		m_LastError = "CGraphmatFile::DealReferences has crushed!";
-		throw;
-	};
-
-
-	// ============  расширения файлов
-	try {
-		for (int i=HB-1; i>=0; i--)
-			DealExtensionsAndLocalFileNames(i,HB);
-	}
-	catch (...)
-	{
-		m_LastError = "CGraphmatFile::DealExtensionsAndLocalFileNames has crushed!";
-		throw;
-	};
-
-
-
-
-	//=========== Keys
-	try{
-		for (size_t i=LB; i<HB; i++)
-			DealSimpleKey(i,HB);
-	}
-	catch (...)
-	{
-		m_LastError = "CGraphmatFile::DealSimpleKey has crushed!";
-		throw;
-	};
-
-	try {
-		for (size_t i=LB; i<HB; i++)
-			DealKeySequence(i,HB);
-	}
-	catch (...)
-	{
-		m_LastError = "CGraphmatFile::DealKeySequence has crushed!";
-		throw;
-	};
-
-	try {
-		if (m_Language == morphGerman)
-			for (size_t i=LB; i<HB; i++)
-				DealGermanDividedCompounds(i,HB);
-	}
-	catch (...)
-	{
-		m_LastError = "CGraphmatFile::DealGermanDividedCompounds has crushed!";
-		throw;
-	};
-
-
-
-	//  === ФИО  =====
-	try {
-		for (size_t i=LB; i<HB;)
-			i = DealFIO (i,HB);
-	}
-	catch (...)
-	{
-		m_LastError = "CGraphmatFile::DealFIO has crushed!";
-		throw;
-	};
-
-	try {
-		DealAsteriskBullet (LB, HB);
-	}
-	catch (...)
-	{
-		m_LastError = "CGraphmatFile::DealAsteriskBullet has crushed!";
-		throw;
-	};
-
-
-	//  === Все остальное =====
-	try
-	{
-		size_t LastAsteriskNo = 0;
-		for (size_t i=LB; i<HB; i++)
-		{
-			DealBullet(i,HB); 
-			DealBulletsWithTwoBrackets (i, HB);
-			if (HasDescr(i,OBullet))
-				MapCorrectMinSpace (*this, i+1,HB, FuzzyMinSpace, MinSpace, NumOfFilledLines, gLeftMargins);
-
-			size_t Offset =  (		(NumOfFilledLines < (size_t)BigTextLengthInFilledLines) 
-								|| (MinSpace == FuzzyMinSpace) 
-								|| (gLeftMargins[i] < FuzzyMinSpace)
-							) ? MinSpace : FuzzyMinSpace;
-
-
-
-			if (m_bUseIndention)
-				DealIndention(*this, i, Offset, gLeftMargins);
-
-			int LowerBorder = (gLeftMargins[i] == 0) ? gLeftMargins[i] :  gLeftMargins[i] - 1;
-
-			if   (	   (LastAsteriskNo != 0) 
-					&& (gLeftMargins[LastAsteriskNo] <= gLeftMargins[i]+1)
-					&& (gLeftMargins[LastAsteriskNo] >= LowerBorder)
-					&& (GetUnit(LastAsteriskNo).GetInputOffset() < GetUnit(i).GetInputOffset() + 1000)
-					&& HasDescr(i, OPar)
-				)
-				DeleteDescr(i,OPar);
-
-
-
-			if (HasDescr(i, OBullet) && GetUnits()[i].IsAsterisk())
-			{
-
-				LastAsteriskNo = PassSpace(i+1, HB);
-			};
-
-		}
-	}
-	catch (...)
-	{
-		m_LastError = "An exception during ascribing context graphematical descriptors";
-		throw;
-	};
-
 
 	
-	return 1;
-}
+	for (int i= m_Tokens.size()-1; i>=0; i--) {
+		DealExtensionsAndLocalFileNames(i, m_Tokens.size());
+	}
 
+	for (size_t i=0; i < m_Tokens.size(); i++) {
+		DealSimpleKey(i, m_Tokens.size());
+	}
+
+	for (size_t i=0; i< m_Tokens.size(); i++) {
+		DealKeySequence(i, m_Tokens.size());
+	}
+
+	if (m_Language == morphGerman) {
+		for (size_t i = 0; i < m_Tokens.size(); i++)
+			DealGermanDividedCompounds(i, m_Tokens.size());
+	}
+	
+	for (size_t i=0; i< m_Tokens.size();) {
+		i = DealFIO (i, m_Tokens.size());
+	}
+	
+	DealAsteriskBullet (0, m_Tokens.size());
+
+	size_t LastAsteriskNo = 0;
+	for (size_t i=0; i< m_Tokens.size(); i++)
+	{
+		DealBullet(i, m_Tokens.size());
+		DealBulletsWithTwoBrackets (i, m_Tokens.size());
+		if (HasDescr(i,OBullet))
+			MapCorrectMinSpace (*this, i+1, m_Tokens.size(), FuzzyMinSpace, MinSpace, NumOfFilledLines, gLeftMargins);
+
+		size_t Offset =  (		(NumOfFilledLines < (size_t)BigTextLengthInFilledLines) 
+							|| (MinSpace == FuzzyMinSpace) 
+							|| (gLeftMargins[i] < FuzzyMinSpace)
+						) ? MinSpace : FuzzyMinSpace;
+
+
+
+		if (m_bUseIndention)
+			DealIndention(*this, i, Offset, gLeftMargins);
+
+		int LowerBorder = (gLeftMargins[i] == 0) ? gLeftMargins[i] :  gLeftMargins[i] - 1;
+
+		if   (	   (LastAsteriskNo != 0) 
+				&& (gLeftMargins[LastAsteriskNo] <= gLeftMargins[i]+1)
+				&& (gLeftMargins[LastAsteriskNo] >= LowerBorder)
+				&& (GetUnit(LastAsteriskNo).GetInputOffset() < GetUnit(i).GetInputOffset() + 1000)
+				&& HasDescr(i, OPar)
+			)
+			DeleteDescr(i,OPar);
+
+
+
+		if (HasDescr(i, OBullet) && GetUnits()[i].IsAsterisk())
+		{
+
+			LastAsteriskNo = PassSpace(i+1, m_Tokens.size());
+		};
+
+	}
+}

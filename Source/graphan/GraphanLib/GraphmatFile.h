@@ -31,7 +31,7 @@ class CGraphmatFile : public CUnitHolder {
 
     size_t FindOborotto(size_t i, size_t HB, const std::vector<uint16_t> &OborortIds);
 
-    void DealOborotto(size_t HB);
+    void DealOborotto();
 
     int DealReferences(size_t i, size_t HB);
 
@@ -61,7 +61,7 @@ class CGraphmatFile : public CUnitHolder {
 
     void GraphmatMain();
 
-    int InitContextDescriptors(size_t LB, size_t HB);
+    void InitContextDescriptors();
 
     void MacSynHierarchy();
 
@@ -74,6 +74,12 @@ class CGraphmatFile : public CUnitHolder {
     void ReadToken(const char* in_str, CGraLine& token) const;
 
     size_t ReadWord(const char* s, CGraLine& token) const;
+
+    void ReadIdents(CGraphanDicts* dicts, std::string path);
+
+    void DealIdents();
+
+    bool DealSimpleEnglishNames(size_t StartPos);
 
 public:
     const CGraphanDicts *m_pDicts;

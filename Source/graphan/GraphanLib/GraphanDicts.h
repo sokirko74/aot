@@ -14,6 +14,9 @@ const int MaxSpaceWordLen = 100;
 
 const size_t MaxNameSize = 100;
 
+struct CIdent {
+	std::vector<CGraLine> m_tokens;
+};
 
 class CGraphanDicts {
 	void _add_oborot(CGraphemOborot o);
@@ -35,9 +38,7 @@ public:
 
 	// Идентификатор - это что-то, что содержит в себе  знак препинания, но является одним словом
 	// типа C++, TCP/IP.
-	StringVector			m_Idents[256];
-	bool FindInIdents (const char* s, BYTE& ResultLen) const;
-	bool ReadIdents (std::string FileName);
+	std::unordered_multimap<std::string, CIdent> m_Idents;
 
 
 	// John, Bill

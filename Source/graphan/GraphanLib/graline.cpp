@@ -27,6 +27,10 @@ const std::string& CGraLine::GetToken() const {
     return m_Token;
 };
 
+void CGraLine::SetStatus(short status) {
+    m_Status = status;
+}
+
 const std::string& CGraLine::GetTokenUpper() const {
     return m_TokenUpper;
 };

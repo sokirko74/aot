@@ -62,7 +62,6 @@ CGraphanAndMorphanHolder::CGraphanAndMorphanHolder()
 {
 	m_pLemmatizer = 0;
 	m_pGramTab = 0;
-	m_bTimeStatis = false;
     m_bUsePrediction = true;
 };
 
@@ -92,7 +91,7 @@ bool CGraphanAndMorphanHolder::GetMorphology(std::string str, bool bFile, int& C
 
 	try {
 		// ============  Graphematics =======================
-		if (m_bTimeStatis) t1= clock();
+		t1 = clock();
 		if (bFile) {
 			m_Graphan.LoadFileToGraphan(str);
 		}
@@ -100,21 +99,20 @@ bool CGraphanAndMorphanHolder::GetMorphology(std::string str, bool bFile, int& C
 			m_Graphan.LoadStringToGraphan(str);
 		}
 
-		if (m_bTimeStatis) 
+		IF_PLOG(plog::debug)
 		{
 			t2 = clock();
 			size_t TokensCount = m_Graphan.GetTokensCount();
 			for (int i = 0; i <TokensCount; i++)
 				if (m_Graphan.GetTokenLanguage(i) == m_CurrentLanguage )
-							CountOfWords++;
-			fprintf (stderr,"CountOfWords = %i\n",CountOfWords);
-
+						CountOfWords++;
+			PLOGD << "CountOfWords: " << CountOfWords;
 			double speed =  ((double)CountOfWords)/((t2-t1)/((double)CLOCKS_PER_SEC));
-			fprintf(stderr,"Graphan: Ticks = %li Speed = %6.0f\n", t2-t1, speed );
+			PLOGD <<  "Graphan: Ticks = " << t2 - t1 <<" Speed = " << speed;
 		};
 
 		// ============  Morphology =======================
-		if (m_bTimeStatis) t1= clock();
+		t1= clock();
 
 		//m_Graphan.WriteGraphMat("graphan.gra");
 
@@ -122,20 +120,21 @@ bool CGraphanAndMorphanHolder::GetMorphology(std::string str, bool bFile, int& C
 
 		m_PlmLines.CreateFromTokemized(&m_Graphan);
 
-		if (m_bTimeStatis) 
+		IF_PLOG(plog::debug)
 		{
 			t2 = clock();
 			double speed =  ((double)CountOfWords)/((t2-t1)/((double)CLOCKS_PER_SEC));
-			fprintf(stderr,"Morphology: Ticks = %li Speed = %6.0f\n", t2-t1, speed );
+			PLOGD << "Morphology: Ticks = " << t2 - t1 << " Speed = " << speed;
 		};
 		m_Graphan.FreeTable();
 		return true;
 	}
-	catch (CExpc e) {
-		std::cerr << e.what() << "\n";
+	catch (std::exception& e) {
+		PLOGE << e.what();
 		return false;	}
 	catch (...)
 	{
+		PLOGE << "unknown exception in CGraphanAndMorphanHolder::GetMorphology";
 		return false;
 	};
 

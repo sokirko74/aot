@@ -72,6 +72,22 @@ TEST_CASE("test_puncts") {
 
 }
 
+TEST_CASE("test_idents") {
+	rus.LoadStringToGraphan("c++");
+	CHECK(1 == rus.GetUnits().size());
+	auto gra = rus.GetUnits()[0].GetGraphematicalLine();
+	auto canon = "c++\t0 3\t LLE aa";
+	CHECK(canon == gra);
+	rus.LoadStringToGraphan("бит/с OS/2 peer-to-peer");
+	CHECK(3 == rus.GetUnits().size());
+}
+
+TEST_CASE("test_empty") {
+	rus.LoadStringToGraphan("");
+	CHECK(0 == rus.GetUnits().size());
+
+}
+
 TEST_CASE("test_zero_char") {
 	std::string s = "\x0\n";
 	std::string path = std::tmpnam(nullptr);
@@ -117,7 +133,6 @@ TEST_CASE("test_force_rus") {
 
 }
 
-
 size_t check_sent_breaks(CGraphmatFile& g, std::string s, size_t canon_count) {
 	g.LoadStringToGraphan(s);
 	size_t count = 0;
@@ -145,7 +160,7 @@ TEST_CASE("test_sent_breaker") {
 void check_file_name(std::string s) {
 	rus.LoadStringToGraphan(s);
 	auto m = Format("file name %s is not recognized", s.c_str());
-	print_results(rus);
+	//print_results(rus);
 	CHECK_MESSAGE(rus.GetUnits()[0].HasDes(OFile1), m);
 	CHECK_MESSAGE(rus.GetUnits().back().HasDes(OFile2), m);
 

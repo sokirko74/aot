@@ -506,8 +506,8 @@ std::string CLemWord :: GetPlmStr (const CHomonym* pHomonym, bool bFirstHomonym)
     if (!bFirstHomonym) Result = "  ";
 
 	Result += m_strWord;
-	Result += " ";
-    Result += Format (" %i %i ", m_GraphematicalUnitOffset, m_TokenLengthInFile);
+	Result += "\t";
+    Result += Format ("%i %i\t", m_GraphematicalUnitOffset, m_TokenLengthInFile);
     Result += BuildGraphemDescr();
 
 	if (pHomonym->m_LemSign != 0)
@@ -516,7 +516,7 @@ std::string CLemWord :: GetPlmStr (const CHomonym* pHomonym, bool bFirstHomonym)
         assert (!pHomonym->GetGramCodes().empty());
         assert (!pHomonym->m_CommonGramCode.empty());
         
-        Result += pHomonym->m_LemSign + pHomonym->m_CommonGramCode + " " + pHomonym->GetLemma() + " " + pHomonym->GetGramCodes() + " ";
+        Result += std::string("\t") + pHomonym->m_LemSign + pHomonym->m_CommonGramCode + " " + pHomonym->GetLemma() + " " + pHomonym->GetGramCodes() + " ";
         Result +=  Format("%i %i", pHomonym->m_lPradigmID, pHomonym->m_lFreqHom);
 	};
 

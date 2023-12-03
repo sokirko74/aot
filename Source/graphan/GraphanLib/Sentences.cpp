@@ -182,7 +182,10 @@ bool  CGraphmatFile::CheckSentenceStart(size_t StartSent, size_t EndPos) const {
 void CGraphmatFile::DealSentBreaker ()
 {
 	size_t EndPos   = GetUnits().size();
-	
+
+	// for empty texts
+	if (EndPos == 0) return;
+
 	/*
 		if the whole  sentence is in brackets, then 
 		SentenceOpenBracket contains the code  of the this bracket,
@@ -219,8 +222,6 @@ void CGraphmatFile::DealSentBreaker ()
 	long FirstSentStart = PPunctOrSoft (1, EndPos);
 	SetSentMarkers(*this, 0, FirstSentStart, SentenceOpenBracket, bSentenceQuotationMarks, StartSentenceOffset);
 
-	// for empty texts
-	if (EndPos == 1) return;
 	
 	// going through the input text, 
 	// we should start from FirstSentStart, since SentenceOpenBracket, bSentenceQuotationMarks

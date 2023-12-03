@@ -147,14 +147,15 @@ bool CMAPost::ProcessData(const CLemmatizedText* piInTextItems)
 		RunRules();
 
 		m_ResultLemWords.clear();
-		for (std::list<CPostLemWord>::const_iterator it = m_Words.begin(); it != m_Words.end(); it++)
-			for (size_t i = 0; i < it->GetHomonymsCount(); i++)
+		for (auto& word : m_Words) {
+			for (size_t i = 0; i < word.GetHomonymsCount(); i++)
 			{
 				if (m_bHumanFriendlyOutput)
-					m_ResultLemWords.push_back(it->GetDebugString(it->GetHomonym(i), i == 0));
+					m_ResultLemWords.push_back(word.GetDebugString(word.GetHomonym(i), i == 0));
 				else
-					m_ResultLemWords.push_back(it->GetPlmStr(it->GetHomonym(i), i == 0));
+					m_ResultLemWords.push_back(word.GetPlmStr(word.GetHomonym(i), i == 0));
 			}
+		}
 
 		m_Words.clear();
 		return true;

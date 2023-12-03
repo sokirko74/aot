@@ -55,6 +55,36 @@ void CGraphmatFile::FreeDicts()
 }
 
 
+void CGraphmatFile::ReadIdents(CGraphanDicts* dicts, std::string path)
+{
+	assert(m_Language != morphUnknown);
+
+	std::ifstream inp(path);
+	if (!inp.good()) {
+		throw CExpc("cannot read %s", path.c_str());
+	}
+	std::string q;
+	while (std::getline(inp, q))
+	{
+		Trim(q);
+		if (q.empty()) continue;
+		assert(q.length() < CriticalTokenLength);
+		MakeUpperUtf8(q);
+		std::string s8 = convert_from_utf8(q.c_str(), m_Language);
+		size_t offset = 0;
+		CIdent idnt;
+		while (offset < s8.length())
+		{
+			CGraLine token;
+			token.Initialize(m_Language, offset);
+			ReadToken(s8.c_str() + offset, token);
+			offset += token.GetTokenLength();
+			idnt.m_tokens.push_back(token);
+		}
+		dicts->m_Idents.insert({ idnt.m_tokens[0].GetTokenUpper(), idnt });
+	};
+};
+
 
 bool CGraphmatFile::LoadDicts (MorphLanguageEnum langua)
 {
@@ -73,7 +103,7 @@ bool CGraphmatFile::LoadDicts (MorphLanguageEnum langua)
 
 		pDicts->ReadSpacedWords(GetRegistryString("Software\\Dialing\\Graphan\\SpDicFile"));
 		pDicts->ReadENames (GetRegistryString("Software\\Dialing\\Graphan\\ENamesFile"));
-		pDicts->ReadIdents (GetRegistryString("Software\\Dialing\\Graphan\\IdentsFile"));
+		ReadIdents (pDicts, GetRegistryString("Software\\Dialing\\Graphan\\IdentsFile"));
 		pDicts->ReadAbbrevations ();
 
 		if ( !pDicts->ReadKeyboard(GetRegistryString("Software\\Dialing\\Graphan\\Keyboard")) )
@@ -240,11 +270,6 @@ void CGraphmatFile::ReadToken(const char* in_str, CGraLine& token) const {
 		return;
 	};	
 	BYTE len = 0;
-	// if c++ occurs ..
-	if (m_pDicts->FindInIdents(in_str, len)) {
-		token.SetToken(stIdent, in_str, len);
-		return;
-	}
 
 	/*  if a Bracket occurs ..*/
 	if (isbracket((BYTE)in_str[0])) {
@@ -344,7 +369,7 @@ void CGraphmatFile :: GraphmatMain ()
 	// больше TBuf не нужен, так что освобождаем память
 	ClearInputBuffer();
 
-	InitContextDescriptors (0,GetUnits().size());  
+	InitContextDescriptors();  
 
 	MacSynHierarchy();
 

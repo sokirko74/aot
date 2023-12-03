@@ -168,5 +168,6 @@ public:
     bool ReadEolns(const char* in_str);
     bool ReadSpaces(const char* in_str, int tab_size);
     void SetToken(short status, const char* s, size_t len, BYTE screen_len=0);
+    void SetStatus(short status);
 
 };
