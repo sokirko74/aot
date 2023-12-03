@@ -11,7 +11,6 @@ class CGraphanDicts;
 class CDictionary;
 
 class CGraphmatFile : public CUnitHolder {
-    std::string m_SourceFileName;
     std::string m_LastError;
 
 
@@ -72,6 +71,10 @@ class CGraphmatFile : public CUnitHolder {
 
     int FindSentenceStart(size_t WordNo, size_t EndPos) const;
 
+    void ReadToken(const char* in_str, CGraLine& token) const;
+
+    size_t ReadWord(const char* s, CGraLine& token) const;
+
 public:
     const CGraphanDicts *m_pDicts;
 
@@ -105,8 +108,6 @@ public:
     // использовать красную строку для разделения на параграфы
     bool m_bUseIndention;
 
-    bool m_bFilterUnprintableSymbols;
-
     // max length of sentence
     size_t m_MaxSentenceLength;
 
@@ -120,7 +121,7 @@ public:
 
     void LoadStringToGraphan(const std::string &szBuffer);
 
-    void LoadFileToGraphan(const std::string &CommandLine);
+    void LoadFileToGraphan(const std::string& path);
 
     void FreeDicts();
 

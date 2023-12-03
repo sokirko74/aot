@@ -266,14 +266,12 @@ static bool DealSimpleEnglishNames (CGraphmatFile& C, size_t StartPos, size_t En
 
 void CGraphmatFile::DealOborotto(size_t  HB)
 {
-
-	std::string s;
 	std::vector<uint16_t> OborotIds;
 	OborotIds.resize(HB);
 		
 	for (int i = 0; i<HB; i++)
 	{
-		s = GetUppercaseToken(i);
+		auto s = GetUpperString(i);
 		StringVector::const_iterator it = lower_bound(m_pDicts->m_OborotTokens.begin(),  m_pDicts->m_OborotTokens.end(), s);
 		
 		if (		(it != m_pDicts->m_OborotTokens.end())
@@ -338,7 +336,7 @@ int CGraphmatFile::DealReferences (size_t i,size_t HB)
    if ( (nt == HB) || ((nt -k) > 20)) return false;
 
    if	(		(GetUnits()[nt].GetTokenLength() != 2) 
-			|| _R("СТ") != GetUppercaseToken(nt)
+			|| _R("СТ") != GetUpperString(nt)
 		) 
 	  return false;
 
@@ -618,7 +616,7 @@ void CGraphmatFile::DealExtensionsAndLocalFileNames(size_t LB, size_t  HB)
 		// if extension is not part of the name
 		LastTokenNo++;
 		if (		(LastTokenNo == HB) 
-				|| !m_pDicts->IsExtension(GetUppercaseToken(LastTokenNo), GetUnits()[LastTokenNo].GetTokenLength()) 
+				|| !m_pDicts->IsFileExtension(GetUpperString(LastTokenNo))
 			) return;
 
 		if (LB == 0 || !CanBeFileName(*this, LB-1))
@@ -638,10 +636,11 @@ void CGraphmatFile::DealExtensionsAndLocalFileNames(size_t LB, size_t  HB)
 	}
 	else
 	{
-		const char* s = GetUppercaseToken(LastTokenNo);
-		const char* extension =  strstr(s, ".");
-		if (!extension || !m_pDicts->IsExtension(extension+1, (BYTE)strlen(extension)-1))
+		auto& s = GetUpperString(LastTokenNo);
+		size_t dot_index = s.find('.');
+		if (dot_index == std::string::npos || !m_pDicts->IsFileExtension(s.substr(dot_index + 1)) ) {
 			return;
+		}
 		StartToken = LB;
 	}
 
@@ -697,7 +696,7 @@ void CGraphmatFile::DealExtensionsAndLocalFileNames(size_t LB, size_t  HB)
 
 	if (StartToken > 0)
 	{
-		const char* s = GetUppercaseToken(StartToken-1);
+		const char* s = GetUpperString(StartToken-1).c_str();
 		size_t l = GetUnits()[StartToken-1].GetTokenLength();
 		if (		(l==2)
 				&&	(BYTE)s[1] == ':' 
@@ -773,7 +772,6 @@ bool CGraphmatFile :: FindKeySequence (const char* title, size_t i,size_t HB, si
 
 bool CGraphmatFile::IsKey(size_t LB, size_t HB, size_t& GraLast) const
 {
-  if (GetUnits()[LB].GetToken() == 0) return false;
   int ch1 =  (unsigned char)GetUnits()[LB].GetToken()[0];
   int ch2 =  (unsigned char)ReverseChar((unsigned char)GetUnits()[LB].GetToken()[0], m_Language);
   GraLast = LB+1;
@@ -942,13 +940,7 @@ void CGraphmatFile::DealGermanDividedCompounds(size_t LB, size_t  HB)
 		if (i == HB) break;
 	
 		
-		if (	(		!strncmp(GetUppercaseToken(i), "UND", 3)
-					&&	(GetUnits()[i].GetTokenLength() == 3)
-				)
-				|| (		!strncmp(GetUppercaseToken(i), "ODER", 4)
-					&&	(GetUnits()[i].GetTokenLength() == 4)
-				)
-			)
+		if (m_Tokens[i].IsOneOfUpperStrings({"UND", "ODER"}))
 		{
 			i = PSoft(i+1, HB);
 			if (i == HB) break;

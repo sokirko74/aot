@@ -10,18 +10,13 @@
 
 class CUnitHolder
 {
-	std::vector<CGraLine>		m_Units;
-	std::vector<char>			m_TokenBuf;
-	std::vector<char>			m_UnitBufUpper;
-	std::vector<BYTE>			m_InputBuffer;
-
 protected: 
+	std::vector<CGraLine> m_Tokens;
+	std::string	m_InputText;
 	CGraLine& GetUnit(size_t UnitNo);
 
 public:
 	const std::vector<CGraLine>& GetUnits() const;
-	const std::vector<char>& GetUnitBuf() const;
-	const std::vector<BYTE>& GetInputBuffer() const;
 	std::string GetTokenUtf8(size_t line_no) const;
 
 	MorphLanguageEnum		m_Language;
@@ -58,23 +53,15 @@ public:
 
 
 	void	FreeTable();
-	void	BuildUnitBufferUpper ();
-	void	InitTokenBuffer();
-	bool	InitInputBuffer(const std::string& S);	
+	void	InitInputText(const std::string& S);	
 	void	ClearInputBuffer();
-	void	AddUnit(const CGraLine& NewLine);
-	const char*	GetUnitBufferStart() const;
-	const char*	GetUnitUpperBufferStart() const;
-	const char*	GetUppercaseToken(uint32_t LineNo) const;
-	std::string		GetToken(uint32_t LineNo) const;
-	std::string		GetUpperString(uint32_t LineNo) const;
-	size_t		GetTokensCount() const;
-	uint32_t		GetTokenInputOffset(uint32_t LineNo) const;
-	BYTE		GetTokenLength(uint32_t LineNo) const;
+	const std::string& GetToken(uint32_t LineNo) const;
+	const std::string& GetUpperString(uint32_t LineNo) const;
+	size_t	GetTokensCount() const;
+	uint32_t GetTokenInputOffset(uint32_t LineNo) const;
+	BYTE	GetTokenLength(uint32_t LineNo) const;
 
 
-
-	size_t		GetUnitBufferSize() const;
 	void	DeleteDescr(size_t LineNo, Descriptors d);
 
 	void		MakeOneWord(size_t StartLineNo, size_t EndLineNo);

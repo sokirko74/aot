@@ -12,26 +12,36 @@
 
 CGraLine::CGraLine() {
     m_Status = 0;
-    unit = NULL;
     m_Descriptors = 0;
-    ulen = slen = 0;
+    m_TokenScreenLength = 0;
     m_InputOffset = 0;
-    m_PageNumber = UnknownPageNumber;
     m_OborotNo = -1;
     m_Language = morphUnknown;
 };
 
 BYTE CGraLine::GetTokenLength() const { 
-    return ulen; 
+    return (BYTE)m_Token.length();
 };
 
-const char* CGraLine::GetToken() const { 
-    return unit; 
+const std::string& CGraLine::GetToken() const { 
+    return m_Token;
 };
 
+const std::string& CGraLine::GetTokenUpper() const {
+    return m_TokenUpper;
+};
+
+void CGraLine::Initialize(MorphLanguageEnum l, size_t offset) {
+    assert(l < 16); // see bit field  optimization
+    m_Language = l;
+    m_InputOffset = offset;
+    m_TokenScreenLength = 0;
+}
 
 BYTE CGraLine::GetScreenLength() const { 
-    return slen; 
+    // "\t" => 8 
+    // "\r\n" -> 1
+    return m_TokenScreenLength; 
 };
 
 uint32_t CGraLine::GetInputOffset() const { 
@@ -74,20 +84,17 @@ bool CGraLine::IsSingleSpaceToDelete() const {
 };
 
 
-void CGraLine::MakeSpaces(size_t SpacesLength) {
+void CGraLine::MakeSpaces(size_t spaces_count) {
     m_Descriptors = _QM(ODel) | _QM(OSpc);
     m_Status = stSpace;
-    ulen = (BYTE) SpacesLength;
-    slen = (BYTE) SpacesLength;
-    memset(const_cast<char *>(unit), ' ', SpacesLength);
+    m_TokenScreenLength = (BYTE)spaces_count;
+    m_Token = std::string(spaces_count, ' ');
+    m_TokenUpper = m_Token;
 };
 
 
 int CGraLine::ToInt() const {
-    char s[100];
-    strncpy(s, unit, ulen);
-    s[ulen] = 0;
-    return atoi(s);
+    return atoi(m_Token.c_str());
 };
 
 bool CGraLine::IsBulletWord() const
@@ -158,7 +165,7 @@ bool CGraLine::IsElectronicAddress() const {
 };
 
 bool CGraLine::IsChar(int c) const {
-    return (ulen == 1) && (unit[0] == c);
+    return m_Token.length() == 1 && m_Token[0] == c;
 };
 
 bool CGraLine::is_lowercase(int ch) const
@@ -187,24 +194,22 @@ bool CGraLine::HasSingleSpaceAfter() const { return (m_Status & stSingleSpaceAft
 
 
 bool CGraLine::IsString(const std::string& s) const {
-    return (s.length() == ulen) && !s.compare(0, ulen, unit);
+    return s == m_Token;
 };
 
-void CGraLine::SetSpace() {
-    m_Status |= stSpace;
-};
+bool CGraLine::IsUpperString(const std::string& s) const {
+    return s == m_TokenUpper;
+}
 
-void CGraLine::SetEOLN() {
-    m_Status |= stEOLN;
-};
+bool CGraLine::IsOneOfUpperStrings(const std::vector<std::string>& v) const {
+    for (const auto& s : v) {
+        if (s == m_TokenUpper) {
+            return true;
+        }
+    }
+    return false;
+}
 
-void CGraLine::SetNotPrint() {
-    m_Status |= stNotPrint;
-};
-
-void CGraLine::SetPunct() {
-    m_Status |= stPunct;
-};
 
 void CGraLine::SetParagraphChar() {
     m_Status |= stParagraphChar;
@@ -227,17 +232,6 @@ void CGraLine::SetSingleSpaceAfter() {
     m_Status |= stSingleSpaceAfter;
 };
 
-void CGraLine::SetIdent() {
-    m_Status |= stIdent;
-};
-
-void CGraLine::SetPageBreak() {
-    m_Status |= stPageBreak;
-};
-
-void CGraLine::SetTextAreaEnd() {
-    m_Status |= stTextAreaEnd;
-};
 
 void CGraLine::SetEnglishName() {
     m_Status |= stEnglishName;
@@ -261,287 +255,72 @@ void CGraLine::AddStatus(uint16_t add_state) {
     m_Status |= add_state;
 };
 
-void CGraLine::AddLength(const CGraLine &L) {
-    ulen += L.GetTokenLength();
-    slen += L.GetScreenLength();
+void CGraLine::AppendToken(const CGraLine &t) {
+    m_Token += t.m_Token;
+    m_TokenUpper += t.m_TokenUpper;
+    m_TokenScreenLength += t.m_TokenScreenLength;
 };
 
 
-void CGraLine::SetToken(const char *s) {
-    unit = s;
-};
 
 
-size_t GetInternetAddressStarter(const char *s) {
-    if (!strncmp(s, "http://", strlen("http://"))) return strlen("http://");
-    if (!strncmp(s, "HTTP://", strlen("http://"))) return strlen("http://");
-
-    if (!strncmp(s, "ftp://", strlen("ftp://"))) return strlen("ftp://");
-    if (!strncmp(s, "FTP://", strlen("ftp://"))) return strlen("ftp://");
-
-    if (!strncmp(s, "ftp.", strlen("ftp."))) return strlen("ftp.");
-    if (!strncmp(s, "FTP.", strlen("ftp."))) return strlen("ftp.");
-
-    if (!strncmp(s, "www.", strlen("www."))) return strlen("www.");
-    if (!strncmp(s, "WWW.", strlen("www."))) return strlen("www.");
-
-    if (!strncmp(s, "www2.", strlen("www2."))) return strlen("www2.");
-    if (!strncmp(s, "WWW2.", strlen("www2."))) return strlen("www2.");
-
-    return 0;
-}
-
-
-size_t CGraLine::LengthUntilDelimiters(const char *s, const CGraphmatFile *G) {
-    bool bElectronicAddress = GetInternetAddressStarter(s) > 0;
-    int i = 0;
-    for (i = 0; i < CriticalTokenLength; i++) {
-
-        if (is_alpha((BYTE) s[i])) {
-            if (i == 0) // prohibit apostrophe at the first position
-                if (s[i] == Apostrophe)
-                    break;
-            continue;
-        };
-
-
-        if (isdigit((BYTE) s[i])) continue;
-
-        if (G->m_pDicts->IsRegisteredKeyModifier(s, i)) {
-            SetKeyModifier();
-            break;
-        };
-
-        if (i > 0) {
-            if (s[i] == '-') //  let an inner hyphen be part of the word, for example "test-test"
-                if ((i + 1 < CriticalTokenLength) && isdigit((BYTE) s[0]) && isdigit((BYTE) s[i + 1]) &&
-                    isdigit((BYTE) s[i - 1])) // not ok for "1-2"
-                    break;
-                else continue;
-            if ((s[i] == '.') && (i + 1 < CriticalTokenLength)) {
-                if ((isdigit((BYTE) s[i - 1]) == isdigit((BYTE) s[i + 1]))
-                    && ((G->m_Language != morphRussian)    // prohibit  "." as a word part  for Russian
-                        || !is_russian_alpha((BYTE) s[i - 1])  // for example: г.Самара, В.И.Ленин
-                        || !is_russian_alpha((BYTE) s[i + 1])
-                    )
-                        )
-                    continue; //  if "." delimits alphas or digits, let an inner full stops be part of the word, for example "www.lenta.ru" or 1.12.12
-                // we exclude cases, if the full stop delimits digits and alphas, since it can lead to tokenization errors, for example such "1.We go to the north;2.We go to the south;"
-            };
-
-            if (s[i] == '/') continue; //  let an inner slash be part of the word, for example "TCP/IP"
-            if (s[i] == '_') continue; //  let an underscore be part of the word, for example "al_sokirko"
-        };
-
-        if (bElectronicAddress) {
-            if (s[i] == '.') continue;
-            if (s[i] == '_') continue;
-            if (s[i] == '/') continue;
-            if (s[i] == '\\') continue;
-            if (s[i] == ':') continue;
-        };
-        if (s[i] == '@') {
-            // sokirko@medialingua.ru
-            if (i + 1 < CriticalTokenLength) {
-                if (is_alpha((BYTE) s[i + 1]) || isdigit((BYTE) s[i + 1])) {
-                    bElectronicAddress = true;
-                    continue;
-                };
-            };
-
-        };
-
-        break;
-    };
-    //  exclude the last full stop or  slash from the word,
-    //  for example we  do not consider "Israel/" as one word, but as two tokens "Israel" and "/".
-    //  but  do not exclude the last hyphen, cf German examples:
-    //   "Reichsfinanz- und Reichsinnenministers"
-
-    for (; i > 0 && (s[i - 1] == '.' || s[i - 1] == '/' || s[i - 1] == ':' || s[i - 1] == '\''); i--);
-
-    if (i == 0)
-        return 1; // return 1, if this is not a word and not a number
-    else {
-        if (bElectronicAddress)
-            SetElectronicAddress();
-
-        return i;
-    };
-}
-
-
-// читает из буфера b в структуру L
-size_t CGraLine::ReadWord(size_t Offset, const CGraphmatFile *G, uint32_t &PageNumber) {
-    PageNumber = UnknownPageNumber;
-    assert(G->m_Language < 8); // see bit field  optimization
-    m_Language = G->m_Language;
-    const char *s;
-    const char *In = (const char *) &(G->GetInputBuffer()[0]);
-    char *Out = const_cast<char *>(unit);
-    BYTE len;
-    ulen = slen = 0;
-
-
-    m_InputOffset = Offset;
-
-
-    /*   If Carriage Return occurs ...*/
-    if (In[Offset] == '\r') {
-        if (In[Offset + 1] != '\n') {
-            if (G->m_bFilterUnprintableSymbols) {
-                Out[0] = ' ';
-                SetNotPrint();
-            } else {
-                Out[0] = In[Offset];
-                SetPunct();
-            };
-            Offset++;
-            slen = 1;
-            ulen = 1;
-        } else {
-            do {
-                Out[ulen] = '\r';
-                Out[ulen + 1] = '\n';
-                if (In[Offset + 1] != '\n') break;
-                ulen += 2;
-                slen++;
-                Offset += 2;
-            } while ((In[Offset] == '\r') && (ulen < CriticalTokenLength));
-            SetEOLN();
-        }
-    } else if (In[Offset] == '\n') {
-        do {
-            Out[ulen] = '\n';
-            ulen += 1;
-            Offset++;
-            slen++;
-
-        } while ((In[Offset] == '\n') && (ulen < CriticalTokenLength));
-        SetEOLN();
-    } else
-        /*  if TCP/IP occurs ..*/
-    if (G->m_pDicts->FindInIdents(In + Offset, len) && len <= CriticalTokenLength) {
-        slen = len;
-        ulen = len;
-        memcpy(Out, In + Offset, ulen);
-        Offset += ulen;
-        SetIdent();
-    } else
-        /*  if a Bracket occurs ..*/
-    if (isbracket((BYTE) In[Offset])) {
-        *Out = In[Offset];
-        slen = ulen = 1;
-        Offset++;
-        SetPunct();
-    } else
-        /* if a Space or Tabulation occurs ... */
-    if (isnspace((BYTE) In[Offset])) {
-        for (;
-                isnspace(In[Offset]) && ulen < CriticalTokenLength;
-                ulen++, slen += (In[Offset] == '\t') ? G->m_TabSize : 1, Offset++
-                )
-            Out[ulen] = In[Offset];
-
-        SetSpace();
-    } else
-        /*
-        последовательность из восклицательных и вопросительных знаков
-        (используется как конец предложения)
-        */
-    if (((BYTE) In[Offset] == '?')
-        || ((BYTE) In[Offset] == '!')
-            ) {
-        for (int ch1 = In[Offset];
-             ((In[Offset] == '?')
-              || (In[Offset] == '!'))
-             && (ulen < CriticalTokenLength);
-             Offset++,
-                     slen++, ulen++
-                )
-            Out[ulen] = In[Offset];
-
-        SetPunct();
-    } else
-        /* if it is a hard delimiter */
-    if (std::iswpunct(In[Offset]) || is_pseudo_graph((BYTE) In[Offset])) {
-        for (int ch1 = In[Offset];
-             (In[Offset] == ch1) && (ulen < CriticalTokenLength);
-             Offset++,
-                     slen++, ulen++
-                )
-            Out[ulen] = ch1;
-
-        SetPunct();
-    } else
-        /*  If it is not printable symbol and if the non-printable symbols should be filtered */
-    if (((BYTE) In[Offset] < 32)
-        || ((BYTE) In[Offset] == cIonChar)
-        || ((BYTE) In[Offset] == cNumberChar)
-        || ((BYTE) In[Offset] == cPiChar)
-        || ((BYTE) In[Offset] == cCompanyChar)
-        || ((BYTE) In[Offset] == cEllipseChar)
-            ) {
-        if (G->m_bFilterUnprintableSymbols || !In[Offset]) {
-            Out[0] = ' ';
-            SetNotPrint();
-        } else {
-            Out[0] = In[Offset];
-            SetPunct();
-        };
-
-        if ((BYTE) In[Offset] == cParagraph)
-            SetParagraphChar();
-
-        Offset++;
-        slen = 1;
-        ulen = 1;
-    } else
-        /* If a word, number or something else  occurs ...*/
+bool CGraLine::ReadEolns(const char* in_str) {
+    assert (m_TokenScreenLength == 0);
+    size_t len = 0;
+    while (in_str[len] == '\r' && in_str[len + 1] == '\n' && len + 1 < CriticalTokenLength)
     {
-        int WordLength;
-
-        bool bCanBeSpaceDelimitedWord =
-                ((G->GetInputBuffer().size() - Offset) > 2)
-                && is_spc_fill(In[Offset + 1]);
-
-        s = bCanBeSpaceDelimitedWord ? G->m_pDicts->SearchSpace(In + Offset, &WordLength) : NULL;
-
-        if (s != NULL) {
-            // spaced words
-            ulen = (BYTE) strlen(s);
-            strncpy(Out, s, ulen);
-            Offset += WordLength;
-        } else {
-            const char *CurrIn = In + Offset;
-
-            WordLength = LengthUntilDelimiters(CurrIn, G);
-
-
-            // sequence N% is one token)
-            if (WordLength == 1)
-                if ((BYTE) CurrIn[WordLength - 1] == 'N')
-                    if (Offset + WordLength < G->GetInputBuffer().size())
-                        if ((BYTE) CurrIn[WordLength] == '%') {
-                            WordLength++;
-                        };
-
-            if (Offset + WordLength >= G->GetInputBuffer().size())
-                WordLength = G->GetInputBuffer().size() - Offset;
-
-            if (WordLength >= CriticalTokenLength)
-                WordLength = CriticalTokenLength;
-
-            strncpy(Out, CurrIn, WordLength);
-
-            slen = ulen = WordLength;
-            Offset += WordLength;
+        len += 2;
+        m_TokenScreenLength++;
+    }
+    if (len == 0) {
+        while (in_str[len] == '\n' && len < CriticalTokenLength)
+        {
+            len++;
         }
-    };
-    assert (ulen <= CriticalTokenLength);
-
-    return Offset;
+    }
+    if (len == 0) {
+        while (in_str[len] == '\r' && len < CriticalTokenLength)
+        {
+            len++;
+        }
+    }
+    if (len > 0) {
+        SetToken(stEOLN, in_str, len);
+        return true;
+    }
+    return false;
 }
+
+bool CGraLine::ReadSpaces(const char* in_str, int tab_size) {
+    assert(m_TokenScreenLength == 0);
+    size_t len = 0;
+    while (isnspace((BYTE)in_str[len])) {
+        len++;
+        m_TokenScreenLength += (in_str[len] == '\t') ? tab_size : 1;
+    }
+    if (len > 0) {
+        SetToken(stSpace, in_str, len);
+        return true;
+    }
+    return false;
+}
+
+void CGraLine::SetToken(short status, const char * s, size_t len, BYTE screen_len) {
+    assert(len > 0);
+    if (len >= CriticalTokenLength) {
+        len = CriticalTokenLength;
+    }
+    m_Token = std::string(s, len);
+    m_TokenUpper = m_Token;
+    RmlMakeUpper(m_TokenUpper, m_Language);
+    m_Status |= status;
+    if (screen_len > 0)
+        m_TokenScreenLength = screen_len;
+    else if (m_TokenScreenLength == 0) {
+        m_TokenScreenLength = len;
+    }
+}
+
 
 void CGraLine::SetOborot(short oborotNo, bool bFixed) {
     m_OborotNo = oborotNo;
@@ -553,27 +332,15 @@ void CGraLine::SetOborot(short oborotNo, bool bFixed) {
     }
 }
 
-short CGraLine::GetPageNumber() const
-{
-    return m_PageNumber;
-}
-
-void CGraLine::SetPageNumber(short page) {
-    m_PageNumber = page;
-}
-
 std::string CGraLine::GetGraphematicalLine() const
 {
     std::string result;
 
     if (!IsSoft())
     {
-        if (!IsNotPrint()
-            && (GetToken() != NULL)
-            && (GetToken()[0] != 0)
-            )
+        if (!IsNotPrint())
         {
-            result.append(GetToken(), GetTokenLength());
+            result.append(m_Token);
         }
         else {
             result.append(1, GraphematicalSPACE);
@@ -608,11 +375,6 @@ std::string CGraLine::GetGraphematicalLine() const
         result.append(Format(" EXPR_NO%zu", m_OborotNo));
     }
 
-    if (IsPageBreak())
-    {
-        result.append(Format(" PGBR%zu", m_PageNumber));
-    }
-
     if (IsParagraphTag())
     {
         result.append(" PARTAG");
@@ -628,6 +390,39 @@ bool CGraLine::is_latin_alpha(int ch) const
         return is_english_alpha(ch);
 };
 
+// в первой строке находятся латинские буквы, который могут быть заменены на
+// русские
+const static std::string latin_chars = "AaEe3KkMHOoPpCcyXxuT";
+
+// во второй строке находятся русские
+const static std::string russian_chars = _R("АаЕеЗКкМНОоРрСсуХхиТ");
+
+
+BYTE force_rus_char(BYTE ch)
+{
+    size_t i = latin_chars.find(ch);
+
+    if (i == std::string::npos) return 0;
+
+    return russian_chars[i];
+}
+
+
+
+std::string force_to_rus(const std::string& s)
+{
+    std::string res;
+    for (BYTE ch : s) {
+        if (ch < 128 && is_english_alpha(ch)) {
+            ch = force_rus_char(ch);
+            if (ch == 0)
+                return "";
+        }
+        res += ch;
+    }
+    return res;
+}
+
 void CGraLine::InitNonContextDescriptors(bool b_force_to_rus)
 {
     bool	fl_ra = false,  /* rus alpha */
@@ -636,9 +431,7 @@ void CGraLine::InitNonContextDescriptors(bool b_force_to_rus)
         fl_up = false,  /* upper alpha */
         fl_decimal_number = false;
 
-    size_t TokenLength = GetTokenLength();
-    const char* Token = GetToken();
-    BYTE first_char = (BYTE)Token[0];
+    BYTE first_char = (BYTE)m_Token[0];
 
 
     if (IsSpace())
@@ -680,11 +473,8 @@ void CGraLine::InitNonContextDescriptors(bool b_force_to_rus)
         return;
     }
 
-
-
     if (IsPunct())
     {
-
         SetDes(OPun);
 
         int BracketClassNo = isbracket(first_char);
@@ -695,45 +485,42 @@ void CGraLine::InitNonContextDescriptors(bool b_force_to_rus)
             if (first_char == cHyphenChar)
                 SetDes(OHyp);
 
-
-        if (TokenLength > 1)
+        if (m_Token.length() > 1)
             SetDes(OPlu);
 
         return;
     }
     bool has_hyphen = false;
-    for (int i = 0; i < TokenLength; i++)
+    for (auto& c: m_Token)
     {
-        if ((BYTE)Token[i] == Apostrophe) continue;
-        if ((BYTE)Token[i] == cHyphenChar) has_hyphen = true;
+        if (c == Apostrophe) continue;
+        if (c == cHyphenChar) has_hyphen = true;
         if (m_Language == morphRussian)
         {
-            if (is_russian_alpha((BYTE)Token[i]))
+            if (is_russian_alpha((BYTE)c))
                 fl_ra = true;
             else
-                if (is_latin_alpha((BYTE)Token[i]))
+                if (is_latin_alpha(c))
                     fl_la = true;
         }
         else
-            fl_la = fl_la || is_latin_alpha((BYTE)Token[i]);
+            fl_la = fl_la || is_latin_alpha(c);
 
-        fl_decimal_number = fl_decimal_number || isdigit((BYTE)Token[i]);
+        fl_decimal_number = fl_decimal_number || isdigit((BYTE)c);
 
         if ((m_Language != morphGerman)
-            || (((BYTE)Token[i] != szlig) // ignore these symbols, they are equal in uppercase an in lowercase
-                && ((BYTE)Token[i] != Nu)
+            || ((c!= szlig) // ignore these symbols, they are equal in uppercase an in lowercase
+                && (c!= Nu)
                 )
             )
         {
-            fl_lw = fl_lw || is_lowercase((BYTE)Token[i]);
-            fl_up = fl_up || is_uppercase((BYTE)Token[i]);
+            fl_lw = fl_lw || is_lowercase((BYTE)c);
+            fl_up = fl_up || is_uppercase((BYTE)c);
         };
 
     }
 
-    if (!fl_decimal_number
-        && (fl_ra || fl_la)
-        )
+    if (!fl_decimal_number && (fl_ra || fl_la))
     {
         // встретились русские и латинские буквы, 
         // но нет дефиса, чтобы не трогать "IP-адрес"
@@ -742,13 +529,13 @@ void CGraLine::InitNonContextDescriptors(bool b_force_to_rus)
                 SetDes(OUnk); // установить дескриптор "вопрос"
             else // попробовать привести слово к русскому алфав.
             {
-                char s[255];
-                if (!force_to_rus(s, Token, TokenLength)) // если не удалось привести
+                auto s = force_to_rus(m_Token);
+                if (s.empty()) {
                     SetDes(OUnk);
-                else
-                {
-                    memcpy(const_cast<char*>(Token), s, TokenLength); // приводим
-                    SetDes(ORLE);  // говорим, что это русская лексема
+                }
+                else {
+                    SetDes(ORLE);
+                    SetToken(0, s.c_str(), s.length());
                 }
             }
         else
@@ -769,9 +556,7 @@ void CGraLine::InitNonContextDescriptors(bool b_force_to_rus)
         return;
     }
 
-    if (((BYTE)first_char == '\'')
-        && (TokenLength == 1)
-        )
+    if (((BYTE)first_char == '\'') && m_Token.length()== 1)
     {
         SetDes(ODel);
         SetDes(OPun);

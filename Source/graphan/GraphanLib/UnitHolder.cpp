@@ -37,7 +37,7 @@ CUnitHolder::CUnitHolder()
 void CUnitHolder::SetState (size_t LB, size_t HB, uint16_t state) 
 {
 	for (size_t i=LB; i<HB; i++)
-		m_Units[i].AddStatus(state);
+		m_Tokens[i].AddStatus(state);
 }
 
 bool  CUnitHolder::AreGrouped (size_t LB, size_t HB) const
@@ -45,7 +45,7 @@ bool  CUnitHolder::AreGrouped (size_t LB, size_t HB) const
 	bool fl_res = true;
 
 	for (size_t i=LB; i<HB; i++)
-		fl_res = fl_res && m_Units[i].IsGrouped();
+		fl_res = fl_res && m_Tokens[i].IsGrouped();
 
 	return fl_res;
 }
@@ -53,7 +53,7 @@ bool  CUnitHolder::AreGrouped (size_t LB, size_t HB) const
 bool  CUnitHolder::HasGrouped (size_t LB, size_t HB) const
 {
 	for (size_t i=LB; i<HB; i++)
-		if (m_Units[i].IsGrouped())
+		if (m_Tokens[i].IsGrouped())
 			return true;
 
 	return false;
@@ -62,7 +62,7 @@ bool  CUnitHolder::HasGrouped (size_t LB, size_t HB) const
 bool  CUnitHolder::HasAbbreviation (size_t LB, size_t HB) const
 {
 	for (size_t i=LB; i<HB; i++)
-		if (m_Units[i].IsAbbreviation())
+		if (m_Tokens[i].IsAbbreviation())
 			return true;
 
 	return false;
@@ -71,14 +71,14 @@ bool  CUnitHolder::HasAbbreviation (size_t LB, size_t HB) const
 size_t CUnitHolder::PassSpace (size_t i, size_t HB) const
 {
 	if (i >= HB) return HB;
-	for ( ; (i<HB)  && m_Units[i].IsSpace() ; i++);
+	for ( ; (i<HB)  && m_Tokens[i].IsSpace() ; i++);
 	return  i;
 }
 
 size_t CUnitHolder::PPunctOrSoft(size_t i, size_t HB) const
 {
 	if (i >= HB) return HB;
-	for ( ; (i<HB)  && (HasDescr (i,OPun) || m_Units[i].IsSoft()) ; i++);
+	for ( ; (i<HB)  && (HasDescr (i,OPun) || m_Tokens[i].IsSoft()) ; i++);
 	return  i;
 };
 
@@ -93,7 +93,7 @@ size_t CUnitHolder::PPunct(size_t i, size_t HB) const
 size_t CUnitHolder::FindSpace (size_t i, size_t HB) const
 {
 	if (i >= HB) return HB;
-	for ( ; (i<HB)  && !m_Units[i].IsSpace() ; i++);
+	for ( ; (i<HB)  && !m_Tokens[i].IsSpace() ; i++);
 	return  i;
 }
 
@@ -104,7 +104,7 @@ size_t CUnitHolder::BSpace (size_t i, size_t LB) const
 		return 0;
 	}
 	i--;
-	for ( ; (i>LB) && m_Units[i].IsSpace(); i--);
+	for ( ; (i>LB) && m_Tokens[i].IsSpace(); i--);
 
 	return i;
 }
@@ -113,7 +113,7 @@ size_t CUnitHolder::PSoft (size_t i, size_t HB) const
 {
 	if (i >= HB) return HB;
 
-	for ( ;(i<HB) && m_Units[i].IsSoft(); i++);
+	for ( ;(i<HB) && m_Tokens[i].IsSoft(); i++);
 
 	return i;
 }
@@ -126,7 +126,7 @@ size_t CUnitHolder::BSoft (size_t i) const
 
 	i--;
 
-	for ( ; (i>0) && m_Units[i].IsSoft(); i--);
+	for ( ; (i>0) && m_Tokens[i].IsSoft(); i--);
 
 	return i;
 }
@@ -134,9 +134,9 @@ size_t CUnitHolder::BSoft (size_t i) const
 
 bool CUnitHolder::IsQuestionOrExclamationMarks (size_t i) const 
 {
-	return   (    (m_Units[i].GetTokenLength() > 0)
-				&& (      ((unsigned  char)m_Units[i].GetToken()[0] == '?')
-					||  ((unsigned  char)m_Units[i].GetToken()[0] == '!')
+	return   (    (m_Tokens[i].GetTokenLength() > 0)
+				&& (      ((unsigned  char)m_Tokens[i].GetToken()[0] == '?')
+					||  ((unsigned  char)m_Tokens[i].GetToken()[0] == '!')
 					)
 			);
 };
@@ -146,20 +146,20 @@ bool CUnitHolder::IsSentenceEndMark (size_t  i) const
 {
 	return			IsOneFullStop(i) 
 				|| IsQuestionOrExclamationMarks(i)
-				|| ((m_Units[i].GetTokenLength() == 1)  &&  ((BYTE)m_Units[i].GetToken()[0] == cEllipseChar))
+				|| ((m_Tokens[i].GetTokenLength() == 1)  &&  ((BYTE)m_Tokens[i].GetToken()[0] == cEllipseChar))
 				|| (
-						(m_Units[i].GetTokenLength() >1)
-					&&  (m_Units[i].GetTokenLength() <6)
-					&&  ((unsigned  char)m_Units[i].GetToken()[0] ==  '.')
+						(m_Tokens[i].GetTokenLength() >1)
+					&&  (m_Tokens[i].GetTokenLength() <6)
+					&&  ((unsigned  char)m_Tokens[i].GetToken()[0] ==  '.')
 				)
-				|| m_Units[i].IsTextAreaEnd();
+				|| m_Tokens[i].IsTextAreaEnd();
 };
 
 bool CUnitHolder::IsOneCloseQuotationMark (size_t i) const
 {
 	if (i == 0) return false;
-	BYTE z = (BYTE)m_Units[i].GetToken()[0];
-	return	(m_Units[i].GetTokenLength() == 1)
+	BYTE z = (BYTE)m_Tokens[i].GetToken()[0];
+	return	(m_Tokens[i].GetTokenLength() == 1)
 		&&	(	( z == (BYTE)'"')
 			||	( z == CloseQuoteMark1251)
 		); 
@@ -167,8 +167,8 @@ bool CUnitHolder::IsOneCloseQuotationMark (size_t i) const
 
 bool CUnitHolder::IsOneOpenQuotationMark (size_t i) const
 {
-	BYTE z = (BYTE)m_Units[i].GetToken()[0];
-	return     (m_Units[i].GetTokenLength() == 1)
+	BYTE z = (BYTE)m_Tokens[i].GetToken()[0];
+	return     (m_Tokens[i].GetTokenLength() == 1)
 		&& (     (z == (BYTE)'"')
 			|| (z ==OpenQuoteMark1251)
 			); 
@@ -178,19 +178,19 @@ bool CUnitHolder::IsOneOpenQuotationMark (size_t i) const
 
 void CUnitHolder::SetDes(size_t x, Descriptors des)  
 {
-	m_Units[x].SetDes(des);
+	m_Tokens[x].SetDes(des);
 };
 
 bool CUnitHolder::HasDescr(size_t i, Descriptors descr)  const {
-	return m_Units[i].HasDes(descr); 
+	return m_Tokens[i].HasDes(descr); 
 }
 
 
 bool CUnitHolder::StrSuperCompare (int UnitNo, const char* s) const 
 {
 	
-	return		(s[m_Units[UnitNo].GetTokenLength()] == 0) 
-			&&	!strscmp(m_Units[UnitNo].GetToken(), s, m_Units[UnitNo].GetTokenLength(), m_Language);
+	return		(s[m_Tokens[UnitNo].GetTokenLength()] == 0) 
+			&&	!strscmp(m_Tokens[UnitNo].GetToken().c_str(), s, m_Tokens[UnitNo].GetTokenLength(), m_Language);
 };
 
 
@@ -202,91 +202,41 @@ bool CUnitHolder::StrSuperCompare (int UnitNo, const char* s) const
 
 bool  CUnitHolder::EmptyLineBeforeGraph (size_t i, size_t HB) const
 {
-	if ((i == 0) || m_Units[i].IsSoft()) return false;
+	if ((i == 0) || m_Tokens[i].IsSoft()) return false;
 	size_t k = BSpace (i, 0);
-	if (!m_Units[k].IsEOLN())  return false;
-    if (   (m_Units[k].GetTokenLength()>2)
-		|| (    (m_Units[k].GetTokenLength() == 2)
-		        && (m_Units[k].GetToken()[0] == '\n')
+	if (!m_Tokens[k].IsEOLN())  return false;
+    if (   (m_Tokens[k].GetTokenLength()>2)
+		|| (    (m_Tokens[k].GetTokenLength() == 2)
+		        && (m_Tokens[k].GetToken()[0] == '\n')
 		  	)
 	    ) return true; 
 	k--;
 	if ( k ==  0 ) return false;
 	k = BSpace (k + 1, 0); 
-	return m_Units[k].IsEOLN();
+	return m_Tokens[k].IsEOLN();
 };
 
 
 void CUnitHolder::FreeTable()
 {
-	m_Units.clear();
-	m_TokenBuf.clear();
+	m_Tokens.clear();
 }
 
 
-void  CUnitHolder :: BuildUnitBufferUpper ()
+const std::string&  CUnitHolder::GetToken(uint32_t LineNo) const 
 {
-	m_UnitBufUpper.clear();
-
-	for (auto& u: m_Units)
-	{
-		m_UnitBufUpper.insert(m_UnitBufUpper.end(), u.GetToken(), u.GetToken() + u.GetTokenLength());
-		m_UnitBufUpper.push_back(0);
-	};
-	MakeUpperVector(m_UnitBufUpper, m_Language);
-
+	return m_Tokens[LineNo].GetToken();
 };
 
-
-
-size_t CUnitHolder::GetUnitBufferSize() const 
+const std::string&  CUnitHolder::GetUpperString(uint32_t LineNo) const
 {
-	/*
-	this function is used by DDC. We should decrement the returning value, since 
-	we have added a null to the end of GetUnitBuf(). 
-	Without this decrementing we have a broken index to bibliography  file.
-	Generally, if the source file was plain, then CUnitHolder::GetUnitBufferSize()
-	should return the real(!) size of this file in bytes.
-	*/
-	return GetUnitBuf().size() - 1;
-};
-
-
-const char*	CUnitHolder::GetUnitBufferStart() const 
-{ 
-	return &(*(GetUnitBuf().begin())); 
-};
-
-const char*	CUnitHolder::GetUnitUpperBufferStart() const 
-{ 
-	return &(*(m_UnitBufUpper.begin())); 
-};
-
-const char*	CUnitHolder::GetUppercaseToken(uint32_t LineNo) const 
-{ 
-	size_t Offset = ( (GetUnits()[LineNo].GetToken()+LineNo) - GetUnitBufferStart());
-	return GetUnitUpperBufferStart() + Offset; 
-};
-
-std::string  CUnitHolder::GetToken(uint32_t LineNo) const 
-{
-	char s[CriticalTokenLength+1];
-	strncpy (s,GetUnits()[LineNo].GetToken(), GetUnits()[LineNo].GetTokenLength());
-	s[GetUnits()[LineNo].GetTokenLength()] = 0;
-	return std::string(s);
-};
-
-std::string  CUnitHolder::GetUpperString(uint32_t LineNo) const
-{
-	size_t off = ((GetUnits()[LineNo].GetToken() + LineNo) - GetUnitBufferStart());
-	size_t len = GetUnits()[LineNo].GetTokenLength();
-	return std::string(GetUnitUpperBufferStart() + off, GetUnitUpperBufferStart() + off + len);
+	return m_Tokens[LineNo].GetTokenUpper();
 };
 
 	
 size_t	CUnitHolder::GetTokensCount() const 
 {
-	return GetUnits().size();
+	return m_Tokens.size();
 }
 
 uint32_t	CUnitHolder::GetTokenInputOffset(uint32_t LineNo) const 
@@ -300,112 +250,81 @@ BYTE	CUnitHolder::GetTokenLength(uint32_t LineNo) const
 };
 
 
-void	CUnitHolder::InitTokenBuffer()
+void	CUnitHolder::InitInputText(const std::string& utfString)
 {
-	FreeTable();
-	//  While  building gra-table we use pointers into m_TokenBuf, 
-	// that's why we should allocate only once m_TokenBuf in the very beginning. 
-	// No reallocations are possible.
-	m_TokenBuf.resize(m_InputBuffer.size());
-}
+	m_InputText = convert_from_utf8(utfString.c_str(), m_Language);
 
+	if (m_InputText.length() > 0x500000)
+	{
+		throw CExpc("Graphan cannot process files larger than 5 MB");
+	};
 
-
-bool	CUnitHolder::InitInputBuffer(const std::string& utfString)
-{
-	std::string s = utfString;
-	// convert one non-printable to another
-	for (size_t i = 0; i < s.size(); ++i) {
-		if (s[i] == 0) {
-			s[i] = 1;
-		}
-	}
-	std::string inputText = convert_from_utf8(s.c_str(), m_Language);
-	m_InputBuffer.clear();
-	// copy with terminated null 
-	size_t len = inputText.length() + 1;
-	m_InputBuffer.insert(m_InputBuffer.begin(), inputText.c_str(), inputText.c_str()+len);
-	return m_InputBuffer.size() == len;
+	// to process it as a null-terminated string
+	std::replace(m_InputText.begin(), m_InputText.end(), '\x0', '\x1');
 };
 
 
 void	CUnitHolder::ClearInputBuffer()
 {
-	m_InputBuffer.clear();
+	m_InputText.clear();
 }
 
 void	CUnitHolder::DeleteDescr(size_t LineNo, Descriptors d)
 {
-	m_Units[LineNo].DelDes(d);
+	m_Tokens[LineNo].DelDes(d);
 };
 
 
 CGraLine& CUnitHolder::GetUnit(size_t UnitNo) 
 { 
-	return m_Units[UnitNo]; 
+	return m_Tokens[UnitNo]; 
 };
 
-const std::vector<char>& CUnitHolder::GetUnitBuf() const 
-{ 
-	return m_TokenBuf; 
-};
 
 const std::vector<CGraLine>& CUnitHolder::GetUnits() const
 { 
 	
-	return m_Units; 
+	return m_Tokens; 
 };
 
 std::string CUnitHolder::GetTokenUtf8(size_t line_no) const {
-	std::string s(m_Units[line_no].GetToken(), m_Units[line_no].GetTokenLength());
-	return convert_to_utf8(s, m_Language);
+	return convert_to_utf8(m_Tokens[line_no].GetToken(), m_Language);
 }
 
-const std::vector<BYTE>& CUnitHolder::GetInputBuffer() const 
-{ 
-	return m_InputBuffer; 
-};
-
-void	CUnitHolder::AddUnit(const CGraLine& NewLine)
+void	CUnitHolder::ClearPairDescriptors(size_t start_token_no, size_t end_token_no)
 {
-	m_Units.push_back(NewLine);  
-};
-
-
-void	CUnitHolder::ClearPairDescriptors(size_t StartLineNo, size_t EndLineNo)
-{
-	for (size_t LineNo=StartLineNo; LineNo<EndLineNo; LineNo++)
+	for (size_t t=start_token_no; t<end_token_no; t++)
 		for (uint8_t des=0; des<64; des++)
 			if (des != OSentEnd)
-			if (HasDescr(LineNo, (Descriptors)des))
+			if (HasDescr(t, (Descriptors)des))
 			if (IsFirstMemberOfPairDesciptor((Descriptors)des))
 			{
 				Descriptors dual_descr = GetSecondMemberByTheFirst((Descriptors)des);
-				size_t i=LineNo;
-				for (; i<LineNo+20; i++)
+				size_t i=t;
+				for (; i<t+20; i++)
 					if (HasDescr(i, dual_descr))
 					{
 						DeleteDescr(i,dual_descr);
 						break;
 					};
 				//  we should find the dual descriptor in this range
-				assert (i < LineNo+20);
-					DeleteDescr(LineNo,(Descriptors)des);
+				assert (i < t+20);
+					DeleteDescr(t,(Descriptors)des);
 			}
 			else
 				if (IsSecondMemberOfPairDesciptor((Descriptors)des))
 				{
 					Descriptors dual_descr = GetFirstMemberByTheSecond((Descriptors)des);
-					int i=LineNo;
-					for (; i>LineNo-20; i--)
+					int i=t;
+					for (; i>t-20; i--)
 						if (HasDescr(i, dual_descr))
 						{
 							DeleteDescr(i,dual_descr);
 							break;
 						};
 					//  we should find the dual descriptor in this range
-					assert (i > LineNo-20);
-					DeleteDescr(LineNo,(Descriptors)des);
+					assert (i > t-20);
+					DeleteDescr(t,(Descriptors)des);
 				};
 
 		
@@ -428,73 +347,46 @@ static bool IsEndTextPeriodDescriptor(Descriptors d)
 };
 
 
-void	CUnitHolder::MakeOneWord(size_t StartLineNo, size_t EndLineNo)
+void	CUnitHolder::MakeOneWord(size_t start_token_no, size_t end_token_no)
 {
-	if (StartLineNo+1 == EndLineNo) return;
+	if (start_token_no+1 == end_token_no) return;
 
-	//  delete all pair descriptors which intersects with [StartLineNo,EndLineNo)
-	ClearPairDescriptors(StartLineNo, EndLineNo);
+	//  delete all pair descriptors which intersects with [start_token_no,end_token_no)
+	ClearPairDescriptors(start_token_no, end_token_no);
 
-	//  move "end of sentence" descriptors from all lines of [StartLineNo,EndLineNo) to StartLineNo
-	for (size_t LineNo=StartLineNo+1; LineNo<EndLineNo; LineNo++)
+	//  move "end of sentence" descriptors from all lines of [start_token_no,end_token_no) to start_token_no
+	for (size_t t=start_token_no + 1; t<end_token_no; t++)
 		for (size_t i=0; i<64; i++)
 			if	(		IsEndTextPeriodDescriptor((Descriptors)i) 
-					&&	HasDescr(LineNo, (Descriptors)i)
+					&&	HasDescr(t, (Descriptors)i)
 				)
-			SetDes(StartLineNo, (Descriptors)i);
+			SetDes(start_token_no, (Descriptors)i);
 
 	//  add all hard lines to the first line, counting all spaces  in order to maintain the file offsets
-	size_t SpacesLength = 0;
-	for (size_t LineNo=StartLineNo+1; LineNo<EndLineNo; LineNo++)
+	size_t spaces_len = 0;
+	for (size_t t=start_token_no + 1; t<end_token_no; t++)
 	{
-		if (!m_Units[LineNo].IsSoft())
+		if (!m_Tokens[t].IsSoft())
 		{
-			char* out= const_cast<char*>(m_Units[StartLineNo].GetToken()) + m_Units[StartLineNo].GetTokenLength();
-			strncpy(out, m_Units[LineNo].GetToken(),  m_Units[LineNo].GetTokenLength());
-			GetUnit(StartLineNo).AddLength(m_Units[LineNo]);
-
-			char* upper_out= const_cast<char*>(GetUppercaseToken(StartLineNo));
-			strcat(upper_out, GetUppercaseToken(LineNo));
-
+			GetUnit(start_token_no).AppendToken(m_Tokens[t]);
 		}
-		else
-			SpacesLength += m_Units[LineNo].GetTokenLength();
-
+		else {
+			spaces_len += m_Tokens[t].GetTokenLength();
+		}
 	};
 
 
-	//  if some spaces were found in (StartLineNo, EndLineNo)
-	// then fill line StartLineNo+1 with the spaces
-	if (SpacesLength > 0)
+	//  if some spaces were found in (start_token_no, end_token_no)
+	// then fill line start_token_no+1 with the spaces
+	if (spaces_len > 0)
 	{
-		m_Units[StartLineNo+1].SetToken(m_Units[StartLineNo].GetToken()+m_Units[StartLineNo].GetTokenLength());
-		m_Units[StartLineNo+1].MakeSpaces(SpacesLength);
-
-		{	// update upper buffer
-			char* upper_out= const_cast<char*>(GetUppercaseToken(StartLineNo+1));
-			strncpy(upper_out, m_Units[StartLineNo+1].GetToken(),  m_Units[StartLineNo+1].GetTokenLength());
-			upper_out[m_Units[StartLineNo+1].GetTokenLength()] = 0;
-		};
-
-		GetUnit(StartLineNo + 1).SetOborot(-1, false);
-		if (EndLineNo-StartLineNo > 2)
-		{
-			//  erasing NULLs from the upper m_UnitBufUpper, which were addeded after each line
-			size_t upper_rest_offset =  GetUppercaseToken(StartLineNo+2) - GetUnitUpperBufferStart();
-			m_UnitBufUpper.erase(m_UnitBufUpper.begin()+upper_rest_offset,m_UnitBufUpper.begin()+upper_rest_offset+(EndLineNo-StartLineNo-2));
-		};
-
-		//  deleting (StartLineNo+2, EndLineNo)
-		m_Units.erase(m_Units.begin()+StartLineNo+2, m_Units.begin() + EndLineNo);
+		m_Tokens[start_token_no + 1].MakeSpaces(spaces_len);
+		GetUnit(start_token_no + 1).SetOborot(-1, false);
+		m_Tokens.erase(m_Tokens.begin() + start_token_no + 2, m_Tokens.begin() + end_token_no);
 	}
 	else
 	{
-		//  deleting (StartLineNo+1, EndLineNo)
-		m_Units.erase(m_Units.begin()+StartLineNo+1, m_Units.begin() + EndLineNo);
-
-		//  erasing NULLs from the upper m_UnitBufUpper, which were addeded after each line
-		size_t upper_rest_offset = GetUppercaseToken(StartLineNo+1) - GetUnitUpperBufferStart();
-		m_UnitBufUpper.erase(m_UnitBufUpper.begin()+upper_rest_offset,m_UnitBufUpper.begin()+upper_rest_offset+(EndLineNo-StartLineNo-1));
+		m_Tokens.erase(m_Tokens.begin() + start_token_no + 1, m_Tokens.begin() + end_token_no);
 	}
 };
 

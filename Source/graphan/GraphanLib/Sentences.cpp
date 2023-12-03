@@ -108,7 +108,6 @@ static void SetSentMarkers (CGraphmatFile& F, const size_t PreviousSentEnd, cons
 
 bool CheckGermanSentenceBreak(CGraphmatFile& G, size_t WordNo)
 {
-
 	const size_t ArticlesCount = 6;
 	const std::string Articles[ArticlesCount] =  {"DAS", "DEM","DEN","DER","DES","DIE" };
 
@@ -123,7 +122,7 @@ bool CheckGermanSentenceBreak(CGraphmatFile& G, size_t WordNo)
 			// This full stop is not considered a sentence break.
 			int i  = G.BSoft(WordNo-1);
 			if (i > 0) 
-				if (binary_search(Articles,Articles+ArticlesCount, std::string(G.GetUppercaseToken(i))) )
+				if (binary_search(Articles, Articles+ArticlesCount, G.GetUpperString(i)) )
 					return false;
 		};
 

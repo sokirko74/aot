@@ -27,14 +27,9 @@ public:
 
 	
 
-	struct CSpacedWord 
-	{
-	   char m_SpacedWord[MaxSpaceWordLen];
-	   int  m_SpacedWordLen; 
-	};
-	std::vector<CSpacedWord> m_Spaces;
-	bool   ReadSpaces (std::string FileName);
-	const char*  SearchSpace (const char *In ,int *len ) const;
+	std::vector<std::string> m_SpacedWords;
+	void   ReadSpacedWords (std::string path);
+	const std::string& SearchSpacedWords(const char *In, BYTE& len) const;
 
 
 
@@ -84,8 +79,8 @@ public:
 	bool		ReadKeyboard(std::string FileName);
 	
 
-	StringVector m_Extensions;
-	bool			IsExtension(const char * UpperStr, BYTE Len) const;
+	std::unordered_set<std::string> m_Extensions;
+	bool IsFileExtension(const std::string& s) const;
 	void ReadExtensions(std::string path);
 	
 

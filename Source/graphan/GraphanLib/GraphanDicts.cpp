@@ -9,29 +9,29 @@
 #define RD_MODE    (unsigned) 'r'
 #define WR_MODE    (unsigned) 'w'
 
-FILE* MOpen (const char *FName, int Mode)
+FILE* MOpen(const char* FName, int Mode)
 {
-	FILE *fp;
-	while (isspace (*FName)) FName ++;
-	size_t l = strlen (FName);
+	FILE* fp;
+	while (isspace(*FName)) FName++;
+	size_t l = strlen(FName);
 	if ((l == 0) || (l > 255))
-	  throw CExpc ("Cannot read file %s", FName);
+		throw CExpc("Cannot read file %s", FName);
 
-	if (Mode == RD_MODE )
-	 {
-		fp = fopen (FName,"rb");
-		if (!fp) throw CExpc ("Cannot read file %s", FName);
+	if (Mode == RD_MODE)
+	{
+		fp = fopen(FName, "rb");
+		if (!fp) throw CExpc("Cannot read file %s", FName);
 		else return (fp);
-	 }
+	}
 
 	if (Mode == WR_MODE)
-	 {
-     fp = fopen(FName,"wb");
-	 if (!fp) throw CExpc ("Cannot write file %s", FName );
+	{
+		fp = fopen(FName, "wb");
+		if (!fp) throw CExpc("Cannot write file %s", FName);
 		else return (fp);
-     return fp;
-    }
-  return NULL;
+		return fp;
+	}
+	return NULL;
 }
 
 
@@ -45,7 +45,7 @@ CGraphanDicts::~CGraphanDicts()
 	m_pOborDictionary.FreePointer();
 };
 
-void CGraphanDicts ::FreeData()
+void CGraphanDicts::FreeData()
 {
 	m_pOborDictionary.FreePointer();
 	m_EnglishNames.clear();
@@ -53,56 +53,57 @@ void CGraphanDicts ::FreeData()
 	m_Abbrevs.clear();
 };
 
-void CGraphanDicts::ReadENames (std::string path)
+void CGraphanDicts::ReadENames(std::string path)
 {
-   assert (m_Language != morphUnknown);
-   std::ifstream inp(path);
-   if (!inp.good()) {
-	   throw CExpc("cannot open file %s", path.c_str());
-   }
-   std::string s;
-   while (std::getline(inp, s))
-   {
-	   Trim(s);
-	   if (s.empty()) continue;
-	   m_EnglishNames.insert(convert_from_utf8(s.c_str(), m_Language));
-   };
-   inp.close();
+	assert(m_Language != morphUnknown);
+	std::ifstream inp(path);
+	if (!inp.good()) {
+		throw CExpc("cannot open file %s", path.c_str());
+	}
+	std::string s;
+	while (std::getline(inp, s))
+	{
+		Trim(s);
+		if (s.empty()) continue;
+		m_EnglishNames.insert(convert_from_utf8(s.c_str(), m_Language));
+	};
+	inp.close();
 };
 
 
 
-bool CGraphanDicts:: ReadIdents (std::string FileName)
+bool CGraphanDicts::ReadIdents(std::string FileName)
 {
-	assert (m_Language != morphUnknown);
+	assert(m_Language != morphUnknown);
 
-	for (int i =0; i< 256;  i++)
+	for (int i = 0; i < 256; i++)
 		m_Idents[i].clear();
-	
-	FILE* EnamesFp = MOpen (FileName.c_str(),RD_MODE);
+
+	FILE* EnamesFp = MOpen(FileName.c_str(), RD_MODE);
 	char s[MaxNameSize];
 
-	while (fgets (s, MaxNameSize, EnamesFp))
+	while (fgets(s, MaxNameSize, EnamesFp))
 	{
 		std::string q = s;
 		Trim(q);
 		if (q.empty()) continue;
+		assert(q.length() < CriticalTokenLength);
 		m_Idents[(unsigned char)q[0]].push_back(q);
-		m_Idents[(unsigned char)ReverseChar((unsigned char)q[0],m_Language)].push_back(q);
+		m_Idents[(unsigned char)ReverseChar((unsigned char)q[0], m_Language)].push_back(q);
 	};
- 
-	fclose (EnamesFp);  // space.dic
+
+	fclose(EnamesFp);  // space.dic
 
 	return true;
 };
 
 
-bool CGraphanDicts:: FindInIdents (const char* s, BYTE& len) const
+bool CGraphanDicts::FindInIdents(const char* s, BYTE& len) const
 {
 	const StringVector& Idents = m_Idents[(unsigned char)s[0]];
 
-	for (size_t i=0; i  < Idents.size(); i++)
-		if (CompareWithoutRegister ((const char*)s+1, Idents[i].c_str()+1, Idents[i].length()-1, morphEnglish) == 0)
+	for (size_t i = 0; i < Idents.size(); i++)
+		if (CompareWithoutRegister((const char*)s + 1, Idents[i].c_str() + 1, Idents[i].length() - 1, morphEnglish) == 0)
 		{
 			len = (BYTE)Idents[i].length();
 			return true;
@@ -111,98 +112,81 @@ bool CGraphanDicts:: FindInIdents (const char* s, BYTE& len) const
 	return false;
 };
 
-bool CGraphanDicts:: ReadSpaces (std::string FileName)
+void CGraphanDicts::ReadSpacedWords(std::string path)
 {
-	assert (m_Language != morphUnknown);
-
-	FILE* fp = MOpen (FileName.c_str(), RD_MODE);  
-
-	m_Spaces.clear();
-
-
-	char s[1000];
-	while ( fgets (s, 1000, fp) )
+	std::ifstream inp(path);
+	if (!inp.good()) {
+		throw CExpc("cannot open %s", path.c_str());
+	}
+	m_SpacedWords.clear();
+	std::string line;
+	while (std::getline(inp, line))
 	{
-		CSpacedWord S;
-		rtrim (s);
-		strcpy (S.m_SpacedWord, s + strspn (s, " \t"));
-		S.m_SpacedWordLen = strlen (S.m_SpacedWord);
-		m_Spaces.push_back(S);
+		Trim(line);
+		m_SpacedWords.push_back(convert_from_utf8(line.c_str(), m_Language));
 	};
-
-	fclose( fp );
-
-	return true;
 }
 
 
 
-bool CGraphanDicts:: IsExtension(const char * UpperStr, BYTE Len) const
+bool CGraphanDicts::IsFileExtension(const std::string& s) const
 {
-  long i=0;
-  for (; i < m_Extensions.size(); i++)
-	 if (   (m_Extensions[i].length() == Len)
-		 && !strncmp (m_Extensions[i].c_str(), UpperStr,  Len)
-		)
-		break;
-
-  return  i != m_Extensions.size();
+	return m_Extensions.find(s) != m_Extensions.end();
 };
 
 
 bool CGraphanDicts::IsRegisteredKeyModifier(const char* Str, size_t Len) const
 {
-  for (long i=0; i < m_KeyModifiers.size(); i++)
-	 if (   (m_KeyModifiers[i].length() == Len)
-		 && !strncmp (m_KeyModifiers[i].c_str(), Str,  Len)
-		)
-		return true;
+	for (long i = 0; i < m_KeyModifiers.size(); i++)
+		if (    (m_KeyModifiers[i].length() == Len)
+			&& !strncmp(m_KeyModifiers[i].c_str(), Str, Len)
+			)
+			return true;
 
-  return  false;
+	return  false;
 };
 
 
-bool StrSpacingCompare (const char* Sample,  const char* Text, size_t SampleLength, size_t& TextLength, MorphLanguageEnum langua)
+static bool StrSpacingCompare(MorphLanguageEnum langua, const std::string& word, const char* text, BYTE& spaced_length)
 {
-	int spacing = 1;
+	int spaces_count = 1;
 
 	// после первой буквы должна идти  разрядка
-	if ( !is_spc_fill((BYTE) Text[spacing] ) ) return false;
+	if (!is_spc_fill((BYTE)text[1])) return false;
 
 	//  разрядка может быть в два пробела 
-	if ( is_spc_fill((BYTE) Text[spacing+1] )  ) spacing++;
-
-	// Разрядка не может быть  больше двух пробелов
-	if ( is_spc_fill((BYTE) Text[spacing+1] )  ) return false;
+	if (is_spc_fill((BYTE)text[2])) {
+		spaces_count = 2;
+	}
 
 	// пошла проверка слов
-	for (int i=0; i<SampleLength; i++)
-	{ 
-		if (!IsSuperEqualChar((BYTE) Sample[i], (BYTE) Text[(spacing+1)*i], langua) )
+	for (int i = 0; i < word.length(); i++)
+	{
+		if (i > 0)
+			for (size_t k = 0; k < spaces_count; ++k) {
+				if (!is_spc_fill((BYTE)text[i   + spaces_count * (i - 1) + k ])) 
+					return false;
+			}
+		if (!IsSuperEqualChar((BYTE)word[i], (BYTE)text[i + spaces_count * i], langua))
 			return false;
 	}
 
-	TextLength = spacing*(SampleLength-1) + 1;
+	spaced_length = word.length()  + spaces_count*(word.length() - 1);
 
 	return true;
 
 };
 
 
-
-
-const char * CGraphanDicts ::SearchSpace (const char *In ,int *len ) const
+const std::string empty_string;
+const std::string& CGraphanDicts::SearchSpacedWords(const char* In, BYTE& len) const
 {
-
-	size_t length;
-
-	for (size_t i=0;i<m_Spaces.size();i++)
-		if (StrSpacingCompare (m_Spaces[i].m_SpacedWord,In,m_Spaces[i].m_SpacedWordLen, length, m_Language))
+	for (auto& s: m_SpacedWords)
+		if (StrSpacingCompare(m_Language, s, In, len))
 		{
-			*len = length;
-			return m_Spaces[i].m_SpacedWord;
+			return s;
 		};
-
-	return NULL;
+	len = 0;
+	return empty_string;
 }
 

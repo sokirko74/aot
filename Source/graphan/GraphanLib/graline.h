@@ -42,40 +42,32 @@ struct CGraphemOborot {
 };
 
 
-const uint32_t UnknownPageNumber = 0xffffffff;
-
 class CGraLine {
-    // Этот указатель либо указывает на строку выделенную специально для
-    // одного объекта этого класса, либо в m_TokenBuf (с каким-то смещением).
-    //  Переменная m_m_UnitBuf  определена в файле graphmat.cpp
-    const char *unit;
 
+    std::string m_Token;
+    std::string m_TokenUpper;
     // длина  строки с учетом табуляции (screen length) и разрядки
     // Длина каждого конца строк - один символ.
-    BYTE slen;
+    BYTE m_TokenScreenLength;
 
-    // длина строки unit
-    BYTE ulen;
-    uint64_t m_Descriptors;
+    uint64_t m_Descriptors : 60;
+    MorphLanguageEnum m_Language : 4;
     uint16_t m_Status;
     uint32_t m_InputOffset;
-    short m_OborotNo;
 
     // memory optimization
-    short m_PageNumber:13;
-    MorphLanguageEnum m_Language: 3; 
+    short m_OborotNo;
 
-    size_t LengthUntilDelimiters(const char *s, const CGraphmatFile *G);
     bool is_latin_alpha(int ch) const;
     bool IsNotPrint() const;
-
 public:
 
     CGraLine();
 
     BYTE GetTokenLength() const;
 
-    const char* GetToken() const;
+    const std::string& GetToken() const;
+    const std::string& GetTokenUpper() const;
 
     BYTE GetScreenLength() const;
 
@@ -121,20 +113,15 @@ public:
 
     bool IsString(const std::string &) const;
 
+    bool IsUpperString(const std::string&) const;
+
+    bool IsOneOfUpperStrings(const std::vector<std::string>& v) const;
+
     int ToInt() const;
 
     bool HasMacroSyntaxDelimiter() const;
 
     bool IsWordOrNumberOrAbbr() const;
-
-
-    void SetSpace();
-
-    void SetPunct();
-
-    void SetEOLN();
-
-    void SetNotPrint();
 
     void SetParagraphChar();
 
@@ -144,13 +131,9 @@ public:
 
     void SetSingleSpaceAfter();
 
-    void SetIdent();
+    void Initialize(MorphLanguageEnum l, size_t offset);
 
     void SetElectronicAddress();
-
-    void SetPageBreak();
-
-    void SetTextAreaEnd();
 
     void SetEnglishName();
 
@@ -164,23 +147,17 @@ public:
 
     void AddStatus(uint16_t add_state);
 
-    void AddLength(const CGraLine &L);
+    void AppendToken(const CGraLine &L);
 
-    void SetToken(const char *);
-
-    size_t ReadWord(size_t Offset, const CGraphmatFile *G, uint32_t &PageNumber);
+    void ReadWord(const char* in_str);
 
     bool IsSingleSpaceToDelete() const;
 
     void SetOborot(short oborotNo, bool fixed);
 
-    short GetPageNumber() const;
-
-    void SetPageNumber(short page);
-
     std::string GetGraphematicalLine() const;
 
-    void InitNonContextDescriptors(bool force_to_rus);
+    void InitNonContextDescriptors(bool _force_to_rus);
 
     bool IsBulletWord() const;
     bool IsOneAlpha() const;
@@ -188,5 +165,8 @@ public:
     bool FirstUpper() const;
     bool is_lowercase(int ch) const;
     bool is_uppercase(int ch) const;
+    bool ReadEolns(const char* in_str);
+    bool ReadSpaces(const char* in_str, int tab_size);
+    void SetToken(short status, const char* s, size_t len, BYTE screen_len=0);
 
 };

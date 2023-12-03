@@ -28,7 +28,6 @@ CGraphmatFile :: CGraphmatFile()
 	m_bEmptyLineIsSentenceDelim = true;
 	m_bUseParagraphTagToDivide = false;
 	m_bUseIndention = true;
-	m_bFilterUnprintableSymbols = false;
 	m_MaxSentenceLength = 9000;
 }
 
@@ -72,7 +71,7 @@ bool CGraphmatFile::LoadDicts (MorphLanguageEnum langua)
 		CGraphanDicts* pDicts = new CGraphanDicts(m_Language);
 		assert (pDicts);
 
-		pDicts->ReadSpaces (GetRegistryString("Software\\Dialing\\Graphan\\SpDicFile"));
+		pDicts->ReadSpacedWords(GetRegistryString("Software\\Dialing\\Graphan\\SpDicFile"));
 		pDicts->ReadENames (GetRegistryString("Software\\Dialing\\Graphan\\ENamesFile"));
 		pDicts->ReadIdents (GetRegistryString("Software\\Dialing\\Graphan\\IdentsFile"));
 		pDicts->ReadAbbrevations ();
@@ -133,60 +132,221 @@ bool CGraphmatFile::LoadDicts (MorphLanguageEnum langua)
 	};
 }
 
+size_t GetInternetAddressStarter(const char* s) {
+	if (!strncmp(s, "http://", strlen("http://"))) return strlen("http://");
+	if (!strncmp(s, "HTTP://", strlen("http://"))) return strlen("http://");
+
+	if (!strncmp(s, "ftp://", strlen("ftp://"))) return strlen("ftp://");
+	if (!strncmp(s, "FTP://", strlen("ftp://"))) return strlen("ftp://");
+
+	if (!strncmp(s, "ftp.", strlen("ftp."))) return strlen("ftp.");
+	if (!strncmp(s, "FTP.", strlen("ftp."))) return strlen("ftp.");
+
+	if (!strncmp(s, "www.", strlen("www."))) return strlen("www.");
+	if (!strncmp(s, "WWW.", strlen("www."))) return strlen("www.");
+
+	if (!strncmp(s, "www2.", strlen("www2."))) return strlen("www2.");
+	if (!strncmp(s, "WWW2.", strlen("www2."))) return strlen("www2.");
+
+	return 0;
+}
+
+size_t CGraphmatFile::ReadWord(const char* s, CGraLine& token) const {
+	bool bElectronicAddress = GetInternetAddressStarter(s) > 0;
+	int i = 0;
+	for (i = 0; i < CriticalTokenLength; i++) {
+
+		if (is_alpha((BYTE)s[i])) {
+			if (i == 0) // prohibit apostrophe at the first position
+				if (s[i] == Apostrophe)
+					break;
+			continue;
+		};
+
+
+		if (isdigit((BYTE)s[i])) continue;
+
+		if (m_pDicts->IsRegisteredKeyModifier(s, i)) {
+			token.SetKeyModifier();
+			break;
+		};
+
+		if (i > 0) {
+			if (s[i] == '-') //  let an inner hyphen be part of the word, for example "test-test"
+				if ((i + 1 < CriticalTokenLength) && isdigit((BYTE)s[0]) && isdigit((BYTE)s[i + 1]) &&
+					isdigit((BYTE)s[i - 1])) // not ok for "1-2"
+					break;
+				else continue;
+			if ((s[i] == '.') && (i + 1 < CriticalTokenLength)) {
+				if ((isdigit((BYTE)s[i - 1]) == isdigit((BYTE)s[i + 1]))
+					&& ((m_Language != morphRussian)    // prohibit  "." as a word part  for Russian
+						|| !is_russian_alpha((BYTE)s[i - 1])  // for example: г.Самара, В.И.Ленин
+						|| !is_russian_alpha((BYTE)s[i + 1])
+						)
+					)
+					continue; //  if "." delimits alphas or digits, let an inner full stops be part of the word, for example "www.lenta.ru" or 1.12.12
+				// we exclude cases, if the full stop delimits digits and alphas, since it can lead to tokenization errors, for example such "1.We go to the north;2.We go to the south;"
+			};
+
+			if (s[i] == '/') continue; //  let an inner slash be part of the word, for example "TCP/IP"
+			if (s[i] == '_') continue; //  let an underscore be part of the word, for example "al_sokirko"
+		};
+
+		if (bElectronicAddress) {
+			if (s[i] == '.') continue;
+			if (s[i] == '_') continue;
+			if (s[i] == '/') continue;
+			if (s[i] == '\\') continue;
+			if (s[i] == ':') continue;
+		};
+		if (s[i] == '@') {
+			// sokirko@medialingua.ru
+			if (i + 1 < CriticalTokenLength) {
+				if (is_alpha((BYTE)s[i + 1]) || isdigit((BYTE)s[i + 1])) {
+					bElectronicAddress = true;
+					continue;
+				};
+			};
+
+		};
+
+		break;
+	};
+	//  exclude the last full stop or  slash from the word,
+	//  for example we  do not consider "Israel/" as one word, but as two tokens "Israel" and "/".
+	//  but  do not exclude the last hyphen, cf German examples:
+	//   "Reichsfinanz- und Reichsinnenministers"
+
+	for (; i > 0 && (s[i - 1] == '.' || s[i - 1] == '/' || s[i - 1] == ':' || s[i - 1] == '\''); i--);
+
+	if (i == 0) {
+		return 1; // return 1, if this is not a word and not a number
+	}
+	else {
+		// sequence "N%" is one token)
+		if ((BYTE)s[0] == 'N' && (BYTE)s[1] == '%') {
+			return 2;
+		};
+		if (bElectronicAddress)
+			token.SetElectronicAddress();
+		return i;
+	};
+}
+
+
+// читает из буфера b в структуру 
+void CGraphmatFile::ReadToken(const char* in_str, CGraLine& token) const {
+	if (token.ReadEolns(in_str)) {
+		return;
+	};	
+	BYTE len = 0;
+	// if c++ occurs ..
+	if (m_pDicts->FindInIdents(in_str, len)) {
+		token.SetToken(stIdent, in_str, len);
+		return;
+	}
+
+	/*  if a Bracket occurs ..*/
+	if (isbracket((BYTE)in_str[0])) {
+		token.SetToken(stPunct, in_str, 1);
+		return;
+	}
+
+	/* if a Space or Tabulation occurs ... */
+	if (token.ReadSpaces(in_str, m_TabSize)) {
+		return;
+	}
+	/*
+	последовательность из восклицательных и вопросительных знаков
+	(используется как конец предложения)
+	*/
+	while ( (BYTE)in_str[len] == '?' || (BYTE)in_str[len] == '!') {
+		len++;
+	}
+	if (len > 0) {
+		token.SetToken(stPunct, in_str, len);
+		return;
+	}
+
+
+	/* if it is a hard delimiter (repeat) */
+	while ((
+		std::iswpunct(in_str[len])
+		|| is_pseudo_graph((BYTE)in_str[len])
+		)
+		&& (in_str[len] == in_str[0])
+		)
+	{
+		len++;
+	}
+
+	if (len > 0) {
+		token.SetToken(stPunct, in_str, len);
+		return;
+	}
+
+	/*  If it is not printable symbol and if the non-printable symbols should be filtered */
+	if (((BYTE)in_str[0] < 32)
+		|| ((BYTE)in_str[0] == cIonChar)
+		|| ((BYTE)in_str[0] == cNumberChar)
+		|| ((BYTE)in_str[0] == cPiChar)
+		|| ((BYTE)in_str[0] == cCompanyChar)
+		|| ((BYTE)in_str[0] == cEllipseChar)
+		)
+	{
+		token.SetToken(stPunct, in_str, 1);
+		if ((BYTE)in_str[0] == cParagraph)
+			token.SetParagraphChar();
+		return;
+	}
+
+	if (is_spc_fill(in_str[1])) {
+		// spaced words "м а м а"  -> "мама   "
+		auto word  = m_pDicts->SearchSpacedWords(in_str, len);
+		if (len > 0) {
+			token.SetToken(0, word.c_str(), word.length(), len);
+			memset(const_cast<char*>(in_str) + word.length(), ' ', len - word.length());
+			return;
+		}
+	}
+
+	/* If a word, number or something else  occurs ...*/
+	len = ReadWord(in_str, token);
+	token.SetToken(0, in_str, len);
+}
+
+
 void CGraphmatFile :: GraphmatMain ()
 {
-	if (0x500000 < GetInputBuffer().size())
+	size_t offset = 0;
+	m_Tokens.clear();
+	while(offset < m_InputText.length())
 	{
-		throw CExpc( "File is to large, it cannot be more than 5 MB");
-	};
-
-
-	InitTokenBuffer();
-
-	// NUMBER of all UNITS which were read from INPUT file
-	size_t  CurrOutBufOffset  = 0;
-
-	// we should process all bytes except the last terminating null
-	size_t InputBufferSize = GetInputBuffer().size()-1;
-
-	for (size_t InputOffset  = 0; InputOffset < InputBufferSize ; )
-	{
-		CGraLine NewLine;
+		CGraLine token;
+		token.Initialize(m_Language, offset);
+		ReadToken(m_InputText.c_str() + offset, token);
+		offset += token.GetTokenLength();
 			
-		NewLine.SetToken(GetUnitBufferStart() + CurrOutBufOffset);
-		uint32_t	PageNumber;
-		InputOffset = NewLine.ReadWord(InputOffset,this, PageNumber);
-			
-		//  ignore single spaces in order to save memory
-		if	( !NewLine.IsSingleSpaceToDelete() )
+		if	( !token.IsSingleSpaceToDelete() )
 		{
-			AddUnit(NewLine);  
-			CurrOutBufOffset += NewLine.GetTokenLength();
-			if (NewLine.IsPageBreak() )
-				GetUnit(GetUnits().size() - 1).SetPageNumber((short)PageNumber);
+			token.InitNonContextDescriptors(m_bForceToRus);
+			m_Tokens.emplace_back(token);
 		}
 		else
 		{
-			if (!GetUnits().empty()) {
-				GetUnit(GetUnits().size() - 1).SetSingleSpaceAfter();
+			//  ignore single spaces in order to save memory
+			if (!m_Tokens.empty()) {
+				m_Tokens.back().SetSingleSpaceAfter();
 			}
 		};
 	}
 
-
 	// больше TBuf не нужен, так что освобождаем память
 	ClearInputBuffer();
-
-	for (size_t i=0; i< GetUnits().size(); i++)
-		GetUnit(i).InitNonContextDescriptors(m_bForceToRus);
-
-	
-	BuildUnitBufferUpper();
 
 	InitContextDescriptors (0,GetUnits().size());  
 
 	MacSynHierarchy();
-	
 
 	if (m_bSentBreaker) {
 		DealSentBreaker();
@@ -198,12 +358,7 @@ void CGraphmatFile :: GraphmatMain ()
 void CGraphmatFile::LoadStringToGraphan(const std::string& szBuffer)
 {
 	m_XmlMacSynOutputFile = "";
-
-	if (!InitInputBuffer(szBuffer)) 
-	{
-		throw CExpc ("Cannot init input buffer for %i bytes", szBuffer.length());
-	};
-
+	InitInputText(szBuffer);
 	GraphmatMain();
 }
 
@@ -214,29 +369,30 @@ static bool IsHtmlFile(const std::string& FileName)
 	return endswith(r, ".htm") || endswith(r, ".html") || endswith(r, ".shtm");
 }
 
-void CGraphmatFile :: LoadFileToGraphan (const std::string&  fileName)
+void CGraphmatFile :: LoadFileToGraphan (const std::string&  path)
 {
-	m_SourceFileName = fileName;
 	std::string inputText;
-	if (IsHtmlFile(m_SourceFileName))
+	if (IsHtmlFile(path))
 	{
 		HTML Convert;
-		inputText = Convert.GetTextFromHtmlFile(m_SourceFileName);
+		inputText = Convert.GetTextFromHtmlFile(path);
 	}
 	else
 	{
-		if (!FileExists(m_SourceFileName.c_str())) {
-			throw CExpc("Cannot read file %s", m_SourceFileName.c_str());
+		if (!fs::exists(path)) {
+			throw CExpc("Cannot read file %s", path.c_str());
 		}
-		inputText = LoadFileToString(m_SourceFileName);
+		inputText = LoadFileToString(path, true);
 
 	};
-	
-	if (!InitInputBuffer(inputText))
-	{
-		throw CExpc("Cannot init input buffer for %i bytes", inputText.length());
+	try {
+		InitInputText(inputText);
+		GraphmatMain();
 	}
-	GraphmatMain ();
+	catch (CExpc& e) {
+		e.add_to_message(Format(" file: ", path.c_str()));
+		throw;
+	}
 };
 
 const std::string&	CGraphmatFile::GetLastError() const

@@ -586,15 +586,13 @@ void FindSimilarHeadings (CSList& List)
 		  ) 
 		{
 			bool IsParagraph = List[0].GetUnit(List[SentNo].m_HardGraphStartNo).IsParagraphChar();
-			const char *s = List[SentNo].FirstUnit().GetToken();
+			const char *s = List[SentNo].FirstUnit().GetToken().c_str();
 			// Идем дальше по тексту и ищем похожие МЕ
 			for (long SentNo1 = SentNo; (SentNo1 <  List.size()) && (List[SentNo1].m_SimilarFieldNo == 0); SentNo1++)
 				 if  	(List[SentNo1].m_Type == List[SentNo].m_Type) 
 					 if (
 							(
-								(List[SentNo1].FirstUnit().GetToken() != NULL ) && 
-								(s != NULL) && 
-								(strscmp(s,List[SentNo1].FirstUnit().GetToken(),4, List[SentNo1].m_GraFile->m_Language) == 0) 
+								(strscmp(s, List[SentNo1].FirstUnit().GetToken().c_str(), 4, List[SentNo1].m_GraFile->m_Language) == 0)
 							) || // типа "Глава 1 .... Глава 2"
 							(
 							      IsParagraph 

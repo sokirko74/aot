@@ -23,9 +23,9 @@ struct CStrToCompare {
 	CStrToCompare(const CGraphmatFile* pParent, size_t LineNo, bool bCaseSensitive)
 	{
 		if (bCaseSensitive)
-			m_Str = pParent->GetUnits()[LineNo].GetToken();
+			m_Str = pParent->GetUnits()[LineNo].GetToken().c_str();
 		else
-			m_Str = pParent->GetUppercaseToken(LineNo);
+			m_Str = pParent->GetUpperString(LineNo).c_str();
 
 
 		m_StrLen = pParent->GetUnits()[LineNo].GetTokenLength();
@@ -225,7 +225,7 @@ void CGraphanDicts::ReadExtensions(std::string path)
 		if (!CheckEnglishUtf8(s)) {
 			throw CExpc("only English file extensions are enabled");
 		}
-		m_Extensions.push_back(s);
+		m_Extensions.insert(s);
 	};
 	inp.close();
 	

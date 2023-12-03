@@ -6,8 +6,15 @@
 CGraphmatFile rus;
 CGraphmatFile ger;
 
+void print_results(CGraphmatFile& g) {
+	for (auto& u : g.GetUnits()) {
+		std::cerr << u.GetGraphematicalLine() << "\n";
+	}
+}
+
 TEST_CASE("test_tokens") {
 	rus.LoadStringToGraphan("Яя ЯЯ яя z");
+	print_results(rus);
 	CHECK(4 == rus.GetUnits().size());
 
 	auto u0 = rus.GetUnits()[0];
@@ -36,6 +43,32 @@ TEST_CASE("test_numbers") {
 
 	auto u1 = rus.GetUnits()[1];
 	CHECK(u1.HasDes(ONumChar));
+
+}
+
+TEST_CASE("test_spaced") {
+	auto s = "з а к о н";
+	rus.LoadStringToGraphan(s);
+	print_results(rus);
+	CHECK(2 == rus.GetUnits().size());
+	CHECK("закон" == rus.GetTokenUtf8(0));
+	CHECK("    " == rus.GetToken(1));
+
+	s = "У  К  А  З";
+	rus.LoadStringToGraphan(s);
+	print_results(rus);
+	CHECK(2 == rus.GetUnits().size());
+	CHECK("УКАЗ" == rus.GetTokenUtf8(0));
+	CHECK("      " == rus.GetToken(1));
+
+}
+
+TEST_CASE("test_puncts") {
+	rus.LoadStringToGraphan("..\\");
+	CHECK(2 == rus.GetUnits().size());
+
+	rus.LoadStringToGraphan("N%");
+	CHECK(1 == rus.GetUnits().size());
 
 }
 
@@ -76,12 +109,12 @@ TEST_CASE("test_force_rus") {
 	auto s = rus.GetTokenUtf8(0);
 	CHECK("IP-адрес" == s); 
 
-}
+	rus.LoadStringToGraphan("яAaEeKkMHOoPpCcyXxuT"); //я+english
+	CHECK(1 == rus.GetUnits().size());
+	auto t = rus.GetTokenUtf8(0);
+	CHECK("яАаЕеКкМНОоРрСсуХхиТ" == t); //я+russian
 
-void print_results(CGraphmatFile& g) {
-	for (auto& u : g.GetUnits()) {
-		std::cerr << u.GetGraphematicalLine() << "\n";
-	}
+
 }
 
 
@@ -112,6 +145,7 @@ TEST_CASE("test_sent_breaker") {
 void check_file_name(std::string s) {
 	rus.LoadStringToGraphan(s);
 	auto m = Format("file name %s is not recognized", s.c_str());
+	print_results(rus);
 	CHECK_MESSAGE(rus.GetUnits()[0].HasDes(OFile1), m);
 	CHECK_MESSAGE(rus.GetUnits().back().HasDes(OFile2), m);
 
