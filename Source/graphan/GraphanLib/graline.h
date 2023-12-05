@@ -65,9 +65,12 @@ public:
     CGraLine();
 
     BYTE GetTokenLength() const;
+    BYTE GetLettersCount() const;
 
     const std::string& GetToken() const;
     const std::string& GetTokenUpper() const;
+    std::string GetTokenUtf8() const;
+    std::string GetTokenUpperUtf8() const;
 
     BYTE GetScreenLength() const;
 
@@ -169,5 +172,6 @@ public:
     bool ReadSpaces(const char* in_str, int tab_size);
     void SetToken(short status, const char* s, size_t len, BYTE screen_len=0);
     void SetStatus(short status);
-
+    MorphLanguageEnum GetTokenLanguage() const;
+    short  GetOborotNo() const;
 };

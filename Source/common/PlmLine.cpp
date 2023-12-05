@@ -18,7 +18,7 @@ CPlmLine::CPlmLine ()
 	m_bHyphenWord = false;
 	m_bMorphName = false;
 	m_bMorphSurname = false;
-	m_TokenType = OTHER_TOKEN_TYPE;
+	m_TokenType = OTHER_TOKEN_TYPE_DUMMY;
 	m_Grammems = 0;
 	m_bOborot1 = false;
 	m_bOborot2 = false;
@@ -185,8 +185,8 @@ bool CPlmLine :: LoadPlmLineFromString (std::string LineStr, const CAgramtab* pR
 
 	};
 
-	m_TokenType = OTHER_TOKEN_TYPE;
-	for (int k=(int)RLE; k < OTHER_TOKEN_TYPE; k++)
+	m_TokenType = OTHER_TOKEN_TYPE_DUMMY;
+	for (int k=(int)RLE; k < OTHER_TOKEN_TYPE_DUMMY; k++)
 		if (init_flag (m_GraphDescr, TokenTypeToString((MainTokenTypeEnum)k).c_str() ))
 		{
             m_TokenType = (MainTokenTypeEnum)k;
@@ -376,14 +376,4 @@ std::string TokenTypeToString(const MainTokenTypeEnum & t)
 		case OTHER_TOKEN_TYPE : return "OTHER";
 		default: assert (false);  return "";
 	};
-};
-MainTokenTypeEnum StringToTokenType(const  std::string& t)
-{
-	if (t == "RLE")	return RLE;
-	if (t == "LLE")	return LLE;
-	if (t == "DC")	return NUM_TOKEN;
-	if (t == "ROMAN")	return ROMAN_NUM;
-	if (t == "DSC")	return NUM_CHAR;
-	if (t == "PUN")	return PUNCTUAT;
-	return OTHER_TOKEN_TYPE;
 };

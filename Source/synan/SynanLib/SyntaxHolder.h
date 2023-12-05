@@ -16,7 +16,6 @@ public:
 	CSyntaxHolder();
 	~CSyntaxHolder();
 
-	bool RunMapost(CLemmatizedText& mapostPlmLines);
 	void LoadSyntax(MorphLanguageEnum langua);
 	void ClearHolder();
 	bool GetSentencesFromSynAn(std::string str, bool bFile);

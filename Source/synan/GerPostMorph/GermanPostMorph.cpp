@@ -36,10 +36,8 @@ bool	CGermanPostMorph::Init(const CAgramtab* GerGramTab)
 	return true;
 };
 
-bool	CGermanPostMorph::ProcessData(const CLemmatizedText *piInTextItems)
+void CGermanPostMorph::ProcessData(CLemmatizedText& text)
 {
-	std::string ErrorMsg;
 	m_PersonGrammar.CreateTokenList();
-	m_ResultLemWords = m_PersonGrammar.FilterHomonymsByGrammar(*piInTextItems);
-	return !m_ResultLemWords.empty();
+	text = m_PersonGrammar.FilterHomonymsByGrammar(text);
 };

@@ -426,24 +426,6 @@ const std::string&	CGraphmatFile::GetLastError() const
 };
 
 
-MorphLanguageEnum CGraphmatFile::GetTokenLanguage (int LineNo) const
-{
-	if (HasDescr (LineNo, ORLE))
-		return morphRussian;
-	else
-		if (HasDescr (LineNo, OLLE))
-		{
-			if (m_Language == morphGerman)
-				return morphGerman;
-			else
-				return morphEnglish;
-				
-		}
-		else
-			return morphUnknown;
-};
-
-
 const CDictionary* CGraphmatFile :: GetOborDic() const
 {
 	assert(m_pDicts);

@@ -58,10 +58,10 @@ int main(int argc, char **argv)
 			std::cout << "  Cannot process " << f << "\n";
 			continue;
 		};
-		std::cout << "Found " << Holder.m_PlmLines.m_PlmItems.size() <<" items\n";
+		std::cout << "Found " << Holder.m_LemText.m_LemWords.size() <<" items\n";
 		std::string LemFile = MakeFName(f, "lem");
 		std::cout << "Save to " << LemFile  << "\n";
-		Holder.m_PlmLines.SaveToFile(LemFile);
+		Holder.m_LemText.SaveToFile(LemFile);
 	};
 	return 0;
 }

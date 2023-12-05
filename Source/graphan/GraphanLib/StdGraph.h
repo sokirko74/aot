@@ -14,4 +14,3 @@
 
 #include "dicts/StructDictLib/Ross.h"
 
-extern bool	strscmp(const char* s1, const char* s2, size_t l, MorphLanguageEnum langua);

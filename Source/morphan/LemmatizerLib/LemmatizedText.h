@@ -7,16 +7,17 @@
 
 #include "graphan/GraphanLib/GraphmatFile.h"
 #include "morph_dict/lemmatizer_base_lib/Lemmatizers.h"
-
+#include "LemWord.h"
 
 
 class CLemmatizedText
 {
 public:
-	StringVector			m_PlmItems;
-	CLemmatizer*			m_pLemmatizer;
+	std::vector<CLemWord>	m_LemWords;
+	CAgramtab* m_pGramTab;
+	CLemmatizer* m_pLemmatizer;
 
-	CLemmatizedText();
+	CLemmatizedText(CAgramtab* pGramTab=nullptr, CLemmatizer* pLemmatizer=nullptr);
 
 	bool SaveToFile(std::string filename) const;
 	void CreateFromTokemized(const CGraphmatFile* piGraphmatFile);

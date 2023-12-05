@@ -3,11 +3,14 @@ declare_cmake_min_version()
 project(LemmatizerLib)
 
 add_library(LemmatizerLib
-        PLMLineCollection.cpp
+        LemmatizedText.cpp
+        LemmatizedText.h
         GraphanAndMorphanHolder.cpp
         GraphanAndMorphanHolder.h
-        PLMLineCollection.h
-
+        LemWord.cpp
+        LemWord.h
+        Homonym.cpp
+        Homonym.h
 )
 
 target_link_libraries(LemmatizerLib

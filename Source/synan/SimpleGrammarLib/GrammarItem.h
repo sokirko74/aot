@@ -38,9 +38,9 @@ const char DisjunctionMark = '|';
 
 struct CGrammarItem 
 {
-	bool				m_bMeta;
-	MainTokenTypeEnum   m_TokenType;
-	std::string				m_ItemStrId;
+	bool		  m_bMeta;
+	Descriptors   m_TokenType;
+	std::string	  m_ItemStrId;
 	std::string				m_Token;
 	CMorphPattern		m_MorphPattern;
 	

@@ -57,19 +57,23 @@ enum Descriptors
 	 OKey2 =  46,
 	 OGerDivComp1 =  47, 
 	 OGerDivComp2 =  48,
-     NumberOfGraphematicalDescriptors = 49
+
+     NumberOfGraphematicalDescriptors = 49,
+	 OTHER_TOKEN_TYPE = 49
 	 
 };
+//const int OTHER_TOKEN_TYPE = NumberOfGraphematicalDescriptors;
 
 extern bool IsFirstMemberOfPairDesciptor(Descriptors d);
 extern bool IsSecondMemberOfPairDesciptor(Descriptors d);
 extern Descriptors GetSecondMemberByTheFirst(Descriptors d);
 extern Descriptors GetFirstMemberByTheSecond(Descriptors d);
-extern uint64_t parse_gra_descriptors(const char* s, std::string& unparsed);
-extern const char* GetDescriptorStr(int DescriptorNo);
+const std::string& GetDescriptorStr(Descriptors d);
 
 // max length of the token
 const size_t CriticalTokenLength = 255;
 
 // length of the token and its graphematical descriptors 
 const size_t CriticalGraphemLineLength = CriticalTokenLength*2;
+
+

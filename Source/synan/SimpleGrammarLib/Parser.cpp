@@ -5,7 +5,7 @@
 
 const size_t MaxAutomatSymbolInterpetation = 10;
 
-struct CInputHomonym : public CPlmLine
+struct CInputHomonym : public CHomonym
 {
 	//  all possible grammar symbols which can be interpetation of this Homonym in the grammar
 	//  based upon Homonyme informatin and previous context
@@ -14,24 +14,16 @@ struct CInputHomonym : public CPlmLine
 };
 
 
-struct CInputWord 
+struct CInputWord: public CLemWord 
 {
-	size_t					m_StartPlmLineNo;
 	std::vector<CInputHomonym>	m_Homonyms;
 	std::set<CInputSymbol>		m_AutomatSymbolInterpetationUnion;
 
-	CInputWord (size_t StartPlmLineNo)
+	CInputWord (const CAgramtab* p): CLemWord(p)
 	{
-		m_StartPlmLineNo = StartPlmLineNo;
 	};
 
-	void UpdateAfterDelete()
-	{
-		for (int i=0; i < m_Homonyms.size(); i++)
-			m_Homonyms[i].m_bHomonym = (i != 0);
-
-	};
-
+	
 	void DeleteHomonymByNotTerminalSymbol(const CInputSymbol& S)
 	{
 		for (int i=(int)m_Homonyms.size()-1; i >=0; i--)
@@ -45,20 +37,19 @@ struct CInputWord
 				m_Homonyms.erase(m_Homonyms.begin() + i);
 		};
 
-		UpdateAfterDelete();
 	};
 
 	void AddDescriptor(const std::string& Descriptor)
 	{
 		for (size_t j=0; j<m_Homonyms.size(); j++)
 		{
-			m_Homonyms[j].m_GraphDescr += " " + Descriptor;
+			m_Homonyms[j].m_OtherWordDescriptors += " " + Descriptor;
 		};
 	};
-	std::string GetWord() const
+
+	const std::string& GetWord() const
 	{
-		assert (!m_Homonyms.empty());
-		return m_Homonyms[0].GetWord();
+		return m_strWord;
 	};
 };
 
@@ -73,7 +64,7 @@ struct CInputSentence
 	};
 
 	size_t	ReadSentence (const CLemmatizedText&	PlmLines, size_t StartLineNo);
-	void	AddToResultPlmLinesCollection(std::vector<std::string>& Result) const;
+	void	AddToResultPlmLinesCollection(CLemmatizedText& Result) const;
 	size_t	GetOffsetInHomonyms(size_t  StartWordNo, size_t EndWordNo) const;
 
 };
@@ -103,117 +94,84 @@ private:
 };
 
 
-bool CheckGrammems(const CPlmLine& L, const CGrammarItem& I)
+bool CheckGrammems(const CLemWord& w, const CHomonym& h, const CGrammarItem& I)
 {
-	if (I.m_MorphPattern.m_SearchStatus != AnyStatus)
-	{
-		if ((I.m_MorphPattern.m_SearchStatus == FoundInDictionary) != L.IsFoundInMorphology())
-			return false;
-		
-	};
+	if (w.m_TokenType != ORLE && w.m_TokenType != OLLE) return false;
 
-	//  nor punctuation marks neither abbreviations can match a morphological pattern
-	if (L.m_Pos == UnknownPartOfSpeech)
+	if (I.m_MorphPattern.m_SearchStatus == NotFoundInDictionary) {
+		if (h.m_lPradigmID != -1) return false;
+	}
+
+	//  check pos
+	if ((h.m_iPoses & I.m_MorphPattern.m_Poses) != I.m_MorphPattern.m_Poses)
 		return false;
-	
-	if	(		((I.m_MorphPattern.m_Grammems & L.m_Grammems) != I.m_MorphPattern.m_Grammems) 
-			&&	!(		(I.m_MorphPattern.m_Grammems== _QM(gGenitiv))
-					&&	!L.IsFoundInMorphology()
-					&&	!L.GetUpperWord().empty()
-					&&	(L.GetUpperWord()[L.GetUpperWord().length() -1 ] == 'S')
-				)
+
+	if ((I.m_MorphPattern.m_Grammems & h.m_iGrammems) == I.m_MorphPattern.m_Grammems)
+		return true;
+
+	// German genetive ad hoc rule
+	if	(		(I.m_MorphPattern.m_Grammems == _QM(gGenitiv))
+			&&	h.m_lPradigmID == -1
+			&&	endswith(w.m_strUpperWord, "S")
 		)
-		return false;
+		return true;
 
-	return		(I.m_MorphPattern.m_Poses == 0)
-			||	(I.m_MorphPattern.m_Poses &  (1<<L.m_Pos)) > 0; 
+	return false; 
 
 };
 
-bool AreEqual(const CPlmLine& L, const CGrammarItem& I)
+bool AreEqual(const CLemWord& w, const CHomonym& h, const CGrammarItem& I)
 {
-	if (I.m_TokenType != L.m_TokenType)
+	if (I.m_TokenType != w.m_TokenType)
 		return false;
 
 	if (!I.m_MorphPattern.m_GrmAttribute.empty())
-		if (!CheckGrammems(L,I))
+		if (!CheckGrammems(w, h, I))
 			return false;
 
 
-	if (!I.m_Token.empty())
-		if (L.m_Lemma != "-1" && !L.m_Lemma.empty())
-		{
-			if (L.m_Lemma != I.m_Token)
-				return false;
-		}
-		else
-		{
-			if  (L.GetUpperWord() != I.m_Token)
-				return false;
-		};
+	if (!I.m_Token.empty()) {
+		if (h.GetLemma() != I.m_Token)
+			return false;
+	}
 
-
-
-	
 	if (I.m_pListFile != 0)
 	{
-		const StringSet& PossibleLemmas = I.m_pListFile->m_PossibleLemmas;
-		std::string debug = *(PossibleLemmas.begin());
-		if	(		( PossibleLemmas.find(L.m_Lemma) == PossibleLemmas.end() ) // if we cannot find lemma
-				&&	(		( L.m_Lemma == L.GetUpperWord()) // and if we cannot find the token itself
-						||	L.IsFoundInMorphology()
-						||	PossibleLemmas.find(L.GetUpperWord()) == PossibleLemmas.end() 
-					)
-			)
+		const StringSet& lemmas = I.m_pListFile->m_PossibleLemmas;
+		bool found = lemmas.find(h.GetLemma()) != lemmas.end();
+		if (!found && h.m_lPradigmID == -1) {
+			found = lemmas.find(w.m_strUpperWord) != lemmas.end();
+		}
+		if	(!found)
 		{
-				size_t hyphen = L.m_Lemma.rfind("-"); // and if we cannot find the token substd::string  after the last hyphen
-				if	(		(hyphen == std::string::npos)
-						||	( PossibleLemmas.find(L.m_Lemma.substr(hyphen+1)) == PossibleLemmas.end() )
-					)
-					return false;
+			size_t hyphen = h.GetLemma().rfind("-"); // and if we cannot find the token substd::string  after the last hyphen
+			found = (hyphen != std::string::npos) && (lemmas.find(h.GetLemma().substr(hyphen + 1)) != lemmas.end());
 		};
-	};
+		if (!found) {
+			return false;
+		}
+	}
 
 
 	return true;
 };
 
 
-size_t CInputSentence::ReadSentence ( const CLemmatizedText&	PlmLines, size_t StartLineNo)
+size_t CInputSentence::ReadSentence (const CLemmatizedText&	text, size_t StartLineNo)
 {
-	size_t EndLineNo = PlmLines.m_PlmItems.size();
-	assert (StartLineNo < EndLineNo);
 	m_Words.clear();
-
-	for (size_t i=StartLineNo; i<EndLineNo ; i++)
+	for (size_t i=StartLineNo; i < text.m_LemWords.size(); i++)
 	{
-		CInputHomonym Homonym;
-		if (!Homonym.LoadPlmLineFromString(PlmLines.m_PlmItems[i].c_str(), m_pGramTab))
-		{
-			throw CExpc ("Cannot parse "+ PlmLines.m_PlmItems[i]);
-		};
-		if (Homonym.m_TokenType == OTHER_TOKEN_TYPE) continue;
-
-	
-		if (!Homonym.m_bHomonym)
-		{
-			if (!m_Words.empty())
-				if (m_Words.back().m_Homonyms.back().m_bSent2)
-					return i;			
-			m_Words.push_back(CInputWord(i));
-		};
-
-		m_Words.back().m_Homonyms.push_back(Homonym);			
+		CInputWord new_word(text.m_pGramTab);
+		new_word.CreateFromLemWord(text.m_LemWords[i]);
+		m_Words.push_back(new_word);
+		if (text.m_LemWords[i].HasDes(OSentEnd)) {
+			return i;
+		}
 	};
-
-
-
-	return EndLineNo;
+	return text.m_LemWords.size();
 
 };
-
-
-
 
 size_t CInputSentence::GetOffsetInHomonyms(size_t  StartWordNo, size_t EndWordNo) const
 {
@@ -225,14 +183,12 @@ size_t CInputSentence::GetOffsetInHomonyms(size_t  StartWordNo, size_t EndWordNo
 	return StartWordNo+Result;
 };
 
-void CInputSentence::AddToResultPlmLinesCollection(std::vector<std::string>& result) const
+void CInputSentence::AddToResultPlmLinesCollection(CLemmatizedText& text) const
 {
-	for (auto& w: m_Words)
-		for (auto& h : w.m_Homonyms)
-		{
-			result.push_back(h.GetStr());
-		};
-
+	for (auto& w : m_Words) {
+		CLemWord word = w;
+		text.m_LemWords.push_back(word);
+	}
 };
 
 
@@ -260,18 +216,19 @@ void CInputSentenceGLR::BuildTerminalSymbolsByWord(const CWorkGrammar& G, CInput
 
 		if (I.m_Register != AnyRegister)
 		{
-				if (I.m_Register != W.m_Homonyms[0].m_Register)
-					continue;
+			if (I.m_Register != W.m_Register)
+				continue;
 		};
 				
 
-		for (auto& h : W.m_Homonyms)
-			if (AreEqual(h, I))
+		for (auto& h : W.m_Homonyms) {
+			if (AreEqual(W, h, I))
 			{
-				CInputSymbol N (i, h.GetGramCodes(), h.GetCommonGramCode());
+				CInputSymbol N(i, h.GetGramCodes(), h.m_CommonGramCode);
 				h.m_AutomatSymbolInterpetation.Add(N);
 				W.m_AutomatSymbolInterpetationUnion.insert(N);
 			};
+		}
 	}
 
 };
@@ -579,21 +536,21 @@ std::vector<CFoundEntity> CInputSentenceGLR::ProcessFull (const CWorkGrammar& G)
 };
 
 
-std::vector<std::string> CWorkGrammar::FilterHomonymsByGrammar(const CLemmatizedText& PlmLines) const
+CLemmatizedText CWorkGrammar::FilterHomonymsByGrammar(const CLemmatizedText& text) const
 {
 	assert(m_pGramTab != nullptr);
-	PlmLines.SaveToFile("input.lem");
-	size_t Count = PlmLines.m_PlmItems.size();
-	std::vector<std::string >  result;
+	text.SaveToFile("input.lem");
+	CLemmatizedText result(text.m_pGramTab, text.m_pLemmatizer);
 
 	CInputSentenceGLR Sentence(m_pGramTab);
 	
-	for (size_t i=0; i < Count ;)
+	for (size_t i=0; i < text.m_LemWords.size();)
 	{		
-		i = Sentence.ReadSentence(PlmLines, i);
+		i = Sentence.ReadSentence(text, i);
 		for (auto& w: Sentence.m_Words)
 			Sentence.BuildTerminalSymbolsByWord(*this, w);
 		Sentence.ProcessRestart(*this);
+		
 		Sentence.AddToResultPlmLinesCollection(result);
 	};
 	return result;

@@ -36,6 +36,7 @@ public:
 		
 	bool m_bRussianOdin;
 	
+	std::string m_OtherWordDescriptors;
 
 	// a special slot to mark all homonyms which should be deleted by 
 	// function CSynWord::DeleteMarkedHomonymsWithClauses

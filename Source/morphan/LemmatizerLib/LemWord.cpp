@@ -1,14 +1,14 @@
 #include "LemWord.h"
-#include "gra_descr.h"
+#include "common/gra_descr.h"
 #include "morph_dict/agramtab/RusGramTab.h"
 #include "morph_dict/agramtab/agramtab_.h"
+#include "morph_dict/lemmatizer_base_lib/Lemmatizers.h"
 
 
-CLemWord::CLemWord() 
+CLemWord::CLemWord(const CAgramtab* pGramTab): m_pGramTab(pGramTab)
 {
 	Reset();	
 };
-
 
 
 #define   StupidSymbol1 160
@@ -26,25 +26,113 @@ void CLemWord::AddDes(Descriptors g)
     m_GraDescrs |= ( _QM(g) );
 }
 
+size_t	CLemWord::GetHomonymsCount() const
+{
+	return m_MorphHomonyms.size();
+}
+
+const CHomonym* CLemWord::GetHomonym(int i) const
+{
+	return &m_MorphHomonyms[i];
+}
+
+CHomonym* CLemWord::GetHomonym(int i)
+{
+	return &m_MorphHomonyms[i];
+}
+
+void CLemWord::EraseHomonym(int iHom)
+{
+	m_MorphHomonyms.erase(m_MorphHomonyms.begin() + iHom);
+}
+
+CHomonym* CLemWord::AddNewHomonym()
+{
+	CHomonym hom(m_pGramTab);
+	m_MorphHomonyms.push_back(hom);
+	return &m_MorphHomonyms.back();
+
+}
+
+void CLemWord::InitLevelSpecific(const CGraLine& token, short oborot_no, CHomonym* pHom)
+{
+	m_bFirstUpperAlpha = (m_Register == UpUp) || (m_Register == UpLow);
+	m_bQuoteMark = HasDes(OPun) && m_strWord.find("\"") != std::string::npos;
+	pHom->InitAncodePattern();
+
+	if (oborot_no != -1)
+	{
+		pHom->m_OborotNo = oborot_no;
+		pHom->m_bInOb = true;
+		pHom->m_bOborot1 = HasDes(OEXPR1);
+		pHom->m_bOborot2 = HasDes(OEXPR2);
+	}
+	if ((m_strWord == "\"") || (m_strWord == "'"))
+		DelDes(OPun);
+
+	if (pHom->m_LemSign != '+')
+		m_bPredicted = true;
+
+}
+
+void CLemWord::DeleteAllHomonyms()
+{
+	m_MorphHomonyms.clear();
+}
+
+void CLemWord::SafeDeleteMarkedHomonyms()
+{
+	for (int i = (int)GetHomonymsCount() - 1; i >= 0; i--)
+	{
+		if (GetHomonymsCount() == 1) return;
+		if (GetHomonym(i)->m_bDelete)
+			EraseHomonym(i);
+	}
+}
+
+void CLemWord::CreateFromToken(const CGraLine& token) {
+	m_GraDescrs = token.GetDescriptors();
+	m_strWord = token.GetTokenUtf8();
+	m_strUpperWord = token.GetTokenUpperUtf8();
+	m_LettersCount = token.GetLettersCount();
+	m_GraphematicalUnitOffset = token.GetInputOffset();
+	ProcessGraphematicalDescriptors();
+}
+
+void CLemWord::CreateFromLemWord(const CLemWord& _X) {
+	*this = _X;
+}
+
+bool CLemWord::LemmatizeFormUtf8(const std::string& s, const CLemmatizer* pLemmatizer)
+{
+	std::vector<CFormInfo> Paradigms;
+	std::string word_s8 = convert_from_utf8(s.c_str(), pLemmatizer->GetLanguage());
+	if (!pLemmatizer->CreateParadigmCollection(false, word_s8, false, false, Paradigms)) return false;
+	if (Paradigms.empty()) return false;
+	DeleteAllHomonyms();
+	for (size_t i = 0; i < Paradigms.size(); i++)
+	{
+		CHomonym H(m_pGramTab);
+		H.SetHomonym(&Paradigms[i]);
+		m_MorphHomonyms.push_back(H);
+	}
+	return true;
+
+};
 
 bool CLemWord::HasDes(Descriptors g) const
 {
     return (m_GraDescrs & _QM(g)) == _QM(g);
 }
 
-// returns the end point of the graphematical descriptors
-void CLemWord::ProcessGraphematicalDescriptors(const std::string& s)
+
+
+void CLemWord::ProcessGraphematicalDescriptors()
 {
-
-    m_GraDescrs = parse_gra_descriptors(s.c_str(), m_UnparsedGraphemDescriptorsStr);
-
 	m_bSpace =			HasDes(OSpc) 
 					||	HasDes(OEOLN) 
 					||	((BYTE)m_strWord[0] == StupidSymbol1)
 					||	( ((BYTE)m_strWord[0] == '_') && (m_strWord.length() == 1));
-
-    
-
 	if (HasDes (OUpLw))
 		m_Register = UpLow;
 	else
@@ -72,42 +160,20 @@ void CLemWord::ProcessGraphematicalDescriptors(const std::string& s)
 
     m_bWord  = !bRomanNumber && (HasDes(ORLE) || HasDes(OLLE)); 
 
-	
-}
-
-void rtrim (char* s, size_t* len)
- {
-     // откусываю признаки конца строки, если они появились
-   while (*len > 0 && isspace((unsigned char)s[*len-1]))
-	s[--(*len)] = 0;
- }
-
-
-bool CLemWord::AddNextHomonym(const std::string& strPlmLine)
-{
-	auto columns = split_string(strPlmLine, '\t');
-	assert(columns.size() == 4);
-
-    assert ( GetHomonymsCount() > 0);
-
-	CHomonym* pHomonym = AddNewHomonym();
-
-	ProcessGraphematicalDescriptors(columns[2]);
-
-	if (!pHomonym->ProcessLemmaAndGrammems(columns[3])) return false;
-
-    {
-        const CHomonym* pFirstHom = GetHomonym(0);
-        pHomonym->m_bInOb = pFirstHom->m_bInOb;
-        pHomonym->m_bOborot1 = pFirstHom->m_bOborot1;
-        pHomonym->m_bOborot2 = pFirstHom->m_bOborot2;
-        pHomonym->m_OborotNo = pFirstHom->m_OborotNo;
-    }
-
-	InitLevelSpecific(pHomonym);
-
-	return true;
-
+	if (HasDes(ORLE))
+		m_TokenType = ORLE;
+	else if (HasDes(OLLE)) 
+		m_TokenType = OLLE;
+	else if (HasDes(ODigits))
+		m_TokenType = ODigits;
+	else if (HasDes(ONumChar))
+		m_TokenType = ONumChar;
+	else if (HasDes(OPun))
+		m_TokenType = OPun;
+	else if (HasDes(ORoman))
+		m_TokenType = ORoman;
+	else 
+		m_TokenType = (Descriptors)OTHER_TOKEN_TYPE;
 }
 
 
@@ -121,56 +187,6 @@ int ParseOborotNo(const std::string& Descriptors)
 };
 
 
-bool CLemWord::ProcessPlmLineForTheFirstHomonym(std::string sPlmLine, int& OborotNo)
-{
-    // откусываю признаки конца строки, если они появились
-	Trim(sPlmLine);
-	auto columns = split_string(sPlmLine, '\t');
-	assert(columns.size() == 3 || columns.size() == 4);
-    SetWordStr(columns[0]);
-
-	//  reading file position of an item from graline
-    if (sscanf(columns[1].c_str(), "%i %i", &m_GraphematicalUnitOffset, &m_TokenLengthInFile) != 2)
-        return false;
-
-    ProcessGraphematicalDescriptors(columns[2]);
-
-    if( m_bSpace )
-        return true;
-
-    CHomonym*  pHomonym  = AddNewHomonym();
-
-    if (HasDes(OEXPR1))
-        OborotNo = ParseOborotNo(m_UnparsedGraphemDescriptorsStr);
-
-    if (OborotNo != -1)
-    {
-        pHomonym->m_OborotNo =  OborotNo;
-        pHomonym->m_bInOb =  true;
-        pHomonym->m_bOborot1 = HasDes(OEXPR1);
-        pHomonym->m_bOborot2 = HasDes(OEXPR2);
-    }
-    if (HasDes(OEXPR2))
-        OborotNo = -1;
-
-	if (columns.size() == 3)
-        pHomonym->SetLemma(m_strWord);
-    else
-        if (!pHomonym->ProcessLemmaAndGrammems(columns[3]))
-            return false;
-
-    InitLevelSpecific(pHomonym);
-
-    if	(		(m_strWord == "\"")
-        ||	(m_strWord == "'")
-        )
-        DelDes(OPun);
-
-    if (pHomonym->m_LemSign != '+')
-        m_bPredicted = true;
-
-    return true;
-}
 
 
 
@@ -252,6 +268,8 @@ bool CLemWord::IsSecondOfGraPair(EGraPairType type) const
 
 void CLemWord::Reset()
 {
+	m_bFirstUpperAlpha = false;
+	m_bQuoteMark = false;
     m_GraDescrs = 0;
 	m_bSpace = false;
 	m_bWord = false; 
@@ -260,10 +278,10 @@ void CLemWord::Reset()
 	m_bComma = false;
 	m_bPredicted = false;
 	m_GraphematicalUnitOffset = -1;
-    m_TokenLengthInFile = 0;
 	m_bHasSpaceBefore = false;
 	m_bDeleted = false;
 	m_LettersCount = 0;
+	m_TokenType = OTHER_TOKEN_TYPE;
 }
 
 
@@ -457,19 +475,20 @@ int CLemWord::GetHomonymByPosesandGrammem(part_of_speech_mask_t Poses, BYTE gram
 }
 
 
-
-
-
 std::string CLemWord :: BuildGraphemDescr ()  const
 {
     std::string Result;
-    for (int l=0;l<63;l++)     // write descriptors 
+    for (int l=0; l<NumberOfGraphematicalDescriptors;l++)     // write descriptors 
         if ( HasDes(((Descriptors)l) )) 
 		{  
 			Result += " ";
-			Result +=  GetDescriptorStr(l);
+			Result +=  GetDescriptorStr((Descriptors)l);
 		};
-    Result += " " +m_UnparsedGraphemDescriptorsStr;
+	if (HasDes(OEXPR1) && !m_MorphHomonyms.empty()) {
+		Result += Format(" EXPR_NO%i", m_MorphHomonyms[0].m_OborotNo);
+	}
+
+	Result += " " + m_UnparsedGraphemDescriptorsStr;
     return Result;
 }
 
@@ -481,7 +500,7 @@ std::string CLemWord::GetDebugString(const CHomonym* pHomonym, bool bFirstHomony
 	if(!pHomonym) pHomonym = GetHomonym(0);
 	Result += m_strWord;
 	Result += " ";
-    Result += Format (" %i %i ", m_GraphematicalUnitOffset, m_TokenLengthInFile);
+    Result += Format (" %i %i ", m_GraphematicalUnitOffset, m_LettersCount);
     Result += BuildGraphemDescr();
 	if (pHomonym->m_LemSign != 0)
 	{
@@ -507,7 +526,7 @@ std::string CLemWord :: GetPlmStr (const CHomonym* pHomonym, bool bFirstHomonym)
 
 	Result += m_strWord;
 	Result += "\t";
-    Result += Format ("%i %i\t", m_GraphematicalUnitOffset, m_TokenLengthInFile);
+    Result += Format ("%i %i\t", m_GraphematicalUnitOffset, m_strWord.length());
     Result += BuildGraphemDescr();
 
 	if (pHomonym->m_LemSign != 0)

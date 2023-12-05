@@ -70,7 +70,7 @@ void CMAPost::Cifrdef()
 	CLineIter dollar = m_Words.end();
 	for (CLineIter it = m_Words.begin(); it != m_Words.end(); it++)
 	{
-		CPostLemWord& W = *it;
+		CLemWord& W = *it;
 		CLineIter next_it = it;
 		CLineIter prev_it = it;
 		next_it++;
@@ -212,7 +212,7 @@ void CMAPost::Cifrdef()
 				spec_it = prev_it;
 			if (it != spec_it)
 			{
-				CPostLemWord& W2 = *spec_it;
+				CLemWord& W2 = *spec_it;
                 LOGV << "apply Cifrdef to  " <<  W2.m_strWord;
 				std::vector<CFormInfo> Paradigms;
 				W2.DeleteOborotMarks();

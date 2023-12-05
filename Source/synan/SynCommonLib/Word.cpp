@@ -52,7 +52,7 @@ bool CSynHomonym::CompareWithPredefinedWords(const CLemmaList& ll) const
 //================= CLASS uint16_t ==================
 //===============================================
 
-CSynWord::CSynWord(CSentence* pSent) 
+CSynWord::CSynWord(CSentence* pSent) : CLemWord(pSent->m_pSyntaxOptions->GetGramTab())
 {
 	m_pSent = pSent;
 	Reset();	
@@ -352,16 +352,16 @@ void CSynWord::BuildTerminalSymbolsByWord()
 };
 
 
-void CSynWord::InitLevelSpecific(CHomonym* pHom)
+void CSynWord::InitLevelSpecific(CSynHomonym& h)
 {
 
-    m_pSent->InitHomonymLanguageSpecific(*(CSynHomonym*)pHom,this);
+    m_pSent->InitHomonymLanguageSpecific(h, this);
 
 	if	(		( m_bWord && (GetOpt()->m_Language == morphRussian))
 			||	( HasDes(OLLE) && (GetOpt()->m_Language != morphRussian))
 		)
 	{
-		m_pSent->InitHomonymMorphInfo(*(CSynHomonym*)pHom);
+		m_pSent->InitHomonymMorphInfo(h);
 	}
     
 

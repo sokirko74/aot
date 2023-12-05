@@ -1,17 +1,15 @@
-
-#ifndef MorphologyHolder_H
-#define MorphologyHolder_H
+#pragma once
 
 #include "morph_dict/common/utilit.h"
-#include "PLMLineCollection.h"
+#include "LemmatizedText.h"
 #include "graphan/GraphanLib/GraphmatFile.h"
 #include "morph_dict/lemmatizer_base_lib/MorphanHolder.h"
 
 class CGraphanAndMorphanHolder: public CMorphanHolder
 {
 public:
-	CLemmatizedText				m_PlmLines;
-	CGraphmatFile					m_Graphan;
+	CGraphmatFile	m_Graphan;
+	CLemmatizedText	m_LemText;
 
 	CGraphanAndMorphanHolder();
 	~CGraphanAndMorphanHolder();
@@ -22,4 +20,3 @@ public:
 
 extern bool ProcessHyphenWords(const CLemmatizer* lemmatizer, CGraphmatFile* piGraphmatFile);
 
-#endif

@@ -59,43 +59,27 @@ void CSyntaxHolder::LoadSyntax(MorphLanguageEnum langua)
 };
 
 
-bool CSyntaxHolder::RunMapost(CLemmatizedText& mapostPlmLines)
-{
-	if (!m_pPostMorph->ProcessData(&m_PlmLines))
-	{
-		LOGE <<  "  Cannot process Mapost";
-		return false;
-	};
-	mapostPlmLines.m_PlmItems.clear();
-	mapostPlmLines.m_pLemmatizer = m_PlmLines.m_pLemmatizer;
-	m_pPostMorph->SwapResults(mapostPlmLines.m_PlmItems);
-	return true;
-}
-
 bool CSyntaxHolder::GetSentencesFromSynAn(std::string utf8str, bool bFile)
 {
 	try {
 		m_Synan.ClearSentences();
-		m_PlmLines.m_PlmItems.clear();
+		m_LemText.m_LemWords.clear();
 		int CountOfWords;
 
 		if (!GetMorphology(utf8str, bFile, CountOfWords))
 			return false;;
 
         #ifdef _DEBUG
-		    m_PlmLines.SaveToFile("before.lem");
+			m_LemText.SaveToFile("before.lem");
         #endif
 
-		CLemmatizedText MapostPlmLines;
-		if (!RunMapost(MapostPlmLines)) {
-			return false;
-		}
+		m_pPostMorph->ProcessData(m_LemText);
 
 #ifdef _DEBUG
-		MapostPlmLines.SaveToFile("after.lem");
+		m_LemText.SaveToFile("after.lem");
 #endif
 		
-		if (!m_Synan.ProcessData(&MapostPlmLines))
+		if (!m_Synan.ProcessData(&m_LemText))
 		{
 			fprintf (stderr, "  Synan has crushed!\n");
 			return false;

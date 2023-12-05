@@ -12,7 +12,7 @@ bool ProcessHyphenWords(const CLemmatizer* lemmatizer, CGraphmatFile* piGraphmat
         for (int LineNo = 1; LineNo+1 < LinesCount; LineNo++)
         {
             if	(		piGraphmatFile->HasDescr(LineNo, OHyp)
-                           &&	(lemmatizer->GetLanguage() == piGraphmatFile->GetTokenLanguage(LineNo-1)
+                           &&	(lemmatizer->GetLanguage() == piGraphmatFile->GetUnits()[LineNo - 1].GetTokenLanguage()
 
                                   // and if no single space was deleted between the first word and the hyphen
                                   &&	!piGraphmatFile->GetUnits()[LineNo-1].HasSingleSpaceAfter()
@@ -34,7 +34,7 @@ bool ProcessHyphenWords(const CLemmatizer* lemmatizer, CGraphmatFile* piGraphmat
                 // with an oborot which is marked as "fixed" in the dictionary
                 if (piGraphmatFile->HasDescr(NextWord, OFixedOborot)) continue;
 
-                if (lemmatizer->GetLanguage() != piGraphmatFile->GetTokenLanguage(NextWord)) continue;
+                if (lemmatizer->GetLanguage() != piGraphmatFile->GetUnits()[NextWord].GetTokenLanguage()) continue;
                 std::string HyphenWord = piGraphmatFile->GetToken(LineNo-1)+"-"+piGraphmatFile->GetToken(NextWord);
 
                 if (lemmatizer->IsInDictionary(HyphenWord, !piGraphmatFile->HasDescr(LineNo-1,OLw)))
@@ -80,7 +80,8 @@ void CGraphanAndMorphanHolder::LoadGraphanAndLemmatizer(MorphLanguageEnum langua
 		throw CExpc("Cannot load graphan");
 	}
 	LoadMorphology(langua);
-    m_PlmLines.m_pLemmatizer = m_pLemmatizer;
+	m_LemText.m_pLemmatizer = m_pLemmatizer;
+	m_LemText.m_pGramTab = m_pGramTab;
 };
 
 
@@ -104,7 +105,7 @@ bool CGraphanAndMorphanHolder::GetMorphology(std::string str, bool bFile, int& C
 			t2 = clock();
 			size_t TokensCount = m_Graphan.GetTokensCount();
 			for (int i = 0; i <TokensCount; i++)
-				if (m_Graphan.GetTokenLanguage(i) == m_CurrentLanguage )
+				if (m_Graphan.GetUnits()[i].GetTokenLanguage() == m_CurrentLanguage )
 						CountOfWords++;
 			PLOGD << "CountOfWords: " << CountOfWords;
 			double speed =  ((double)CountOfWords)/((t2-t1)/((double)CLOCKS_PER_SEC));
@@ -118,7 +119,7 @@ bool CGraphanAndMorphanHolder::GetMorphology(std::string str, bool bFile, int& C
 
 		ProcessHyphenWords(m_pLemmatizer, &m_Graphan);
 
-		m_PlmLines.CreateFromTokemized(&m_Graphan);
+		m_LemText.CreateFromTokemized(&m_Graphan);
 
 		IF_PLOG(plog::debug)
 		{

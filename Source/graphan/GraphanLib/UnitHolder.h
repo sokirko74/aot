@@ -44,7 +44,6 @@ public:
 	size_t	BSoft (size_t i) const;
 
 	// simple predicates	
-	bool	StrSuperCompare (int UnitNo, const char* s) const; 
 	bool	EmptyLineBeforeGraph (size_t i, size_t HB) const;
 	bool	IsQuestionOrExclamationMarks (size_t i) const; 
 	bool	IsSentenceEndMark (size_t  i) const;

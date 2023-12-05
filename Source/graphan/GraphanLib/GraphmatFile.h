@@ -133,8 +133,6 @@ public:
 
     const std::string &GetLastError() const;
 
-    MorphLanguageEnum GetTokenLanguage(int LineNo) const;
-
     const CDictionary *GetOborDic() const;
 
     void WriteGraphMat(std::string FName) const;

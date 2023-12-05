@@ -15,7 +15,7 @@
 
 #pragma warning (disable : 4786)
 #include "morph_dict/lemmatizer_base_lib/Lemmatizers.h"
-#include "morphan/LemmatizerLib/PLMLineCollection.h"
+#include "morphan/LemmatizerLib/LemmatizedText.h"
 
 #include "morph_dict/agramtab/agramtab_.h"
 #include "dicts/StructDictLib/Ross.h"

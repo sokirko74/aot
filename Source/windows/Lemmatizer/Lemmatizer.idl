@@ -126,14 +126,4 @@ library LEMMATIZERLib
 	};
 
 
-	[
-		uuid(34E94E25-6C26-11D3-9D4A-00105A68BAF2),
-		helpstring("PLMLineCollection Class"),
-		licensed
-	]
-	coclass PLMLineCollection
-	{
-		[default] interface IPLMLineCollection;
-	};
-
 };

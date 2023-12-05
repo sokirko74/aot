@@ -23,8 +23,21 @@ BYTE CGraLine::GetTokenLength() const {
     return (BYTE)m_Token.length();
 };
 
+BYTE CGraLine::GetLettersCount() const {
+    //todo: change when m_Token would be in different encoding
+    return (BYTE)m_Token.length();
+};
+
 const std::string& CGraLine::GetToken() const { 
     return m_Token;
+};
+
+std::string CGraLine::GetTokenUtf8() const {
+    return convert_to_utf8(m_Token, m_Language);
+};
+
+std::string CGraLine::GetTokenUpperUtf8() const {
+    return convert_to_utf8(m_TokenUpper, m_Language);
 };
 
 void CGraLine::SetStatus(short status) {
@@ -336,6 +349,11 @@ void CGraLine::SetOborot(short oborotNo, bool bFixed) {
     }
 }
 
+short  CGraLine::GetOborotNo() const {
+    return m_OborotNo;
+}
+
+
 std::string CGraLine::GetGraphematicalLine() const
 {
     std::string result;
@@ -366,11 +384,11 @@ std::string CGraLine::GetGraphematicalLine() const
     result.append(Format("\t%zu %zu\t", GetInputOffset(), GetTokenLength()));
 
     // write descriptors 
-    for (int l = 0; l < 63; l++) {
+    for (int l = 0; l < NumberOfGraphematicalDescriptors; l++) {
         if ((GetDescriptors() & _QM(l)) > 0)
         {
             result.append(" ");
-            result.append(GetDescriptorStr(l));
+            result.append(GetDescriptorStr((Descriptors)l));
         };
     }
 
@@ -574,5 +592,22 @@ void CGraLine::InitNonContextDescriptors(bool b_force_to_rus)
 
     if (GetDescriptors() == 0) SetDes(OUnk);
 }
+
+MorphLanguageEnum CGraLine::GetTokenLanguage() const
+{
+    if (HasDes(ORLE))
+        return morphRussian;
+    else
+        if (HasDes(OLLE))
+        {
+            if (m_Language == morphGerman)
+                return morphGerman;
+            else
+                return morphEnglish;
+
+        }
+        else
+            return morphUnknown;
+};
 
 

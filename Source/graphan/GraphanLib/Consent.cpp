@@ -41,12 +41,6 @@ bool  CConSent::IsSoft()   const
 };
 
 
-bool  CConSent::IsFirstWord(const std::string& s)	 const
-{
-	return m_GraFile->StrSuperCompare(m_HardGraphStartNo, s.c_str());
-};
-
-
 
 
 //==  Условие,  что начало МЕ оформлено стандартным способом 
@@ -56,20 +50,20 @@ bool  CConSent::IsFirstWord(const std::string& s)	 const
 //  Подраздел X-A.
 inline bool CConSent::SetUsualLawDocumentDivision()
 {
-
-	if (IsFirstWord(_R("глава")))
+	const auto& t = m_GraFile->GetUnits()[m_HardGraphStartNo];
+	if (t.IsUpperString(_R("ГЛАВА")))
 		m_UsualLawDocumentDivision = Chapter;
 	else
-		if (IsFirstWord(_R("статья")))
+		if (t.IsUpperString(_R("СТАТЬЯ")))
 			m_UsualLawDocumentDivision = Article;
 		else
-			if (IsFirstWord(_R("раздел")))
+			if (t.IsUpperString(_R("РАЗДЕЛ")))
 				m_UsualLawDocumentDivision = Section;
 			else
-				if (IsFirstWord(_R("подраздел")))
+				if (t.IsUpperString(_R("ПОДРАЗДЕЛ")))
 					m_UsualLawDocumentDivision = SubSection;
 				else
-					if (IsFirstWord(_R("часть")))
+					if (t.IsUpperString(_R("ЧАСТЬ")))
 						m_UsualLawDocumentDivision = Part;
 					else
 						m_UsualLawDocumentDivision = None;

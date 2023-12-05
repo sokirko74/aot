@@ -9,10 +9,10 @@
 #include "morph_dict/common/util_classes.h"
 #include "../../common/PlmLine.h"
 #include "PostMorphInterface.h"
-#include "PostLemWord.h"
+#include "morphan/LemmatizerLib/LemWord.h"
 
 
-#include "morphan/LemmatizerLib/PLMLineCollection.h"
+#include "morphan/LemmatizerLib/LemmatizedText.h"
 #include "morph_dict/lemmatizer_base_lib/Lemmatizers.h"
 #include "morph_dict/agramtab/RusGramTab.h"
 #include "list"
@@ -49,7 +49,7 @@ struct CLemmaAndCodes {
 
 
 
-typedef std::list<CPostLemWord> LineCollection ;
+typedef std::list<CLemWord> LineCollection ;
 
 typedef LineCollection::iterator CLineIter;
 typedef LineCollection::const_iterator CConstLineIter;
@@ -62,7 +62,7 @@ class CMAPost  : public CPostMorphInteface
 	//грамматический код ДУРНОВО (неизменяеммое существительное всех родов)
 	std::string          m_DURNOVOGramCode;
     std::set<std::string> m_AbbrIndeclGramCodes;
-	std::list<CPostLemWord>	m_Words;
+	std::list<CLemWord>	m_Words;
     
 	bool is_russian_numeral( std::string& word) const;
 
@@ -72,9 +72,8 @@ public:
 public:
 	
     
-    bool    LoadWords(const CLemmatizedText *piInTextItems);
-	bool	ProcessData(const CLemmatizedText *piInTextItems);
-	bool	Init(const CLemmatizer* RusLemmatizer, const CAgramtab* RusGramTab);
+	void Init(const CLemmatizer* RusLemmatizer, const CAgramtab* RusGramTab);
+	void ProcessData(CLemmatizedText& text) override;
 	CLineIter Remove(CLineIter it, bool bRemoveSpaceAfterDeletedWord);
     CLineIter PassSpaces(CLineIter it);
     CLineIter BackSpaces(CLineIter it);
@@ -103,7 +102,7 @@ protected:
 	void ParticipleAndVerbInOneForm();
 	void PronounP_Pronoun_Homonymy();
 	void FixedCollocations();
-	bool ReadCollocs();
+	void ReadCollocs();
 	void CorrectOborots();
 	void SemiAdjectives();
 	void SemiNouns();
@@ -136,7 +135,7 @@ protected:
 	void Rule_ChangePatronymicLemmas();
 	void Rule_Interjections();
     bool FilterPostMorphWords();
-    bool FilterOnePostLemWord(CPostLemWord& W, uint16_t tagid, uint16_t tagid2) const;
+    bool FilterOnePostLemWord(CLemWord& W, uint16_t tagid, uint16_t tagid2) const;
     void Rule_TwoPredicates();
     void SolveAmbiguityUsingRuleForTwoPredicates(CLineIter start, CLineIter end);
     bool SetFioFormat (const CFIOFormat* Format, CLineIter it); 

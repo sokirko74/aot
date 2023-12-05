@@ -10,7 +10,6 @@
 #include "lemmatizer_resource.h"
 #include <initguid.h>
 #include "Lemmatizer_i.h"
-#include "ComPlmLineCollection.h"
 
 #include "Lemmatizer_i.c"
 
@@ -23,7 +22,6 @@ OBJECT_ENTRY(CLSID_ParadigmCollection, CCOMParadigmCollection)
 OBJECT_ENTRY(CLSID_LemmatizerRussian, CCOMLemmatizerRussian)
 OBJECT_ENTRY(CLSID_LemmatizerEnglish, CCOMLemmatizerEnglish)
 OBJECT_ENTRY(CLSID_LemmatizerGerman, CCOMLemmatizerGerman)
-OBJECT_ENTRY(CLSID_PLMLineCollection, CCOMPLMLineCollection)
 END_OBJECT_MAP()
 
 /////////////////////////////////////////////////////////////////////////////

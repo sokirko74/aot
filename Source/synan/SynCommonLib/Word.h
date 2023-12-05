@@ -8,7 +8,7 @@
 #include "Word.h"
 #include "SynPlmLine.h"
 #include "synan/SimpleGrammarLib/InputSymbol.h"
-#include "common/LemWord.h"
+#include "morphan/LemmatizerLib/LemWord.h"
 #pragma warning(disable:4786) 
 
 
@@ -156,7 +156,7 @@ public:
 	void	BuildTerminalSymbolsByWord();
 	bool	IsEqualToGrammarItem(const CSynHomonym& L, const CGrammarItem& I);
 	void	UpdateConjInfo();
-    void    InitLevelSpecific(CHomonym* pHom);
+    void    InitLevelSpecific(CSynHomonym& h);
 };
 
 typedef std::vector<CSynWord> CWordVector;

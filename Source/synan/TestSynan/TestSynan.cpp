@@ -252,12 +252,12 @@ int main(int argc, const char** argv) {
             cases.dump_rapidjson_pretty(p.second, 4);
         }
     }
-    catch (CExpc e) {
-        std::cerr << e.what() << "\n";
+    catch (std::exception& e) {
+        PLOGE << e.what();
         return 1;
     }
     catch (...) {
-        std::cerr << "an exception occurred!\n";
+        PLOGE << "an exception occurred!";
         return 1;
     };
 

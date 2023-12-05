@@ -15,8 +15,8 @@ public:
 	CGermanPostMorph();
 	~CGermanPostMorph();
 
-	bool	ProcessData(const CLemmatizedText *piInTextItems);
-	bool	Init(const CAgramtab* GerGramTab);
+	void ProcessData(CLemmatizedText& text) override;
+	bool Init(const CAgramtab* GerGramTab);
 	
 };
 

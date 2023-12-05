@@ -1,16 +1,20 @@
 #pragma once 
 
 #include "Homonym.h"
-#include "PlmLine.h"
-#include "gra_descr.h"
+#include "graphan/GraphanLib/graline.h"
+
+class CLemmatizer;
 
 class CLemWord  
 {
-	// graphematical descriptors in one std::string (without some binary flags that could be restored by CLemWord::BuildGraphemDescr() )
-	
 
+	// graphematical descriptors in one std::string (without some binary flags that could be restored by CLemWord::BuildGraphemDescr() )
     uint64_t   m_GraDescrs;
-    void		ProcessGraphematicalDescriptors(const std::string& s);
+	std::vector<CHomonym> m_MorphHomonyms;
+	const CAgramtab* m_pGramTab;
+	
+	void		ProcessGraphematicalDescriptors();
+
 public:
 
 	// ======= Graphematics ======================	
@@ -43,8 +47,6 @@ public:
 	//  offset in the graphematcil buffer (= in the input file for text files)
 	int	 m_GraphematicalUnitOffset;
 
-    int m_TokenLengthInFile;
-
 	// true, if this word has a space before ot it is at the beginning of the sentence.
 	bool	m_bHasSpaceBefore;
 
@@ -54,12 +56,15 @@ public:
 	// is morphologically predicted
 	bool m_bPredicted;
 
+	bool	m_bFirstUpperAlpha;
+	bool    m_bQuoteMark;
 
-	CLemWord(); 
-	
+	Descriptors   m_TokenType;
+
+	CLemWord(const CAgramtab* pGramTab);
+	void CreateFromToken(const CGraLine& token);
+	void CreateFromLemWord(const CLemWord& _X);
 	void DeleteOborotMarks();
-	bool AddNextHomonym(const std::string& strPlmLine);
-	bool ProcessPlmLineForTheFirstHomonym(std::string strPlmLine,  int& OborotNo);
 	bool HasDes(Descriptors g) const;
     void DelDes(Descriptors g);
     void AddDes(Descriptors g);
@@ -84,14 +89,18 @@ public:
 	
 
 
-    virtual size_t	GetHomonymsCount() const	= 0; 
-	virtual const CHomonym* GetHomonym(int i) const	 = 0;
-	virtual CHomonym* GetHomonym(int i) = 0;
-	virtual void EraseHomonym(int iHom) = 0;;
-    virtual CHomonym* AddNewHomonym() = 0;;
+    virtual size_t	GetHomonymsCount() const; 
+	virtual const CHomonym* GetHomonym(int i) const;
+	virtual CHomonym* GetHomonym(int i);
+	virtual void EraseHomonym(int iHom);
+    virtual CHomonym* AddNewHomonym();
+	virtual void InitLevelSpecific(const CGraLine& token, short oborot_no, CHomonym* );
 
 	void DeleteMarkedHomonymsBeforeClauses();
 	void SetHomonymsDel(bool Value);
+	void DeleteAllHomonyms();
+	void SafeDeleteMarkedHomonyms();
+	bool LemmatizeFormUtf8(const std::string& s, const CLemmatizer* pLemmatizer);
 
 	bool IsFirstOfGraPair(EGraPairType type) const;
 	bool IsFirstOfGraPair() const;
@@ -105,7 +114,6 @@ public:
 	bool	IsInOborot() const;
 	bool	CanBeSynNoun() const;
 	void	KillHomonymOfPartOfSpeech(int iPartOfSpeech);
-    virtual void InitLevelSpecific(CHomonym* ) {};
     std::string  GetPlmStr (const CHomonym* pHomonym, bool bFirstHomonym)  const;
     std::string  GetDebugString(const CHomonym* pHomonym, bool bFirstHomonym)  const;
     std::string BuildGraphemDescr ()  const;

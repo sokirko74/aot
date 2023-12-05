@@ -7,22 +7,6 @@
 #include  "../../common/gra_descr.h"
 
 
-/* сравнивает строки с помощью предиката IsSuperEqualChar */
-// возращает true, если строки одинаковы
-bool strscmp(const char* s1, const char* s2, size_t l, MorphLanguageEnum langua)
-{
-	for (;
-		((l > 0)
-			&& IsSuperEqualChar((BYTE)*s1, (BYTE)*s2, langua)
-			&& *s1
-			&& *s2
-			);
-			s1++, s2++, l--
-		);
-	//если обе строки закончились
-	return (!*s1 && !*s2);
-}
-
 
 //=======================================================
 //==========            CUnitHolder         =============
@@ -31,8 +15,6 @@ CUnitHolder::CUnitHolder()
 {
 	m_Language  = morphRussian;
 };
-
-
 
 void CUnitHolder::SetState (size_t LB, size_t HB, uint16_t state) 
 {
@@ -186,12 +168,6 @@ bool CUnitHolder::HasDescr(size_t i, Descriptors descr)  const {
 }
 
 
-bool CUnitHolder::StrSuperCompare (int UnitNo, const char* s) const 
-{
-	
-	return		(s[m_Tokens[UnitNo].GetTokenLength()] == 0) 
-			&&	!strscmp(m_Tokens[UnitNo].GetToken().c_str(), s, m_Tokens[UnitNo].GetTokenLength(), m_Language);
-};
 
 
 
@@ -288,7 +264,7 @@ const std::vector<CGraLine>& CUnitHolder::GetUnits() const
 };
 
 std::string CUnitHolder::GetTokenUtf8(size_t line_no) const {
-	return convert_to_utf8(m_Tokens[line_no].GetToken(), m_Language);
+	return m_Tokens[line_no].GetTokenUtf8();
 }
 
 void	CUnitHolder::ClearPairDescriptors(size_t start_token_no, size_t end_token_no)

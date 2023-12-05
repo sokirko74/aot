@@ -117,54 +117,34 @@ bool CSentencesCollection::ProcessData(const CLemmatizedText *piPlmLine) {
 }
 
 
-bool CSentencesCollection::ReadAndProcessSentences(const CLemmatizedText *piPlmLine) {
-    const size_t LinesCount = piPlmLine->m_PlmItems.size();
-
+bool CSentencesCollection::ReadAndProcessSentences(const CLemmatizedText* text) {
     if (!m_pSyntaxOptions->IsValid())
         return false;
 
-
     if (m_bEnableProgressBar)
-        printf("Starting Syntax\n");
+        LOGD << "Starting Syntax";
 
     time_t t1;
     time(&t1);
 
-    for (size_t LineNo = 0; LineNo < LinesCount;) {
-        if (m_bEnableProgressBar)
-            printf("%zu of %zu       \r", LineNo, LinesCount);
-
+    for (size_t LineNo = 0; LineNo < text->m_LemWords.size();) {
         CSentence *S = m_pSyntaxOptions->NewSentence();
         if (!S) {
-            m_pSyntaxOptions->OutputErrorString("Cannot allocate space for the new sentence!");
-            return false;
+            throw CExpc("Cannot allocate space for the new sentence!");
         };
-        try {
 
-            S->m_pSyntaxOptions = m_pSyntaxOptions;
+        S->m_pSyntaxOptions = m_pSyntaxOptions;
+        bool bResult = S->GetNextSentence(text, LineNo);
 
-            bool bResult = S->ReadNextFromPlmLines(piPlmLine, LineNo);
+        if (m_bLogProcessedSentence) {
+            LOGD << S->GetSentenceBeginStr();
+        };
 
-            if (m_bLogProcessedSentence) {
-                FILE *fp = fopen("last_read_sentence.log", "w");
-                fprintf(fp, "%s\n", S->GetSentenceBeginStr().c_str());
-                fclose(fp);
-            };
-
-            if (!bResult) {
-                //  a parse error occurs
-                delete S;
-                return false;
-            };
-
-        }
-        catch (...) {
-
-            m_pSyntaxOptions->OutputErrorString("Cannot read a sentence from Mapost");
+        if (!bResult) {
+            //  a parse error occurs
             delete S;
             return false;
         };
-
 
         if (S->m_Words.empty()) {
             // no not-empty sentence can be found, we are at the end of the text
@@ -210,13 +190,14 @@ bool CSentencesCollection::ReadAndProcessSentences(const CLemmatizedText *piPlmL
     if (m_bEnableProgressBar) {
         time_t t2;
         time(&t2);
-        std::cout << "Finish             \n";
+        LOGD << "Finish             ";
         int seconds = t2 - t1;
-        std::cout << "Time : " << seconds << "\n";
-        std::cout << "Count of tokens : " << LinesCount << "\n";
+        LOGD << "Time : " << seconds;
+        LOGD << "Count of tokens : " << text->m_LemWords.size();
         if (seconds > 0)
-            std::cout << "The speed is " << LinesCount / seconds << " tokens pro second\n";
+            LOGD << "The speed is " << text->m_LemWords.size() / seconds << " tokens pro second";
     };
+
     return true;
 }
 

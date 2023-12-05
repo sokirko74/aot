@@ -34,7 +34,7 @@ struct CFIOFormat
 };
 
 
-static bool IsPartFio(const CMAPost& C, const CFIOItem& I, const CPostLemWord& Word, const CHomonym* pH)
+static bool IsPartFio(const CMAPost& C, const CFIOItem& I, const CLemWord& Word, const CHomonym* pH)
 {
 	if (Word.HasDes(OFAM1) || Word.HasDes(OFAM2))    return false;
 	switch (I.m_fiType)
@@ -95,7 +95,7 @@ bool CMAPost::SetFioFormat(const CFIOFormat* Format, CLineIter it)
 	size_t variants_count = 1;
 	for (auto& fio_item: Format->m_FioItems)
 	{
-		CPostLemWord& W = *it;
+		CLemWord& W = *it;
 		HomonymVector homs;
 		for (int HomNo = 0; HomNo < W.GetHomonymsCount(); HomNo++)
 		{
@@ -162,7 +162,7 @@ bool CMAPost::SetFioFormat(const CFIOFormat* Format, CLineIter it)
 	
 	for (size_t i = 0; i < FioWords.size(); i++)
 	{
-		CPostLemWord& W = *FioWords[i];
+		CLemWord& W = *FioWords[i];
 		CHomonym* pH = Hypots[i][best_var[i]];
 		W.SetHomonymsDel(true);
 		pH->m_bDelete = false;

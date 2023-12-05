@@ -19,14 +19,14 @@ II  99 2  LLE AA SENT_END ROMAN FAM2  - II * но, С мр,им,ед, С мр,р
 .  116 1  PUN CS? 
 Д  119 1  RLE AA  - Д * но, С ср,жр,мр,пр,тв,вн,дт,рд,им,ед,мн,
 .  120 1  PUN CS? SENT_END FAM2 
-А  123 1  RLE AA EXPR1 EXPR2 EXPR_NO3 + А  МЕЖД 
-  А  123 1  RLE AA EXPR1 EXPR2 EXPR_NO3 + А  СОЮЗ 
+А  123 1  RLE AA EXPR1 EXPR2 EXPR_NO3  + А  МЕЖД 
+  А  123 1  RLE AA EXPR1 EXPR2 EXPR_NO3  + А  СОЮЗ 
 !  124 1  PUN CS? SENT_END 
-а  127 1  RLE aa EXPR1 EXPR2 EXPR_NO3 + А  СОЮЗ 
+а  127 1  RLE aa EXPR1 EXPR2 EXPR_NO3  + А  СОЮЗ 
 Иван  129 4  RLE Aa SENT_END  + ИВАН * од, С имя,мр,им,ед,
 система  135 7  RLE aa  + СИСТЕМА * но, С жр,им,ед,
-А  143 1  RLE AA SENT_END EXPR1 EXPR2 EXPR_NO3 + А  ЧАСТ 
-Т  146 1  RLE AA BUL INDENT EXPR1 ABB1 EXPR_NO484 - Т * но, С ср,жр,мр,пр,тв,вн,дт,рд,им,ед,мн,
+А  143 1  RLE AA SENT_END EXPR1 EXPR2 EXPR_NO3  + А  ЧАСТ 
+Т  146 1  RLE AA BUL INDENT EXPR1 ABB1 EXPR_NO484  - Т * но, С ср,жр,мр,пр,тв,вн,дт,рд,им,ед,мн,
 .  147 1  PUN 
 Е  148 1  RLE AA  + Е * дфст,но, С ср,им,ед, С ср,рд,ед, С ср,дт,ед, С ср,вн,ед, С ср,тв,ед, С ср,пр,ед,
 .  149 1  PUN EXPR2 

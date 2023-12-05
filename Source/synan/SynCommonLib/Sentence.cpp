@@ -350,34 +350,21 @@ void CSentence::AddSynWord(CSynWord &Word) {
     m_Words.push_back(Word);
 }
 
-bool ReadSentence(CSentence &S, const CLemmatizedText *piPLMLinePtr, size_t &LineNo) {
+bool ReadSentence(CSentence &S, const CLemmatizedText* text, size_t &LineNo) {
     S.Reset();
 
-    int OborotNo = -1;
-
-    for (; LineNo < piPLMLinePtr->m_PlmItems.size(); LineNo++) {
-        const char* strPlmLine = piPLMLinePtr->m_PlmItems[LineNo].c_str();
-        if (!CheckIfHomonymPlmLine(strPlmLine)) {
-            // if the previous  word was  the last in the sentence, then exit
-            if (!S.m_Words.empty() && S.m_Words.back().HasDes(OSentEnd))
-                break;
-
-            CSynWord Word(&S);
-
-            //  reading the first homonym and word's  properties
-            if (!Word.ProcessPlmLineForTheFirstHomonym(strPlmLine, OborotNo))
-                return false;
-            Word.m_bHasSpaceBefore = S.m_Words.empty()
-                                     || S.m_Words.back().m_GraphematicalUnitOffset + S.m_Words.back().m_strWord.length() <  Word.m_GraphematicalUnitOffset
-                                     || S.m_Words.back().m_bSpace;
-            S.AddSynWord(Word);
-
-        } else {
-            if (!S.m_Words.empty()) // первая строка иногда содержит всякую информацию про документ
-                if (!S.m_Words.back().AddNextHomonym(strPlmLine))
-                    return false;
+    for (; LineNo < text->m_LemWords.size(); LineNo++) {
+        auto& lem_word = text->m_LemWords[LineNo];
+        CSynWord word(&S);
+        for (int i = 0; i < lem_word.GetHomonymsCount(); ++i) {
+            CSynHomonym h(&S);
+            (CHomonym)h = *lem_word.GetHomonym(i);
+            word.InitLevelSpecific(h);
+            word.m_Homonyms.push_back(h);
         }
-
+        S.AddSynWord(word);
+        if (lem_word.HasDes(OSentEnd))
+            break;
     }
 
     if (!BuildAuxSimpleGroups(S)) return false;
@@ -394,24 +381,16 @@ It finds the next sentence delimeter, checking that a sentence should have at le
 The function returns false if a parse  error occurs while reading. If no error, the function 
 changes LineNo, which   should point to the end position of the next sentence.
 */
-bool CSentence::ReadNextFromPlmLines(const CLemmatizedText *piPLMLinePtr, size_t &LineNo) {
-    try {
-        //  a cycle till a non-empty sentence is found or  the end is reached
-        while (m_Words.empty() && (LineNo < piPLMLinePtr->m_PlmItems.size())) {
-            // if an error occurs then exit with failure
-            if (!ReadSentence(*this, piPLMLinePtr, LineNo)) return false;
-        }
-
-        // language  specific processings
-        ReadNextFromPlmLinesLanguageSpecific();
-
-
-        return true;
+bool CSentence::GetNextSentence(const CLemmatizedText* text, size_t &LineNo) {
+    //  a cycle till a non-empty sentence is found or  the end is reached
+    while (m_Words.empty() && (LineNo < text->m_LemWords.size())) {
+        // if an error occurs then exit with failure
+        if (!ReadSentence(*this, text, LineNo)) return false;
     }
-    catch (...) {
-        Reset();
-        return false;
-    }
+
+    // language  specific processing
+    ReadNextFromPlmLinesLanguageSpecific();
+    return true;
 }
 
 

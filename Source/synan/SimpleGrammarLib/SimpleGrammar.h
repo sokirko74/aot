@@ -2,7 +2,7 @@
 
 #include "morph_dict/common/utilit.h"
 #include "common/PlmLine.h"
-#include "morphan/LemmatizerLib/PLMLineCollection.h"
+#include "morphan/LemmatizerLib/LemmatizedText.h"
 #include "AhoKorasick.h"
 #include "GLR.h"
 
@@ -243,7 +243,7 @@ public:
 
     size_t GetCountOfRoots() const;
 
-    std::vector<std::string> FilterHomonymsByGrammar(const CLemmatizedText &PlmLines) const;
+    CLemmatizedText FilterHomonymsByGrammar(const CLemmatizedText &text) const;
 
     std::vector<CFoundEntity> GetFoundOccurrences(const CLemmatizedText& PlmLines) const;
 

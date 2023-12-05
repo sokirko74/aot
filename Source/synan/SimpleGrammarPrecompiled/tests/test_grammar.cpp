@@ -36,7 +36,7 @@ TEST_CASE("filtering_for_postmorph") {
 	CLemmatizedText t = get_plm_lines("Rot Bild");
 	CHECK(4 == t.m_PlmItems.size());
 	auto res = g.FilterHomonymsByGrammar(t);
-	CHECK(3 == res.size());
+	CHECK(3 == res.m_LemWords.size());
 }
 
 TEST_CASE("simple_np") {
@@ -105,4 +105,5 @@ int main(int argc, char** argv) {
 		return res;
 	}
 }
+// todo: test for [TOKEN grm="-"] and CParser::AreEqual
 

@@ -60,14 +60,11 @@ int main(int argc, const char **argv) {
             }
 
 #ifdef _DEBUG
-            H.m_PlmLines.SaveToFile("before.lem");
+            H.m_LemText.SaveToFile("before.lem");
 #endif
 
-            CLemmatizedText MapostPlmLines;
-            if (!H.RunMapost(MapostPlmLines)) {
-                return 1;
-            }
-            MapostPlmLines.SaveToFile(p.second);
+            H.m_pPostMorph->ProcessData(H.m_LemText);
+            H.m_LemText.SaveToFile(p.second);
         }
     }
     catch (CExpc e) {

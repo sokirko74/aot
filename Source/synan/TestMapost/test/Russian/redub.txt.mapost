@@ -1,7 +1,7 @@
 идем  0 4  RLE aa  + ИДТИ * нп,нс, Г дст,1л,нст,мн, Г дст,пвл,1л,мн,
 вниз  5 4  RLE aa  + ВНИЗ  Н 
 ,  9 1  PUN 
-вниз  11 4  RLE aa EXPR1 EXPR_NO161 + ВНИЗ  Н 
+вниз  11 4  RLE aa EXPR1 EXPR_NO161  + ВНИЗ  Н 
 по  16 2  RLE aa EXPR2  + ПО  ПРЕДЛ 
 лестнице  19 8  RLE aa SENT_END  + ЛЕСТНИЦА * но, С жр,дт,ед, С жр,пр,ед,
 Я  29 1  RLE AA  + Я  МС 1л,им,ед,
@@ -17,12 +17,12 @@
 ?  88 1  PUN CS? SENT_END 
 Плыву  91 5  RLE Aa  #РЕДУПЛ  + ПЛЫТЬ * нп,нс, Г дст,1л,нст,ед,
 ,  103 1  PUN 
-а  105 1  RLE aa EXPR1 EXPR2 EXPR_NO3 + А  СОЮЗ 
+а  105 1  RLE aa EXPR1 EXPR2 EXPR_NO3  + А  СОЮЗ 
 берегов  107 7  RLE aa  + БЕРЕГ * но, С мр,рд,мн,
 все  115 3  RLE aa  + ВСЕ  Н 
   все  115 3  RLE aa  + ВЕСЬ  МС-П но,од,ср,им,ед, МС-П но,од,ср,вн,ед, МС-П но,од,им,мн, МС-П но,вн,мн,
   все  115 3  RLE aa  + ВСЕ  МС ср,им,ед, МС ср,вн,ед, МС им,мн, МС вн,мн,
-не  119 2  RLE aa EXPR1 EXPR2 EXPR_NO326 + НЕ  ЧАСТ 
-видно  122 5  RLE aa EXPR1 EXPR2 EXPR_NO277 + ВИДНО  ПРЕДК нст,
-  видно  122 5  RLE aa EXPR1 EXPR2 EXPR_NO277 + ВИДНО  ВВОДН 
+не  119 2  RLE aa EXPR1 EXPR2 EXPR_NO326  + НЕ  ЧАСТ 
+видно  122 5  RLE aa EXPR1 EXPR2 EXPR_NO277  + ВИДНО  ПРЕДК нст,
+  видно  122 5  RLE aa EXPR1 EXPR2 EXPR_NO277  + ВИДНО  ВВОДН 
 .  127 1  PUN CS? SENT_END 

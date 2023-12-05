@@ -3,25 +3,23 @@
 #include <vector>
 #include <string>
 #include "morph_dict/common/utilit.h"
+#include "morphan/LemmatizerLib/LemmatizedText.h"
 
 using namespace std;
-class CLemmatizedText;
+
 
 class CPostMorphInteface
 {
-protected:
-    std::vector<std::string>  m_ResultLemWords;  
-    MorphLanguageEnum m_Language;
 public:
+    MorphLanguageEnum m_Language;
     bool			m_bCanChangeInputText;
 	bool			m_bHumanFriendlyOutput;
-	virtual bool	ProcessData(const CLemmatizedText *piInTextItems) = 0;
+
+	virtual void ProcessData(CLemmatizedText& text) = 0;
+    
     CPostMorphInteface() : m_Language(morphUnknown) {};
-	virtual ~CPostMorphInteface() {};
-    std::string    GetResultPlmLineUtf8(size_t i) const { 
-            return convert_to_utf8(m_ResultLemWords[i], m_Language);
-    };
-    size_t    GetResultPlmLineCount() const {return m_ResultLemWords.size(); }
-    void SwapResults(std::vector<std::string>& v) {v.swap(m_ResultLemWords);};
+	
+    virtual ~CPostMorphInteface() {};
+   
 };
 

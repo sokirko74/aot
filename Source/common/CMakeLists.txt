@@ -1,16 +1,12 @@
 declare_cmake_min_version()
 
 set(my_SOURCES
-        Homonym.cpp
-        LemWord.cpp
         PlmLine.cpp
         gra_descr.cpp
         Chunk.h
         cortege.h
         gra_descr.h
-        Homonym.h
         http_server.h
-        LemWord.h
         PlmLine.h
         cortege.cpp
 )

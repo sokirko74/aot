@@ -8,12 +8,14 @@
 CPostMorphInteface *NewRussianPostMorph(const CLemmatizer *RusLemmatizer, const CAgramtab *RusGramTab) {
     CMAPost *M = new CMAPost;
     if (!M) return 0;
-    if (!M->Init(RusLemmatizer, RusGramTab)) {
-
+    try {
+        M->Init(RusLemmatizer, RusGramTab);
+        return M;
+    }
+    catch (...) {
         delete M;
-        return 0;
-    };
-    return M;
+        throw;
+    }
 }
 
 CMAPost::CMAPost() {
@@ -54,72 +56,47 @@ CFixedColloc::CFixedColloc(std::string LemmaStr, long MainWordNo, std::string In
     assert (m_MainWordNo >= 0);
 };
 
-bool CMAPost::ReadCollocs() {
-    try {
-
-        std::string FileName = GetRegistryString("Software\\Dialing\\Mapost\\Collocs");
-        FILE *fp = fopen(FileName.c_str(), "rb");
-        if (!fp) {
-            ErrorMessage("Cannot Load Collocations in Mapost");
-            return false;
+void CMAPost::ReadCollocs() {
+    std::string FileName = GetRegistryString("Software\\Dialing\\Mapost\\Collocs");
+    FILE *fp = fopen(FileName.c_str(), "rb");
+    if (!fp) {
+        throw ("Cannot find file %s in CMAPost::ReadCollocs()", FileName.c_str());
+    };
+    char s[1000];
+    while (fgets(s, 1000, fp)) {
+        std::string LemmaStr;;
+        int MainWordNo;
+        std::string InterfaceString;
+        StringTokenizer tok(s, "#");
+        int i = 0;
+        while (tok()) {
+            std::string q = tok.val();
+            Trim(q);
+            if (i == 0)
+                LemmaStr = q;
+            else if (i == 1)
+                MainWordNo = atoi(q.c_str());
+            else if (i == 2)
+                InterfaceString = q;
+            i++;
         };
-        char s[1000];
-        while (fgets(s, 1000, fp)) {
-            std::string LemmaStr;;
-            int MainWordNo;
-            std::string InterfaceString;
-            StringTokenizer tok(s, "#");
-            int i = 0;
-            while (tok()) {
-                std::string q = tok.val();
-                Trim(q);
-                if (i == 0)
-                    LemmaStr = q;
-                else if (i == 1)
-                    MainWordNo = atoi(q.c_str());
-                else if (i == 2)
-                    InterfaceString = q;
-                i++;
-            };
 
-            m_FixedCollocs.push_back(CFixedColloc(LemmaStr, MainWordNo, InterfaceString, m_pRusGramTab));
-        };
-        fclose(fp);
-    }
-    catch (...) {
-        return false;
-    }
-    return true;
+        m_FixedCollocs.push_back(CFixedColloc(LemmaStr, MainWordNo, InterfaceString, m_pRusGramTab));
+    };
+    fclose(fp);
 };
 
 
-bool CMAPost::Init(const CLemmatizer *RusLemmatizer, const CAgramtab *RusGramTab) {
-    try {
-        m_pRusGramTab = reinterpret_cast<const CRusGramTab*>(RusGramTab);
-        m_pRusLemmatizer = RusLemmatizer;
-        if (!ReadCollocs()) {
-            return false;
-        };
+void CMAPost::Init(const CLemmatizer *RusLemmatizer, const CAgramtab *RusGramTab) {
+    m_pRusGramTab = reinterpret_cast<const CRusGramTab*>(RusGramTab);
+    m_pRusLemmatizer = RusLemmatizer;
+    ReadCollocs();
 
-        m_DURNOVOGramCode = m_pRusGramTab->GetPlugNouInfo().m_GramCode;
-        auto codes = m_pRusGramTab->GetAllGramCodes(NOUN, _QM(rIndeclinable) | _QM(rInitialism), GrammemsInclusion);
-        for (size_t i = 0; i < codes.length(); i += 2) {
-            m_AbbrIndeclGramCodes.insert(codes.substr(i, 2));
-        }
-        assert (m_AbbrIndeclGramCodes.size() == 6);
-
-
+    m_DURNOVOGramCode = m_pRusGramTab->GetPlugNouInfo().m_GramCode;
+    auto codes = m_pRusGramTab->GetAllGramCodes(NOUN, _QM(rIndeclinable) | _QM(rInitialism), GrammemsInclusion);
+    for (size_t i = 0; i < codes.length(); i += 2) {
+        m_AbbrIndeclGramCodes.insert(codes.substr(i, 2));
     }
-    catch(std::exception c)
-    {
-        LOGE << c.what();
-        return false;
-    }
-    catch(...)
-    {
-        LOGE << "unknown exception in mapost";
-        return false;
-    }
-    return true;
+    assert (m_AbbrIndeclGramCodes.size() == 6);
 }
 

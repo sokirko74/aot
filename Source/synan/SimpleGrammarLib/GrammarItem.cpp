@@ -225,7 +225,7 @@ std::string CGrammarItem::GetDumpString() const
 				Attributes += "register=\"AA\" ";
 
 	if (m_TokenType != OTHER_TOKEN_TYPE)
-		Attributes += Format("type=\"%s\" ", TokenTypeToString(m_TokenType).c_str());
+		Attributes += Format("type=\"%s\" ", GetDescriptorStr(m_TokenType).c_str());
 
 	if (m_bSynMain)
 		Attributes += "root ";
@@ -241,6 +241,17 @@ std::string CGrammarItem::GetDumpString() const
 
 
 	return Format("[%s %s]", Meta.c_str(), Attributes.c_str());
+};
+
+static Descriptors StringToTokenType(const  std::string& t)
+{
+	if (t == "RLE")	return ORLE;
+	if (t == "LLE")	return OLLE;
+	if (t == "DC")	return ODigits;
+	if (t == "ROMAN")	return ORoman;
+	if (t == "DSC")	return ONumChar;
+	if (t == "PUN")	return OPun;
+	return OTHER_TOKEN_TYPE;
 };
 
 
@@ -282,14 +293,14 @@ void CGrammarItem::AddAttribute(std::string Name, std::string Value, MorphLangua
 			};
 
 		if (m_TokenType == OTHER_TOKEN_TYPE)
-			m_TokenType = (Language == morphRussian) ? RLE : LLE;
+			m_TokenType = (Language == morphRussian) ? ORLE : OLLE;
 		return;
 	}
 	else if (Name == "grm")
 	{
 		m_MorphPattern.m_GrmAttribute = Value;
 		if (m_TokenType == OTHER_TOKEN_TYPE)
-			m_TokenType = (Language == morphRussian) ? RLE : LLE;
+			m_TokenType = (Language == morphRussian) ? ORLE : OLLE;
 		return;
 	}
 	else  if (Name == "form")
@@ -301,26 +312,26 @@ void CGrammarItem::AddAttribute(std::string Name, std::string Value, MorphLangua
 		if ((m_TokenType == OTHER_TOKEN_TYPE) && !m_Token.empty())
 		{
 			if (std::iswpunct(m_Token[0]))
-				m_TokenType = PUNCTUAT;
+				m_TokenType = OPun;
 			else
 				if (isdigit((BYTE)m_Token[0]))
-					m_TokenType = NUM_TOKEN;
+					m_TokenType = ODigits;
 				else
 					if (Language == morphRussian)
 					{
 						if (CheckRussianUtf8(m_Token))
-							m_TokenType = RLE;
+							m_TokenType = ORLE;
 					}
 					else if (Language == morphGerman)
 					{
 						if (CheckGermanUtf8(m_Token))
-							m_TokenType = LLE;
+							m_TokenType = OLLE;
 
 						else
 						{
 							LOGI << "use english abc for unknown language";
 							if (CheckEnglishUtf8(m_Token))
-								m_TokenType = LLE;
+								m_TokenType = OLLE;
 						}
 					};
 			return;
@@ -341,7 +352,7 @@ void CGrammarItem::AddAttribute(std::string Name, std::string Value, MorphLangua
 					throw CExpc("Bad value for attribute \"register\" (\"%s\"). It can be \"AA\", \"aa\" or \"Aa\"", Value.c_str());
 				};
 		if (m_TokenType == OTHER_TOKEN_TYPE)
-			m_TokenType = (Language == morphRussian) ? RLE : LLE;
+			m_TokenType = (Language == morphRussian) ? ORLE : OLLE;
 		return;
 	}
 	else if (Name == "filename")
@@ -352,7 +363,7 @@ void CGrammarItem::AddAttribute(std::string Name, std::string Value, MorphLangua
 			throw CExpc("file %s does not exist", Value.c_str());
 		}
 		if (m_TokenType == OTHER_TOKEN_TYPE)
-			m_TokenType = (Language == morphRussian) ? RLE : LLE;
+			m_TokenType = (Language == morphRussian) ? ORLE : OLLE;
 	}
 	m_Attributes[Name] = Value;
 };
@@ -401,7 +412,7 @@ bool	CGrammarItem::fromString(std::string & Result)
 			if (sscanf(line.c_str(), "%i %s %s %i\n", &iMeta, buff1, buff2, &iTokenType) != 4)
 				return false;
 			m_bMeta = (bool)iMeta;
-			m_TokenType = (MainTokenTypeEnum)iTokenType;
+			m_TokenType = (Descriptors)iTokenType;
 			m_ItemStrId = buff1;
 			if (m_ItemStrId.empty()) return false;
 

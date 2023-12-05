@@ -1,12 +1,11 @@
 #include "morph_dict/common/util_classes.h"
 #include "gra_descr.h"
 
-const int ODesLen    = 9;                   /* the length of unit's descriptor */
 
-const char DesArray[NumberOfGraphematicalDescriptors][ODesLen] = 
-{
-		     
-    	     "dummy","RLE", "LLE","DEL","PUN",//the first position :  //0-4
+const std::string DesArray[NumberOfGraphematicalDescriptors] = {
+    	     "dummy",
+			 "RLE", 
+			 "LLE","DEL","PUN",//the first position :  //0-4
 		     "DC", "DSC","EA","_UNK_", // 5-8
 		     //the second position :
 		     "SPC","HYP","EOLN","EOP", //9-12
@@ -34,6 +33,16 @@ const char DesArray[NumberOfGraphematicalDescriptors][ODesLen] =
 
 };
 
+static std::unordered_map<std::string, Descriptors> init_map_str_to_id() {
+	std::unordered_map<std::string, Descriptors> result;
+	for (size_t i = 0; i < NumberOfGraphematicalDescriptors; ++i) {
+		result[DesArray[i]] = (Descriptors)i;
+	}
+	return result;
+}
+
+const std::unordered_map<std::string, Descriptors> DesStr_To_Id = init_map_str_to_id();
+
 
 
 bool IsFirstMemberOfPairDesciptor(Descriptors d) 
@@ -42,6 +51,7 @@ bool IsFirstMemberOfPairDesciptor(Descriptors d)
 			&&	(d >= (int)OEXPR1) 
 			&&  (d < NumberOfGraphematicalDescriptors);
 };
+
 bool IsSecondMemberOfPairDesciptor(Descriptors d) 
 {
 	return		(d%2 != 0) 
@@ -54,53 +64,18 @@ Descriptors GetSecondMemberByTheFirst(Descriptors d)
 	assert   (IsFirstMemberOfPairDesciptor(d));
 	return (Descriptors)(d+1);
 };
+
 Descriptors GetFirstMemberByTheSecond(Descriptors d) 
 {
 	assert   (IsSecondMemberOfPairDesciptor(d));
 	return (Descriptors)(d-1);
 };
 
-bool GetDescriptorStr(int DescriptorNo, std::string& Result)
+const std::string& GetDescriptorStr(Descriptors d)
 {
-	if (DescriptorNo >= NumberOfGraphematicalDescriptors)
-		return false;
-
-	Result = DesArray[DescriptorNo];
-	return true;
-};
-
-const char* GetDescriptorStr(int DescriptorNo)
-{
-	assert (DescriptorNo < NumberOfGraphematicalDescriptors);
-	return DesArray[DescriptorNo];
+	return DesArray[d];
 };
 
 
 
-uint64_t parse_gra_descriptors ( const char * s, std::string& unparsed)
-{
-    unparsed = "";
-    StringTokenizer tok (s, "\t\r\n ");
-    uint64_t Res = 0;
-    while (tok())
-    {
-        const char * d =  tok.val();
-        int i = 0;
-	    for (; i< NumberOfGraphematicalDescriptors; i++)
-		    if (!strcmp(d,DesArray[i]) )
-            {
-                Res |= _QM(i);
-                break;
-            }
-
-        if (i == NumberOfGraphematicalDescriptors)
-        {
-            if (!unparsed.empty())
-                unparsed += " ";
-            unparsed += d;
-        }
-    }
-
-	return Res;
-}
  
