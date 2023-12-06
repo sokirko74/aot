@@ -86,7 +86,7 @@ void CGerSyntaxOpt :: InitOptionsLanguageSpecific()
 	ReadListFile(strFileName, m_AdjPrp);
 
 	strFileName = MakePath(synan_directory, "synan.grm");
-	m_FormatsGrammar.InitalizeGrammar(GetGramTab(), strFileName);
+	m_FormatsGrammar.InitalizeGrammar(morphGerman, strFileName);
 	m_FormatsGrammar.LoadGrammarForGLR(true);
 }
 

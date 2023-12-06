@@ -12,13 +12,13 @@
 
 class CLemmatizedText
 {
+	MorphLanguageEnum m_Language;
 public:
 	std::vector<CLemWord>	m_LemWords;
-	CAgramtab* m_pGramTab;
-	CLemmatizer* m_pLemmatizer;
 
-	CLemmatizedText(CAgramtab* pGramTab=nullptr, CLemmatizer* pLemmatizer=nullptr);
+	CLemmatizedText(MorphLanguageEnum l);
 
+	MorphLanguageEnum GetDictLanguage() const;
 	bool SaveToFile(std::string filename) const;
 	void CreateFromTokemized(const CGraphmatFile* piGraphmatFile);
 	

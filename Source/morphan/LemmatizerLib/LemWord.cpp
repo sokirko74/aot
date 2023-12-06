@@ -1,12 +1,14 @@
 #include "LemWord.h"
 #include "common/gra_descr.h"
 #include "morph_dict/agramtab/RusGramTab.h"
-#include "morph_dict/agramtab/agramtab_.h"
+#include "morph_dict/agramtab/GerGramTab.h"
+#include "morph_dict/agramtab/agramtab.h"
 #include "morph_dict/lemmatizer_base_lib/Lemmatizers.h"
 
 
-CLemWord::CLemWord(const CAgramtab* pGramTab): m_pGramTab(pGramTab)
+CLemWord::CLemWord(MorphLanguageEnum l)
 {
+	m_Language = l;
 	Reset();	
 };
 
@@ -48,11 +50,16 @@ void CLemWord::EraseHomonym(int iHom)
 
 CHomonym* CLemWord::AddNewHomonym()
 {
-	CHomonym hom(m_pGramTab);
+	CHomonym hom(m_Language);
 	m_MorphHomonyms.push_back(hom);
 	return &m_MorphHomonyms.back();
-
 }
+
+
+const std::string& CLemWord::GetWord() const
+{
+	return m_strWord;
+};
 
 void CLemWord::InitLevelSpecific(const CGraLine& token, short oborot_no, CHomonym* pHom)
 {
@@ -70,7 +77,7 @@ void CLemWord::InitLevelSpecific(const CGraLine& token, short oborot_no, CHomony
 	if ((m_strWord == "\"") || (m_strWord == "'"))
 		DelDes(OPun);
 
-	if (pHom->m_LemSign != '+')
+	if (pHom->m_SearchStatus != DictionaryWord)
 		m_bPredicted = true;
 
 }
@@ -99,10 +106,6 @@ void CLemWord::CreateFromToken(const CGraLine& token) {
 	ProcessGraphematicalDescriptors();
 }
 
-void CLemWord::CreateFromLemWord(const CLemWord& _X) {
-	*this = _X;
-}
-
 bool CLemWord::LemmatizeFormUtf8(const std::string& s, const CLemmatizer* pLemmatizer)
 {
 	std::vector<CFormInfo> Paradigms;
@@ -112,7 +115,7 @@ bool CLemWord::LemmatizeFormUtf8(const std::string& s, const CLemmatizer* pLemma
 	DeleteAllHomonyms();
 	for (size_t i = 0; i < Paradigms.size(); i++)
 	{
-		CHomonym H(m_pGramTab);
+		CHomonym H(m_Language);
 		H.SetHomonym(&Paradigms[i]);
 		m_MorphHomonyms.push_back(H);
 	}
@@ -497,51 +500,17 @@ std::string CLemWord::GetDebugString(const CHomonym* pHomonym, bool bFirstHomony
 {
     std::string Result;
     if (!bFirstHomonym) Result = "  ";
-	if(!pHomonym) pHomonym = GetHomonym(0);
+	if (!pHomonym) pHomonym = GetHomonym(0);
 	Result += m_strWord;
 	Result += " ";
     Result += Format (" %i %i ", m_GraphematicalUnitOffset, m_LettersCount);
     Result += BuildGraphemDescr();
-	if (pHomonym->m_LemSign != 0)
+	if (pHomonym->m_SearchStatus != NotWord)
 	{
-        assert (!pHomonym->GetLemma().empty());
-        assert (!pHomonym->GetGramCodes().empty());
-        assert (!pHomonym->m_CommonGramCode.empty());
-
-        Result += " " + Format("%c",pHomonym->m_LemSign);
-        Result += " " + pHomonym->GetLemma();
-        Result += " " + pHomonym->GetGramTab()->GetTabStringByGramCode(pHomonym->m_CommonGramCode.c_str());
-        for (int i=0; i < pHomonym->GetGramCodes().length(); i+=2)
-            Result += " " + pHomonym->GetGramTab()->GetTabStringByGramCode(pHomonym->GetGramCodes().c_str()+i);
+		Result += pHomonym->GetDebugString();
     }
 	return  Result;
 }
-
-std::string CLemWord :: GetPlmStr (const CHomonym* pHomonym, bool bFirstHomonym)  const
-{
-
-    std::string Result;
-
-    if (!bFirstHomonym) Result = "  ";
-
-	Result += m_strWord;
-	Result += "\t";
-    Result += Format ("%i %i\t", m_GraphematicalUnitOffset, m_strWord.length());
-    Result += BuildGraphemDescr();
-
-	if (pHomonym->m_LemSign != 0)
-	{
-        assert (!pHomonym->GetLemma().empty());
-        assert (!pHomonym->GetGramCodes().empty());
-        assert (!pHomonym->m_CommonGramCode.empty());
-        
-        Result += std::string("\t") + pHomonym->m_LemSign + pHomonym->m_CommonGramCode + " " + pHomonym->GetLemma() + " " + pHomonym->GetGramCodes() + " ";
-        Result +=  Format("%i %i", pHomonym->m_lPradigmID, pHomonym->m_lFreqHom);
-	};
-
-	return  Result;
-};
-
 
 bool CLemWord::HasAnalyticalBeRus() const
 {
@@ -559,3 +528,125 @@ bool CLemWord::HasAnalyticalBeRus() const
 		
 	return false; 	
 }
+
+void CLemWord::AddDescriptor(const std::string& some_string_label)
+{
+	for (auto& h: m_MorphHomonyms)
+	{
+		h.m_OtherWordDescriptors += " " + some_string_label;
+	};
+};
+
+void CLemWord::DeleteHomonymByNotTerminalSymbol(const CInputSymbol& s)
+{
+	for (int i = (int)m_MorphHomonyms.size() - 1; i >= 0; i--)
+	{
+		auto& all = m_MorphHomonyms[i].m_AutomatSymbolInterpetation;
+		if (all.find(s) == all.end()) {
+			m_MorphHomonyms.erase(m_MorphHomonyms.begin() + i);
+		}
+	};
+
+};
+
+
+bool CheckGrammems(const CLemWord& w, const CHomonym& h, const CGrammarItem& I)
+{
+
+	if (I.m_MorphPattern.m_SearchStatus == PredictedWord) {
+		if (h.m_lPradigmID != -1) return false;
+	}
+
+	//  check pos
+	if ((h.m_iPoses & I.m_MorphPattern.m_iPoses) != I.m_MorphPattern.m_iPoses)
+		return false;
+
+	if ((I.m_MorphPattern.m_iGrammems & h.m_iGrammems) == I.m_MorphPattern.m_iGrammems)
+		return true;
+
+	// German genitive ad hoc rule
+	if ((I.m_MorphPattern.m_iGrammems == _QM(gGenitiv))
+		&& h.m_lPradigmID == -1
+		&& endswith(w.m_strUpperWord, "S")
+		)
+		return true;
+
+	return false;
+
+};
+
+bool CLemWord::IsEqualToGrammarItem(const CHomonym& h, const CGrammarItem& I) const
+{
+	if (I.m_TokenType != m_TokenType) {
+		return false;
+	}
+
+
+	if (!I.m_MorphPattern.HasNoInfo()) {
+		if (m_TokenType != ORLE && m_TokenType != OLLE)
+			return false;
+		if (!CheckGrammems(*this, h, I))
+			return false;
+	}
+
+
+	if (!I.m_Token.empty()) {
+		if (h.GetLemma() != I.m_Token)
+			return false;
+	}
+
+	if (I.m_pListFile != 0)
+	{
+		const StringSet& lemmas = I.m_pListFile->m_PossibleLemmas;
+		bool found = lemmas.find(h.GetLemma()) != lemmas.end();
+		if (!found && h.m_lPradigmID == -1) {
+			found = lemmas.find(m_strUpperWord) != lemmas.end();
+		}
+		if (!found)
+		{
+			size_t hyphen = h.GetLemma().rfind("-"); // and if we cannot find the token substd::string  after the last hyphen
+			found = (hyphen != std::string::npos) && (lemmas.find(h.GetLemma().substr(hyphen + 1)) != lemmas.end());
+		};
+		if (!found) {
+			return false;
+		}
+	}
+
+
+	return true;
+};
+
+void CLemWord::BuildTerminalSymbolsByWord(const std::vector<CGrammarItem>& grm_items, size_t end_of_stream_symbol)
+{
+	assert(!m_MorphHomonyms.empty());
+	m_AutomatSymbolInterpetationUnion.clear();
+	for (auto& h: m_MorphHomonyms)
+		h.m_AutomatSymbolInterpetation.clear();
+
+	// adding an end of stream symbol to each word
+	m_AutomatSymbolInterpetationUnion.insert(CInputSymbol(end_of_stream_symbol, "", ""));
+
+	
+	for (size_t i = 0; i < grm_items.size(); ++i)
+	{
+		auto& item = grm_items[i];
+		if (item.m_bMeta) continue;
+
+		if (!item.m_bCanHaveManyHomonyms && (m_MorphHomonyms.size() > 1)) continue;
+
+		if (item.m_Register != AnyRegister)
+		{
+			if (item.m_Register != m_Register)
+				continue;
+		};
+
+		for (auto& h: m_MorphHomonyms)
+			if (IsEqualToGrammarItem(h, item))
+			{
+				CInputSymbol N(i, h.GetGramCodes(), h.m_CommonGramCode);
+				h.m_AutomatSymbolInterpetation.insert(N);
+				m_AutomatSymbolInterpetationUnion.insert(N);
+			};
+	}
+
+};

@@ -206,7 +206,7 @@ bool CSynPlmLine :: is_month() const
 
 bool CSynPlmLine :: has_unk_gramcodes() const 
 {
-    return m_pActiveHomonym ? m_pActiveHomonym->m_bUnkGramcodes : false;
+    return m_pActiveHomonym ? m_pActiveHomonym->HasUnkGramCode() : false;
 }
 bool CSynPlmLine :: has_des(Descriptors g) const 
 {

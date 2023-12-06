@@ -2,6 +2,8 @@
 
 #include "Homonym.h"
 #include "graphan/GraphanLib/graline.h"
+#include "synan/SimpleGrammarLib/GrammarItem.h"
+#include "synan/SimpleGrammarLib/InputSymbol.h"
 
 class CLemmatizer;
 
@@ -11,9 +13,11 @@ class CLemWord
 	// graphematical descriptors in one std::string (without some binary flags that could be restored by CLemWord::BuildGraphemDescr() )
     uint64_t   m_GraDescrs;
 	std::vector<CHomonym> m_MorphHomonyms;
-	const CAgramtab* m_pGramTab;
+	MorphLanguageEnum m_Language;
 	
 	void		ProcessGraphematicalDescriptors();
+
+	bool IsEqualToGrammarItem(const CHomonym& h, const CGrammarItem& I) const;
 
 public:
 
@@ -61,9 +65,11 @@ public:
 
 	Descriptors   m_TokenType;
 
-	CLemWord(const CAgramtab* pGramTab);
+	std::set<CInputSymbol> m_AutomatSymbolInterpetationUnion;
+
+
+	CLemWord(MorphLanguageEnum l);
 	void CreateFromToken(const CGraLine& token);
-	void CreateFromLemWord(const CLemWord& _X);
 	void DeleteOborotMarks();
 	bool HasDes(Descriptors g) const;
     void DelDes(Descriptors g);
@@ -74,6 +80,7 @@ public:
 	
 	
 	void	SetWordStr (std::string NewValue);
+	const std::string& GetWord() const;
 
 	bool	FindLemma(std::string strLemma) const;	
 	int		GetHomonymByPOS(BYTE POS) const;
@@ -114,10 +121,13 @@ public:
 	bool	IsInOborot() const;
 	bool	CanBeSynNoun() const;
 	void	KillHomonymOfPartOfSpeech(int iPartOfSpeech);
-    std::string  GetPlmStr (const CHomonym* pHomonym, bool bFirstHomonym)  const;
     std::string  GetDebugString(const CHomonym* pHomonym, bool bFirstHomonym)  const;
     std::string BuildGraphemDescr ()  const;
     part_of_speech_mask_t GetPoses() const;
     uint64_t   GetGrammems() const;
     bool    HasAnalyticalBeRus() const;
+
+	void AddDescriptor(const std::string& some_string_label);
+	void DeleteHomonymByNotTerminalSymbol(const CInputSymbol& s);
+	void CLemWord::BuildTerminalSymbolsByWord(const std::vector<CGrammarItem>& grm_items, size_t end_of_stream_symbol);
 };

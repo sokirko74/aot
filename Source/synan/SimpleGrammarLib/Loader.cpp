@@ -2,7 +2,7 @@
 #include "SimpleGrammar.h"
 #include "morph_dict/common/bserialize.h"
 #include "morph_dict/common/rapidjson.h"
-#include "morph_dict/agramtab/agramtab_.h"
+#include "morph_dict/agramtab/agramtab.h"
 
 #include <time.h>
 #include <sys/stat.h>
@@ -655,9 +655,8 @@ void CWorkGrammar::LoadGrammarForGLR(bool bUsePrecompiledAutomat) {
 
 };
 
-void CWorkGrammar::InitalizeGrammar(const CAgramtab* gramtab, std::string path) {
-    m_pGramTab = gramtab;
-    m_Language = gramtab->m_Language;
+void CWorkGrammar::InitalizeGrammar(MorphLanguageEnum l, std::string path) {
+    m_Language = l;
     m_RootGrammarPath = path;
 }
 

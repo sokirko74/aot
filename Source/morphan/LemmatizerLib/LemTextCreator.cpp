@@ -2,9 +2,9 @@
 // ==========  Dialing Lemmatizer (www.aot.ru)
 // ==========  Copyright by Alexey Sokirko
 
-#include "GraphanAndMorphanHolder.h"
+#include "LemTextCreator.h"
 
-bool ProcessHyphenWords(const CLemmatizer* lemmatizer, CGraphmatFile* piGraphmatFile)
+static bool ProcessHyphenWords(const CLemmatizer* lemmatizer, CGraphmatFile* piGraphmatFile)
 {
     try
     {
@@ -57,36 +57,21 @@ bool ProcessHyphenWords(const CLemmatizer* lemmatizer, CGraphmatFile* piGraphmat
 
 };
 
-
-CGraphanAndMorphanHolder::CGraphanAndMorphanHolder()
+CLemTextCreator::CLemTextCreator(MorphLanguageEnum l) : m_LemText(l)
 {
-	m_pLemmatizer = 0;
-	m_pGramTab = 0;
-    m_bUsePrediction = true;
-};
-
-CGraphanAndMorphanHolder::~CGraphanAndMorphanHolder()
-{
-	DeleteProcessors();
-};
-
-
-void CGraphanAndMorphanHolder::LoadGraphanAndLemmatizer(MorphLanguageEnum langua)
-{
-	DeleteProcessors();
-	m_Graphan.FreeDicts();
-    if (!m_Graphan.LoadDicts(langua))
-	{	
+	m_Language = l;
+	if (!m_Graphan.LoadDicts(l))
+	{
 		throw CExpc("Cannot load graphan");
 	}
-	LoadMorphology(langua);
-	m_LemText.m_pLemmatizer = m_pLemmatizer;
-	m_LemText.m_pGramTab = m_pGramTab;
+
 };
 
 
-bool CGraphanAndMorphanHolder::GetMorphology(std::string str, bool bFile, int& CountOfWords)
+
+bool CLemTextCreator::BuildLemText(std::string str, bool bFile, int& CountOfWords)
 {
+	auto lemmatizer = GetMHolder(m_Language).m_pLemmatizer;
 	clock_t t1,t2;
 	CountOfWords = 0;
 
@@ -105,7 +90,7 @@ bool CGraphanAndMorphanHolder::GetMorphology(std::string str, bool bFile, int& C
 			t2 = clock();
 			size_t TokensCount = m_Graphan.GetTokensCount();
 			for (int i = 0; i <TokensCount; i++)
-				if (m_Graphan.GetUnits()[i].GetTokenLanguage() == m_CurrentLanguage )
+				if (m_Graphan.GetUnits()[i].GetTokenLanguage() == m_Language )
 						CountOfWords++;
 			PLOGD << "CountOfWords: " << CountOfWords;
 			double speed =  ((double)CountOfWords)/((t2-t1)/((double)CLOCKS_PER_SEC));
@@ -117,7 +102,7 @@ bool CGraphanAndMorphanHolder::GetMorphology(std::string str, bool bFile, int& C
 
 		//m_Graphan.WriteGraphMat("graphan.gra");
 
-		ProcessHyphenWords(m_pLemmatizer, &m_Graphan);
+		ProcessHyphenWords(lemmatizer, &m_Graphan);
 
 		m_LemText.CreateFromTokemized(&m_Graphan);
 
@@ -135,7 +120,7 @@ bool CGraphanAndMorphanHolder::GetMorphology(std::string str, bool bFile, int& C
 		return false;	}
 	catch (...)
 	{
-		PLOGE << "unknown exception in CGraphanAndMorphanHolder::GetMorphology";
+		PLOGE << "unknown exception in CLemTextCreator::BuildLemText";
 		return false;
 	};
 

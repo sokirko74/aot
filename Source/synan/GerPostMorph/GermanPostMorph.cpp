@@ -30,7 +30,7 @@ CGermanPostMorph::~CGermanPostMorph()
 bool	CGermanPostMorph::Init(const CAgramtab* GerGramTab)
 {	
 	std::string path = MakePath(GetRegistryString("GerSynan"), "postmorph.grm");
-	m_PersonGrammar.InitalizeGrammar(GerGramTab, path);
+	m_PersonGrammar.InitalizeGrammar(morphGerman, path);
 	m_PersonGrammar.LoadGrammarForGLR( true);
 	m_GerGramTab = GerGramTab;
 	return true;

@@ -1,7 +1,6 @@
 #pragma once
 
 #include "morph_dict/common/utilit.h"
-#include "common/PlmLine.h"
 #include "morphan/LemmatizerLib/LemmatizedText.h"
 #include "AhoKorasick.h"
 #include "GLR.h"
@@ -59,13 +58,13 @@ typedef bool CheckType1(const bool);
 typedef bool CheckType3(const CAgramtab *, const std::string &, const size_t &, const uint64_t &);
 
 struct CAttribAndId {
-    CMorphPattern m_MorphPattern;
+    CAncodePattern m_MorphPattern;
     size_t m_Id;
     std::string m_AttribName;
 
     std::string GetStr() const {
-        if (!m_MorphPattern.m_GrmAttribute.empty())
-            return "\"" + m_MorphPattern.m_GrmAttribute + "\"";
+        if (!m_MorphPattern.HasNoInfo())
+            return "\"" + m_MorphPattern.ToGrammarFormat() + "\"";
         else
             return Format("$%i.%s", m_Id, m_AttribName.c_str());
     };
@@ -91,7 +90,7 @@ struct CRuleFeature {
 
     bool AddFeatureArgument(std::string s);
 
-    bool AddFeatureValue(const CAgramtab *pGramTab, std::string s);
+    bool AddFeatureValue(MorphLanguageEnum l, std::string s);
 
     std::string InitAssignement(std::string s, std::string func_name);
 
@@ -168,7 +167,6 @@ struct CFoundEntity {
 class CWorkGrammar {
 public:
     MorphLanguageEnum m_Language;
-    const CAgramtab *m_pGramTab;
     std::vector<CGrammarItem> m_UniqueGrammarItems;
 
     std::set<CWorkRule> m_EncodedRules;
@@ -287,7 +285,7 @@ public:
 
     void CreatePrecompiledGrammar();
 
-    void InitalizeGrammar(const CAgramtab* gramtab, std::string path);
+    void InitalizeGrammar(MorphLanguageEnum l, std::string path);
 
 protected:
 

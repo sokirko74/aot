@@ -129,7 +129,6 @@ protected:
 	void Rule_Abbreviation();
 	// по-восточному
 	void Rule_AdverbFromAdjectives();
-	void SaveToFile(std::string s);
 	CLineIter AddCollocation(CLineIter start_it, CLineIter end_it, CLineIter main_it, bool HasEndtSent,  int CollocNo);
 	void Rule_FilterProperName();
 	void Rule_ChangePatronymicLemmas();

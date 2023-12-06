@@ -66,7 +66,7 @@ bool CSyntaxHolder::GetSentencesFromSynAn(std::string utf8str, bool bFile)
 		m_LemText.m_LemWords.clear();
 		int CountOfWords;
 
-		if (!GetMorphology(utf8str, bFile, CountOfWords))
+		if (!BuildLemText(utf8str, bFile, CountOfWords))
 			return false;;
 
         #ifdef _DEBUG

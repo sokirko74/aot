@@ -13,7 +13,7 @@
 #include "morph_dict/common/util_classes.h"
 #include "../FreqDictionary/ParadigmPairFreq.h"
 #include "morph_dict/agramtab/eng_consts.h"
-#include "../common/MorphologyHolder.h"
+#include "morph_dict/lemmatizer_base_lib/MorphanHolder.h"
 
 CMorphologyHolder MorphHolderRus;
 
@@ -95,11 +95,7 @@ try
 		fprintf (stderr, "bad number of arguments\n");
 		return 1;
 	}
-	if (!MorphHolderRus.LoadGraphanAndLemmatizer(morphRussian))
-	{
-		fprintf(stderr, "cannot load Russian morph_dict\n");
-		return 1;
-	}
+	GlobalLoadMorphHolder(morphRussian);
 
 
 	fff MVa_s, A_s, E_s;
@@ -204,7 +200,7 @@ try
 	
 	return 0;
 }
-catch (CExpc e)
+catch (std::exception& e)
 {
 	fprintf (stderr, "exception occurred: %s!\n", e.what().c_str());
 	return 1;

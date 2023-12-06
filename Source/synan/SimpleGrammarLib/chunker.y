@@ -99,7 +99,7 @@ chunker : chunk_rule CHUNK_RULE_DELIM
 			CChunkGrammar* pObj = $1;
 			assert (pObj == &_prs->m_ChunkGrammar);
 			CChunkParser P;
-			P.m_pGramTab = _prs->m_pGramTab;
+			P.m_GrammarLanguage = _prs->m_GrammarLanguage;
 			if (!P.ParseGrammarInFile(*$3, _prs->m_CurrentSourceFileName))
 				YYABORT;
 			pObj->AddRules(P.m_ChunkGrammar);		
@@ -110,7 +110,7 @@ chunker : chunk_rule CHUNK_RULE_DELIM
 		{
 			CChunkGrammar* pObj = &_prs->m_ChunkGrammar;
 			CChunkParser P;
-			P.m_pGramTab = _prs->m_pGramTab;
+			P.m_GrammarLanguage = _prs->m_GrammarLanguage;
 			if (!P.ParseGrammarInFile(*$2, _prs->m_CurrentSourceFileName))
 				YYABORT;
 			pObj->AddRules(P.m_ChunkGrammar);		
@@ -263,7 +263,7 @@ attribute :		CHUNK_ATTR
 				}
 				| CHUNK_ATTR_VARIABLE CHUNK_ATTR_ASSIGNMENT CHUNK_NAME
 				{
-					CRuleFeature* pFeat = new CRuleFeature;
+					CRuleFeature* pFeat = new CRuleFeature();
 					if (!pFeat) 
 						YYABORT;
 					std::string ErrorStr = pFeat->InitAssignement(*$1, *$3);
@@ -284,7 +284,7 @@ func_expr : '(' feat_list ')'
 				
 feat_list :  CHUNK_ATTR_VARIABLE
 			{
-				CRuleFeature* pObj = new CRuleFeature;
+				CRuleFeature* pObj = new CRuleFeature();
 				if (!pObj->AddFeatureArgument(*$1))
 				{
 					std::string ErrorStr = std::string("Bad item id:") + *$1;
@@ -306,8 +306,8 @@ feat_list :  CHUNK_ATTR_VARIABLE
 			}	
 			| CHUNK_ATTRIB_VALUE
 			{
-				CRuleFeature* pObj = new CRuleFeature;
-				if (!pObj->AddFeatureValue(_prs->m_pGramTab, *$1))
+				CRuleFeature* pObj = new CRuleFeature();
+				if (!pObj->AddFeatureValue(_prs->m_GrammarLanguage, *$1))
 				{
 					std::string ErrorStr = std::string("Bad argument:") + *$1;
 					yyerror(_prs, ErrorStr.c_str());
@@ -318,7 +318,7 @@ feat_list :  CHUNK_ATTR_VARIABLE
 			| feat_list ',' CHUNK_ATTRIB_VALUE
 			{
 				CRuleFeature* pObj = $1;
-				if (!pObj->AddFeatureValue(_prs->m_pGramTab, *$3))
+				if (!pObj->AddFeatureValue(_prs->m_GrammarLanguage, *$3))
 				{
 					std::string ErrorStr = std::string("Bad argument :") + *$3;
 					yyerror(_prs, ErrorStr.c_str());

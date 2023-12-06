@@ -1,13 +1,12 @@
-#ifndef GrammarItem_h
-#define GrammarItem_h
+#pragma once
 
-
+#include "common/gra_descr.h"
 #include "morph_dict/common/utilit.h"
+#include "morph_dict/lemmatizer_base_lib/AncodePattern.h"
 #include "list"
 
 
-enum MorphSearchStatus {FoundInDictionary=1, NotFoundInDictionary=2, AnyStatus=3};
-
+/*
 struct CMorphPattern
 {
 	MorphSearchStatus	m_SearchStatus;				
@@ -24,7 +23,7 @@ struct CMorphPattern
 	bool				operator ==(const CMorphPattern& _X1) const;
 
 };
-
+*/
 struct CTokenListFile 
 {
 	size_t	m_SavedModifTime;
@@ -42,7 +41,7 @@ struct CGrammarItem
 	Descriptors   m_TokenType;
 	std::string	  m_ItemStrId;
 	std::string				m_Token;
-	CMorphPattern		m_MorphPattern;
+	CAncodePattern		m_MorphPattern;
 	
 	std::map<std::string, std::string> m_Attributes;
 	std::string				m_Source; 
@@ -84,6 +83,3 @@ struct CGrammarItem
 	bool	fromString(std::string& Result);
 	bool	HasAnyOfWorkingAttributes() const;
 };
-
-
-#endif

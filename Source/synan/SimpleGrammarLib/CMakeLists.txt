@@ -29,7 +29,7 @@ add_library(SimpleGrammarLib
 		my_stl.h
 		SimpleGrammar.h
 		SimpleGrammarLib.h
-)
+ "InputSymbol.cpp")
 
 target_link_libraries(SimpleGrammarLib
     aot_common

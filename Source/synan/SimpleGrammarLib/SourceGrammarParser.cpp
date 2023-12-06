@@ -7,7 +7,7 @@
 #include "ChunkParser.h"
 
 
-bool BuildGrammarItem(const CChunkNode* pNode, const CAgramtab* GramTab, MorphLanguageEnum Language, CGrammarItem& I, std::string& ErrorStr, const std::string& SourceFileName )
+bool BuildGrammarItem(const CChunkNode* pNode, MorphLanguageEnum Language, CGrammarItem& I, std::string& ErrorStr, const std::string& SourceFileName )
 {
 	I.InitGrammarItem();
 	I.m_bMeta = (pNode->m_AtomicName != "TOKEN");
@@ -23,8 +23,6 @@ bool BuildGrammarItem(const CChunkNode* pNode, const CAgramtab* GramTab, MorphLa
 
 	};
 
-	if (!I.m_MorphPattern.Init(GramTab, ErrorStr)) return false;
-
 	return true;	
 };
 
@@ -32,7 +30,7 @@ bool AttributesToFeatures (CWorkGrammar& WorkGrammar, const size_t CurrentItemNo
 {
 	// convert attribute "grm" to a feature "has_grammem"
 	if (		(I.m_bMeta)  
-			&&	!I.m_MorphPattern.m_GrmAttribute.empty()
+			&&	!I.m_MorphPattern.HasNoInfo()
 		)
 	{
 		CRuleFeature F;
@@ -44,7 +42,7 @@ bool AttributesToFeatures (CWorkGrammar& WorkGrammar, const size_t CurrentItemNo
 		}
 		{
 			CAttribAndId A;
-			A.m_MorphPattern.CopyFrom(I.m_MorphPattern);
+			A.m_MorphPattern.CopyAncodePattern(I.m_MorphPattern);
 			F.m_RightItems.push_back(A);
 		};
 		F.m_Type = foeCheck;
@@ -55,7 +53,7 @@ bool AttributesToFeatures (CWorkGrammar& WorkGrammar, const size_t CurrentItemNo
 			ErrorStr = "Cannot convert \"has_grammem\" to a feature function name"; 
 			return false;
 		};
-		I.m_MorphPattern.SetNull();
+		I.m_MorphPattern.SetNotWord();
 
 		Features.push_back(F);
 	};
@@ -103,9 +101,7 @@ bool AttributesToFeatures (CWorkGrammar& WorkGrammar, const size_t CurrentItemNo
 		}
 		{
 			CAttribAndId A;
-			A.m_MorphPattern.m_GrmAttribute =  it->second;
-			if (!A.m_MorphPattern.Init(WorkGrammar.m_pGramTab, ErrorStr))
-				return false;
+			A.m_MorphPattern.InitFromGrammarFormat(WorkGrammar.m_Language, it->second);
 			F.m_RightItems.push_back(A);
 		};
 		F.m_Type = foeCheck;
@@ -170,7 +166,7 @@ bool GetRightPartRecursive(const CChunkSequenceNode* pNode, CWorkGrammar& WorkGr
 		else
 		{
 			CGrammarItem I;
-			if (!BuildGrammarItem(P, WorkGrammar.m_pGramTab, WorkGrammar.m_Language, I, ErrorStr, SourceFileName))
+			if (!BuildGrammarItem(P, WorkGrammar.m_Language, I, ErrorStr, SourceFileName))
 				return false;
 
 			if (!AttributesToFeatures(	WorkGrammar, 
@@ -208,7 +204,7 @@ void ConvertToWorkGrammar(const CChunkGrammar& ChunkGrammar, CWorkGrammar& WorkG
 		CGrammarItem I;
 		std::string ErrorStr;
 		
-		if (!BuildGrammarItem(rule->m_pLeftHand, WorkGrammar.m_pGramTab, WorkGrammar.m_Language, I, ErrorStr, rule->m_SourceFileName))
+		if (!BuildGrammarItem(rule->m_pLeftHand, WorkGrammar.m_Language, I, ErrorStr, rule->m_SourceFileName))
 		{
 			std::ostringstream err;
 			err << ErrorStr << "at line " << rule->m_SourceLineNo << " in file " << rule->m_SourceFileName;
@@ -246,7 +242,7 @@ void BuildWorkGrammar(CWorkGrammar& WorkGrammar)
 {
 	LOGI <<  "reading from the root source file " << WorkGrammar.m_RootGrammarPath;
 	CChunkParser Parser;
-	Parser.m_pGramTab = WorkGrammar.m_pGramTab;
+	Parser.m_GrammarLanguage = WorkGrammar.m_Language;
 	bool bResult = Parser.ParseGrammarInFile(WorkGrammar.m_RootGrammarPath, "");
 	if (!bResult)
 	{

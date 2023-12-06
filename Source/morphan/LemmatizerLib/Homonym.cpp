@@ -1,11 +1,12 @@
 #include "LemWord.h"
 #include "Homonym.h"
 #include "morph_dict/common/util_classes.h"
-#include "morph_dict/agramtab/agramtab_.h"
+#include "morph_dict/agramtab/agramtab.h"
 #include "morph_dict/lemmatizer_base_lib/Lemmatizers.h"
 
-CHomonym::CHomonym(const CAgramtab* pGramTab):CAncodePattern(pGramTab)
+CHomonym::CHomonym(MorphLanguageEnum l)
 {
+	SetLanguage(l);
 	m_iCmpnLen = 0;
 	m_bCmplLem = false;
 	m_lPradigmID = -1;
@@ -93,59 +94,6 @@ std::string	CHomonym::GetGrammemsStr() const
 	return GetGrammemsByAncodes();
 };
 
-bool CHomonym::ProcessLemmaAndGrammems(std::string& CurrStr)
-{
-	StringTokenizer tok(CurrStr.c_str(),  " ");
-
-	//  if it a punctuation mark then return true, and do not try to find lemma and morph. information
-	if( !tok() ) return true;
-
-
-	// lem-sign
-	{
-		const char* s = tok.val();
-		if	(		(strlen(s) < 3) //"км  0 2  RLE aa CS? SENT_END +Фаао КИЛОМЕТР абавагадаеажазаиайакал 177648 1"
-				||	(		(s[0] != '+') 
-						&&	(s[0] != '-') 
-						&&	(s[0] != '?') 
-					)
-			)
-
-			
-		{
-			ErrorMessage( Format("Bad lem-sign in \"%s\" ",CurrStr) );
-			return false;
-		}
-		m_LemSign = s[0];
-		m_CommonGramCode = s+1;
-	}
-
-	// lemma
-	if( !tok() ) return false;
-	SetLemma(tok.val());
-	if( !m_strLemma.empty() )
-	{
-		m_iCmpnLen = strcspn (m_strLemma.c_str(),"-");
-		m_bCmplLem =  ((BYTE)m_iCmpnLen != m_strLemma.length());
-	}
-
-	// ancode
-	if( !tok() ) return false;
-	SetGramCodes ( tok.val() );
-	
-	// paradigm ID
-	if( !tok() ) return false;
-	m_lPradigmID = atoi(tok.val());
-
-	// frequence
-	if (!tok() ) return false;
-	m_lFreqHom = atoi(tok.val());
-    if (0 == m_lFreqHom) 
-				m_lFreqHom = 1; 
-
-	return true;
-}
-
 void CHomonym::DeleteOborotMarks()
 {
 		m_bOborot1 = false;
@@ -154,20 +102,53 @@ void CHomonym::DeleteOborotMarks()
 		m_OborotNo = -1;
 };
 
-void  CHomonym::SetMorphUnknown()
+void  CHomonym::SetPredictedWord()
 {
-    CAncodePattern::SetMorphUnknown();
+    CAncodePattern::SetPredictedWord();
     m_lPradigmID = -1;
 }
+
+bool CHomonym::operator < (const CHomonym& hom) const
+{
+	return m_strLemma < hom.m_strLemma;
+}
+
 
 void  CHomonym::SetHomonym(const CFormInfo* F)
 {
     SetGramCodes ( F->GetSrcAncode() );
     m_CommonGramCode   = F->GetCommonAncode();
     m_lPradigmID = F->GetParadigmId();
-    m_LemSign = F->GetLemSign();
+	if (F->GetLemSign() == '+') {
+		m_SearchStatus = DictionaryWord;
+	}
+	else if (F->GetLemSign() == '-') {
+		m_SearchStatus = PredictedWord;
+	}
+	else {
+		m_SearchStatus = NotWord;
+	}
+
     m_strLemma = convert_to_utf8(F->GetWordForm(0), GetGramTab()->m_Language);
-    InitAncodePattern();
+	m_iCmpnLen = strcspn(m_strLemma.c_str(), "-");
+	m_bCmplLem = ((BYTE)m_iCmpnLen != m_strLemma.length());
+	m_lFreqHom = F->GetHomonymWeight();
+	if (0 == m_lFreqHom)
+		m_lFreqHom = 1;
+	InitAncodePattern();
+}
+
+std::string CHomonym::GetDebugString() const {
+	assert(!GetLemma().empty());
+	assert(!GetGramCodes().empty());
+	assert(!m_CommonGramCode.empty());
+	std::string r;
+	r += " " + Format("%c", GetLemSign());
+	r += " " + GetLemma();
+	r += " " + GetGramTab()->GetTabStringByGramCode(m_CommonGramCode.c_str());
+	for (int i = 0; i < GetGramCodes().length(); i += 2)
+		r += " " + GetGramTab()->GetTabStringByGramCode(GetGramCodes().c_str() + i);
+	return r;
 }
 
 

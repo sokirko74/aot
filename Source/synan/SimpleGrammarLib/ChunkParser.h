@@ -21,7 +21,7 @@ class CChunkParser : // protected chunkFlexLexer
 public:
 	
 	CChunkGrammar			m_ChunkGrammar;	
-	const CAgramtab*		m_pGramTab;
+	MorphLanguageEnum		m_GrammarLanguage;
 	int						m_line_num;
 	int                     m_CurrentSourceLineNo;
     std::string                  m_CurrentSourceFileName;

@@ -1,0 +1,5 @@
+[main] -> [RAREWORD root] | [NUMBER root];
+
+[RAREWORD] -> [TOKEN grm="-"];
+
+[NUMBER] -> [TOKEN type="DC"];

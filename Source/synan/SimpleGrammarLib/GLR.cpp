@@ -2,6 +2,9 @@
 #include  "GLR.h"
 #include  "LR-items.h"
 #include  "SimpleGrammar.h"
+#include "morph_dict/lemmatizer_base_lib/MorphanHolder.h"
+
+
 
 CGLRParser::CGLRParser()
 {
@@ -178,6 +181,7 @@ bool CGLRParser::GetGrammarFeatures(const CPendingReduction& Reduction, const st
 		const CSymbolNode& MainNode = GetNodeFromPath(Path, Rule.m_SynMainItemNo+1);
 		Node.m_Symbol.CopyAttributes(MainNode.m_Symbol);
 	};
+	auto gramtab = GetMHolder(Grammar.m_Language).m_pGramTab;
 
 	for (size_t i=0; i < Features.size(); i++)
 	{
@@ -199,7 +203,7 @@ bool CGLRParser::GetGrammarFeatures(const CPendingReduction& Reduction, const st
 								assert (F.m_FuncType == ffeAssign1);
 								assert (F.m_RightItems[0].m_AttribName == "grm");
 								const CSymbolNode& N1 = GetNodeFromPath(Path, F.m_RightItems[0].m_Id);
-								Node.m_Symbol.m_GramCodes = F.m_pAssign1(Grammar.m_pGramTab, N1.m_Symbol.m_GramCodes );
+								Node.m_Symbol.m_GramCodes = F.m_pAssign1(gramtab, N1.m_Symbol.m_GramCodes );
 								break;
 							};
 					case 2: {
@@ -208,7 +212,7 @@ bool CGLRParser::GetGrammarFeatures(const CPendingReduction& Reduction, const st
 								assert (F.m_RightItems[1].m_AttribName == "grm");
 								const CSymbolNode& N1 = GetNodeFromPath(Path, F.m_RightItems[0].m_Id);
 								const CSymbolNode& N2 = GetNodeFromPath(Path, F.m_RightItems[1].m_Id);
-								Node.m_Symbol.m_GramCodes = F.m_pAssign2(Grammar.m_pGramTab, N1.m_Symbol.m_GramCodes, N2.m_Symbol.m_GramCodes );
+								Node.m_Symbol.m_GramCodes = F.m_pAssign2(gramtab, N1.m_Symbol.m_GramCodes, N2.m_Symbol.m_GramCodes );
 								break;
 							};
 					case 3: {
@@ -219,7 +223,7 @@ bool CGLRParser::GetGrammarFeatures(const CPendingReduction& Reduction, const st
 								const CSymbolNode& N1 = GetNodeFromPath(Path, F.m_RightItems[0].m_Id);
 								const CSymbolNode& N2 = GetNodeFromPath(Path, F.m_RightItems[1].m_Id);
 								const CSymbolNode& N3 = GetNodeFromPath(Path, F.m_RightItems[2].m_Id);
-								Node.m_Symbol.m_GramCodes = F.m_pAssign3(Grammar.m_pGramTab, N1.m_Symbol.m_GramCodes, N2.m_Symbol.m_GramCodes, N3.m_Symbol.m_GramCodes );
+								Node.m_Symbol.m_GramCodes = F.m_pAssign3(gramtab, N1.m_Symbol.m_GramCodes, N2.m_Symbol.m_GramCodes, N3.m_Symbol.m_GramCodes );
 								break;
 							};
 					default : assert(false);
@@ -256,7 +260,7 @@ bool CGLRParser::GetGrammarFeatures(const CPendingReduction& Reduction, const st
 									assert (F.m_FuncType == ffeCheck3);
 									assert (F.m_RightItems[0].m_AttribName == "grm");
 									const CSymbolNode& N1 = GetNodeFromPath(Path, F.m_RightItems[0].m_Id);
-									if (!F.m_pCheck3(Grammar.m_pGramTab, N1.m_Symbol.m_GramCodes, F.m_RightItems[1].m_MorphPattern.m_Poses, F.m_RightItems[1].m_MorphPattern.m_Grammems))
+									if (!F.m_pCheck3(gramtab, N1.m_Symbol.m_GramCodes, F.m_RightItems[1].m_MorphPattern.m_iPoses, F.m_RightItems[1].m_MorphPattern.m_iGrammems))
 										return false;
 									break;
 								}
@@ -530,8 +534,9 @@ std::string CGLRParser::GetDotStringOfSymbolNode(size_t SymbolNodeNo) const
 	if (C.m_Symbol.m_GrammarSymbolNo == m_pTable->m_pWorkGrammar->GetEndOfStreamSymbol()) return "";
 	const CGrammarItem& I = 	m_pTable->m_pWorkGrammar->m_UniqueGrammarItems[C.m_Symbol.m_GrammarSymbolNo];
 	std::string Label = I.m_ItemStrId.c_str();
-	if  (!I.m_MorphPattern.m_GrmAttribute.empty())
-		Label += " "+I.m_MorphPattern.m_GrmAttribute;
+	auto grm = I.m_MorphPattern.ToGrammarFormat();
+	if  (!grm.empty())
+		Label += " " + grm;
 	Label += Format("[%i,%i) N=%i", C.m_InputStart, C.m_InputEnd, SymbolNodeNo);
 
 	std::string Subsets;

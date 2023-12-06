@@ -1,6 +1,6 @@
 #include "MAPostMain.h"
 #include "morph_dict/lemmatizer_base_lib/rus_numerals.h"
-#include "morph_dict/agramtab/agramtab_.h"
+#include "morph_dict/agramtab/agramtab.h"
 
 
 bool CMAPost::is_russian_numeral(std::string& word) const {
@@ -116,7 +116,7 @@ void CMAPost::Cifrdef()
 					else
 					{
 						pNew->SetGramCodes(m_DURNOVOGramCode);
-						pNew->SetMorphUnknown();
+						pNew->SetPredictedWord();
 					}
 					pNew->SetLemma(W.m_strUpperWord);
 					pNew->InitAncodePattern();
@@ -200,7 +200,7 @@ void CMAPost::Cifrdef()
 			if (!(AnCodes0.empty() || (next_it != m_Words.end() && (next_it->m_strUpperWord == "ГГ")))) // ЧИСЛ
 			{
 				CHomonym* pH = W.AddNewHomonym();
-				pH->SetMorphUnknown();
+				pH->SetPredictedWord();
 				pH->SetGramCodes(AnCodes0);
 				pH->SetLemma(NumWordForm);
 				pH->InitAncodePattern();
@@ -220,7 +220,7 @@ void CMAPost::Cifrdef()
 				W2.DelDes(OPun);
 				W2.DeleteAllHomonyms();
 				CHomonym* pH = W2.AddNewHomonym();
-				pH->SetMorphUnknown();
+				pH->SetPredictedWord();
 				pH->m_CommonGramCode = m_pRusGramTab->GramCodes().m_InanimIndeclNoun;
 				pH->SetGramCodes(m_pRusGramTab->GramCodes().m_MasAbbrNoun);
 				if (W2.m_strWord == "%")
@@ -253,7 +253,7 @@ void CMAPost::Cifrdef()
 					if (!AnCodes.empty())  //ЧИСЛ-П
 					{
 						CHomonym* pH = W.AddNewHomonym();
-						pH->SetMorphUnknown();
+						pH->SetPredictedWord();
 						pH->SetGramCodes(AnCodes);
 						pH->SetLemma(NumWordForm);
 						pH->InitAncodePattern();

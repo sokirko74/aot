@@ -11,7 +11,7 @@
 #include "Period.h"
 #include "oborot.h"
 #include "morph_dict/common/utilit.h"
-#include "morph_dict/agramtab/AncodePattern.h"
+#include "morph_dict/lemmatizer_base_lib/AncodePattern.h"
 
 
 

@@ -1,8 +1,9 @@
 #include "SimpleGrammarLib.h"
 #include "GrammarItem.h"
-#include "morph_dict/agramtab/agramtab_.h"
+#include "morph_dict/agramtab/agramtab.h"
 
 //==========================================
+/*
 void	CMorphPattern::CopyFrom(const CMorphPattern& P)
 {
 	m_Grammems = P.m_Grammems;
@@ -16,7 +17,7 @@ void CMorphPattern::SetNull()
 	m_Grammems = 0;
 	m_Poses = 0;
 	m_GrmAttribute = "";
-	m_SearchStatus = AnyStatus;
+	m_SearchStatus = NotWord;
 };
 
 bool CMorphPattern::operator < (const CMorphPattern& _X1) const
@@ -45,13 +46,13 @@ bool  CMorphPattern::Init(const CAgramtab* GramTab, std::string& ErrorMsg)
 	std::string s = m_GrmAttribute;
 	if (m_GrmAttribute[0] == '-')
 	{
-		m_SearchStatus = NotFoundInDictionary;
+		m_SearchStatus = PredictedWord;
 		s.erase(0, 1);
 	}
 	else
 		if (m_GrmAttribute[0] == '+')
 		{
-			m_SearchStatus = FoundInDictionary;
+			m_SearchStatus = DictionaryWord;
 			s.erase(0, 1);
 		}
 	Trim(s);
@@ -104,7 +105,7 @@ bool CMorphPattern::FromString(const std::string& line)
 	m_SearchStatus = (MorphSearchStatus)iStatus;
 	return true;
 };
-
+*/
 //==========================================
 
 void CGrammarItem::InitGrammarItem()
@@ -112,7 +113,7 @@ void CGrammarItem::InitGrammarItem()
 	m_bGrammarRoot = true;
 	m_bCanHaveManyHomonyms = true;
 	m_bSynMain = false;
-	m_MorphPattern.SetNull();
+	m_MorphPattern.SetNotWord();
 	m_bMeta = true;
 	m_Source = "<empty>";
 	m_Register = AnyRegister;
@@ -182,9 +183,9 @@ bool CGrammarItem::operator ==(const CGrammarItem& _X1) const
 
 void CGrammarItem::CopyNonEmptyWorkAttributesFrom(const CGrammarItem& Item)
 {
-	if (!Item.m_MorphPattern.m_GrmAttribute.empty())
+	if (!Item.m_MorphPattern.HasNoInfo())
 	{
-		m_MorphPattern.CopyFrom(Item.m_MorphPattern);
+		m_MorphPattern = Item.m_MorphPattern;
 	};
 
 	if (!Item.m_bCanHaveManyHomonyms)
@@ -202,15 +203,15 @@ void CGrammarItem::CopyNonEmptyWorkAttributesFrom(const CGrammarItem& Item)
 std::string CGrammarItem::GetDumpString() const
 {
 
-	if (!m_bMeta && !m_Token.empty() && m_Attributes.empty() && m_MorphPattern.m_GrmAttribute.empty())
+	if (!m_bMeta && !m_Token.empty() && m_Attributes.empty() && m_MorphPattern.HasNoInfo())
 		return Format("'%s'", m_ItemStrId.c_str());
 
 	std::string Attributes;
 	for (std::map<std::string, std::string>::const_iterator it = m_Attributes.begin(); it != m_Attributes.end(); it++)
 		Attributes += Format("%s=%s ", it->first.c_str(), it->second.c_str());
 
-	if (!m_MorphPattern.m_GrmAttribute.empty())
-		Attributes += Format("grm=\"%s\" ", m_MorphPattern.m_GrmAttribute.c_str());
+	if (!m_MorphPattern.HasNoInfo())
+		Attributes += Format("grm=\"%s\" ", m_MorphPattern.ToGrammarFormat().c_str());
 
 	if (!m_bCanHaveManyHomonyms)
 		Attributes += "hom=\"no\" ";
@@ -298,7 +299,7 @@ void CGrammarItem::AddAttribute(std::string Name, std::string Value, MorphLangua
 	}
 	else if (Name == "grm")
 	{
-		m_MorphPattern.m_GrmAttribute = Value;
+		m_MorphPattern.InitFromGrammarFormat(Language, Value);
 		if (m_TokenType == OTHER_TOKEN_TYPE)
 			m_TokenType = (Language == morphRussian) ? ORLE : OLLE;
 		return;
@@ -380,7 +381,7 @@ std::string	CGrammarItem::toString() const
 
 	Result += Format("%s\x1\n", m_Source.c_str());
 
-	Result += m_MorphPattern.ToString();
+	Result += m_MorphPattern.ToString() + "\n";
 	Result += Format("%i %i %i %i\n", m_bGrammarRoot ? 1 : 0, m_bSynMain ? 1 : 0, m_bCanHaveManyHomonyms ? 1 : 0, (int)m_Register);
 
 	for (std::map<std::string, std::string>::const_iterator i = m_Attributes.begin(); i != m_Attributes.end(); i++)
@@ -469,7 +470,7 @@ bool	CGrammarItem::fromString(std::string & Result)
 bool	CGrammarItem::HasAnyOfWorkingAttributes() const
 {
 	return  (!m_bCanHaveManyHomonyms
-		|| !m_MorphPattern.m_GrmAttribute.empty()
+		|| !m_MorphPattern.HasNoInfo()
 		|| (m_Register != AnyRegister)
 		);
 };

@@ -47,9 +47,6 @@ public:
 	//  "arm an+D"
 	bool m_bAdjWithActiveValency;
 
-	//  all possible interpretation in the formats grammar
-	std::set<CInputSymbol> m_AutomatSymbolInterpetation;
-
 	const CSentence* m_pSent;	
 	
 	CSynHomonym(const CSentence* pSentence);
@@ -121,8 +118,6 @@ public:
 	// is created by syntax
 	bool m_bArtificialCreated;
 
-
-	std::set<CInputSymbol> m_AutomatSymbolInterpetationUnion;
 
 	CSynWord(CSentence* pSent); 
 	const	CSyntaxOpt* GetOpt() const; 

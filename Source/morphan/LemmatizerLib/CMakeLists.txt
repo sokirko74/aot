@@ -5,8 +5,8 @@ project(LemmatizerLib)
 add_library(LemmatizerLib
         LemmatizedText.cpp
         LemmatizedText.h
-        GraphanAndMorphanHolder.cpp
-        GraphanAndMorphanHolder.h
+        LemTextCreator.cpp
+        LemTextCreator.h
         LemWord.cpp
         LemWord.h
         Homonym.cpp

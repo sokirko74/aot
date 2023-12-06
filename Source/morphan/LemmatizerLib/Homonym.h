@@ -1,16 +1,13 @@
-// ==========  This file is under  LGPL, the GNU Lesser General Public Licence
-// ==========  Dialing Syntax Analysis (www.aot.ru)
-// ==========  Copyright by Dmitry Pankratov, Igor Nozhov, Alexey Sokirko
-
 #pragma once 
+
+#include "morph_dict/lemmatizer_base_lib/AncodePattern.h"
+#include "synan/SimpleGrammarLib/InputSymbol.h"
+
 
 enum EGraPairType {Date, WebAddr, Oborot, Keyb,  GermanDividedCompound, UnknownPairType };
 
-
-
 class CFormInfo;
 
-#include "morph_dict/agramtab/AncodePattern.h"
 
 class CHomonym : public CAncodePattern
 {
@@ -42,15 +39,14 @@ public:
 	// function CSynWord::DeleteMarkedHomonymsWithClauses
 	bool m_bDelete;
 
-	
-	CHomonym(const	CAgramtab* pGramTab);
-	
-	
-	bool operator<(const CHomonym& hom) const
-	{
-		return m_strLemma < hom.m_strLemma;	
-	}
+	//  all possible interpretation in the format grammar (SimpleGrammar, GLR)
+	std::set<CInputSymbol> m_AutomatSymbolInterpetation;
 
+	
+	CHomonym(MorphLanguageEnum l);
+	
+	
+	bool operator<(const CHomonym& hom) const;
 	bool	HasSetOfGrammemsExact(uint64_t Grammems) const;
 	bool	IsOb1() const;
 	bool	IsOb2() const;
@@ -61,14 +57,13 @@ public:
 	bool	IsLeftNounModifier() const;
 	void	DeleteOborotMarks();
 
-	bool	ProcessLemmaAndGrammems(std::string& strLemma);
 	void	SetLemma(std::string Lemma);
 	const std::string& GetLemma() const;
 	std::string	GetGrammemsStr() const;
 	
-    void    SetMorphUnknown();
+    void    SetPredictedWord();
     void    SetHomonym(const CFormInfo* F);
     
-	
+	std::string GetDebugString() const;
 	
 };

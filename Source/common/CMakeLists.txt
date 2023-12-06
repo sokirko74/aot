@@ -1,13 +1,11 @@
 declare_cmake_min_version()
 
 set(my_SOURCES
-        PlmLine.cpp
         gra_descr.cpp
         Chunk.h
         cortege.h
         gra_descr.h
         http_server.h
-        PlmLine.h
         cortege.cpp
 )
 

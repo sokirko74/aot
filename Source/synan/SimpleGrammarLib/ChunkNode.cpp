@@ -171,20 +171,10 @@ static bool FeatureToId(std::string s, CAttribAndId& Result)
 	
 };
 
-static bool InitAttribValue(const CAgramtab* pGramTab, std::string s, CAttribAndId& Result)
-{
-	Result.m_MorphPattern.m_GrmAttribute = s;
-	std::string ErrorStr;
-	if (!Result.m_MorphPattern.Init(pGramTab, ErrorStr))
-		return false;
-	return true;
-	
-};
-
-bool CRuleFeature::AddFeatureValue(const CAgramtab* pGramTab, std::string s)
+bool CRuleFeature::AddFeatureValue(MorphLanguageEnum l, std::string s)
 {
 	CAttribAndId A;
-	if (! InitAttribValue(pGramTab, s, A) ) return false;
+	A.m_MorphPattern.InitFromGrammarFormat(l, s);
 	m_RightItems.push_back(A);
 	return true;
 };

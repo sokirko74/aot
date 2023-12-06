@@ -5,7 +5,7 @@
 #include "GerWord.h"
 #include "synan/SimpleGrammarLib/SimpleGrammar.h"
 
-
+/*
 bool CheckGrammems(const CHomonym& L, const CGrammarItem& I)
 {
 	//  nor punctuation marks neither abbreviations can match a morphological pattern
@@ -64,45 +64,8 @@ bool AreEqual(const CHomonym& L, const CWord& W, const CGrammarItem& I)
 
 // we should try to call this procedure only on the first stage, 
 // not each time when it is needed
-void CGerSentence::BuildTerminalSymbolsByWord(CWord& W)							
-{
-	const CWorkGrammar& G = GetOpt()->m_FormatsGrammar;
-	const std::vector<CGrammarItem>&	TerminalSymbols = G.m_UniqueGrammarItems;
 
-	// adding an end of stream symbol to each word
-	assert (!W.m_Homonyms.empty());
-	W.m_AutomatSymbolInterpetationUnion.clear();
-	W.m_AutomatSymbolInterpetationUnion.insert(CInputSymbol(G.GetEndOfStreamSymbol(), ""));
-
-	for (size_t j=0; j<W.m_Homonyms.size(); j++)
-		W.m_Homonyms[j].m_AutomatSymbolInterpetation.clear();
-
-
-	for (size_t i=0; i<TerminalSymbols.size(); i++)
-	{
-		const CGrammarItem& I = TerminalSymbols[i];
-
-		if (I.m_Type == siMeta) continue;
-
-		if (!I.m_bCanHaveManyHomonyms && (W.m_Homonyms.size() > 1)) continue;
-
-		if (I.m_Register != AnyRegister)
-		{
-				if (I.m_Register != W.m_Register)
-					continue;
-		};
-				
-
-		for (size_t j=0; j<W.m_Homonyms.size(); j++)
-			if (AreEqual(W.m_Homonyms[j], W, I))
-			{
-				CInputSymbol N(i, W.m_Homonyms[j].m_strGramcodes);
-				W.m_Homonyms[j].m_AutomatSymbolInterpetation.insert(N);
-				W.m_AutomatSymbolInterpetationUnion.insert(N);
-			};
-	}
-
-};
+*/
 
 // we should try to call this procedure only on the first stage, 
 // not each time when it is needed

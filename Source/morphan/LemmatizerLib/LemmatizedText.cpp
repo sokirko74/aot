@@ -1,21 +1,21 @@
 #include "morph_dict/lemmatizer_base_lib/Lemmatizers.h"
 #include "LemmatizedText.h"
+#include "morph_dict/lemmatizer_base_lib/MorphanHolder.h"
+
 #include <fstream>
 
 
-CLemmatizedText::CLemmatizedText(CAgramtab* pGramTab, CLemmatizer* pLemmatizer) :
-	m_pGramTab(pGramTab),
-	m_pLemmatizer(pLemmatizer)
+CLemmatizedText::CLemmatizedText(MorphLanguageEnum l)
 {
+	m_Language = l;
 };
 
 
 void CLemmatizedText::CreateFromTokemized(const CGraphmatFile* Gr)
 {
-	if (!m_pLemmatizer || !m_pGramTab) {
-		throw CExpc("no morphology in CLemmatizedText");
-	}
+	auto lemmatizer = GetMHolder(m_Language).m_pLemmatizer;
 
+	
 	m_LemWords.clear();
 
 	bool bInFixedExpression = false;
@@ -32,7 +32,7 @@ void CLemmatizedText::CreateFromTokemized(const CGraphmatFile* Gr)
 			oborot_no = token.GetOborotNo();
 		}
 
-		CLemWord word(m_pGramTab);
+		CLemWord word(m_Language);
 		word.CreateFromToken(token);
 		word.m_bHasSpaceBefore = bHasSpaceAfter;
 		bHasSpaceAfter = word.m_bSpace || token.HasSingleSpaceAfter();
@@ -42,11 +42,11 @@ void CLemmatizedText::CreateFromTokemized(const CGraphmatFile* Gr)
 			if (token.HasDes(OEXPR2))
 				bInFixedExpression = false;
 		}
-		else if (m_pLemmatizer->GetLanguage() == token.GetTokenLanguage())
+		else if (m_Language == token.GetTokenLanguage())
 		{
 			std::string word_s8 = token.GetToken();
 			std::vector<CFormInfo> paradigms;
-			m_pLemmatizer->CreateParadigmCollection(false, word_s8, !token.HasDes(OLw), true, paradigms);
+			lemmatizer->CreateParadigmCollection(false, word_s8, !token.HasDes(OLw), true, paradigms);
 			for(auto& p: paradigms)
 			{
 				CHomonym* h = word.AddNewHomonym();
@@ -58,7 +58,7 @@ void CLemmatizedText::CreateFromTokemized(const CGraphmatFile* Gr)
 		if (word.GetHomonymsCount() == 0 && !word.m_bSpace) {
 			CHomonym* h = word.AddNewHomonym();
 			if (!token.HasDes(OPun)) {
-				h->SetMorphUnknown();
+				h->SetPredictedWord();
 			}
 			h->SetLemma(word.m_strUpperWord);
 			word.InitLevelSpecific(token, oborot_no, h);
@@ -71,7 +71,9 @@ void CLemmatizedText::CreateFromTokemized(const CGraphmatFile* Gr)
 	}
 }
 
-
+MorphLanguageEnum CLemmatizedText::GetDictLanguage() const {
+	return m_Language;
+}
 
 
 bool CLemmatizedText::SaveToFile(std::string filename) const

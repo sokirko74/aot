@@ -226,9 +226,9 @@ void CSynWord::EraseHomonym(int iHom)
 
 bool CheckGrammems(const CSynHomonym& L, const CGrammarItem& I)
 {
-	if (I.m_MorphPattern.m_SearchStatus != AnyStatus)
+	if (I.m_MorphPattern.m_SearchStatus != NotWord)
 	{
-		if ((I.m_MorphPattern.m_SearchStatus == FoundInDictionary) == (L.m_lPradigmID == -1))
+		if ((I.m_MorphPattern.m_SearchStatus == DictionaryWord) == (L.m_lPradigmID == -1))
 			return false;
 	};
 

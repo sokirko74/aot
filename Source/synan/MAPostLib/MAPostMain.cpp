@@ -146,7 +146,7 @@ void CMAPost::Odnobuk()
 			W.DeleteAllHomonyms();
 			CHomonym* pH = W.AddNewHomonym();
 			pH->SetLemma(W.m_strUpperWord);
-			pH->SetMorphUnknown();
+			pH->SetPredictedWord();
 			pH->SetGramCodes(m_DURNOVOGramCode);
 			pH->InitAncodePattern();
 		}
@@ -461,7 +461,7 @@ void CMAPost::OtherRules()
 		{
 			W.DeleteAllHomonyms();
 			CHomonym* pNew = W.AddNewHomonym();
-			pNew->SetMorphUnknown();
+			pNew->SetPredictedWord();
 			pNew->SetLemma(W.m_strUpperWord);
 			pNew->m_CommonGramCode = m_pRusGramTab->GramCodes().m_InanimIndeclNoun;
 			pNew->SetGramCodes(m_pRusGramTab->GetAllGramCodes(NOUN, rAllCases | rAllNumbers | rAllGenders, 0));
@@ -909,7 +909,7 @@ void CMAPost::Rule_ILE()
             LOGV << "apply Rule_ILE to " << W.m_strWord;
 			W.DeleteAllHomonyms();
 			CHomonym* pNew = W.AddNewHomonym();
-			pNew->SetMorphUnknown();
+			pNew->SetPredictedWord();
 			pNew->SetLemma(W.m_strUpperWord);
 			pNew->m_CommonGramCode = m_pRusGramTab->GramCodes().m_InanimIndeclNoun;
             auto codes = m_pRusGramTab->GetAllGramCodes(NOUN, rAllCases | rAllNumbers | rAllGenders, 0);
@@ -1318,7 +1318,7 @@ void CMAPost::Rule_AdverbFromAdjectives()
 		W.DeleteAllHomonyms();
 		CHomonym* pNew = W.AddNewHomonym();
 		pNew->SetLemma(it->m_strUpperWord);
-		pNew->SetMorphUnknown();
+		pNew->SetPredictedWord();
 		std::string NewGramCode;
 		m_pRusGramTab->GetGramCodeByGrammemsAndPartofSpeechIfCan(ADV, 0, NewGramCode);
 		pNew->SetGramCodes(NewGramCode);
@@ -1326,22 +1326,6 @@ void CMAPost::Rule_AdverbFromAdjectives()
 	}
 
 };
-
-
-
-void CMAPost::SaveToFile(std::string s)
-{
-	/*FILE * fp = fopen (s.c_str(), "w");
-	assert (fp);
-	if (!fp) return;
-	for (CLineIter it=m_Words.begin(); it !=  m_Words.end(); it++)
-	{
-		fprintf (fp, "%s\n", it->GetPlmStr()GetStr().c_str());
-	};
-	fclose(fp);*/
-
-};
-
 
 /*
 	если слово  пришло из словаря имен, и было написано с маленькой  буквы

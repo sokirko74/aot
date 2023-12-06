@@ -20,9 +20,8 @@ int main(int argc, const char **argv) {
 
     try {
         CWorkGrammar g;
-        CMorphanHolder Holder;
-        Holder.LoadOnlyGramtab(args.GetLanguage());
-        g.InitalizeGrammar(Holder.m_pGramTab, args.Retrieve("input"));
+        GlobalLoadMorphHolder(args.GetLanguage(), true);
+        g.InitalizeGrammar(args.GetLanguage(), args.Retrieve("input"));
         g.CreatePrecompiledGrammar();
     }
     catch (std::exception& e) {

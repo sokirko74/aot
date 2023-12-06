@@ -3,7 +3,7 @@
 // ==========   Dialing Lemmatizer (www.aot.ru)
 //================================
 #include "morph_dict/common/utilit.h"
-#include "../LemmatizerLib/GraphanAndMorphanHolder.h"
+#include "../LemmatizerLib/LemTextCreator.h"
 
 
 void PrintUsage()
@@ -35,7 +35,7 @@ int main(int argc, char **argv)
 		PrintUsage();
 	};
 	fprintf (stderr, "Loading dictionaries \n");
-	CGraphanAndMorphanHolder Holder;
+	CLemTextCreator Holder;
 	Holder.LoadGraphanAndLemmatizer(Language);
 
 	
@@ -53,7 +53,7 @@ int main(int argc, char **argv)
 		Trim(f);
 		int CountOfWords;
 		std::cout << "Reading " << f <<  "\n";
-		if (!Holder.GetMorphology(f,true, CountOfWords)) 
+		if (!Holder.BuildLemText(f,true, CountOfWords)) 
 		{
 			std::cout << "  Cannot process " << f << "\n";
 			continue;
