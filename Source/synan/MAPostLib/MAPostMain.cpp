@@ -1,4 +1,4 @@
-// ==========  This file is under  LGPL, the GNU Lesser General Public Licence
+// ==========  This file is under  LGPL, the GNU Lesser General Public License
 // ==========  Dialing Posmorphological Module (www.aot.ru)
 // ==========  Copyright by Dmitry Pankratov, Alexey Sokirko (1999-2002)
 
@@ -146,9 +146,7 @@ void CMAPost::Odnobuk()
 			W.DeleteAllHomonyms();
 			CHomonym* pH = W.AddNewHomonym();
 			pH->SetLemma(W.m_strUpperWord);
-			pH->SetPredictedWord();
-			pH->SetGramCodes(m_DURNOVOGramCode);
-			pH->InitAncodePattern();
+			pH->SetPredictedWord(m_DURNOVOGramCode);
 		}
 	}
 }
@@ -224,10 +222,7 @@ void CMAPost::ILeDefLe()
 			for (int i = 0; i < W.GetHomonymsCount(); i++)
 			{
 				CHomonym* pH = W.GetHomonym(i);
-				pH->m_lPradigmID = -1;
-				pH->m_LemSign = '-';
-				if (pH->m_CommonGramCode.empty())
-					pH->m_CommonGramCode = "??";
+				pH->SetPredictedWord(pH->GetGramCodes(), pH->m_CommonGramCode);
 				auto l = pH->GetLemma();
 				pH->SetLemma(l.insert(0, W.m_strUpperWord.substr(0, hyp + 1)));
 			}
@@ -461,11 +456,9 @@ void CMAPost::OtherRules()
 		{
 			W.DeleteAllHomonyms();
 			CHomonym* pNew = W.AddNewHomonym();
-			pNew->SetPredictedWord();
+			pNew->SetPredictedWord(m_pRusGramTab->GetAllGramCodes(NOUN, rAllCases | rAllNumbers | rAllGenders, 0),
+				m_pRusGramTab->GramCodes().m_InanimIndeclNoun);
 			pNew->SetLemma(W.m_strUpperWord);
-			pNew->m_CommonGramCode = m_pRusGramTab->GramCodes().m_InanimIndeclNoun;
-			pNew->SetGramCodes(m_pRusGramTab->GetAllGramCodes(NOUN, rAllCases | rAllNumbers | rAllGenders, 0));
-			pNew->InitAncodePattern();
 			W.AddDes(ContainsRussianUtf8(W.m_strWord) ? ORLE : OLLE);
 		}
 	};
@@ -515,7 +508,7 @@ void CMAPost::SemiAdjectives()
 	{
 		CLemWord& W = *it;
 		if (!W.HasDes(ORLE)) continue;
-		if (!W.m_bPredicted) continue;
+		if (!W.IsPredicted()) continue;
 		if (!startswith(W.m_strUpperWord, prefix)) continue;
 		for (int i = 0; i < W.GetHomonymsCount(); i++) {
 			auto l = W.GetHomonym(i)->GetLemma();
@@ -561,7 +554,7 @@ void CMAPost::SemiNouns()
 	{
 		CLemWord& W = *it;
 		if (!W.HasDes(ORLE)) continue;
-		if (!W.m_bPredicted) continue;
+		if (!W.IsPredicted()) continue;
 
 		size_t PrefixLen = 0;
 		bool bChangeToPlural = false;
@@ -765,7 +758,7 @@ void CMAPost::Rule_DeadPlurals()
 		CLemWord& W = *it;
 		if (!W.HasPos(NOUN)) continue;
 		if (NounHasObviousPluralContext(it)) continue;
-		if (W.m_bPredicted) continue;
+		if (W.IsPredicted()) continue;
 		if (!W.HasGrammem(rSingular)) continue; // only pluralia 
 		for (int i = 0; i < W.GetHomonymsCount(); i++)
 		{
@@ -909,12 +902,9 @@ void CMAPost::Rule_ILE()
             LOGV << "apply Rule_ILE to " << W.m_strWord;
 			W.DeleteAllHomonyms();
 			CHomonym* pNew = W.AddNewHomonym();
-			pNew->SetPredictedWord();
 			pNew->SetLemma(W.m_strUpperWord);
-			pNew->m_CommonGramCode = m_pRusGramTab->GramCodes().m_InanimIndeclNoun;
-            auto codes = m_pRusGramTab->GetAllGramCodes(NOUN, rAllCases | rAllNumbers | rAllGenders, 0);
-			pNew->SetGramCodes(codes);
-			pNew->InitAncodePattern();
+			auto codes = m_pRusGramTab->GetAllGramCodes(NOUN, rAllCases | rAllNumbers | rAllGenders, 0);
+			pNew->SetPredictedWord(codes, m_pRusGramTab->GramCodes().m_InanimIndeclNoun);
 		}
 	};
 };
@@ -1109,7 +1099,7 @@ void CMAPost::Rule_CHTO_ZA()
 
 void CMAPost::InsertComma(CLineIter it)
 {
-	CLemWord P(m_pRusGramTab);
+	CLemWord P(morphRussian);
 	P.SetWordStr(",");
 	P.AddDes(OPun);
 	P.m_bComma = true;
@@ -1152,7 +1142,7 @@ void CMAPost::Rule_VOT_UZHE()
 		};
 		if (!bFound) break;
 
-		CLemWord P(m_pRusGramTab);
+		CLemWord P(morphRussian);
 		P.m_bWord = true;
 		P.AddDes(ORLE);
 		P.AddDes(OLw);
@@ -1179,7 +1169,7 @@ void CMAPost::Rule_UnknownNames()
 	{
 		CLemWord& W = *it;
 		if (!W.HasDes(ORLE)) continue;
-		if (!W.m_bPredicted)  continue;
+		if (!W.IsPredicted())  continue;
 		if (!W.m_bFirstUpperAlpha) continue;
 		for (int i = 0; i < W.GetHomonymsCount(); i++)
 			W.GetHomonym(i)->m_bDelete = !W.GetHomonym(i)->HasPos(NOUN);
@@ -1310,7 +1300,7 @@ void CMAPost::Rule_AdverbFromAdjectives()
 	{
 		CLemWord& W = *it;
 		if (!W.HasDes(ORLE)) continue;
-		if (!W.m_bPredicted) continue;
+		if (!W.IsPredicted()) continue;
 		const std::string prefix = "ПО-";
 		if (!startswith(W.m_strUpperWord, prefix)) continue;
 		if (!HasParadigmOfFormAndPoses(W.m_strUpperWord.substr(prefix.length()), (1 << ADJ_FULL) | (1 << ADJ_SHORT)))
@@ -1318,11 +1308,9 @@ void CMAPost::Rule_AdverbFromAdjectives()
 		W.DeleteAllHomonyms();
 		CHomonym* pNew = W.AddNewHomonym();
 		pNew->SetLemma(it->m_strUpperWord);
-		pNew->SetPredictedWord();
 		std::string NewGramCode;
 		m_pRusGramTab->GetGramCodeByGrammemsAndPartofSpeechIfCan(ADV, 0, NewGramCode);
-		pNew->SetGramCodes(NewGramCode);
-		pNew->InitAncodePattern();
+		pNew->SetPredictedWord(NewGramCode);
 	}
 
 };

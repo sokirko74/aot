@@ -6,24 +6,6 @@
 #include "list"
 
 
-/*
-struct CMorphPattern
-{
-	MorphSearchStatus	m_SearchStatus;				
-	uint64_t				m_Grammems;
-	size_t				m_Poses;
-	std::string				m_GrmAttribute;
-
-	bool				Init(const CAgramtab* GramTab, std::string& ErrorMsg);
-	void				CopyFrom(const CMorphPattern& P);
-	void				SetNull();
-	std::string				ToString() const;
-	bool				FromString(const std::string& line);
-	bool				operator < (const CMorphPattern& _X1) const;
-	bool				operator ==(const CMorphPattern& _X1) const;
-
-};
-*/
 struct CTokenListFile 
 {
 	size_t	m_SavedModifTime;

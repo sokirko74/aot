@@ -1,4 +1,4 @@
-// ==========  This file is under  LGPL, the GNU Lesser General Public Licence
+// ==========  This file is under  LGPL, the GNU Lesser General Public License
 // ==========  Dialing Syntax Analysis (www.aot.ru)
 // ==========  Copyright by Dmitry Pankratov, Igor Nozhov, Alexey Sokirko
 
@@ -186,7 +186,7 @@ void CreateHomonymFor_NECHEGO(CSynHomonym &H, long plPardigmID, std::string psAn
     s = "НЕЧЕГО";
     H.SetLemma(s);
     H.m_iCmpnLen = 6;
-    H.m_LemSign = '+';
+    H.m_SearchStatus = DictionaryWord;
     H.m_CommonGramCode = "??";
     const CAgramtab *Agramtab = H.GetOpt()->GetGramTab();
     H.m_iGrammems = Agramtab->GetAllGrammems(psAncode.c_str());
@@ -268,10 +268,11 @@ void CRusSentence::DisruptPronounPredik() {
                 ) {
             uint64_t lOldGrammems = m_Words[i + 2].m_Homonyms[ihom].m_iGrammems;
             m_Words[i + 2].m_Homonyms.clear();
-            CSynHomonym Hom_nechego(this);
-            CreateHomonymFor_NECHEGO(Hom_nechego, GetOpt()->m_lPradigmID_NECHEGO, GetOpt()->m_Gramcode_NECHEGO,
+            CSynHomonym h(morphRussian);
+            h.SetSentence(this);
+            CreateHomonymFor_NECHEGO(h, GetOpt()->m_lPradigmID_NECHEGO, GetOpt()->m_Gramcode_NECHEGO,
                                      lOldGrammems);
-            m_Words[i + 2].m_Homonyms.push_back(Hom_nechego);
+            m_Words[i + 2].m_Homonyms.push_back(h);
             MarkWordAsDeleted(i);
         }
 
@@ -290,7 +291,7 @@ void CreateHomonymFor_EksVice(CSynHomonym &H, long plPardigmID, std::string psAn
     H.m_lFreqHom = 1;
     H.SetLemma(sLem);
     H.m_iCmpnLen = sLem.length();
-    H.m_LemSign = '+';
+    H.m_SearchStatus = DictionaryWord;
     H.m_CommonGramCode = TypeAncode;
     H.m_iGrammems = Agramtab->GetAllGrammems(psAncode.c_str());
     H.m_iPoses = (1 << Agramtab->GetPartOfSpeech(psAncode.c_str()));
@@ -325,7 +326,8 @@ void CRusSentence::CutPrefixEksAndVize() {
             std::string sLemma = convert_to_utf8(p.GetWordForm(0), morphRussian);
             if (!GetOpt()->m_Professions.has_lemma(sLemma))
                 continue;
-            CSynHomonym NewHom(this);
+            CSynHomonym NewHom(morphRussian);
+            NewHom.SetSentence(this);
             CreateHomonymFor_EksVice(NewHom, p.GetParadigmId(), p.GetSrcAncode(), sLemma, p.GetCommonAncode());
             vec_Homonyms.push_back(NewHom);
         }

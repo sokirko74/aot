@@ -1,4 +1,4 @@
-// ==========  This file is under  LGPL, the GNU Lesser General Public Licence
+// ==========  This file is under  LGPL, the GNU Lesser General Public License
 // ==========  Dialing Posmorphological Module (www.aot.ru)
 // ==========  Copyright by Dmitry Pankratov, Alexey Sokirko (1999-2002)
 
@@ -7,7 +7,6 @@
 
 
 #include "morph_dict/common/util_classes.h"
-#include "../../common/PlmLine.h"
 #include "PostMorphInterface.h"
 #include "morphan/LemmatizerLib/LemWord.h"
 

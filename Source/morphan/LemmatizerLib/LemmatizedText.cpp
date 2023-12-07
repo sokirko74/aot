@@ -58,7 +58,7 @@ void CLemmatizedText::CreateFromTokemized(const CGraphmatFile* Gr)
 		if (word.GetHomonymsCount() == 0 && !word.m_bSpace) {
 			CHomonym* h = word.AddNewHomonym();
 			if (!token.HasDes(OPun)) {
-				h->SetPredictedWord();
+				h->SetPredictedWord("??");
 			}
 			h->SetLemma(word.m_strUpperWord);
 			word.InitLevelSpecific(token, oborot_no, h);

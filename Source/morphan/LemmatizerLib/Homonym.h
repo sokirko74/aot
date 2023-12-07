@@ -61,8 +61,9 @@ public:
 	const std::string& GetLemma() const;
 	std::string	GetGrammemsStr() const;
 	
-    void    SetPredictedWord();
+    void    SetPredictedWord(std::string gram_codes, std::string common_gram_codes="??");
     void    SetHomonym(const CFormInfo* F);
+	void	CopyFromFormInfo(const CFormInfo* F);
     
 	std::string GetDebugString() const;
 	

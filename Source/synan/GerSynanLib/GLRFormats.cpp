@@ -5,67 +5,7 @@
 #include "GerWord.h"
 #include "synan/SimpleGrammarLib/SimpleGrammar.h"
 
-/*
-bool CheckGrammems(const CHomonym& L, const CGrammarItem& I)
-{
-	//  nor punctuation marks neither abbreviations can match a morphological pattern
-	if (!L.m_iPoses)
-		return false;
-	
-	if	((I.m_Grammems & L.m_iGrammems) != I.m_Grammems) 
-		return false;
 
-	return (I.m_Poses & L.m_iPoses) > 0; 
-
-};
-
-bool AreEqual(const CHomonym& L, const CWord& W, const CGrammarItem& I)
-{
-	if (!I.m_GrmAttribute.empty())
-	{
-		if (!CheckGrammems(L,I))
-			return false;
-		if (I.m_Type == siMorphPattern)
-			return true;
-	};
-
-	switch (I.m_Type) {
-		case siGraph:
-						return		I.m_Lemma.empty() // [GRAPH register="AA"];
-								||	(L.GetLemma() == I.m_Lemma); 
-
-		case siFileList :	
-				{
-					assert (I.m_pListFile != NULL);
-					const StringSet& PossibleLemmas = I.m_pListFile->m_PossibleLemmas;
-					return  PossibleLemmas.find(L.GetLemma()) != PossibleLemmas.end();
-				}
-
-		case siRomanNumber :	
-					assert (false); // we do not  use in formats grammar
-					return		false;
-
-		case siAnyWord:	
-					return		W.m_bWord;
-					
-
-		case siNumber :	
-					return		W.m_bDigit;
-
-		case siMorphologicalyUnknown :
-					return	W.m_bPredicted;
-					
-	};
-	
-	return false;
-};
-
-
-
-// we should try to call this procedure only on the first stage, 
-// not each time when it is needed
-
-*/
 
 // we should try to call this procedure only on the first stage, 
 // not each time when it is needed
@@ -381,7 +321,7 @@ bool CGerSentence::BuildGroups(CClause& pClause)
 	{
 		const CBuildingUnit & Unit = BuildingUnits[i];
 		if (Unit.m_ChildClauseNo == -1) 
-			BuildTerminalSymbolsByWord(m_Words[Unit.m_WordNo]);
+			_BuildTerminalSymbolsByWord(m_Words[Unit.m_WordNo]);
 		else
 		{
 			BuildTerminalSymbolsByClause(Unit.m_ChildClauseNo);

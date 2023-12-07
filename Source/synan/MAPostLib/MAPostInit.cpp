@@ -1,15 +1,13 @@
-// ==========  This file is under  LGPL, the GNU Lesser General Public Licence
-// ==========  Dialing Posmorphological Module (www.aot.ru)
-// ==========  Copyright by Dmitry Pankratov, Alexey Sokirko (1999-2002)
-
 #include "MAPostMain.h"
 #include "morph_dict/agramtab/agramtab.h"
+#include "morph_dict/lemmatizer_base_lib/MorphanHolder.h"
 
-CPostMorphInteface *NewRussianPostMorph(const CLemmatizer *RusLemmatizer, const CAgramtab *RusGramTab) {
+CPostMorphInteface *NewRussianPostMorph() {
     CMAPost *M = new CMAPost;
     if (!M) return 0;
     try {
-        M->Init(RusLemmatizer, RusGramTab);
+        auto& h = GetMHolder(morphRussian);
+        M->Init(h.m_pLemmatizer, h.m_pGramTab);
         return M;
     }
     catch (...) {
@@ -31,7 +29,7 @@ CMAPost::~CMAPost() {
 }
 
 CFixedColloc::CFixedColloc(std::string LemmaStr, long MainWordNo, std::string InterfaceString,
-                           const CAgramtab *m_piRusGramTab) {
+                           const CAgramtab *piRusGramTab) {
     m_LemmaStr = LemmaStr;
     m_MainWordNo = MainWordNo;
     m_InterfaceString = InterfaceString;
@@ -44,7 +42,7 @@ CFixedColloc::CFixedColloc(std::string LemmaStr, long MainWordNo, std::string In
             int k = Item.find("]");
             std::string POS = Item.substr(i + 1, k - i - 1);
             uint64_t dummy;
-            m_piRusGramTab->ProcessPOSAndGrammems(POS.c_str(), L.m_POS, dummy);
+            piRusGramTab->ProcessPOSAndGrammems(POS.c_str(), L.m_POS, dummy);
             L.m_Lemma = Item.substr(0, i);
         } else {
             L.m_Lemma = Item;
@@ -89,6 +87,8 @@ void CMAPost::ReadCollocs() {
 
 void CMAPost::Init(const CLemmatizer *RusLemmatizer, const CAgramtab *RusGramTab) {
     m_pRusGramTab = reinterpret_cast<const CRusGramTab*>(RusGramTab);
+    assert(m_pRusGramTab);
+
     m_pRusLemmatizer = RusLemmatizer;
     ReadCollocs();
 

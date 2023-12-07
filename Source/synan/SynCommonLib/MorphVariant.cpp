@@ -1,4 +1,4 @@
-// ==========  This file is under  LGPL, the GNU Lesser General Public Licence
+// ==========  This file is under  LGPL, the GNU Lesser General Public License
 // ==========  Dialing Syntax Analysis (www.aot.ru)
 // ==========  Copyright by Dmitry Pankratov, Igor Nozhov, Alexey Sokirko
 
@@ -7,8 +7,9 @@
 #include "Sentence.h"
 
 
-CSynUnit::CSynUnit(const CAgramtab* pGramTab) : CAncodePattern(pGramTab)
+CSynUnit::CSynUnit(MorphLanguageEnum l)
 {
+	SetLanguage(l);
 	m_iHomonymNum = -1;
 	m_Type = EWord;
 	m_iClauseTypeNum = -1;
@@ -50,7 +51,7 @@ bool CMorphVariant::HasPredk() const
 
 void CMorphVariant::PushHomonymNum(int i)
 { 
-	CSynUnit Unit(m_pGramTab);
+	CSynUnit Unit(m_pGramTab->m_Language);
 	Unit.m_iHomonymNum = i;
 	m_SynUnits.push_back(Unit); 
 };

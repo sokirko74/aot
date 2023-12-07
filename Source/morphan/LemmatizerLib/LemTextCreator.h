@@ -7,6 +7,7 @@
 
 class CLemTextCreator
 {
+protected:
 	MorphLanguageEnum m_Language;
 	CGraphmatFile	m_Graphan;
 public:

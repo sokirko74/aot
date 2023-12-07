@@ -210,7 +210,7 @@ public:
 
     CWorkGrammar();
 
-    ~CWorkGrammar();
+    bool IsLoaded() const;
 
     void CreateTokenList();
 

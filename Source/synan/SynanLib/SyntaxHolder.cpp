@@ -1,11 +1,11 @@
 #include "SyntaxHolder.h"
 #include "synan/MAPostLib/PostMorphInterface.h"
 
-extern CPostMorphInteface* NewRussianPostMorph(const CLemmatizer* RusLemmatizer, const CAgramtab* RusGramTab);
-extern CPostMorphInteface* NewGermanPostMorph(const CLemmatizer* RusLemmatizer, const CAgramtab* RusGramTab);
+extern CPostMorphInteface* NewRussianPostMorph();
+extern CPostMorphInteface* NewGermanPostMorph();
 
 
-CSyntaxHolder::CSyntaxHolder()
+CSyntaxHolder::CSyntaxHolder(MorphLanguageEnum l) : CLemTextCreator(l)
 {
 	m_pPostMorph = 0;
 };
@@ -28,34 +28,30 @@ void CSyntaxHolder::ClearHolder() {
 
 
 
-void CSyntaxHolder::LoadSyntax(MorphLanguageEnum langua)
+void CSyntaxHolder::LoadSyntax()
 {
-	LoadGraphanAndLemmatizer(langua);
-
     assert (!m_pPostMorph);
 
-	if (langua == morphRussian)
-		m_pPostMorph = NewRussianPostMorph(m_pLemmatizer, m_pGramTab);
+	if (m_Language == morphRussian)
+		m_pPostMorph = NewRussianPostMorph();
 	else
-		m_pPostMorph = NewGermanPostMorph(m_pLemmatizer, m_pGramTab);
+		m_pPostMorph = NewGermanPostMorph();
 		
 	if (!m_pPostMorph)
 	{
 		throw CExpc("Cannot load postmorphology\n");				
 	}
 
-	m_Synan.CreateOptions(langua);
+	m_Synan.CreateOptions(m_Language);
 
-	if (langua == morphGerman)
+	if (m_Language == morphGerman)
 	{
 			m_Synan.SetEnableAllThesauri(false);
 	}
 
 	m_Synan.SetOborDic(m_Graphan.GetOborDic());
-	m_Synan.SetLemmatizer(m_pLemmatizer);
+	m_Synan.SetLemmatizer(GetMHolder(m_Language).m_pLemmatizer);
 	m_Synan.InitializeProcesser();
-
-	m_CurrentLanguage = langua;
 };
 
 
@@ -99,5 +95,6 @@ std::string  CSyntaxHolder::GetClauseTypeDescr(const CClause& C, int ClauseTypeN
 	if (ClauseTypeNo == -1)
 		return " ";
 	assert (ClauseTypeNo < C.m_vectorTypes.size() );
-	return m_pGramTab->GetClauseNameByType(C.m_vectorTypes[ClauseTypeNo].m_Type);
+	auto gramtab = GetMHolder(m_Language).m_pGramTab;
+	return gramtab->GetClauseNameByType(C.m_vectorTypes[ClauseTypeNo].m_Type);
 };

@@ -64,8 +64,11 @@ bool HasNounInNomSgPl(const CSynWord &W)
 
 CSynWord CreateDash(CSentence* pSent)
 {
-	CSynWord W (pSent);
-	CSynHomonym NewDashHom (pSent);
+	CSynWord W(morphRussian);
+	W.SetSentence(pSent);
+
+	CSynHomonym NewDashHom(morphRussian);
+	NewDashHom.SetSentence(pSent);
 	NewDashHom.SetLemma("-");
 
     W.SetWordStr("-");

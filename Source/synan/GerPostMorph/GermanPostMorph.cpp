@@ -1,10 +1,12 @@
 #include "GermanPostMorph.h"
+#include "morph_dict/lemmatizer_base_lib/MorphanHolder.h"
 
-CPostMorphInteface* NewGermanPostMorph(const CLemmatizer* GerLemmatizer, const CAgramtab* GerGramTab)
+CPostMorphInteface* NewGermanPostMorph()
 {
 	CGermanPostMorph* M = new CGermanPostMorph;
 	if (!M) return 0;
-	if (!M->Init(GerGramTab))
+	auto& h = GetMHolder(morphGerman);
+	if (!M->Init(h.m_pGramTab))
 	{
 
 		delete M;

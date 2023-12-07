@@ -1,9 +1,8 @@
-// ==========  This file is under  LGPL, the GNU Lesser General Public Licence
+// ==========  This file is under  LGPL, the GNU Lesser General Public License
 // ==========  Dialing Posmorphological Module (www.aot.ru)
 // ==========  Copyright by Dmitry Pankratov, Alexey Sokirko (1999-2002)
 
 #include "MAPostMain.h"
-#include "common/PlmLine.h"
 
 
 

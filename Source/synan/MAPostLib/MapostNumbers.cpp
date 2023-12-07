@@ -104,22 +104,16 @@ void CMAPost::Cifrdef()
 					std::vector<CFormInfo> Paradigms;
 					std::string TmpStr = W.m_strWord.substr(0, hyp);
 					m_pRusLemmatizer->CreateParadigmCollection(false, _R(TmpStr), false, false, Paradigms);
+					pNew->SetLemma(W.m_strUpperWord);
 					if (Paradigms.size() > 0) // плутония-238
 					{
-						pNew->m_lPradigmID = Paradigms[0].GetParadigmId();
-						pNew->m_CommonGramCode = Paradigms[0].GetCommonAncode();
-						pNew->SetGramCodes(Paradigms[0].GetSrcAncode());
-						pNew->m_LemSign = '+';
+						pNew->CopyFromFormInfo(&Paradigms[0]);
 						W.m_bWord = true;
-						W.m_bPredicted = false;
 					}
 					else
 					{
-						pNew->SetGramCodes(m_DURNOVOGramCode);
-						pNew->SetPredictedWord();
+						pNew->SetPredictedWord(m_DURNOVOGramCode);
 					}
-					pNew->SetLemma(W.m_strUpperWord);
-					pNew->InitAncodePattern();
 				}
 				else
 					continue;
@@ -200,10 +194,8 @@ void CMAPost::Cifrdef()
 			if (!(AnCodes0.empty() || (next_it != m_Words.end() && (next_it->m_strUpperWord == "ГГ")))) // ЧИСЛ
 			{
 				CHomonym* pH = W.AddNewHomonym();
-				pH->SetPredictedWord();
-				pH->SetGramCodes(AnCodes0);
+				pH->SetPredictedWord(AnCodes0);
 				pH->SetLemma(NumWordForm);
-				pH->InitAncodePattern();
 			}
 			CLineIter spec_it = it;
 			if (next_it != m_Words.end() && (next_it->m_strWord == "%" || next_it->m_strWord == "$"))  //доллары, проценты
@@ -220,9 +212,8 @@ void CMAPost::Cifrdef()
 				W2.DelDes(OPun);
 				W2.DeleteAllHomonyms();
 				CHomonym* pH = W2.AddNewHomonym();
-				pH->SetPredictedWord();
-				pH->m_CommonGramCode = m_pRusGramTab->GramCodes().m_InanimIndeclNoun;
-				pH->SetGramCodes(m_pRusGramTab->GramCodes().m_MasAbbrNoun);
+				pH->SetPredictedWord(m_pRusGramTab->GramCodes().m_MasAbbrNoun,
+					m_pRusGramTab->GramCodes().m_InanimIndeclNoun);
 				if (W2.m_strWord == "%")
 				{
 					W2.m_strUpperWord = W2.m_strWord = "ПРОЦ";
@@ -242,10 +233,10 @@ void CMAPost::Cifrdef()
 				}
 				m_pRusLemmatizer->CreateParadigmCollection(true, _R(pH->GetLemma()), true, false, Paradigms);
 				pH->m_lPradigmID = Paradigms[0].GetParadigmId();
-				W2.m_bWord = true;
-				W2.m_bPredicted = false;
-				pH->m_LemSign = '+';
+				pH->m_SearchStatus = DictionaryWord;
 				pH->InitAncodePattern();
+
+				W2.m_bWord = true;
 			}
 			else
 				if (!((next_it != m_Words.end() && (next_it->m_strUpperWord == "ЛЕТ"))	// "в течение 2 лет"
@@ -253,10 +244,8 @@ void CMAPost::Cifrdef()
 					if (!AnCodes.empty())  //ЧИСЛ-П
 					{
 						CHomonym* pH = W.AddNewHomonym();
-						pH->SetPredictedWord();
-						pH->SetGramCodes(AnCodes);
+						pH->SetPredictedWord(AnCodes);
 						pH->SetLemma(NumWordForm);
-						pH->InitAncodePattern();
 					}
 			if (dollar == prev_it)
 			{

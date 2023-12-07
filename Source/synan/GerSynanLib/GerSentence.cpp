@@ -140,8 +140,8 @@ void CGerSentence::DeleteHomonymsUsingGrossSchriebung()
 				if (		(WordNo > 0)
 						&&	bHasBeSubstantive
 						&&  (( H.m_iGrammems & gAllCases)  == 0) // this homonym is not a substantive
-						&&	(		W.m_bPredicted
-								||	(			(WordNo > 0)
+						&&	(		H.m_SearchStatus == PredictedWord
+								||	(		(WordNo > 0)
 										&&	m_Words[WordNo-1].m_bWord
 									)
 
@@ -332,8 +332,7 @@ void CGerSentence::ParticipleAndVerbInOneForm()
 			PartHom.SetGramCodes ( PartGramCodes );
 			InitHomonymMorphInfo(PartHom);
 			W.m_Homonyms.push_back(PartHom);
-
-			W.BuildTerminalSymbolsByWord();
+			_BuildTerminalSymbolsByWord(W);
 
 		};
 		

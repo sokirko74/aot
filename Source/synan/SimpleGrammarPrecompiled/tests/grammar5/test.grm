@@ -1,5 +1,7 @@
-[main] -> [RAREWORD root] | [NUMBER root];
+[main] -> [RAREWORD root] | [NUMBER root] | [TRUNC root];
 
 [RAREWORD] -> [TOKEN grm="-"];
 
 [NUMBER] -> [TOKEN type="DC"];
+
+[TRUNC] -> [TOKEN form="*tter"];

@@ -102,9 +102,9 @@ void CHomonym::DeleteOborotMarks()
 		m_OborotNo = -1;
 };
 
-void  CHomonym::SetPredictedWord()
+void  CHomonym::SetPredictedWord(std::string gram_codes, std::string common_gram_codes)
 {
-    CAncodePattern::SetPredictedWord();
+    CAncodePattern::SetPredictedWord(gram_codes, common_gram_codes);
     m_lPradigmID = -1;
 }
 
@@ -113,12 +113,10 @@ bool CHomonym::operator < (const CHomonym& hom) const
 	return m_strLemma < hom.m_strLemma;
 }
 
-
-void  CHomonym::SetHomonym(const CFormInfo* F)
-{
-    SetGramCodes ( F->GetSrcAncode() );
-    m_CommonGramCode   = F->GetCommonAncode();
-    m_lPradigmID = F->GetParadigmId();
+void  CHomonym::CopyFromFormInfo(const CFormInfo* F) {
+	SetGramCodes(F->GetSrcAncode());
+	m_CommonGramCode = F->GetCommonAncode();
+	m_lPradigmID = F->GetParadigmId();
 	if (F->GetLemSign() == '+') {
 		m_SearchStatus = DictionaryWord;
 	}
@@ -126,16 +124,21 @@ void  CHomonym::SetHomonym(const CFormInfo* F)
 		m_SearchStatus = PredictedWord;
 	}
 	else {
-		m_SearchStatus = NotWord;
+		throw CExpc("Bad lem sign %c", F->GetLemSign());
 	}
+	InitAncodePattern();
 
+}
+
+void  CHomonym::SetHomonym(const CFormInfo* F)
+{
+	CopyFromFormInfo(F);
     m_strLemma = convert_to_utf8(F->GetWordForm(0), GetGramTab()->m_Language);
 	m_iCmpnLen = strcspn(m_strLemma.c_str(), "-");
 	m_bCmplLem = ((BYTE)m_iCmpnLen != m_strLemma.length());
 	m_lFreqHom = F->GetHomonymWeight();
 	if (0 == m_lFreqHom)
 		m_lFreqHom = 1;
-	InitAncodePattern();
 }
 
 std::string CHomonym::GetDebugString() const {

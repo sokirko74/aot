@@ -191,7 +191,9 @@ bool CRuleFeature::AddFeatureArgument(std::string s)
 std::string CRuleFeature::InitAssignement(std::string s, std::string func_name)
 {
 	CAttribAndId A;
-	if (! FeatureToId(s, A) ) "Bad item id:"+s;
+	if (!FeatureToId(s, A)) {
+		return "Bad item id:" + s;
+	}
 	m_LeftItem = A;
 	m_Type = foeAssignement;
 	if (!InitFuncName(func_name))

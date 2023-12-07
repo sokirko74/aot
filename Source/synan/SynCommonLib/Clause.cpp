@@ -1,4 +1,4 @@
-// ==========  This file is under  LGPL, the GNU Lesser General Public Licence
+// ==========  This file is under  LGPL, the GNU Lesser General Public License
 // ==========  Dialing Syntax Analysis (www.aot.ru)
 // ==========  Copyright by Dmitry Pankratov, Igor Nozhov, Alexey Sokirko
 
@@ -462,7 +462,7 @@ void CClause::GetBuildingUnits(std::vector<CBuildingUnit>& BuildingUnits)
 int AddUnitAsClause (std::vector<CBuildingUnit>::const_iterator pUnit, int CurrentHomonymNo, const CClause& C, CMorphVariant& synVariant)
 {
 	const CClause& Child = C.m_pSent->m_Clauses[pUnit->m_ChildClauseNo];
-    CSynUnit SClauseHomonym(C.GetOpt()->GetGramTab());
+    CSynUnit SClauseHomonym(C.GetOpt()->m_Language);
 	SClauseHomonym.m_Type = EClause;
 	SClauseHomonym.m_iClauseTypeNum = (CurrentHomonymNo >= Child.m_vectorTypes.size())? -1 : CurrentHomonymNo;
 	SClauseHomonym.m_SentPeriod = (CPeriod)Child;

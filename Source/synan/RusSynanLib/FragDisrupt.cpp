@@ -1,4 +1,4 @@
-// ==========  This file is under  LGPL, the GNU Lesser General Public Licence
+// ==========  This file is under  LGPL, the GNU Lesser General Public License
 // ==========  Dialing Syntax Analysis (www.aot.ru)
 // ==========  Copyright by Dmitry Pankratov, Igor Nozhov, Alexey Sokirko
 
@@ -97,7 +97,7 @@ bool CRusSentence::TryToFindCommonGroupsForUnitedSynVariants(const CClause& ClFi
 			// если клаузы  не стоят влотную, тогда  добавим пустую клаузу между  ними
 			if (ClFirst.m_iLastWord+1 !=  ClSecond.m_iFirstWord)
 			{
-				CSynUnit S(GetRusGramTab());
+				CSynUnit S(morphRussian);
 				S.m_Type = EClause;
 				S.m_SentPeriod = CPeriod (ClFirst.m_iLastWord+1, ClSecond.m_iFirstWord-1); 
 				synVariant.m_SynUnits.push_back(S);

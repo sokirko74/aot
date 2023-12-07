@@ -78,8 +78,11 @@ TEST_CASE("check_predicted_word") {
 	compile_grammar("grammar5/test.grm", g);
 	check_first_entity(g, "RRRRRRRRRRR", { "main", 0, 1 });
 	check_not_parsed(g, "Mann");
+	// numbers
 	check_first_entity(g, "2.650", { "main", 0, 1 });
 	check_first_entity(g, "2,650", { "main", 0, 1 });
+	// left truncation
+	check_first_entity(g, "Mutter", { "main", 0, 1 });
 
 }
 

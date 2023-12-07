@@ -1,4 +1,4 @@
-// ==========  This file is under  LGPL, the GNU Lesser General Public Licence
+// ==========  This file is under  LGPL, the GNU Lesser General Public License
 // ==========  Dialing Syntax Analysis (www.aot.ru)
 // ==========  Copyright by Dmitry Pankratov, Igor Nozhov, Alexey Sokirko
 
@@ -9,55 +9,14 @@
 #include "SynPlmLine.h"
 #include "synan/SimpleGrammarLib/InputSymbol.h"
 #include "morphan/LemmatizerLib/LemWord.h"
+#include "SynHomonym.h"
+
 #pragma warning(disable:4786) 
 
 
-class CSynHomonym : public CHomonym
-{
-public:
-	const COborotForSyntax*	GetOborotPtr()  const
-	{
-		assert ( m_OborotNo != -1);
-		return &GetOpt()->GetOborDic()->m_Entries[m_OborotNo];
-	};
-	
-	bool m_bAdvAdj;
-	bool m_bCanSynDependOnAdj;
-	bool m_bCanSynDependOnAdv;
-	bool m_bCanSubdueInfinitive;
-	bool m_bCanSubdueInstr;
-	bool m_bNounHasAdjectiveDeclination;
-	int m_CoordConjNo;
-	bool m_bMonth;
-	bool m_bPassive; // is used for German verbs only
-
-	// a special slot which is now used only in CSentence::FindTermins to select all  homonyms which 
-	// suit the found termin
-	bool m_bGoodHomonym;
-
-	// all German verbs which should have special Perfect order in  subclauses, for example
-	//  Ich weiss, dass du die Gefahr hast kommen sehen
-	bool	m_bPerfectAnomalie;
-
-	// all German verbs which can subdue an infinitive without zu
-	//  Ich bleibe stehen.
-	bool m_bInfinitiveConstruction;
-
-	// all German adjectives  which can subdue at least on NP
-	//  "arm an+D"
-	bool m_bAdjWithActiveValency;
-
-	const CSentence* m_pSent;	
-	
-	CSynHomonym(const CSentence* pSentence);
-	const	CSyntaxOpt* GetOpt() const;
-	
-	bool	CompareWithPredefinedWords(const CLemmaList& arr) const;
-    
-	
-};
 class CSynWord  : public CLemWord
 {
+	void ResetSelfMembers();
 public:
 	//  a reference to a divided prefix (for German)
 	int		m_TrennbarePraefixWordNo;
@@ -118,25 +77,31 @@ public:
 	// is created by syntax
 	bool m_bArtificialCreated;
 
+	CSynWord(MorphLanguageEnum l);
 
-	CSynWord(CSentence* pSent); 
+	CSynWord(const CLemWord &);
+
+	void SetSentence(CSentence* s);
+
 	const	CSyntaxOpt* GetOpt() const; 
-	
-	
+		
 	void	Reset();
-	
-	
-	
-	
+		
 	size_t	GetHomonymsCount() const	{ return m_Homonyms.size(); }
+	
 	bool	InitializePlmLine(CSynPlmLine& pPlmWord, int HomonymNo) const;
+	
 	CSynHomonym CloneHomonymByAnotherHomonym(const CSynHomonym* pHomonym, uint64_t iGrammems, BYTE iTagID) const;
 
-	const CSynHomonym& GetSynHomonym(int i) const	{ return m_Homonyms[i]; }
-	CSynHomonym& GetSynHomonym(int i) 	{ return m_Homonyms[i]; }
-   	const CHomonym* GetHomonym(int i) const { return &m_Homonyms[i]; };
-	CHomonym* GetHomonym(int i){ return &m_Homonyms[i]; };
-    virtual CHomonym* AddNewHomonym() { m_Homonyms.push_back(CSynHomonym(m_pSent)); return &m_Homonyms.back(); };;
+	const CSynHomonym& GetSynHomonym(int i) const;
+
+	CSynHomonym& GetSynHomonym(int i);
+
+	const CHomonym* GetHomonym(int i) const override;
+	
+	CHomonym* GetHomonym(int i) override;
+	
+	CHomonym* AddNewHomonym() override;
 
 
 	void SetGoodHomonym(int i );
@@ -148,8 +113,6 @@ public:
 	const COborotForSyntax*	GetOborotPtr() const;
 	
 	
-	void	BuildTerminalSymbolsByWord();
-	bool	IsEqualToGrammarItem(const CSynHomonym& L, const CGrammarItem& I);
 	void	UpdateConjInfo();
     void    InitLevelSpecific(CSynHomonym& h);
 };

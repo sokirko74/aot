@@ -21,8 +21,9 @@ class CLemWord
 
 public:
 
-	// ======= Graphematics ======================	
-    std::string  m_UnparsedGraphemDescriptorsStr;
+	Descriptors   m_TokenType;
+	
+	std::string  m_UnparsedGraphemDescriptorsStr;
 
 	// input word form
 	std::string m_strWord;
@@ -34,7 +35,6 @@ public:
 
 	// is graphematical space 
 	bool m_bSpace;
-
 
 	// graphematical descriptor RLE or LLE
 	bool m_bWord; 
@@ -57,13 +57,9 @@ public:
 	//  true if the word was deleted and should be ignored 
 	bool	m_bDeleted;
 
-	// is morphologically predicted
-	bool m_bPredicted;
-
 	bool	m_bFirstUpperAlpha;
 	bool    m_bQuoteMark;
 
-	Descriptors   m_TokenType;
 
 	std::set<CInputSymbol> m_AutomatSymbolInterpetationUnion;
 
@@ -129,5 +125,6 @@ public:
 
 	void AddDescriptor(const std::string& some_string_label);
 	void DeleteHomonymByNotTerminalSymbol(const CInputSymbol& s);
-	void CLemWord::BuildTerminalSymbolsByWord(const std::vector<CGrammarItem>& grm_items, size_t end_of_stream_symbol);
+	void BuildTerminalSymbolsByWord(const std::vector<CGrammarItem>& grm_items, size_t end_of_stream_symbol);
+	bool IsPredicted() const;
 };

@@ -13,9 +13,10 @@ CWorkGrammar::CWorkGrammar() {
     m_bEnableRootPrefix = true;
 };
 
-CWorkGrammar::~CWorkGrammar() {
 
-};
+bool CWorkGrammar::IsLoaded() const {
+    return m_UniqueGrammarItems.size() > 0;
+}
 
 size_t CWorkGrammar::GetItemId(const CGrammarItem &I) {
     auto it = find(m_UniqueGrammarItems.begin(), m_UniqueGrammarItems.end(), I);

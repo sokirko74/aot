@@ -1,4 +1,4 @@
-// ==========  This file is under  LGPL, the GNU Lesser General Public Licence
+// ==========  This file is under  LGPL, the GNU Lesser General Public License
 // ==========  Dialing Syntax Analysis (www.aot.ru)
 // ==========  Copyright by Dmitry Pankratov, Igor Nozhov, Alexey Sokirko
 
@@ -94,6 +94,9 @@ protected:
 	bool	EqToTermin(const CSynWord& Word,   const std::string& termin, const CSynPlmLine& word_scheme, int iHom) const;
 	void	FindTermins();
 	void	FindAllTermins();
+	void _BuildTerminalSymbolsByWord(CSynWord& word);
+	void _AddSynWord(CSynWord& Word);
+	void _ReadSentence(const CLemmatizedText* text, size_t& LineNo);
 
 public:
 
@@ -255,7 +258,6 @@ public:
 
 	size_t			GetPrimitiveClausesCount() const;
 	const CClause*	GetPrimitiveClause(int ClauseNo) const;
-    void AddSynWord( CSynWord& Word);
     bool        CheckTerminIntersection(int iFWrd, int iLWrd) const;
 	
 

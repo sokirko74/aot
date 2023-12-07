@@ -35,9 +35,10 @@ int main(int argc, const char **argv) {
     initArgParser(argc, argv, args);
     MorphLanguageEnum  language = args.GetLanguage();
     init_plog(args.GetLogLevel(), "mapost_test.log", false, language);
-    CSyntaxHolder H;
+    GlobalLoadMorphHolder(language);
+    CSyntaxHolder H(language);
     try {
-        H.LoadSyntax(args.GetLanguage());
+        H.LoadSyntax();
 
         H.m_pPostMorph->m_bHumanFriendlyOutput = !args.Exists("print-ancodes");
         std::vector <std::pair<std::string, std::string> > file_pairs;

@@ -156,7 +156,7 @@
                                 "groups": [
                                     {
                                         "type": "КОЛИЧ",
-                                        "words": "2 3"
+                                        "words": "2 3 4"
                                     }
                                 ],
                                 "clause_type": "EMPTY"
@@ -182,7 +182,7 @@
                                 "groups": [
                                     {
                                         "type": "КОЛИЧ",
-                                        "words": "2 3"
+                                        "words": "2 3 4"
                                     }
                                 ],
                                 "clause_type": "EMPTY"
@@ -208,7 +208,7 @@
                                 "groups": [
                                     {
                                         "type": "КОЛИЧ",
-                                        "words": "2 3"
+                                        "words": "2 3 4"
                                     }
                                 ],
                                 "clause_type": "EMPTY"
@@ -234,7 +234,7 @@
                                 "groups": [
                                     {
                                         "type": "КОЛИЧ",
-                                        "words": "2 3"
+                                        "words": "2 3 4"
                                     }
                                 ],
                                 "clause_type": "EMPTY"
@@ -260,7 +260,7 @@
                                 "groups": [
                                     {
                                         "type": "КОЛИЧ",
-                                        "words": "2 3"
+                                        "words": "2 3 4"
                                     }
                                 ],
                                 "clause_type": "EMPTY"
@@ -286,7 +286,7 @@
                                 "groups": [
                                     {
                                         "type": "КОЛИЧ",
-                                        "words": "2 3"
+                                        "words": "2 3 4"
                                     }
                                 ],
                                 "clause_type": "EMPTY"
@@ -312,7 +312,7 @@
                                 "groups": [
                                     {
                                         "type": "КОЛИЧ",
-                                        "words": "2 3"
+                                        "words": "2 3 4"
                                     }
                                 ],
                                 "clause_type": "EMPTY"
@@ -338,7 +338,7 @@
                                 "groups": [
                                     {
                                         "type": "КОЛИЧ",
-                                        "words": "2 3"
+                                        "words": "2 3 4"
                                     }
                                 ],
                                 "clause_type": "EMPTY"

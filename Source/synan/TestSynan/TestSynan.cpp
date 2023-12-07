@@ -173,8 +173,9 @@ void GetThesaurusTerms(const CSentence& Sentence, CJsonObject& out) {
     out.add_member("terms", terms.get_value());
 }
 
-void GetResultBySyntax(const CSentencesCollection& SC, const CAgramtab& A, CJsonObject& out) {
+void GetResultBySyntax(const CSentencesCollection& SC, CJsonObject& out) {
     CJsonObject sents(out.get_doc(), rapidjson::kArrayType);
+    const CAgramtab& A = *SC.GetOpt()->GetGramTab();
     for (size_t nSent = 0; nSent < SC.m_vectorSents.size(); nSent++) {
         const CSentence &Sentence = *SC.m_vectorSents[nSent];
         CJsonObject sent(out.get_doc());
@@ -205,11 +206,11 @@ int main(int argc, const char** argv) {
     ArgumentParser args;
     initArgParser(argc, argv, args);
     auto langua = args.GetLanguage();
-    init_plog(args.GetLogLevel(), "synan_test.log", true, langua);
-
-    CSyntaxHolder H;
+    init_plog(args.GetLogLevel(), "synan_test.log", true);
+    GlobalLoadMorphHolder(langua);
+    CSyntaxHolder H(langua);
     try {
-        H.LoadSyntax(langua);
+        H.LoadSyntax();
 
         std::cerr << "ok\n";
         std::vector <std::pair<std::string, std::string> > file_pairs;
@@ -244,7 +245,7 @@ int main(int argc, const char** argv) {
                     CJsonObject j(d);
                     j.add_string("input",  t.Text);
                     j.add_string("comments", t.Comment);
-                    GetResultBySyntax(H.m_Synan, *H.m_pGramTab, j);
+                    GetResultBySyntax(H.m_Synan, j);
                     cases.push_back(j.get_value());
                 }
             }

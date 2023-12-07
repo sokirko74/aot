@@ -1,4 +1,4 @@
-// ==========  This file is under  LGPL, the GNU Lesser General Public Licence
+// ==========  This file is under  LGPL, the GNU Lesser General Public License
 // ==========  Dialing Syntax Analysis (www.aot.ru)
 // ==========  Copyright by Dmitry Pankratov, Igor Nozhov, Alexey Sokirko
 
@@ -46,20 +46,26 @@ void CSentence::SetIgnoreWhileBuildingSynVariantsToAllClauses(bool Value) {
         m_Clauses[i].m_bIgnoreWhileBuildingSynVariants = Value;
 };
 
+void CSentence::_BuildTerminalSymbolsByWord(CSynWord& word) {
+    auto& G = GetOpt()->m_FormatsGrammar;
+    if (G.IsLoaded()) {
+        word.BuildTerminalSymbolsByWord(G.m_UniqueGrammarItems, G.GetEndOfStreamSymbol());
+    }
+}
 
 //	удаляет все омонимы предсказанных слов, кроме первого, если  в предложении больше 10 неузнанных слов.
 
 void CSentence::DeleteHomonymsIfTooManyPredictedWords() {
     int CountOfPredicted = 0;
     for (int i = 0; i < m_Words.size(); i++)
-        if (m_Words[i].m_bPredicted)
+        if (m_Words[i].IsPredicted())
             CountOfPredicted++;
 
     if (CountOfPredicted >= 10) {
         for (int i = 0; i < m_Words.size(); i++)
-            if (m_Words[i].m_bPredicted) {
+            if (m_Words[i].IsPredicted()) {
                 m_Words[i].m_Homonyms.erase(m_Words[i].m_Homonyms.begin() + 1, m_Words[i].m_Homonyms.end());
-                m_Words[i].BuildTerminalSymbolsByWord();
+                _BuildTerminalSymbolsByWord(m_Words[i]);
             };
     };
 
@@ -266,7 +272,7 @@ bool CSentence::ProcessGrammarModels() {
 	This function builds std::vector  std::vector<CSimpleGroup>;:m_SimpleGroups;
 	Each group consists of two pointers to a word and  an name.
 */
-bool BuildAuxSimpleGroups(CSentence &S) {
+static void BuildAuxSimpleGroups(CSentence &S) {
 
     for (size_t WordNo = 0; WordNo < S.m_Words.size(); WordNo++) {
 
@@ -285,15 +291,13 @@ bool BuildAuxSimpleGroups(CSentence &S) {
                 // G.m_MainWordNo in order to get it in the  coordinates of the largest group.
                 if (sscanf(g_descr + i + 8, "%s %i %i %hi", name, &G.m_iFirstWord, &G.m_iLastWord, &G.m_MainWordNo) !=
                     4) {
-                    ErrorMessage(Format("General format error between Simple grammar Module and Syntax! (%s)",
-                                        g_descr + i + 8));
-                    return false;
+                    throw CExpc("General format error between Simple grammar Module and Syntax! (%s)",
+                                        g_descr + i + 8);
                 };
                 G.m_MainGroup = G.m_MainWordNo;
                 G.m_GroupType = S.GetOpt()->GetGroupTypebyName(name);
                 if (G.m_GroupType == -1) {
-                    ErrorMessage(Format("Simple grammar sends a group name which is not registered! (%s)", name));
-                    return false;
+                    throw CExpc("Simple grammar sends a group name which is not registered! (%s)", name);
                 };
                 // no groups with the same boundaries are allowed
                 if (Groups.find_group(G) == -1)
@@ -337,55 +341,55 @@ bool BuildAuxSimpleGroups(CSentence &S) {
 
         };
     };
-
-    return true;
-
 };
 
-void CSentence::AddSynWord(CSynWord &Word) {
-    Word.BuildTerminalSymbolsByWord();
-    Word.UpdateConjInfo();
-    sort(Word.m_Homonyms.begin(), Word.m_Homonyms.end());
 
+void CSentence::_AddSynWord(CSynWord &Word) {
+    _BuildTerminalSymbolsByWord(Word);
+    Word.UpdateConjInfo();
     m_Words.push_back(Word);
 }
 
-bool ReadSentence(CSentence &S, const CLemmatizedText* text, size_t &LineNo) {
-    S.Reset();
+void CSentence::_ReadSentence(const CLemmatizedText* text, size_t &line_no) {
+    Reset();
 
-    for (; LineNo < text->m_LemWords.size(); LineNo++) {
-        auto& lem_word = text->m_LemWords[LineNo];
-        CSynWord word(&S);
+    for (; line_no < text->m_LemWords.size(); line_no++) {
+        auto& lem_word = text->m_LemWords[line_no];
+        CSynWord syn_word(lem_word);
+        syn_word.SetSentence(this);
         for (int i = 0; i < lem_word.GetHomonymsCount(); ++i) {
-            CSynHomonym h(&S);
-            (CHomonym)h = *lem_word.GetHomonym(i);
-            word.InitLevelSpecific(h);
-            word.m_Homonyms.push_back(h);
+            CSynHomonym h(*lem_word.GetHomonym(i));
+            h.SetSentence(this);
+            syn_word.InitLevelSpecific(h);
+            syn_word.m_Homonyms.push_back(h);
         }
-        S.AddSynWord(word);
-        if (lem_word.HasDes(OSentEnd))
+        if (!syn_word.m_bSpace) {
+            _AddSynWord(syn_word);
+        }
+        if (lem_word.HasDes(OSentEnd)) {
+            ++line_no;
             break;
+        }
     }
 
-    if (!BuildAuxSimpleGroups(S)) return false;
-
-    return true;
-
-
+    BuildAuxSimpleGroups(*this);
 };
 
 
 /*
-This function recieves a list of plm lines(piPLMLinePtr) and pointer to a line (LineNo)
+This function recieves a list of plm lines(piPLMLinePtr) and pointer to a line (line_no)
 It finds the next sentence delimeter, checking that a sentence should have at least one word
 The function returns false if a parse  error occurs while reading. If no error, the function 
-changes LineNo, which   should point to the end position of the next sentence.
+changes line_no, which   should point to the end position of the next sentence.
 */
-bool CSentence::GetNextSentence(const CLemmatizedText* text, size_t &LineNo) {
+bool CSentence::GetNextSentence(const CLemmatizedText* text, size_t &line_no) {
     //  a cycle till a non-empty sentence is found or  the end is reached
-    while (m_Words.empty() && (LineNo < text->m_LemWords.size())) {
+    while (m_Words.empty()) {
         // if an error occurs then exit with failure
-        if (!ReadSentence(*this, text, LineNo)) return false;
+        _ReadSentence(text, line_no);
+        if (line_no >= text->m_LemWords.size()) {
+            break;
+        }
     }
 
     // language  specific processing
@@ -568,7 +572,8 @@ long CSentence::GetPrimitiveClauseNoByClauseNo(long lClauseNo) const {
 
 
 bool CSentence::GetHomonymByClauseVariantInterface(long iWord, long iVar, long iClause, CSynHomonym &H) const {
-    H = CSynHomonym(this);
+    H = CSynHomonym(GetOpt()->m_Language);
+    H.SetSentence(this);
 
     CSVI pSynVar = m_Clauses[iClause].m_SynVariants.begin();
 
@@ -1033,7 +1038,7 @@ bool CSentence::IsWordClause(const CClause &rClause, int iWrd) const {
 
 void CSentence::MarkWordAsDeleted(int iDelWrd) {
     m_Words[iDelWrd].m_bDeleted = true;
-    m_Words[iDelWrd].BuildTerminalSymbolsByWord();
+    _BuildTerminalSymbolsByWord(m_Words[iDelWrd]);
 }
 
 

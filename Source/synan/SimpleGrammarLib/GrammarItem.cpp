@@ -2,112 +2,6 @@
 #include "GrammarItem.h"
 #include "morph_dict/agramtab/agramtab.h"
 
-//==========================================
-/*
-void	CMorphPattern::CopyFrom(const CMorphPattern& P)
-{
-	m_Grammems = P.m_Grammems;
-	m_Poses = P.m_Poses;
-	m_GrmAttribute = P.m_GrmAttribute;
-	m_SearchStatus = P.m_SearchStatus;
-};
-
-void CMorphPattern::SetNull()
-{
-	m_Grammems = 0;
-	m_Poses = 0;
-	m_GrmAttribute = "";
-	m_SearchStatus = NotWord;
-};
-
-bool CMorphPattern::operator < (const CMorphPattern& _X1) const
-{
-	if (m_Grammems != _X1.m_Grammems)
-		return m_Grammems < _X1.m_Grammems;
-
-	if (m_Poses != _X1.m_Poses)
-		return m_Poses < _X1.m_Poses;
-
-	return m_SearchStatus < _X1.m_SearchStatus;
-};
-
-
-bool CMorphPattern::operator ==(const CMorphPattern& _X1) const
-{
-	return		m_Grammems == _X1.m_Grammems
-		&& m_Poses == _X1.m_Poses
-		&& m_SearchStatus == _X1.m_SearchStatus;
-};
-
-bool  CMorphPattern::Init(const CAgramtab* GramTab, std::string& ErrorMsg)
-{
-	Trim(m_GrmAttribute);
-	if (m_GrmAttribute.empty())	return true;
-	std::string s = m_GrmAttribute;
-	if (m_GrmAttribute[0] == '-')
-	{
-		m_SearchStatus = PredictedWord;
-		s.erase(0, 1);
-	}
-	else
-		if (m_GrmAttribute[0] == '+')
-		{
-			m_SearchStatus = DictionaryWord;
-			s.erase(0, 1);
-		}
-	Trim(s);
-	BYTE PartOfSpeech;
-	if (GramTab)
-		if (!GramTab->ProcessPOSAndGrammems(s.c_str(), PartOfSpeech, m_Grammems)
-			&& !GramTab->ProcessPOSAndGrammems(std::string("* " + s).c_str(), PartOfSpeech, m_Grammems)
-			)
-		{
-			ErrorMsg = "Bad morphologiucal description " + m_GrmAttribute;
-			return false;
-		};
-
-	if (PartOfSpeech != UnknownPartOfSpeech)
-		m_Poses = 1 << PartOfSpeech;
-	else
-		m_Poses = 0;
-
-	return true;
-};
-
-
-std::string  CMorphPattern::ToString() const
-{
-	std::string Result;
-#ifdef WIN32
-	Result = Format("%I64i", m_Grammems);
-#else
-	Result = Format("%lli", m_Grammems);
-#endif
-
-	Result += Format(" %i %i %s\x1\n", (int)m_Poses, (int)m_SearchStatus, m_GrmAttribute.empty() ? "null" : m_GrmAttribute.c_str());
-	return Result;
-
-};
-
-bool CMorphPattern::FromString(const std::string& line)
-{
-	char buff1[1024];
-	int iStatus;
-#ifdef WIN32
-	if (sscanf(line.c_str(), "%I64i %i %i %[^\x1]", &m_Grammems, &m_Poses, &iStatus, buff1) != 4) return false;
-#else
-	if (sscanf(line.c_str(), "%lli %li %i %[^\x1]", &m_Grammems, &m_Poses, &iStatus, buff1) != 4) return false;
-#endif
-
-	m_GrmAttribute = buff1;
-	if (m_GrmAttribute == "null")
-		m_GrmAttribute = "";
-	m_SearchStatus = (MorphSearchStatus)iStatus;
-	return true;
-};
-*/
-//==========================================
-
 void CGrammarItem::InitGrammarItem()
 {
 	m_bGrammarRoot = true;
@@ -312,7 +206,15 @@ void CGrammarItem::AddAttribute(std::string Name, std::string Value, MorphLangua
 
 		if ((m_TokenType == OTHER_TOKEN_TYPE) && !m_Token.empty())
 		{
-			if (std::iswpunct(m_Token[0]))
+			if (m_Token[0] == '*' && m_Token.length() > 1) {
+				if (Language == morphRussian) {
+					m_TokenType = ORLE;
+				}
+				else {
+					m_TokenType = OLLE;
+				}
+			}
+			else if (std::iswpunct(m_Token[0]))
 				m_TokenType = OPun;
 			else
 				if (isdigit((BYTE)m_Token[0]))

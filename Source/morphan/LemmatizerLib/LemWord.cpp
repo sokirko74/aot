@@ -12,9 +12,30 @@ CLemWord::CLemWord(MorphLanguageEnum l)
 	Reset();	
 };
 
+void CLemWord::Reset()
+{
+	m_bFirstUpperAlpha = false;
+	m_bQuoteMark = false;
+	m_GraDescrs = 0;
+	m_bSpace = false;
+	m_bWord = false;
+	m_bDash = false;
+	m_Register = AnyRegister;
+	m_bComma = false;
+	m_GraphematicalUnitOffset = -1;
+	m_bHasSpaceBefore = false;
+	m_bDeleted = false;
+	m_LettersCount = 0;
+	m_TokenType = OTHER_TOKEN_TYPE;
+}
+
+//void CLemWord(const CLemWord& c)
+//{
+//
+//}
+
 
 #define   StupidSymbol1 160
-extern int GetMorphSignPosition(const char* LineStr);
 
 
 void CLemWord::DelDes(Descriptors g) 
@@ -76,9 +97,6 @@ void CLemWord::InitLevelSpecific(const CGraLine& token, short oborot_no, CHomony
 	}
 	if ((m_strWord == "\"") || (m_strWord == "'"))
 		DelDes(OPun);
-
-	if (pHom->m_SearchStatus != DictionaryWord)
-		m_bPredicted = true;
 
 }
 
@@ -269,26 +287,10 @@ bool CLemWord::IsSecondOfGraPair(EGraPairType type) const
 
 }
 
-void CLemWord::Reset()
-{
-	m_bFirstUpperAlpha = false;
-	m_bQuoteMark = false;
-    m_GraDescrs = 0;
-	m_bSpace = false;
-	m_bWord = false; 
-	m_bDash = false;
-	m_Register = AnyRegister;
-	m_bComma = false;
-	m_bPredicted = false;
-	m_GraphematicalUnitOffset = -1;
-	m_bHasSpaceBefore = false;
-	m_bDeleted = false;
-	m_LettersCount = 0;
-	m_TokenType = OTHER_TOKEN_TYPE;
+
+bool CLemWord::IsPredicted() const {
+	return !m_MorphHomonyms.empty() && m_MorphHomonyms[0].m_SearchStatus == PredictedWord;
 }
-
-
-
 
 
 void CLemWord::DeleteOborotMarks()
@@ -517,14 +519,14 @@ bool CLemWord::HasAnalyticalBeRus() const
 	// если мы попали на оборот(например, "может быть"), тогда не будем строить здесь анал. форму.
 	if (IsInOborot()) return false;
 
-	// "быто" предсказывается как "быть"
-	if (m_bPredicted) return false;
-
-    for (int i = 0; i < GetHomonymsCount(); i++)
-		if	(		(GetHomonym(i)->HasPos(VERB) || GetHomonym(i)->HasPos(INFINITIVE)) 
-				&& 	( GetHomonym(i)->IsLemma("БЫТЬ") || GetHomonym(i)->IsLemma("СТАТЬ"))
+	for (int i = 0; i < GetHomonymsCount(); i++) {
+		auto h = GetHomonym(i);
+		if (   h->m_SearchStatus == DictionaryWord // 	// "быто" предсказывается как "быть"
+			&& (h->HasPos(VERB) || h->HasPos(INFINITIVE))
+			&& (h->IsLemma("БЫТЬ") || h->IsLemma("СТАТЬ"))
 			)
 			return true;
+	}
 		
 	return false; 	
 }
@@ -591,7 +593,10 @@ bool CLemWord::IsEqualToGrammarItem(const CHomonym& h, const CGrammarItem& I) co
 
 
 	if (!I.m_Token.empty()) {
-		if (h.GetLemma() != I.m_Token)
+		auto equal_to_lemma = h.GetLemma() == I.m_Token;
+		// or equality with right truncation
+		auto equal_to_lemma_suffix = (I.m_Token[0] == '*') && endswith(h.GetLemma(), I.m_Token.substr(1));
+		if (!equal_to_lemma && !equal_to_lemma_suffix)
 			return false;
 	}
 
@@ -622,6 +627,9 @@ void CLemWord::BuildTerminalSymbolsByWord(const std::vector<CGrammarItem>& grm_i
 	m_AutomatSymbolInterpetationUnion.clear();
 	for (auto& h: m_MorphHomonyms)
 		h.m_AutomatSymbolInterpetation.clear();
+
+	if (m_bDeleted)
+		return;
 
 	// adding an end of stream symbol to each word
 	m_AutomatSymbolInterpetationUnion.insert(CInputSymbol(end_of_stream_symbol, "", ""));

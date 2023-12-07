@@ -962,6 +962,37 @@
                                     }
                                 ],
                                 "clause_type": "ГЛ_ЛИЧН"
+                            },
+                            {
+                                "syn_units": [
+                                    {
+                                        "lemma": ",",
+                                        "morph_info": " ",
+                                        "modified_grammems": ""
+                                    },
+                                    {
+                                        "lemma": "--",
+                                        "morph_info": " ",
+                                        "modified_grammems": ""
+                                    },
+                                    {
+                                        "lemma": "ПРОШЕПТАТЬ",
+                                        "morph_info": "Г дст,прш,мр,ед,; ",
+                                        "modified_grammems": "дст,прш,мр,ед,"
+                                    },
+                                    {
+                                        "lemma": "ВРУМФУНДЕЛЬ",
+                                        "morph_info": "С ср,жр,мр,пр,тв,вн,дт,рд,им,ед,мн,; ",
+                                        "modified_grammems": "ср,жр,мр,пр,тв,вн,дт,рд,им,ед,мн,"
+                                    }
+                                ],
+                                "groups": [
+                                    {
+                                        "type": "ПРЯМ_ДОП",
+                                        "words": "прошептал Врумфундель"
+                                    }
+                                ],
+                                "clause_type": "ГЛ_ЛИЧН"
                             }
                         ]
                     },
@@ -1121,6 +1152,116 @@
                                         "modified_grammems": "но,од,им,мн,"
                                     },
                                     {
+                                        "lemma": "МОЗГ",
+                                        "morph_info": "С мр,им,мн,; мр,вн,мн,; ",
+                                        "modified_grammems": "мр,им,мн,"
+                                    },
+                                    {
+                                        "lemma": "СЛИШКОМ",
+                                        "morph_info": "Н ; ",
+                                        "modified_grammems": ""
+                                    },
+                                    {
+                                        "lemma": "НАТРЕНИРОВАТЬ",
+                                        "morph_info": "КР_ПРИЧАСТИЕ стр,но,од,прш,мн,; ",
+                                        "modified_grammems": "стр,но,од,прш,мн,"
+                                    },
+                                    {
+                                        "lemma": ",",
+                                        "morph_info": " ",
+                                        "modified_grammems": ""
+                                    },
+                                    {
+                                        "lemma": "МАДЖИКТИЗ",
+                                        "morph_info": "С ср,жр,мр,пр,тв,вн,дт,рд,им,ед,мн,; ",
+                                        "modified_grammems": "ср,жр,мр,пр,тв,вн,дт,рд,им,ед,мн,"
+                                    },
+                                    {
+                                        "lemma": ".",
+                                        "morph_info": " ",
+                                        "modified_grammems": ""
+                                    }
+                                ],
+                                "groups": [
+                                    {
+                                        "type": "ПРИЛ_СУЩ",
+                                        "words": "наши мозги"
+                                    },
+                                    {
+                                        "type": "НАР_ПРИЛ",
+                                        "words": "слишком натренированы"
+                                    }
+                                ],
+                                "clause_type": "КР_ПРЧ"
+                            },
+                            {
+                                "syn_units": [
+                                    {
+                                        "lemma": ",",
+                                        "morph_info": " ",
+                                        "modified_grammems": ""
+                                    },
+                                    {
+                                        "lemma": "НАШ",
+                                        "morph_info": "МС-П но,од,им,мн,; но,вн,мн,; ",
+                                        "modified_grammems": "но,од,им,мн,"
+                                    },
+                                    {
+                                        "lemma": "МОЗГ",
+                                        "morph_info": "С мр,им,мн,; мр,вн,мн,; ",
+                                        "modified_grammems": "мр,им,мн,"
+                                    },
+                                    {
+                                        "lemma": "СЛИШКОМ",
+                                        "morph_info": "Н ; ",
+                                        "modified_grammems": ""
+                                    },
+                                    {
+                                        "lemma": "НАТРЕНИРОВАТЬ",
+                                        "morph_info": "КР_ПРИЧАСТИЕ стр,но,од,прш,мн,; ",
+                                        "modified_grammems": "стр,но,од,прш,мн,"
+                                    },
+                                    {
+                                        "lemma": ",",
+                                        "morph_info": " ",
+                                        "modified_grammems": ""
+                                    },
+                                    {
+                                        "lemma": "МАДЖИКТИЗ",
+                                        "morph_info": "С ср,жр,мр,пр,тв,вн,дт,рд,им,ед,мн,; ",
+                                        "modified_grammems": "ср,жр,мр,пр,тв,вн,дт,рд,им,ед,мн,"
+                                    },
+                                    {
+                                        "lemma": ".",
+                                        "morph_info": " ",
+                                        "modified_grammems": ""
+                                    }
+                                ],
+                                "groups": [
+                                    {
+                                        "type": "ПРИЛ_СУЩ",
+                                        "words": "наши мозги"
+                                    },
+                                    {
+                                        "type": "НАР_ПРИЛ",
+                                        "words": "слишком натренированы"
+                                    }
+                                ],
+                                "clause_type": "КР_ПРЧ"
+                            },
+                            {
+                                "syn_units": [
+                                    {
+                                        "lemma": ",",
+                                        "morph_info": " ",
+                                        "modified_grammems": ""
+                                    },
+                                    {
+                                        "lemma": "НАШ",
+                                        "morph_info": "МС-П но,од,им,мн,; но,вн,мн,; ",
+                                        "modified_grammems": "но,од,им,мн,"
+                                    },
+                                    {
                                         "lemma": "МОЗГИ",
                                         "morph_info": "С им,мн,; вн,мн,; ",
                                         "modified_grammems": "им,мн,"
@@ -1199,6 +1340,116 @@
                                         "lemma": "МАДЖИКТИЗА",
                                         "morph_info": "С жр,рд,мн,; ",
                                         "modified_grammems": "жр,рд,мн,"
+                                    },
+                                    {
+                                        "lemma": ".",
+                                        "morph_info": " ",
+                                        "modified_grammems": ""
+                                    }
+                                ],
+                                "groups": [
+                                    {
+                                        "type": "ПРИЛ_СУЩ",
+                                        "words": "наши мозги"
+                                    },
+                                    {
+                                        "type": "НАР_ПРИЛ",
+                                        "words": "слишком натренированы"
+                                    }
+                                ],
+                                "clause_type": "КР_ПРЧ"
+                            },
+                            {
+                                "syn_units": [
+                                    {
+                                        "lemma": ",",
+                                        "morph_info": " ",
+                                        "modified_grammems": ""
+                                    },
+                                    {
+                                        "lemma": "НАШ",
+                                        "morph_info": "МС-П но,од,им,мн,; но,вн,мн,; ",
+                                        "modified_grammems": "но,од,им,мн,"
+                                    },
+                                    {
+                                        "lemma": "МОЗГИ",
+                                        "morph_info": "С им,мн,; вн,мн,; ",
+                                        "modified_grammems": "им,мн,"
+                                    },
+                                    {
+                                        "lemma": "СЛИШКОМ",
+                                        "morph_info": "Н ; ",
+                                        "modified_grammems": ""
+                                    },
+                                    {
+                                        "lemma": "НАТРЕНИРОВАТЬ",
+                                        "morph_info": "КР_ПРИЧАСТИЕ стр,но,од,прш,мн,; ",
+                                        "modified_grammems": "стр,но,од,прш,мн,"
+                                    },
+                                    {
+                                        "lemma": ",",
+                                        "morph_info": " ",
+                                        "modified_grammems": ""
+                                    },
+                                    {
+                                        "lemma": "МАДЖИКТИЗ",
+                                        "morph_info": "С ср,жр,мр,пр,тв,вн,дт,рд,им,ед,мн,; ",
+                                        "modified_grammems": "ср,жр,мр,пр,тв,вн,дт,рд,им,ед,мн,"
+                                    },
+                                    {
+                                        "lemma": ".",
+                                        "morph_info": " ",
+                                        "modified_grammems": ""
+                                    }
+                                ],
+                                "groups": [
+                                    {
+                                        "type": "ПРИЛ_СУЩ",
+                                        "words": "наши мозги"
+                                    },
+                                    {
+                                        "type": "НАР_ПРИЛ",
+                                        "words": "слишком натренированы"
+                                    }
+                                ],
+                                "clause_type": "КР_ПРЧ"
+                            },
+                            {
+                                "syn_units": [
+                                    {
+                                        "lemma": ",",
+                                        "morph_info": " ",
+                                        "modified_grammems": ""
+                                    },
+                                    {
+                                        "lemma": "НАШ",
+                                        "morph_info": "МС-П но,од,им,мн,; но,вн,мн,; ",
+                                        "modified_grammems": "но,од,им,мн,"
+                                    },
+                                    {
+                                        "lemma": "МОЗГИ",
+                                        "morph_info": "С им,мн,; вн,мн,; ",
+                                        "modified_grammems": "им,мн,"
+                                    },
+                                    {
+                                        "lemma": "СЛИШКОМ",
+                                        "morph_info": "Н ; ",
+                                        "modified_grammems": ""
+                                    },
+                                    {
+                                        "lemma": "НАТРЕНИРОВАТЬ",
+                                        "morph_info": "КР_ПРИЧАСТИЕ стр,но,од,прш,мн,; ",
+                                        "modified_grammems": "стр,но,од,прш,мн,"
+                                    },
+                                    {
+                                        "lemma": ",",
+                                        "morph_info": " ",
+                                        "modified_grammems": ""
+                                    },
+                                    {
+                                        "lemma": "МАДЖИКТИЗ",
+                                        "morph_info": "С ср,жр,мр,пр,тв,вн,дт,рд,им,ед,мн,; ",
+                                        "modified_grammems": "ср,жр,мр,пр,тв,вн,дт,рд,им,ед,мн,"
                                     },
                                     {
                                         "lemma": ".",
@@ -17640,106 +17891,9 @@
                         ]
                     },
                     {
-                        "start": 26,
-                        "last": 31,
-                        "words": ", после чего я его ударил",
-                        "good_synvars": [
-                            {
-                                "syn_units": [
-                                    {
-                                        "lemma": ",",
-                                        "morph_info": " ",
-                                        "modified_grammems": ""
-                                    },
-                                    {
-                                        "lemma": "ПОСЛЕ",
-                                        "morph_info": "ПРЕДЛ ; ",
-                                        "modified_grammems": ""
-                                    },
-                                    {
-                                        "lemma": "ЧТО",
-                                        "morph_info": "МС ср,рд,ед,; ",
-                                        "modified_grammems": "ср,рд,ед,"
-                                    },
-                                    {
-                                        "lemma": "Я",
-                                        "morph_info": "МС 1л,им,ед,; ",
-                                        "modified_grammems": "1л,им,ед,"
-                                    },
-                                    {
-                                        "lemma": "ОНО",
-                                        "morph_info": "МС 3л,ср,рд,ед,; 3л,ср,вн,ед,; ",
-                                        "modified_grammems": "3л,ср,вн,рд,ед,"
-                                    },
-                                    {
-                                        "lemma": "УДАРИТЬ",
-                                        "morph_info": "Г дст,прш,мр,ед,; ",
-                                        "modified_grammems": "дст,прш,мр,ед,"
-                                    }
-                                ],
-                                "groups": [
-                                    {
-                                        "type": "ПГ",
-                                        "words": "после чего"
-                                    },
-                                    {
-                                        "type": "ПРЯМ_ДОП_РЕВ",
-                                        "words": "его ударил"
-                                    }
-                                ],
-                                "clause_type": "ГЛ_ЛИЧН"
-                            },
-                            {
-                                "syn_units": [
-                                    {
-                                        "lemma": ",",
-                                        "morph_info": " ",
-                                        "modified_grammems": ""
-                                    },
-                                    {
-                                        "lemma": "ПОСЛЕ",
-                                        "morph_info": "ПРЕДЛ ; ",
-                                        "modified_grammems": ""
-                                    },
-                                    {
-                                        "lemma": "ЧТО",
-                                        "morph_info": "МС ср,рд,ед,; ",
-                                        "modified_grammems": "ср,рд,ед,"
-                                    },
-                                    {
-                                        "lemma": "Я",
-                                        "morph_info": "МС 1л,им,ед,; ",
-                                        "modified_grammems": "1л,им,ед,"
-                                    },
-                                    {
-                                        "lemma": "ОН",
-                                        "morph_info": "МС 3л,мр,рд,ед,; 3л,мр,вн,ед,; ",
-                                        "modified_grammems": "3л,мр,вн,рд,ед,"
-                                    },
-                                    {
-                                        "lemma": "УДАРИТЬ",
-                                        "morph_info": "Г дст,прш,мр,ед,; ",
-                                        "modified_grammems": "дст,прш,мр,ед,"
-                                    }
-                                ],
-                                "groups": [
-                                    {
-                                        "type": "ПГ",
-                                        "words": "после чего"
-                                    },
-                                    {
-                                        "type": "ПРЯМ_ДОП_РЕВ",
-                                        "words": "его ударил"
-                                    }
-                                ],
-                                "clause_type": "ГЛ_ЛИЧН"
-                            }
-                        ]
-                    },
-                    {
                         "start": 24,
-                        "last": 31,
-                        "words": "производишь муру , после чего я его ударил",
+                        "last": 25,
+                        "words": "производишь муру",
                         "good_synvars": [
                             {
                                 "syn_units": [
@@ -17761,44 +17915,6 @@
                                     }
                                 ],
                                 "clause_type": "ГЛ_ЛИЧН"
-                            }
-                        ]
-                    },
-                    {
-                        "start": 32,
-                        "last": 35,
-                        "words": ", ладонью по губам",
-                        "good_synvars": [
-                            {
-                                "syn_units": [
-                                    {
-                                        "lemma": ",",
-                                        "morph_info": " ",
-                                        "modified_grammems": ""
-                                    },
-                                    {
-                                        "lemma": "ЛАДОНЬ",
-                                        "morph_info": "С жр,тв,ед,; ",
-                                        "modified_grammems": "жр,тв,ед,"
-                                    },
-                                    {
-                                        "lemma": "ПО",
-                                        "morph_info": "ПРЕДЛ ; ",
-                                        "modified_grammems": ""
-                                    },
-                                    {
-                                        "lemma": "ГУБА",
-                                        "morph_info": "С жр,дт,мн,; жр,дт,мн,; ",
-                                        "modified_grammems": "жр,дт,мн,"
-                                    }
-                                ],
-                                "groups": [
-                                    {
-                                        "type": "ПГ",
-                                        "words": "по губам"
-                                    }
-                                ],
-                                "clause_type": "EMPTY"
                             }
                         ]
                     },
@@ -17836,6 +17952,151 @@
                                     }
                                 ],
                                 "groups": [],
+                                "clause_type": "ГЛ_ЛИЧН"
+                            }
+                        ]
+                    },
+                    {
+                        "start": 26,
+                        "last": 40,
+                        "words": ", после чего я его ударил , ладонью по губам , и он убежал .",
+                        "good_synvars": [
+                            {
+                                "syn_units": [
+                                    {
+                                        "lemma": ",",
+                                        "morph_info": " ",
+                                        "modified_grammems": ""
+                                    },
+                                    {
+                                        "lemma": "ПОСЛЕ",
+                                        "morph_info": "ПРЕДЛ ; ",
+                                        "modified_grammems": ""
+                                    },
+                                    {
+                                        "lemma": "ЧТО",
+                                        "morph_info": "МС ср,рд,ед,; ",
+                                        "modified_grammems": "ср,рд,ед,"
+                                    },
+                                    {
+                                        "lemma": "Я",
+                                        "morph_info": "МС 1л,им,ед,; ",
+                                        "modified_grammems": "1л,им,ед,"
+                                    },
+                                    {
+                                        "lemma": "ОНО",
+                                        "morph_info": "МС 3л,ср,рд,ед,; 3л,ср,вн,ед,; ",
+                                        "modified_grammems": "3л,ср,вн,рд,ед,"
+                                    },
+                                    {
+                                        "lemma": "УДАРИТЬ",
+                                        "morph_info": "Г дст,прш,мр,ед,; ",
+                                        "modified_grammems": "дст,прш,мр,ед,"
+                                    },
+                                    {
+                                        "lemma": ",",
+                                        "morph_info": " ",
+                                        "modified_grammems": ""
+                                    },
+                                    {
+                                        "lemma": "ЛАДОНЬ",
+                                        "morph_info": "С жр,тв,ед,; ",
+                                        "modified_grammems": "жр,тв,ед,"
+                                    },
+                                    {
+                                        "lemma": "ПО",
+                                        "morph_info": "ПРЕДЛ ; ",
+                                        "modified_grammems": ""
+                                    },
+                                    {
+                                        "lemma": "ГУБА",
+                                        "morph_info": "С жр,дт,мн,; жр,дт,мн,; ",
+                                        "modified_grammems": "жр,дт,мн,"
+                                    }
+                                ],
+                                "groups": [
+                                    {
+                                        "type": "ПГ",
+                                        "words": "после чего"
+                                    },
+                                    {
+                                        "type": "ПРЯМ_ДОП_РЕВ",
+                                        "words": "его ударил"
+                                    },
+                                    {
+                                        "type": "ПГ",
+                                        "words": "по губам"
+                                    }
+                                ],
+                                "clause_type": "ГЛ_ЛИЧН"
+                            },
+                            {
+                                "syn_units": [
+                                    {
+                                        "lemma": ",",
+                                        "morph_info": " ",
+                                        "modified_grammems": ""
+                                    },
+                                    {
+                                        "lemma": "ПОСЛЕ",
+                                        "morph_info": "ПРЕДЛ ; ",
+                                        "modified_grammems": ""
+                                    },
+                                    {
+                                        "lemma": "ЧТО",
+                                        "morph_info": "МС ср,рд,ед,; ",
+                                        "modified_grammems": "ср,рд,ед,"
+                                    },
+                                    {
+                                        "lemma": "Я",
+                                        "morph_info": "МС 1л,им,ед,; ",
+                                        "modified_grammems": "1л,им,ед,"
+                                    },
+                                    {
+                                        "lemma": "ОН",
+                                        "morph_info": "МС 3л,мр,рд,ед,; 3л,мр,вн,ед,; ",
+                                        "modified_grammems": "3л,мр,вн,рд,ед,"
+                                    },
+                                    {
+                                        "lemma": "УДАРИТЬ",
+                                        "morph_info": "Г дст,прш,мр,ед,; ",
+                                        "modified_grammems": "дст,прш,мр,ед,"
+                                    },
+                                    {
+                                        "lemma": ",",
+                                        "morph_info": " ",
+                                        "modified_grammems": ""
+                                    },
+                                    {
+                                        "lemma": "ЛАДОНЬ",
+                                        "morph_info": "С жр,тв,ед,; ",
+                                        "modified_grammems": "жр,тв,ед,"
+                                    },
+                                    {
+                                        "lemma": "ПО",
+                                        "morph_info": "ПРЕДЛ ; ",
+                                        "modified_grammems": ""
+                                    },
+                                    {
+                                        "lemma": "ГУБА",
+                                        "morph_info": "С жр,дт,мн,; жр,дт,мн,; ",
+                                        "modified_grammems": "жр,дт,мн,"
+                                    }
+                                ],
+                                "groups": [
+                                    {
+                                        "type": "ПГ",
+                                        "words": "после чего"
+                                    },
+                                    {
+                                        "type": "ПРЯМ_ДОП_РЕВ",
+                                        "words": "его ударил"
+                                    },
+                                    {
+                                        "type": "ПГ",
+                                        "words": "по губам"
+                                    }
+                                ],
                                 "clause_type": "ГЛ_ЛИЧН"
                             }
                         ]
@@ -17933,6 +18194,26 @@
                         "trg_grm": "3л,мр,им,ед,"
                     },
                     {
+                        "src": "производишь",
+                        "trg": "муру",
+                        "name": "ПРЯМ_ДОП",
+                        "gramrel": "дст,пе,нс,2л,нст,ед,",
+                        "src_lemma": "ПРОИЗВОДИТЬ",
+                        "src_grm": "дст,пе,нс,2л,нст,ед,",
+                        "trg_lemma": "МУРА",
+                        "trg_grm": "дфст,но,жр,вн,ед,"
+                    },
+                    {
+                        "src": "убежал",
+                        "trg": "он",
+                        "name": "ПОДЛ",
+                        "gramrel": "",
+                        "src_lemma": "УБЕЖАТЬ",
+                        "src_grm": "дст,нп,св,прш,мр,ед,",
+                        "trg_lemma": "ОН",
+                        "trg_grm": "3л,мр,им,ед,"
+                    },
+                    {
                         "src": "ударил",
                         "trg": "его",
                         "name": "ПРЯМ_ДОП_РЕВ",
@@ -17953,26 +18234,6 @@
                         "trg_grm": "ср,рд,ед,"
                     },
                     {
-                        "src": "ударил",
-                        "trg": "я",
-                        "name": "ПОДЛ",
-                        "gramrel": "",
-                        "src_lemma": "УДАРИТЬ",
-                        "src_grm": "дст,пе,св,прш,мр,ед,",
-                        "trg_lemma": "Я",
-                        "trg_grm": "1л,им,ед,"
-                    },
-                    {
-                        "src": "производишь",
-                        "trg": "муру",
-                        "name": "ПРЯМ_ДОП",
-                        "gramrel": "дст,пе,нс,2л,нст,ед,",
-                        "src_lemma": "ПРОИЗВОДИТЬ",
-                        "src_grm": "дст,пе,нс,2л,нст,ед,",
-                        "trg_lemma": "МУРА",
-                        "trg_grm": "дфст,но,жр,вн,ед,"
-                    },
-                    {
                         "src": "по",
                         "trg": "губам",
                         "name": "ПГ",
@@ -17983,24 +18244,24 @@
                         "trg_grm": "но,жр,дт,мн,"
                     },
                     {
-                        "src": "убежал",
-                        "trg": "он",
+                        "src": "ударил",
+                        "trg": "я",
                         "name": "ПОДЛ",
                         "gramrel": "",
-                        "src_lemma": "УБЕЖАТЬ",
-                        "src_grm": "дст,нп,св,прш,мр,ед,",
-                        "trg_lemma": "ОН",
-                        "trg_grm": "3л,мр,им,ед,"
+                        "src_lemma": "УДАРИТЬ",
+                        "src_grm": "дст,пе,св,прш,мр,ед,",
+                        "trg_lemma": "Я",
+                        "trg_grm": "1л,им,ед,"
                     },
                     {
-                        "src": "производишь",
-                        "trg": "ударил",
+                        "src": "ударил",
+                        "trg": "убежал",
                         "name": "ПОДКЛАУЗА",
                         "gramrel": "",
-                        "src_lemma": "ПРОИЗВОДИТЬ",
-                        "src_grm": "дст,пе,нс,2л,нст,ед,",
-                        "trg_lemma": "УДАРИТЬ",
-                        "trg_grm": "дст,пе,св,прш,мр,ед,"
+                        "src_lemma": "УДАРИТЬ",
+                        "src_grm": "дст,пе,св,прш,мр,ед,",
+                        "trg_lemma": "УБЕЖАТЬ",
+                        "trg_grm": "дст,нп,св,прш,мр,ед,"
                     }
                 ],
                 "terms": []

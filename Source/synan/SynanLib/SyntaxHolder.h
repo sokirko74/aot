@@ -13,10 +13,10 @@ public:
 	CPostMorphInteface*				m_pPostMorph;
 
 
-	CSyntaxHolder();
+	CSyntaxHolder(MorphLanguageEnum l);
 	~CSyntaxHolder();
 
-	void LoadSyntax(MorphLanguageEnum langua);
+	void LoadSyntax();
 	void ClearHolder();
 	bool GetSentencesFromSynAn(std::string str, bool bFile);
 	
