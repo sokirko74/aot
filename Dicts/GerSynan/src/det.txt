@@ -1,4 +1,4 @@
-der
-derselbe
-derjenige
-dieser
+DER
+DERSELBE
+DERJENIGE
+DIESER

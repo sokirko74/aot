@@ -5,9 +5,10 @@
 #pragma once
 
 #include "stdafx.h"
-#include  "ThesaurusForSyntax.h"
-#include  "LemmaList.h"
+#include "ThesaurusForSyntax.h"
+#include "LemmaList.h"
 #include "synan/SimpleGrammarLib/SimpleGrammar.h"
+#include "morph_dict/lemmatizer_base_lib/MorphanHolder.h"
 
 #include "oborot.h"
 #include <memory>

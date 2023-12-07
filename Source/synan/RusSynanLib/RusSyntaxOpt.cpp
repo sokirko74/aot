@@ -137,8 +137,6 @@ void CRusSyntaxOpt::LoadFromRoss(CDictionary *piRossDict) {
 const char g_strRegRossDicPath[] = "Software\\Dialing\\Ross\\DictPath";
 
 void CRusSyntaxOpt::InitOptionsLanguageSpecific() {
-    m_piGramTab->LoadFromRegistry();
-
     //loading ross
     CDictionary piRossDict;
     std::string strPath = GetRegistryString(g_strRegRossDicPath);

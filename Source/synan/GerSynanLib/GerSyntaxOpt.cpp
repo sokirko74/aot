@@ -79,8 +79,6 @@ void CGerSyntaxOpt::DestroyOptions ()
 
 void CGerSyntaxOpt :: InitOptionsLanguageSpecific()
 {
-	m_piGramTab->LoadFromRegistry();
-
 	auto synan_directory = GetRegistryString("GerSynan");
 
 	//  reading adjektives

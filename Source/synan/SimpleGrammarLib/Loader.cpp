@@ -196,9 +196,9 @@ void CWorkGrammar::CreateTokenList() {
             throw CExpc("CWorkGrammar::CreateTokenList cannot open %s", path.c_str());
         };
         std::string line;
+        LOGV << "read file " << path;
         while (std::getline(inp, line)) {
             Trim(line);
-            MakeUpperUtf8(line);
             if (!line.empty()) {
                 F.m_PossibleLemmas.insert(line);
             }

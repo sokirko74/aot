@@ -27,7 +27,6 @@ bool CSyntaxOpt::IsValid() const {
 
 
 void CSyntaxOpt::DestroyOptions() {
-    delete m_piGramTab;
     m_pOborDic.reset(nullptr);
     m_pThesaurus.reset(nullptr);
     
@@ -168,6 +167,7 @@ void CSyntaxOpt::InitializeOptions() {
         throw CExpc("Failed read oborots");
     }
     m_pThesaurus.reset(NewThesaurus(this));
+    m_piGramTab = GetMHolder(m_Language).m_pGramTab;
     InitOptionsLanguageSpecific();
     LoadTermins(GetOborDictionary());
 };

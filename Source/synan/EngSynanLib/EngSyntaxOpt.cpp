@@ -58,7 +58,7 @@ void CEngSyntaxOpt::DestroyOptions ()
 
 void CEngSyntaxOpt :: InitOptionsLanguageSpecific()
 {
-	m_piGramTab->LoadFromRegistry();
+	
 }
 
 

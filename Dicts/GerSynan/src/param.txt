@@ -1,8 +1,8 @@
-Prozent
-Drittel
-Viertel
-Dollar
-Franc
-Rubel
-Euro
-Uhr
+PROZENT
+DRITTEL
+VIERTEL
+DOLLAR
+FRANC
+RUBEL
+EURO
+UHR
