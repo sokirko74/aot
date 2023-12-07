@@ -133,7 +133,7 @@ CGroup CSentence::ConvertFromTomitaNodeToCGroup(const CGLRParser& Parser, const 
 	G.m_iFirstWord = Node.m_InputStart;
 	G.m_iLastWord  = Node.m_InputEnd-1;
 	std::string Symbol = Grammar.m_UniqueGrammarItems[Node.m_Symbol.m_GrammarSymbolNo].m_ItemStrId;
-	G.m_GroupType = m_pSyntaxOptions->GetSyntaxGroupOrRegister(Symbol.c_str());
+	G.m_GroupType = m_pSyntaxOptions->GetSyntaxGroupOrRegister(Symbol);
 	G.SetGrammems(GetOpt()->GetGramTab()->GetAllGrammems(Node.m_Symbol.m_GramCodes.c_str()));
 	G.m_GramCodes = Node.m_Symbol.m_GramCodes;
 	assert (!Node.m_ParseChildren.empty());

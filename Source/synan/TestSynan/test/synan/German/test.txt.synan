@@ -54,7 +54,7 @@
                     {
                         "src": "gehe",
                         "trg": "Ich",
-                        "name": "EXPR",
+                        "name": "SUBJ",
                         "gramrel": "",
                         "src_lemma": "GEHEN",
                         "src_grm": "imper,intra,sin,3,1,prae,imp,kj1,non,",
@@ -121,7 +121,7 @@
                     {
                         "src": "bist",
                         "trg": "Du",
-                        "name": "EXPR",
+                        "name": "SUBJ",
                         "gramrel": "",
                         "src_lemma": "SEIN",
                         "src_grm": "imper,intra,trans,sin,2,prae,aux,non,",

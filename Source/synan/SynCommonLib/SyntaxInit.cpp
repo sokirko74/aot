@@ -173,8 +173,6 @@ void CSyntaxOpt::InitializeOptions() {
 };
 
 const char *CSyntaxOpt::GetGroupNameByIndex(long lType) const {
-    if (lType < 0) return 0;
-    if (lType >= m_SyntaxGroupTypes.size()) return 0;
     return m_SyntaxGroupTypes[lType].c_str();
 }
 
@@ -183,22 +181,22 @@ int CSyntaxOpt::GetGroupTypebyName(const char *TypeName) const {
 
     if (!TypeName) return false;
 
-    for (int i = 0; i < m_SyntaxGroupTypes.size(); i++) {
-        if (m_SyntaxGroupTypes[i] == TypeName) {
-            return i;
+    for (auto& [key, value] : m_SyntaxGroupTypes) {
+        if (value == TypeName) {
+            return key;
         }
     }
     return -1;
 
 }
 
-int CSyntaxOpt::GetSyntaxGroupOrRegister(const char *TypeName) const {
-    int i = GetGroupTypebyName(TypeName);
+int CSyntaxOpt::GetSyntaxGroupOrRegister(const std::string& group_str) const {
+    int i = GetGroupTypebyName(group_str.c_str());
     if (i != -1)
         return i;
 
-    m_SyntaxGroupTypes.push_back(TypeName);
-
-    return m_SyntaxGroupTypes.size() - 1;
+    int group_id = m_SyntaxGroupTypes.size();
+    m_SyntaxGroupTypes[group_id] = group_str;
+    return group_id;
 
 }

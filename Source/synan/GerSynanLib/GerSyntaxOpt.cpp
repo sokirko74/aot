@@ -11,12 +11,13 @@ const char gSyntaxGroupTypes [gSyntaxGroupTypesCount][30] =
 {
 	"DET_ADJ_SUB", "WWW", "KEYB", "PREP_NOUN", "MODIF_ADJ", 
 	"SIMILAR_ADJ", "SIMILAR_NOMEN",	"SIMILAR_ADV", "GEN_NOUN",
-	"DIR_OBJ", "NP", "NOUN_ADJ", "VERB_MODIF", "ADJ_SUB",
-	"FAMIL", "BERUF_NP", "GENIT_NP", "SIMILAR_NP",
-	"APPOSITION", "DISKONT_KONJ", "DISKONT_KONJ_REL", "EXPR",
-	"SUBJ", "SPNAME", "TITLE", "PNAME", 
-	"PERSON", "APPOS", "ADDITION", "MODIF_NUMER", "GEOGR",
-	"GENIT_PRE"
+	"DIR_OBJ", "NP", "NOUN_ADJ", "VERB_MODIF", 
+	"ADJ_SUB",	"FAMIL", "BERUF_NP", "GENIT_NP", 
+	"SIMILAR_NP", "APPOSITION", "DISKONT_KONJ", "DISKONT_KONJ_REL", 
+	"EXPR",	"SUBJ", 
+	"SPNAME", "TITLE", "PNAME", 
+	"PERSON", "APPOS", "ADDITION", 
+	"MODIF_NUMER", "GEOGR",	"GENIT_PRE"
 };
 
 CSentence* CGerSyntaxOpt::NewSentence() const {
@@ -28,7 +29,6 @@ CGerSyntaxOpt :: CGerSyntaxOpt (MorphLanguageEnum langua) : CSyntaxOpt(langua)
 {
 	m_piGramTab = new CGerGramTab();
 
-	m_SimilarNPGroupType = GetSyntaxGroupOrRegister("NP_SIMIL");
 	m_PluralMask = _QM(gPlural);
 	m_SingularMask = _QM(gSingular);
 	m_IndeclinableMask = 0;
@@ -53,7 +53,9 @@ CGerSyntaxOpt :: CGerSyntaxOpt (MorphLanguageEnum langua) : CSyntaxOpt(langua)
 
 
 	for (size_t i=0; i < gSyntaxGroupTypesCount; i++)
-		m_SyntaxGroupTypes.push_back(gSyntaxGroupTypes[i]);
+		m_SyntaxGroupTypes[i] = gSyntaxGroupTypes[i];
+	assert(m_SyntaxGroupTypes[gGENIT_PRE] == "GENIT_PRE");
+	m_SimilarNPGroupType = GetSyntaxGroupOrRegister("NP_SIMIL");
 
 }
 

@@ -73,7 +73,7 @@ public:
     KillHomonymsEnum m_KillHomonymsMode;
     bool m_bSilentMode;
 
-    mutable std::vector <std::string> m_SyntaxGroupTypes;
+    mutable std::unordered_map<uint8_t, std::string> m_SyntaxGroupTypes;
 
     CWorkGrammar m_FormatsGrammar;
 
@@ -124,7 +124,7 @@ public:
 
     virtual bool IsSimilarGroup(int type) const = 0;
 
-    int GetSyntaxGroupOrRegister(const char *TypeName) const;
+    int GetSyntaxGroupOrRegister(const std::string& group_str) const;
     virtual CSentence* NewSentence() const = 0;
 };
 

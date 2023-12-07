@@ -43,7 +43,7 @@ CEngSyntaxOpt :: CEngSyntaxOpt (MorphLanguageEnum langua) : CSyntaxOpt(langua)
 	m_IndeclinableMask = 0;
 	m_SyntaxGroupTypes.clear();
 	for (size_t i=0; i < eSyntaxGroupTypesCount; i++)
-		m_SyntaxGroupTypes.push_back(eSyntaxGroupTypes[i]);
+		m_SyntaxGroupTypes[i] = eSyntaxGroupTypes[i];
 	m_piGramTab = new CEngGramTab();
 	
 

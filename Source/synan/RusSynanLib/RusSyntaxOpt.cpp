@@ -59,7 +59,7 @@ CRusSyntaxOpt::CRusSyntaxOpt(MorphLanguageEnum langua) : CSyntaxOpt(langua) {
 
     m_SyntaxGroupTypes.clear();
     for (size_t i = 0; i < rSyntaxGroupTypesCount; i++)
-        m_SyntaxGroupTypes.push_back(rSyntaxGroupTypes[i]);
+        m_SyntaxGroupTypes[i] = rSyntaxGroupTypes[i];
 
 }
 

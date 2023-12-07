@@ -623,10 +623,11 @@ bool CLemWord::IsEqualToGrammarItem(const CHomonym& h, const CGrammarItem& I) co
 
 void CLemWord::BuildTerminalSymbolsByWord(const std::vector<CGrammarItem>& grm_items, size_t end_of_stream_symbol)
 {
-	assert(!m_MorphHomonyms.empty());
+	assert(GetHomonymsCount() > 0);
 	m_AutomatSymbolInterpetationUnion.clear();
-	for (auto& h: m_MorphHomonyms)
-		h.m_AutomatSymbolInterpetation.clear();
+	for (size_t i = 0; i < GetHomonymsCount(); ++i) {
+		GetHomonym(i)->m_AutomatSymbolInterpetation.clear();
+	}
 
 	if (m_bDeleted)
 		return;
@@ -648,13 +649,15 @@ void CLemWord::BuildTerminalSymbolsByWord(const std::vector<CGrammarItem>& grm_i
 				continue;
 		};
 
-		for (auto& h: m_MorphHomonyms)
+		for (size_t k = 0; k < GetHomonymsCount(); ++k) {
+			auto& h = *GetHomonym(k);
 			if (IsEqualToGrammarItem(h, item))
 			{
 				CInputSymbol N(i, h.GetGramCodes(), h.m_CommonGramCode);
 				h.m_AutomatSymbolInterpetation.insert(N);
 				m_AutomatSymbolInterpetationUnion.insert(N);
 			};
+		}
 	}
 
 };
