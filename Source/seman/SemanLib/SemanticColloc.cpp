@@ -3,7 +3,7 @@
 
 
 void CRusSemStructure::AddCollocHyp (long StartNodeNo, 
-									 std::vector<long>& RefCollocItems,
+									 const std::unordered_map<long, long>& ref_colloc_items,
 									 long ItemNo,
 									 CSemCollocHyp& Hyp,
 									 std::vector<CSemCollocHyp>& Hyps)
@@ -16,12 +16,11 @@ void CRusSemStructure::AddCollocHyp (long StartNodeNo,
 	const CRusSemClause&  Clause = m_Clauses[m_Nodes[StartNodeNo].m_ClauseNo];
 
 	for (; StartNodeNo < Clause.m_EndNodeNo; StartNodeNo++)
-		if (RefCollocItems[StartNodeNo - Clause.m_BeginNodeNo] != -1)
-			for (long RefNo = 0; RefNo < m_pData->m_RusCollocItemRefs[RefCollocItems[StartNodeNo-Clause.m_BeginNodeNo]].Refs.size(); RefNo++)
+		if (ref_colloc_items.find(StartNodeNo) != ref_colloc_items.end() )
+			for (const auto& c: m_pData->m_RusCollocItemRefs[ref_colloc_items.find(StartNodeNo)->second].Refs)
 			{
-				CCollocItemRef& C = m_pData->m_RusCollocItemRefs[RefCollocItems[StartNodeNo-Clause.m_BeginNodeNo]].Refs[RefNo];
-				if (		(C.CollocNo == Hyp.m_CollocNo)
-						&&	(C.ItemNo == ItemNo)
+				if (		(c.CollocNo == Hyp.m_CollocNo)
+						&&	(c.ItemNo == ItemNo)
 					)
 				{
 					
@@ -81,7 +80,7 @@ void CRusSemStructure::AddCollocHyp (long StartNodeNo,
 							)
 						{
 
-							AddCollocHyp (StartNodeNo+1, RefCollocItems, NextItemNo,Hyp, Hyps);
+							AddCollocHyp (StartNodeNo+1, ref_colloc_items, NextItemNo,Hyp, Hyps);
 						};
 					}
 					else
@@ -208,30 +207,25 @@ void CRusSemStructure::FindCollocsHyps(long ClauseNo)
 {
 	std::vector<CSemCollocHyp> AllHyps;
 	CRusSemClause& Clause = m_Clauses[ClauseNo];
-	std::vector<long> RefCollocItems;
-	RefCollocItems.resize(Clause.GetNodesCount());
+	std::unordered_map<long, long> ref_colloc_items;
 
 	for (long i = Clause.m_BeginNodeNo; i < Clause.m_EndNodeNo; i++)
 	{
-		// мы предполагем, что в поле CONTENT входят только примитивные узлы
+		// мы предполагаем, что в поле CONTENT входят только примитивные узлы
 		if (!m_Nodes[i].IsPrimitive()) continue;
 		std::string S  =  m_Nodes[i].m_Words[0].m_Lemma;
 		if (S == "") S = m_Nodes[i].m_Words[0].GetWord();
-
-		auto it = lower_bound(m_pData->m_RusCollocItemRefs.begin(), m_pData->m_RusCollocItemRefs.end(), S, LessCollocItemRefCollect());
-		if (       (it  != m_pData->m_RusCollocItemRefs.end())
-			&&  (it->Item == S)
-		 )
-		     RefCollocItems[i-Clause.m_BeginNodeNo] = it - m_pData->m_RusCollocItemRefs.begin();
-		else
-			RefCollocItems[i-Clause.m_BeginNodeNo] = -1;
+		auto& refs = m_pData->m_RusCollocItemRefs;
+		auto it = lower_bound(refs.begin(), refs.end(), S, LessCollocItemRefCollect());
+		if ((it != refs.end()) && (it->Item == S))
+			ref_colloc_items[i] = it - refs.begin();
 	};
 
 	// получение множетсва гипотез
 	for (long i=0; i<m_pData->m_RusCollocs.size();i++)
 	{
 		CSemCollocHyp Hyp(i);
-		AddCollocHyp(Clause.m_BeginNodeNo, RefCollocItems, 0, Hyp, AllHyps);
+		AddCollocHyp(Clause.m_BeginNodeNo, ref_colloc_items, 0, Hyp, AllHyps);
 	}
 
 	// проверка GF(i)

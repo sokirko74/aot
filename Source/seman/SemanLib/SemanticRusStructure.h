@@ -3,6 +3,7 @@
 #include "SemanticStructure.h"
 #include "SemanticWeight.h"
 #include "rus_sem_word.h"
+#include "rus_sem_relation.h"
 #include "synan/SynCommonLib/RelationsIterator.h"
 
 #include <stack>
@@ -157,43 +158,6 @@ public:
     };
 };
 
-// ==== класс "Русское отношение"
-class CRusSemRelation : public CSemRelation {
-public:
-    // истина, что отношение не может проходить только над одной запятой (оно должно проходить еще над чем-то)
-    bool m_CannotHaveOnlyCommaBetween;
-    // истина, если отношение согласовано по SF (для текущего древесного варианта)
-    bool m_bSemFetAgree;
-    // номер поля эквивалнтности, которое включает отношения, выходящие из одного узла и противоречащие друг другу
-    long m_EqualFieldId;
-    //длина отношения в "жестких" синтаксических деревьях
-    long m_LeapsCount;
-    //технический слот: помечает отношения, которые точно останутся в древесном варианте
-    long m_bUniqueRelation;
-    // номер межклаузного правила, по которому была проведена эта межклаузная связь
-    long m_ClauseRuleNo;
-
-    // истина, если название отношение согласовано с частью речи
-    // узла, в которое оно идет
-    // например, PROPERT обычно идет в прилашательное// а SUB в существительное
-    bool m_bSemRelPOS;
-
-
-    CRusSemRelation(const CValency &Valency,
-                    long SourceNodeNo,
-                    long TargetNodeNo,
-                    std::string SyntacticRelation) : CSemRelation(Valency, SourceNodeNo, TargetNodeNo,
-                                                                  SyntacticRelation) {
-        m_CannotHaveOnlyCommaBetween = false;
-        m_bSemFetAgree = false;
-        m_bReverseRel = false;
-        m_LeapsCount = 0;
-        m_bUniqueRelation = false;
-        m_ClauseRuleNo = -1;
-        m_bSemRelPOS = true;
-
-    };
-};
 
 
 // истина, если между двумя узлами стоит глагол в личной форме
@@ -956,7 +920,7 @@ public:
     void FindCollocsHyps(long ClauseNo);
 
     // проверяет лексическую возможность существования сл-ния начиная от узла StartNodeNo
-    void AddCollocHyp(long StartNodeNo, std::vector<long> &RefCollocItems, long ItemNo, CSemCollocHyp &Hyp,
+    void AddCollocHyp(long StartNodeNo, const std::unordered_map<long, long>& RefCollocItems, long ItemNo, CSemCollocHyp &Hyp,
                       std::vector<CSemCollocHyp> &Hyps);
 
     // проверяет грамматические ограничения элемента словосочетания  CollocNo для узла NodeNo
@@ -1717,6 +1681,7 @@ public:
 
     bool CanBeDeleted(long NodeNo) const;
 
+    COutputRelation GetOutputRelation(const CRusSemRelation& r) const;
 };
 
 extern bool HasReflexiveSuffix(const std::string &s);
@@ -1729,10 +1694,6 @@ extern void GetCommonVariants(const std::vector<VectorLong> &Parents,
                               long Position);
 
 extern bool IsBetween(const CRusSemNode &Node, const CRusSemNode &LowerBound, const CRusSemNode &UpperBound);
-
-extern TCortege GetSubjCortege(const CStructDictHolder *RossDoc);
-
-extern TCortege GetInstrObj(const CStructDictHolder *RossDoc);
 
 // максимально расстояние от начала клаузы, на котором может находиться  союзное слово,
 // например, "Я знаю дом, в подвале которого нет  мышей"

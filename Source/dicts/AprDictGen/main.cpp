@@ -15,11 +15,9 @@
 int main(int argc, char **argv) {
     try {
         assert(argc == 3);
-        CMorphanHolder rus;
-        CMorphanHolder eng;
-        rus.LoadMorphology(morphRussian);
-        eng.LoadMorphology(morphEnglish);
-        BuildBinaryDict(&rus, &eng, argv[1], argv[2]);
+        GlobalLoadMorphHolder(morphEnglish);
+        GlobalLoadMorphHolder(morphRussian);
+        BuildBinaryDict(&GetMHolder(morphRussian), &GetMHolder(morphEnglish), argv[1], argv[2]);
         return 0;
     }
     catch (std::exception& e) {

@@ -15,6 +15,8 @@ public:
 
 	CLemTextCreator(MorphLanguageEnum l);
 
+	void InitGraphan();
+
 	bool BuildLemText(std::string str, bool bFile, int& CountOfWords);
 };
 

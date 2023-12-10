@@ -909,6 +909,19 @@ CRusSemNode	CRusSemStructure::CreateModalCopulNode(long ClauseNo)
 };
 
 
+COutputRelation CRusSemStructure::GetOutputRelation(const CRusSemRelation& r) const {
+	long targetNodeNo = r.m_Valency.m_Direction == C_A && !r.m_bReverseRel ? r.m_SourceNodeNo : r.m_TargetNodeNo;
+	long sourceNodeNo = !(r.m_Valency.m_Direction == C_A && !r.m_bReverseRel) ? r.m_SourceNodeNo
+		: r.m_TargetNodeNo;
+	COutputRelation output = {
+		r.m_Valency.m_RelationStr,
+		r.m_SyntacticRelation,
+		GetNodeStr1(sourceNodeNo),
+		GetNodeStr1(targetNodeNo)
+	};
+	return output;
+}
+
 // ===================================================================
 // =============   CRusSemNode =====================================
 // ===================================================================
@@ -1114,27 +1127,6 @@ bool IsBetween (const CRusSemNode& Node, const CRusSemNode& LowerBound, const CR
 			 && Node.GetMinWordNo()		  < UpperBound.GetMinWordNo();
 };
 
-TCortege GetSubjCortege (const CStructDictHolder* RossDoc)
-{
-          TCortege C;
-		  C.m_FieldNo = RossDoc->GramFetFieldNo;
-		  C.m_LeafId = 1;
-		  C.m_LevelId = 0;
-		  C.SetItem(0, RossDoc->SubjSynONo);
-		  C.SetItem(1, RossDoc->NominativeNo);
-		  return C;
-};
-
-TCortege GetInstrObj (const CStructDictHolder* RossDoc)
-{
-          TCortege C;
-		  C.m_FieldNo = RossDoc->GramFetFieldNo;
-		  C.m_LeafId = 2;
-		  C.m_LevelId = 0;
-		  C.SetItem(0, RossDoc->IndirObjSynONo);
-		  C.SetItem(1, RossDoc->InstrumentalisNo);
-		  return C;
-};
 
 
 // =====================  CRusSemClause
@@ -1244,3 +1236,4 @@ void CRusSemClause::PopNodesReferences()
 	m_NodeRef.pop();
 	m_NodeRef.pop();
 };
+

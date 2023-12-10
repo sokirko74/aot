@@ -61,7 +61,7 @@ add_library(SemanLib
         "rus_sem_word.h"
         "sem_word.cpp" 
         "sem_word.h"
- "dict_type.h" "dict_type.cpp")
+ "dict_type.h" "dict_type.cpp" "rus_sem_relation.cpp" "rus_sem_relation.h" "sem_relation.cpp" "sem_relation.h" "syn_realization.h" "syn_realization.cpp")
 
 target_link_libraries(SemanLib
     SynanLib
@@ -81,3 +81,5 @@ if (BUILD_DICTS)
         EngCollocs
         TimeRoss) 
 endif()
+
+add_subdirectory(tests)

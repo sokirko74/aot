@@ -510,7 +510,7 @@ bool   TRoss::ReadFromStrWithOneSignatura(const char* s, TCortege& C, const CSig
 };
 
 
-bool   TRoss::ReadFromStr(const char* str, TCortege& C)
+bool   TRoss::ReadFromStr(const char* str, TCortege& C)  
 {
 	for (const auto& s : Fields[C.m_FieldNo].m_Signats)
 		if (ReadFromStrWithOneSignatura(str, C, s))

@@ -367,22 +367,20 @@ void CEngSemStructure::RefineByNumeralMarks(int iEngNode)
 	if( StrNumeral!="#ed" )
 		return; // неизвестная помета
 //
-	std::vector<CFormInfo> piPC;
-	helper.GetEngLemmatizer()->CreateParadigmCollection(true, engWord.m_Lemma, false, false, piPC);
+	std::vector<CFormInfo> paradigms;
+	helper.GetEngLemmatizer()->CreateParadigmCollection(true, engWord.m_Lemma, false, false, paradigms);
 	
-	int pid = -1;
-	for( int k=0; k<piPC.size(); k++ )
+	long pid = UnknownParadigmId;
+	for(auto& p: paradigms)
 	{
-		const CFormInfo& piPagadigm = piPC[k];
-		std::string anc = piPagadigm.GetAncode(0);
-		anc = anc.substr(0,2);
-		std::string pos = helper.GetEngGramTab()->GetPartOfSpeechStr(helper.GetEngGramTab()->GetPartOfSpeech(anc.c_str()));
-		if( pos != "VERB" )
-			continue;
-		pid = piPagadigm.GetParadigmId();
-		break;
+		std::string anc = p.GetAncode(0).substr(0,2);
+		auto pos = helper.GetEngGramTab()->GetPartOfSpeech(anc.c_str());
+		if (pos == eVERB) {
+			pid = p.GetParadigmId();
+			break;
+		}
 	}
-	if( pid<0 )
+	if( pid == UnknownParadigmId  )
 		return;
 //
 	engWord.SetWord(helper.create_form_by_id(pid,_QM(ePastParticiple)), true);

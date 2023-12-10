@@ -55,18 +55,15 @@ part_of_speech_mask_t CSemanticStructure::GetPosesFromRusArticle(CStructDictHold
     return ret_poses;
 }
 
-bool CRusSemStructure::VerbCanBeWithoutReflexiveSuffix(std::string Lemma) const {
-    if (!HasReflexiveSuffix(Lemma)) return false;
-    Lemma.erase(Lemma.length() - ReflexiveSuffixLen);
-    const CLemmatizer *P = m_pData->GetRusLemmatizer();
-
-
+bool CRusSemStructure::VerbCanBeWithoutReflexiveSuffix(std::string lemma) const {
+    if (!HasReflexiveSuffix(lemma)) return false;
+    lemma.erase(lemma.length() - ReflexiveSuffixLen);
     std::vector<CFormInfo> ParadigmCollection;
-    P->CreateParadigmCollection(true, Lemma, false, false, ParadigmCollection);
+    auto s8 = convert_from_utf8(lemma.c_str(), morphRussian);
+    m_pData->GetRusLemmatizer()->CreateParadigmCollection(true, s8, false, false, ParadigmCollection);
 
-    for (int i = 0; i < ParadigmCollection.size(); i++) {
-        std::string GramCodes = ParadigmCollection[i].GetAncode(0);
-        long POS = m_pData->GetRusGramTab()->GetPartOfSpeech(GramCodes.c_str());
+    for (auto& p: ParadigmCollection) {
+        part_of_speech_t POS = m_pData->GetRusGramTab()->GetPartOfSpeech(p.GetAncode(0).c_str());
         if (POS == INFINITIVE) return true;
     };
     return false;
@@ -173,8 +170,8 @@ void CRusSemStructure::InitInterps(CRusSemWord &W, bool PassiveForm, long Clause
 
         // если	слово не нашлось, то постараемся найти его видовую пару
         if (UnitNo == ErrUnitNo)
-            for (long i = 0; i < W.m_WordEquals.size(); i++) {
-                UnitStr = W.m_WordEquals[i];
+            for (auto& s: W.m_WordEquals) {
+                UnitStr = s;
                 MakeLowerUtf8(UnitStr);
                 UnitNo = GetRossHolder(Ross)->LocateUnit(UnitStr.c_str(), 1);
                 if (UnitNo != ErrUnitNo) break;
@@ -330,7 +327,8 @@ CRusSemNode CRusSemStructure::CreatePrimitiveNode(size_t WordNo) {
     CRusSemNode N;
     const CSynWord &W = m_piSent->m_Words[WordNo];
 
-    CSynHomonym H(const_cast<CSentence *>(m_piSent));
+    CSynHomonym H(morphRussian);
+    H.SetSentence(const_cast<CSentence *>(m_piSent));
     GetHomonym(ClauseNo, WordNo, H);
 
     unsigned short UnitNo = ErrUnitNo;
@@ -415,7 +413,7 @@ CRusSemNode CRusSemStructure::CreatePrimitiveNode(size_t WordNo) {
             bool bRes = m_pData->GetRusLemmatizer()->CreateParadigmFromID(ParadigmId, Paradigm);
             assert (bRes);
             SemWord.m_ParadigmId = ParadigmId;
-            SemWord.m_Lemma = Paradigm.GetWordForm(0);
+            SemWord.m_Lemma = convert_to_utf8(Paradigm.GetWordForm(0), morphRussian);
             SemWord.m_Poses = (1 << ADV);
             SemWord.SetFormGrammems(0);
             GramCodes = "";
@@ -448,14 +446,15 @@ CRusSemNode CRusSemStructure::CreatePrimitiveNode(size_t WordNo) {
              )
          )
         )
-        {
+    {
+        const size_t prefix_len = std::string("ПО-").length();
         if (endswith(S, "КИ")) {
             // "по-солдатски"
-            SemWord.m_Lemma = S.substr(std::string("ПО-").length()) + "Й";
+            SemWord.m_Lemma = S.substr(prefix_len) + "Й";
             SemWord.m_ParadigmId = m_pData->GetFirstParadigmId(morphRussian, SemWord.m_Lemma, 1 << ADJ_FULL);
         } else {
             // "по-хорошему"
-            SemWord.m_ParadigmId = m_pData->GetFirstParadigmIdAndLemma(morphRussian, S.substr(3), 1 << ADJ_FULL,
+            SemWord.m_ParadigmId = m_pData->GetFirstParadigmIdAndLemma(morphRussian, S.substr(prefix_len), 1 << ADJ_FULL,
                                                                        SemWord.m_Lemma);
         };
         SemWord.m_bAdverbFromAdjective = true;
@@ -536,16 +535,14 @@ void CRusSemStructure::DelProhibitedInterps(std::string UnitStr, CRusSemNode &N)
     };
 };
 
-bool CRusSemStructure::HasAuxiliaryPOS(std::string Lemma) const {
+bool CRusSemStructure::HasAuxiliaryPOS(std::string lemma) const {
 
 
     std::vector<CFormInfo> ParadigmCollection;
-    m_pData->GetRusLemmatizer()->CreateParadigmCollection(true, Lemma, true, false, ParadigmCollection);
-
-
-    for (int i = 0; i < ParadigmCollection.size(); i++) {
-        const CFormInfo &Paradigm = ParadigmCollection[i];
-        std::string ancode = Paradigm.GetSrcAncode();
+    auto s8 = convert_from_utf8(lemma.c_str(), morphRussian);
+    m_pData->GetRusLemmatizer()->CreateParadigmCollection(true, s8, true, false, ParadigmCollection);
+    for (auto& p: ParadigmCollection) {
+        std::string ancode = p.GetSrcAncode();
         BYTE POS = m_pData->GetRusGramTab()->GetPartOfSpeech(ancode.c_str());
         if ((POS == PRONOUN)
             || (POS == PRONOUN_P)
@@ -559,18 +556,14 @@ bool CRusSemStructure::HasAuxiliaryPOS(std::string Lemma) const {
     return false;
 }
 
-void CRusSemStructure::GetMaxWordWeightByLemma(std::string Lemma, CRusSemWord &SemWord) const {
-
-
-    std::vector<CFormInfo> ParadigmCollection;
-    m_pData->GetRusLemmatizer()->CreateParadigmCollection(true, Lemma, true, false, ParadigmCollection);
-
-    for (int i = 0; i < ParadigmCollection.size(); i++) {
-        const CFormInfo &Paradigm = ParadigmCollection[i];
-        if (SemWord.m_WordWeight < Paradigm.GetWordWeight())
-            SemWord.m_WordWeight = Paradigm.GetWordWeight();
+void CRusSemStructure::GetMaxWordWeightByLemma(std::string lemma, CRusSemWord &SemWord) const {
+    std::vector<CFormInfo> paradigms;
+    auto s8 = convert_from_utf8(lemma.c_str(), morphRussian);
+    m_pData->GetRusLemmatizer()->CreateParadigmCollection(true, s8, true, false, paradigms);
+    for (auto& p : paradigms) {
+        if (SemWord.m_WordWeight < p.GetWordWeight())
+            SemWord.m_WordWeight = p.GetWordWeight();
     }
-
 }
 
 CRusSemNode CRusSemStructure::CreateNodeByFirmGroup(const CRelationsIterator *RelIt, long GroupNo) {
@@ -583,7 +576,8 @@ CRusSemNode CRusSemStructure::CreateNodeByFirmGroup(const CRelationsIterator *Re
         const CSynWord &W = m_piSent->m_Words[j];
         std::string Lemma;
 
-        CSynHomonym H(const_cast<CSentence *> (m_piSent));
+        CSynHomonym H(morphRussian);
+        H.SetSentence(const_cast<CSentence*> (m_piSent));
         GetHomonym(ClauseNo, j, H);
         Lemma = H.GetLemma();
         CRusSemWord SemWord(j, Lemma);
@@ -631,7 +625,8 @@ CRusSemNode CRusSemStructure::CreateNodeByFirmGroup(const CRelationsIterator *Re
     };
 
 
-    CSynHomonym H(const_cast<CSentence *> (m_piSent));
+    CSynHomonym H(morphRussian);
+    H.SetSentence(const_cast<CSentence*> (m_piSent));
     GetHomonym(ClauseNo, G.m_iFirstWord, H);
 
     if (H.m_OborotNo != -1)
@@ -640,14 +635,6 @@ CRusSemNode CRusSemStructure::CreateNodeByFirmGroup(const CRelationsIterator *Re
     N.m_ClauseNo = ClauseNo;
     N.m_SynGroupTypeStr = m_piSent->GetOpt()->GetGroupNameByIndex(G.m_GroupType);
     N.m_SyntaxGroupNo = GroupNo;
-    /*SYNANLib::IWordPtr W = m_piSent->Word[N.m_Words[0].m_WordNo];
-    if (G->ThesID != NoneThes)
-    {
-              N.m_TerminId = G->TerminID;
-              N.m_ThesaurusId = G->ThesID;
-    };*/
-
-
     N.SetGrammems(G.GetGrammems());
 
     return N;
@@ -864,7 +851,7 @@ m_Nodes[CopulNodeNo].m_Patterns[0].m_Valency.m_RelationStr= "F-ACT"; m_Nodes[Cop
  m_Nodes[CopulNodeNo].m_Patterns[1].m_SourceNo = CopulNodeNo;
  m_Nodes[CopulNodeNo].m_Patterns[1].m_Valency = m_Nodes[CopulNodeNo].m_Vals[1];
  m_Nodes[CopulNodeNo].m_Patterns[1].m_pRossDoc = GetRossHolder(Ross);
- m_Nodes[CopulNodeNo].m_Patterns[1].m_GramCorteges.push_back(GetSubjCortege(GetRossHolder(Ross)));
+ m_Nodes[CopulNodeNo].m_Patterns[1].m_GramCorteges.push_back(GetRossHolder(Ross)->rus_subj_gf);
 */
     m_Clauses[ClauseNo].m_ClauseSyntaxTop = CopulNodeNo;
 
@@ -1009,38 +996,37 @@ void CRusSemStructure::DealInvitatoryMoodAfterTree() {
 CRusSemNode Create_EST_Node(CRusSemStructure &R, long ClauseNo) {
     const CLemmatizer *P = R.m_pData->GetRusLemmatizer();
 
-    std::vector<CFormInfo> ParadigmCollection;
+    std::vector<CFormInfo> paradigms;
     std::string Est = _R("есть");
-    P->CreateParadigmCollection(false, Est, false, false, ParadigmCollection);
+    P->CreateParadigmCollection(false, Est, false, false, paradigms);
 
 
-    assert (!ParadigmCollection.empty());
-    long i = 0;
-    for (; i < ParadigmCollection.size(); i++)
-        if (ParadigmCollection[i].GetWordForm(0) == _R("БЫТЬ"))
-            break;
-    assert (i < ParadigmCollection.size());
-
-    std::string GramCodes = ParadigmCollection[i].GetSrcAncode();
-    CRusSemWord SemWord(-1, "БЫТЬ");
-    uint64_t dummy = R.m_pData->GetRusGramTab()->GetAllGrammems(GramCodes.c_str());
-    SemWord.SetFormGrammems(dummy);
-    SemWord.m_Poses = 1 << VERB;
-    SemWord.SetWord("ЕСТЬ");
-    SemWord.m_CharCase = LowLow;
-    SemWord.m_ParadigmId = ParadigmCollection[i].GetParadigmId();
-    SemWord.m_IsPunct = false;
-    SemWord.m_pData = R.m_pData;
-    SemWord.m_ILE = false;
-    CRusSemNode N;
-    N.m_Words.push_back(SemWord);
-    N.SetGrammems(SemWord.GetAllGrammems());
-    N.m_GramCodes = GramCodes;
-    N.m_SynGroupTypeStr = "";
-    N.SetMainWordNo(0);
-    R.InitInterps(SemWord, false, ClauseNo, N, false);
-    N.m_ClauseNo = ClauseNo;
-    return N;
+    assert (!paradigms.empty());
+    for (auto& p : paradigms) {
+        if (p.GetWordForm(0) == _R("БЫТЬ")) {
+            std::string GramCodes = p.GetSrcAncode();
+            CRusSemWord SemWord(-1, "БЫТЬ");
+            uint64_t dummy = R.m_pData->GetRusGramTab()->GetAllGrammems(GramCodes.c_str());
+            SemWord.SetFormGrammems(dummy);
+            SemWord.m_Poses = 1 << VERB;
+            SemWord.SetWord("ЕСТЬ");
+            SemWord.m_CharCase = LowLow;
+            SemWord.m_ParadigmId = p.GetParadigmId();
+            SemWord.m_IsPunct = false;
+            SemWord.m_pData = R.m_pData;
+            SemWord.m_ILE = false;
+            CRusSemNode N;
+            N.m_Words.push_back(SemWord);
+            N.SetGrammems(SemWord.GetAllGrammems());
+            N.m_GramCodes = GramCodes;
+            N.m_SynGroupTypeStr = "";
+            N.SetMainWordNo(0);
+            R.InitInterps(SemWord, false, ClauseNo, N, false);
+            N.m_ClauseNo = ClauseNo;
+            return N;
+        }
+    }
+    throw CExpc("cannot find \"быть\" in the Russian Dictionary");
 };
 
 

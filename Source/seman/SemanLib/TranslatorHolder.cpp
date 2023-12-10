@@ -23,7 +23,7 @@ std::string CTranslatorHolder::GetThesPath(int ThesId) const {
 }
 
 
-CTranslatorHolder::CTranslatorHolder() {
+CTranslatorHolder::CTranslatorHolder(): m_RusHolder(morphRussian) {
 
     m_LastUpdateTime = 0;
     m_bSilentMode = false;
@@ -38,19 +38,19 @@ CSentencesCollection *CTranslatorHolder::GetSynan() {
 };
 
 const CLemmatizer *CTranslatorHolder::GetRusLemmatizer() const {
-    return m_RusHolder.m_pLemmatizer;
+    return GetMHolder(morphRussian).m_pLemmatizer;
 };
 
 const CLemmatizer *CTranslatorHolder::GetEngLemmatizer() const {
-    return m_EngHolder.m_pLemmatizer;
+    return GetMHolder(morphEnglish).m_pLemmatizer;
 };
 
 const CRusGramTab *CTranslatorHolder::GetRusGramTab() const {
-    return (const CRusGramTab *) m_RusHolder.m_pGramTab;
+    return (const CRusGramTab *)GetMHolder(morphRussian).m_pGramTab;
 };
 
 const CEngGramTab *CTranslatorHolder::GetEngGramTab() const {
-    return (const CEngGramTab *) m_EngHolder.m_pGramTab;
+    return (const CEngGramTab *)GetMHolder(morphEnglish).m_pGramTab;
 };
 
 const CLemmatizer *CTranslatorHolder::GetLemmatizer(MorphLanguageEnum langua) const {
@@ -96,8 +96,9 @@ std::string CTranslatorHolder::GetThesStr(int ThesId) const {
 };
 
 void CTranslatorHolder::Init() {
-    m_EngHolder.LoadMorphology(morphEnglish);
-    m_RusHolder.LoadSyntax(morphRussian);
+    GlobalLoadMorphHolder(morphRussian);
+    GlobalLoadMorphHolder(morphEnglish);
+    m_RusHolder.LoadSyntax();
     m_AspDict.Load();
     m_CompFreq.Load(GetRegistryString(g_strFreqCompPath));
     m_FinFreq.Load(GetRegistryString(g_strFreqFinPath));
@@ -109,33 +110,33 @@ void CTranslatorHolder::Init() {
 
 
 StringVector CTranslatorHolder::GetAspVerb(long ParadigmId, bool IsPerfective) {
-    StringVector Res;
 
-
-    std::vector<uint32_t> ResVector;
+    std::vector<uint32_t> ids;
 
     if (!IsPerfective)
-        m_AspDict.nonperf2perf(ParadigmId, ResVector);
+        m_AspDict.nonperf2perf(ParadigmId, ids);
     else
-        m_AspDict.perf2nonperf(ParadigmId, ResVector);
+        m_AspDict.perf2nonperf(ParadigmId, ids);
 
 
-    for (long i = 0; i < ResVector.size(); i++) {
-        CFormInfo Prd;
-        bool bRes = GetRusLemmatizer()->CreateParadigmFromID(ResVector[i], Prd);
-        assert (bRes);
-        Res.push_back(Prd.GetWordForm(0));
+    StringVector res;
+    for (auto& paradigm_id: ids) {
+        CFormInfo p;
+        bool b = GetRusLemmatizer()->CreateParadigmFromID(paradigm_id, p);
+        assert (b);
+        res.push_back(convert_to_utf8(p.GetWordForm(0), morphRussian));
     };
 
-    return Res;
+    return res;
 };
 
-StringVector CTranslatorHolder::GetAspVerb(std::string Verb, bool IsPerfective) {
+StringVector CTranslatorHolder::GetAspVerb(std::string verb, bool IsPerfective) {
     StringVector Empty;
     try {
 
         std::vector<CFormInfo> ParadigmCollection;
-        GetRusLemmatizer()->CreateParadigmCollection(true, Verb, false, false, ParadigmCollection);
+        std::string s8 = convert_from_utf8(verb.c_str(), morphRussian);
+        GetRusLemmatizer()->CreateParadigmCollection(true, s8, false, false, ParadigmCollection);
 
         for (int i = 0; i < ParadigmCollection.size(); i++)
             if (GetRusGramTab()->GetPartOfSpeech(ParadigmCollection[i].GetSrcAncode().c_str()) == INFINITIVE) {
@@ -174,22 +175,15 @@ uint32_t CTranslatorHolder::GetFirstParadigmIdAndLemma(const MorphLanguageEnum l
     const CAgramtab *G = GetGramTab(langua);
     try {
 
-        std::vector<CFormInfo> ParadigmCollection;
-        L->CreateParadigmCollection(false, WordForm, false, false, ParadigmCollection);
-
-        if (Poses == 0) {
-            if (!ParadigmCollection.empty()) {
-                ResultLemma = ParadigmCollection[0].GetWordForm(0);
-                return ParadigmCollection[0].GetParadigmId();
-            }
-        };
-
-        for (long k = 0; k < ParadigmCollection.size(); k++) {
-            std::string AnCode = ParadigmCollection[k].GetAncode(0);
-            long POS = G->GetPartOfSpeech(AnCode.c_str());
-            if ((1 << POS) & Poses) {
-                ResultLemma = ParadigmCollection[k].GetWordForm(0);
-                return ParadigmCollection[k].GetParadigmId();
+        std::vector<CFormInfo> paradigms;
+        auto s8 = convert_from_utf8(WordForm.c_str(), langua);
+        L->CreateParadigmCollection(false, s8, false, false, paradigms);
+        for (auto& p: paradigms) {
+            std::string AnCode = p.GetAncode(0);
+            part_of_speech_t POS = G->GetPartOfSpeech(AnCode.c_str());
+            if (((1 << POS) & Poses) == Poses) {
+                ResultLemma = convert_to_utf8(p.GetWordForm(0), morphRussian);
+                return p.GetParadigmId();
             };
         };
         return UnknownParadigmId;

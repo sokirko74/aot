@@ -3,8 +3,8 @@
 #include "StdAfx.h"
 #include "EngSynthes.h"
 #include "EngVerbTense.h"
-#include "EngNumerals.h"
-#include "EngNumerals.h"
+#include "numerals.h"
+#include "numerals.h"
 
 
 // ==================================================================
@@ -545,57 +545,57 @@ bool CEngSynthes::HasInfinitiveInTree(int node_no) const
 
 bool ordered_rel_pos_less::operator ()(int r1, int r2)const
 {
-			const SynthesResult &res1 = S.result_vec[S.E.m_Relations[r1].m_TargetNodeNo];
-			const SynthesResult &res2 = S.result_vec[S.E.m_Relations[r2].m_TargetNodeNo];
-			long value1 =  ValuePosition(res1.m_Position);
-			long value2 =  ValuePosition(res2.m_Position);
-			if (value1  != value2)
-				return value1 < value2;
-			/*
-			   прилагательные  с модификаторами so, such 
-			   должны стоять перед прилагательными без таких модификаторов
-			*/
+	const SynthesResult &res1 = S.result_vec[S.E.m_Relations[r1].m_TargetNodeNo];
+	const SynthesResult &res2 = S.result_vec[S.E.m_Relations[r2].m_TargetNodeNo];
+	long value1 =  ValuePosition(res1.m_Position);
+	long value2 =  ValuePosition(res2.m_Position);
+	if (value1  != value2)
+		return value1 < value2;
+	/*
+		прилагательные  с модификаторами so, such 
+		должны стоять перед прилагательными без таких модификаторов
+	*/
 
-			if (   S.node_is_adj(S.E.m_Relations[r1].m_TargetNodeNo)
-				&& S.node_is_adj(S.E.m_Relations[r2].m_TargetNodeNo)
-			   )
-			{
-bool b1 =  !S.E.HasOutRelationByName(S.E.m_Relations[r1].m_TargetNodeNo, "PROPERT");bool b2 =  !S.E.HasOutRelationByName(S.E.m_Relations[r2].m_TargetNodeNo, "PROPERT");				if (b1 !=  b2)
-					return b1 < b2;
-			};
+	if (   S.node_is_adj(S.E.m_Relations[r1].m_TargetNodeNo)
+		&& S.node_is_adj(S.E.m_Relations[r2].m_TargetNodeNo)
+		)
+	{
+		bool b1 =  !S.E.HasOutRelationByName(S.E.m_Relations[r1].m_TargetNodeNo, "PROPERT");bool b2 =  !S.E.HasOutRelationByName(S.E.m_Relations[r2].m_TargetNodeNo, "PROPERT");				if (b1 !=  b2)
+		return b1 < b2;
+	};
 
-			// правое валентное отношение должно  стоять раньше правого невалентного, например,
-			// "В каждой четвертой российской семье женщина подвергается насилию."
-			if (value1 > 0)
-			  if (S.rel_is_valency(r1) !=  S.rel_is_valency(r2))
-				return S.rel_is_valency(r1) > S.rel_is_valency(r2);
-		   /*
-		     если  один актант является инфинитивом (или у него в потомках есть инфинитив),
-			 а в другом нет, тогда первый должен стоять после второго
-		   */
-			if (   S.rel_is_valency(r1) 
-				&& S.rel_is_valency(r2))
-			{
-				bool b1 =  S.HasInfinitiveInTree(S.E.m_Relations[r1].m_TargetNodeNo);
-				bool b2 =  S.HasInfinitiveInTree(S.E.m_Relations[r2].m_TargetNodeNo);
-				if (b1 !=  b2)
-					return b1 < b2;
-			};
+	// правое валентное отношение должно  стоять раньше правого невалентного, например,
+	// "В каждой четвертой российской семье женщина подвергается насилию."
+	if (value1 > 0)
+		if (S.rel_is_valency(r1) !=  S.rel_is_valency(r2))
+		return S.rel_is_valency(r1) > S.rel_is_valency(r2);
+	/*
+		если  один актант является инфинитивом (или у него в потомках есть инфинитив),
+		а в другом нет, тогда первый должен стоять после второго
+	*/
+	if (   S.rel_is_valency(r1) 
+		&& S.rel_is_valency(r2))
+	{
+		bool b1 =  S.HasInfinitiveInTree(S.E.m_Relations[r1].m_TargetNodeNo);
+		bool b2 =  S.HasInfinitiveInTree(S.E.m_Relations[r2].m_TargetNodeNo);
+		if (b1 !=  b2)
+			return b1 < b2;
+	};
 
-		   /*
-		     валентность, выраженная  предлогом of, должна стоять сразу после хозяина
-		   */
-			if (		S.node_is_noun(S.E.m_Relations[r1].m_SourceNodeNo)   )
-			{
-					if (S.result_vec[S.E.m_Relations[r1].m_TargetNodeNo].m_prep == "of")
-							return true;
+	/*
+		валентность, выраженная  предлогом of, должна стоять сразу после хозяина
+	*/
+	if (		S.node_is_noun(S.E.m_Relations[r1].m_SourceNodeNo)   )
+	{
+			if (S.result_vec[S.E.m_Relations[r1].m_TargetNodeNo].m_prep == "of")
+					return true;
 
-					if (S.result_vec[S.E.m_Relations[r2].m_TargetNodeNo].m_prep == "of")
-							return false;
-			};
+			if (S.result_vec[S.E.m_Relations[r2].m_TargetNodeNo].m_prep == "of")
+					return false;
+	};
 
 				
-		   return res1.pos_order < res2.pos_order;
+	return res1.pos_order < res2.pos_order;
 
 }
 
@@ -611,6 +611,157 @@ struct ordered_rel_pos_less_by_word_no
 
 	};
 };
+
+std::vector<long> CEngSynthes::build_actant_positions(int node) {
+	std::vector<long> out_rels;
+	get_out_rels(node, out_rels);
+	E.PrintNodes();
+	E.PrintRelations();
+
+	for (auto rel_no: out_rels)
+	{
+		auto r = Rel(rel_no);
+		std::string Position = r.m_Position;
+
+		if (r.m_bReverseRel)
+			Position = GetDualPosition(r.m_Position);
+
+		long sub_node = r.m_TargetNodeNo;
+
+		if (Res(sub_node).pos_order == -1)
+			Res(sub_node).pos_order = E.m_Nodes[sub_node].GetMinWordNo();
+
+
+
+		if ((ValuePosition(Position) != 0))
+			Res(sub_node).m_Position = Position;
+
+		// может быть, какой-нибуль алгоритм в translte_node уже проставил 
+		// позицию (например позицию подлежащего), поэтому забираем 
+		// позицию, если она не была прописана 
+		if (Position == "")
+			Position = Res(sub_node).m_Position;
+
+
+		/*
+		  если граф не собран, тогда нужно высчитывать только  позиции, которые пришли из Трансфера
+		*/
+		if (!m_bConnected)
+		{
+			if (E.m_Nodes[sub_node].GetMinWordNo() < E.m_Nodes[node].GetMinWordNo())
+				Res(sub_node).m_Position = "<";
+			else
+				Res(sub_node).m_Position = ">";
+			continue;
+		};
+
+		// Непрямой объект стоит дальше прямого
+		if (Position == "")
+			if (r.m_SyntacticRelation == "indir_obj")
+				Position = ">!";
+			else
+				if ((r.m_SyntacticRelation == "obj")
+					|| (r.m_SyntacticRelation == "dir_obj")
+					|| (r.m_SyntacticRelation == "obj_pl")
+					)
+				{
+					/*
+					если объект выражен инфинитивом, то его, наверно, не надо ставит раньше
+					непрямого объекта ("indir_obj"), поскольку иначе может
+					возникнуть желание отнести непрямой объект к инфинитиву
+					Например:
+						This technology promised (A1:chance to work on the same line) (A2:to several users)
+						Здесь A1 - инфинитивный объект;
+							  A2 - именной косвенный объект.
+					   Наверно, они должны стоять наоборот, чем указано в примере, а именно:
+					   This technology promised  (A2:to several users) (A1:chance to work on the same line)
+					*/
+					if (HasInfinitiveInTree(r.m_TargetNodeNo))
+						Position = ">!";
+					else
+						Position = ">>";
+					/*
+					 объектов может быть два, например: "I consider him a teacher"
+					 Два объекта нужно упорядочивать  по номеру валентности в статье.
+					*/
+					if (rel_is_valency(rel_no))
+						Res(sub_node).pos_order = r.m_Valency.m_LeafId * 10 + r.m_Valency.m_BracketLeafId;
+				};
+
+
+		// еще раз
+		if (ValuePosition(Position) != 0)
+			Res(sub_node).m_Position = Position;
+		else
+			/*
+			  наречия, которые подчинены герундию должны стоят в постпозиции, (??)
+			  например   "Going quickly is dangerous"
+					или  "Going faster is dangerous"
+			*/
+			if (is_gerund(E.m_Nodes[node].GetTense())
+				&& (node_is_adv(E.m_Nodes[sub_node])
+					|| (node_is_adj(sub_node)
+						&& (E.m_Nodes[sub_node].GetGrammemsRich() & _QM(eComparativ))
+						)
+					)
+				)
+			{
+				Res(sub_node).m_Position = ">";
+
+			}
+			else
+				// прилагательные, которые подчинены существительному 
+				// должны стоять перед своим хозяином
+				if (_node_is_adj(E.m_Nodes[sub_node])
+					&& node_is_noun(node)
+					)
+				{
+					Res(sub_node).m_Position = "<<";
+				}
+				else
+					// наречия, которые подчинены другому наречию или прилагательному
+					// должны стоять перед своим хозяином
+					if (node_is_adv(E.m_Nodes[sub_node])
+						&& (node_is_adv(E.m_Nodes[node])
+							|| _node_is_adj(E.m_Nodes[node])
+							)
+						)
+					{
+						Res(sub_node).m_Position = "<<";
+					}
+					else
+						if (rel_is_valency(rel_no) && r.HasSomePrep())
+						{
+							Res(sub_node).m_Position = ">!";
+						}
+						else
+							/*
+							  Общее правило: интерпретированный несубъектный актант должен стоять
+							  после своего хозяина, если хозяин - глагол
+							*/
+							if (
+								node_is_verb(node)
+								&& rel_is_valency(rel_no)
+								&& !E.IsSubj(r)
+
+								)
+							{
+								Res(sub_node).m_Position = ">";
+							}
+							else
+								// если Position не задан, учитываем порядок, заданный номерами слов
+								if (Position == "")
+								{
+									if (E.m_Nodes[sub_node].GetMinWordNo() < E.m_Nodes[node].GetMinWordNo())
+										Res(sub_node).m_Position = "<";
+									else
+										Res(sub_node).m_Position = ">";
+								};
+
+	}
+	return out_rels;
+}
+
 
 std::string CEngSynthes::collect_results(int node)
 {
@@ -705,160 +856,11 @@ std::string CEngSynthes::collect_results(int node)
 
 	MainNodeStr += result.postfix + " ";
 
-	std::vector<long> out_rels;
-	get_out_rels(node, out_rels);
-	  
-	
-	for(i = 0; i < out_rels.size(); i++)
-	{
-		std::string Position = Rel(out_rels[i]).m_Position;
+	std::vector<long> out_rels = build_actant_positions(node);
 
-		if (Rel(out_rels[i]).m_bReverseRel)
-			Position = GetDualPosition(Rel(out_rels[i]).m_Position);
-
-		long sub_node = Rel(out_rels[i]).m_TargetNodeNo;
-
- 		if (Res(sub_node).pos_order == -1)
-			Res(sub_node).pos_order = E.m_Nodes[sub_node].GetMinWordNo();
-
-
-
-		if  (    (  ValuePosition(Position) != 0  )
-			)
-			Res(sub_node).m_Position = Position;
-
-		// может быть, какой-нибуль алгоритм в translte_node уже проставил 
-		// позицию (например позицию подлежащего), поэтому забираем 
-		// позицию, если она не была прописана 
-		if (Position == "")
-			Position = Res(sub_node).m_Position;
-
-
-		/*
-		  если граф не собран, тогда нужно высчитывать только  позиции, которые пришли из Трансфера
-		*/
-		if (!m_bConnected)
-		{
-			 if (E.m_Nodes[sub_node].GetMinWordNo() < E.m_Nodes[node].GetMinWordNo())
-				 Res(sub_node).m_Position = "<";
-			 else
-			 	 Res(sub_node).m_Position = ">";
-			continue;
-		};
-
-		// Непрямой объект стоит дальше прямого
-		if (Position == "")
-		   if (Rel(out_rels[i]).m_SyntacticRelation == "indir_obj")
-			 Position = ">!";
-		   else
-			 if (   (Rel(out_rels[i]).m_SyntacticRelation == "obj")
-				 || (Rel(out_rels[i]).m_SyntacticRelation == "dir_obj")
-				 || (Rel(out_rels[i]).m_SyntacticRelation == "obj_pl")
-				)
-			 {
-				/*
-				если объект выражен инфинитивом, то его, наверно, не надо ставит раньше 
-				непрямого объекта ("indir_obj"), поскольку иначе может 
-				возникнуть желание отнести непрямой объект к инфинитиву 
-				Например:
-					This technology promised (A1:chance to work on the same line) (A2:to several users)
-					Здесь A1 - инфинитивный объект;
-					      A2 - именной косвенный объект.
-				   Наверно, они должны стоять наоборот, чем указано в примере, а именно:
-				   This technology promised  (A2:to several users) (A1:chance to work on the same line)
-				*/
-			   if (HasInfinitiveInTree(Rel(out_rels[i]).m_TargetNodeNo))
-				   Position = ">!";
-			   else
-				   Position = ">>";
-               /*
-			    объектов может быть два, например: "I consider him a teacher"
-				Два объекта нужно упорядочивать  по номеру валентности в статье.
-			   */
-			   if ( rel_is_valency(out_rels[i]) )
-					Res(sub_node).pos_order = E.m_Relations[out_rels[i]].m_Valency.m_LeafId*10 + E.m_Relations[out_rels[i]].m_Valency.m_BracketLeafId;
-			 };
-
-
-	    // еще раз
-		if  (  ValuePosition(Position) != 0  )
-			Res(sub_node).m_Position = Position;
-		else
-		/*
-		  наречия, которые подчинены герундию должны стоят в постпозиции, (??)
-		  например   "Going quickly is dangerous" 
-				или  "Going faster is dangerous" 
-		*/
-		if (    is_gerund(E.m_Nodes[node].GetTense()) 
-			&& (   node_is_adv(E.m_Nodes[sub_node])
-			   ||  (   node_is_adj(sub_node) 
-					&& (E.m_Nodes[sub_node].GetGrammemsRich() & _QM(eComparativ) )
-				   )
-			   )
-		   )
-		{
-			Res(sub_node).m_Position = ">";
-
-		}
-		else
-		// прилагательные, которые подчинены существительному 
-		// должны стоять перед своим хозяином
-		if (    _node_is_adj(E.m_Nodes[sub_node]) 
-			&&  node_is_noun(node)
-		   )
-		{
-			Res(sub_node).m_Position = "<<";
-		}
-		else
-		// наречия, которые подчинены другому наречию или прилагательному
-		// должны стоять перед своим хозяином
-		if (    node_is_adv(E.m_Nodes[sub_node]) 
-			&& (   node_is_adv(E.m_Nodes[node])
-			    || _node_is_adj(E.m_Nodes[node])
-			   )
-		   )
-		{
-			Res(sub_node).m_Position = "<<";
-		}
-		else
-		if (    
-			    rel_is_valency(out_rels[i])
-			 && (    E.m_Relations[out_rels[i]].HasSomePrep()
-				)
-		   )
-		{
-			Res(sub_node).m_Position = ">!";
-		}
-		else
-			/*
-			  Общее правило: интерпретированный несубъектный актант должен стоять
-			  после своего хозяина, если хозяин - глагол
-			*/
-		if ( 
-			     node_is_verb(node)
-			 &&  rel_is_valency(out_rels[i])
-			 && !E.IsSubj(E.m_Relations[out_rels[i]])
-			 
-		   )
-		{
-			Res(sub_node).m_Position = ">";
-		}
-		else
-		// если Position не задан, учитываем порядок, заданный номерами слов
-		 if (Position == "")
-		{
-			 if (E.m_Nodes[sub_node].GetMinWordNo() < E.m_Nodes[node].GetMinWordNo())
-				 Res(sub_node).m_Position = "<";
-			 else
-			 	 Res(sub_node).m_Position = ">";
-		};
-
-
-
+	if (m_bConnected) {
+		sort(out_rels.begin(), out_rels.end(), ordered_rel_pos_less(*this));
 	}
-
-	if (m_bConnected)
-	   sort(out_rels.begin(), out_rels.end(), ordered_rel_pos_less(*this));
 	else
 	   sort(out_rels.begin(), out_rels.end(), ordered_rel_pos_less_by_word_no(*this));
 

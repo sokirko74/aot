@@ -6,7 +6,7 @@
 #include "StdAfx.h"
 #include "EngBinaryTranslate.h"
 #include <map>
-#include "EngNumerals.h"
+#include "numerals.h"
 #include "EngSemStructure.h"
 
 

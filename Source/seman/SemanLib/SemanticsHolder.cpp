@@ -1021,7 +1021,8 @@ bool CSemanticsHolder::BuildCollocs()
 				It->Refs.push_back(CCollocItemRef(i, k));
 
 				// Добавление совершенного вида
-				StringVector Vec = GetAspVerb(m_RusCollocs[i].Items[k].Item, false);
+				auto& word = m_RusCollocs[i].Items[k].Item;
+				StringVector Vec = GetAspVerb(word, false);
 				for (long j = 0; j < Vec.size(); j++)
 					if (Vec[j] != S) // почему-то такое бывает? (двувидовые?)
 					{

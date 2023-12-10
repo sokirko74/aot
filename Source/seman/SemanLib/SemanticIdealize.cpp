@@ -246,7 +246,7 @@ void CRusSemStructure::ApplySubordinationCases() {
                     int j = s.find("+");
                     if (j == string::npos) continue;
                     s.erase(0, j + 1);
-                    CaseItemNo = RossHolder->GetItemNoByItemStr1(s, RossHolder->CaseDomNo);
+                    CaseItemNo = RossHolder->GetItemNoByItemStr1(s, RossHolder->CaseDomNo, false);
                 }
             } else
                 CaseItemNo = RossHolder->GetSynFet(C);
@@ -458,8 +458,9 @@ void CRusSemStructure::ApplySubordinationSemfets() {
 bool HasSynFet(const CSemPattern &P, dom_item_id_t item_id) {
 
     for (auto& c : P.m_GramCorteges) {
-        auto syn_fet = P.GetRossHolder()->GetSynFet(c);
-        if (!is_null(syn_fet) && c.GetItem(syn_fet) == item_id)
+        auto debug = P.GetRossHolder()->GetRoss()->WriteToString(c);
+        dom_item_id_t syn_fet = P.GetRossHolder()->GetSynFet(c);
+        if (!is_null(syn_fet) && syn_fet == item_id)
             return true;
     }
 

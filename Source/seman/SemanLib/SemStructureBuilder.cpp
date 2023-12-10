@@ -14,6 +14,15 @@ CSemStructureBuilder::~CSemStructureBuilder()
 	delete m_RusStr.m_pData;
 };
 
+void CSemStructureBuilder::InitDicts() {
+	PLOGD << "initialize presemantic dictionaries...";
+	m_RusStr.m_pData->Init();
+	m_RusStr.m_pData->Initialize();
+	m_RusStr.m_pData->InitializeIndices();
+	m_bShouldBuildTclGraph = false;
+	m_RusStr.m_pData->GetSynan()->SetKillHomonymsMode(CoverageKillHomonyms);
+
+}
 
 bool CSemStructureBuilder::FindSituationsForNextSentence()
 {
@@ -152,8 +161,8 @@ std::string CSemStructureBuilder::TranslateRussianText(const std::string& russia
 			if (logger) logger("  FindSituationsForNextSentence\n");
 			if (!FindSituationsForNextSentence()) break;
 		}
-
-		return res;
+		//остаются недопереведенные слова
+		return convert_to_utf8(res.c_str(), morphRussian);
 	}
 	catch (CExpc c) {
 		throw;

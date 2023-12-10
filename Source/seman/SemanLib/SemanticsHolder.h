@@ -1,11 +1,8 @@
-// RossDoc.h : interface of the CRossDoc class
-//
-/////////////////////////////////////////////////////////////////////////////
+#pragma once 
 
-#if !defined(Semanticsolder_H)
-#define Semanticsolder_H
 #include "AllRossesHolder.h"
 #include "morph_dict/agramtab/GramInfo.h"
+#include "sem_relation.h"
 
 
 // частичная словарная интерпретация 
@@ -91,14 +88,6 @@ public:
 	  };
 };
 
-
-
-
-
-
-
-
-
 struct SEngEquiv
 {
 	SEngEquiv() : m_iMeanNum(10), m_RusPoses(-1) {};
@@ -153,75 +142,6 @@ struct  CObor {
 	};
 
 };
-
-// класс простого бинарного отношения
-struct CSimpleBinaryRelation {
-	// исходный узел
-	long    m_SourceNodeNo;
-	// конечный узел
-	long    m_TargetNodeNo;
-
-	CSimpleBinaryRelation (long SourceNodeNo,	long    TargetNodeNo)
-	{
-		m_SourceNodeNo = SourceNodeNo;
-	    m_TargetNodeNo = TargetNodeNo;
-	};
-
-	CSimpleBinaryRelation()
-	{
-		m_SourceNodeNo = -1;
-	    m_TargetNodeNo = -1;	
-	}
-};
-
-// класс синтаксического отношения
-struct CSynRelation : public CSimpleBinaryRelation
-{
-	std::string			   m_SynRelName;
-	bool			   m_bPragmaticallyStrong; 			
-	CSynRelation (long SourceNodeNo,	long    TargetNodeNo, 	std::string SynRelName) :
-		CSimpleBinaryRelation(SourceNodeNo,	TargetNodeNo)
-	{
-			m_SynRelName = SynRelName;
-			m_bPragmaticallyStrong = false;
-	};
-
-	CSynRelation() : CSimpleBinaryRelation()
-	{
-		m_bPragmaticallyStrong = false;
-	};
-	bool operator == (const CSynRelation X) const
-	{
-		return   (X.m_SourceNodeNo ==  m_SourceNodeNo)
-			   &&(X.m_TargetNodeNo ==  m_TargetNodeNo)
-			   && (X.m_SynRelName == m_SynRelName);
-	};
-
-};
-
-
-// класс синтаксического отношения
-struct CSemThesRelation : public CSimpleBinaryRelation
-{
-	std::string			   m_SemRelName;
-	CSemThesRelation (long SourceNodeNo,	long    TargetNodeNo, 	std::string SemRelName) :
-		CSimpleBinaryRelation(SourceNodeNo,	TargetNodeNo)
-	{
-			m_SemRelName = SemRelName;
-	};
-
-	CSemThesRelation() : CSimpleBinaryRelation()
-	{
-	};
-	bool operator == (const CSemThesRelation X) const 
-	{
-		return   (X.m_SourceNodeNo ==  m_SourceNodeNo)
-			   &&(X.m_TargetNodeNo ==  m_TargetNodeNo)
-			   && (X.m_SemRelName == m_SemRelName);
-	};
-
-};
-
 
 
 // класс отношения LF
@@ -658,8 +578,3 @@ class CSemanticsHolder  : public CAllRossesHolder
 
 extern  size_t GetCaseGrammem (const CStructDictHolder* RossDoc, long ItemNo); 
 extern  size_t GetCaseItemNo (CStructDictHolder* RossDoc, long GrammemNo);
-
-
-
-
-#endif

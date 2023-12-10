@@ -30,6 +30,8 @@ void CSyntaxHolder::ClearHolder() {
 
 void CSyntaxHolder::LoadSyntax()
 {
+	InitGraphan();
+
     assert (!m_pPostMorph);
 
 	if (m_Language == morphRussian)

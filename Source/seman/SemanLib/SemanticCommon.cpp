@@ -1182,9 +1182,11 @@ bool CSemanticStructure::IsRusSubj(int iRel) const
 		m_SyntacticRelation == "подл")
 		return true;
 	long iRusSynRel = GetSynRelBySemRel(iRel);
-	if (iRusSynRel != -1)
-		if (GetSynRels()[iRusSynRel].m_SynRelName == "ПОДЛ")
+	if (iRusSynRel != -1) {
+		auto& synrel = GetSynRels()[iRusSynRel];
+		if (synrel.m_SynRelName == "ПОДЛ")
 			return true;
+	}
 	return false;
 }
 
@@ -1505,8 +1507,8 @@ void CSemanticStructure::InitThesSemFet(CSemNode& OutNode, const CSemNode& InNod
 	{
 		std::string conceptStr = Thes->GetConceptStrById(i);
 		Trim(conceptStr);
-		if (   !is_null(GetRossHolder(Ross)->GetItemNoByItemStr(conceptStr, "D_SF"))
-			|| !is_null(GetRossHolder(Ross)->GetItemNoByItemStr(conceptStr, "D_SEM_REL"))
+		if (   !is_null(GetRossHolder(Ross)->GetItemNoByItemStr(conceptStr, "D_SF", false))
+			|| !is_null(GetRossHolder(Ross)->GetItemNoByItemStr(conceptStr, "D_SEM_REL", false))
 			)
 			AddSemFet(OutNode, conceptStr.c_str());
 	};
@@ -1760,25 +1762,6 @@ bool CRossQuery::operator == (const CRossQuery& X) const
 
 //=====================================
 
-
-void CSynRealization::SetEmpty()
-{
-	m_Preps.clear();
-	m_Conj.m_UnitNo = ErrUnitNo;
-	m_Grammems = 0;
-	m_Other = "";
-	m_Cortege = TCortege();
-};
-
-// проверяет, приписан ли узлу предлог PrepNo
-bool CSynRealization::HasThePrep(uint16_t UnitNo) const
-{
-	for (long i = 0; i < m_Preps.size(); i++)
-		if (m_Preps[i].m_UnitNo == UnitNo)
-			return true;
-
-	return false;
-};
 
 
 //==============================

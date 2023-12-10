@@ -2,11 +2,14 @@
 #include "dicts/StructDictLib/Ross.h"
 #include "dicts/StructDictLib/TempArticle.h"
 #include "morph_dict/common/argparse.h"
-#include "../../SemanLib/SemanticRusStructure.h"
+#include "seman/SemanLib/SemanticRusStructure.h"
+#include "seman/SemanLib/SemStructureBuilder.h"
+#include "seman/Transfer/numerals.h"
 
 #define DOCTEST_CONFIG_IMPLEMENT
 #include "morph_dict/contrib/doctest/doctest.h"
 
+CSemStructureBuilder SemBuilder;
 
 TEST_CASE("transliteration") {
 	translate_helper t;
@@ -31,10 +34,33 @@ TEST_CASE("fix_case") {
 
 }
 
+std::string translate(std::string s)
+{
+	return SemBuilder.TranslateRussianText(s, "общ", nullptr);
+}
+
+TEST_CASE("translate_name") {
+	auto s = translate("Джон");
+	CHECK(s == "John.");
+	
+}
+
+TEST_CASE("test_numeral") {
+	std::string s = spellout_number("2", true);
+	CHECK(s == "two");
+
+	s = spellout_number("2", false);
+	CHECK(s == "second");
+
+	s = translate("два");
+	CHECK(s == "Two.");
+}
+
 
 
 int main(int argc, char** argv) {
-	init_plog(plog::Severity::debug, "struct_dict_test.log");
+	SemBuilder.InitDicts();
+	init_plog(plog::Severity::verbose, "test_transfer.log");
 	doctest::Context context;
 	context.applyCommandLine(argc, argv);
 	int res;

@@ -32,14 +32,15 @@ add_library(Transfer
         TranseClause.cpp
         TranslateToEnglish.cpp
         EngBinaryTranslate.h
-        EngNumerals.h
+        numerals.h
         EngPrimitives.h
         EngSemStructure.h
         EngSynthes.h
         EngVerbTense.h
         StdAfx.h
+        numerals.cpp
 
- "eng_word.cpp" "eng_word.h" "verb_tense.h")
+ "eng_word.cpp" "eng_word.h" "verb_tense.h" "numerals.cpp")
 
 add_subdirectory(tests)
 

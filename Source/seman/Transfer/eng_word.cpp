@@ -31,6 +31,7 @@ CEngSemWord::CEngSemWord() : CSemWord()
 CEngSemWord::CEngSemWord(const CSemWord& X)
 {
 	*((CSemWord*)this) = X;
+	m_WordStr = X.GetWord();
 	Init();
 };
 

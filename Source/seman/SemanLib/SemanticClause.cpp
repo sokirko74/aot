@@ -1105,7 +1105,7 @@ CRusSemNode  CRusSemStructure::CreatePronounByLemma(std::string Lemma)
 	P->CreateParadigmCollection(true, _R(Lemma), false, false, ParadigmCollection);
 	assert(!ParadigmCollection.empty());
 	std::string GramCodes = ParadigmCollection[0].GetSrcAncode();
-	uint64_t Grammems = m_pData->GetRusGramTab()->GetAllGrammems(GramCodes.c_str());
+	grammems_mask_t Grammems = m_pData->GetRusGramTab()->GetAllGrammems(GramCodes.c_str());
 
 
 	CRusSemWord SemWord(-1, Lemma);

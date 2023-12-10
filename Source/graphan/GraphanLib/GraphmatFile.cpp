@@ -86,80 +86,62 @@ void CGraphmatFile::ReadIdents(CGraphanDicts* dicts, std::string path)
 };
 
 
-bool CGraphmatFile::LoadDicts (MorphLanguageEnum langua)
+void CGraphmatFile::LoadDicts (MorphLanguageEnum langua)
 {
 	m_Language = langua;
-	try {
-
-		if (!m_pDicts)
-		{
-			assert (false);
-			m_LastError = "LoadDicts was already called";
-			return false;
-		};
-		assert (m_Language != morphUnknown);
-		CGraphanDicts* pDicts = new CGraphanDicts(m_Language);
-		assert (pDicts);
-
-		pDicts->ReadSpacedWords(GetRegistryString("Software\\Dialing\\Graphan\\SpDicFile"));
-		pDicts->ReadENames (GetRegistryString("Software\\Dialing\\Graphan\\ENamesFile"));
-		ReadIdents (pDicts, GetRegistryString("Software\\Dialing\\Graphan\\IdentsFile"));
-		pDicts->ReadAbbrevations ();
-
-		if ( !pDicts->ReadKeyboard(GetRegistryString("Software\\Dialing\\Graphan\\Keyboard")) )
-		{
-			m_LastError = "Cannot load Keyboard file";
-			return false;
-		};
-
-		pDicts->ReadExtensions(GetRegistryString("Software\\Dialing\\Graphan\\Extensions"));
-		if (m_pDicts->m_pOborDictionary.m_Pointer == 0)
-		{
-
-			pDicts->m_pOborDictionary.SetPointer(new CDictionary, true);
-			std::string Path;
-			if (m_Language == morphRussian) 
-				Path = GetRegistryString("Software\\Dialing\\Obor\\DictPath").c_str();
-			else if (m_Language == morphGerman)
-				Path = GetRegistryString("Software\\Dialing\\GerObor\\DictPath").c_str();
-			else 
-				Path = GetRegistryString("Software\\Dialing\\EngObor\\DictPath").c_str();
-			try {
-				pDicts->m_pOborDictionary.m_Pointer->Load(Path.c_str());
-			}
-			catch (std::exception& e) {
-				delete pDicts;
-				m_LastError = "Cannot load oborots " + std::string(e.what());
-				return false;
-			};
-
-		}
-		else
-		{
-			pDicts->m_pOborDictionary.SetPointer(m_pDicts->m_pOborDictionary.m_Pointer, m_pDicts->m_pOborDictionary.m_bOwnPointer);
-			//  we create a full clone of this share pointer (m_pDicts->GetOborDic())
-			// in new pDicts, and afterwards we will delete the current version of m_pDicts
-			// and replace it with the new version that' why  we should'not delete 
-			// this share pointer when the we free we old pointer.
-			const_cast<CGraphanDicts*>(m_pDicts)->m_pOborDictionary.m_bOwnPointer = false;
-		};
-
-		pDicts->BuildOborottos();
-		delete m_pDicts;
-
-		m_pDicts = pDicts;
-		return true;
-	}
-	catch (CExpc& c)
+	if (!m_pDicts)
 	{
-		m_LastError = c.what();
-		return false;
-	}
-	catch (...)
-	{
-		m_LastError = "general exception";
-		return false;
+		throw CExpc("LoadDicts was already called");
 	};
+	assert (m_Language != morphUnknown);
+	CGraphanDicts* pDicts = new CGraphanDicts(m_Language);
+	assert (pDicts);
+
+	pDicts->ReadSpacedWords(GetRegistryString("Software\\Dialing\\Graphan\\SpDicFile"));
+	pDicts->ReadENames (GetRegistryString("Software\\Dialing\\Graphan\\ENamesFile"));
+	ReadIdents (pDicts, GetRegistryString("Software\\Dialing\\Graphan\\IdentsFile"));
+	pDicts->ReadAbbrevations ();
+
+	if ( !pDicts->ReadKeyboard(GetRegistryString("Software\\Dialing\\Graphan\\Keyboard")) )
+	{
+		throw CExpc("Cannot load Keyboard file");
+	};
+
+	pDicts->ReadExtensions(GetRegistryString("Software\\Dialing\\Graphan\\Extensions"));
+	if (m_pDicts->m_pOborDictionary.m_Pointer == 0)
+	{
+
+		pDicts->m_pOborDictionary.SetPointer(new CDictionary, true);
+		std::string Path;
+		if (m_Language == morphRussian) 
+			Path = GetRegistryString("Software\\Dialing\\Obor\\DictPath").c_str();
+		else if (m_Language == morphGerman)
+			Path = GetRegistryString("Software\\Dialing\\GerObor\\DictPath").c_str();
+		else 
+			Path = GetRegistryString("Software\\Dialing\\EngObor\\DictPath").c_str();
+		try {
+			pDicts->m_pOborDictionary.m_Pointer->Load(Path.c_str());
+		}
+		catch (std::exception& e) {
+			delete pDicts;
+			throw CExpc("Cannot load oborots %s", e.what());
+		};
+
+	}
+	else
+	{
+		pDicts->m_pOborDictionary.SetPointer(m_pDicts->m_pOborDictionary.m_Pointer, m_pDicts->m_pOborDictionary.m_bOwnPointer);
+		//  we create a full clone of this share pointer (m_pDicts->GetOborDic())
+		// in new pDicts, and afterwards we will delete the current version of m_pDicts
+		// and replace it with the new version that' why  we should'not delete 
+		// this share pointer when the we free we old pointer.
+		const_cast<CGraphanDicts*>(m_pDicts)->m_pOborDictionary.m_bOwnPointer = false;
+	};
+
+	pDicts->BuildOborottos();
+	delete m_pDicts;
+
+	m_pDicts = pDicts;
 }
 
 size_t GetInternetAddressStarter(const char* s) {

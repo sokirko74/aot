@@ -60,13 +60,12 @@ static bool ProcessHyphenWords(const CLemmatizer* lemmatizer, CGraphmatFile* piG
 CLemTextCreator::CLemTextCreator(MorphLanguageEnum l) : m_LemText(l)
 {
 	m_Language = l;
-	if (!m_Graphan.LoadDicts(l))
-	{
-		throw CExpc("Cannot load graphan");
-	}
-
+	
 };
 
+void CLemTextCreator::InitGraphan() {
+	m_Graphan.LoadDicts(m_Language);
+}
 
 
 bool CLemTextCreator::BuildLemText(std::string str, bool bFile, int& CountOfWords)

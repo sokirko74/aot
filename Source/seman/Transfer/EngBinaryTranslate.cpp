@@ -454,7 +454,7 @@ long  translate_helper::GetParadigmIdByLemma(MorphLanguageEnum langua, std::stri
 	const CLemmatizer* lemmatizer = GetLemmatizer(langua);
 	const CAgramtab* GramTab = GetGramTab(langua);
 
-	MakeUpperUtf8(lemma, langua);
+	MakeUpperUtf8(lemma);
 	lemma = convert_from_utf8(lemma.c_str(), langua);
 	
 	if (!lemmatizer->CheckABC(lemma.c_str()))
@@ -478,7 +478,7 @@ long  translate_helper::GetParadigmIdByLemma(MorphLanguageEnum langua, std::stri
 		if (pos != -1)
 			if (GramTab->GetPartOfSpeech(Paradigm.GetAncode(0).c_str()) != pos) continue;
 
-		uint64_t g;
+		grammems_mask_t g;
 		GramTab->GetGrammems(Paradigm.GetAncode(0).c_str(), g);
 		if (((g & _QM(eProper)) > 0) == bProper)
 			AgreedWithProper = Paradigm.GetParadigmId();
@@ -602,7 +602,7 @@ struct CTransliteration {
 	std::string transliterate(std::string str) const {
 		MakeUpperUtf8(str);
 		auto wstr = utf8_to_wstring(str);
-		const std::wstring before_e = U"УЕЪЫАОЭЯИЬЮ";
+		const std::u32string before_e = U"УЕЪЫАОЭЯИЬЮ";
 		std::string res;
 		uint32_t prev_ch = 0;
 		for (size_t i = 0; i < wstr.length(); i++) {

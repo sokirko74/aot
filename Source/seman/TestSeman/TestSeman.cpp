@@ -55,14 +55,6 @@ std::string GetGramInfo(const CRusSemStructure& semStr, part_of_speech_mask_t Po
     return Result;
 }
 
-void InitDicts(CSemStructureBuilder& SemBuilder)
-{
-    PLOGD << "initialize presemantic dictionaries...";
-    SemBuilder.m_RusStr.m_pData->Init();
-    SemBuilder.m_RusStr.m_pData->Initialize();
-    SemBuilder.m_RusStr.m_pData->InitializeIndices();
-    SemBuilder.m_bShouldBuildTclGraph = false;
-}
 
 
 nlohmann::json getNodeInfo(const CRusSemStructure& semStr, int nodeIndex) {
@@ -107,23 +99,22 @@ struct LessRelation {
 
 nlohmann::json getRelations(const CRusSemStructure& semStr, const std::vector<CRusSemRelation>& rels) {
     nlohmann::json result = nlohmann::json::array();
+
     auto sortedRels = rels;
     sort(sortedRels.begin(), sortedRels.end(), LessRelation(semStr));
     for (auto& r : sortedRels) {
-        long targetNodeNo = r.m_Valency.m_Direction == C_A && !r.m_bReverseRel ? r.m_SourceNodeNo : r.m_TargetNodeNo;
-        long sourceNodeNo = !(r.m_Valency.m_Direction == C_A && !r.m_bReverseRel) ? r.m_SourceNodeNo
-            : r.m_TargetNodeNo;
+        auto o = semStr.GetOutputRelation(r);
         nlohmann::json rel = {
-            {   "name",  r.m_Valency.m_RelationStr },
+            {   "name",  o.sem_rel },
             {   "target", {
-                    {"words", semStr.GetNodeStr1(targetNodeNo)},
+                    {"words", o.trg},
                 }
             },
             {   "source", {
-                    {"words", semStr.GetNodeStr1(sourceNodeNo)},
+                    {"words", o.src},
                 }
             },
-            {    "syntax_rel", r.m_SyntacticRelation }
+            {    "syntax_rel", o.syn_rel }
         };
         result.push_back(rel);
     }
@@ -144,7 +135,6 @@ nlohmann::json PrintRelationsToText(const CRusSemStructure& semStr) {
         {"relations", getRelations(semStr, semStr.m_Relations)},
         {"aux relations", getRelations(semStr, semStr.m_DopRelations)}
     };
-    ConvertToUtfRecursive(result, morphRussian);
     return result;
 }
 
@@ -177,8 +167,7 @@ void initArgParser(int argc, const char **argv, ArgumentParser& parser) {
 nlohmann::json processText(CSemStructureBuilder& SemBuilder, bool printVisual, bool printTranslation, std::string inputText) {
     try {
         if (printTranslation) {
-            auto s = SemBuilder.TranslateRussianText(inputText, "общ", nullptr);
-            return convert_to_utf8(s, morphRussian); //остаются недопереведенные слова
+            return SemBuilder.TranslateRussianText(inputText, "общ", nullptr);
         }
         else {
             std::string dummy;
@@ -240,8 +229,7 @@ int main(int argc, const char* argv[]) {
     try {
         GlobalErrorMessage = MyGlobalErrorMessage;
         PLOGI << "init dicts ... (wait one minute)";
-        InitDicts(SemBuilder);
-        SemBuilder.m_RusStr.m_pData->GetSynan()->SetKillHomonymsMode(CoverageKillHomonyms);
+        SemBuilder.InitDicts();
 
         std::vector <std::pair<std::string, std::string> > file_pairs;
         if (args.Exists("input-file-mask")) {

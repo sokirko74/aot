@@ -27,7 +27,6 @@ public:
   const CStructDictHolder*			m_pRossDoc;
   const CStructDictHolder*			GetRossHolder() const;
 
-
   CSemPattern ();
   void		InitSemPattern(const CStructDictHolder* pRossDoc, uint16_t UnitNo, BYTE LeafId, BYTE BracketLeafId);
   dom_item_id_t		GetSynRel(long CortegeNo) const;
@@ -38,7 +37,6 @@ public:
   bool      HasSemFet (const std::string& SemFet) const;
   void		SetEmpty();
   bool		IsEmpty() const;
-  void		InsertReverseSynOToTheBegining();
   void		TracePattern () const;
   bool		LoadSemFromDict();
   bool		LoadGramFromDict();

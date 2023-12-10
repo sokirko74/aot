@@ -1,12 +1,10 @@
-#ifndef _Valency_H
-#define _Valency_H
+#pragma once 
 
 #include "morph_dict/common/utilit.h"
 #include "common/cortege.h"
 #include "dicts/StructDictLib/StructDictConsts.h"
 
 enum Valency_Direction { A_C, C_A};
-typedef TCortege TCortege;
 
 class CStructDictHolder;
 struct CValency 
@@ -41,5 +39,3 @@ struct CValency
 					);
 };
 
-
-#endif

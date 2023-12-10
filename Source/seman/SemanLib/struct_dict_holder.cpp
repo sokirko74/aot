@@ -84,12 +84,75 @@ void CStructDictHolder::InitFieldsAndDomains() {
 
 }
 
+static TCortege GetSubjCortege(CStructDictHolder* RossDoc)
+{
+	TCortege C;
+	C.m_FieldNo = RossDoc->GramFetFieldNo;
+	C.m_LeafId = 1;
+	C.m_LevelId = 0;
+	bool b = RossDoc->GetRoss()->ReadFromStr("подл : И", C);
+	if (!b) {
+		throw CExpc("GetSubjCortege failed");
+	}
+	return C;
+};
+
+static TCortege GetFullGleicheRightCortege(CStructDictHolder* RossDoc, BYTE LeafId)
+{
+	TCortege C;
+	C.m_FieldNo = RossDoc->GramFetFieldNo;
+	C.m_LeafId = LeafId;
+	C.m_LevelId = 0;
+	bool b = RossDoc->GetRoss()->ReadFromStr("> X! : ИГ", C);
+	if (!b) {
+		throw CExpc("GetFullGleicheRightCortege failed");
+	}
+	return C;
+};
+
+
+static TCortege GetIndirObjInGenitive(CStructDictHolder* RossDoc)
+{
+	TCortege C;
+	C.m_FieldNo = RossDoc->GramFetFieldNo;
+	C.m_LeafId = 2;
+	C.m_LevelId = 0;
+	bool b = RossDoc->GetRoss()->ReadFromStr("к_доп : Р", C);
+	if (!b) {
+		throw CExpc("GetIndirObjInGenitive failed");
+	}
+	return C;
+};
+
+static TCortege GetInstrObj(CStructDictHolder* RossDoc)
+{
+	TCortege C;
+	C.m_FieldNo = RossDoc->GramFetFieldNo;
+	C.m_LeafId = 2;
+	C.m_LevelId = 0;
+	bool b = RossDoc->GetRoss()->ReadFromStr("к_доп : Т", C);
+	if (!b) {
+		throw CExpc("GetInstrObj failed");
+	}
+	return C;
+};
+
+
+
 bool CStructDictHolder::InitConsts()
 {
 	InitFieldsAndDomains();
 
 	InitDomainsConsts();
 
+	if (m_DictType == Ross) {
+		rus_subj_gf = GetSubjCortege(this);
+		adj_gf_1 = GetFullGleicheRightCortege(this, 1);
+		adj_gf_2 = GetFullGleicheRightCortege(this, 2);
+		indir_genitive_gf = GetIndirObjInGenitive(this);
+		indir_instr_gf = GetInstrObj(this);
+	}
+	
 	return true;
 };
 
@@ -111,20 +174,20 @@ const std::string& CStructDictHolder::GetDomItemStrWrapper1(size_t cortege_no, B
 	return GetDomItemStrWrapper(GetRoss()->GetCortege(cortege_no).GetItem(item_no));
 }
 
-dom_item_id_t CStructDictHolder::GetItemNoByItemStr1(const std::string& ItemStr, BYTE dom_no, bool check) const
+dom_item_id_t CStructDictHolder::GetItemNoByItemStr1(const std::string& ItemStr, BYTE dom_no, bool throw_exception) const
 {
 	auto item_id = GetRoss()->GetItemIdByItemStr(ItemStr, dom_no);
-	if (check && is_null(item_id)) {
+	if (throw_exception && is_null(item_id)) {
 		throw CExpc("cannot find %s in domain %zi, struct dict name %s", ItemStr.c_str(), dom_no, m_Ross.GetDictName());
 	}
 	return item_id;
 }
 
 
-dom_item_id_t CStructDictHolder::GetItemNoByItemStr(const std::string& ItemStr, const char* DomStr, bool check) const
+dom_item_id_t CStructDictHolder::GetItemNoByItemStr(const std::string& ItemStr, const char* DomStr, bool throw_exception) const
 {
 	BYTE DomNo = GetRoss()->GetDomenNoByDomStr(DomStr);
-	return GetItemNoByItemStr1(ItemStr, DomNo, check);
+	return GetItemNoByItemStr1(ItemStr, DomNo, throw_exception);
 }
 
 
@@ -184,6 +247,15 @@ void CStructDictHolder::InitDomainsConsts()
 	S0LexFunctNo = GetItemNoByItemStr1("S0", LexFunctDomNo, false);
 	RightDirectionNo = GetItemNoByItemStr(">", "D_POSITION", false);
 
+	IndirObjSynONo = GetItemNoByItemStr1("к_доп", SynRelDomNo, is_russian);
+	ReverseSynONo = GetItemNoByItemStr1("X!", SynRelDomNo);
+	UncoordAttrSynONo = GetItemNoByItemStr1("нс_опр", SynRelDomNo, is_russian);
+	CoordAttrSynONo = GetItemNoByItemStr1("с_опр", SynRelDomNo, is_russian);
+	DirectObjSynONo = GetItemNoByItemStr1("п_доп", SynRelDomNo, is_russian);
+	SubjSynONo = GetItemNoByItemStr1("подл", SynRelDomNo, is_russian);
+	EnglSubjSynONo = GetItemNoByItemStr1("subj", SynRelDomNo, is_english);
+	ParatAttrSynONo = GetItemNoByItemStr1("прим_опр", SynRelDomNo, is_russian);
+	
 };
 
 // ================	 функции для проверки извлечения и проверки	значений полей.
@@ -294,7 +366,7 @@ bool CStructDictHolder::HasItem(uint16_t	UnitNo, const std::string FieldStr, con
 	if (UnitNo == ErrUnitNo)  return false;
 	BYTE DomNo = GetRoss()->GetDomenNoByDomStr(DomStr.c_str());
 	if (DomNo == ErrUChar) return false;
-	dom_item_id_t ItemNo = GetItemNoByItemStr1(ItemStr, DomNo);
+	dom_item_id_t ItemNo = GetItemNoByItemStr1(ItemStr, DomNo, false);
 	if (is_null(ItemNo)) return false;
 	BYTE FieldNo = GetRoss()->GetFieldNoByFieldStr(FieldStr.c_str());
 
@@ -325,9 +397,10 @@ long  CStructDictHolder::GetDopFields(long UnitNo, std::vector<CDopField>& DopFi
 		for (size_t k = GetRoss()->GetUnitStartPos(UnitNo); k <= GetRoss()->GetUnitLastPos(UnitNo); k++)
 			if (DopFldName == GetRoss()->GetCortegeFieldNo(k))
 			{
-				TCortege C = GetCortegeCopy(k);
-				if (!C.is_null(0) || !C.is_null(1) || !C.is_null(2))
-					continue;
+				TCortege c = GetCortegeCopy(k);
+				if (c.is_null(0) || c.is_null(1) || c.is_null(2))
+					throw CExpc("bad format in field AUX, dict = %s, entry %s", GetRoss()->GetDictName().c_str(),
+						GetRoss()->GetEntryStr(UnitNo).c_str());
 				CDopField Field;
 				std::string	S = GetDomItemStrWrapper1(k, 1);
 				//	 Word1 - зависимое слово

@@ -441,20 +441,18 @@ struct CSemanTermin {
 };
 
 
-void LoadTerminItems(CRusSemStructure& R, long ThesaurusId, long TextItemId, const char* Lemma, std::vector<CSemanTermin>& Result)
+void LoadTerminItems(CRusSemStructure& R, EThesType thes_id, long TextItemId, const char* Lemma, std::vector<CSemanTermin>& Result)
 {
-	const CThesaurus* Thes = R.m_pData->GetThes(ThesaurusId);
+	const CThesaurus* Thes = R.m_pData->GetThes(thes_id);
 	std::vector<int> TerminItems;
 	Thes->QueryTerminItem(Lemma, TerminItems);
-	long Count = TerminItems.size();
-	for (long i = 0; i < Count; i++)
-	{
+	for (auto& t: TerminItems)	{
 		CSemanTermin T;
 		CTerminItem I;
 		I.m_TextItemId = TextItemId;
-		T.m_ThesaurusId = ThesaurusId;
-		T.m_TerminNo = Thes->m_SynItems[TerminItems[i]].m_TerminNo;
-		I.m_ItemNo = Thes->m_SynItems[TerminItems[i]].m_ItemPos;
+		T.m_ThesaurusId = thes_id;
+		T.m_TerminNo = Thes->m_SynItems[t].m_TerminNo;
+		I.m_ItemNo = Thes->m_SynItems[t].m_ItemPos;
 		// односоставные теримны пропускаем
 		long ModelNo = Thes->m_Termins[T.m_TerminNo].m_ModelNo;
 		if (ModelNo == -1) continue;
@@ -522,16 +520,15 @@ bool CheckIfAllItemsFoundForDividedTermin(const CRusSemStructure& R, const CSema
 {
 	std::vector<bool> V(T.m_TextItemsCount, false);
 
-	for (int i = 0; i < T.m_TermItems.size(); i++)
+	for (auto& i: T.m_TermItems)
 	{
-		int z = T.m_TermItems[i].m_ItemNo - 1;
-		assert(z < V.size());
-		V[z] = true;
+		V[i.m_ItemNo - 1] = true;
 	};
 
-	for (int j = 0; j < V.size(); j++)
-		if (!V[j])
+	for (auto& i : V) {
+		if (!i)
 			return  false;
+	}
 
 	return true;
 };
@@ -601,24 +598,21 @@ void CRusSemStructure::FindDividedTermins()
 				|| m_Nodes[i].m_Words[0].m_Lemma.empty()
 				)
 				continue;;
-
-			LoadTerminItems(*this, LocThes, i, m_Nodes[i].m_Words[0].m_Lemma.c_str(), Termins);
-			LoadTerminItems(*this, FinThes, i, m_Nodes[i].m_Words[0].m_Lemma.c_str(), Termins);
-			LoadTerminItems(*this, OmniThes, i, m_Nodes[i].m_Words[0].m_Lemma.c_str(), Termins);
-			LoadTerminItems(*this, CompThes, i, m_Nodes[i].m_Words[0].m_Lemma.c_str(), Termins);
+			auto l = m_Nodes[i].m_Words[0].m_Lemma.c_str();
+			LoadTerminItems(*this, LocThes, i, l, Termins);
+			LoadTerminItems(*this, FinThes, i, l, Termins);
+			LoadTerminItems(*this, OmniThes, i, l, Termins);
+			LoadTerminItems(*this, CompThes, i, l, Termins);
 
 		};
 		// строим разорванные термины
-		for (int TerminNo = 0; TerminNo < Termins.size(); TerminNo++)
+		for (auto& t: Termins)
 		{
+			const CThesaurus* Thes = m_pData->GetThes(t.m_ThesaurusId);
 
-			CSemanTermin& T = Termins[TerminNo];
+			t.m_TextItemsCount = Thes->m_Termins[t.m_TerminNo].m_TermItems.size();
 
-			const CThesaurus* Thes = m_pData->GetThes(T.m_ThesaurusId);
-
-			T.m_TextItemsCount = Thes->m_Termins[T.m_TerminNo].m_TermItems.size();
-
-			if (!CheckIfAllItemsFoundForDividedTermin(*this, T)) continue;
+			if (!CheckIfAllItemsFoundForDividedTermin(*this, t)) continue;
 			// дальше  мы будем уничтожать элементы вектора  T.m_Items, оставляя в нем только те, 
 			// для которых были найдены отношения из поля AUX
 			// Если, например,  для некого двухсловного термина для первого слова было найдено две гипотезы  в тексте,
@@ -626,19 +620,19 @@ void CRusSemStructure::FindDividedTermins()
 			// тогда  второе гипотеза будет удалена
 
 			std::vector<CDopField> DopFields;
-			T.m_TerminId = Thes->m_Termins[T.m_TerminNo].m_TerminId;
-			uint16_t UnitNo = GetUnitNoByTerminId(GetRossIdByThesId(T.m_ThesaurusId), T.m_TerminId);
+			t.m_TerminId = Thes->m_Termins[t.m_TerminNo].m_TerminId;
+			uint16_t UnitNo = GetUnitNoByTerminId(GetRossIdByThesId(t.m_ThesaurusId), t.m_TerminId);
 			if (UnitNo == ErrUnitNo) continue;
-			long MainItemNo = GetRossHolder(GetRossIdByThesId(T.m_ThesaurusId))->GetDopFields(UnitNo, DopFields);
+			long MainItemNo = GetRossHolder(GetRossIdByThesId(t.m_ThesaurusId))->GetDopFields(UnitNo, DopFields);
 
 			// если поле AUX пусто, тогда не на что опираться, призодится выходить
-			if (DopFields.size() == 0) continue;
+			if (DopFields.empty()) continue;
 
-			GetThesInterpFirstVariant(T);
+			GetThesInterpFirstVariant(t);
 
 			do {
-				if (CheckAndBuildOneDividedTermin(*this, T, DopFields, MainItemNo)) break;
-			} while (GetInterpNextVariant(T));
+				if (CheckAndBuildOneDividedTermin(*this, t, DopFields, MainItemNo)) break;
+			} while (GetInterpNextVariant(t));
 
 		};
 	}

@@ -131,5 +131,4 @@ int main(int argc, char** argv) {
 		return res;
 	}
 }
-// todo: test for [TOKEN grm="-"] and CParser::AreEqual
 

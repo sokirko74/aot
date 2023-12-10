@@ -226,12 +226,8 @@ private:
 	bool		IsSlaveClause(long ClauseNo) const;
 	// находит позицию для неглавнх компонент клаузы
 	void		find_position_for_slave_clause_components();
-	
-
-	
-
 	bool		lemma_is_demonstrative_pronoun (std::string Lemma) const;
-
+	std::vector<long> CEngSynthes::build_actant_positions(int node);
 
 
 public:

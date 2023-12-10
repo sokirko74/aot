@@ -209,11 +209,7 @@ try
 {
 
 	CGraphmatFile Graphan;
-	if (!Graphan.LoadDicts(Langua))
-	{
-		fprintf (stderr,"Cannot load dictionaries \n");
-		return 1;
-	};
+	Graphan.LoadDicts(Langua);
 
 	Graphan.m_bUseIndention = false;
 	Graphan.m_MaxSentenceLength = 1000;
@@ -342,6 +338,10 @@ try
 		fprintf (stderr,"exiting\n");
 
 		return 0;
+	}
+	catch (std::exception& c) {
+		fprintf(stderr, "An exception occurred %s", c.what());
+		return 1;
 	}
 	catch (...)
 	{

@@ -103,8 +103,6 @@ public:
 	dom_item_id_t SubjSynONo; //подл
 	dom_item_id_t EnglSubjSynONo; //subj
 	dom_item_id_t ParatAttrSynONo; //прим_опр
-	dom_item_id_t FromPredicSynONo; //отпредик
-	dom_item_id_t PostSpecifSynONo; //уточн
 
 
 	// уточнения групп 
@@ -170,6 +168,11 @@ public:
 	dom_item_id_t SelfLabelNo;
 	dom_item_id_t RightDirectionNo;
 
+	TCortege rus_subj_gf;
+	TCortege adj_gf_1;
+	TCortege adj_gf_2;
+	TCortege indir_genitive_gf;
+	TCortege indir_instr_gf;
 
 	CStructDictHolder(DictTypeEnum dictType);
 	~CStructDictHolder();

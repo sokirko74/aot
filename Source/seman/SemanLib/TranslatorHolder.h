@@ -21,7 +21,6 @@ const part_of_speech_t UnknownPOS = 0xff;
 
 class CTranslatorHolder  
 {
-	CMorphanHolder		    m_EngHolder;
 	CSyntaxHolder			m_RusHolder;
 
 public:

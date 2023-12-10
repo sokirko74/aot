@@ -33,6 +33,7 @@ bool CRusSemStructure::LoadFromDictForPassive(uint16_t UnitNo, BYTE LeafId, BYTE
 	return    P.m_GramCorteges.empty();
 };
 
+
 // функция, которая определяет валентную структуру для пассивной формы глагола
 // (CDictUnitInterp::m_bPassiveForm)
 void  CRusSemStructure::InitPassivePattern(size_t NodeNo, BYTE ValencyNo, CSemPattern& P)
@@ -50,7 +51,7 @@ void  CRusSemStructure::InitPassivePattern(size_t NodeNo, BYTE ValencyNo, CSemPa
 		P.m_PatternValency = m_Nodes[NodeNo].m_Vals[1];
 
 		if (P.m_GramCorteges.size() == 0)
-			P.m_GramCorteges.push_back(GetSubjCortege(P.m_pRossDoc));
+			P.m_GramCorteges.push_back(P.m_pRossDoc->rus_subj_gf);
 
 		/*
 		"отмечается, что продолжительность составляет 55,5 лет."
@@ -82,7 +83,7 @@ void  CRusSemStructure::InitPassivePattern(size_t NodeNo, BYTE ValencyNo, CSemPa
 		LoadFromDictForPassive(UnitNo, 1, 0, P);
 		P.m_PatternValency = m_Nodes[NodeNo].m_Vals[0];
 		if (P.m_GramCorteges.empty())
-			P.m_GramCorteges.push_back(GetInstrObj(P.m_pRossDoc));
+			P.m_GramCorteges.push_back(P.m_pRossDoc->indir_instr_gf);
 		P.m_PatternValency.m_InstrAgent = true;
 	}
 	else
@@ -95,21 +96,6 @@ void  CRusSemStructure::InitPassivePattern(size_t NodeNo, BYTE ValencyNo, CSemPa
 };
 
 
-
-
-
-
-inline TCortege GetFullGleicheRightCortege(const CStructDictHolder* RossDoc, BYTE LeafId)
-{
-	TCortege C;
-	C.m_FieldNo = RossDoc->GramFetFieldNo;;
-	C.m_LeafId = LeafId;
-	C.m_LevelId = 0;
-	C.SetItem(0, RossDoc->RightDirectionNo);
-	C.SetItem(1, RossDoc->ReverseSynONo);
-	C.SetItem(2, RossDoc->NounGrpNo);
-	return C;
-};
 
 
 
@@ -135,7 +121,7 @@ void  CRusSemStructure::GetActantPattern(size_t NodeNo, BYTE ValencyNo, CSemPatt
 		// получение первой валентности для краткого прилагательного
 		if (m_Nodes[P.m_SourceNo].m_Vals.size() >= 1)
 		{
-			P.m_GramCorteges.push_back(GetSubjCortege(P.m_pRossDoc));
+			P.m_GramCorteges.push_back(P.m_pRossDoc->rus_subj_gf);
 			P.m_PatternValency = m_Nodes[P.m_SourceNo].m_Vals[0];
 		}
 	}
@@ -171,7 +157,7 @@ void  CRusSemStructure::GetActantPattern(size_t NodeNo, BYTE ValencyNo, CSemPatt
 				if (ValencyNo == 0)
 				{
 					P.m_GramCorteges.clear();
-					P.m_GramCorteges.push_back(GetFullGleicheRightCortege(P.m_pRossDoc, 1));
+					P.m_GramCorteges.push_back(P.m_pRossDoc->adj_gf_1);
 				};
 			}
 			else
@@ -187,7 +173,7 @@ void  CRusSemStructure::GetActantPattern(size_t NodeNo, BYTE ValencyNo, CSemPatt
 						if (P.GetSynRel(i) == P.m_pRossDoc->DirectObjSynONo)
 						{
 							P.m_GramCorteges.clear();
-							P.m_GramCorteges.push_back(GetFullGleicheRightCortege(P.m_pRossDoc, 2));
+							P.m_GramCorteges.push_back(P.m_pRossDoc->adj_gf_2);
 							break;
 						};
 				}
@@ -294,6 +280,7 @@ bool CRusSemStructure::CheckDirection(long NodeNo1, long NodeNo2, std::string Di
 
 bool CRusSemStructure::CheckPatternReverseGramFetLine(CSemPattern& P, CSynRealization& SynRealization, size_t NodeNo)
 {
+	auto debug = P.m_pRossDoc->GetRoss()->WriteToString(P.m_GramCorteges[SynRealization.m_CortegeNo]);
 	long SynFet = P.GetSynFet(SynRealization.m_CortegeNo);
 	std::string SynFetStr = P.GetSynFetStr(SynRealization.m_CortegeNo);
 	TCortege& C = P.m_GramCorteges[SynRealization.m_CortegeNo];
@@ -303,7 +290,7 @@ bool CRusSemStructure::CheckPatternReverseGramFetLine(CSemPattern& P, CSynRealiz
 		)
 		if (SynFetStr == "ПРИЛ" || SynFetStr == "ИГ" )
 		{
-			/* Связь между  существительное и прилагательным  не может идти через  предлог.
+			/* Связь между  существительным и прилагательным  не может идти через  предлог.
 			   (т.е. предлог находился между прилагательным и существительным)
 			   например, "красивом в доме",   здесь "красивом" не может относиться к "доме",
 			   или:  "доме в красивом"
@@ -1441,7 +1428,7 @@ void CRusSemStructure::FindActants(size_t NodeNo)
 				{
 					LoadFromDictForPassive(m_Nodes[NodeNo].GetUnitNo(), 1, 1, CopulPattern);
 					CopulPattern.m_PatternValency = CValency("F-ACT", A_C, GetRossHolder(Ross), 1, 1, m_Nodes[NodeNo].GetUnitNo());
-					if (CopulPattern.m_GramCorteges.size() == 0) CopulPattern.m_GramCorteges.push_back(GetSubjCortege(GetRossHolder(Ross)));
+					if (CopulPattern.m_GramCorteges.size() == 0) CopulPattern.m_GramCorteges.push_back(GetRossHolder(Ross)->rus_subj_gf);
 					TryPatternOnNodes(CopulNodeNo, ClauseNo, CopulPattern);
 				}
 				else
@@ -1527,7 +1514,8 @@ void CRusSemStructure::FindReverseActantForPreps(size_t ClauseNo)
 			P.InitSemPattern(P.m_pRossDoc, PrepUnitNo, 1, 0);
 			P.LoadGramFromDict();
 			// нужно добавить X!, потому что предлог является CAT=RELAT		  
-			P.InsertReverseSynOToTheBegining();
+			P.TracePattern();
+
 			// получаем первую валентность предлога (то отношение, которое оно выражает)
 			StringVector Vals;
 			P.m_pRossDoc->GetSimpleFieldItemsFromArticle(PrepUnitNo, "VAL", 0, 0, Vals);

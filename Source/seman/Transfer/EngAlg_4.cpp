@@ -447,7 +447,7 @@ void CEngSemStructure::ConvertClosedCollocToOpen()
 			int    e1no = atoi(e1ns.c_str());
 			assert(e1no>0 && (e1lt=="A" || e1no<=nWords) );
 		//
-			assert( vecSINO[k].is_null(2));
+			assert(!vecSINO[k].is_null(2));
 			std::string e2 = GetRoss(type)->GetDomItemStr(vecSINO[k].GetItem(2));
 			std::string e2lt = e2.substr(0,1);
 			assert(e2lt=="A" || e2lt=="C");

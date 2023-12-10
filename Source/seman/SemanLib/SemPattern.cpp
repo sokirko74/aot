@@ -4,8 +4,8 @@
 
 CSemPattern::CSemPattern ()
 {
-		m_Direction ="";
-		SetEmpty();
+	m_Direction ="";
+	SetEmpty();
 };
 
 const CStructDictHolder*	CSemPattern::GetRossHolder()  const
@@ -49,16 +49,12 @@ dom_item_id_t CSemPattern::GetSynFet(long CortegeNo) const
 
 std::string  CSemPattern::GetSynFetStr(long cortege_no) const
 {
-	auto c = m_pRossDoc->GetRoss()->GetCortege(cortege_no);
-	dom_item_id_t item_id = m_pRossDoc->GetSynFet(c);
-	return  m_pRossDoc->GetDomItemStrWrapper(item_id);
+	return  m_pRossDoc->GetDomItemStrWrapper(GetSynFet(cortege_no));
 };
 
 std::string  CSemPattern::GetSynRelStr(long cortege_no) const
 {
-	auto c = m_pRossDoc->GetRoss()->GetCortege(cortege_no);
-	auto item_id = m_pRossDoc->GetSynRel(c);
-	return  m_pRossDoc->GetDomItemStrWrapper(item_id);
+	return  m_pRossDoc->GetDomItemStrWrapper(GetSynRel(cortege_no));
 };
 
 
@@ -72,33 +68,12 @@ bool  CSemPattern::HasSemFet(const std::string& SemFet) const
 	return false;
 };
 
-void  CSemPattern::InsertReverseSynOToTheBegining() 
-{
-	for (long i=0; i < m_GramCorteges.size(); i++)
-	{
-		for (long k=9; k > 0; k--)
-			m_GramCorteges[i].SetItem(k, m_GramCorteges[i].GetItem(k - 1));
-		m_GramCorteges[i].SetItem(0, m_pRossDoc->ReverseSynONo);
-
-	};
-		
-};
-
 void CSemPattern::TracePattern () const
 {
 	LOGV << m_PatternValency.m_RelationStr;
 	for (auto& g: m_GramCorteges)
 	{
-		std::string Q = "";
-		for (size_t k = 0; k < 3; k++) {
-			if (!g.is_null(k))
-			{
-				std::string S = m_pRossDoc->GetDomItemStrWrapper(g.GetItem(k));
-				Q += std::string(" ") + S;
-			};
-		}
-	     Q += std::string ("\n");
-		 LOGV << Q;
+		LOGV << m_pRossDoc->GetRoss()->WriteToString(g);
 	};
 };
 

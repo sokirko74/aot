@@ -123,7 +123,7 @@ public:
     ~CGraphmatFile();
 
     // processing
-    bool LoadDicts(MorphLanguageEnum langua);
+    void LoadDicts(MorphLanguageEnum langua);
 
     void LoadStringToGraphan(const std::string &szBuffer);
 

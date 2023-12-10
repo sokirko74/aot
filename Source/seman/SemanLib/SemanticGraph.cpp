@@ -2,7 +2,7 @@
 #include "SemanticStructure.h"
 
 
-//====================================================================
+
 //===================       Relations         ========================
 //====================================================================
 
@@ -131,24 +131,21 @@ long CSemanticStructure::GetIncomingRelationsCount(long NodeNo, bool UseUse) con
 	return Relations.size();
 };
 
-
-
-
-
-
+std::string CSemanticStructure::GetRelationStr(long rel_no) const {
+	auto r = GetRelation(rel_no);
+	std::string l = Format("%s %s ", GetNodeStr1(r->m_SourceNodeNo).c_str(), r->m_Valency.m_RelationStr.c_str());
+	l += Format(" %s %s ", GetNodeStr1(r->m_TargetNodeNo).c_str(), (r->m_bRelUse ? " used" : " unused"));;
+	l += " SF = " + GetSemFetsInOneStr(r->m_SemFets);
+	l += " SynR = \"" + r->m_SyntacticRelation + "\" ";
+	return l;
+}
 
 void CSemanticStructure::PrintRelations() const
 {
 	LOGV << "Relations:";
 	for (size_t i = 0; i < GetRelationsSize(); i++)
 	{
-		auto r = GetRelation(i);
-		std::string l = Format("%s %s ", GetNodeStr1(r->m_SourceNodeNo).c_str(), r->m_Valency.m_RelationStr.c_str());
-		l += Format(" %s %s ", GetNodeStr1(r->m_TargetNodeNo).c_str(), (r->m_bRelUse ? " used" : " unused"));;
-		l += " SF = " + GetSemFetsInOneStr(r->m_SemFets);
-		l += " SynR = \"" + r->m_SyntacticRelation + "\" ";
-		l += std::string("\n");
-		LOGV << l;
+		LOGV << GetRelationStr(i);
 	};
 };
 

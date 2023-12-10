@@ -556,7 +556,6 @@ void CEngSemStructure::ApplyBeRule(int iEngNode)
 			m_Nodes[iEngNode].AddOneGrammemRich(eSingular);
 
 		m_Relations[outRels[i]].m_RusRel = -1;
-		//m_Relations[outRels[i]].m_SynReal.m_Cortege.SetItem(0,-1);
 	}
 }
 
@@ -876,7 +875,7 @@ void CEngSemStructure::ApplyALG_compl_obj(int iEngNode)
 	rRelToSubj.m_RusRel = -1;
 	rRelToSubj.m_bInterpreted = false;
 	rRelToSubj.m_Valency.m_RelationStr = "Compl_obj";
-	rRelToSubj.m_SynReal.m_Cortege.SetItem(0, -1);
+	rRelToSubj.m_SynReal.m_Cortege.SetItem(0, EmptyDomItemId);
 	rRelToSubj.m_Position = ">";	
 	rRelToSubj.m_PosType = FromAlgorithmPosType;	
 

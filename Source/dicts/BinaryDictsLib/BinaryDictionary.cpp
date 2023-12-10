@@ -8,6 +8,8 @@
 #include "morph_dict/agramtab/RusGramTab.h"
 #include "morph_dict/agramtab/EngGramTab.h"
 #include "morph_dict/lemmatizer_base_lib/MorphanHolder.h"
+#include "morph_dict/lemmatizer_base_lib/Paradigm.h"
+#include "morph_dict/lemmatizer_base_lib/Lemmatizers.h"
 
 
 inline size_t get_size_in_bytes(const WordPair &t) {

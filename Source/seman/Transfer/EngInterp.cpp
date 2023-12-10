@@ -339,7 +339,8 @@ int CEngSemStructure::InterpretOneNode( CEnglishEquivMap& mapRNodeToENode, int i
 			long iLexFun = FindLexFunctBySituationNodeNo(iRusNode);
 			if( iLexFun == -1 )
 			{
-				engNode = (CSemNode&)RusStr.GetNode(iRusNode);
+				auto& from_node = (CSemNode&)RusStr.GetNode(iRusNode);
+				engNode = from_node;
 				engNode.SetGrammemsRich( 0 );
 				engNode.RusNode = iRusNode; 
 				TransferGrammems (RusStr.GetNode(iRusNode), engNode, "InterpretOneNode");

@@ -16,14 +16,13 @@ int CEngSemStructure::GetEngRelByRusRel(int iRusRel)
 
 bool CEngSemStructure::CanBeRusVerb(const std::string& Lemma)  const
 {
-	std::string l = Lemma;
+	std::string l = convert_from_utf8(Lemma.c_str(), morphRussian);
 	const CLemmatizer* P = m_pData->GetRusLemmatizer(); 
-	std::vector<CFormInfo> ParadigmCollection;
-	P->CreateParadigmCollection(true, l, false, false, ParadigmCollection);
-	for (int i=0; i < ParadigmCollection.size(); i++)
+	std::vector<CFormInfo> paradigms;
+	P->CreateParadigmCollection(true, l, false, false, paradigms);
+	for (auto& p: paradigms)
 	{
-		std::string GramCodes = ParadigmCollection[i].GetSrcAncode();
-		if (m_pData->GetRusGramTab()->GetPartOfSpeech(GramCodes.c_str()) == INFINITIVE)
+		if (m_pData->GetRusGramTab()->GetPartOfSpeech(p.GetSrcAncode().c_str()) == INFINITIVE)
 			return true;
 	};
 	return false;

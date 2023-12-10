@@ -50,38 +50,6 @@ struct CRossQuery {
 
 
 
-typedef std::pair<std::string, std::string> PairOfString;
-
-
-struct CSynRealization {
-    // предлоги
-    std::vector<CRossInterp> m_Preps;
-    // союзы (для отношений)
-    CRossInterp m_Conj;
-
-    // граммемы отношения или узла
-    grammems_mask_t m_Grammems;
-
-    // предлог или союз, который не был найден в оборотах, но он был прописан в статье.
-    //  Такой предлог или союз пишется прямо в строку.
-    std::string m_Other;
-
-    // номер используемого кортежа в векторе CSemPattern::m_GramCorteges
-    long m_CortegeNo;
-
-    // сохраненный кортеж  CSemPattern::m_GramCorteges[m_CortegeNo]
-    TCortege m_Cortege;
-
-    // добавлено для статьи "не ранее", в которой используется специальная константа А1(НЕ)
-    std::string m_AlgStr;
-
-    void SetEmpty();
-
-    // проверяет, приписан ли узлу предлог PrepNo
-    bool HasThePrep(uint16_t UnitNo) const;
-
-};
-
 enum NodeTypeEnum {
     SimpleNode, MNA, Copul, ModalCopul, SJA, Situat
 };
@@ -311,55 +279,6 @@ public:
 
 };
 
-enum PositionTypeEnum {
-    UnknownPosType,
-    FromArticlePosType,
-    FromAlgorithmPosType
-};
-
-struct CSemRelation : public CSimpleBinaryRelation {
-    // валентность, которая приписана этому слову
-    CValency m_Valency;
-    // синтаксическое отношение, которое лежит в основе этого семантического отношения
-    // если данное СемО пришло из жесктих синтаксических отношений, то здесь лежит СинО,
-    // взятое непосредственно из синтаксиса, иначе здесь лежит отношение, которое записано в поле GFi
-    std::string m_SyntacticRelation;
-    //технический слот: помечает те отношения, которые нужно будет удалить
-    bool m_bToDelete;
-    //здесь записывается информация о том, как реализуется лексически и грамматически это отношение
-    CSynRealization m_SynReal;
-    //технический слот: используется для выделения одного подмножества отношений среди некоторого множества
-    long m_bRelUse;
-    // помета того, что GFi был помечен реверсинвым отношением ("X!")
-    bool m_bReverseRel;
-
-    // перечень LEX, которым должно удовлетворять данное отношение
-    StringVector m_LexFets;
-
-    //SF отношения
-    std::vector<uint64_t> m_SemFets;
-
-    bool m_bDopRelation;
-
-    // позиция, которая указывается для синтеза
-    std::string m_Position;
-    PositionTypeEnum m_PosType;
-
-// отношение, которое на этапе идеализации должно подвеситься к узлу SIT , а пока подвешивается	// к вершине клаузы
-    bool m_bSituatRelation;
-
-    void Init();
-
-    CSemRelation();
-
-    CSemRelation(const CValency &Valency,
-                 long SourceNodeNo,
-                 long TargetNodeNo,
-                 std::string SyntacticRelation);
-
-    // истина, если отношению приписаны предлоги
-    bool HasSomePrep() const;
-};
 
 
 // Наклонение предложения (изъявительное, восклицательное, вопорсительное)
@@ -515,6 +434,8 @@ public:
 
     // печатает отношения в Debug
     void PrintRelations() const;
+    std::string GetRelationStr(long rel_no) const;
+
 
     // проверяет, что сущетсвует хотя бы одно отношение, которое идет между ClauseNo1 и ClauseNo2
     bool AreConnectedClauses(long ClauseNo1, long ClauseNo2) const;

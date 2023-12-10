@@ -24,20 +24,15 @@ int main(int argc, const char* argv[])
 
 	try {			
 		CGraphmatFile Graphan;
-		if (!Graphan.LoadDicts(args.GetLanguage()))
-		{
-			std::cerr << "Cannot load dictionaries:" << Graphan.GetLastError() << "\n";
-			return 1;
-		};
+		Graphan.LoadDicts(args.GetLanguage();
 		auto inputFile = args.Retrieve("input-file");
 		std::cout << "Loading file " << inputFile << "\n";
 		Graphan.LoadFileToGraphan(inputFile);
 		Graphan.WriteGraphMat(args.Retrieve("output-file"));
-
 		std::cout  << "Found Units:" <<  Graphan.GetUnits().size() << "\n";
 		return 0;
 	}
-	catch (CExpc c)
+	catch (std::exception& c)
 	{
 		std::cerr << "An exception occurred:" << c.what() << "\n";
 	}

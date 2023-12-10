@@ -16,6 +16,8 @@ public:
 
     ~CSemStructureBuilder(void);
 
+    void InitDicts();
+
     bool FindSituationsForNextSentence();
 
     bool FindSituations(std::string text, long UserTreeVariantNo, std::string PO, long PanicTreeVariantCount,
