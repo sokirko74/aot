@@ -1,5 +1,4 @@
 {
-	"MaxNumDom": 3,
 	"MaxMeanNum":  1,
 	"DictName": "RML_THES_COMP",
 	"users": ["alex", "maya", "user", "boris", "oleg", "graf","masha", "af"]

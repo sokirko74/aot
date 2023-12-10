@@ -14,7 +14,7 @@ CONTENT =  из
 GF      = 1  ПРОСТ_ПРЕДЛ
 SF      = 1  PART
 VAL     =  PART , A2 , A1
-GF1     = 1  ЧИСЛ
+GF1     = 1  X! : ЧИСЛ
 GF2     = 1  ЧИСЛ
 ENG     =  from 1
 ============
@@ -177,8 +177,8 @@ TIME_CREATE       = 14/2/1 20:49:1
 CONTENT =  (без  | безо)
 GF      = 1  ПРОСТ_ПРЕДЛ
 VAL     =  ACT , A1 , A2
-GF1     = 1  ГГ
-          2  < ИГ
+GF1     = 1  X! : ГГ
+          2  < X! : ИГ
 GF2     = 1  >> Р
 ENG     =  without 1
            less 1
@@ -215,7 +215,7 @@ GF      = 1  ПРЕДЛ
 SF      = 1  RESTR
 VAL     =  RESTR , A2 , A1
 SYNR    =  уточн ( с+а2 , а1 )
-GF1     = 1  ГГ
+GF1     = 1  X! : ГГ
 SF1     = 1  PREDIC
 GF2     = 1  >> Р
 SF2     = 1  ANYTH
@@ -229,7 +229,7 @@ TIME_CREATE       = 14/2/1 20:49:2
 CONTENT =  благодаря
 GF      = 1  ПРОСТ_ПРЕДЛ
 VAL     =  ACT , A1 , A2
-GF1     = 1  ПРОП
+GF1     = 1  X! : ПРОП
 GF2     = 1  >> Д
 ENG     =  due_to 1
 ============
@@ -318,8 +318,8 @@ CAT     = 1  OPER
 GF      = 1  ПРОСТ_ПРЕДЛ
 SF      = 1  TRG-PNT
 VAL     =  TRG-PNT , A2 , A1
-GF1     = 1  ГГ
-          2  < ИГ
+GF1     = 1  X! : ГГ
+          2  < X! : ИГ
 GF2     = 1  >> В
 ENG     =  to 1
            into 1
@@ -335,8 +335,8 @@ CAT     = 1  OPER
 GF      = 1  ПРОСТ_ПРЕДЛ
 SF      = 1  TRG-PNT
 VAL     =  TRG-PNT , A2 , A1
-GF1     = 1  ГГ
-          2  < ИГ
+GF1     = 1  X! : ГГ
+          2  < X! : ИГ
 GF2     = 1  >> И_мн
 ENG     =  to 1
 ============
@@ -348,8 +348,8 @@ CAT     = 1  OPER
 GF      = 1  ПРОСТ_ПРЕДЛ
 SF      = 1  LOK
 VAL     =  LOK , A2 , A1
-GF1     = 1  ГГ
-          2  < ИГ
+GF1     = 1  X! : ГГ
+          2  < X! : ИГ
 ESF2(2) = 1  TIME
 GF2     = 1  >> П
 ENG     =  in 1
@@ -458,8 +458,8 @@ CAT     = 1  RELAT
 GF      = 1  ПРЕДЛ
 VAL     =  ADR , A2 , A1
 SYNR    =  к_доп ( а2 , а1 )
-GF1     = 1  ГГ
-          2  < ИГ
+GF1     = 1  X! : ГГ
+          2  < X! : ИГ
 SF1     = 1  PREDIC
 GF2     = 1  >> Р
 SF2     = 1  ANIM
@@ -493,8 +493,8 @@ CAT     = 1  RELAT
 GF      = 1  ПРЕДЛ
 SF      = 1  BELNG
 VAL     =  BELNG , A1 , A2
-GF1     = 1  ИГ
-          2  ГГ
+GF1     = 1  X! : ИГ
+          2  X! : ГГ
 SF1     = 1  PREDIC
 GF2     = 1  >> Р
 SF2     = 1  THINGN
@@ -514,8 +514,8 @@ GF      = 1  ПРЕДЛ
 SF      = 1  CAUSE
 VAL     =  CAUSE , A2 , A1
 SYNR    =  обст ( с+а2 , а1 )
-GF1     = 1  ГГ
-          2  ИГ
+GF1     = 1  X! : ГГ
+          2  X! : ИГ
 SF1     = 1  PREDIC
 GF2     = 1  >> Р
 ENG     =  in_the_view_of 1
@@ -531,7 +531,7 @@ GF      = 1  ПРЕДЛ
 SF      = 1  FORM
 VAL     =  FORM , A2 , A1
 SYNR    =  уточн ( с+а2 , а1 )
-GF1     = 1  ИГ
+GF1     = 1  X! : ИГ
 SF1     = 1  THINGN
              ABSTR
 GF2     = 1  >> Р
@@ -593,8 +593,8 @@ GF      = 1  ПРЕДЛ
 SF      = 1  SPHERE
 VAL     =  SPHERE , A2 , A1
 SYNR    =  обст ( с+а2 , а1 )
-GF1     = 1  ГГ
-          2  ИГ
+GF1     = 1  X! : ГГ
+          2  X! : ИГ
 SF1     = 1  AKTIO
 GF2     = 1  >> Р
 ENG     =  in 1
@@ -622,7 +622,7 @@ GF      = 1  ПРЕДЛ
 SF      = 1  TOGETHER
 VAL     =  TOGETHER , A2 , A1
 SYNR    =  уточн ( а2 , а1 )
-GF1     = 1  ИГ
+GF1     = 1  X! : ИГ
 SF1     = 1  SF ( 2 )
 GF2     = 1  >> Д
 ENG     =  in_addition_to 1
@@ -638,8 +638,8 @@ GF      = 1  ПРЕДЛ
 SF      = 1  COND
 VAL     =  COND , A2 , A1
 SYNR    =  обст ( с+а2 , а1 )
-GF1     = 1  ГГ
-          2  ИГ
+GF1     = 1  X! : ГГ
+          2  X! : ИГ
 SF1     = 1  PREDIC
 GF2     = 1  >> Р
 ENG     =  depending_on 1
@@ -689,8 +689,8 @@ GF      = 1  ПРЕДЛ
 SF      = 1  GOOD
 VAL     =  ADR , A2 , A1
 SYNR    =  уточн ( с+а2 , а1 )
-GF1     = 1  ГГ
-          2  ИГ
+GF1     = 1  X! : ГГ
+          2  X! : ИГ
 SF1     = 1  PREDIC
 GF2     = 1  >> Р
 SF2     = 1  ANIM
@@ -709,7 +709,7 @@ GF      = 1  ПРЕДЛ
 SF      = 1  REPRES
 VAL     =  RESTR , A1 , A2
 SYNR    =  уточн ( с+а2 , а1 )
-GF1     = 1  ГГ
+GF1     = 1  X! : ГГ
 SF1     = 1  PREDIC
 GF2     = 1  >> Р
 SF2     = 1  PROF
@@ -742,8 +742,8 @@ GF      = 1  ПРЕДЛ
 SF      = 1  GOOD
 VAL     =  ADR , A2 , A1
 SYNR    =  уточн ( с+а2 , а1 )
-GF1     = 1  ГГ
-          2  ИГ
+GF1     = 1  X! : ГГ
+          2  X! : ИГ
 SF1     = 1  PREDIC
 GF2     = 1  >> Р
 SF2     = 1  ANIM
@@ -796,7 +796,7 @@ CAT     = 1  RELAT
 GF      = 1  ПРЕДЛ
 SF      = 1  RESLT
 VAL     =  RESLT , A2 , A1
-GF1     = 1  ГГ
+GF1     = 1  X! : ГГ
 SF1     = 1  PREDIC
 GF2     = 1  >> Р
 EGF2(2) =  -
@@ -812,7 +812,7 @@ CAT     = 1  RELAT
 GF      = 1  ПРЕДЛ
 SF      = 1  TIME
 VAL     =  AFTER , A2 , A1
-GF1     = 1  ГГ
+GF1     = 1  X! : ГГ
 SF1     = 1  PREDIC
 GF2     = 1  >> ИГ
 ENG     =  on_the_eve_of 1
@@ -831,8 +831,8 @@ GF      = 1  ПРЕДЛ
 SF      = 1  FUNCT
 VAL     =  FUNCT , A2 , A1
 SYNR    =  уточн ( с+а2 , а1 )
-GF1     = 1  ГГ
-          2  ИГ
+GF1     = 1  X! : ГГ
+          2  X! : ИГ
 SF1     = 1  THINGN
 GF2     = 1  >> Р
 SF2     = 1  PREDIC
@@ -871,7 +871,7 @@ GF      = 1  ПРЕДЛ
 SF      = 1  LOK
 VAL     =  LOC_conta , A2 , A1
 SYNR    =  нс_опр ( с+а2 , а1 )
-GF1     = 1  ИГ
+GF1     = 1  X! : ИГ
 SF1     = 1  THINGN
 GF2     = 1  >> Т
 ENG     =  contacting_with 1
@@ -885,7 +885,7 @@ CAT     = 1  RELAT
 GF      = 1  ПРЕДЛ
 SF      = 1  TIME
 VAL     =  TIME , A2 , A1
-GF1     = 1  ГГ
+GF1     = 1  X! : ГГ
 SF1     = 1  PREDIC
 GF2     = 1  >> ИГ
 SF2     = 1  PROC
@@ -922,7 +922,7 @@ GF      = 1  ПРЕДЛ
 SF      = 1  REPRES
 VAL     =  REPRES , A2 , A1
 SYNR    =  уточн ( с+а2 , а1 )
-GF1     = 1  ИГ
+GF1     = 1  X! : ИГ
 SF1     = 1  PROF
           2  ORG
 GF2     = 1  >> Р
@@ -966,8 +966,8 @@ GF      = 1  ПРЕДЛ
 SF      = 1  TIME
 VAL     =  SIMULT , A1 , A2
 SYNR    =  обст ( с+а2 , а1 )
-GF1     = 1  ГГ
-          2  ИГ
+GF1     = 1  X! : ГГ
+          2  X! : ИГ
 SF1     = 1  PREDIC
 GF2     = 1  >> Р
 ENG     =  at_the_time_of 1
@@ -1016,8 +1016,8 @@ SF      = 1  LOK
           2  IN-DIRECT
 VAL     =  IN-DIRECT , A2 , A1
 SYNR    =  обст ( с+а2 , а1 )
-GF1     = 1  ГГ
-          2  ИГ
+GF1     = 1  X! : ГГ
+          2  X! : ИГ
 SF1     = 1  AKTIO
 GF2     = 1  >> Р
 SF2     = 1  THINGN
@@ -1033,7 +1033,7 @@ EXM     =  Мы с тобой поговорим в начале следующ�
 GF      = 1  ПРЕДЛ
 SF      = 1  TIME
 VAL     =  TIME , A2 , A1
-GF1     = 1  ГГ
+GF1     = 1  X! : ГГ
 GF2     = 1  >> Р
 SF2     = 1  AKTIO
           2  PERIO
@@ -1063,7 +1063,7 @@ GF      = 1  ПРЕДЛ
 SF      = 1  SPAC
 VAL     =  LOK , A2 , A1
 SYNR    =  обст ( с+а2 , а1 )
-GF1     = 1  ГГ
+GF1     = 1  X! : ГГ
 SF1     = 1  PREDIC
 GF2     = 1  >> Р
 ENG     =  near 1
@@ -1093,8 +1093,8 @@ CAT     = 1  RELAT
 GF      = 1  ПРЕДЛ
 SF      = 1  SPHERE
 VAL     =  SPHERE , A2 , A1
-GF1     = 1  ГГ
-          2  < ИГ
+GF1     = 1  X! : ГГ
+          2  < X! : ИГ
 SF1     = 1  AKTIO
 GF2     = 1  >> Р
 SF2     = 1  EMPL
@@ -1270,7 +1270,7 @@ REDACT       = graf
 TIME_CREATE       = 5/3/1 14:53:22
 CONTENT =  в ответ на
 GF      = 1  ПРЕДЛ
-GF1     = 1  ГГ
+GF1     = 1  X! : ГГ
 GF2     = 1  >> В
 ENG     =  in_answer_to 1
 ============
@@ -1334,7 +1334,7 @@ CAT     = 1  RELAT
 GF      = 1  ПРЕДЛ
 SF      = 1  FOR
 VAL     =  FOR , A1 , A2
-GF1     = 1  ГГ
+GF1     = 1  X! : ГГ
 SF1     = 1  PREDIC
 GF2     = 1  >> Р
 SF2     = 1  AKTIO
@@ -1352,8 +1352,8 @@ CAT     = 1  RELAT
 GF      = 1  ПРЕДЛ
 SF      = 1  NEG
 VAL     =  COND , A2 , A1
-GF1     = 1  ИГ
-          2  ГГ
+GF1     = 1  X! : ИГ
+          2  X! : ГГ
 SF1     = 1  PREDIC
 GF2     = 1  >> Р
 SF2     = 1  ANIM
@@ -1401,7 +1401,7 @@ CAT     = 1  RELAT
 GF      = 1  ПРЕДЛ
 SF      = 1  RESTR
 VAL     =  SPEC , A2 , A1
-GF1     = 1  ГГ
+GF1     = 1  X! : ГГ
 SF1     = 1  PREDIC
 GF2     = 1  >> Р
 SF2     = 1  SF ( 1 )
@@ -1417,7 +1417,7 @@ EXM     =  Мы выступаем в поддержку рабочих Урал
 CAT     = 1  RELAT
              LABL
 GF      = 1  ПРЕДЛ
-GF1     = 1  ГГ
+GF1     = 1  X! : ГГ
 SF1     = 1  PREDIC
 GF2     = 1  >> Р
 ENG     =  in_support_for 1
@@ -1436,7 +1436,7 @@ SF      = 1  INF
              CausVer
 VAL     =  ISCONNECTED , A1 , A2
            OBJ , A2 , C
-GF1     = 1  ГГ
+GF1     = 1  X! : ГГ
 SF1     = 1  PREDIC
 GF2     = 1  >> Р
 SF2     = 1  MEDINF
@@ -1472,7 +1472,7 @@ SF      = 1  AIM
              GOOD
 VAL     =  ADR , A2 , A1
 SYNR    =  обст ( с+а2 , а1 )
-GF1     = 1  ГГ
+GF1     = 1  X! : ГГ
 SF1     = 1  PREDIC
 GF2     = 1  >> Р
 SF2     = 1  ANIM
@@ -1496,7 +1496,7 @@ SF      = 1  AIM
 VAL     =  PURP , A2 , A1
            ADR , A2 , C
 SYNR    =  обст ( с+а2 , а1 )
-GF1     = 1  ГГ
+GF1     = 1  X! : ГГ
 SF1     = 1  PREDIC
 GF2     = 1  >> Д
 SF2     = 1  ANIM
@@ -1549,7 +1549,7 @@ GF      = 1  ПРЕДЛ
 SF      = 1  TIME
 VAL     =  AFTER , A2 , A1
 SYNR    =  обст ( с+а2 , а1 )
-GF1     = 1  ГГ
+GF1     = 1  X! : ГГ
 SF1     = 1  PREDIC
 GF2     = 1  >> Р
 ENG     =  on_the_threshold_of 1
@@ -1568,7 +1568,7 @@ GF      = 1  ПРЕДЛ
 SF      = 1  RESTR
 VAL     =  RESTR , A2 , A1
 SYNR    =  обст ( с+а2 , а1 )
-GF1     = 1  ГГ
+GF1     = 1  X! : ГГ
 SF1     = 1  PREDIC
 GF2     = 1  >> Р
 SF2     = 1  SPAC
@@ -1592,8 +1592,8 @@ SF      = 1  Caus
              TOGETHER
 VAL     =  TOGETHER , A2 , A1
 SYNR    =  обст ( с+а2 , а1 )
-GF1     = 1  >> ИГ
-          2  >> ГГ
+GF1     = 1  >> X! : ИГ
+          2  >> X! : ГГ
 SF1     = 1  PREDIC
 GF2     = 1  >> Д
 SF2     = 1  THINGN
@@ -1616,7 +1616,7 @@ SF      = 1  EXISTE
              TOGETHER
 VAL     =  TOGETHER , A2 , A1
 SYNR    =  обст ( с+а2 , а1 )
-GF1     = 1  ГГ
+GF1     = 1  X! : ГГ
 SF1     = 1  PREDIC
 GF2     = 1  >> Р
 SF2     = 1  ANIM
@@ -1636,7 +1636,7 @@ SF      = 1  RESTR
              TIME
 VAL     =  AFTER , A2 , A1
 SYNR    =  обст ( с+а2 , а1 )
-GF1     = 1  ПРОП
+GF1     = 1  X! : ПРОП
 SF1     = 1  PREDIC
 GF2     = 1  >> Р
 ENG     =  in_continuation_of 1
@@ -1673,7 +1673,7 @@ SF      = 1  NEG
              IN-ACCORD
 VAL     =  COMP , A2 , A1
 SYNR    =  обст ( с+а2 , а1 )
-GF1     = 1  ГГ
+GF1     = 1  X! : ГГ
 SF1     = 1  PREDIC
 GF2     = 1  >> Д
 ENG     =  versus 1
@@ -1689,7 +1689,7 @@ GF      = 1  ПРЕДЛ
 SF      = 1  NEG
              IN-ACCORD
 VAL     =  COMP , A2 , A1
-GF1     = 1  ГГ
+GF1     = 1  X! : ГГ
 SF1     = 1  PREDIC
 GF2     = 1  >> Т
 SF2     = 1  ABSTR
@@ -1707,8 +1707,8 @@ CAT     = 1  RELAT
 GF      = 1  ПРЕДЛ
 SF      = 1  SIMULT
 VAL     =  SIMULT , A2 , A1
-GF1     = 1  ГГ
-          2  < ИГ
+GF1     = 1  X! : ГГ
+          2  < X! : ИГ
 SF1     = 1  PREDIC
 GF2     = 1  >> Р
 ENG     =  in_the_process_of 1
@@ -1724,8 +1724,8 @@ CAT     = 1  RELAT
 GF      = 1  ПРЕДЛ
 SF      = 1  RESTR
 VAL     =  RESTR , A2 , A1
-GF1     = 1  ГГ
-          2  ИГ
+GF1     = 1  X! : ГГ
+          2  X! : ИГ
 GF2     = 1  >> Р
 SF2     = 1  QUANTIT
 ENG     =  of 1
@@ -1743,7 +1743,7 @@ GF      = 1  ПРЕДЛ
 SF      = 1  RESTR
 VAL     =  RESTR , A2 , A1
 SYNR    =  обст ( с+а2 , а1 )
-GF1     = 1  ГГ
+GF1     = 1  X! : ГГ
 SF1     = 1  PREDIC
 GF2     = 1  >> Р
 SF2     = 1  LEGISL
@@ -1762,7 +1762,7 @@ GF      = 1  ПРЕДЛ
 SF      = 1  AIM
 VAL     =  AIM , A2 , A1
            CONTEN , A2 , C
-GF1     = 1  ГГ
+GF1     = 1  X! : ГГ
 SF1     = 1  PREDIC
 GF2     = 1  >> В
 SF2     = 1  ANIM
@@ -1781,7 +1781,7 @@ CAT     = 1  RELAT
 GF      = 1  ПРЕДЛ
 SF      = 1  AIM
 VAL     =  AIM , A2 , A1
-GF1     = 1  ГГ
+GF1     = 1  X! : ГГ
 SF1     = 1  PREDIC
 GF2     = 1  >> ПРИД_ПР
 ENG     =  with_an_eye_to 1
@@ -1798,7 +1798,7 @@ CAT     = 1  RELAT
 GF      = 1  ПРЕДЛ
 SF      = 1  RESLT
 VAL     =  RESLT , A2 , A1
-GF1     = 1  ГГ
+GF1     = 1  X! : ГГ
 SF1     = 1  PREDIC
 GF2     = 1  >> Р
 EGF2(2) =  -
@@ -1816,7 +1816,7 @@ CAT     = 1  RELAT
 GF      = 1  ПРЕДЛ
 SF      = 1  SPHERE
 VAL     =  SPHERE , A2 , A1
-GF1     = 1  ГГ
+GF1     = 1  X! : ГГ
 SF1     = 1  PREDIC
 GF2     = 1  >> Р
 ENG     =  in_the_light_of 1
@@ -1849,7 +1849,7 @@ CAT     = 1  RELAT
 GF      = 1  ПРЕДЛ
 SF      = 1  ISCONNECTED
 VAL     =  ISCONNECTED , A2 , A1
-GF1     = 1  ПРОП
+GF1     = 1  X! : ПРОП
 SF1     = 1  PREDIC
 GF2     = 1  >> Т
 ENG     =  in_connection_with 1
@@ -1895,7 +1895,7 @@ CAT     = 1  RELAT
 GF      = 1  ПРЕДЛ
 SF      = 1  CAUSE
 VAL     =  CAUSE , A2 , A1
-GF1     = 1  ГГ
+GF1     = 1  X! : ГГ
 SF1     = 1  PREDIC
 GF2     = 1  >> Р
 SF2     = 1  ABSTR
@@ -1970,7 +1970,7 @@ GF      = 1  ПРЕДЛ
 SF      = 1  COND
 VAL     =  COND , A2 , A1
 SYNR    =  обст ( с+а2 , а1 )
-GF1     = 1  ГГ
+GF1     = 1  X! : ГГ
 SF1     = 1  PREDIC
 GF2     = 1  >> Р
 ENG     =  in_case_of 1
@@ -1997,7 +1997,7 @@ CAT     = 1  RELAT
 GF      = 1  ПРЕДЛ
 SF      = 1  COND
 VAL     =  COND , A2 , A1
-GF1     = 1  ГГ
+GF1     = 1  X! : ГГ
 SF1     = 1  PREDIC
 GF2     = 1  >> Р
 ENG     =  in_case_of 1
@@ -2013,8 +2013,8 @@ GF      = 1  ПРЕДЛ
 SF      = 1  IN-ACCORD
 VAL     =  IN-ACCORD , A2 , A1
 SYNR    =  обст ( с+а2 , а1 )
-GF1     = 1  ГГ
-          2  ИГ
+GF1     = 1  X! : ГГ
+          2  X! : ИГ
 SF1     = 1  PREDIC
 GF2     = 1  >> Т
 SF2     = 1  LEGISL
@@ -2032,8 +2032,8 @@ GF      = 1  ПРЕДЛ
 SF      = 1  TOGETHER
 VAL     =  TOGETHER , A2 , A1
 SYNR    =  уточн ( с+а2 , а1 )
-GF1     = 1  ГГ
-          2  ИГ
+GF1     = 1  X! : ГГ
+          2  X! : ИГ
 SF1     = 1  AKTIO
           2  THINGN
 GF2     = 1  >> Р
@@ -2052,7 +2052,7 @@ GF      = 1  ПРЕДЛ
 SF      = 1  PACIEN
 VAL     =  PACIEN , A1 , A2
 SYNR    =  уточн ( с+а2 , а1 )
-GF1     = 1  ГГ
+GF1     = 1  X! : ГГ
 SF1     = 1  THINGN
           2  ABSTR
 GF2     = 1  >> Р
@@ -2070,7 +2070,7 @@ CAT     = 1  RELAT
 GF      = 1  ПРЕДЛ
 SF      = 1  TOGETHER
 VAL     =  TOGETHER , A2 , A1
-GF1     = 1  ИГ
+GF1     = 1  X! : ИГ
 SF1     = 1  THINGN
 GF2     = 1  >> Т
 SF2     = 1  SF ( 1 )
@@ -2091,8 +2091,8 @@ GF      = 1  ПРЕДЛ
 SF      = 1  COMP
 VAL     =  COMP , A2 , A1
 SYNR    =  уточн ( с+а2 , а1 )
-GF1     = 1  ИГ
-             ГГ
+GF1     = 1  X! : ИГ
+             X! : ГГ
 SF1     = 1  ANYTH
 GF2     = 1  >> Т
 SF2     = 1  THINGN
@@ -2162,7 +2162,7 @@ GF      = 1  ПРЕДЛ
 SF      = 1  IN-DIRECT
 VAL     =  IN-DIRECT , A2 , A1
 SYNR    =  уточн ( с+а2 , а1 )
-GF1     = 1  ГГ
+GF1     = 1  X! : ГГ
 SF1     = 1  PREDIC
 ESF2(2) = 1  LEGISL
 GF2     = 1  >> Р
@@ -2197,8 +2197,8 @@ GF      = 1  ПРЕДЛ
 SF      = 1  SPHERE
 VAL     =  SPHERE , A2 , A1
 SYNR    =  уточн ( с+а2 , а1 )
-GF1     = 1  ИГ
-          2  ГГ
+GF1     = 1  X! : ИГ
+          2  X! : ГГ
 SF1     = 1  PREDIC
 GF2     = 1  >> Р
 SF2     = 1  EMPL
@@ -2215,8 +2215,8 @@ GF      = 1  ПРЕДЛ
 SF      = 1  TIME
 VAL     =  SIMULT , A2 , A1
 SYNR    =  обст ( с+а2 , а1 )
-GF1     = 1  ИГ
-          2  ГГ
+GF1     = 1  X! : ИГ
+          2  X! : ГГ
 SF1     = 1  SITUAT
 GF2     = 1  >> Р
 SF2     = 1  AKTIO
@@ -2364,7 +2364,7 @@ SF      = 1  AIM
              DAMAG
 VAL     =  ADR , A2 , A1
 SYNR    =  обст ( с+а2 , а1 )
-GF1     = 1  ПРОП
+GF1     = 1  X! : ПРОП
 SF1     = 1  SITUAT
 ESF2(2) = 1  ANIM
 GF2     = 1  >> Д
@@ -2384,7 +2384,7 @@ GF      = 1  ПРЕДЛ
 SF      = 1  FORM
 VAL     =  FORM , A2 , A1
 SYNR    =  уточн ( с+а2 , а1 )
-GF1     = 1  ИГ
+GF1     = 1  X! : ИГ
 SF1     = 1  THINGN
           2  ABSTR
 GF2     = 1  >> Р
@@ -2402,8 +2402,8 @@ GF      = 1  ПРЕДЛ
 SF      = 1  SIMULT
 VAL     =  SIMULT , A2 , A1
 SYNR    =  уточн ( с+а2 , а1 )
-GF1     = 1  ИГ
-          2  ГГ
+GF1     = 1  X! : ИГ
+          2  X! : ГГ
 SF1     = 1  PREDIC
 GF2     = 1  >> Р
 SF2     = 1  AKTIO
@@ -2420,8 +2420,8 @@ GF      = 1  ПРЕДЛ
 SF      = 1  AIM
 VAL     =  AIM , A2 , A1
 SYNR    =  уточн ( с+а2 , а1 )
-GF1     = 1  ГГ
-          2  < ИГ
+GF1     = 1  X! : ГГ
+          2  < X! : ИГ
 SF1     = 1  PREDIC
 GF2     = 1  >> Р
 ENG     =  for_the_purpose_of 1
@@ -2439,8 +2439,8 @@ GF      = 1  ПРЕДЛ
 SF      = 1  RESTR
 VAL     =  RESTR , A2 , A1
 SYNR    =  уточн ( с+а2 , а1 )
-GF1     = 1  ИГ
-          2  ГГ
+GF1     = 1  X! : ИГ
+          2  X! : ГГ
 SF1     = 1  PREDIC
 GF2     = 1  >> Р
 SF2     = 1  MODL
@@ -2485,7 +2485,7 @@ SF      = 1  AIM
              GOOD
 VAL     =  ADR , A2 , A1
 SYNR    =  обст ( с+а2 , а1 )
-GF1     = 1  ГГ
+GF1     = 1  X! : ГГ
 SF1     = 1  PREDIC
 GF2     = 1  >> Р
 SF2     = 1  ANIM
@@ -2505,7 +2505,7 @@ GF      = 1  ПРЕДЛ
 SF      = 1  PART
 VAL     =  PART , A1 , A2
 SYNR    =  уточн ( с+а2 , а1 )
-GF1     = 1  ГГ
+GF1     = 1  X! : ГГ
 SF1     = 1  PREDIC
 GF2     = 1  >> Р
 ENG     =  among 1
@@ -2554,8 +2554,8 @@ SENSE       = 1
 TIME_CREATE       = 14/2/1 20:49:20
 CONTENT =  вблизи
 GF      = 1  ПРОСТ_ПРЕДЛ
-GF1     = 1  ГГ
-          2  < ИГ
+GF1     = 1  X! : ГГ
+          2  < X! : ИГ
 GF2     = 1  >> Р
 ENG     =  anear 1
 ============
@@ -2570,8 +2570,8 @@ GF      = 1  ПРЕДЛ
 SF      = 1  LOK
 VAL     =  LOK , A2 , A1
 SYNR    =  обст ( с+а2 , а1 )
-GF1     = 1  ГГ
-          2  ИГ
+GF1     = 1  X! : ГГ
+          2  X! : ИГ
 SF1     = 1  THINGN
           2  AKTIO
 GF2     = 1  >> Р
@@ -2595,8 +2595,8 @@ TIME_CREATE       = 14/2/1 20:49:20
 CONTENT =  ввиду
 GF      = 1  ПРОСТ_ПРЕДЛ
 VAL     =  ACT , A1 , A2
-GF1     = 1  ГГ
-          2  < ИГ
+GF1     = 1  X! : ГГ
+          2  < X! : ИГ
 GF2     = 1  >> Р
 ENG     =  in_view_of 1
 ============
@@ -2628,7 +2628,7 @@ GF      = 1  ПРЕДЛ
 SF      = 1  TOGETHER
 VAL     =  TOGETHER , A2 , A1
 SYNR    =  уточн ( с+а2 , а1 )
-GF1     = 1  ИГ
+GF1     = 1  X! : ИГ
 SF1     = 1  ANYTH
 GF2     = 1  >> Д
 SF2     = 1  SF ( 1 )
@@ -2665,8 +2665,8 @@ TIME_CREATE       = 14/2/1 20:49:21
 CONTENT =  включая
 GF      = 1  ПРОСТ_ПРЕДЛ
 VAL     =  ACT , A1 , A2
-GF1     = 1  ГГ
-          2  < ИГ
+GF1     = 1  X! : ГГ
+          2  < X! : ИГ
 GF2     = 1  >> В
 ENG     =  including 1
 ============
@@ -2684,7 +2684,7 @@ CAT     = 1  RELAT
 GF      = 1  ПРЕДЛ
 SF      = 1  TOGETHER
 VAL     =  TOGETHER , A2 , A1
-GF1     = 1  ИГ
+GF1     = 1  X! : ИГ
 SF1     = 1  SF ( 2 )
 GF2     = 1  >> Т
 ENG     =  together_with 1
@@ -2742,8 +2742,8 @@ SENSE       = 1
 TIME_CREATE       = 14/2/1 20:49:22
 CONTENT =  вместо
 GF      = 1  ПРОСТ_ПРЕДЛ
-GF1     = 1  ГГ
-          2  < ИГ
+GF1     = 1  X! : ГГ
+          2  < X! : ИГ
 GF2     = 1  >> Р
 ENG     =  instead_of 1
            vice 1
@@ -2771,8 +2771,8 @@ SENSE       = 1
 TIME_CREATE       = 14/2/1 20:49:22
 CONTENT =  вне
 GF      = 1  ПРОСТ_ПРЕДЛ
-GF1     = 1  ГГ
-          2  < ИГ
+GF1     = 1  X! : ГГ
+          2  < X! : ИГ
 GF2     = 1  >> Р
 ENG     =  outside 1
            dehors 1
@@ -2788,7 +2788,7 @@ SF      = 1  NEG
           2  COND
 VAL     =  COND , A2 , A1
 SYNR    =  обст ( с+а2 , а1 )
-GF1     = 1  ГГ
+GF1     = 1  X! : ГГ
 SF1     = 1  PREDIC
 GF2     = 1  >> Р
 ENG     =  irrespective_of 1
@@ -2804,7 +2804,7 @@ SF      = 1  NEG
           2  SPHERE
 VAL     =  SPHERE , A2 , A1
 SYNR    =  обст ( с+а2 , а1 )
-GF1     = 1  ГГ
+GF1     = 1  X! : ГГ
 SF1     = 1  PREDIC
 GF2     = 1  >> Р
 SF2     = 1  EMPL
@@ -2821,8 +2821,8 @@ SF      = 1  LOK
           2  IN-DIRECT
 VAL     =  LOC_downward , A2 , A1
 SYNR    =  обст ( с+а2 , а1 )
-GF1     = 1  ГГ
-          2  ИГ
+GF1     = 1  X! : ГГ
+          2  X! : ИГ
 SF1     = 1  AKTIO
 GF2     = 1  >> Д
 SF2     = 1  THINGN
@@ -2839,8 +2839,8 @@ CONTENT =  внутрь
 GF      = 1  ПРОСТ_ПРЕДЛ
 SF      = 1  TRG-PNT
 VAL     =  TRG-PNT , A2 , A1
-GF1     = 1  ГГ
-          2  < ИГ
+GF1     = 1  X! : ГГ
+          2  < X! : ИГ
 GF2     = 1  >> Р
 ENG     =  inside 1
 ============
@@ -2872,7 +2872,7 @@ GF      = 1  ПРЕДЛ
 SF      = 1  TOGETHER
 VAL     =  TOGETHER , A2 , A1
 SYNR    =  обст ( с+а2 , а1 )
-GF1     = 1  ИГ
+GF1     = 1  X! : ИГ
 SF1     = 1  ANIM
              SF ( 2 )
 GF2     = 1  >> Т
@@ -2888,8 +2888,8 @@ GF      = 1  ПРЕДЛ
 SF      = 1  SIMULT
 VAL     =  SIMULT , A2 , A1
 SYNR    =  обст ( с+а2 , а1 )
-GF1     = 1  ГГ
-          2  ИГ
+GF1     = 1  X! : ГГ
+          2  X! : ИГ
 SF1     = 1  PREDIC
 GF2     = 1  >> Р
 ENG     =  at_the_time_of 1
@@ -2953,7 +2953,7 @@ GF      = 1  ПРЕДЛ
 SF      = 1  TOGETHER
 VAL     =  INCLUDING , A2 , A1
 SYNR    =  уточн ( с+а2 , а1 )
-GF1     = 1  ИГ
+GF1     = 1  X! : ИГ
 SF1     = 1  SF ( 2 )
 GF2     = 1  >> Т
 SF2     = 1  ANIM
@@ -2970,7 +2970,7 @@ GF      = 1  ПРЕДЛ
 SF      = 1  AIM
 VAL     =  NO_AIM , A2 , A1
 SYNR    =  обст ( с+а2 , а1 )
-GF1     = 1  ГГ
+GF1     = 1  X! : ГГ
 SF1     = 1  PREDIC
 GF2     = 1  >> Р
 SF2     = 1  ABSTR
@@ -2989,7 +2989,7 @@ GF      = 1  ПРЕДЛ
 SF      = 1  INSTEAD
 VAL     =  AIM , A1 , A2
 SYNR    =  обст ( с+а2 , а1 )
-GF1     = 1  ГГ
+GF1     = 1  X! : ГГ
 SF1     = 1  PREDIC
           2  AUTHORIT
 GF2     = 1  >> Р
@@ -3007,7 +3007,7 @@ GF      = 1  ПРЕДЛ
 SF      = 1  AIM
 VAL     =  AIM , A2 , A1
 SYNR    =  обст ( с+а2 , а1 )
-GF1     = 1  ГГ
+GF1     = 1  X! : ГГ
 SF1     = 1  PREDIC
 GF2     = 1  >> Р
 SF2     = 1  ABSTR
@@ -3027,7 +3027,7 @@ GF      = 1  ПРЕДЛ
 SF      = 1  AIM
 VAL     =  AIM , A2 , A1
 SYNR    =  обст ( с+а2 , а1 )
-GF1     = 1  ГГ
+GF1     = 1  X! : ГГ
 SF1     = 1  PREDIC
 GF2     = 1  >> Р
 SF2     = 1  ABSTR
@@ -3061,8 +3061,8 @@ CONTENT =  возле
 GF      = 1  ПРОСТ_ПРЕДЛ
 SF      = 1  LOK
 VAL     =  LOK , A2 , A1
-GF1     = 1  ГГ
-          2  < ИГ
+GF1     = 1  X! : ГГ
+          2  < X! : ИГ
 GF2     = 1  >> Р
 ENG     =  beside 1
            by 1
@@ -3075,8 +3075,8 @@ CONTENT =  вокруг
 GF      = 1  ПРОСТ_ПРЕДЛ
 SF      = 1  LOK
 VAL     =  LOK , A2 , A1
-GF1     = 1  ГГ
-          2  < ИГ
+GF1     = 1  X! : ГГ
+          2  < X! : ИГ
 GF2     = 1  >> Р
 ENG     =  around 1
            round 1
@@ -3102,8 +3102,8 @@ TIME_CREATE       = 14/2/1 20:49:25
 CONTENT =  вопреки
 GF      = 1  ПРОСТ_ПРЕДЛ
 VAL     =  ACT , A1 , A2
-GF1     = 1  ГГ
-          2  < ИГ
+GF1     = 1  X! : ГГ
+          2  < X! : ИГ
 GF2     = 1  >> Д
 ENG     =  contrary_to 1
            despite 1
@@ -3136,7 +3136,7 @@ GF      = 1  ПРЕДЛ
 SF      = 1  LOK
 VAL     =  LOK , A2 , A1
 SYNR    =  обст ( с+а2 , а1 )
-GF1     = 1  ГГ
+GF1     = 1  X! : ГГ
 SF1     = 1  PREDIC
           2  THINGN
 GF2     = 1  >> Д
@@ -3154,8 +3154,8 @@ GF      = 1  ПРЕДЛ
 SF      = 1  TRG-PNT
 VAL     =  TRG-PNT , A2 , A1
 SYNR    =  обст ( с+а2 , а1 )
-GF1     = 1  ГГ
-          2  ИГ
+GF1     = 1  X! : ГГ
+          2  X! : ИГ
 SF1     = 1  PREDIC
 GF2     = 1  >> Р
 SF2     = 1  AKTIO
@@ -3175,7 +3175,7 @@ SF      = 1  RESTR
 VAL     =  RESTR , A2 , A1
            LOK , A2 , A1
 SYNR    =  обст ( с+а2 , а1 )
-GF1     = 1  >> ИГ
+GF1     = 1  >> X! : ИГ
 SF1     = 1  THINGN
 GF2     = 1  >> Д
 ENG     =  close_to 1
@@ -3194,7 +3194,7 @@ GF      = 1  ПРЕДЛ
 SF      = 1  NEG
              IN-ACCORD
 VAL     =  COMP , A2 , A1
-GF1     = 1  ГГ
+GF1     = 1  X! : ГГ
 SF1     = 1  PREDIC
 GF2     = 1  >> Т
 SF2     = 1  ABSTR
@@ -3223,7 +3223,7 @@ CAT     = 1  OPER
 GF      = 1  ПРОСТ_ПРЕДЛ
 SF      = 1  COMP
 VAL     =  COMP , A1 , A2
-GF1     = 1  < ИГ
+GF1     = 1  < X! : ИГ
 GF2     = 1  >> Р
 ENG     =  like 1
            sort of
@@ -3340,7 +3340,7 @@ GF      = 1  ПРЕДЛ
 SF      = 1  AFTER
 VAL     =  AFTER , A1 , A2
 SYNR    =  обст ( с+а2 , а1 )
-GF1     = 1  ГГ
+GF1     = 1  X! : ГГ
 SF1     = 1  SITUAT
 GF2     = 1  >> Т
 ENG     =  following 1
@@ -3371,8 +3371,8 @@ TIME_CREATE       = 14/2/1 20:49:1
 CONTENT =  выше
 GF      = 1  ПРОСТ_ПРЕДЛ
 VAL     =  ACT , A1 , A2
-GF1     = 1  ГГ
-          2  < ИГ
+GF1     = 1  X! : ГГ
+          2  < X! : ИГ
 GF2     = 1  >> Р
 ENG     =  over 1
 ============
@@ -3432,8 +3432,8 @@ TIME_CREATE       = 14/2/1 20:49:27
 CONTENT =  для
 GF      = 1  ПРОСТ_ПРЕДЛ
 VAL     =  ACT , A1 , A2
-GF1     = 1  ГГ
-          2  < ИГ
+GF1     = 1  X! : ГГ
+          2  < X! : ИГ
 GF2     = 1  >> Р
 ENG     =  for 2
 ============
@@ -3465,8 +3465,8 @@ GF      = 1  ПРЕДЛ
 SF      = 1  AIM
 VAL     =  AIM , A2 , A1
 SYNR    =  уточн ( с+а2 , а1 )
-GF1     = 1  ГГ
-          2  < ИГ
+GF1     = 1  X! : ГГ
+          2  < X! : ИГ
 SF1     = 1  PREDIC
 GF2     = 1  >> Р
 ENG     =  with_the_purpose_of 1
@@ -3480,8 +3480,8 @@ CONTENT =  до
 GF      = 1  ПРОСТ_ПРЕДЛ
 SF      = 1  TRG-PNT
 VAL     =  TRG-PNT , A2 , A1
-GF1     = 1  ГГ
-          2  < ИГ
+GF1     = 1  X! : ГГ
+          2  < X! : ИГ
 ESF2(3) = 1  TIME
 GF2     = 1  >> Р
 ENG     =  before 2
@@ -3502,7 +3502,7 @@ EXM     =  Вас же удалили до конца игры!
 GF      = 1  ПРЕДЛ
 SF      = 1  TIME
 VAL     =  TIME , A2 , A1
-GF1     = 1  ГГ
+GF1     = 1  X! : ГГ
 GF2     = 1  >> Р
 ENG     =  till_the_end_of 1
 ============
@@ -3544,8 +3544,8 @@ GF      = 1  ПРЕДЛ
 SF      = 1  TOGETHER
 VAL     =  TOGETHER , A2 , A1
 SYNR    =  уточн ( с+а2 , а1 )
-GF1     = 1  ГГ
-          2  < ИГ
+GF1     = 1  X! : ГГ
+          2  < X! : ИГ
 SF1     = 1  PREDIC
           2  THINGN
 GF2     = 1  >> Д
@@ -3697,8 +3697,8 @@ CONTENT =  за
 GF      = 1  ПРОСТ_ПРЕДЛ
 SF      = 1  TRG-PNT
 VAL     =  TRG-PNT , A2 , A1
-GF1     = 1  ГГ
-          2  < ИГ
+GF1     = 1  X! : ГГ
+          2  < X! : ИГ
 ESF2(2) = 1  S0
 GF2     = 1  >> В
 ENG     =  for 2
@@ -3712,8 +3712,8 @@ GF      = 1  ПРОСТ_ПРЕДЛ
 SF      = 1  LOK
 VAL     =  ACT , A1 , A2
            LOK , A2 , A1
-GF1     = 1  ГГ
-          2  < ИГ
+GF1     = 1  X! : ГГ
+          2  < X! : ИГ
 ESF2    = 1  LOK
 GF2     = 1  >> Т
 ENG     =  over 1
@@ -3733,8 +3733,8 @@ SF      = 1  RESTR
 VAL     =  RESTR , A2 , A1
            OBJ , A2 , C
 SYNR    =  уточн ( с+а2 , а1 )
-GF1     = 1  ГГ
-          2  < ИГ
+GF1     = 1  X! : ГГ
+          2  < X! : ИГ
 SF1     = 1  PREDIC
 GF2     = 1  >> Р
 SF2     = 1  THINGN
@@ -3768,7 +3768,7 @@ CAT     = 1  RELAT
 GF      = 1  ПРЕДЛ
 SF      = 1  TIME
 VAL     =  AFTER , A2 , A1
-GF1     = 1  ГГ
+GF1     = 1  X! : ГГ
 SF1     = 1  PREDIC
 GF2     = 1  >> Р
 ENG     =  the_day_before 2
@@ -3801,8 +3801,8 @@ SF      = 1  RESTR
 VAL     =  RESTR , A2 , A1
            OBJ , A2 , C
 SYNR    =  уточн ( с+а2 , а1 )
-GF1     = 1  ГГ
-          2  < ИГ
+GF1     = 1  X! : ГГ
+          2  < X! : ИГ
 SF1     = 1  PREDIC
 GF2     = 1  >> Р
 SF2     = 1  THINGN
@@ -3841,8 +3841,8 @@ SF      = 1  RESTR
 VAL     =  RESTR , A2 , A1
            OBJ , A2 , C
 SYNR    =  уточн ( с+а2 , а1 )
-GF1     = 1  ГГ
-          2  < ИГ
+GF1     = 1  X! : ГГ
+          2  < X! : ИГ
 SF1     = 1  PREDIC
 GF2     = 1  >> Р
 SF2     = 1  FIN
@@ -3880,7 +3880,7 @@ GF      = 1  ПРЕДЛ
 SF      = 1  TIME
 VAL     =  AFTER , A2 , A1
 SYNR    =  обст ( с+а2 , а1 )
-GF1     = 1  ПРОП
+GF1     = 1  X! : ПРОП
 SF1     = 1  PREDIC
 GF2     = 1  > Р
 ENG     =  long_before 1
@@ -3979,8 +3979,8 @@ CONTENT =  (из  | изо)
 GF      = 1  ПРОСТ_ПРЕДЛ
 SF      = 1  SRC-PNT
 VAL     =  SRC-PNT , A2 , A1
-GF1     = 1  ГГ
-          2  < ИГ
+GF1     = 1  X! : ГГ
+          2  < X! : ИГ
 ELEX1(2)=  один
 ESF2(3) = 1  SRC-PNT
 GF2     = 1  >> Р
@@ -3999,8 +3999,8 @@ SF      = 1  SRC-PNT
           2  CAUSE
 VAL     =  SRC-PNT , A2 , A1
 EDOMAIN(2)=  худ
-GF1     = 1  ГГ
-          2  < ИГ
+GF1     = 1  X! : ГГ
+          2  < X! : ИГ
 ESF2(3) = 1  SRC-PNT
 GF2     = 1  >> Р
 ENG     =  as_a_result_of 1
@@ -4062,8 +4062,8 @@ CONTENT =  из-под
 GF      = 1  ПРОСТ_ПРЕДЛ
 SF      = 1  SRC-PNT
 VAL     =  SRC-PNT , A2 , A1
-GF1     = 1  ГГ
-          2  < ИГ
+GF1     = 1  X! : ГГ
+          2  < X! : ИГ
 GF2     = 1  >> Р
 ENG     =  from_under 1
 ============
@@ -4079,7 +4079,7 @@ CAT     = 1  RELAT
 GF      = 1  ПРЕДЛ
 SF      = 1  SRC
 VAL     =  SRC , A2 , A1
-GF1     = 1  ИГ
+GF1     = 1  X! : ИГ
 SF1     = 1  PREDIC
 GF2     = 1  >> Р
 SF2     = 1  ANIM
@@ -4124,8 +4124,8 @@ SENSE       = 1
 TIME_CREATE       = 14/2/1 20:49:32
 CONTENT =  исключая
 GF      = 1  ПРОСТ_ПРЕДЛ
-GF1     = 1  ГГ
-          2  < ИГ
+GF1     = 1  X! : ГГ
+          2  < X! : ИГ
 GF2     = 1  >> В
 ENG     =  omitting 1
            saving 1
@@ -4141,7 +4141,7 @@ CAT     = 1  RELAT
 GF      = 1  ПРЕДЛ
 SF      = 1  SRC-PNT
 VAL     =  SRC-PNT , A2 , A1
-GF1     = 1  ГГ
+GF1     = 1  X! : ГГ
 SF1     = 1  PREDIC
 GF2     = 1  >> Р
 ENG     =  ???
@@ -4156,8 +4156,8 @@ CONTENT =  к
 GF      = 1  ПРОСТ_ПРЕДЛ
 SF      = 1  TRG-PNT
 VAL     =  TRG-PNT , A2 , A1
-GF1     = 1  ГГ
-          2  < ИГ
+GF1     = 1  X! : ГГ
+          2  < X! : ИГ
 ESF2(3) = 1  TIME
 GF2     = 1  >> Д
 ENG     =  to 1
@@ -4177,7 +4177,7 @@ CONTENT =  к концу
 GF      = 1  ПРЕДЛ
 SF      = 1  TIME
 VAL     =  TIME , A2 , A1
-GF1     = 1  ГГ
+GF1     = 1  X! : ГГ
 GF2     = 1  >> Р
 SF2     = 1  AKTIO
           2  PERIO
@@ -4456,7 +4456,7 @@ CAT     = 1  RELAT
 GF      = 1  ПРЕДЛ
 SF      = 1  RESLT
 VAL     =  RESLT , A2 , A1
-GF1     = 1  ГГ
+GF1     = 1  X! : ГГ
 SF1     = 1  PREDIC
 GF2     = 1  >> Р
           2  < ПРОП
@@ -4485,8 +4485,8 @@ SENSE       = 1
 TIME_CREATE       = 14/2/1 20:49:34
 CONTENT =  касательно
 GF      = 1  ПРОСТ_ПРЕДЛ
-GF1     = 1  ГГ
-          2  < ИГ
+GF1     = 1  X! : ГГ
+          2  < X! : ИГ
 GF2     = 1  >> Р
 ENG     =  touching 1
            anent 1
@@ -4502,8 +4502,8 @@ EXM     =  кверх ногами
 GF      = 1  ПРОСТ_ПРЕДЛ
 SF      = 1  LOK
 VAL     =  LOK , A2 , A1
-GF1     = 1  ГГ
-          2  < ИГ
+GF1     = 1  X! : ГГ
+          2  < X! : ИГ
 GF2     = 1  >> Т
 ENG     =  upside_down 1
 ============
@@ -4590,8 +4590,8 @@ TIME_CREATE       = 14/2/1 20:49:35
 CONTENT =  кроме
 GF      = 1  ПРОСТ_ПРЕДЛ
 VAL     =  ACT , A1 , A2
-GF1     = 1  ГГ
-          2  < ИГ
+GF1     = 1  X! : ГГ
+          2  < X! : ИГ
 GF2     = 1  >> Р
 ENG     =  except 1
            except_for 1
@@ -4683,8 +4683,8 @@ CONTENT =  между
 GF      = 1  ПРОСТ_ПРЕДЛ
 SF      = 1  LOK
 VAL     =  LOK , A2 , A1
-GF1     = 1  ГГ
-          2  < ИГ
+GF1     = 1  X! : ГГ
+          2  < X! : ИГ
 GF2     = 1  >> Т
 ENG     =  between 1
            inter 1
@@ -4742,8 +4742,8 @@ TIME_CREATE       = 14/2/1 20:49:35
 CONTENT =  мимо
 GF      = 1  ПРОСТ_ПРЕДЛ
 VAL     =  ACT , A1 , A2
-GF1     = 1  ГГ
-          2  < ИГ
+GF1     = 1  X! : ГГ
+          2  < X! : ИГ
 GF2     = 1  >> Р
 ENG     =  past 1
 ============
@@ -4752,8 +4752,8 @@ SENSE       = 1
 TIME_CREATE       = 14/2/1 20:49:35
 CONTENT =  минус
 GF      = 1  ПРОСТ_ПРЕДЛ
-GF1     = 1  ГГ
-          2  < ИГ
+GF1     = 1  X! : ГГ
+          2  < X! : ИГ
 GF2     = 1  >> И
 ENG     =  minus 1
 ============
@@ -4818,8 +4818,8 @@ EXM     =  восшествие на престол - accession to the throne
 GF      = 1  ПРОСТ_ПРЕДЛ
 SF      = 1  TRG-PNT
 VAL     =  TRG-PNT , A2 , A1
-GF1     = 1  ГГ
-          2  < ИГ
+GF1     = 1  X! : ГГ
+          2  < X! : ИГ
 ESF2(2) = 1  LOK
           2  ORG
 ESF2(3) = 1  S0
@@ -4837,8 +4837,8 @@ GF      = 1  ПРОСТ_ПРЕДЛ
 CONTENT =  на
 SF      = 1  LOK
 VAL     =  LOK , A2 , A1
-GF1     = 1  ГГ
-          2  < ИГ
+GF1     = 1  X! : ГГ
+          2  < X! : ИГ
 ESF2(2) = 1  LOK
 GF2     = 1  >> П
 ENG     =  on 1
@@ -4855,8 +4855,8 @@ GF      = 1  ПРЕДЛ
 SF      = 1  SRC-PNT
 VAL     =  SRC-PNT , A2 , A1
 SYNR    =  обст ( с+а2 , а1 )
-GF1     = 1  ГГ
-          2  ИГ
+GF1     = 1  X! : ГГ
+          2  X! : ИГ
 SF1     = 1  PREDIC
 GF2     = 1  >> Р
 SF2     = 1  ORG
@@ -4912,7 +4912,7 @@ GF      = 1  ПРЕДЛ
 SF      = 1  MODL
 VAL     =  MODL , A2 , A1
 SYNR    =  обст ( с+а2 , а1 )
-GF1     = 1  ИГ
+GF1     = 1  X! : ИГ
 SF1     = 1  PREDIC
           2  ANIM
 GF2     = 1  >> Р
@@ -4946,8 +4946,8 @@ GF      = 1  ПРЕДЛ
 SF      = 1  LOK
 VAL     =  LOK , A2 , A1
 SYNR    =  обст ( с+а2 , а1 )
-GF1     = 1  ГГ
-          2  ИГ
+GF1     = 1  X! : ГГ
+          2  X! : ИГ
 SF1     = 1  PREDIC
           2  ANIM
 GF2     = 1  >> Р
@@ -4983,8 +4983,8 @@ EXM     =  Нервы перекручены на манер каната.
            Он поступает на манер своего брата.
 GF      = 1  ПРЕДЛ
 VAL     =  ALIKE , A1 , A2
-GF1     = 1  ГГ
-          2  ИГ
+GF1     = 1  X! : ГГ
+          2  X! : ИГ
 GF2     = 1  >> Р
 SF2     = 1  ANIM
           2  NEG
@@ -5006,8 +5006,8 @@ GF      = 1  ПРЕДЛ
 SF      = 1  TIME
 VAL     =  SIMULT , A1 , A2
 SYNR    =  обст ( с+а2 , а1 )
-GF1     = 1  ГГ
-          2  ИГ
+GF1     = 1  X! : ГГ
+          2  X! : ИГ
 SF1     = 1  PREDIC
 GF2     = 1  >> Р
 ENG     =  at_the_moment_of 1
@@ -5021,7 +5021,7 @@ EXM     =  На основании предоставленных прокуро
 GF      = 1  ПРЕДЛ
 VAL     =  SRC-PNT , A2 , A1
 SYNR    =  обст ( с+а2 , а1 )
-GF1     = 1  ГГ
+GF1     = 1  X! : ГГ
 SF1     = 1  PREDIC
 GF2     = 1  >> Р
 SF2     = 1  MEDINF
@@ -5040,8 +5040,8 @@ GF      = 1  ПРЕДЛ
 SF      = 1  SRC-PNT
 VAL     =  SRC-PNT , A2 , A1
 SYNR    =  обст ( с+а2 , а1 )
-GF1     = 1  ГГ
-          2  ИГ
+GF1     = 1  X! : ГГ
+          2  X! : ИГ
 SF1     = 1  PREDIC
 GF2     = 1  >> Р
 SF2     = 1  INF
@@ -5062,8 +5062,8 @@ GF      = 1  ПРЕДЛ
 SF      = 1  TIME
 VAL     =  SIMULT , A2 , A1
 SYNR    =  обст ( с+а2 , а1 )
-GF1     = 1  ИГ
-          2  ГГ
+GF1     = 1  X! : ИГ
+          2  X! : ГГ
 SF1     = 1  SITUAT
 GF2     = 1  >> Р
 SF2     = 1  AKTIO
@@ -5082,8 +5082,8 @@ GF      = 1  ПРЕДЛ
 SF      = 1  SRC-PNT
 VAL     =  SRC-PNT , A2 , A1
 SYNR    =  обст ( с+а2 , а1 )
-GF1     = 1  ГГ
-          2  ИГ
+GF1     = 1  X! : ГГ
+          2  X! : ИГ
 SF1     = 1  PREDIC
 GF2     = 1  >> Р
 ENG     =  in_the_direction_of 1
@@ -5138,8 +5138,8 @@ SF      = 1  TOGETHER
 VAL     =  TOGETHER , A2 , A1
            LOK , A2 , A1
 SYNR    =  обст ( с+а2 , а1 )
-GF1     = 1  ИГ
-          2  ГГ
+GF1     = 1  X! : ИГ
+          2  X! : ГГ
 SF1     = 1  ANIM
           2  SPAC
 GF2     = 1  >> Р
@@ -5156,7 +5156,7 @@ CAT     = 1  RELAT
 GF      = 1  ПРЕДЛ
 SF      = 1  THEME
 VAL     =  THEME , A2 , A1
-GF1     = 1  ГГ
+GF1     = 1  X! : ГГ
 SF1     = 1  PREDIC
           2  INF
 GF2     = 1  >> Р
@@ -5198,9 +5198,9 @@ TIME_CREATE       = 14/2/1 20:49:37
 CONTENT =  навстречу
 GF      = 1  ПРОСТ_ПРЕДЛ
 VAL     =  ACT , A1 , A2
-GF1     = 1  ПРОП
-          2  ГГ
-          3  < ИГ
+GF1     = 1  X! : ПРОП
+          2  X! : ГГ
+          3  < X! : ИГ
 GF2     = 1  >> Д
           2  << Д
           3  к_доп : к+Д
@@ -5214,8 +5214,8 @@ CONTENT =  над
 GF      = 1  ПРОСТ_ПРЕДЛ
 SF      = 1  LOK
 VAL     =  LOK , A2 , A1
-GF1     = 1  ГГ
-          2  < ИГ
+GF1     = 1  X! : ГГ
+          2  < X! : ИГ
 GF2     = 1  >> Т
 ENG     =  above 1
            over 1
@@ -5228,8 +5228,8 @@ TIME_CREATE       = 14/2/1 20:49:37
 CONTENT =  накануне
 GF      = 1  ПРОСТ_ПРЕДЛ
 VAL     =  ACT , A1 , A2
-GF1     = 1  ГГ
-          2  < ИГ
+GF1     = 1  X! : ГГ
+          2  < X! : ИГ
 GF2     = 1  >> Р
 ENG     =  on_the_eve_of 1
 ============
@@ -5251,8 +5251,8 @@ TIME_CREATE       = 14/2/1 20:49:38
 CONTENT =  наперекор
 GF      = 1  ПРОСТ_ПРЕДЛ
 VAL     =  ACT , A1 , A2
-GF1     = 1  ГГ
-          2  < ИГ
+GF1     = 1  X! : ГГ
+          2  < X! : ИГ
 GF2     = 1  >> Д
 ENG     =  against 1
            in the face of
@@ -5284,8 +5284,8 @@ CAT     = 1  RELAT
 GF      = 1  ПРЕДЛ
 VAL     =  ACT , A2 , A1
 SYNR    =  обст ( с+а2 , а1 )
-GF1     = 1  ГГ
-          2  ИГ
+GF1     = 1  X! : ГГ
+          2  X! : ИГ
 SF1     = 1  PREDIC
 GF2     = 1  >> Т
 SF2     = 1  ANIM
@@ -5338,8 +5338,8 @@ GF      = 1  ПРЕДЛ
 SF      = 1  SRC-PNT
 VAL     =  SRC-PNT , A2 , A1
 SYNR    =  обст ( с+а2 , а1 )
-GF1     = 1  ГГ
-          2  ИГ
+GF1     = 1  X! : ГГ
+          2  X! : ИГ
 SF1     = 1  PREDIC
 GF2     = 1  >> Р
 SF2     = 1  SPAC
@@ -5365,8 +5365,9 @@ GF      = 1  ПРЕДЛ
 SF      = 1  MODL
 VAL     =  ACT , A2 , A1
 SYNR    =  уточн ( с+а2 , а1 )
-GF1     = 1  >> Р
-SF1     = 1  PREDIC
+GF1     = 1  X! : ГГ
+GF2     = 1  >> Р
+SF2     = 1  PREDIC
 ENG     =  with 1
 COMM    =  Внесена помета OPERAT, так как этот оборот сообщает модальную окраску всему
            предложению. ("не без А2" = "почти уверен, что с А2")
@@ -5439,8 +5440,8 @@ EXM     =  we were not expecting him till Tuesday.
 GF      = 1  ПРЕДЛ
 SF      = 1  TIME
 VAL     =  TIME , A2 , A1
-GF1     = 1  ГГ
-          2  < ИГ
+GF1     = 1  X! : ГГ
+          2  < X! : ИГ
 GF2     = 1  >> Р
 ENG     =  till 1 + A1(no)
 ============
@@ -5472,8 +5473,8 @@ GF      = 1  ПРЕДЛ
 SF      = 1  ISCONNECTED
 VAL     =  ISCONNECTED , A2 , A1
 SYNR    =  обст ( с+а2 , а1 )
-GF1     = 1  ГГ
-          2  ИГ
+GF1     = 1  X! : ГГ
+          2  X! : ИГ
 SF1     = 1  SITUAT
 GF2     = 1  >> Р
 SF2     = 1  ABSTR
@@ -5537,8 +5538,8 @@ SF      = 1  NEG
              ISCONNECTED
 VAL     =  ISCONNECTED , A2 , A1
 SYNR    =  обст ( с+а2 , а1 )
-GF1     = 1  ГГ
-             ИГ
+GF1     = 1  X! : ГГ
+             X! : ИГ
 SF1     = 1  SITUAT
 GF2     = 1  >> В
 SF2     = 1  ABSTR
@@ -5555,8 +5556,8 @@ SF      = 1  NEG
           2  ISCONNECTED
 VAL     =  ISCONNECTED , A2 , A1
 SYNR    =  обст ( с+а2 , а1 )
-GF1     = 1  ГГ
-          2  ИГ
+GF1     = 1  X! : ГГ
+          2  X! : ИГ
 SF1     = 1  SITUAT
 GF2     = 1  >> Р
 SF2     = 1  ABSTR
@@ -5572,7 +5573,7 @@ GF      = 1  ПРЕДЛ
 SF      = 1  TIME
 VAL     =  AFTER , A2 , A1
 SYNR    =  обст ( с+а2 , а1 )
-GF1     = 1  ГГ
+GF1     = 1  X! : ГГ
 SF1     = 1  PREDIC
 GF2     = 1  >> Р
 ENG     =  on_the_eve_of 1
@@ -5591,8 +5592,8 @@ SF      = 1  NEG
 VAL     =  ISCONNECTED , A2 , A1
            MODL , C , A2
 SYNR    =  обст ( с+а2 , а1 )
-GF1     = 1  ГГ
-          2  ИГ
+GF1     = 1  X! : ГГ
+          2  X! : ИГ
 SF1     = 1  SITUAT
 GF2     = 1  >> В
 SF2     = 1  ABSTR
@@ -5666,8 +5667,8 @@ CONTENT =  ниже
 GF      = 1  ПРОСТ_ПРЕДЛ
 SF      = 1  LOK
 VAL     =  LOK , A2 , A1
-GF1     = 1  ГГ
-          2  < ИГ
+GF1     = 1  X! : ГГ
+          2  < X! : ИГ
 GF2     = 1  >> Р
 ENG     =  below 1
 ============
@@ -5714,8 +5715,8 @@ CONTENT =  о
            об
            обо
 GF      = 1  ПРОСТ_ПРЕДЛ
-GF1     = 1  ГГ
-          2  < ИГ
+GF1     = 1  X! : ГГ
+          2  < X! : ИГ
 GF2     = 1  >> В
 ENG     =  on 2
            against 1
@@ -5729,8 +5730,8 @@ CONTENT =  о
 GF      = 1  ПРОСТ_ПРЕДЛ
 VAL     =  ACT , A1 , A2
 EDOMAIN(2)=  худ
-GF1     = 1  ГГ
-          2  < ИГ
+GF1     = 1  X! : ГГ
+          2  < X! : ИГ
 GF2     = 1  >> П
 ENG     =  about 1
            on 1
@@ -5779,7 +5780,7 @@ CAT     = 1  OPER
 GF      = 1  ПРЕДЛ
 SF      = 1  SIMULT
 VAL     =  SIMULT , A1 , A2
-GF1     = 1  ПРОП
+GF1     = 1  X! : ПРОП
 SF1     = 1  SITUAT
 GF2     = 1  >> Т
 SF2     = 1  SITUAT
@@ -5792,8 +5793,8 @@ TIME_CREATE       = 14/2/1 20:49:41
 CONTENT =  около
 GF      = 1  ПРОСТ_ПРЕДЛ
 VAL     =  ACT , A1 , A2
-GF1     = 1  ГГ
-          2  < ИГ
+GF1     = 1  X! : ГГ
+          2  < X! : ИГ
 GF2     = 1  >> Р
 ENG     =  near 1
            alongside 1
@@ -5807,8 +5808,8 @@ GF      = 1  ПРОСТ_ПРЕДЛ
 SF      = 1  SRC-PNT
 VAL     =  SRC-PNT , A2 , A1
 ESF1(2) = 1  SRC
-GF1     = 1  ГГ
-          2  < ИГ
+GF1     = 1  X! : ГГ
+          2  < X! : ИГ
 GF2     = 1  >> Р
 ENG     =  of 1
            from 1
@@ -5826,8 +5827,8 @@ SF      = 1  ACT
              MEDIATOR
 VAL     =  ACT , A2 , A1
 SYNR    =  уточн ( с+а2 , а1 )
-GF1     = 1  ГГ
-          2  ИГ
+GF1     = 1  X! : ГГ
+          2  X! : ИГ
 SF1     = 1  SITUAT
           2  ANIM
 GF2     = 1  >> Р
@@ -5845,8 +5846,8 @@ SF      = 1  NEG
              SIMULT
 VAL     =  ISCONNECTED , A2 , A1
            SRC-PNT , A2 , C
-GF1     = 1  ГГ
-          2  ИГ
+GF1     = 1  X! : ГГ
+          2  X! : ИГ
 SF1     = 1  PREDIC
 GF2     = 1  >> Р
 ENG     =  separately_from 1
@@ -5857,8 +5858,8 @@ TIME_CREATE       = 14/2/1 20:49:41
 CONTENT =  относительно
 GF      = 1  ПРОСТ_ПРЕДЛ
 VAL     =  ACT , A1 , A2
-GF1     = 1  ГГ
-          2  < ИГ
+GF1     = 1  X! : ГГ
+          2  < X! : ИГ
 GF2     = 1  >> Р
 ENG     =  regarding 1
            respecting 1
@@ -5887,8 +5888,8 @@ SF      = 1  LOK
           2  TIME
 VAL     =  LOCK_forward , A2 , A1
            AFTER , A2 , A1
-GF1     = 1  ГГ
-          2  < ИГ
+GF1     = 1  X! : ГГ
+          2  < X! : ИГ
 ESF2(2) = 1  TIME
           2  SITUAT
 GF2     = 1  >> Т
@@ -5902,8 +5903,8 @@ SENSE       = 1
 TIME_CREATE       = 14/2/1 20:49:41
 CONTENT =  плюс
 GF      = 1  ПРОСТ_ПРЕДЛ
-GF1     = 1  ГГ
-          2  < ИГ
+GF1     = 1  X! : ГГ
+          2  < X! : ИГ
 GF2     = 1  >> И
 ENG     =  plus 1
 ============
@@ -5915,8 +5916,8 @@ CONTENT =  по
 EXM     =  по пояс
            по ту сторону
 GF      = 1  ПРОСТ_ПРЕДЛ
-GF1     = 1  ГГ
-          2  < ИГ
+GF1     = 1  X! : ГГ
+          2  < X! : ИГ
 GF2     = 1  >> В
 ENG     =  over 1
 COMM    =  в код надо специально зашивать правило для примера
@@ -5936,8 +5937,8 @@ EXM     =  по всему организму
            по утрам
 GF      = 1  ПРОСТ_ПРЕДЛ
 VAL     =  LOK , A1 , A2
-GF1     = 1  ГГ
-          2  < ИГ
+GF1     = 1  X! : ГГ
+          2  < X! : ИГ
 ESF2(2) = 1  LOK
 GF2     = 1  >> Д
 ENG     =  on 1
@@ -5953,8 +5954,8 @@ CONTENT =  по
 EXM     =  по прибытии в город
            по окончании экзаменов
 GF      = 1  ПРОСТ_ПРЕДЛ
-GF1     = 1  ГГ
-          2  < ИГ
+GF1     = 1  X! : ГГ
+          2  < X! : ИГ
 GF2     = 1  >> П
 ENG     =  upon 1
            for 2
@@ -5983,8 +5984,8 @@ GF      = 1  ПРЕДЛ
 SF      = 1  ADR
 VAL     =  ADR , A2 , A1
 SYNR    =  уточн ( с+а2 , а1 )
-GF1     = 1  ГГ
-          2  ИГ
+GF1     = 1  X! : ГГ
+          2  X! : ИГ
 SF1     = 1  SITUAT
           2  ANIM
           3  INF
@@ -6003,7 +6004,7 @@ GF      = 1  ПРЕДЛ
 SF      = 1  THEME
 VAL     =  THEME , A2 , A1
 SYNR    =  уточн ( с+а2 , а1 )
-GF1     = 1  ГГ
+GF1     = 1  X! : ГГ
 SF1     = 1  PREDIC
           2  INF
 GF2     = 1  >> Р
@@ -6022,7 +6023,7 @@ GF      = 1  ПРЕДЛ
 SF      = 1  THEME
 VAL     =  THEME , A2 , A1
 SYNR    =  уточн ( с+а2 , а1 )
-GF1     = 1  ГГ
+GF1     = 1  X! : ГГ
 SF1     = 1  PREDIC
           2  INF
 GF2     = 1  >> Р
@@ -6039,7 +6040,7 @@ GF      = 1  ПРЕДЛ
 SF      = 1  THEME
 VAL     =  THEME , A2 , A1
 SYNR    =  уточн ( с+а2 , а1 )
-GF1     = 1  ГГ
+GF1     = 1  X! : ГГ
 SF1     = 1  PREDIC
           2  INF
 GF2     = 1  >> П
@@ -6091,7 +6092,7 @@ GF      = 1  ПРЕДЛ
 SF      = 1  IDENT
 VAL     =  IDENT , A1 , A2
 SYNR    =  обст ( с+а2 , а1 )
-GF1     = 1  >> ИГ
+GF1     = 1  >> X! : ИГ
 ENG     =  called 1
 ============
 TITLE        = по_исполнении+Р
@@ -6108,8 +6109,8 @@ SF      = 1  MODL
 VAL     =  STAD , C , A1
            ACT , A2 , C
 SYNR    =  обст ( с+а2 , а1 )
-GF1     = 1  ГГ
-          2  ИГ
+GF1     = 1  X! : ГГ
+          2  X! : ИГ
 SF1     = 1  PREDIC
 GF2     = 1  >> Р
 ENG     =  having_executed 1
@@ -6128,8 +6129,8 @@ SF      = 1  MODL
 VAL     =  STAD , C , A1
            ACT , A2 , C
 SYNR    =  обст ( с+а2 , а1 )
-GF1     = 1  ГГ
-          2  ИГ
+GF1     = 1  X! : ГГ
+          2  X! : ИГ
 SF1     = 1  PREDIC
 GF2     = 1  >> Р
 SF2     = 1  ABSTR
@@ -6162,8 +6163,8 @@ SF      = 1  IN-ACCORD
 VAL     =  IN-ACCORD , A1 , A2
            SCALE , A2 , A1
 SYNR    =  обст ( с+а2 , а1 )
-GF1     = 1  ГГ
-          2  ИГ
+GF1     = 1  X! : ГГ
+          2  X! : ИГ
 SF1     = 1  PREDIC
 GF2     = 1  >> Р
 SF2     = 1  ORG
@@ -6182,7 +6183,7 @@ SF      = 1  MODL
              SIMULT
 VAL     =  SIMULT , A2 , A1
 SYNR    =  обст ( с+а2 , а1 )
-GF1     = 1  ПРОП
+GF1     = 1  X! : ПРОП
 SF1     = 1  PROC
 GF2     = 1  >> Р
 SF2     = 1  PREDIC
@@ -6231,7 +6232,7 @@ GF      = 1  ПРЕДЛ
 SF      = 1  IN-DIRECT
 VAL     =  IN-DIRECT , A2 , A1
 SYNR    =  обст ( с+а2 , а1 )
-GF1     = 1  ГГ
+GF1     = 1  X! : ГГ
 SF1     = 1  AKTIO
              DIREC
 GF2     = 1  >> Р
@@ -6249,7 +6250,7 @@ GF      = 1  ПРЕДЛ
 SF      = 1  IN-DIRECT
 VAL     =  IN-DIRECT , A2 , A1
 SYNR    =  обст ( с+а2 , а1 )
-GF1     = 1  ГГ
+GF1     = 1  X! : ГГ
 SF1     = 1  AKTIO
              DIREC
 GF2     = 1  >> Д
@@ -6267,7 +6268,7 @@ GF      = 1  ПРЕДЛ
 SF      = 1  FOR
 VAL     =  FOR , A1 , A2
 SYNR    =  обст ( с+а2 , а1 )
-GF1     = 1  ИГ
+GF1     = 1  X! : ИГ
 SF1     = 1  THINGN
           2  ATTR
 GF2     = 1  >> Д
@@ -6304,8 +6305,8 @@ GF      = 1  ПРЕДЛ
 SF      = 1  THEME
 VAL     =  THEME , A2 , A1
 SYNR    =  обст ( с+а2 , а1 )
-GF1     = 1  ГГ
-          2  ИГ
+GF1     = 1  X! : ГГ
+          2  X! : ИГ
 SF1     = 1  PREDIC
              INTEL
 GF2     = 1  >> Р
@@ -6324,8 +6325,8 @@ GF      = 1  ПРЕДЛ
 SF      = 1  IN-ACCORD
 VAL     =  IN-ACCORD , A1 , C
 SYNR    =  обст ( с+а2 , а1 )
-GF1     = 1  ГГ
-          2  ИГ
+GF1     = 1  X! : ГГ
+          2  X! : ИГ
 SF1     = 1  PREDIC
           2  INTEL
 GF2     = 1  >> Р
@@ -6366,8 +6367,8 @@ GF      = 1  ПРЕДЛ
 SF      = 1  IN-ACCORD
 VAL     =  IN-ACCORD , A1 , C
 SYNR    =  обст ( с+а2 , а1 )
-GF1     = 1  ГГ
-          2  ИГ
+GF1     = 1  X! : ГГ
+          2  X! : ИГ
 SF1     = 1  PREDIC
 GF2     = 1  >> Р
 SF2     = 1  ANIM
@@ -6391,8 +6392,8 @@ SF      = 1  REL
 VAL     =  SIMULT , A1 , C
            OBJ , A2 , C
 SYNR    =  обст ( с+а2 , а1 )
-GF1     = 1  ГГ
-          2  ИГ
+GF1     = 1  X! : ГГ
+          2  X! : ИГ
 SF1     = 1  PREDIC
 GF2     = 1  >> Р
 SF2     = 1  MEDINF
@@ -6409,7 +6410,7 @@ GF      = 1  ПРЕДЛ
 SF      = 1  CAUSE
 VAL     =  CAUSE , A2 , A1
 SYNR    =  обст ( с+а2 , а1 )
-GF1     = 1  ПРОП
+GF1     = 1  X! : ПРОП
 SF1     = 1  PREDIC
 GF2     = 1  >> Р
 ENG     =  due_to 1
@@ -6427,8 +6428,8 @@ SF      = 1  REL
              ANIM
 VAL     =  IN-ACCORD , A1 , C
 SYNR    =  обст ( с+а2 , а1 )
-GF1     = 1  ГГ
-          2  ИГ
+GF1     = 1  X! : ГГ
+          2  X! : ИГ
 SF1     = 1  PREDIC
 GF2     = 1  >> Р
 ENG     =  meeting_the_demand_of 1
@@ -6444,7 +6445,7 @@ GF      = 1  ПРЕДЛ
 SF      = 1  TIME
 VAL     =  AFTER , A1 , A2
 SYNR    =  обст ( с+а2 , а1 )
-GF1     = 1  ПРОП
+GF1     = 1  X! : ПРОП
 SF1     = 1  PREDIC
 GF2     = 1  >> Р
 ENG     =  after 1
@@ -6459,7 +6460,7 @@ GF      = 1  ПРЕДЛ
 SF      = 1  IN-DIRECT
 VAL     =  IN-DIRECT , A1 , A2
 SYNR    =  обст ( с+а2 , а1 )
-GF1     = 1  ГГ
+GF1     = 1  X! : ГГ
 SF1     = 1  PREDIC
 GF2     = 1  >> ПГ
           2  >> ИГ
@@ -6478,7 +6479,7 @@ CAT     = 1  RELAT
 GF      = 1  ПРЕДЛ
 SF      = 1  IN-DIRECT
 VAL     =  IN-DIRECT , A1 , A2
-GF1     = 1  ГГ
+GF1     = 1  X! : ГГ
 SF1     = 1  PREDIC
 GF2     = 1  >> Д
 SF2     = 1  SPAC
@@ -6533,7 +6534,7 @@ SF      = 1  REL
              ANIM
 VAL     =  AUTHOR , A1 , A2
 SYNR    =  обст ( с+а2 , а1 )
-GF1     = 1  ПРОП
+GF1     = 1  X! : ПРОП
 SF1     = 1  PREDIC
 GF2     = 1  >> Р
 ENG     =  due_to_the_advice_of 1
@@ -6550,7 +6551,7 @@ GF      = 1  ПРЕДЛ
 SF      = 1  IN-ACCORD
 VAL     =  IN-ACCORD , A1 , A2
 SYNR    =  обст ( с+а2 , а1 )
-GF1     = 1  ПРОП
+GF1     = 1  X! : ПРОП
 SF1     = 1  PREDIC
 GF2     = 1  >> Т
 SF2     = 1  ANIM
@@ -6586,7 +6587,7 @@ GF      = 1  ПРЕДЛ
 SF      = 1  COMP
 VAL     =  COMP , A1 , A2
 SYNR    =  обст ( с+а2 , а1 )
-GF1     = 1  ИГ
+GF1     = 1  X! : ИГ
 SF1     = 1  PREDIC
           2  THINGN
 GF2     = 1  >> Т
@@ -6611,7 +6612,7 @@ GF      = 1  ПРЕДЛ
 SF      = 1  ALIKE
 VAL     =  ALIKE , A1 , A2
 SYNR    =  обст ( с+а2 , а1 )
-GF1     = 1  ИГ
+GF1     = 1  X! : ИГ
 SF1     = 1  PREDIC
           2  THINGN
 GF2     = 1  >> Т
@@ -6644,8 +6645,8 @@ GF      = 1  ПРЕДЛ
 SF      = 1  RESTR
 VAL     =  RESTR , A2 , A1
 SYNR    =  уточн ( с+а2 , а1 )
-GF1     = 1  ПРОП
-          2  ИГ
+GF1     = 1  X! : ПРОП
+          2  X! : ИГ
 SF1     = 1  PREDIC
           2  ATTR
 GF2     = 1  >> Р
@@ -6660,8 +6661,8 @@ CONTENT =  под
 GF      = 1  ПРОСТ_ПРЕДЛ
 SF      = 1  TRG-PNT
 VAL     =  TRG-PNT , A2 , A1
-GF1     = 1  ГГ
-          2  < ИГ
+GF1     = 1  X! : ГГ
+          2  < X! : ИГ
 GF2     = 1  >> В
 ENG     =  against 1
 ============
@@ -6673,8 +6674,8 @@ CONTENT =  под
 GF      = 1  ПРОСТ_ПРЕДЛ
 SF      = 1  LOK
 VAL     =  LOK , A1 , A2
-GF1     = 1  ГГ
-          2  < ИГ
+GF1     = 1  X! : ГГ
+          2  < X! : ИГ
 GF2     = 1  >> Т
 ENG     =  under 1
            beneath 1
@@ -6691,8 +6692,8 @@ GF      = 1  ПРЕДЛ
 SF      = 1  ALIKE
 VAL     =  ALIKE , A2 , A1
 SYNR    =  уточн ( с+а2 , а1 )
-GF1     = 1  ГГ
-          2  ИГ
+GF1     = 1  X! : ГГ
+          2  X! : ИГ
 SF1     = 1  THINGN
           2  ANIM
 GF2     = 1  >> Р
@@ -6712,7 +6713,7 @@ EXM     =  Винни-Пух жил под именем Сандерс.
            Он скрывался под псевдонимом Герхард Блок.
 GF      = 1  ПРЕДЛ
 VAL     =  RESTR , A1 , A2
-GF1     = 1  ГГ
+GF1     = 1  X! : ГГ
 GF2     = 1  >> И
 SF2     = 1  NAME
 ENG     =  under_the_name_of 1
@@ -6744,8 +6745,8 @@ SF      = 1  CAUSE
              MODL
 VAL     =  CAUSE , A2 , A1
 SYNR    =  уточн ( с+а2 , а1 )
-GF1     = 1  ГГ
-          2  ИГ
+GF1     = 1  X! : ГГ
+          2  X! : ИГ
 SF1     = 1  PREDIC
 GF2     = 1  >> Р
 ENG     =  under_the_pretext_of 1
@@ -6756,8 +6757,8 @@ TIME_CREATE       = 14/2/1 20:49:44
 CONTENT =  подле
 GF      = 1  ПРОСТ_ПРЕДЛ
 VAL     =  ACT , A1 , A2
-GF1     = 1  ГГ
-          2  < ИГ
+GF1     = 1  X! : ГГ
+          2  < X! : ИГ
 GF2     = 1  >> Р
 ENG     =  near 1
 ============
@@ -6767,8 +6768,8 @@ TIME_CREATE       = 14/2/1 20:49:44
 CONTENT =  подобно
 GF      = 1  ПРОСТ_ПРЕДЛ
 VAL     =  ACT , A1 , A2
-GF1     = 1  ГГ
-          2  < ИГ
+GF1     = 1  X! : ГГ
+          2  < X! : ИГ
 GF2     = 1  >> Д
 ENG     =  similar_to 1
 ============
@@ -6803,8 +6804,8 @@ SENSE       = 1
 TIME_CREATE       = 14/2/1 20:49:44
 CONTENT =  позади
 GF      = 1  ПРОСТ_ПРЕДЛ
-GF1     = 1  ГГ
-          2  < ИГ
+GF1     = 1  X! : ГГ
+          2  < X! : ИГ
 GF2     = 1  >> Р
 ENG     =  abaft 1
 ============
@@ -6834,8 +6835,8 @@ TIME_CREATE       = 14/2/1 20:49:45
 CONTENT =  помимо
 GF      = 1  ПРОСТ_ПРЕДЛ
 VAL     =  ACT , A1 , A2
-GF1     = 1  ГГ
-          2  < ИГ
+GF1     = 1  X! : ГГ
+          2  < X! : ИГ
 GF2     = 1  >> Р
 ENG     =  besides 1
 ============
@@ -6849,8 +6850,8 @@ GF      = 1  ПРЕДЛ
 SF      = 1  LOK
 VAL     =  LOK , A2 , A1
 SYNR    =  обст ( с+а2 , а1 )
-GF1     = 1  ИГ
-          2  ГГ
+GF1     = 1  X! : ИГ
+          2  X! : ГГ
 SF1     = 1  THINGN
           2  PREDIC
 GF2     = 1  >> Р
@@ -6863,8 +6864,8 @@ SENSE       = 1
 TIME_CREATE       = 14/2/1 20:49:45
 CONTENT =  поперек
 GF      = 1  ПРОСТ_ПРЕДЛ
-GF1     = 1  ГГ
-          2  < ИГ
+GF1     = 1  X! : ГГ
+          2  < X! : ИГ
 GF2     = 1  >> Р
 ENG     =  thwart 1
            athwart 1
@@ -6890,8 +6891,8 @@ TIME_CREATE       = 14/2/1 20:49:45
 CONTENT =  после
 GF      = 1  ПРОСТ_ПРЕДЛ
 VAL     =  ACT , A1 , A2
-GF1     = 1  ГГ
-          2  < ИГ
+GF1     = 1  X! : ГГ
+          2  < X! : ИГ
 GF2     = 1  >> Р
 ENG     =  after 1
            past 1
@@ -6938,8 +6939,8 @@ CONTENT =  посреди
 GF      = 1  ПРОСТ_ПРЕДЛ
 SF      = 1  LOK
 VAL     =  LOK , A1 , A2
-GF1     = 1  ГГ
-          2  < ИГ
+GF1     = 1  X! : ГГ
+          2  < X! : ИГ
 GF2     = 1  >> Р
 ENG     =  in_the_middle_of 1
 ============
@@ -6949,8 +6950,8 @@ TIME_CREATE       = 14/2/1 20:49:45
 CONTENT =  посредством
 GF      = 1  ПРОСТ_ПРЕДЛ
 VAL     =  ACT , A1 , A2
-GF1     = 1  ГГ
-          2  < ИГ
+GF1     = 1  X! : ГГ
+          2  < X! : ИГ
 GF2     = 1  >> Р
 ENG     =  by_means_of 1
 ============
@@ -6980,8 +6981,8 @@ TIME_CREATE       = 14/2/1 20:49:45
 CONTENT =  прежде
 GF      = 1  ПРОСТ_ПРЕДЛ
 VAL     =  ACT , A1 , A2
-GF1     = 1  ГГ
-          2  < ИГ
+GF1     = 1  X! : ГГ
+          2  < X! : ИГ
 GF2     = 1  >> Р
 ENG     =  before 1
 ============
@@ -7042,8 +7043,8 @@ TIME_CREATE       = 14/2/1 20:49:45
 CONTENT =  при
 GF      = 1  ПРОСТ_ПРЕДЛ
 VAL     =  ACT , A1 , A2
-GF1     = 1  ГГ
-          2  < ИГ
+GF1     = 1  X! : ГГ
+          2  < X! : ИГ
 ESF2(2) = 1  ANIM
 ESF2(3) = 1  S0
 ESF2(4) = 1  ANIM
@@ -7067,7 +7068,7 @@ GF      = 1  ПРЕДЛ
 SF      = 1  SIMULT
 VAL     =  SIMULT , A2 , A1
 SYNR    =  обст ( с+а2 , а1 )
-GF1     = 1  ПРОП
+GF1     = 1  X! : ПРОП
 SF1     = 1  PREDIC
 GF2     = 1  >> Р
 SF2     = 1  THINGN
@@ -7105,7 +7106,7 @@ CAT     = 1  RELAT
 GF      = 1  ПРЕДЛ
 SF      = 1  INTEL
 VAL     =  CAUSE , A2 , A1
-GF1     = 1  ГГ
+GF1     = 1  X! : ГГ
 SF1     = 1  PREDIC
 GF2     = 1  >> ИГ
 ENG     =  at_the_thought_of 1
@@ -7136,7 +7137,7 @@ GF      = 1  ПРЕДЛ
 SF      = 1  COND
 VAL     =  COND , A2 , A1
 SYNR    =  обст ( с+а2 , а1 )
-GF1     = 1  ПРОП
+GF1     = 1  X! : ПРОП
 SF1     = 1  PREDIC
 GF2     = 1  >> Р
 SF2     = 1  THINGN
@@ -7174,7 +7175,7 @@ VAL     =  COND , A2 , A1
 SYNR    =  обст ( с+а2 , а1 )
 ESF1(3) = 1  NEG
              ANIM
-GF1     = 1  ПРОП
+GF1     = 1  X! : ПРОП
 SF1     = 1  PREDIC
 GF2     = 1  >> Р
 SF2     = 1  THINGN
@@ -7192,7 +7193,7 @@ GF      = 1  ПРЕДЛ
 SF      = 1  WITH
 VAL     =  WITH , A1 , A2
 SYNR    =  обст ( с+а2 , а1 )
-GF1     = 1  ГГ
+GF1     = 1  X! : ГГ
 SF1     = 1  PREDIC
 GF2     = 1  >> Р
 SF2     = 1  ANIM
@@ -7210,7 +7211,7 @@ GF      = 1  ПРЕДЛ
 SF      = 1  WITH
 VAL     =  WITH , A1 , A2
 SYNR    =  обст ( с+а2 , а1 )
-GF1     = 1  ПРОП
+GF1     = 1  X! : ПРОП
 SF1     = 1  PREDIC
 ESF2(2) = 1  NEG
              ANIM
@@ -7234,7 +7235,7 @@ SF      = 1  WITH
 VAL     =  WITH , A1 , A2
            ACT , A2 , C
 SYNR    =  обст ( с+а2 , а1 )
-GF1     = 1  ПРОП
+GF1     = 1  X! : ПРОП
 SF1     = 1  PREDIC
           2  ANIM
 ESF2(1) = 1  NEG
@@ -7256,7 +7257,7 @@ SF      = 1  WITH
 VAL     =  WITH , A1 , A2
            ACT , A2 , C
 SYNR    =  обст ( с+а2 , а1 )
-GF1     = 1  ПРОП
+GF1     = 1  X! : ПРОП
 SF1     = 1  ANIM
 GF2     = 1  >> Р
 ENG     =  with_the_assistance_of 1
@@ -7291,7 +7292,7 @@ GF      = 1  ПРЕДЛ
 SF      = 1  COND
 VAL     =  COND , A2 , A1
 SYNR    =  обст ( с+а2 , а1 )
-GF1     = 1  ПРОП
+GF1     = 1  X! : ПРОП
 SF1     = 1  PREDIC
 GF2     = 1  >> Р
 ENG     =  under_conditions_of 1
@@ -7311,7 +7312,7 @@ VAL     =  WITH , A1 , A2
            ACT , A2 , C
            INCLUDING , A2 , A1
 SYNR    =  уточн ( с+а2 , а1 )
-GF1     = 1  ПРОП
+GF1     = 1  X! : ПРОП
 SF1     = 1  SITUAT
 GF2     = 1  >> Р
 SF2     = 1  ANIM
@@ -7351,7 +7352,7 @@ GF      = 1  ПРЕДЛ
 SF      = 1  FOR
 VAL     =  FOR , A1 , A2
 SYNR    =  обст ( с+а2 , а1 )
-GF1     = 1  ПРОП
+GF1     = 1  X! : ПРОП
 SF1     = 1  PREDIC
 GF2     = 1  >> Д
 SF2     = 1  THINGN
@@ -7372,8 +7373,8 @@ TIME_CREATE       = 14/2/1 20:49:47
 CONTENT =  про
 GF      = 1  ПРОСТ_ПРЕДЛ
 VAL     =  ACT , A1 , A2
-GF1     = 1  ГГ
-          2  < ИГ
+GF1     = 1  X! : ГГ
+          2  < X! : ИГ
 GF2     = 1  >> В
 ENG     =  about 1
 ============
@@ -7383,8 +7384,8 @@ TIME_CREATE       = 14/2/1 20:49:47
 CONTENT =  против
 GF      = 1  ПРОСТ_ПРЕДЛ
 VAL     =  ACT , A1 , A2
-GF1     = 1  ГГ
-          2  < ИГ
+GF1     = 1  X! : ГГ
+          2  < X! : ИГ
 GF2     = 1  >> Р
 ENG     =  against 1
            versus 1
@@ -7410,8 +7411,8 @@ SENSE       = 1
 TIME_CREATE       = 14/2/1 20:49:47
 CONTENT =  путем
 GF      = 1  ПРОСТ_ПРЕДЛ
-GF1     = 1  ГГ
-          2  < ИГ
+GF1     = 1  X! : ГГ
+          2  < X! : ИГ
 GF2     = 1  >> Р
 ENG     =  via 1
 ============
@@ -7421,8 +7422,8 @@ TIME_CREATE       = 14/2/1 20:49:47
 CONTENT =  ради
 GF      = 1  ПРОСТ_ПРЕДЛ
 VAL     =  ACT , A1 , A2
-GF1     = 1  ГГ
-          2  < ИГ
+GF1     = 1  X! : ГГ
+          2  < X! : ИГ
 GF2     = 1  >> Р
           2  << Р
 ENG     =  for_the_sake_of 1
@@ -7472,8 +7473,8 @@ GF      = 1  ПРЕДЛ
 SF      = 1  LOK
 VAL     =  LOK , A2 , A1
 SYNR    =  обст ( с+а2 , а1 )
-GF1     = 1  ИГ
-          2  ГГ
+GF1     = 1  X! : ИГ
+          2  X! : ГГ
 SF1     = 1  THINGN
           2  PREDIC
 GF2     = 1  >> Т
@@ -7489,8 +7490,8 @@ TIME_CREATE       = 14/2/1 20:49:47
 CONTENT =  с
            со
 GF      = 1  ПРОСТ_ПРЕДЛ
-GF1     = 1  ГГ
-          2  < ИГ
+GF1     = 1  X! : ГГ
+          2  < X! : ИГ
 GF2     = 1  >> В
 ENG     =  like 1
 ============
@@ -7502,8 +7503,8 @@ CONTENT =  с
 GF      = 1  ПРОСТ_ПРЕДЛ
 SF      = 1  SRC-PNT
 VAL     =  SRC-PNT , A2 , A1
-GF1     = 1  ГГ
-          2  < ИГ
+GF1     = 1  X! : ГГ
+          2  < X! : ИГ
 GF2     = 1  >> Р
 ENG     =  from 1
            off 1
@@ -7519,8 +7520,8 @@ CONTENT =  с
            со
 GF      = 1  ПРОСТ_ПРЕДЛ
 VAL     =  ACT , A1 , A2
-GF1     = 1  ГГ
-          2  < ИГ
+GF1     = 1  X! : ГГ
+          2  < X! : ИГ
 GF2     = 1  >> Т
 ENG     =  with 1
            cum 1
@@ -7539,7 +7540,7 @@ GF      = 1  ПРЕДЛ
 SF      = 1  WITH
 VAL     =  WITH , A1 , A2
 SYNR    =  обст ( с+а2 , а1 )
-GF1     = 1  ПРОП
+GF1     = 1  X! : ПРОП
 SF1     = 1  PREDIC
 GF2     = 1  >> Р
 SF2     = 1  THINGN
@@ -7559,8 +7560,8 @@ SF      = 1  NEG
              SIMULT
 VAL     =  ISCONNECTED , A2 , A1
            SRC-PNT , A2 , C
-GF1     = 1  ГГ
-          2  ИГ
+GF1     = 1  X! : ГГ
+          2  X! : ИГ
 SF1     = 1  PREDIC
 GF2     = 1  >> Р
 SF2     = 1  ORG
@@ -7579,8 +7580,8 @@ GF      = 1  ПРЕДЛ
 SF      = 1  METHOD
 VAL     =  METHOD , A2 , A1
 SYNR    =  обст ( с+а2 , а1 )
-GF1     = 1  ИГ
-          2  ГГ
+GF1     = 1  X! : ИГ
+          2  X! : ГГ
 SF1     = 1  PREDIC
 GF2     = 1  >> Р
 SF2     = 1  ABSTR
@@ -7602,7 +7603,7 @@ GF      = 1  ПРЕДЛ
 SF      = 1  WITH
 VAL     =  WITH , A1 , A2
 SYNR    =  обст ( с+а2 , а1 )
-GF1     = 1  ПРОП
+GF1     = 1  X! : ПРОП
 SF1     = 1  PREDIC
 ESF2(1) = 1  THINGN
 ESF2(2) = 1  ANIM
@@ -7626,7 +7627,7 @@ VAL     =  WITH , A1 , A2
            ACT , A2 , C
            INCLUDING , A2 , A1
 SYNR    =  уточн ( с+а2 , а1 )
-GF1     = 1  ПРОП
+GF1     = 1  X! : ПРОП
 SF1     = 1  SITUAT
 GF2     = 1  >> Р
 SF2     = 1  ANIM
@@ -7647,7 +7648,7 @@ SF      = 1  WITH
 VAL     =  WITH , A1 , A2
            OBJ , A2 , C
 SYNR    =  уточн ( с+а2 , а1 )
-GF1     = 1  ПРОП
+GF1     = 1  X! : ПРОП
 SF1     = 1  SITUAT
 GF2     = 1  >> Р
 SF2     = 1  PREDIC
@@ -7667,7 +7668,7 @@ GF      = 1  ПРЕДЛ
 SF      = 1  IN-ACCORD
 VAL     =  IN-ACCORD , A1 , A2
            ACT , A2 , C
-GF1     = 1  ПРОП
+GF1     = 1  X! : ПРОП
 SF1     = 1  SITUAT
 GF2     = 1  >> Р
 SF2     = 1  ANIM
@@ -7743,7 +7744,7 @@ SF      = 1  SRC-PNT
 VAL     =  SRC-PNT , A2 , A1
            BELNG , C , A2
 SYNR    =  обст ( а2 , а1 )
-GF1     = 1  ПРОП
+GF1     = 1  X! : ПРОП
 SF1     = 1  PREDIC
 ESF2(2) = 1  PREDIC
 GF2     = 1  >> Р
@@ -7778,7 +7779,7 @@ VAL     =  WITH , A1 , A2
            ACT , A2 , C
            INCLUDING , A2 , A1
 SYNR    =  уточн ( с+а2 , а1 )
-GF1     = 1  ПРОП
+GF1     = 1  X! : ПРОП
 SF1     = 1  SITUAT
 GF2     = 1  >> Р
 SF2     = 1  ANIM
@@ -7801,7 +7802,7 @@ SF      = 1  WITH
 VAL     =  WITH , A1 , A2
            OBJ , A2 , C
 SYNR    =  уточн ( с+а2 , а1 )
-GF1     = 1  ПРОП
+GF1     = 1  X! : ПРОП
 SF1     = 1  SITUAT
 GF2     = 1  >> Р
 SF2     = 1  ABSTR
@@ -7818,7 +7819,7 @@ GF      = 1  ПРЕДЛ
 SF      = 1  AIM
 VAL     =  AIM , A2 , A1
 SYNR    =  обст ( а2 , а1 )
-GF1     = 1  ГГ
+GF1     = 1  X! : ГГ
 SF1     = 1  PREDIC
 GF2     = 1  >> Р
           2  >> инф
@@ -7836,8 +7837,8 @@ GF      = 1  ПРЕДЛ
 SF      = 1  LOK
 VAL     =  LOC_up , A2 , A1
 SYNR    =  обст ( с+а2 , а1 )
-GF1     = 1  ИГ
-          2  ГГ
+GF1     = 1  X! : ИГ
+          2  X! : ГГ
 SF1     = 1  THINGN
           2  PREDIC
 GF2     = 1  >> Р
@@ -7851,8 +7852,8 @@ TIME_CREATE       = 14/2/1 20:49:1
 CONTENT =  свыше
 GF      = 1  ПРОСТ_ПРЕДЛ
 VAL     =  ACT , A1 , A2
-GF1     = 1  ГГ
-          2  < ИГ
+GF1     = 1  X! : ГГ
+          2  < X! : ИГ
 GF2     = 1  >> Р
 ENG     =  over 1
 ============
@@ -7878,8 +7879,8 @@ GF      = 1  ПРЕДЛ
 SF      = 1  LOK
 VAL     =  LOK , A2 , A1
 SYNR    =  обст ( с+а2 , а1 )
-GF1     = 1  ИГ
-          2  ГГ
+GF1     = 1  X! : ИГ
+          2  X! : ГГ
 SF1     = 1  THINGN
           2  PREDIC
 GF2     = 1  >> Р
@@ -7909,8 +7910,8 @@ CONTENT =  сквозь
 GF      = 1  ПРОСТ_ПРЕДЛ
 SF      = 1  LOK
 VAL     =  LOK , A1 , A2
-GF1     = 1  ГГ
-          2  < ИГ
+GF1     = 1  X! : ГГ
+          2  < X! : ИГ
 GF2     = 1  >> В
 ENG     =  through 1
 ============
@@ -7942,7 +7943,7 @@ GF      = 1  ПРЕДЛ
 SF      = 1  AFTER
 VAL     =  AFTER , A2 , A1
 SYNR    =  обст ( с+а2 , а1 )
-GF1     = 1  ПРОП
+GF1     = 1  X! : ПРОП
 SF1     = 1  PREDIC
 GF2     = 1  >> Т
 SF2     = 1  THINGN
@@ -8024,8 +8025,8 @@ CONTENT =  снаружи
 GF      = 1  ПРОСТ_ПРЕДЛ
 SF      = 1  LOK
 VAL     =  LOK , A1 , A2
-GF1     = 1  ГГ
-          2  < ИГ
+GF1     = 1  X! : ГГ
+          2  < X! : ИГ
 GF2     = 1  >> Р
 ENG     =  outside 1
 ============
@@ -8039,8 +8040,8 @@ GF      = 1  ПРЕДЛ
 SF      = 1  LOK
 VAL     =  LOC_down , A2 , A1
 SYNR    =  обст ( с+а2 , а1 )
-GF1     = 1  ИГ
-          2  ГГ
+GF1     = 1  X! : ИГ
+          2  X! : ГГ
 SF1     = 1  THINGN
           2  PREDIC
 GF2     = 1  >> Р
@@ -8057,8 +8058,8 @@ GF      = 1  ПРЕДЛ
 SF      = 1  LOK
 VAL     =  LOC_down , A2 , A1
 SYNR    =  обст ( с+а2 , а1 )
-GF1     = 1  ИГ
-          2  ГГ
+GF1     = 1  X! : ИГ
+          2  X! : ГГ
 SF1     = 1  THINGN
           2  PREDIC
 GF2     = 1  >> Р
@@ -8074,7 +8075,7 @@ EXM     =  cпособы перекачки данных со скоростью
 CAT     = 1  RELAT
 GF      = 1  ПРЕДЛ
 SYNR    =  обст ( с+а2 , а1 )
-GF1     = 1  ГГ
+GF1     = 1  X! : ГГ
 SF1     = 1  PREDIC
 GF2     = 1  >> И
           2  >> Р
@@ -8095,8 +8096,8 @@ CAT     = 1  RELAT
 GF      = 1  ПРЕДЛ
 SF      = 1  S-ACT
 VAL     =  S-ACT , A2 , A1
-GF1     = 1  ГГ
-          2  ИГ
+GF1     = 1  X! : ГГ
+          2  X! : ИГ
 SF1     = 1  PREDIC
 GF2     = 1  >> Р
 SF2     = 1  ANIM
@@ -8116,8 +8117,8 @@ SF      = 1  TOGETHER
 VAL     =  TOGETHER , A2 , A1
 ESF1(2) = 1  ANIM
 ESF1(3) = 1  PREDIC
-GF1     = 1  ГГ
-          2  ИГ
+GF1     = 1  X! : ГГ
+          2  X! : ИГ
 SF1     = 1  PREDIC
           2  ANIM
 GF2     = 1  >> Т
@@ -8133,8 +8134,8 @@ TIME_CREATE       = 14/2/1 20:49:49
 CONTENT =  согласно
 GF      = 1  ПРОСТ_ПРЕДЛ
 VAL     =  ACT , A1 , A2
-GF1     = 1  ГГ
-          2  < ИГ
+GF1     = 1  X! : ГГ
+          2  < X! : ИГ
 GF2     = 1  >> Д
 ENG     =  according_to 1
 ============
@@ -8149,8 +8150,8 @@ GF      = 1  ПРЕДЛ
 SF      = 1  IN-ACCORD
 VAL     =  IN-ACCORD , A2 , A1
 SYNR    =  уточн ( с , а1 )
-GF1     = 1  ГГ
-          2  ИГ
+GF1     = 1  X! : ГГ
+          2  X! : ИГ
 SF1     = 1  PREDIC
 GF2     = 1  >> Т
 SF2     = 1  LEGISL
@@ -8169,8 +8170,8 @@ GF      = 1  ПРЕДЛ
 SF      = 1  IN-ACCORD
 VAL     =  IN-ACCORD , A2 , A1
 SYNR    =  обст ( с+а2 , а1 )
-GF1     = 1  ГГ
-          2  ИГ
+GF1     = 1  X! : ГГ
+          2  X! : ИГ
 SF1     = 1  PREDIC
 GF2     = 1  >> Д
 SF2     = 1  LEGISL
@@ -8207,8 +8208,8 @@ GF      = 1  ПРЕДЛ
 SF      = 1  LOK
 VAL     =  LOC_front , A2 , A1
 SYNR    =  обст ( с+а2 , а1 )
-GF1     = 1  ИГ
-          2  ГГ
+GF1     = 1  X! : ИГ
+          2  X! : ГГ
 SF1     = 1  THINGN
           2  PREDIC
 GF2     = 1  >> Р
@@ -8225,8 +8226,8 @@ CONTENT =  среди
 GF      = 1  ПРОСТ_ПРЕДЛ
 SF      = 1  LOK
 VAL     =  LOK , A1 , A2
-GF1     = 1  ГГ
-          2  < ИГ
+GF1     = 1  X! : ГГ
+          2  < X! : ИГ
 GF2     = 1  >> Р
 ENG     =  among 1
            mid 1
@@ -8240,7 +8241,7 @@ EXM     =  Фирма заключила с ним контракт сроком
 GF      = 1  ПРЕДЛ
 SF      = 1  TIME
 VAL     =  TIME , A2 , A1
-GF1     = 1  ГГ
+GF1     = 1  X! : ГГ
 GF2     = 1  >> В
 SF2     = 1  AKTIO
           2  PERIO
@@ -8283,7 +8284,7 @@ TIME_CREATE       = 14/2/1 20:49:2
 CONTENT =  судя по
 GF      = 1  ПРОСТ_ПРЕДЛ
 VAL     =  ACT , A1 , A2
-GF1     = 1  ПРОП
+GF1     = 1  X! : ПРОП
 GF2     = 1  >> Д
 ENG     =  justice_of 1
 ============
@@ -8676,8 +8677,8 @@ GF      = 1  ПРОСТ_ПРЕДЛ
 SF      = 1  SRC-PNT
           2  LOK
 VAL     =  LOK , A1 , A2
-GF1     = 1  ГГ
-          2  < ИГ
+GF1     = 1  X! : ГГ
+          2  < X! : ИГ
 GF2     = 1  >> Р
 ENG     =  at 1
            by 1
@@ -8792,8 +8793,8 @@ CONTENT =  через
 GF      = 1  ПРОСТ_ПРЕДЛ
 SF      = 1  LOK
 VAL     =  LOK , A1 , A2
-GF1     = 1  ГГ
-          2  < ИГ
+GF1     = 1  X! : ГГ
+          2  < X! : ИГ
 ESF2(2) = 1  TIME
 GF2     = 1  >> В
 ENG     =  through 1
