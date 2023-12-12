@@ -23,3 +23,5 @@ target_link_libraries(SynanLib
 if (BUILD_DICTS)
     add_dependencies(SynanLib Ross)
 endif()
+
+add_subdirectory(tests)

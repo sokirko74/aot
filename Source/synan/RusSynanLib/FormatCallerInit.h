@@ -5,7 +5,7 @@
 #ifndef format_caller_init
 	#define format_caller_init
 
-#include "RusFormatCaller.h"
+#include "groups/RusFormatCaller.h"
 
 void InitAllRules( CFormatCaller& FormatCaller);
 void InitGroupRulesForClause( CFormatCaller& FormatCaller);

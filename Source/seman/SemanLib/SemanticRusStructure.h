@@ -4,6 +4,7 @@
 #include "SemanticWeight.h"
 #include "rus_sem_word.h"
 #include "rus_sem_relation.h"
+#include "time_phrases.h"
 #include "synan/SynCommonLib/RelationsIterator.h"
 
 #include <stack>
@@ -317,51 +318,6 @@ struct CConj {
     std::string RelationStr;
 };
 
-// Этот класс используется пока только для нахождения групп времени
-struct CNodeHypot {
-    // номер узла
-    long m_NodeNo;
-    // этаж в поле LEXi
-    long m_LexFetNo;
-    // этаж в поле GFi
-    long m_GramCortegeNo;
-    // номер предлога в словаре оборотов
-    long m_PrepNo;
-    // номер предлога в поле PREP
-    long m_PrepNoInArticle;
-    // верно, если  GF = ЦК_порядк для этого узла
-    bool m_bShouldBeNumeral_P;
-
-    CNodeHypot(long NodeNo, long LexFetNo, long GramCortegeNo, long PrepNo, long PrepNoInArticle,
-               bool bShouldBeNumeral_P) {
-        m_NodeNo = NodeNo;
-        m_LexFetNo = LexFetNo;
-        m_GramCortegeNo = GramCortegeNo;
-        m_PrepNo = PrepNo;
-        m_PrepNoInArticle = PrepNoInArticle;
-        m_bShouldBeNumeral_P = bShouldBeNumeral_P;
-    };
-
-    CNodeHypot(long NodeNo, long GramCortegeNo) {
-        m_NodeNo = NodeNo;
-        m_GramCortegeNo = GramCortegeNo;
-        m_LexFetNo = -1;
-        m_PrepNo = -1;
-        m_PrepNoInArticle = -1;
-        m_bShouldBeNumeral_P = false;
-    };
-
-    CNodeHypot() {
-        m_NodeNo = -1;
-        m_GramCortegeNo = -1;
-        m_LexFetNo = -1;
-        m_PrepNo = -1;
-        m_PrepNoInArticle = -1;
-        m_bShouldBeNumeral_P = false;
-    };
-};
-
-typedef std::vector<CNodeHypot> CNodeHypotVector;
 
 enum ClauseRulesTypesEnum {
     ProminentClauseRules,
@@ -542,13 +498,14 @@ class CRusSemStructure :
         public CLexVariant {
     void CreateSemNodesBySynttaxRelations();
     void CreateSimilarInfinitives();
+    std::vector<CTimeNodeHypot> BuildTimeHypots(long node_no) const;
+    void CreateOneTimeNode(const CTimeNodeHypot& h);
+
 public:
     // входное СинП одного предложения
     const CSentence *m_piSent;
     // номер варианта комбинации клаузы
     long m_ClauseVariantsCombinationNo;
-    // номер варианта комбинации клаузы, который заказал пользователь
-    long m_UserClauseVariantsCombinationNo;
     // номер варианта дерева, который заказал пользователь
     long m_UserTreeVariantNo;
 
@@ -580,9 +537,6 @@ public:
     bool m_bLastTry;
     // сингнал о том, что пользователь хочет остановить весь процесс
     bool m_bShouldBeStopped;
-    // информация для ProgressBar
-    long m_InterfaceClauseNo;
-    long m_AllClausesVariants;
 
     //  информация для синтеза о том, какие леммы надо заменить на другие
     std::map<std::string, std::string> m_SynthLemmaToReplace;
@@ -660,13 +614,13 @@ public:
 
     //=====================   Основные функции
     // основная функция построения предложения
-    long FindSituations(size_t SentNo);
+    long FindSituations(size_t SentNo, long user_clause_var_no = -1);
 
     // построение узлов по синтаксическому анализу и чтение СинО (интерпретация синтаксиса)
     void BuildSemNodesBySyntax();
 
     // основная функция для построения СемП для одного морфологического варианта одной клаузы
-    long FindSituationsForClauseVariantCombination();
+    long FindSituationsForClauseVariantCombination(const std::vector<size_t>& clause_var);
 
     // построение анафорических отношений
     void BuildAnaphoricRels();
@@ -1004,19 +958,19 @@ public:
     void BuildTimeNodes(long ClauseNo);
 
     // проверяет, что текущая гипотеза о группе времени согласована с полем SYNREP
-    bool TimeHypotIsSyntaxAgree(CNodeHypotVector &V, CTimeUnit &U);
+    bool TimeHypotIsSyntaxAgree(CNodeHypotVector &V, const CTimeUnit &U) const;
 
     // проверяет, что узлу приписана SF = TIME
     bool IsIntervalNode(const CSemNode &N) const;
 
     // проверяет лексическое соответствие узла элементу поля CONTENT
-    bool CheckOneTimeWord(CTimeUnit &TimeUnit, CNodeHypotVector &Hypots, BYTE PlaceNo, long &AbbrFunctNo);
+    bool CheckOneTimeWord(const CTimeUnit &TimeUnit, CNodeHypotVector &Hypots, BYTE PlaceNo, long &AbbrFunctNo) const;
 
     // проверяет грамматическое соответствие узла элементу поля CONTENT
-    bool CheckTimeGramFet(CNodeHypot &Hypot, CTimeUnit &TimeUnit, BYTE PlaceNo, bool IsHole, long Numbers);
+    bool CheckTimeGramFet(CNodeHypot &Hypot, const CTimeUnit &TimeUnit, BYTE PlaceNo, bool IsHole, long Numbers) const;
 
     // проверяет семантическое  соответствие узла элементу поля CONTENT
-    bool CheckTimeSemFet(long NodeNo, long UnitNo, BYTE PlaceNo);
+    bool CheckTimeSemFet(long NodeNo, long UnitNo, BYTE PlaceNo) const;
 
     // находит, узел, который может подчинять подч. союз "когда"
     long FindTimeHost(long NodeNo, long ClauseNo);
@@ -1025,7 +979,7 @@ public:
     bool HasTimeSemFet(const CSemNode &W, std::string SemFet) const;
 
     // проверяет лекс. совп. DictLemma со словом W (с учетом Abbr)
-    bool IsEqualTimeWord(std::string DictLemma, CRusSemNode &N, long &AbbrFunctNo);
+    bool IsEqualTimeWord(std::string DictLemma, const CRusSemNode &N, long &AbbrFunctNo) const;
 
     // строит словарные интерпретации для слова Lemma
     void GetTimeInterps(std::string Lemma, std::string WordStr, std::string PostPuncts, CRusSemNode &N) const;
@@ -1286,11 +1240,9 @@ public:
 
     void FindParticleBY(long ClauseNo);
 
-    void GetClauseVariantCombinations(std::vector<VectorLong> &Variants) const;
-
     void ApplyTerminSemStrForOneRel(std::string SemRel, long Word1, long Word2, const CStructDictHolder *RossHolder);
 
-    bool GetClauseVariantCombination();
+    void InitClauseVariantCombination(const std::vector<size_t>& clause_var);
 
 
     bool ReadDopField(long ClauseNo, long NodeNo, const CStructDictHolder *Dict, long UnitNo, long CollocId);

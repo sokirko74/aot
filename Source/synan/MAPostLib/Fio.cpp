@@ -69,23 +69,8 @@ bool IsPartOfNonSingleOborot(const CHomonym* pH)
 	return pH->m_bOborot1 != pH->m_bOborot2;
 }
 
-bool get_next_variant(const std::vector<HomonymVector>& base, std::vector<size_t>& cur_variant) {
+template bool get_next_variant(const std::vector<std::vector<CHomonym*>>& base, std::vector<size_t>& cur_variant);
 
-	if (cur_variant.empty()) {
-		cur_variant.resize(base.size(), 0);
-		return true;
-	}
-	assert(base.size() == cur_variant.size());
-
-	for (size_t i = 0; i < cur_variant.size(); ++i) {
-		if (cur_variant[i] + 1 < base[i].size()) {
-			++cur_variant[i];
-			return true;
-		}
-		cur_variant[i] = 0;
-	}
-	return false;
-}
 
 bool CMAPost::SetFioFormat(const CFIOFormat* Format, CLineIter it)
 {
@@ -127,10 +112,10 @@ bool CMAPost::SetFioFormat(const CFIOFormat* Format, CLineIter it)
 		best_var.resize(Hypots.size(), 0);
 	}
 	else {
-	std::vector<size_t> cur_variant;
+		std::vector<size_t> cur_variant;
 		size_t processed_vars_count = 0;
 		int max_variant_weight = -1;
-		while (get_next_variant(Hypots, cur_variant))
+		while (get_next_variant<CHomonym*>(Hypots, cur_variant))
 		{
 			uint64_t Grammems = rAllCases | rAllNumbers;
 			for (size_t i = 0; i < cur_variant.size(); ++i)

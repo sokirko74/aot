@@ -51,20 +51,12 @@ void CLemmatizedText::CreateFromTokemized(const CGraphmatFile* Gr)
 			{
 				CHomonym* h = word.AddNewHomonym();
 				h->SetHomonym(&p);
-				word.InitLevelSpecific(token, oborot_no, h);
+				word.InitLevelSpecific(oborot_no, h);
 			}
 		}
-
-		if (word.GetHomonymsCount() == 0 && !word.m_bSpace) {
-			CHomonym* h = word.AddNewHomonym();
-			if (!token.HasDes(OPun)) {
-				h->SetPredictedWord("??");
-			}
-			h->SetLemma(word.m_strUpperWord);
-			word.InitLevelSpecific(token, oborot_no, h);
-		}
-
+		word.CreateDefaultHomonym(oborot_no);
 		m_LemWords.push_back(word);
+
 		if (token.HasDes(OEXPR2)) {
 			oborot_no = -1;
 		}
@@ -83,6 +75,7 @@ bool CLemmatizedText::SaveToFile(std::string filename) const
 		std::ofstream outp(filename.c_str(), std::ios::binary);
 		if (!outp.is_open()) return false;
 		for (auto& w : m_LemWords) {
+			assert(w.m_bSpace || w.GetHomonymsCount() > 0);
 			for (size_t i = 0; i < w.GetHomonymsCount(); ++i) {
 				outp << w.GetDebugString(w.GetHomonym(i), i == 0) << "\n";
 			}

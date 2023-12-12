@@ -2,7 +2,6 @@
 // ==========  Dialing Syntax Analysis (www.aot.ru)
 // ==========  Copyright by Dmitry Pankratov, Igor Nozhov, Alexey Sokirko
 
-#include "StdSynan.h"
 #include "morph_dict/lemmatizer_base_lib/rus_numerals.h"
 #include "RusFormatCaller.h"
 
@@ -540,7 +539,7 @@ bool CRusFormatCaller::gleiche_for_plural_numbers(int i_noun, int i_number, uint
         auto word = sent[i_last_number].get_upper_word();
         if (word.empty()) return false;
 
-        if (word == "2" || word == "3" || word == "4") {
+        if (word.back() == '2' || word.back() == '3' || word.back() == '4') {
             // "2 мальчика"
             uint64_t cases = 0;
             if (noun_grammems & _QM(rGenitiv)) {
@@ -675,7 +674,7 @@ bool CRusFormatCaller::gleiche_for_plural_numbers(int i_noun, int i_number, uint
 // пять мальчиков
 bool CRusFormatCaller::format_for_number_noun_private(CGroup &G) {
     bool small_number = is_small_number_group(G.m_iFirstWord);
-    uint64_t grammems = G.GetGrammems();
+    grammems_mask_t grammems = G.GetGrammems();
     const CGroup &G1 = get_maximal_group(G.m_iFirstWord);
 
     int i = get_main_word(G.m_iFirstWord);

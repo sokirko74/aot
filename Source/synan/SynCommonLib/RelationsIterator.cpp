@@ -108,8 +108,8 @@ bool CRelationsIterator::BuildRelations()
 			int iSourceGr = FindFirmGroupClauseRelations(itSource->first, itSource->second, ClauseRel.m_iFirstWord);
 			int iTargetGr = FindFirmGroupClauseRelations(itTarget->first, itTarget->second, ClauseRel.m_iLastWord);
 	
-			CSynOutputRelation R;;
-			R.Init(ClauseRel, iSourceGr, iTargetGr, m_pSent->m_pSyntaxOptions);
+			CSynOutputRelation R;
+			R.Init(ClauseRel, iSourceGr, iTargetGr, m_pSent->GetOpt());
 			m_vectorIRelations.push_back(R);
 		}
 	}
@@ -171,7 +171,7 @@ bool CRelationsIterator::BuildRelationsOfGroups(const CClause& clause, CSVI pSyn
             )
         {
 		    CSynOutputRelation R;;
-		    R.Init(rel, iSourceGroup, iTargetGroup, m_pSent->m_pSyntaxOptions);
+		    R.Init(rel, iSourceGroup, iTargetGroup, m_pSent->GetOpt());
 		    m_vectorIRelations.push_back(R);
         }
 	}
@@ -276,7 +276,7 @@ void CRelationsIterator::BuildSubjRel(const CMorphVariant& SynVar, int iClauseNo
 		Relation.m_iLastWord = SynVar.GetSentenceCoordinates(SynVar.GetFirstSubject()).m_iFirstWord;
 
 		CSynOutputRelation R;
-		R.Init(Relation, -1, -1, m_pSent->m_pSyntaxOptions);
+		R.Init(Relation, -1, -1, m_pSent->GetOpt());
 		m_vectorIRelations.push_back(R);
 	}
 }
@@ -314,4 +314,22 @@ int CRelationsIterator::FindFirmGroupClauseRelations(int iClauseNum, CSVI pSynVa
 		return  FindFirmGroup(*MemberGroup);
 		
 	return -1;
+}
+
+std::string CRelationsIterator::GetSourceNodeStr(const CSynOutputRelation& r) const {
+	if (r.m_iSourceGroup != -1)
+		return m_pSent->GetWordsDebug(GetFirmGroups()[r.m_iSourceGroup]);
+	else
+		return m_pSent->m_Words[r.m_Relation.m_iFirstWord].m_strWord;
+}
+
+std::string CRelationsIterator::GetTargetNodeStr(const CSynOutputRelation& r) const {
+	if (r.m_iTargetGroup != -1)
+		return m_pSent->GetWordsDebug(GetFirmGroups()[r.m_iTargetGroup]);
+	else
+		return m_pSent->m_Words[r.m_Relation.m_iLastWord].m_strWord;
+}
+
+std::string CRelationsIterator::GetRelationName(const CSynOutputRelation& r) const {
+	return m_pSent->GetOpt()->GetGroupNameByIndex(r.m_Relation.type);
 }

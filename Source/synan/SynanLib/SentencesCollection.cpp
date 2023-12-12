@@ -132,8 +132,7 @@ bool CSentencesCollection::ReadAndProcessSentences(const CLemmatizedText* text) 
         if (!S) {
             throw CExpc("Cannot allocate space for the new sentence!");
         };
-
-        S->m_pSyntaxOptions = m_pSyntaxOptions;
+        assert(S->GetOpt() != nullptr);
         bool bResult = S->GetNextSentence(text, LineNo);
 
         if (m_bLogProcessedSentence) {
@@ -154,29 +153,21 @@ bool CSentencesCollection::ReadAndProcessSentences(const CLemmatizedText* text) 
 
 
         try {
-            bool bRes = S->BuildClauses();
-
-            if (!bRes) {
+            if (!S->CreateSyntaxStructure()) {
                 delete S;
                 return false;
             };
-
-            S->CalculatePrimitiveClausesCount();
-
-
             if (m_bEnableProgressBar) {
                 if (S->m_bPanicMode)
                     printf("    found a \"panic\" sentence\n");
             };
-
             m_vectorSents.push_back(S);
-
         }
         catch (...) {
             if (m_bEnableProgressBar) {
                 printf("\n");
-                if (!S->m_Words.empty())
-                    printf("exception at offset %i\n", S->m_Words[0].m_GraphematicalUnitOffset);
+                if (!S->GetWords().empty())
+                    printf("exception at offset %i\n", S->GetWords()[0].m_GraphematicalUnitOffset);
             };
 
             delete S;

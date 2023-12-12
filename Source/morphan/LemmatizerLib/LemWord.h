@@ -77,6 +77,9 @@ public:
 	
 	void	SetWordStr (std::string NewValue);
 	const std::string& GetWord() const;
+	void  InitLevelSpecific(short oborot_no, CHomonym*);
+	void CreateDefaultHomonym(short oborot_no = -1);
+
 
 	bool	FindLemma(std::string strLemma) const;	
 	int		GetHomonymByPOS(BYTE POS) const;
@@ -97,7 +100,6 @@ public:
 	virtual CHomonym* GetHomonym(int i);
 	virtual void EraseHomonym(int iHom);
     virtual CHomonym* AddNewHomonym();
-	virtual void InitLevelSpecific(const CGraLine& token, short oborot_no, CHomonym* );
 
 	void DeleteMarkedHomonymsBeforeClauses();
 	void SetHomonymsDel(bool Value);

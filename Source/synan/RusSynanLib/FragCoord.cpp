@@ -6,7 +6,7 @@
 #include "StdSynan.h"
 #include "RusWord.h"
 #include "RusSentence.h"
-#include "RusFormatCaller.h"
+#include "groups/RusFormatCaller.h"
 
 //  проверяет, что вершина клаузы iClauseNum1 и вершина iClauseNum2 согласовани  как личные глагольные формы 
 bool CRusSentence::CheckCoordinarionBetweenClauseRoots(GrammemCompare CompareFunc, int iClauseNum1, int iClauseNum2 ) const

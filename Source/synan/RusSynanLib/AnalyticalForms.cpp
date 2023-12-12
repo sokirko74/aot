@@ -7,7 +7,7 @@
 #include "RusSentence.h"
 #include "assert.h"
 #undef NDEBUG
-#include "RusFormatCaller.h"
+#include "groups/RusFormatCaller.h"
 
 
 bool HasDeclinableSynNounInInstrumentalis(const CSynWord& _W)

@@ -7,6 +7,8 @@
 #include "RusSyntaxOpt.h"
 #include "RusPlmLine.h"
 #include "morph_dict/agramtab/RusGramTab.h"
+#include "groups/rules.h"
+
 
 
 

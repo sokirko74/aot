@@ -3,7 +3,6 @@
 // ==========  Copyright by Dmitry Pankratov, Igor Nozhov, Alexey Sokirko
 
 #include "StdSynan.h"
-#include "RusFormatCaller.h"
 #include "RusSentence.h"
 
 
@@ -131,6 +130,7 @@ bool CRusSentence::find_subj_and_predic_noun_with_dash(CMorphVariant& synVariant
 	return true;
 }
 
+extern bool CanNumeralBeNoun(const std::string& s);
 /*
  функция can_be_subject проверяет, может ли слово WordNo быть подлежащим. 
  Параметр exactitude определяет жесткость условий, которым должно 

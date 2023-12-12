@@ -597,8 +597,10 @@ static void GetIndexedVariants(const std::vector<CLexVariantWeightVector>& Paren
 
 // returns the weight of the best tree variant
 
-long CRusSemStructure::FindSituationsForClauseVariantCombination()
+long CRusSemStructure::FindSituationsForClauseVariantCombination(const std::vector<size_t>& clause_var)
 {
+	InitClauseVariantCombination(clause_var);
+
 	const long constMinStructureWeight = 1000000;
 	m_bHasConjBut = false;
 	StartTimer("Syntax interpretation", 0);
@@ -679,8 +681,7 @@ long CRusSemStructure::FindSituationsForClauseVariantCombination()
 
 			// здесь начинается инициализация морфологического варината
 			ClauseVar.m_bNew = false;
-			m_InterfaceClauseNo++;
-
+			
 			ZaplataCompar2(ClauseNo);
 
 
@@ -750,8 +751,7 @@ long CRusSemStructure::FindSituationsForClauseVariantCombination()
 	std::vector<VectorLong> Variants;
 	LOGV << "================================================";
 	LOGV << "===  Connecting clauses  " << m_ClauseVariantsCombinationNo;
-	m_InterfaceClauseNo++;
-
+	
 	// построение связного варианта
 	VectorLong V;
 
@@ -997,35 +997,14 @@ bool  CRusSemStructure::ReadAuxiliaryArticles()
 
 };
 
-bool CRusSemStructure::GetClauseVariantCombination()
+void CRusSemStructure::InitClauseVariantCombination(const std::vector<size_t>& clause_var)
 {
-	std::vector<VectorLong> Parents;
-	Parents.resize(m_piSent->GetPrimitiveClausesCount());
-	m_AllClausesVariants = 0;
-	for (long i = 0; i < Parents.size(); i++)
-	{
-		for (long k = 0; k < m_piSent->GetPrimitiveClause(i)->m_SynVariants.size(); k++)
-		{
-			Parents[i].push_back(k);
-			m_AllClausesVariants++;
-		}
-	};
-	VectorLong V; // текущий вариант 
-	V.resize(Parents.size());
-	std::vector<VectorLong> Variants;
-	GetCommonVariants(Parents, V, Variants, 0);
-
-
-
-	//GetClauseVariantCombinations(Variants);
-
-	if (m_ClauseVariantsCombinationNo >= Variants.size()) return false;
 	m_Clauses.clear();
 	m_Clauses.resize(m_piSent->GetPrimitiveClausesCount());
 	for (long i = 0; i < m_Clauses.size(); i++)
 	{
 		const CClause* pClause = m_piSent->GetPrimitiveClause(i);
-		m_Clauses[i].m_ClauseVariantNo = Variants[m_ClauseVariantsCombinationNo][i];
+		m_Clauses[i].m_ClauseVariantNo = clause_var[i];
 		CSVI pSynVar = pClause->GetSynVariantByNo(m_Clauses[i].m_ClauseVariantNo);
 
 		int RootNo = pSynVar->m_ClauseTypeNo;
@@ -1048,167 +1027,145 @@ bool CRusSemStructure::GetClauseVariantCombination()
 
 	};
 
-	LOGV << "ClauseVariantsCombinationNo " << m_ClauseVariantsCombinationNo + 1 << " (out of " << Variants.size() << ")";
-	m_ClauseCombinationVariantsCount = Variants.size();
+	m_ClauseCombinationVariantsCount = m_piSent->m_ClauseClauseVarsCount;
+	LOGV << "ClauseVariantsCombinationNo " << m_ClauseVariantsCombinationNo << " (out of " << m_ClauseCombinationVariantsCount << ")";
 	m_Nodes.clear();
-	return true;
 };
 
 
 
-long CRusSemStructure::FindSituations(size_t SentNo)
+long CRusSemStructure::FindSituations(size_t SentNo, long user_clause_var_no)
 {
-	try {
-		m_AllClausesVariants = 0;
-		ClearTimers();
-		StartTimer("All time", 0);
+	ClearTimers();
+	StartTimer("All time", 0);
 
-		if (!ReadAuxiliaryArticles())
+	if (!ReadAuxiliaryArticles())
+	{
+		ErrorMessage("Cannot read ross auxiliary articles");
+		return  -1;
+	};
+
+	Queries.clear();
+	m_MemoryCaseNo = 0;
+	m_MemRelations.clear();
+	m_MemNodes.clear();
+
+	StartTimer("Syntax interpretation", 0);
+
+	m_AlreadyBuiltClauseVariants.clear();
+
+	m_IndexedSemFets.clear();
+	m_IndexedSemFets.push_back("NEG");
+	m_IndexedSemFets.push_back("CAUS");
+	m_IndexedSemFets.push_back("FIN");
+	m_IndexedSemFets.push_back("SOC");
+
+	m_bLastTry = false;
+	m_piSent = m_pData->GetSynan()->m_vectorSents[SentNo];
+	m_ClauseCombinationVariantsCount = 0;
+	m_bShouldBeStopped = false;
+	m_pData->InitializeIndices();
+	EndTimer("Syntax interpretation");
+
+	bool  bTooSlow = false;
+	double WordsPerSecond = 0;
+	size_t ProcessedVariantsCount = 0;
+	std::vector<size_t> clause_var;
+	std::vector<size_t> best_clause_var;
+	std::vector<size_t> last_clause_var;
+	size_t best_clause_var_no;
+	long min_weight = 100000;
+	for (size_t i = 0; m_piSent->GetNextClauseVariant(clause_var); ++i)
+	{
+		m_ClauseVariantsCombinationNo = i;
+
+		if (user_clause_var_no != -1) {
+			if (user_clause_var_no == m_ClauseVariantsCombinationNo) {
+				best_clause_var = clause_var;
+				best_clause_var_no = m_ClauseVariantsCombinationNo;
+				break;
+			}
+			continue;
+		}
+
+		ProcessedVariantsCount++;
+		m_ClausePropertiesProtocol = "";
+		if (m_bShouldBeStopped) return -1;
+		StartTimer("FindSituationsForClauseVariantCombination", 0);
+		long weight = FindSituationsForClauseVariantCombination(clause_var);
+		last_clause_var = clause_var;
+		if (m_bShouldBeStopped) return -1;
+		LOGV <<"VariantWeght " << m_ClauseVariantsCombinationNo << " = " << weight;
+		if (weight < min_weight)
 		{
-			ErrorMessage("Cannot read ross auxiliary articles");
-			return  -1;
+			best_clause_var = clause_var;
+			best_clause_var_no = m_ClauseVariantsCombinationNo;
+			min_weight = weight;
 		};
 
-		Queries.clear();
-		m_MemoryCaseNo = 0;
-		m_MemRelations.clear();
-		m_MemNodes.clear();
-
-		StartTimer("Syntax interpretation", 0);
-
-		m_AlreadyBuiltClauseVariants.clear();
-
-		m_IndexedSemFets.clear();
-		m_IndexedSemFets.push_back("NEG");
-		m_IndexedSemFets.push_back("CAUS");
-		m_IndexedSemFets.push_back("FIN");
-		m_IndexedSemFets.push_back("SOC");
-
-		m_bLastTry = false;
-		m_piSent = m_pData->GetSynan()->m_vectorSents[SentNo];
-		m_ClauseCombinationVariantsCount = 0;
-		m_bShouldBeStopped = false;
-
-
-
-
-
-		m_pData->InitializeIndices();
-		m_InterfaceClauseNo = 0;
-
-
-		EndTimer("Syntax interpretation");
-		long BestClauseVariantsCombinationNo = 0;
-		long BestClauseVariantsCombinationWeight = 100000;
-
-		bool  bTooSlow = false;
-		double WordsPerSecond = 0;
-		size_t ProcessedVariantsCount = 0;
-		if (m_UserClauseVariantsCombinationNo != -1)
-		{
-			BestClauseVariantsCombinationNo = m_UserClauseVariantsCombinationNo;
-			m_ClauseVariantsCombinationNo = -1;
-		}
-		else
-			for (m_ClauseVariantsCombinationNo = 0; GetClauseVariantCombination(); m_ClauseVariantsCombinationNo++)
-			{
-				ProcessedVariantsCount++;
-				m_ClausePropertiesProtocol = "";
-				if (m_bShouldBeStopped) return -1;
-				StartTimer("FindSituationsForClauseVariantCombination", 0);
-				long Weight = FindSituationsForClauseVariantCombination();
-
-				if (m_bShouldBeStopped) return -1;
-
-
-				LOGV <<"VariantWeght " << m_ClauseVariantsCombinationNo << " = " << Weight;
-
-				if (Weight < BestClauseVariantsCombinationWeight)
-				{
-					BestClauseVariantsCombinationNo = m_ClauseVariantsCombinationNo;
-					BestClauseVariantsCombinationWeight = Weight;
-				};
-
-				double AllTicks = EndTimer("FindSituationsForClauseVariantCombination");
-				WordsPerSecond = (AllTicks == 0) ? 0 : (double)(m_Nodes.size()) / (AllTicks / CLOCKS_PER_SEC);
+		double AllTicks = EndTimer("FindSituationsForClauseVariantCombination");
+		WordsPerSecond = (AllTicks == 0) ? 0 : (double)(m_Nodes.size()) / (AllTicks / CLOCKS_PER_SEC);
 
 #ifndef _DEBUG
 
-				/*
-				В релизной  версии, если  скорость меньше, чем полсекунды на слово,
-				тогда надо выходить.
-				*/
-				if ((WordsPerSecond < 0.5) && (WordsPerSecond > 0))
-				{
-					bTooSlow = true;
-					break;
-				};
+		/*
+		В релизной  версии, если  скорость меньше, чем полсекунды на слово,
+		тогда надо выходить.
+		*/
+		if ((WordsPerSecond < 0.5) && (WordsPerSecond > 0))
+		{
+			bTooSlow = true;
+			break;
+		};
 
-				if (ProcessedVariantsCount > 100)
-				{
-					bTooSlow = true;
-					break;
-				};
+		if (ProcessedVariantsCount > 100)
+		{
+			bTooSlow = true;
+			break;
+		};
 
 #endif
 
-			};
-
-
-		if (m_ClauseVariantsCombinationNo - 1 == BestClauseVariantsCombinationNo)
-			m_ClauseVariantsCombinationNo = BestClauseVariantsCombinationNo;
-		else
-		{
-			m_ClauseVariantsCombinationNo = BestClauseVariantsCombinationNo;
-			GetClauseVariantCombination();
-
-			m_bLastTry = true;
-			BestClauseVariantsCombinationWeight = FindSituationsForClauseVariantCombination();
-
-			AssertValidGraph();
-
-		};
-
-		ConvertParticipleTreeToClause();
-
-		std::string S = Format("Sentence length: %i\n Dictionary request count: %i\n Best clause : %i (out of  %i)\n",
-			m_piSent->m_Words.size(), Queries.size(), BestClauseVariantsCombinationNo + 1, m_ClauseCombinationVariantsCount);
-
-		EndTimer("All time");
-
-
-
-		m_TimeStatictics = std::string(GetStrRepresentation().c_str()) + S;
-
-		m_TimeStatictics += GetClauseComplexitiesStr() + std::string("\n");
-
-		S = Format("==========\n Sentence weight: %i\n", BestClauseVariantsCombinationWeight);
-		m_ClausePropertiesProtocol += S;
-		S = Format("UserProhibitedLexVars.size : %i\n", m_UserProhibitedLexVars.size());
-		m_ClausePropertiesProtocol += S;
-		S = Format("WordsPerSecond =  %10.0f\n", WordsPerSecond);
-		if (bTooSlow)
-		{
-			S += "Выход по скорости !!!!\n";
-		};
-
-		m_ClausePropertiesProtocol += S;
-
-
-
-
-
-		m_ClauseVariantsStatistics = "";
-		for (long j = 0; j < m_AlreadyBuiltClauseVariants.size(); j++)
-			m_ClauseVariantsStatistics += m_AlreadyBuiltClauseVariants[j].GetStr() + std::string("\n");
-
-		return  BestClauseVariantsCombinationWeight;
-	}
-	catch (...)
-	{
-		ErrorMessage("long CRusSemStructure::FindSituations(size_t) Failed");
-		throw;
 	};
+
+
+	m_ClauseVariantsCombinationNo = best_clause_var_no;
+	if (best_clause_var.empty() || last_clause_var != best_clause_var) {
+		m_bLastTry = true;
+		min_weight = FindSituationsForClauseVariantCombination(best_clause_var);
+	};
+
+	AssertValidGraph();
+
+	ConvertParticipleTreeToClause();
+
+	std::string S = Format("Sentence length: %i\n Dictionary request count: %i\n Best clause : %i (out of  %i)\n",
+		m_piSent->m_Words.size(), Queries.size(), best_clause_var_no, m_ClauseCombinationVariantsCount);
+
+	EndTimer("All time");
+
+
+
+	m_TimeStatictics = std::string(GetStrRepresentation().c_str()) + S;
+
+	m_TimeStatictics += GetClauseComplexitiesStr() + std::string("\n");
+
+	S = Format("==========\n Sentence weight: %i\n", min_weight);
+	m_ClausePropertiesProtocol += S;
+	S = Format("UserProhibitedLexVars.size : %i\n", m_UserProhibitedLexVars.size());
+	m_ClausePropertiesProtocol += S;
+	S = Format("WordsPerSecond =  %10.0f\n", WordsPerSecond);
+	if (bTooSlow)
+	{
+		S += "Выход по скорости !!!!\n";
+	};
+
+	m_ClausePropertiesProtocol += S;
+	m_ClauseVariantsStatistics = "";
+	for (long j = 0; j < m_AlreadyBuiltClauseVariants.size(); j++)
+		m_ClauseVariantsStatistics += m_AlreadyBuiltClauseVariants[j].GetStr() + std::string("\n");
+
+	return  min_weight;
 };
 
 
@@ -1222,11 +1179,13 @@ bool CRusSemStructure::GetSyntaxTreeByText(std::string utf8text, int ClauseVarNo
 		if (m_pData->GetSynan()->m_vectorSents.empty())
 			return false;
 		m_piSent = m_pData->GetSynan()->m_vectorSents[0];
-		if (ClauseVarNo != -1)
-			m_ClauseVariantsCombinationNo = ClauseVarNo;
-		else
-			m_ClauseVariantsCombinationNo = 0;
-		GetClauseVariantCombination();
+		if (ClauseVarNo == -1)
+			ClauseVarNo = 0;
+		std::vector<size_t> clause_var;
+		for (int i = 0; i <= ClauseVarNo; ++i) {
+			m_piSent->GetNextClauseVariant(clause_var);
+		}
+		InitClauseVariantCombination(clause_var);
 		m_pData->InitializeIndices();
 		BuildSemNodesBySyntax();
 		m_TimeStatictics = Format("Sentence length: %i\n ClauseCombinationVariantsCount: %i\n",

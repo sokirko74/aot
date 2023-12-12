@@ -6,7 +6,6 @@
 #include "StdSynan.h"
 #include "RusWord.h"
 #include "RusSentence.h"
-#include "RusFormatCaller.h"
 
 
 bool	CRusSentence::CanBeRelativeAntecedent(const CSynHomonym& H) const

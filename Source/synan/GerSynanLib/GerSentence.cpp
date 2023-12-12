@@ -28,6 +28,11 @@ CGerSentence::~CGerSentence()
 
 };
 
+const CGerGramTab* CGerSentence::GetGerGramTab() const
+{
+	return (CGerGramTab*)GetOpt()->GetGramTab();
+};
+
 void CGerSentence::ReadNextFromPlmLinesLanguageSpecific()
 {
 };
@@ -638,11 +643,6 @@ BuildInitialClausesLabel:
 
 		};
 	};
-
-
-	assert ( IsValid() );
-
-
 	return true;	
 }
 

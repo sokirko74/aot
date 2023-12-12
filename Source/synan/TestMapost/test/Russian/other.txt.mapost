@@ -103,6 +103,7 @@ Rule_CHTO_ZA  341 12  LLE Aa  - RULE_CHTO_ZA * но, С мр,им,ед, С мр,
 лет  510 3  RLE aa  + ГОД * но, С мр,рд,мн,
   лет  510 3  RLE aa  + ЛЕТ * но, С мр,им,ед, С мр,вн,ед,
 прошли  -1 6  RLE aa  + ПРОЙТИ * пе,св, Г дст,прш,мн,
+,  -1 1  PUN 
 как  514 3  RLE aa EXPR1 EXPR2 EXPR_NO247  + КАК  СОЮЗ 
   как  514 3  RLE aa EXPR1 EXPR2 EXPR_NO247  + КАК  Н вопр,
   как  514 3  RLE aa EXPR1 EXPR2 EXPR_NO247  + КАК  ЧАСТ 

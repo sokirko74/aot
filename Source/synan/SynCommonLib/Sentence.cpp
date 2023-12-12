@@ -18,6 +18,11 @@ void CSentence::Reset() {
     CClauseCollection::Clear();
 }
 
+const CSyntaxOpt* CSentence::GetOpt() const
+{
+    return m_pSyntaxOptions;
+};
+
 std::string CSentence::GetSentenceBeginStr() const {
     std::string ss;
     int count = m_Words.size();
@@ -39,6 +44,16 @@ void CSentence::TraceClauses() const {
         LOGV << m_Clauses[i].GetTraceStr() << " ";
     };
 };
+
+std::string CSentence::GetWordsDebug(const CPeriod& P) const {
+    std::string s;
+    for (int i = P.m_iFirstWord; i <= P.m_iLastWord; i++) {
+        s += m_Words[i].m_strWord;
+        if (i < P.m_iLastWord)
+            s += " ";
+    };
+    return s;
+}
 
 
 void CSentence::SetIgnoreWhileBuildingSynVariantsToAllClauses(bool Value) {
@@ -583,6 +598,20 @@ bool CSentence::GetHomonymByClauseVariantInterface(long iWord, long iVar, long i
     return GetHomonymByClauseVariant(iWord, pSynVar, H);
 }
 
+static bool GetHomonymByClauseVariantWithModifiedProperties(int iUnit, const CSynWord& word, const CMorphVariant& syn_var,
+    CSynHomonym& H) {
+    long lHomNum;
+    lHomNum = syn_var.GetHomNum(iUnit);
+
+    H = word.GetSynHomonym(lHomNum);
+
+    // setting grammems
+    H.CopyAncodePattern(syn_var.m_SynUnits[iUnit]);
+    H.m_SimplePrepNos = syn_var.GetSimplePrepNos(iUnit);
+    return true;
+};
+
+
 bool CSentence::GetHomonymByClauseVariant(long iWord, CSVI pSynVar, CSynHomonym &H) const {
     if ((iWord < 0) || (iWord >= m_Words.size()))
         return false;
@@ -1073,19 +1102,6 @@ int CSentence::FindWordWithOneHomonym(int iFirstWord, int iLastWord, BYTE pos) c
 }
 
 
-bool GetHomonymByClauseVariantWithModifiedProperties(int iUnit, const CSynWord &word, const CMorphVariant &syn_var,
-                                                     CSynHomonym &H) {
-    long lHomNum;
-    lHomNum = syn_var.GetHomNum(iUnit);
-
-    H = word.GetSynHomonym(lHomNum);
-
-    // setting grammems
-    H.CopyAncodePattern(syn_var.m_SynUnits[iUnit]);
-    H.m_SimplePrepNos = syn_var.GetSimplePrepNos(iUnit);
-    return true;
-};
-
 
 bool FindAntecedentForRelativePronoun(CSentence &C, int iClauseNum, int MainClauseNo) {
     CClause *pClause = &C.GetClause(iClauseNum);
@@ -1370,3 +1386,27 @@ const CClause *CSentence::GetPrimitiveClause(int ClauseNo) const {
     return &GetClause(m_vectorPrClauseNo[ClauseNo]);
 }
 
+bool  CSentence::CreateSyntaxStructure() {
+    if (!BuildClauses())
+        return false;
+    assert(IsValid());
+
+    CalculatePrimitiveClausesCount();
+    
+    m_OutputClauseVars.clear();
+    m_OutputClauseVars.resize(GetPrimitiveClausesCount());
+    m_ClauseClauseVarsCount= 1;
+    for (long i = 0; i < m_OutputClauseVars.size(); i++)
+    {
+        for (long k = 0; k < GetPrimitiveClause(i)->m_SynVariants.size(); k++)
+            m_OutputClauseVars[i].push_back(k);
+        assert(!GetPrimitiveClause(i)->m_SynVariants.empty());
+        m_ClauseClauseVarsCount *= GetPrimitiveClause(i)->m_SynVariants.size();
+    };
+
+    return true;
+}
+
+bool  CSentence::GetNextClauseVariant(std::vector<size_t>& v) const {
+    return get_next_variant(m_OutputClauseVars, v);
+}

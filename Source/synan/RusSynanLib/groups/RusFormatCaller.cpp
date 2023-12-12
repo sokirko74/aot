@@ -2,9 +2,8 @@
 // ==========  Dialing Syntax Analysis (www.aot.ru)
 // ==========  Copyright by Dmitry Pankratov, Igor Nozhov, Alexey Sokirko
 
-#include "StdSynan.h"
 #include "RusFormatCaller.h"
-#include "RusClause.h"
+#include "../RusClause.h"
 
 
 CRusFormatCaller::CRusFormatCaller(const CSyntaxOpt* Opt) : CFormatCaller(Opt)

@@ -173,7 +173,7 @@ public:
 	void	TryToAddComparativeTypeToClause();
 	void	TryToRebuildDashInClause();
 
-	bool	BuildClauses();
+	bool	BuildClauses() override;
 	void	BuildAnalyticalVerbForms();
 	bool	CheckAnalyticalVerbForm(int iVWrd, int iSWrd);
 	bool	IsAnalyticalVerbForm(int iVerbWrd, int iSWrd, int& VerbHomNo, CIntVector& AnalyticHom);

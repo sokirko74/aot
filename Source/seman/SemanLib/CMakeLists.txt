@@ -30,7 +30,7 @@ add_library(SemanLib
         SemanticStrAn.cpp
         SemanticSynRelation.cpp
         SemanticThesaurus.cpp
-        SemanticTime.cpp
+        "time_phrases.cpp"
         SemanticTree.cpp
         SemanticWeight.cpp
         SemanticsHolder.cpp
@@ -61,7 +61,10 @@ add_library(SemanLib
         "rus_sem_word.h"
         "sem_word.cpp" 
         "sem_word.h"
- "dict_type.h" "dict_type.cpp" "rus_sem_relation.cpp" "rus_sem_relation.h" "sem_relation.cpp" "sem_relation.h" "syn_realization.h" "syn_realization.cpp")
+        "dict_type.h" 
+        "dict_type.cpp" 
+        "rus_sem_relation.cpp" "rus_sem_relation.h" "sem_relation.cpp" "sem_relation.h" 
+        "syn_realization.h" "syn_realization.cpp" "time_phrases.h")
 
 target_link_libraries(SemanLib
     SynanLib

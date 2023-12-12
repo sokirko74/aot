@@ -2,7 +2,6 @@
 // ==========  Dialing Syntax Analysis (www.aot.ru)
 // ==========  Copyright by Dmitry Pankratov, Igor Nozhov, Alexey Sokirko
 
-#include "StdSynan.h"
 #include "RusFormatCaller.h"
 
 
@@ -39,6 +38,20 @@ int CountBits(uint64_t value)
 	}
 	return count;
 }
+
+bool CanNumeralBeNoun(const std::string& s)
+{
+	return s == "ДВОЕ"
+		|| s == "ТРОЕ"
+		|| s == "ЧЕТВЕРО"
+		|| s == "ПЯТЕРО"
+		|| s == "ШЕСТЕРО"
+		|| s == "СЕМЕРО"
+		|| s == "ВОСЬМЕРО"
+		|| s == "ДЕВЯТЕРО"
+		|| s == "ДЕСЯТЕРО"
+		|| s == "ОБА";
+};
 
 /*
  Например:

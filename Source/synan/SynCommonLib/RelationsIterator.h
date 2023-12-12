@@ -2,9 +2,7 @@
 // ==========  Dialing Syntax Analysis (www.aot.ru)
 // ==========  Copyright by Dmitry Pankratov, Igor Nozhov, Alexey Sokirko
 
-
-#ifndef __RELATIONSITERATOR_H_
-#define __RELATIONSITERATOR_H_
+#pragma once
 
 #include "Sentence.h"
 
@@ -48,6 +46,8 @@ public:
 	bool		BuildRelations();
 	void		AddClauseNoAndVariantNo(long iClauseNo, long iVarNo);
 
+	std::string GetSourceNodeStr(const CSynOutputRelation& r) const;
+	std::string GetTargetNodeStr(const CSynOutputRelation& r) const;
+	std::string GetRelationName(const CSynOutputRelation& r) const;
 };
 
-#endif //__RELATIONSITERATOR_H_

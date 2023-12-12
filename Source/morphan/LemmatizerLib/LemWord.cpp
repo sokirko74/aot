@@ -82,7 +82,20 @@ const std::string& CLemWord::GetWord() const
 	return m_strWord;
 };
 
-void CLemWord::InitLevelSpecific(const CGraLine& token, short oborot_no, CHomonym* pHom)
+void CLemWord::CreateDefaultHomonym(short oborot_no)
+{
+	if (GetHomonymsCount() > 0 || m_bSpace) {
+		return;
+	}
+	CHomonym* h = AddNewHomonym();
+	if (!HasDes(OPun)) {
+		h->SetPredictedWord("??");
+	}
+	h->SetLemma(m_strUpperWord);
+	InitLevelSpecific(oborot_no, h);
+}
+
+void CLemWord::InitLevelSpecific(short oborot_no, CHomonym* pHom)
 {
 	m_bFirstUpperAlpha = (m_Register == UpUp) || (m_Register == UpLow);
 	m_bQuoteMark = HasDes(OPun) && m_strWord.find("\"") != std::string::npos;

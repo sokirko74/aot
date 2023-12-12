@@ -113,6 +113,17 @@ bool	CEngSentence::SetClauseBorderIfThereAreTwoPotentialPredicates(int FWrd, int
 	return false;
 };
 
+const CEngGramTab* CEngSentence::GetEngGramTab() const
+{
+	return (CEngGramTab*)GetOpt()->GetGramTab();
+};
+
+const CEngSyntaxOpt* CEngSentence::GetOpt() const
+{
+	return (const CEngSyntaxOpt*)m_pSyntaxOptions;
+};
+
+
 
 bool CEngSentence::BuildClauses()
 {
@@ -129,7 +140,7 @@ bool CEngSentence::BuildClauses()
 	};
 
 	RunSyntaxInClauses(AllRules);
-	assert ( IsValid() );
+	
 
 	return true;	
 }

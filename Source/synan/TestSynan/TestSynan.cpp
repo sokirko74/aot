@@ -23,15 +23,6 @@ void GetAnanlytForms(const CSentence &Sentence, CJsonObject& out) {
     out.add_member("analytical", arr.get_value());
 }
 
-std::string GetWords(const CSentence &Sentence, const CPeriod &P) {
-    std::string S;
-    for (int WordNo = P.m_iFirstWord; WordNo <= P.m_iLastWord; WordNo++) {
-        S += Sentence.m_Words[WordNo].m_strWord;
-        if (WordNo < P.m_iLastWord)
-            S += " ";
-    };
-    return S;
-}
 
 void GetGroups(const CSentence &Sentence, const CAgramtab &A, CJsonObject& out) {
     int nClausesCount = Sentence.GetClausesCount();
@@ -45,7 +36,7 @@ void GetGroups(const CSentence &Sentence, const CAgramtab &A, CJsonObject& out) 
         CJsonObject clause(out.get_doc());
         clause.add_int("start", Clause.m_iFirstWord);
         clause.add_int("last",  Clause.m_iLastWord);
-        clause.add_string_copy("words", GetWords(Sentence, Clause));
+        clause.add_string_copy("words", Sentence.GetWordsDebug(Clause));
         if (!Clause.m_RelativeWord.IsEmpty())
         {
             clause.add_string_copy("relative", Sentence.m_Words[Clause.m_RelativeWord.m_WordNo].m_strWord);
@@ -73,7 +64,7 @@ void GetGroups(const CSentence &Sentence, const CAgramtab &A, CJsonObject& out) 
             for (auto& g: synVar.m_vectorGroups.GetGroups()) {
                 CJsonObject jq(out.get_doc());
                 jq.add_string_copy("type", Sentence.GetOpt()->GetGroupNameByIndex(g.m_GroupType));
-                jq.add_string_copy("words", GetWords(Sentence, g));
+                jq.add_string_copy("words", Sentence.GetWordsDebug(g));
                 groups.push_back(jq.get_value());
             };           
 
@@ -105,13 +96,6 @@ void GetGroups(const CSentence &Sentence, const CAgramtab &A, CJsonObject& out) 
     out.add_member("groups", arr.get_value());
 }
 
-std::string GetNodeStr(const CSentence &Sentence, const CRelationsIterator &RelIt, int GroupNo, int WordNo) {
-    if (GroupNo != -1)
-        return GetWords(Sentence, RelIt.GetFirmGroups()[GroupNo]);
-    else
-        return Sentence.m_Words[WordNo].m_strWord;
-}
-
 std::string GetNodeGrmStr(const CSentence &Sentence, const CRelationsIterator &RelIt, int GroupNo, int WordNo, std::string &Lemma) {
     Lemma = "";
     if (GroupNo != -1)
@@ -137,9 +121,9 @@ void GetRelations(const CSentence &Sentence, CJsonObject& out) {
 
     for (auto& piRel: RelIt.GetRelations()) {
         CJsonObject o(out.get_doc());
-        o.add_string_copy("src", GetNodeStr(Sentence, RelIt, piRel.m_iSourceGroup, piRel.m_Relation.m_iFirstWord));
-        o.add_string_copy("trg", GetNodeStr(Sentence, RelIt, piRel.m_iTargetGroup, piRel.m_Relation.m_iLastWord));
-        o.add_string_copy("name", Sentence.GetOpt()->GetGroupNameByIndex(piRel.m_Relation.type));
+        o.add_string_copy("src", RelIt.GetSourceNodeStr(piRel));
+        o.add_string_copy("trg", RelIt.GetTargetNodeStr(piRel));
+        o.add_string_copy("name", RelIt.GetRelationName(piRel));
         o.add_string_copy("gramrel", Sentence.GetOpt()->GetGramTab()->GrammemsToStr(piRel.m_Relation.m_iGrammems));
         std::string SrcLemma, TrgLemma;
         std::string SrcGrm = GetNodeGrmStr(Sentence, RelIt, piRel.m_iSourceGroup, piRel.m_Relation.m_iFirstWord, SrcLemma);
@@ -162,7 +146,7 @@ void GetThesaurusTerms(const CSentence& Sentence, CJsonObject& out) {
             for (size_t k = i; k < Sentence.m_Words.size(); ++k) {
                 if (Sentence.m_Words[k].m_bLastWordInTermin) {
                     rapidjson::Value o;
-                    o.SetString(GetWords(Sentence, CPeriod(i, k)), out.get_allocator());
+                    o.SetString(Sentence.GetWordsDebug(CPeriod(i, k)), out.get_allocator());
                     terms.push_back(o);
                     break;
                 }

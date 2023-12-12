@@ -37,11 +37,8 @@ public:
 	
 
 	//   Base Clause Rules
-	bool	BuildClauses();
-	const CGerGramTab* GetGerGramTab() const 
-	{
-		return (CGerGramTab*)GetOpt()->GetGramTab();
-	};
+	bool	BuildClauses() override;
+	const CGerGramTab* GetGerGramTab() const;
 	void	AfterBuildGroupsTrigger(CClause& C);
 	void	BuildSubjAndPredRelation(CMorphVariant& synVariant, long RootWordNo, EClauseType ClauseType); 
 	int		get_weight_of_subj_pred_relation(const CMorphVariant& synVariant, const int Subj, const int Pred, bool bEnclosed);

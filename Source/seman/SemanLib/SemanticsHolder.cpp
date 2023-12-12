@@ -261,7 +261,7 @@ bool CSemanticsHolder::InitTimeUnits()
 
 			CTimeUnit U;
 			U.m_UnitNo = UnitNo;
-
+			U.m_DebugEntryStr = GetRoss(TimeRoss)->GetEntryStr(UnitNo);
 			if (!GetRoss(TimeRoss)->IsEmptyArticle(UnitNo))
 				// по словарной статье 
 				for (size_t i = GetRoss(TimeRoss)->GetUnitStartPos(UnitNo); i <= GetRoss(TimeRoss)->GetUnitLastPos(UnitNo); i++)

@@ -1099,11 +1099,12 @@ void CMAPost::Rule_CHTO_ZA()
 
 void CMAPost::InsertComma(CLineIter it)
 {
-	CLemWord P(morphRussian);
-	P.SetWordStr(",");
-	P.AddDes(OPun);
-	P.m_bComma = true;
-	m_Words.insert(it, P);
+	CLemWord w(morphRussian);
+	w.SetWordStr(",");
+	w.AddDes(OPun);
+	w.m_bComma = true;
+	w.CreateDefaultHomonym(-1);
+	m_Words.insert(it, w);
 };
 
 /*

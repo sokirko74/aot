@@ -5,7 +5,7 @@
 
 #include "StdSynan.h"
 #include "RusSentence.h"
-#include "RusFormatCaller.h"
+#include "groups/RusFormatCaller.h"
 #include "RusWord.h"
 
 CSentence *NewSentenceRussian(const CSyntaxOpt *pSyntaxOptions) {
@@ -713,12 +713,7 @@ bool CRusSentence::BuildClauses() {
         };
     };
 
-
-    assert (IsValid());
-
-
     return true;
-
 }
 
 //клонирование  оборотов сделано для того, чтобы  возникла омонимия между  оборотом и не оборотом.

@@ -708,11 +708,10 @@ bool CRusSemStructure::BuildHypotRelationsGraph(size_t ClauseNo) {
 
 
         }
-        catch (...) {
-            std::string Mess = Format("InitValsRussian  Failed. ClauseNo = %i ClauseVariantsCombinationNo=%i", ClauseNo,
+        catch (std::exception& e) {
+            auto m = Format("InitValsRussian  Failed. ClauseNo = %i ClauseVariantsCombinationNo=%i", ClauseNo,
                                       m_ClauseVariantsCombinationNo);
-            ErrorMessage(Mess);
-            throw;
+            throw CExpc("%s : %s", m.c_str(), e.what());
         };
 
         try {

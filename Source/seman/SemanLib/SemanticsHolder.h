@@ -410,8 +410,9 @@ struct CTimeLexicalFilling {
 
 // класс одной словарной статьи словаря групп времени
 struct CTimeUnit {
-	StringVector				m_Places;
-	long						m_UnitNo;
+	StringVector m_Places;
+	long m_UnitNo;
+	std::string m_DebugEntryStr;
 	std::vector<CSynRelation>		m_Rels;
 	std::vector<CTimeLexicalFilling>	m_LexicalFillings;
 	bool						m_bCanFillNotTimeValency;

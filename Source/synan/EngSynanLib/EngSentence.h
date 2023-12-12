@@ -13,24 +13,19 @@ public:
 	~CEngSentence();
     CFormatCaller* GetNewFormatCaller() const override;
 
-	const CEngSyntaxOpt* GetOpt() const 
-	{
-		return (const CEngSyntaxOpt*)m_pSyntaxOptions;
-	};
+
+	const CEngSyntaxOpt* GetOpt() const;
 	void ReadNextFromPlmLinesLanguageSpecific();
 	void DeleteHomOneToThousand();
 	bool RunSyntaxInClauses(ESynRulesSet);
-	
+	bool BuildClauses() override;
+
 	
 	void AddWeightForSynVariantsInClauses();
 	
 
-	//   Base Clause Rules
-	bool	BuildClauses();
-	const CEngGramTab* GetEngGramTab() const 
-	{
-		return (CEngGramTab*)GetOpt()->GetGramTab();
-	};
+
+	const CEngGramTab* GetEngGramTab() const;
 	void	AfterBuildGroupsTrigger(CClause& C);
 	void	BuildSubjAndPredRelation(CMorphVariant& synVariant, long RootWordNo, EClauseType ClauseType); 
 	int		GetCountOfStrongRoots(const CClause& C, const CMorphVariant& synVar) const;

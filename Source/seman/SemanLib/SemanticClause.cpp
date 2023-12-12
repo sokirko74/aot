@@ -2388,7 +2388,7 @@ CRusSemStructure::CRusSemStructure()
 	// я ушел (ты пришел)
 	m_ClauseRules.push_back(CSemanClauseRule(&CRusSemStructure::TryBracketClause, LeftToRight, "примыкание со скобками"));
 	m_bShouldBeStopped = false;
-	m_AllClausesVariants = 0;
+	
 }
 
 

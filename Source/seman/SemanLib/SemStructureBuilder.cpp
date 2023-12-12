@@ -45,7 +45,6 @@ bool  CSemStructureBuilder::FindSituations(std::string utf8text, long UserTreeVa
 		m_RusStr.m_PO = PO;
 		Graph = "";
 		m_RusStr.m_PanicTreeVariantCount = PanicTreeVariantCount;
-		m_RusStr.m_UserClauseVariantsCombinationNo = UserClauseVariantsCombinationNo;
 		m_RusStr.m_UserTreeVariantNo = UserTreeVariantNo;
 				
 
@@ -64,7 +63,7 @@ bool  CSemStructureBuilder::FindSituations(std::string utf8text, long UserTreeVa
 					return false;
 				};
 				m_GlobalSpan.StartTimer("Semantics",0);
-				m_RusStr.FindSituations(m_CurrentSentence);
+				m_RusStr.FindSituations(m_CurrentSentence, UserClauseVariantsCombinationNo);
 				m_GlobalSpan.EndTimer("Semantics");
 				if (m_RusStr.m_bShouldBeStopped) return true;
 			}	
@@ -214,14 +213,11 @@ std::string  CSemStructureBuilder::Answer()
 
 long CSemStructureBuilder::GetScrollMax() const
 {
-	if (m_RusStr.m_AllClausesVariants > 0)
-		return m_RusStr.m_AllClausesVariants+m_RusStr.m_ClauseCombinationVariantsCount+1;
-	else
-		return  0;
+	return m_RusStr.m_ClauseCombinationVariantsCount;
 }
 
 long  CSemStructureBuilder::GetScrollCurrent() const
 {
-	return m_RusStr.m_InterfaceClauseNo;
+	return m_RusStr.m_ClauseVariantsCombinationNo;
 }
 
