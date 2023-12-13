@@ -39,7 +39,8 @@ class CTempArticle;
 
 class TRoss  : public TCortegeContainer, public TItemContainer  
 {
-	bool	ReadFromStrWithOneSignatura(const char* s, TCortege& C, const CSignat& Sgn);
+	bool ReadFromStrWithOneSignatura(const char* s, const CSignat& Sgn, std::vector<std::string>& item_strs, TCortege& C) const;
+	bool AddStringsIfAbsent(std::vector<std::string>& item_strs, const CSignat& Sgn, TCortege& C);
 
 protected:
 	TDictConfig Config;
@@ -108,7 +109,8 @@ public:
 	// ++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 
-	bool	ReadFromStr (const char* s, TCortege& C);
+	bool	ReadFromStr(const char* s, TCortege& C);
+	bool	ReadFromStrConst(const char* s, TCortege& C) const;
 	std::string	WriteToString (const TCortege& C) const;
 	const CSignat& GetSignat(const TCortege& C) const;
 

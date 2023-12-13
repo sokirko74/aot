@@ -279,7 +279,7 @@ bool CRusSemStructure::TryClauseSubordConj(long ClauseRuleNo, long ClauseNo1, lo
 	if (!P.LoadGramFromDict()) return false;
 
 	long l = 0;
-	for (; l < P.m_GramCorteges.size(); l++)
+	for (; l < P.GetGramCorteges().size(); l++)
 	{
 		std::string SynRel = P.GetSynRelStr(l);
 
@@ -296,7 +296,7 @@ bool CRusSemStructure::TryClauseSubordConj(long ClauseRuleNo, long ClauseNo1, lo
 			break;
 	};
 
-	if (l == P.m_GramCorteges.size()) return false;
+	if (l == P.GetGramCorteges().size()) return false;
 
 	return CreateClauseRelation(ClauseRuleNo, ClauseNo1, ClauseNo2, V, FindFirstNode(ClauseNo2), *Conj);
 }
@@ -924,7 +924,7 @@ bool CRusSemStructure::GetFreeActantPattern(long NodeNo, CSemPattern& P, CSynRea
 		{
 
 			long CortegeNo = 0;
-			for (; CortegeNo < P.m_GramCorteges.size(); CortegeNo++)
+			for (; CortegeNo < P.GetGramCorteges().size(); CortegeNo++)
 				if (CheckSynRel
 					&& !CheckSynFet
 					&& (P.GetSynRelStr(CortegeNo) == SynRel)
@@ -945,9 +945,9 @@ bool CRusSemStructure::GetFreeActantPattern(long NodeNo, CSemPattern& P, CSynRea
 							break;
 
 
-			if (CortegeNo < P.m_GramCorteges.size())
+			if (CortegeNo < P.GetGramCorteges().size())
 			{
-				SynReal.m_Cortege = P.m_GramCorteges[CortegeNo];
+				SynReal.m_Cortege = P.GetGramCorteges()[CortegeNo];
 				SynReal.m_CortegeNo = CortegeNo;
 				return true;
 			};
@@ -1355,7 +1355,7 @@ bool CRusSemStructure::TryClauseSubordDoubleConj(long ClauseRuleNo, long ClauseN
 	if (!P.LoadGramFromDict()) return false;
 
 	long l = 0;
-	for (; l < P.m_GramCorteges.size(); l++)
+	for (; l < P.GetGramCorteges().size(); l++)
 	{
 		std::string SynRel = P.GetSynRelStr(l);
 		if ((SynRel == "инф")
@@ -1375,7 +1375,7 @@ bool CRusSemStructure::TryClauseSubordDoubleConj(long ClauseRuleNo, long ClauseN
 			) break;
 	};
 
-	if (l == P.m_GramCorteges.size()) return false;
+	if (l == P.GetGramCorteges().size()) return false;
 
 	std::vector<long> Nodes1;
 	GetClauseRootsWithoutDeleted(ClauseNo1, Nodes1);

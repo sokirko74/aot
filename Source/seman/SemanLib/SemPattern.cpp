@@ -23,10 +23,30 @@ void		CSemPattern::SetEmpty()
 	m_PatternValency.m_RossHolder = 0;
 };
 
-bool		CSemPattern::IsEmpty() const 
+bool CSemPattern::IsEmpty() const 
 {
 	return m_GramCorteges.size() + m_LexFets.size() + m_ObligLexFets.size() == 0;
 };
+
+const std::vector<TCortege>& CSemPattern::GetGramCorteges() const {
+	return m_GramCorteges;
+}
+
+void CSemPattern::AddGramCortege(const TCortege& c) {
+	m_GramCorteges.push_back(c);
+}
+
+void CSemPattern::CopyGramCorteges(const CSemPattern& from) {
+	m_GramCorteges = from.GetGramCorteges();
+}
+
+void CSemPattern::DeleteGramCortege(size_t index) {
+	m_GramCorteges.erase(m_GramCorteges.begin() + index);
+}
+
+void CSemPattern::DeleteAllGramCortege() {
+	m_GramCorteges.clear();
+}
 
 dom_item_id_t CSemPattern::GetSynRel(long cortege_no) const
 {

@@ -8,7 +8,7 @@ part_of_speech_t GetOnePOS(part_of_speech_mask_t poses)
 		if( poses & (1 << i))
 			return i;
 
-	return UnknownPOS;
+	return UnknownPartOfSpeech;
 }
 
 
@@ -50,7 +50,7 @@ BYTE CEngSemNode::GetPos() const
 	if (m_MainWordNo != -1)
 		return GetOnePOS(m_Words[m_MainWordNo].m_Poses);
 	else // надеемся, что частей речи в англйискои грамтабе меньше 31
-		return UnknownPOS;
+		return UnknownPartOfSpeech;
 };
 
 bool CEngSemNode::IsLemma(std::string Lemma) const 

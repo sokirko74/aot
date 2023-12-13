@@ -70,7 +70,6 @@ public:
 	size_t get_size_in_bytes() const;
 	size_t save_to_bytes(BYTE* buf) const;
 	size_t restore_from_bytes(const BYTE* buf);
-	void shift_left(BYTE start = 0);
 
 };
 

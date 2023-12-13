@@ -388,10 +388,25 @@ bool is_empty_line(const char* t)
 	return true;
 }
 
+bool   TRoss::AddStringsIfAbsent(std::vector<std::string>& item_strs, const CSignat& Sgn, TCortege& C) {
+	for (BYTE i = 0; i < item_strs.size(); i++) {
+		if (C.is_null(i)) // не определено значение
+		{
+			dom_item_id_t item_id = InsertDomItem(item_strs[i].c_str(), Sgn.GetDomsWoDelims()[i]);
 
-bool   TRoss::ReadFromStrWithOneSignatura(const char* s, TCortege& C, const CSignat& Sgn)
+			if (is_null(item_id))
+				return false;
+
+			C.SetItem(i, item_id);
+		};
+	}
+	return true;
+}
+
+
+bool   TRoss::ReadFromStrWithOneSignatura(const char* s, const CSignat& Sgn, std::vector<std::string>& item_strs, TCortege& C) const
 { 
-	std::vector<std::string> item_strs;
+	item_strs.clear();
 	const char* q = s;
 
 	auto doms = Sgn.GetDomsWithDelims();
@@ -491,32 +506,42 @@ bool   TRoss::ReadFromStrWithOneSignatura(const char* s, TCortege& C, const CSig
 	for (size_t i = item_strs.size(); i < MaxNumDom; i++) {
 		C.SetItem(i, EmptyDomItemId);
 	}
-
-
-
-	for (BYTE i = 0; i < item_strs.size(); i++) {
-		if (C.is_null(i)) // не определено значение
-		{
-			dom_item_id_t item_id = InsertDomItem(item_strs[i].c_str(), Sgn.GetDomsWoDelims()[i]);
-
-			if (is_null(item_id))
-				return false;
-
-			C.SetItem(i, item_id);
-		};
-	}
-		
 	return true;
 };
 
 
 bool   TRoss::ReadFromStr(const char* str, TCortege& C)  
 {
-	for (const auto& s : Fields[C.m_FieldNo].m_Signats)
-		if (ReadFromStrWithOneSignatura(str, C, s))
+	std::vector<std::string> item_strs;
+	for (const auto& signat : Fields[C.m_FieldNo].m_Signats)
+		if (ReadFromStrWithOneSignatura(str, signat, item_strs, C))
 		{
-			C.SetSignatId(s.SignatId);
-			return true;
+			if (AddStringsIfAbsent(item_strs, signat, C)) {
+				C.SetSignatId(signat.SignatId);
+				return true;
+			}
+		};
+
+	return false;
+};
+
+bool   TRoss::ReadFromStrConst(const char* str, TCortege& C) const
+{
+	std::vector<std::string> item_strs;
+	for (const auto& signat : Fields[C.m_FieldNo].m_Signats)
+		if (ReadFromStrWithOneSignatura(str, signat, item_strs, C))
+		{
+			bool found_null = false;
+			for (size_t i = 0; i < item_strs.size(); ++i) {
+				if (C.is_null(i)) {
+					found_null = true;
+					break;
+				}
+			}
+			if (!found_null) {
+				C.SetSignatId(signat.SignatId);
+				return true;
+			}
 		};
 
 	return false;

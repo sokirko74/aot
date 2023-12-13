@@ -176,17 +176,20 @@ void CSemanticStrView::PasteClipboard()
 	CopyMemory( wstr, hMem, GlobalSize(hMem));
 	wstr[GlobalSize(hMem)] = 0;
 	std::string utf8 = wstring_to_utf8(std::wstring(wstr));
-	std::string str1251 = convert_from_utf8(utf8.c_str(), morphRussian);
-    CString Q = str1251.c_str();
+	std::string s8 = convert_from_utf8(utf8.c_str(), morphRussian);
+    //CString Q = s8.c_str();
+	//CString Q = utf8.c_str();
 	char cmd[5200];
 	strcpy (cmd, "$main.controls.mainEntry insert 0.0 \"");
-    for (size_t i=0; i < Q.GetLength();i++)
-		if (Q[i] == '"')
+    for (size_t i=0; i < s8.length();i++)
+		if (s8[i] == '"')
 			strcat (cmd, "\\\"");
 		else
-		{   size_t l = strlen(cmd);
-			cmd[l] = Q[i];
-			cmd[l+1] = 0; };
+		{   
+			size_t l = strlen(cmd);
+			cmd[l] = s8[i];
+			cmd[l+1] = 0; 
+		};
 
     strcat (cmd, "\"");
 	try {
@@ -351,7 +354,7 @@ UINT FindSituationsInThread(LPVOID pParam )
 		std::string text = "";
 		if (argv[2] != 0) text = argv[2];
 		Trim(text);
-		//text = convert_to_utf8(text, morphRussian);
+		text = convert_to_utf8(text, morphRussian);
 		if (text.empty()) 
 		{
 			ThreadFinish = true;
@@ -391,7 +394,7 @@ UINT FindSituationsInThread(LPVOID pParam )
 		bool bRes = 
 			GetSemBuilder().FindSituations(text,
 				atoi(argv[5]), 
-				(const char*)argv[6],
+				convert_to_utf8(argv[6], morphRussian),
 				atoi(argv[7]),
 				atoi(argv[8]),
 				argv[10],
@@ -402,7 +405,7 @@ UINT FindSituationsInThread(LPVOID pParam )
 		}
 		else
 		{
-			fc_Graph = Result;
+			fc_Graph = convert_from_utf8(Result.c_str(), morphRussian);
 			if (!Question.empty())
 			{
 				GetSemBuilder().SaveThisSentence();

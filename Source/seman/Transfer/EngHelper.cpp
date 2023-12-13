@@ -130,7 +130,7 @@ bool CEngSemStructure::HasCopul(std::vector<CValency>& Vals, std::string strRusV
 			CSemPattern semPattern;
 			semPattern.InitSemPattern(GetRossHolder(t), Vals[i].m_UnitNo, Vals[i].m_LeafId, Vals[i].m_BracketLeafId);
 			semPattern.LoadGramFromDict();
-			for( auto& c: semPattern.m_GramCorteges)
+			for( auto& c: semPattern.GetGramCorteges())
 			{
 				if (HasStringInCortege(t, c, "Copul")) {
 					return true;
@@ -286,7 +286,7 @@ bool CEngSemStructure::HasGramFet(const CEngSemRelation& Rel, const std::string 
 	const CSemPattern& semPattern = Rel.m_Pattern;
 
 	DictTypeEnum type = m_pData->GetTypeByRossHolder(Rel.m_Valency.m_RossHolder);
-	for( auto& c: semPattern.m_GramCorteges)
+	for( auto& c: semPattern.GetGramCorteges())
 	{
 		if (HasStringInCortege(type, c, strPattern)) {
 			return true;
@@ -386,8 +386,8 @@ bool CEngSemStructure::SetSimpleEngPrep(std::string strPrep, int iNode, int iRel
 bool CEngSemStructure::HasSubjAsFirstValency(const CEngSemNode& N)
 {
 	if (N.m_Patterns.empty()) return false;
-	if (N.m_Patterns[0].m_GramCorteges.empty()) return false;
-	return HasStringInCortege(N.GetType(), N.m_Patterns[0].m_GramCorteges[0], "subj");
+	if (N.m_Patterns[0].GetGramCorteges().empty()) return false;
+	return HasStringInCortege(N.GetType(), N.m_Patterns[0].GetGramCorteges()[0], "subj");
 };
 
 /*
@@ -401,8 +401,8 @@ bool CEngSemStructure::FindSubjPattern(const CEngSemNode& N, CSemPattern& Result
 
 	for (auto& p: N.m_Patterns)
 	{
-		if (p.m_GramCorteges.empty()) continue;
-		if (HasStringInCortege(type, p.m_GramCorteges[0], "subj")) {
+		if (p.GetGramCorteges().empty()) continue;
+		if (HasStringInCortege(type, p.GetGramCorteges()[0], "subj")) {
 			Result = p;
 			return true;
 		}
@@ -410,8 +410,8 @@ bool CEngSemStructure::FindSubjPattern(const CEngSemNode& N, CSemPattern& Result
 
 	for (auto& p : N.m_CopulPatterns)
 	{
-		if (p.m_GramCorteges.empty()) continue;
-		if (HasStringInCortege(type, p.m_GramCorteges[0], "subj")) {
+		if (p.GetGramCorteges().empty()) continue;
+		if (HasStringInCortege(type, p.GetGramCorteges()[0], "subj")) {
 			Result = p;
 			return true;
 		}
@@ -575,7 +575,7 @@ bool CEngSemStructure::TryToAddNewSemPatternFromLexFunWord(int iRel)
 		if( semRel.m_PatternNoInArticle >= 1 )
 			if( AddGXiFromLexFunOperWord(m_Nodes[LexFunctRel.m_TargetNodeNo].GetUnitNo(), semPattern1, semRel.m_PatternNoInArticle, iOperNum) )
 				{					
-					semRel.m_Pattern.m_GramCorteges = semPattern1.m_GramCorteges;
+					semRel.m_Pattern.CopyGramCorteges(semPattern1);
 					return true;
 				}
 	}
@@ -587,7 +587,7 @@ bool CEngSemStructure::TryToAddNewSemPatternFromLexFunWord(int iRel)
 		if( semRel.m_PatternNoInArticle >= 1 )
 			if( AddGXiFromLexFunFuncWord(m_Nodes[LexFunctRel.m_TargetNodeNo].GetUnitNo(), semPattern1, semRel.m_PatternNoInArticle, iFuncNum) )
 			{
-				semRel.m_Pattern.m_GramCorteges = semPattern1.m_GramCorteges;
+				semRel.m_Pattern.CopyGramCorteges(semPattern1);
 				return true;
 			}
 	}

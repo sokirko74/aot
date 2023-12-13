@@ -12,12 +12,11 @@
 #include  "synan/SynanLib/SyntaxHolder.h"
 
 
-class CStructDictHolder;
-
-const char g_strRegRusOborDicPath[]    = "Software\\Dialing\\Obor\\DictPath"; 	 
 const long UnknownParadigmId = -1;
-const part_of_speech_t UnknownPOS = 0xff;
 
+class CStructDictHolder;
+class CRusGramTab;
+class CEngGramTab;
 
 class CTranslatorHolder  
 {

@@ -846,12 +846,12 @@ void CRusSemStructure::BuildPustychaWithETO(long ClauseNo) {
 /* Нужно будет переписать заново 
  m_Nodes[CopulNodeNo].m_Patterns.resize(2);
 m_Nodes[CopulNodeNo].m_Patterns[0].m_Valency.m_RelationStr= "F-ACT"; m_Nodes[CopulNodeNo].m_Patterns[0].m_pRossDoc = GetRossHolder(Ross);
- m_Nodes[CopulNodeNo].m_Patterns[0].m_GramCorteges.push_back(GetSubjCortege(GetRossHolder(Ross)));
- m_Nodes[CopulNodeNo].m_Patterns[0].m_GramCorteges[0].Items[0] = -1;
+ m_Nodes[CopulNodeNo].m_Patterns[0].GetGramCorteges().push_back(GetSubjCortege(GetRossHolder(Ross)));
+ m_Nodes[CopulNodeNo].m_Patterns[0].GetGramCorteges()[0].Items[0] = -1;
  m_Nodes[CopulNodeNo].m_Patterns[1].m_SourceNo = CopulNodeNo;
  m_Nodes[CopulNodeNo].m_Patterns[1].m_Valency = m_Nodes[CopulNodeNo].m_Vals[1];
  m_Nodes[CopulNodeNo].m_Patterns[1].m_pRossDoc = GetRossHolder(Ross);
- m_Nodes[CopulNodeNo].m_Patterns[1].m_GramCorteges.push_back(GetRossHolder(Ross)->rus_subj_gf);
+ m_Nodes[CopulNodeNo].m_Patterns[1].GetGramCorteges().push_back(GetRossHolder(Ross)->rus_subj_gf);
 */
     m_Clauses[ClauseNo].m_ClauseSyntaxTop = CopulNodeNo;
 

@@ -90,7 +90,7 @@ void CEngSemStructure::ApplyComparativeRule(int iEngNode)
 
 				// приписываем отношению первую валентность глагола to be
 				m_Relations[iRelSubj].m_Valency = m_Nodes[iEngNode].m_Vals[0];
-				m_Relations[iRelSubj].m_SynReal.m_Cortege = m_Nodes[iEngNode].m_Patterns[0].m_GramCorteges[0];
+				m_Relations[iRelSubj].m_SynReal.m_Cortege = m_Nodes[iEngNode].m_Patterns[0].GetGramCorteges()[0];
 			}
 			else if (inRelsSubj.size() == 1)
 			{
@@ -103,7 +103,7 @@ void CEngSemStructure::ApplyComparativeRule(int iEngNode)
 
 				// приписываем отношению первую валентность глагола to be
 				m_Relations[iRelSubj].m_Valency = m_Nodes[iEngNode].m_Vals[0];
-				m_Relations[iRelSubj].m_SynReal.m_Cortege = m_Nodes[iEngNode].m_Patterns[0].m_GramCorteges[0];
+				m_Relations[iRelSubj].m_SynReal.m_Cortege = m_Nodes[iEngNode].m_Patterns[0].GetGramCorteges()[0];
 			}
 		}
 		else if (RusStr.GetNode(iRnode).GetWord(iRword).HasPOS(VERB)
@@ -239,7 +239,7 @@ void CEngSemStructure::ApplyComparativeRule(int iEngNode)
 	m_Relations[iRelSubj].m_Valency.m_UnitNo = newNode.GetUnitNo();
 	m_Relations[iRelSubj].m_Valency.m_LeafId = 1;
 	m_Relations[iRelSubj].m_Pattern = newNode.m_Patterns[iSubjPattern];
-	m_Relations[iRelSubj].m_SynReal.m_Cortege = newNode.m_Patterns[iSubjPattern].m_GramCorteges[0];
+	m_Relations[iRelSubj].m_SynReal.m_Cortege = newNode.m_Patterns[iSubjPattern].GetGramCorteges()[0];
 
 	CEngSemRelation newRel(CValency("rComparative", A_C), iNewNode, iNodeMNA, "");
 	newRel.m_bInterpreted = true;
@@ -247,7 +247,7 @@ void CEngSemStructure::ApplyComparativeRule(int iEngNode)
 	newRel.m_Valency.m_UnitNo = newNode.GetUnitNo();
 	newRel.m_Valency.m_LeafId = 2;
 	newRel.m_Pattern = newNode.m_Patterns[iObjPattern];
-	newRel.m_SynReal.m_Cortege = newNode.m_Patterns[iObjPattern].m_GramCorteges[0];
+	newRel.m_SynReal.m_Cortege = newNode.m_Patterns[iObjPattern].GetGramCorteges()[0];
 
 	m_Relations.push_back(newRel); // be->comp|mna
 
@@ -355,7 +355,7 @@ void  CEngSemStructure::ApplyAdjShortRule(int iEngNode)
 		m_Relations[iSubRel].m_bInterpreted = false;
 
 		//приписываем отношению первую валентость
-		m_Relations[iSubRel].m_SynReal.m_Cortege = newNode.m_Patterns[0].m_GramCorteges[0];
+		m_Relations[iSubRel].m_SynReal.m_Cortege = newNode.m_Patterns[0].GetGramCorteges()[0];
 		m_Relations[iSubRel].m_Valency = newNode.m_Vals[0];
 
 		CEngSemNode& subNode = m_Nodes[m_Relations[iSubRel].m_TargetNodeNo];
@@ -448,7 +448,7 @@ void CEngSemStructure::ApplyPredicativeRule(int iEngNode)
 	newRel.m_Valency.m_UnitNo = m_Nodes[iBeNode].GetUnitNo();
 	newRel.m_Valency.m_LeafId = 2;
 	newRel.m_Pattern = m_Nodes[iBeNode].m_Patterns[iObjPattern];
-	newRel.m_SynReal.m_Cortege = m_Nodes[iBeNode].m_Patterns[iObjPattern].m_GramCorteges[0];
+	newRel.m_SynReal.m_Cortege = m_Nodes[iBeNode].m_Patterns[iObjPattern].GetGramCorteges()[0];
 	newRel.m_Position = ">";
 	newRel.m_PosType = FromAlgorithmPosType;
 	m_Relations.push_back(newRel); // be->Pred
@@ -498,7 +498,7 @@ void CEngSemStructure::ApplyPredicativeRule(int iEngNode)
 		subRel.m_Pattern = m_Nodes[iBeNode].m_Patterns[iSubjPattern];
 
 		subRel.m_Valency = m_Nodes[iBeNode].m_Vals[0];
-		subRel.m_SynReal.m_Cortege = m_Nodes[iBeNode].m_Patterns[iSubjPattern].m_GramCorteges[0];
+		subRel.m_SynReal.m_Cortege = m_Nodes[iBeNode].m_Patterns[iSubjPattern].GetGramCorteges()[0];
 
 		subRel.m_Position = "<";
 		subRel.m_PosType = FromAlgorithmPosType;
@@ -513,7 +513,7 @@ void CEngSemStructure::ApplyPredicativeRule(int iEngNode)
 		m_Relations[iSubjRel].m_Pattern = m_Nodes[iBeNode].m_Patterns[iSubjPattern];
 
 		m_Relations[iSubjRel].m_Valency = m_Nodes[iBeNode].m_Vals[0];
-		m_Relations[iSubjRel].m_SynReal.m_Cortege = m_Nodes[iBeNode].m_Patterns[iSubjPattern].m_GramCorteges[0];
+		m_Relations[iSubjRel].m_SynReal.m_Cortege = m_Nodes[iBeNode].m_Patterns[iSubjPattern].GetGramCorteges()[0];
 
 		CEngSemNode& engSubj = m_Nodes[m_Relations[iSubjRel].m_TargetNodeNo];
 		int iRusSubj = engSubj.RusNode;
@@ -735,7 +735,7 @@ void CEngSemStructure::ImpersonalVerb(int iEngNode)
 	// если есть кого - переведем его в subj, проставим Passive и число
 	if (iSubRel != -1)
 	{
-		m_Relations[iSubRel].m_SynReal.m_Cortege = engNode.m_Patterns[0].m_GramCorteges[0];
+		m_Relations[iSubRel].m_SynReal.m_Cortege = engNode.m_Patterns[0].GetGramCorteges()[0];
 		m_Relations[iSubRel].m_Valency = engNode.m_Vals[0];
 
 		m_Relations[iSubRel].m_Position = "<";
@@ -821,8 +821,8 @@ void CEngSemStructure::ImpersonalVerb(int iEngNode)
 	CEngSemRelation newRel(CValency("ImpersonalVerb", A_C), iEngNode, m_Nodes.size() - 1, "");
 	newRel.m_bInterpreted = false;
 
-	if (!engNode.m_Patterns.empty() && !engNode.m_Patterns[0].m_GramCorteges.empty())
-		newRel.m_SynReal.m_Cortege = engNode.m_Patterns[0].m_GramCorteges[0];
+	if (!engNode.m_Patterns.empty() && !engNode.m_Patterns[0].GetGramCorteges().empty())
+		newRel.m_SynReal.m_Cortege = engNode.m_Patterns[0].GetGramCorteges()[0];
 
 	if (!engNode.m_Vals.empty())
 		newRel.m_Valency = engNode.m_Vals[0];
@@ -911,7 +911,7 @@ void CEngSemStructure::InfinitiveAndIf(int iEngNode)
 	CEngSemRelation newRel(CValency("InfinitiveAndIf", A_C), iEngNode, m_Nodes.size() - 1, "");
 
 	newRel.m_Valency = engNode.m_Vals[0];
-	newRel.m_SynReal.m_Cortege = engNode.m_Patterns[0].m_GramCorteges[0];
+	newRel.m_SynReal.m_Cortege = engNode.m_Patterns[0].GetGramCorteges()[0];
 
 	newRel.m_Position = "<";
 	newRel.m_PosType = FromAlgorithmPosType;

@@ -131,12 +131,12 @@ bool CEngSemStructure::MakeDeverbative( int iRusActant, int iEngActant, CEngSemN
 				semPattern.InitSemPattern(GetRossHolder(type),V.m_UnitNo, V.m_LeafId, V.m_BracketLeafId); 
 				semPattern.LoadGramFromDict();
 
-				if( !semPattern.m_GramCorteges.empty() )						
+				if( !semPattern.GetGramCorteges().empty() )						
 				{
 					m_Relations[iEngRel].m_Pattern = semPattern;
 					m_Relations[iEngRel].m_bInterpreted = true;
 					m_Relations[iEngRel].m_Valency = EngValencyOwner.m_Vals[valNo];
-					m_Relations[iEngRel].m_SynReal.m_Cortege = semPattern.m_GramCorteges[0];
+					m_Relations[iEngRel].m_SynReal.m_Cortege = semPattern.GetGramCorteges()[0];
 					m_Relations[iEngRel].m_SynReal.m_CortegeNo = 0;
 				}
 				else	
@@ -465,9 +465,9 @@ bool CEngSemStructure::Rule_TranslateSubj(int iRusActant,long EngRelNo, const st
 	
 	if( !semEngRel.m_Pattern.IsEmpty() &&
 		semEngRel.m_bInterpreted &&
-		semEngRel.m_Pattern.m_GramCorteges.size() )
+		semEngRel.m_Pattern.GetGramCorteges().size() )
 	{
-		semEngRel.m_SynReal.m_Cortege = semEngRel.m_Pattern.m_GramCorteges[0];
+		semEngRel.m_SynReal.m_Cortege = semEngRel.m_Pattern.GetGramCorteges()[0];
 	}
 
 	// первую валентность пассивной итнтерпретации надо отконвертировать в by+NP

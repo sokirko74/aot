@@ -135,7 +135,7 @@ void CEngSemStructure::ApplyModalCopulRule(int iEngNode)
 		m_Relations[iSubjRel].m_bInterpreted = true;
 		m_Relations[iSubjRel].m_Valency = newNode.m_Vals[0];
 		m_Relations[iSubjRel].m_Pattern = newNode.m_Patterns[iSubjPattern];
-		m_Relations[iSubjRel].m_SynReal.m_Cortege = newNode.m_Patterns[iSubjPattern].m_GramCorteges[0];
+		m_Relations[iSubjRel].m_SynReal.m_Cortege = newNode.m_Patterns[iSubjPattern].GetGramCorteges()[0];
 
 		m_Relations[iSubjRel].m_Position = "<";
 		m_Relations[iSubjRel].m_PosType = FromAlgorithmPosType;
@@ -171,7 +171,7 @@ void CEngSemStructure::ApplyModalCopulRule(int iEngNode)
 		CEngSemRelation newRel1(CValency("ModalCopul",A_C),iEngNode,m_Nodes.size()-1,"");
 		newRel1.m_bInterpreted = true;
 		newRel1.m_Valency = m_Nodes[iEngNode].m_Vals[iSubjPattern];
-		newRel1.m_SynReal.m_Cortege = m_Nodes[iEngNode].m_Patterns[iSubjPattern].m_GramCorteges[iSubjPattern];
+		newRel1.m_SynReal.m_Cortege = m_Nodes[iEngNode].m_Patterns[iSubjPattern].GetGramCorteges()[iSubjPattern];
 		newRel1.m_Pattern  = m_Nodes[iEngNode].m_Patterns[iSubjPattern];
 		newRel1.m_Position = "<<";
 		newRel1.m_PosType = FromAlgorithmPosType;
@@ -330,7 +330,7 @@ void CEngSemStructure::ApplyNoRule(int iEngNode)
 		m_Nodes.push_back(newNode);	// have	
 
 		m_Relations[iSubRel].m_Valency = newNode.m_Vals[0];
-		m_Relations[iSubRel].m_SynReal.m_Cortege = newNode.m_Patterns[iSubjPattern].m_GramCorteges[0];
+		m_Relations[iSubRel].m_SynReal.m_Cortege = newNode.m_Patterns[iSubjPattern].GetGramCorteges()[0];
 		m_Relations[iSubRel].m_SynReal.m_Preps.clear(); // предлоги
 		m_Relations[iSubRel].m_SourceNodeNo = m_Nodes.size()-1; // have->Subj
 
@@ -373,7 +373,7 @@ void CEngSemStructure::ApplyNoRule(int iEngNode)
 		newRel1.m_bInterpreted = true;
 		newRel1.m_Position = "<<";
 		newRel1.m_PosType = FromAlgorithmPosType;
-		newRel1.m_SynReal.m_Cortege = newNode2.m_Patterns[iSubjPattern].m_GramCorteges[0];
+		newRel1.m_SynReal.m_Cortege = newNode2.m_Patterns[iSubjPattern].GetGramCorteges()[0];
 		newRel1.m_Valency = newNode2.m_Vals[0];
 		m_Relations.push_back(newRel1); // be->there
 
@@ -499,7 +499,7 @@ void CEngSemStructure::ApplyBeRule(int iEngNode)
 		m_Relations[RelNo].m_bReverseRel = false;
 
 		const CEngSemNode& BeNode = m_Nodes[m_Relations[RelNo].m_SourceNodeNo];
-		m_Relations[RelNo].m_SynReal.m_Cortege = BeNode.m_Patterns[0].m_GramCorteges[0];
+		m_Relations[RelNo].m_SynReal.m_Cortege = BeNode.m_Patterns[0].GetGramCorteges()[0];
 		m_Relations[RelNo].m_Valency = BeNode.m_Vals[0];
 		
 	}
@@ -522,7 +522,7 @@ void CEngSemStructure::ApplyBeRule(int iEngNode)
 		newRel.m_PosType = FromAlgorithmPosType;
 
 		const CEngSemNode& BeNode = m_Nodes[iEngNode];
-		newRel.m_SynReal.m_Cortege = BeNode.m_Patterns[0].m_GramCorteges[0];
+		newRel.m_SynReal.m_Cortege = BeNode.m_Patterns[0].GetGramCorteges()[0];
 		newRel.m_Valency = BeNode.m_Vals[0];
 
 		m_Relations.push_back(newRel); // be->there
@@ -718,7 +718,7 @@ void CEngSemStructure::ApplyALG_it(int iEngNode)
 	m_Nodes.push_back(newNode);
 
 	CEngSemRelation newRel(CValency("AL_it",A_C),iEngNode,m_Nodes.size()-1,"");
-	newRel.m_SynReal.m_Cortege  = SubjPattern.m_GramCorteges[0];
+	newRel.m_SynReal.m_Cortege  = SubjPattern.GetGramCorteges()[0];
 	newRel.m_Valency = SubjPattern.m_PatternValency;
 	newRel.m_Pattern = SubjPattern;
 	newRel.m_Position = "<";

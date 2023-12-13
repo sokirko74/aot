@@ -255,9 +255,9 @@ std::string CEngSynthes::BuildSentence()
 	if (E.m_bHasConjBut)
 		str = "But " + str;
 
-	SetSpacesAndRegisterInSentence(str);
 	SetIndefiniteArticle(str, helper);
 	SetSpacesAndRegisterInSentence(str);
+	//SetSpacesAndRegisterInSentence(str);
 
 	E.SetLastSentencePunctuationMark(str);
 

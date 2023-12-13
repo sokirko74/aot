@@ -53,7 +53,7 @@ void CEngSemStructure::GetGramCortegesAndTypeFromRel(std::vector<SGramCortegesAn
 	std::vector<TCortege> GramCorteges;
 	if( semRel.m_bInterpreted && !semRel.m_Pattern.IsEmpty() )
 	{
-		GramCorteges = semRel.m_Pattern.m_GramCorteges;
+		GramCorteges = semRel.m_Pattern.GetGramCorteges();
 		FillVectorOfGramCortegeAndType(GramCortegesAndTypeV,GramCorteges,m_Nodes[iEngNode].GetType());
 	}
 	else

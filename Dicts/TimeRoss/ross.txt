@@ -775,7 +775,7 @@ EXM     =  Год назад у нас появилась собака.
 GF(1)   = 1  С ед , вн
 SF(1)   = 1  TIME
              PERIO
-ENG     = 1  <а> SR[1](sg) ago
+ENG     = 1  <a> SR[1](sg) ago
 ============
 TITLE        = годы_и_годы
 SENSE       = 1

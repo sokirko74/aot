@@ -19,18 +19,24 @@ bool CRusSemStructure::LoadFromDictForPassive(uint16_t UnitNo, BYTE LeafId, BYTE
 
 	P.InitSemPattern(GetRossHolder(Ross), UnitNo, LeafId, BracketLeafId);
 	P.LoadGramFromDict();
+	std::vector<TCortege> old = P.GetGramCorteges();
+	P.DeleteAllGramCortege();
 
-	for (size_t i = 0; i < P.m_GramCorteges.size(); i++)
-		if (P.m_GramCorteges[i].GetItem(0) != P.m_pRossDoc->CopulNo)
-			if (P.m_GramCorteges[i].GetItem(0) != P.m_pRossDoc->PassiveNo)
-			{
-				P.m_GramCorteges.erase(P.m_GramCorteges.begin() + i);
-				i--;
+	for (auto& c : old) {
+		if (c.GetItem(0) == P.m_pRossDoc->CopulNo) {
+			P.AddGramCortege(c);
+		}
+		else if (c.GetItem(0) == P.m_pRossDoc->PassiveNo) {
+			auto s = P.m_pRossDoc->GetRoss()->WriteToString(c);
+			size_t b = s.find(')');
+			assert(b != string::npos);
+			if (!P.m_pRossDoc->GetRoss()->ReadFromStrConst(s.substr(b + 1).c_str(), c)) {
+				throw CExpc("cannot parse active valency %s", s.substr(b + 1).c_str());
 			}
-			else
-				P.m_GramCorteges[i].shift_left();
-
-	return    P.m_GramCorteges.empty();
+			P.AddGramCortege(c);
+		}
+	}
+	return    P.GetGramCorteges().empty();
 };
 
 
@@ -50,8 +56,8 @@ void  CRusSemStructure::InitPassivePattern(size_t NodeNo, BYTE ValencyNo, CSemPa
 		LoadFromDictForPassive(UnitNo, 2, 0, P);
 		P.m_PatternValency = m_Nodes[NodeNo].m_Vals[1];
 
-		if (P.m_GramCorteges.size() == 0)
-			P.m_GramCorteges.push_back(P.m_pRossDoc->rus_subj_gf);
+		if (P.GetGramCorteges().size() == 0)
+			P.AddGramCortege(P.m_pRossDoc->rus_subj_gf);
 
 		/*
 		"отмечается, что продолжительность составляет 55,5 лет."
@@ -60,7 +66,7 @@ void  CRusSemStructure::InitPassivePattern(size_t NodeNo, BYTE ValencyNo, CSemPa
 		CSemPattern Q;
 		Q.InitSemPattern(GetRossHolder(Ross), UnitNo, 2, 0);
 		Q.LoadGramFromDict();
-		for (long i = 0; i < Q.m_GramCorteges.size(); i++)
+		for (long i = 0; i < Q.GetGramCorteges().size(); i++)
 		{
 			std::string SynRel = Q.GetSynRelStr(i);
 			std::string SynFet = Q.GetSynFetStr(i);
@@ -72,7 +78,7 @@ void  CRusSemStructure::InitPassivePattern(size_t NodeNo, BYTE ValencyNo, CSemPa
 					)
 				)
 			{
-				P.m_GramCorteges.push_back(Q.m_GramCorteges[i]);
+				P.AddGramCortege(Q.GetGramCorteges()[i]);
 
 			};
 		};
@@ -82,8 +88,8 @@ void  CRusSemStructure::InitPassivePattern(size_t NodeNo, BYTE ValencyNo, CSemPa
 		if (m_Nodes[NodeNo].m_Vals.size() < 1) return;
 		LoadFromDictForPassive(UnitNo, 1, 0, P);
 		P.m_PatternValency = m_Nodes[NodeNo].m_Vals[0];
-		if (P.m_GramCorteges.empty())
-			P.m_GramCorteges.push_back(P.m_pRossDoc->indir_instr_gf);
+		if (P.GetGramCorteges().empty())
+			P.AddGramCortege(P.m_pRossDoc->indir_instr_gf);
 		P.m_PatternValency.m_InstrAgent = true;
 	}
 	else
@@ -104,7 +110,7 @@ void  CRusSemStructure::GetActantPattern(size_t NodeNo, BYTE ValencyNo, CSemPatt
 	assert(ValencyNo < m_Nodes[NodeNo].m_Vals.size());
 
 	P.m_SourceNo = NodeNo;
-	P.m_GramCorteges.clear();
+	P.DeleteAllGramCortege();
 	P.m_LexFets.clear();
 
 	if (m_Nodes[NodeNo].GetType() != NoneRoss)
@@ -121,7 +127,7 @@ void  CRusSemStructure::GetActantPattern(size_t NodeNo, BYTE ValencyNo, CSemPatt
 		// получение первой валентности для краткого прилагательного
 		if (m_Nodes[P.m_SourceNo].m_Vals.size() >= 1)
 		{
-			P.m_GramCorteges.push_back(P.m_pRossDoc->rus_subj_gf);
+			P.AddGramCortege(P.m_pRossDoc->rus_subj_gf);
 			P.m_PatternValency = m_Nodes[P.m_SourceNo].m_Vals[0];
 		}
 	}
@@ -156,8 +162,8 @@ void  CRusSemStructure::GetActantPattern(size_t NodeNo, BYTE ValencyNo, CSemPatt
 			{
 				if (ValencyNo == 0)
 				{
-					P.m_GramCorteges.clear();
-					P.m_GramCorteges.push_back(P.m_pRossDoc->adj_gf_1);
+					P.DeleteAllGramCortege();
+					P.AddGramCortege(P.m_pRossDoc->adj_gf_1);
 				};
 			}
 			else
@@ -169,11 +175,11 @@ void  CRusSemStructure::GetActantPattern(size_t NodeNo, BYTE ValencyNo, CSemPatt
 					например:
 					"подписанное группой  обращение"
 					*/
-					for (long i = 0; i < P.m_GramCorteges.size(); i++)
+					for (long i = 0; i < P.GetGramCorteges().size(); i++)
 						if (P.GetSynRel(i) == P.m_pRossDoc->DirectObjSynONo)
 						{
-							P.m_GramCorteges.clear();
-							P.m_GramCorteges.push_back(P.m_pRossDoc->adj_gf_2);
+							P.DeleteAllGramCortege();
+							P.AddGramCortege(P.m_pRossDoc->adj_gf_2);
 							break;
 						};
 				}
@@ -280,10 +286,10 @@ bool CRusSemStructure::CheckDirection(long NodeNo1, long NodeNo2, std::string Di
 
 bool CRusSemStructure::CheckPatternReverseGramFetLine(CSemPattern& P, CSynRealization& SynRealization, size_t NodeNo)
 {
-	auto debug = P.m_pRossDoc->GetRoss()->WriteToString(P.m_GramCorteges[SynRealization.m_CortegeNo]);
+	auto debug = P.m_pRossDoc->GetRoss()->WriteToString(P.GetGramCorteges()[SynRealization.m_CortegeNo]);
 	long SynFet = P.GetSynFet(SynRealization.m_CortegeNo);
 	std::string SynFetStr = P.GetSynFetStr(SynRealization.m_CortegeNo);
-	TCortege& C = P.m_GramCorteges[SynRealization.m_CortegeNo];
+	const TCortege& C = P.GetGramCorteges()[SynRealization.m_CortegeNo];
 
 	if (m_Nodes[P.m_SourceNo].m_bFullGleiche
 		|| HasRichPOS(P.m_SourceNo, ADV)
@@ -490,7 +496,7 @@ bool CRusSemStructure::CheckPatternGramFetLine(CSemPattern& P, CSynRealization& 
 {
 	SynRealization.SetEmpty();
 
-	TCortege& C = P.m_GramCorteges[SynRealization.m_CortegeNo];
+	const TCortege& C = P.GetGramCorteges()[SynRealization.m_CortegeNo];
 
 
 	if (P.m_pRossDoc->IsVerbFet(C.GetItem(0)))
@@ -1228,12 +1234,12 @@ bool CRusSemStructure::IsPattern(CSemPattern& P, size_t NodeNo, std::string& Syn
 
 
 
-	if (P.m_GramCorteges.empty()) return false;
+	if (P.GetGramCorteges().empty()) return false;
 
-	if (P.m_GramCorteges[0].is_null(0)) return false;
+	if (P.GetGramCorteges()[0].is_null(0)) return false;
 
 
-	for (SynRealization.m_CortegeNo = 0; SynRealization.m_CortegeNo < P.m_GramCorteges.size(); SynRealization.m_CortegeNo++)
+	for (SynRealization.m_CortegeNo = 0; SynRealization.m_CortegeNo < P.GetGramCorteges().size(); SynRealization.m_CortegeNo++)
 		if (CheckPatternGramFetLine(P, SynRealization, NodeNo)
 
 			)
@@ -1241,7 +1247,7 @@ bool CRusSemStructure::IsPattern(CSemPattern& P, size_t NodeNo, std::string& Syn
 
 			if (P.m_pRossDoc->IsSynRel(P.GetSynRel(SynRealization.m_CortegeNo)))
 				SyntacticRelation = P.GetSynRelStr(SynRealization.m_CortegeNo);
-			SynRealization.m_Cortege = P.m_GramCorteges[SynRealization.m_CortegeNo];
+			SynRealization.m_Cortege = P.GetGramCorteges()[SynRealization.m_CortegeNo];
 			return true;
 		}
 	SynRealization.m_CortegeNo = -1;
@@ -1351,7 +1357,7 @@ void CRusSemStructure::TryPatternOnNodes(size_t NodeNo, size_t ClauseNo, CSemPat
 
 bool HasCopulPattern(const CSemPattern& P)
 {
-	for (auto& c: P.m_GramCorteges)
+	for (auto& c: P.GetGramCorteges())
 		if (c.GetItem(0) == P.m_pRossDoc->CopulNo)
 			return true;
 
@@ -1360,7 +1366,7 @@ bool HasCopulPattern(const CSemPattern& P)
 
 bool HasModalCopulPattern(const CSemPattern& P)
 {
-	for (auto& c : P.m_GramCorteges)
+	for (auto& c : P.GetGramCorteges())
 		if (c.GetItem(0) == P.m_pRossDoc->ModalCopulNo)
 			return true;
 
@@ -1423,12 +1429,14 @@ void CRusSemStructure::FindActants(size_t NodeNo)
 				m_Nodes[CopulNodeNo].m_Vals.push_back(CValency("S-ACT", A_C, GetRossHolder(Ross), m_Nodes[NodeNo].m_Vals[ValencyNo].m_LeafId, 2, m_Nodes[NodeNo].GetUnitNo()));
 
 				// строим F-ACT		
-				CopulPattern.m_GramCorteges.clear();
+				CopulPattern.DeleteAllGramCortege();
 				if (PassiveCase)
 				{
 					LoadFromDictForPassive(m_Nodes[NodeNo].GetUnitNo(), 1, 1, CopulPattern);
 					CopulPattern.m_PatternValency = CValency("F-ACT", A_C, GetRossHolder(Ross), 1, 1, m_Nodes[NodeNo].GetUnitNo());
-					if (CopulPattern.m_GramCorteges.size() == 0) CopulPattern.m_GramCorteges.push_back(GetRossHolder(Ross)->rus_subj_gf);
+					if (CopulPattern.GetGramCorteges().empty()) {
+						CopulPattern.AddGramCortege(GetRossHolder(Ross)->rus_subj_gf);
+					}
 					TryPatternOnNodes(CopulNodeNo, ClauseNo, CopulPattern);
 				}
 				else
@@ -1443,7 +1451,7 @@ void CRusSemStructure::FindActants(size_t NodeNo)
 				};
 
 				// строим S-ACT		
-				CopulPattern.m_GramCorteges.clear();
+				CopulPattern.DeleteAllGramCortege();
 				CopulPattern.InitSemPattern(GetRossHolder(Ross), m_Nodes[NodeNo].GetUnitNo(), m_Nodes[NodeNo].m_Vals[ValencyNo].m_LeafId, 2);
 				CopulPattern.LoadSemFromDict();
 				if (CopulPattern.LoadGramFromDict())
@@ -1469,7 +1477,7 @@ void CRusSemStructure::FindActants(size_t NodeNo)
 
 				m_Nodes[CopulPattern.m_SourceNo].m_Vals.push_back(CValency("SUB", A_C, GetRossHolder(m_Nodes[NodeNo].GetType()), m_Nodes[NodeNo].m_Vals[ValencyNo].m_LeafId, 1, m_Nodes[NodeNo].GetUnitNo()));
 				m_Nodes[CopulPattern.m_SourceNo].m_Vals.push_back(CValency("CONTEN", A_C, GetRossHolder(m_Nodes[NodeNo].GetType()), m_Nodes[NodeNo].m_Vals[ValencyNo].m_LeafId, 2, m_Nodes[NodeNo].GetUnitNo()));
-				CopulPattern.m_GramCorteges.clear();
+				CopulPattern.DeleteAllGramCortege();
 
 				CopulPattern.InitSemPattern(GetRossHolder(m_Nodes[NodeNo].GetType()), m_Nodes[NodeNo].GetUnitNo(), m_Nodes[NodeNo].m_Vals[ValencyNo].m_LeafId, 1);
 				CopulPattern.LoadSemFromDict();
@@ -1479,7 +1487,7 @@ void CRusSemStructure::FindActants(size_t NodeNo)
 					TryPatternOnNodes(CopulPattern.m_SourceNo, ClauseNo, CopulPattern);
 				};
 
-				CopulPattern.m_GramCorteges.clear();
+				CopulPattern.DeleteAllGramCortege();
 				CopulPattern.InitSemPattern(GetRossHolder(m_Nodes[NodeNo].GetType()), m_Nodes[NodeNo].GetUnitNo(), m_Nodes[NodeNo].m_Vals[ValencyNo].m_LeafId, 2);
 				CopulPattern.LoadSemFromDict();
 				if (CopulPattern.LoadGramFromDict())

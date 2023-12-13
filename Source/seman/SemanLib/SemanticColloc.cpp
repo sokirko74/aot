@@ -130,12 +130,12 @@ bool CRusSemStructure::CheckCollocItemGramFet(long CollocNo, long ItemNo, long N
 	CSemPattern P;
 	P.InitSemPattern(GetRossHolder(CollocRoss), m_pData->m_RusCollocs[CollocNo].UnitNo, 0, ItemNo+1);
 	P.LoadGramFromDict();
-	if (P.m_GramCorteges.empty())  return true;
+	if (P.GetGramCorteges().empty())  return true;
 
 	long GramCortegeNo=0;
-	for (; GramCortegeNo < P.m_GramCorteges.size(); GramCortegeNo++)
+	for (; GramCortegeNo < P.GetGramCorteges().size(); GramCortegeNo++)
 	{
-		TCortege& C = P.m_GramCorteges[GramCortegeNo];
+		const TCortege& C = P.GetGramCorteges()[GramCortegeNo];
 		part_of_speech_mask_t Pose;
 		grammems_mask_t Grammems;
 		std::string GramFet = GetRoss(CollocRoss)->WriteToString(C);
@@ -149,7 +149,7 @@ bool CRusSemStructure::CheckCollocItemGramFet(long CollocNo, long ItemNo, long N
 	};
 
 
-	return  GramCortegeNo < P.m_GramCorteges.size();
+	return  GramCortegeNo < P.GetGramCorteges().size();
 };
 
 bool TwoSemCollocHypsCanBeTogether(const CSemCollocHyp& H1, const CSemCollocHyp& H2)

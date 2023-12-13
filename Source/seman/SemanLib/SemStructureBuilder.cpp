@@ -81,6 +81,13 @@ bool  CSemStructureBuilder::FindSituations(std::string utf8text, long UserTreeVa
 			Graph += m_RusStr.GetOtherRelations ();
 			Graph += m_RusStr.GetClauseTreeForTcl();
 		}
+		std::ofstream outp;
+		outp.open("graph_debug.txt");
+		auto d = Graph;
+		std::replace(d.begin(), d.end(), '\1', '\n');
+		outp << d;
+		outp.close();
+
 		m_RusStr.CopyDopRelationsExceptAnaphor();
 		m_CurrentSentence ++;
 

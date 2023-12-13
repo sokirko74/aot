@@ -298,10 +298,10 @@ void CEngSemStructure::CreateBeSemNode(CEngSemNode& newNode, int& iSubjPattern ,
 	iObjPattern = -1;
 	iSubjPattern = -1;
 	for(int i = 0 ; i < newNode.m_Vals.size() ; i++ )
-		if( HasThisGX(newNode.m_Patterns[i].m_GramCorteges, "obj", Aoss) )
+		if( HasThisGX(newNode.m_Patterns[i].GetGramCorteges(), "obj", Aoss) )
 			iObjPattern = i;
 		else
-			if( HasThisGX(newNode.m_Patterns[i].m_GramCorteges, "subj", Aoss) )
+			if( HasThisGX(newNode.m_Patterns[i].GetGramCorteges(), "subj", Aoss) )
 				iSubjPattern = i;
 
 	assert (iObjPattern != -1);
@@ -331,10 +331,10 @@ void CEngSemStructure::CreateHaveSemNode(CEngSemNode& newNode, int& iSubjPattern
 	
 	for(int i = 0 ; i < newNode.m_Vals.size() ; i++ )
 	{
-		if( HasThisGX(newNode.m_Patterns[i].m_GramCorteges, "obj", Aoss) )
+		if( HasThisGX(newNode.m_Patterns[i].GetGramCorteges(), "obj", Aoss) )
 			iObjPattern = i;
 		else
-			if( HasThisGX(newNode.m_Patterns[i].m_GramCorteges, "subj", Aoss) )
+			if( HasThisGX(newNode.m_Patterns[i].GetGramCorteges(), "subj", Aoss) )
 				iSubjPattern = i;
 	}
 	#ifdef _DEBUG
@@ -354,9 +354,9 @@ void CEngSemStructure::SetPositionOfActantInColloc(CEngSemRelation& engRel, CSem
 	if( type != EngCollocRoss )
 		return;
 	
-	if( !semPattern.m_GramCorteges.empty() )
-	  if( GetRossHolder(EngCollocRoss)->IsPosition(semPattern.m_GramCorteges[0].GetItem(0)) )
-	     engRel.m_Position = GetItemStr(semPattern.m_GramCorteges[0].GetItem(0), type);
+	if( !semPattern.GetGramCorteges().empty() )
+	  if( GetRossHolder(EngCollocRoss)->IsPosition(semPattern.GetGramCorteges()[0].GetItem(0)) )
+	     engRel.m_Position = GetItemStr(semPattern.GetGramCorteges()[0].GetItem(0), type);
 		
 }
 

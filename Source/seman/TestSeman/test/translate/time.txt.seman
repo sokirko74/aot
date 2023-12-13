@@ -22,7 +22,7 @@
     {
         "comments": "// 24 hours <a> day",
         "input": "24 часа в сутки",
-        "result": "For 24 hours to days."
+        "result": "24 Hours a day."
     },
     {
         "comments": "",
@@ -42,7 +42,7 @@
     {
         "comments": "",
         "input": "Год назад",
-        "result": "<а> year ago."
+        "result": "A year ago."
     },
     {
         "comments": "",

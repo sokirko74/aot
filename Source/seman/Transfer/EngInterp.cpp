@@ -22,18 +22,18 @@ void CEngSemStructure::InitEngVals(CEngSemNode& Node)
 		CSemPattern semPattern;
 		semPattern.InitSemPattern(GetRossHolder(Node.GetType()), Node.GetUnitNo(), Node.m_Vals[i].m_LeafId, Node.m_Vals[i].m_BracketLeafId);
 		semPattern.LoadGramFromDict();
-		if (semPattern.m_GramCorteges.empty())
+		if (semPattern.GetGramCorteges().empty())
 		{
 			// Добавляем пустой кортеж, если в статье не было найдено GFi
-			semPattern.m_GramCorteges.push_back(TCortege());
+			// todo:remove me
+			semPattern.AddGramCortege(TCortege());
 		};
-
 		Node.m_Patterns.push_back(semPattern);
 
 		/*
 			добавляем  паттерны копулы в специальный  массив, у копула не может больше двух валентностей
 		*/
-		if (HasThisGX(semPattern.m_GramCorteges,"Copul", Node.GetType()))
+		if (HasThisGX(semPattern.GetGramCorteges(), "Copul", Node.GetType()))
 			for (size_t ValNo=1;  ValNo<=2; ValNo++)
 			{
 				CSemPattern P;
@@ -188,7 +188,7 @@ int CEngSemStructure::GetEnglishNodeBadWeight(int iRusNode, CEngInterp& UnitInte
 			CSemPattern semPattern;
 			semPattern.InitSemPattern(GetRossHolder(UnitInterp.m_DictType), engNode.m_Vals[i].m_UnitNo, engNode.m_Vals[i].m_LeafId, engNode.m_Vals[i].m_BracketLeafId);
 			semPattern.LoadGramFromDict();
-			if( !HasThisGX(semPattern.m_GramCorteges, "-", UnitInterp.m_DictType) )
+			if( !HasThisGX(semPattern.GetGramCorteges(), "-", UnitInterp.m_DictType))
 			{
 				iBadWeight++;
 				break;
@@ -264,14 +264,14 @@ bool  CEngSemStructure::AddGXiFromLexFunOperWord(long LexFunctWordUnitNo, CSemPa
 		{
 			semPattern1.InitSemPattern(GetRossHolder(Aoss), LexFunctWordUnitNo, 1, 0);
 			semPattern1.LoadGramFromDict();
-			if( !semPattern1.m_GramCorteges.empty() )
+			if( !semPattern1.GetGramCorteges().empty() )
 					return true;
 		}
 		else
 		{
 			int iValNumInLexFunctWord = ((iValNum + 1) > iOperNum) ? iValNum + 1 : iValNum + 2;
 			semPattern1.InitSemPattern(GetRossHolder(Aoss), LexFunctWordUnitNo, iValNumInLexFunctWord+1, 0);
-			if( !semPattern1.m_GramCorteges.empty() )
+			if( !semPattern1.GetGramCorteges().empty() )
 					return true;
 		}
 	}
@@ -385,7 +385,7 @@ bool CEngSemStructure::AddGXiFromLexFunFuncWord(long LexFunctWordUnitNo, CSemPat
 		if( iValNum == iFuncNum - 1 )
 		{
 			semPattern1.InitSemPattern(GetRossHolder(Aoss), LexFunctWordUnitNo, 1, 0);
-			if( !semPattern1.m_GramCorteges.empty() )
+			if( !semPattern1.GetGramCorteges().empty() )
 					return true;
 		}
 		else
@@ -395,7 +395,7 @@ bool CEngSemStructure::AddGXiFromLexFunFuncWord(long LexFunctWordUnitNo, CSemPat
 				iValNumInLexFunctWord--;
 
 			semPattern1.InitSemPattern(GetRossHolder(Aoss), LexFunctWordUnitNo, iValNumInLexFunctWord +1, 0);
-			if( !semPattern1.m_GramCorteges.empty() )
+			if( !semPattern1.GetGramCorteges().empty() )
 					return true;
 		}
 
@@ -552,8 +552,8 @@ int CEngSemStructure::InterpretRusNodeAndItsChildren( CEnglishEquivMap& mapRNode
 				{
 					SetPositionOfActantInColloc(engRel,EngValencyOwner.m_Patterns[valNo],iValencyOwner);
 					engRel.m_Pattern = EngValencyOwner.m_Patterns[valNo];
-					assert (engRel.m_Pattern.m_GramCorteges.size() > 0);
-					engRel.m_SynReal.m_Cortege = engRel.m_Pattern.m_GramCorteges[0];
+					assert (engRel.m_Pattern.GetGramCorteges().size() > 0);
+					engRel.m_SynReal.m_Cortege = engRel.m_Pattern.GetGramCorteges()[0];
 				}
 			}
 			else

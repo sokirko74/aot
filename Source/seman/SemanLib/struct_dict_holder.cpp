@@ -84,13 +84,13 @@ void CStructDictHolder::InitFieldsAndDomains() {
 
 }
 
-static TCortege GetSubjCortege(CStructDictHolder* RossDoc)
+static TCortege GetSubjCortege(const CStructDictHolder* RossDoc)
 {
 	TCortege C;
 	C.m_FieldNo = RossDoc->GramFetFieldNo;
 	C.m_LeafId = 1;
 	C.m_LevelId = 0;
-	bool b = RossDoc->GetRoss()->ReadFromStr("подл : И", C);
+	bool b = RossDoc->GetRoss()->ReadFromStrConst("подл : И", C);
 	if (!b) {
 		throw CExpc("GetSubjCortege failed");
 	}
@@ -145,7 +145,7 @@ bool CStructDictHolder::InitConsts()
 
 	InitDomainsConsts();
 
-	if (m_DictType == Ross) {
+	if (m_DictType == Ross || m_DictType == CollocRoss || m_DictType == TimeRoss) {
 		rus_subj_gf = GetSubjCortege(this);
 		adj_gf_1 = GetFullGleicheRightCortege(this, 1);
 		adj_gf_2 = GetFullGleicheRightCortege(this, 2);

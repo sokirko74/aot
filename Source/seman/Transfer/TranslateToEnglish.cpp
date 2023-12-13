@@ -192,7 +192,7 @@ std::string CEngSemStructure::GetMorphologyOfNode(long NodeNo) const
 	if (W.m_Poses != 0)
 	{
 		part_of_speech_t pos = GetOnePOS(W.m_Poses);
-		if (pos != UnknownPOS)
+		if (pos != UnknownPartOfSpeech)
 			POS = std::string(m_pData->GetEngGramTab()->GetPartOfSpeechStr(pos));
 	};
 

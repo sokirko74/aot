@@ -936,7 +936,7 @@ void CEngSemStructure::FindEngWords(std::vector<CEngInterp>& resEngUnits, std::v
 					part_of_speech_t engPos = GetOnePOS(Dummy.m_Poses);
 //Gri !!!!!
 // это место где need переходит в have
-					if( engPos == UnknownPOS )
+					if( engPos == UnknownPartOfSpeech)
 						continue;
 					if( !( (1 << engPos) & (EngPOSesByRusPOS(GetOnePOS(vectorEngEquivs[i].m_RusPoses),"") )) )
 						continue;

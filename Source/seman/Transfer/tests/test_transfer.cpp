@@ -56,6 +56,25 @@ TEST_CASE("test_numeral") {
 	CHECK(s == "Two.");
 }
 
+TEST_CASE("test_timeross_article") {
+	auto s = translate("год назад");
+	CHECK(s == "A year ago.");
+
+}
+
+TEST_CASE("test_colloc") {
+	auto s = translate("не говоря уже о багаже");
+	CHECK(s == "Not speaking of luggage.");
+
+}
+
+TEST_CASE("test_article_with_of") {
+	// all article rules are adhoc: check that NP with  "of" is .GetTense()definite
+	auto s = translate("регулирование обращения");
+	CHECK(s == "The regulation of appeal.");
+
+}
+
 
 
 int main(int argc, char** argv) {

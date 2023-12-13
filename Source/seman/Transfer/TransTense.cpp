@@ -223,7 +223,7 @@ void CEngSemStructure::ApplyModalVerbTenseRule()
 					m_Relations[iSubj].m_bInterpreted = true;
 
 					m_Relations[iSubj].m_Pattern = beNode.m_Patterns[iSubjPattern];
-					m_Relations[iSubj].m_SynReal.m_Cortege = beNode.m_Patterns[iSubjPattern].m_GramCorteges[0];
+					m_Relations[iSubj].m_SynReal.m_Cortege = beNode.m_Patterns[iSubjPattern].GetGramCorteges()[0];
 				}
 			}
 			
@@ -247,7 +247,7 @@ void CEngSemStructure::ApplyModalVerbTenseRule()
 		
 			for( int i=0; i<newNode.m_Patterns.size(); i++ )
 			{
-				if( HasThisGX(newNode.m_Patterns[i].m_GramCorteges,"to+inf",Aoss) )
+				if( HasThisGX(newNode.m_Patterns[i].GetGramCorteges(),"to+inf",Aoss) )
 					iObjPattern = i;
 			}
 			assert( iObjPattern!=-1 );
@@ -263,7 +263,7 @@ void CEngSemStructure::ApplyModalVerbTenseRule()
 				m_Relations[outRels[i]].m_Valency.m_UnitNo = newNode.GetUnitNo();
 				m_Relations[outRels[i]].m_Valency.m_LeafId = 2;
 				m_Relations[outRels[i]].m_Pattern = newNode.m_Patterns[iObjPattern];
-				m_Relations[outRels[i]].m_SynReal.m_Cortege = newNode.m_Patterns[iObjPattern].m_GramCorteges[0];
+				m_Relations[outRels[i]].m_SynReal.m_Cortege = newNode.m_Patterns[iObjPattern].GetGramCorteges()[0];
 			}
 		}
 
@@ -292,7 +292,7 @@ void CEngSemStructure::ApplyModalVerbTenseRule()
 			if (R.m_Valency.m_LeafId == 2)
 			{
 				R.m_Pattern = newNode.m_Patterns[1];
-				R.m_SynReal.m_Cortege = R.m_Pattern.m_GramCorteges[0];
+				R.m_SynReal.m_Cortege = R.m_Pattern.GetGramCorteges()[0];
 			};
 		};
 	}

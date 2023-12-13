@@ -457,8 +457,7 @@ void CRusSemStructure::ApplySubordinationSemfets() {
 
 bool HasSynFet(const CSemPattern &P, dom_item_id_t item_id) {
 
-    for (auto& c : P.m_GramCorteges) {
-        auto debug = P.GetRossHolder()->GetRoss()->WriteToString(c);
+    for (auto& c : P.GetGramCorteges()) {
         dom_item_id_t syn_fet = P.GetRossHolder()->GetSynFet(c);
         if (!is_null(syn_fet) && syn_fet == item_id)
             return true;

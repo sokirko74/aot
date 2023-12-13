@@ -231,9 +231,9 @@ bool CRusSemStructure::CheckTimeGramFet(CNodeHypot& Hypot, const CTimeUnit& Time
 	P.InitSemPattern(GetRossHolder(TimeRoss), UnitNo, 0, PlaceNo + 1);
 	P.LoadGramFromDict();
 
-	for (Hypot.m_GramCortegeNo = 0; Hypot.m_GramCortegeNo < P.m_GramCorteges.size(); Hypot.m_GramCortegeNo++)
+	for (Hypot.m_GramCortegeNo = 0; Hypot.m_GramCortegeNo < P.GetGramCorteges().size(); Hypot.m_GramCortegeNo++)
 	{
-		TCortege& C = P.m_GramCorteges[Hypot.m_GramCortegeNo];
+		const TCortege& C = P.GetGramCorteges()[Hypot.m_GramCortegeNo];
 		std::string GramFet = GetRoss(TimeRoss)->WriteToString( C);
 		Trim(GramFet);
 
@@ -272,7 +272,7 @@ bool CRusSemStructure::CheckTimeGramFet(CNodeHypot& Hypot, const CTimeUnit& Time
 		};
 	};
 
-	return   (P.m_GramCorteges.size() == 0)
+	return   (P.GetGramCorteges().size() == 0)
 		|| (
 			(PlaceNo < TimeUnit.m_LexicalFillings.size())
 			&& TimeUnit.m_LexicalFillings[PlaceNo].m_Preps.size() > 0

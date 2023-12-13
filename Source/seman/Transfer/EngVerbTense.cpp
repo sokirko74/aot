@@ -189,7 +189,7 @@ bool CEngSynthes::IsInfinitivePatternWithoutTo (long NodeNo) const
 		// загружаем GFi из словаря оборотов
 		P.InitSemPattern(E.GetRossHolder(EngObor),E.m_Relations[Rels[i]].m_SynReal.m_Conj.m_UnitNo, 2, 0);
 		P.LoadGramFromDict();
-		if (!P.m_GramCorteges.empty() )
+		if (!P.GetGramCorteges().empty() )
 		  if (P.GetSynRelStr(0) == "inf")
 			  return true;
 	};

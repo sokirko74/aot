@@ -63,6 +63,10 @@
             {
                 "format": "D_POSITION D_SYN_REL D_COLON D_GROUPS",
                 "signat_id": 8
+            },
+            {
+                "format": "D_SYN_REL D_COLON D_PHR_SPECIF",
+                "signat_id": 9
             }
         ],
         "type": 70

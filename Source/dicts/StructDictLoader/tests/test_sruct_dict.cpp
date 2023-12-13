@@ -12,6 +12,9 @@ std::string TestName = "";
 
 CDictionary LoadScheme(std::string local_folder) {
 	auto folder = MakePath(Args.Retrieve("test-folder"), local_folder);
+	if (!fs::exists(folder)) {
+		folder = (fs::path(__FILE__).parent_path() / folder).string();
+	}
 	REQUIRE(FileExists(folder.c_str()));
 	CDictionary D;
 	

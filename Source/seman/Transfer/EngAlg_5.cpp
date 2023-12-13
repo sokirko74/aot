@@ -123,7 +123,7 @@ CEngSemRelation newRel(CValency("S-ACT",A_C),m_Nodes.size()-1,iEngNode,"");	newR
 	newRel.m_Valency.m_UnitNo = m_Nodes[iBeNode].GetUnitNo();
 	newRel.m_Valency.m_LeafId = 2;
 	newRel.m_Pattern = m_Nodes[iBeNode].m_Patterns[iObjPattern];
-	newRel.m_SynReal.m_Cortege = m_Nodes[iBeNode].m_Patterns[iObjPattern].m_GramCorteges[0];
+	newRel.m_SynReal.m_Cortege = m_Nodes[iBeNode].m_Patterns[iObjPattern].GetGramCorteges()[0];
 	m_Relations.push_back(newRel); // be->Node
 
 // поищем Subj
@@ -152,7 +152,7 @@ CEngSemRelation newRel(CValency("S-ACT",A_C),m_Nodes.size()-1,iEngNode,"");	newR
 		m_Relations[iSubRel].m_bInterpreted = true;
 
 		m_Relations[iSubRel].m_Pattern = m_Nodes[iBeNode].m_Patterns[iSubjPattern];
-		m_Relations[iSubRel].m_SynReal.m_Cortege = m_Nodes[iBeNode].m_Patterns[iSubjPattern].m_GramCorteges[0];
+		m_Relations[iSubRel].m_SynReal.m_Cortege = m_Nodes[iBeNode].m_Patterns[iSubjPattern].GetGramCorteges()[0];
 		m_Relations[iSubRel].m_Valency = m_Nodes[iBeNode].m_Vals[0];
 
 		CEngSemNode& subNode = m_Nodes[m_Relations[iSubRel].m_TargetNodeNo];

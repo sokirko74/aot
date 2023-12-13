@@ -23,7 +23,7 @@ static char THIS_FILE[]=__FILE__;
 //////////////////////////////////////////////////////////////////////
 
 inline bool is_a_token_part(int i) {
-	return std::isdigit(i) > 0 || std::isalpha(i) > 0 || i > 127;
+	return i > 127 || std::isdigit(i) > 0 || std::isalpha(i) > 0;
 }
 
 CSyntaxColorizer::CSyntaxColorizer()

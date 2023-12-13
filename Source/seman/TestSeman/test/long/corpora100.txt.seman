@@ -47,7 +47,7 @@
     {
         "comments": "",
         "input": "Компания Диатех заключила арендный договор с компанией Диалинг на два года.",
-        "result": "The company Diatekh signed lease contract with company Dialing for two years."
+        "result": "Company Diatekh signed lease contract with Dialing's company for two years."
     },
     {
         "comments": "",
@@ -57,7 +57,7 @@
     {
         "comments": "",
         "input": "Госбанк осуществлял регулирование денежного обращения и валютных расчетов России и через коммерческие банки принимал активное участие в кредитовании промышленности и торговли.",
-        "result": "The State Bank effected the regulation of currency of money and Russia foreign exchange settlements and took active part in crediting industry and trade through the commercial banks."
+        "result": "The State Bank effected the regulation of currency of money and Russia foreign exchange settlements and he took active part in crediting industry and trade through the commercial banks."
     },
     {
         "comments": "",

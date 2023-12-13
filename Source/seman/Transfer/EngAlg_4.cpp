@@ -158,7 +158,7 @@ void CEngSemStructure::AddLexFuncNode(int iEngNode)
 		if (HasSubjAsFirstValency(VerbNode))
 		{
 			m_Relations[outRels[i]].m_Valency = VerbNode.m_Vals[0];
-			m_Relations[outRels[i]].m_SynReal.m_Cortege = VerbNode.m_Patterns[0].m_GramCorteges[0];
+			m_Relations[outRels[i]].m_SynReal.m_Cortege = VerbNode.m_Patterns[0].GetGramCorteges()[0];
 			bHasSub = true;
 		};
 		break;
@@ -559,7 +559,7 @@ void CEngSemStructure::ConvertClosedCollocToOpen()
 
 				assert ( HasSubjAsFirstValency(OldCollocNode) );
 
-				newRels[k].m_SynReal.m_Cortege = OldCollocNode.m_Patterns[0].m_GramCorteges[0];
+				newRels[k].m_SynReal.m_Cortege = OldCollocNode.m_Patterns[0].GetGramCorteges()[0];
 			};
 
 			

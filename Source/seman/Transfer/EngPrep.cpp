@@ -105,7 +105,7 @@ void CEngSynthes::handle_prep(int node_no)
 		&& eng_rel != -1
 	    && !Rel(eng_rel).m_Pattern.IsEmpty() 
 	 	&& Res(Rel(eng_rel).m_SourceNodeNo).is_passive_verb
-		&& E.HasThisGX(Rel(eng_rel).m_Pattern.m_GramCorteges, "obj", Node(Rel(eng_rel).m_SourceNodeNo).GetType())
+		&& E.HasThisGX(Rel(eng_rel).m_Pattern.GetGramCorteges(), "obj", Node(Rel(eng_rel).m_SourceNodeNo).GetType())
 	  )
 	{
 	  Res(node_no).m_prep = "by";

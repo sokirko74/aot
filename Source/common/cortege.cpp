@@ -145,11 +145,4 @@ size_t TCortege::restore_from_bytes(const BYTE* buf)
 	return get_size_in_bytes();
 };
 
-void TCortege::shift_left(BYTE start) {
-	for (BYTE k = start; k < MaxNumDom - 1; ++k) {
-		SetItem(k, GetItem(k + 1));
-	}
-	SetItem(MaxNumDom - 1, EmptyDomItemId);
-}
-
 

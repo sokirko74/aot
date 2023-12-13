@@ -72,6 +72,7 @@ const char g_strRegRusTimeRossDicPath[] = "Software\\Dialing\\TimeRoss\\DictPath
 const char g_strRegEngCollocsDicPath[] = "Software\\Dialing\\EngCollocs\\DictPath";
 const char g_strRegRusCollocsDicPath[] = "Software\\Dialing\\Collocs\\DictPath";
 const char g_strRegEngOborDicPath[] = "Software\\Dialing\\EngObor\\DictPath";
+const char g_strRegRusOborDicPath[] = "Software\\Dialing\\Obor\\DictPath";
 
 
 
