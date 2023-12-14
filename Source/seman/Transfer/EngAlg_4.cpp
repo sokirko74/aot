@@ -122,7 +122,7 @@ void CEngSemStructure::AddLexFuncNode(int iEngNode)
 		if( m_Nodes[iNewNode].HasPOS(eMOD) &&
 			m_Nodes[iNewNode].m_Words[0].GetTense() == present_smp_tn )
 		{
-			m_Nodes[iEngNode].m_bNotUseTo = true;
+			m_Nodes[iEngNode].SetInfinitiveWoTo();
 		}
 	}
 	else
@@ -775,7 +775,7 @@ void CEngSemStructure::HandleQuestionClause(int iEngRoot)
 		iQueRel!=-1 &&
 		m_Nodes[m_Relations[iQueRel].m_TargetNodeNo].m_Words[0].m_Lemma != "how" )
 	{
-		m_Nodes[iEngRoot].m_bNotUseTo = true;
+		m_Nodes[iEngRoot].SetInfinitiveWoTo();
 	}
 
 // "ли" и "же" игнорируются

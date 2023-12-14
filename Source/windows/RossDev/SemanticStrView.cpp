@@ -1,6 +1,3 @@
-// graphtest3View.cpp : implementation of the CSemanticStrView class
-//
-
 #include "StdAfx.h"
 #include "RossDev.h"
 
@@ -37,7 +34,7 @@ END_MESSAGE_MAP()
 
 
 
-CSemanticStrView::CSemanticStrView() :  m_TclInterp(((CRossDevApp*)AfxGetApp())->m_TclInterp)
+CSemanticStrView::CSemanticStrView() : m_TclInterp(((CRossDevApp*)AfxGetApp())->m_TclInterp)
 {
 }
 
@@ -54,6 +51,7 @@ BOOL CSemanticStrView::OnCreate(LPCREATESTRUCT lpCreateStruct)
 	SwitchMainTkWindow();
 	m_TclInterp.RunTcl("source $env(GRAPHLET_DIR)/lib/graphscript/ross/semstruct.tcl");
 	m_TclInterp.RunTcl("initialize_graphic $main");
+	//m_TclInterp.RunTcl("FindSituationsTcl 1 \"a\" -1 \"test\" 10  -1 \"\"");
 	CView::OnCreate(lpCreateStruct);
 	return TRUE;
 }
@@ -80,7 +78,7 @@ void CSemanticStrView::Dump(CDumpContext& dc) const
 
 #endif //_DEBUG
 
-void CSemanticStrView::ShowGraph() 
+void CSemanticStrView::ShowGraph()
 {
 	m_TclInterp.RunTcl("$GT($main,graph) draw");
 };
@@ -92,36 +90,36 @@ void CSemanticStrView::SwitchMainTkWindow()
 };
 
 
-/*BOOL CSemanticStrView::Create(LPCTSTR lpszClassName, LPCTSTR lpszWindowName, uint32_t dwStyle, const RECT& rect, CWnd* pParentWnd, UINT nID, CCreateContext* pContext) 
+/*BOOL CSemanticStrView::Create(LPCTSTR lpszClassName, LPCTSTR lpszWindowName, uint32_t dwStyle, const RECT& rect, CWnd* pParentWnd, UINT nID, CCreateContext* pContext)
 {
    m_Menu.LoadMenu(IDR_ROSSDETYPE);
    pParentWnd->SetMenu( &m_Menu );
    CRect R = rect;
    pParentWnd->SetWindowPos(0, 120, 120, 840, 500,0);
-	
+
    BOOL ok = CWnd::Create(lpszClassName, lpszWindowName, dwStyle, R, pParentWnd, nID, pContext);
 
    if (ok) {
 	}
 	return ok;
-	
+
 }*/
 
-void CSemanticStrView::OnSize(UINT nType, int cx, int cy) 
+void CSemanticStrView::OnSize(UINT nType, int cx, int cy)
 {
 	CView::OnSize(nType, cx, cy);
 
 	if (m_TopTKWindow.m_tkwin) {
 		CRect clrect;
 		GetClientRect(clrect);
-		Tk_MoveResizeWindow(m_TopTKWindow.m_tkwin, 0,0,clrect.Width(),clrect.Height());
+		Tk_MoveResizeWindow(m_TopTKWindow.m_tkwin, 0, 0, clrect.Width(), clrect.Height());
 		m_TclInterp.RunTcl(Format("$GT($main,canvas) configure -height %u -width %u", clrect.Height(), clrect.Width() - 100));
 		m_TclInterp.RunTcl("ResizeChildControls");
 	}
-	
+
 }
 
-BOOL CSemanticStrView::OnEraseBkgnd(CDC* pDC) 
+BOOL CSemanticStrView::OnEraseBkgnd(CDC* pDC)
 {
 	return 0; // let tk do it
 }
@@ -130,27 +128,27 @@ CSemanticStrView::~CSemanticStrView()
 {
 };
 
-void CSemanticStrView::OnDestroy() 
+void CSemanticStrView::OnDestroy()
 {
 	m_TclInterp.RunTcl(Format("destroy %s", m_TopTKWindow.m_tkname.c_str()));
 	CView::OnDestroy();
 }
 
-LRESULT CSemanticStrView::WindowProc(UINT message, WPARAM wParam, LPARAM lParam) 
+LRESULT CSemanticStrView::WindowProc(UINT message, WPARAM wParam, LPARAM lParam)
 {
 	// pass some messages thru to Tk child window
 	if (m_TopTKWindow.m_tkhwnd) {
 		switch (message) {
-			case WM_KEYDOWN: ::SendMessage(m_TopTKWindow.m_tkhwnd,message,wParam,lParam); break;
-			case WM_KEYUP: ::SendMessage(m_TopTKWindow.m_tkhwnd,message,wParam,lParam); break;
-			case WM_CHAR:
-            case WM_COPY:
-			case WM_CLEAR:
-			case WM_CUT: 
-			case WM_GETTEXT: 
-			case WM_SETFOCUS: ::SendMessage(m_TopTKWindow.m_tkhwnd,message,wParam,lParam); break;
-				
-				break;
+		case WM_KEYDOWN: ::SendMessage(m_TopTKWindow.m_tkhwnd, message, wParam, lParam); break;
+		case WM_KEYUP: ::SendMessage(m_TopTKWindow.m_tkhwnd, message, wParam, lParam); break;
+		case WM_CHAR:
+		case WM_COPY:
+		case WM_CLEAR:
+		case WM_CUT:
+		case WM_GETTEXT:
+		case WM_SETFOCUS: ::SendMessage(m_TopTKWindow.m_tkhwnd, message, wParam, lParam); break;
+
+			break;
 		}
 	}
 
@@ -158,40 +156,40 @@ LRESULT CSemanticStrView::WindowProc(UINT message, WPARAM wParam, LPARAM lParam)
 }
 
 
-void CSemanticStrView::PasteClipboard() 
+void CSemanticStrView::PasteClipboard()
 {
 	OpenClipboard();
-    HGLOBAL hMem = ::GetClipboardData(CF_UNICODETEXT );
-    if (!hMem) {        
-        CloseClipboard();        
-        return;    
-    }
+	HGLOBAL hMem = ::GetClipboardData(CF_UNICODETEXT);
+	if (!hMem) {
+		CloseClipboard();
+		return;
+	}
 
-	wchar_t wstr  [5000];
-	if ( GlobalSize(hMem) > 4999) 
+	wchar_t wstr[5000];
+	if (GlobalSize(hMem) > 4999)
 	{
-		AfxMessageBox (_T(" Text is too big!"));
+		AfxMessageBox(_T(" Text is too big!"));
 	};
 
-	CopyMemory( wstr, hMem, GlobalSize(hMem));
+	CopyMemory(wstr, hMem, GlobalSize(hMem));
 	wstr[GlobalSize(hMem)] = 0;
 	std::string utf8 = wstring_to_utf8(std::wstring(wstr));
 	std::string s8 = convert_from_utf8(utf8.c_str(), morphRussian);
-    //CString Q = s8.c_str();
+	//CString Q = s8.c_str();
 	//CString Q = utf8.c_str();
 	char cmd[5200];
-	strcpy (cmd, "$main.controls.mainEntry insert 0.0 \"");
-    for (size_t i=0; i < s8.length();i++)
+	strcpy(cmd, "$main.controls.mainEntry insert 0.0 \"");
+	for (size_t i = 0; i < s8.length();i++)
 		if (s8[i] == '"')
-			strcat (cmd, "\\\"");
+			strcat(cmd, "\\\"");
 		else
-		{   
+		{
 			size_t l = strlen(cmd);
 			cmd[l] = s8[i];
-			cmd[l+1] = 0; 
+			cmd[l + 1] = 0;
 		};
 
-    strcat (cmd, "\"");
+	strcat(cmd, "\"");
 	try {
 		m_TclInterp.RunTcl(cmd);
 	}
@@ -202,90 +200,56 @@ void CSemanticStrView::PasteClipboard()
 
 }
 
-void CSemanticStrView::OnActivateView(BOOL bActivate, CView* pActivateView, CView* pDeactiveView) 
+void CSemanticStrView::OnActivateView(BOOL bActivate, CView* pActivateView, CView* pDeactiveView)
 {
 	// TODO: Add your specialized code here and/or call the base class
 	SwitchMainTkWindow();
-	
+
 	CView::OnActivateView(bActivate, pActivateView, pDeactiveView);
-	CRossDevApp* App =  (CRossDevApp*)::AfxGetApp();
+	CRossDevApp* App = (CRossDevApp*)::AfxGetApp();
 	App->m_pMainWnd->SendMessage(WM_MDISETMENU, (WPARAM)0, (LPARAM)m_Menu.m_hMenu);
 	App->m_pMainWnd->DrawMenuBar();
 
 }
 
-
-
-
-
-static void log(std::string  s)
+void CSemanticStrView::BuildTclGraph(std::string commands_utf8)
 {
-	std::string FileName = "rossdev.log";
-
+	LOGD << "BuildTclGraphn";
+	auto s8 = convert_from_utf8(commands_utf8.c_str(), morphRussian);
 	try {
-		std::string log_path  = GetRegistryString( "Software\\Dialing\\Logs\\Main" );
-		FileName = log_path + FileName;
-	}
-	catch (...) {
-	};
-
-    FILE* fp  = fopen (FileName.c_str(), "a");
-	fprintf (fp, "%s\n", s.c_str());
-	fclose(fp);
-}
-
-void CSemanticStrView::BuildTclGraph(std::string s_utf8)
-{  
-   log (std::string("\nBuildTclGraphn"));
-   if (s_utf8.empty()) return;
-
-   char* str = new char[s_utf8.length() + 1];
-   assert (str);
-   std::string CurrCommand;
-
-   try {
-	 strcpy  (str, s_utf8.c_str());
-	 char* s = str;
-	 for (;;)
-	 {
-		char* q  = strchr(s, 1);
-		if (!q) break;
-		*q = 0;
-		assert (strlen(s) > 0) ;
-		try {
-			m_TclInterp.RunTcl(s);
+		for (auto& cmd : split_string(s8, '\x1'))
+		{
+			try {
+				m_TclInterp.RunTcl(cmd);
+			}
+			catch (std::exception& e) {
+				auto m = Format("Cannot interpret TCL Code \"%s\". Proceed?", e.what());
+				int Result = ::MessageBox(0, _U16(m), _T("Seman"), MB_YESNO);
+				if (Result == IDYES)
+					break;
+			};
 		}
-		catch (std::exception& e) {
-			auto m = Format("Cannot interpret TCL Code \"%s\". Proceed?", e.what());
-			int Result = ::MessageBox(0, _U16(m), _T("Seman"), MB_YESNO);
-			if (Result == IDYES)
-				break;
-		};
-		s = q+1;
 	}
-   }
 	catch (...)
 	{
 		::MessageBox(0, _T("Cannot interpret TCL Code"), _T("Seman"), MB_OK);
 	};
-
-	delete str;
 };
 
 
-int CreateSynStr (ClientData clienData, 
-			   Tcl_Interp* interp, 
-			   int argc, char* argv[])
+int CreateSynStr(ClientData clienData,
+	Tcl_Interp* interp,
+	int argc, char* argv[])
 {
-	CRossDevApp* App =  (CRossDevApp*)::AfxGetApp();
-	if  (App->m_bGraphanIsBusy)
+	CRossDevApp* App = (CRossDevApp*)::AfxGetApp();
+	if (App->m_bGraphanIsBusy)
 	{
-		AfxMessageBox (_T("Graphan is busy (getting minus list)"));
+		AfxMessageBox(_T("Graphan is busy (getting minus list)"));
 		return TCL_OK;
 	};
 
-    std::string utf8text;
-    if (argv[2] != 0) utf8text = argv[2];
+	std::string utf8text;
+	if (argv[2] != 0) utf8text = argv[2];
 	Trim(utf8text);
 	if (utf8text.empty())
 		return TCL_OK;
@@ -299,7 +263,7 @@ int CreateSynStr (ClientData clienData,
 		Doc->m_bBusy = false;
 		return TCL_ERROR;
 	}
-    Doc->GetView()->BuildTclGraph (Graph.c_str());
+	Doc->GetView()->BuildTclGraph(Graph.c_str());
 	Doc->m_bBusy = false;
 
 	return TCL_OK;
@@ -307,23 +271,23 @@ int CreateSynStr (ClientData clienData,
 }
 
 
-int ShowArticle (ClientData clienData, 
-			   Tcl_Interp* interp, 
-			   int argc, char* argv[])
+int ShowArticle(ClientData clienData,
+	Tcl_Interp* interp,
+	int argc, char* argv[])
 {
 	try {
 		CSemanticStrDoc* Doc = FindDoc<CSemanticStrDoc>(argv[1], GetSemanticStructureTemplate());
-		DictTypeEnum Type = (DictTypeEnum)atoi (argv[2]);
-		uint16_t UnitNo  = atoi (argv[3]);
+		DictTypeEnum Type = (DictTypeEnum)atoi(argv[2]);
+		uint16_t UnitNo = atoi(argv[3]);
 		CRossDoc* RossDoc = ((CRossDevApp*)AfxGetApp())->FindRossDoc(Type);
 		if (RossDoc)
 		{
 			if (UnitNo >= RossDoc->GetRoss()->GetUnitsSize())  return TCL_OK;
-			GlobalOpenArticle(RossDoc,UnitNo);
+			GlobalOpenArticle(RossDoc, UnitNo);
 		}
 	}
 	catch (...) {
-		AfxMessageBox (_T("Cannot show article"));
+		AfxMessageBox(_T("Cannot show article"));
 	};
 
 	return TCL_OK;
@@ -337,100 +301,71 @@ bool ThreadFinish;
 std::string fc_Graph;
 bool bAnswer = false;
 
-UINT FindSituationsInThread(LPVOID pParam )
+UINT FindSituationsInThread(LPVOID pParam)
 {
-	bAnswer = false; 
-	log (std::string("\nFindSituationsInThread"));
-	int argc = fc_argc; 
+	bAnswer = false;
+	LOGD << "FindSituationsInThread";
+	int argc = fc_argc;
 	char** argv = fc_argv;
 
 	try {
-		CRossDevApp* App =  (CRossDevApp*)::AfxGetApp();
-		if  (App->m_bGraphanIsBusy)
+		CRossDevApp* App = (CRossDevApp*)::AfxGetApp();
+		if (App->m_bGraphanIsBusy)
 		{
-			AfxMessageBox (_T("Graphan is busy (getting minus list)"));
+			AfxMessageBox(_T("Graphan is busy (getting minus list)"));
 			return TCL_OK;
 		};
+		//argv[1]
+		CSemanticStrDoc* Doc = FindDoc<CSemanticStrDoc>(argv[1], GetSemanticStructureTemplate());
+
+		//argv[2]
 		std::string text = "";
 		if (argv[2] != 0) text = argv[2];
 		Trim(text);
 		text = convert_to_utf8(text, morphRussian);
-		if (text.empty()) 
+		if (text.empty())
 		{
 			ThreadFinish = true;
 			return TCL_OK;
 		};
 
-		CSemanticStrDoc* Doc = FindDoc<CSemanticStrDoc>(argv[1], GetSemanticStructureTemplate());
+		CSemOptions opts;
+		opts.m_TreeVariantIndex = atoi(argv[3]);
+		opts.m_Domain = convert_to_utf8(argv[4], morphRussian);
+		opts.m_PanicTreeVariantCount = atoi(argv[5]);
+		opts.m_ClauseVariantsCombinationIndex = atoi(argv[6]);
+		std::string bad_lex_var = convert_to_utf8(argv[7], morphRussian);
+		for (auto l : split_string(bad_lex_var, ',')) {
+			opts.m_ProhibitedLexVars.push_back(l);
+		}
+
+
 		if (Doc->m_bBusy) return TCL_OK;
 		Doc->m_bBusy = true;
 		CSemanticStrView& SemStr = *((CSemanticStrView*)Doc->GetView());
 		SemStr.OpenAllRosses();
-		log ("SemStr.m_RusStr->FindSituations");
-		
+		LOGD << "SemStr.m_RusStr->FindSituations";
+
 		{
 			int index = text.find("##");
 			if (index != std::string::npos)
 			{
-				std::string LemmasToReplace = text.substr(index+2);
+				std::string LemmasToReplace = text.substr(index + 2);
 				text.erase(index);
 				GetSemBuilder().m_RusStr.SetLemmasToReplace(LemmasToReplace.c_str());
 			};
 		}
-		std::string Question;
-		{
-			int index = text.find("#mem");
-			if (index != std::string::npos)
-			{
-				Question = text.substr(index+4);
-				text.erase(index);
-				bAnswer = true;
-			};
 
-		}
 
-        
-        std::string Result;
-		bool bRes = 
-			GetSemBuilder().FindSituations(text,
-				atoi(argv[5]), 
-				convert_to_utf8(argv[6], morphRussian),
-				atoi(argv[7]),
-				atoi(argv[8]),
-				argv[10],
-				Result);
-		if (!bRes)
-		{
-			ErrorMessage("FindSituations has crushed!");
-		}
-		else
-		{
-			fc_Graph = convert_from_utf8(Result.c_str(), morphRussian);
-			if (!Question.empty())
-			{
-				GetSemBuilder().SaveThisSentence();
+		GetSemBuilder().FindSituations(text, opts);
 
-				bool bRes = 
-						GetSemBuilder().FindSituations(Question.c_str(),
-						atoi(argv[5]), 
-						(const char*)argv[6],
-						atoi(argv[7]),
-						atoi(argv[8]),
-						(const char*)argv[10],
-						Result);
-				if (!bRes)
-				{
-					ErrorMessage("FindSituations has crushed!");
-				}
-
-			};
-		}
+		fc_Graph = GetSemBuilder().m_RusStr.GetTclGraph();
 
 		Doc->m_bBusy = false;
 	}
-	catch  (...)
+	catch (...)
 	{
-		AfxMessageBox (_T(" Semantics has crushed!"));
+		AfxMessageBox(_T(" Semantics has crushed!"));
 	};
 
 
@@ -438,86 +373,63 @@ UINT FindSituationsInThread(LPVOID pParam )
 	return TCL_OK;
 };
 
-int AnswerBySavedSentences (ClientData clienData, 
-			   Tcl_Interp* interp, 
-			   int argc, char* argv[])
-{
-	  CSemanticStrDoc* Doc = FindDoc<CSemanticStrDoc>(argv[1], GetSemanticStructureTemplate());
-	  if (Doc->m_bBusy) return TCL_OK;
-	  Doc->m_bBusy = true;
-	  
-	  CSemanticStrView& SemStrView = *((CSemanticStrView*)Doc->GetView());
-
-	  std::string Sent = GetSemBuilder().Answer();
-
-	  ::GlobalOpenReport(Sent.c_str(), "Answer:");
-	  Doc->m_bBusy = false;
-
-	  return TCL_OK;
-
-}
 
 
-int FindSituations    (ClientData clienData, 
-			   Tcl_Interp* interp, 
-			   int argc, char* argv[])
+int FindSituationsTcl(ClientData clienData,
+	Tcl_Interp* interp,
+	int argc, char* argv[])
 
 {
-	log (std::string("\nFindSituations"));
+	LOGD << "FindSituations";
 	fc_argc = argc;
 	fc_argv = argv;
 	ThreadFinish = false;
 	try {
-		
+
 		CSemanticStrDoc* Doc = FindDoc<CSemanticStrDoc>(argv[1], GetSemanticStructureTemplate());
 		if (Doc->m_bBusy) return TCL_OK;
 		CSemanticStrView& SemStr = *((CSemanticStrView*)Doc->GetView());
 		AfxBeginThread(FindSituationsInThread, 0, THREAD_PRIORITY_NORMAL);
 		CProgressForm P;
 		P.DoModal();
-		Doc->GetView()->BuildTclGraph (fc_Graph);
+		Doc->GetView()->BuildTclGraph(fc_Graph);
 
-		if (bAnswer)
-			AnswerBySavedSentences(clienData, interp, argc, argv);
 
-	} catch (...) 
+	}
+	catch (...)
 	{
-			AfxMessageBox (_T(" FindSituations!"));
+		AfxMessageBox(_T(" FindSituations!"));
 
 	};
 	return TCL_OK;
 };
 
 
-int GetOtherRelations (ClientData clienData, 
-			   Tcl_Interp* interp, 
-			   int argc, char* argv[])
+int GetOtherRelations(ClientData clienData,
+	Tcl_Interp* interp,
+	int argc, char* argv[])
 
 {
 	return TCL_OK;
 };
 
-int TranslateToEnglish    (ClientData clienData, 
-			   Tcl_Interp* interp, 
-			   int argc, char* argv[])
+int TranslateToEnglish(ClientData clienData,
+	Tcl_Interp* interp,
+	int argc, char* argv[])
 
 {
 	try
 	{
-	  CSemanticStrDoc* Doc = FindDoc<CSemanticStrDoc>(argv[1], GetSemanticStructureTemplate());
-	  CString sent; 
-	  
-	  //bool bShowUnusedValencies = (atoi(argv[2]) == 1) ?  true : false;
-	  if (Doc->m_bBusy) return TCL_OK;
-	  Doc->m_bBusy = true;
-	  CSemanticStrView& RusStr = *((CSemanticStrView*)Doc->GetView());
-	  Doc->GetView()->OpenAllRosses();
-	  std::string Graph;
-	  if (GetSemBuilder().TranslateToEnglish(Graph))
-	  {
-		Doc->GetView()->BuildTclGraph (Graph.c_str());
-	  }
-	  Doc->m_bBusy = false;
+		CSemanticStrDoc* Doc = FindDoc<CSemanticStrDoc>(argv[1], GetSemanticStructureTemplate());
+		CString sent;
+		if (Doc->m_bBusy) return TCL_OK;
+		Doc->m_bBusy = true;
+		CSemanticStrView& RusStr = *((CSemanticStrView*)Doc->GetView());
+		Doc->GetView()->OpenAllRosses();
+		GetSemBuilder().TranslateToEnglish();
+		auto g = GetSemBuilder().m_EngStr.GetTclGraph();
+		Doc->GetView()->BuildTclGraph(g.c_str());
+		Doc->m_bBusy = false;
 	}
 	catch (...)
 	{
@@ -525,71 +437,71 @@ int TranslateToEnglish    (ClientData clienData,
 	return TCL_OK;
 };
 
-int BuildSentence (ClientData clienData, 
-			   Tcl_Interp* interp, 
-			   int argc, char* argv[])
+int BuildSentence(ClientData clienData,
+	Tcl_Interp* interp,
+	int argc, char* argv[])
 {
-	  CSemanticStrDoc* Doc = FindDoc<CSemanticStrDoc>(argv[1], GetSemanticStructureTemplate());
-	  if (Doc->m_bBusy) return TCL_OK;
-	  Doc->m_bBusy = true;
-	  
-	  CSemanticStrView& RusStr = *((CSemanticStrView*)Doc->GetView());
+	CSemanticStrDoc* Doc = FindDoc<CSemanticStrDoc>(argv[1], GetSemanticStructureTemplate());
+	if (Doc->m_bBusy) return TCL_OK;
+	Doc->m_bBusy = true;
 
-	  std::string Sent;
-	  if (GetSemBuilder().BuildSentence(Sent))
-	  {
+	CSemanticStrView& RusStr = *((CSemanticStrView*)Doc->GetView());
+
+	std::string Sent;
+	if (GetSemBuilder().BuildSentence(Sent))
+	{
 		::GlobalOpenReport(Sent.c_str(), "Translation:");
-	  }
-	  Doc->m_bBusy = false;
+	}
+	Doc->m_bBusy = false;
 
-	  return TCL_OK;
+	return TCL_OK;
 
 }
 
-int SyntRusSentence (ClientData clienData, 
-			   Tcl_Interp* interp, 
-			   int argc, char* argv[])
+int SyntRusSentence(ClientData clienData,
+	Tcl_Interp* interp,
+	int argc, char* argv[])
 {
-	  CSemanticStrDoc* Doc = FindDoc<CSemanticStrDoc>(argv[1], GetSemanticStructureTemplate());
-	  if (Doc->m_bBusy) return TCL_OK;
-	  Doc->m_bBusy = true;
-	  
-	  CSemanticStrView& RusStr = *((CSemanticStrView*)Doc->GetView());
+	CSemanticStrDoc* Doc = FindDoc<CSemanticStrDoc>(argv[1], GetSemanticStructureTemplate());
+	if (Doc->m_bBusy) return TCL_OK;
+	Doc->m_bBusy = true;
 
-	  std::string Sent;
-	  if (GetSemBuilder().SyntRusSentence(Sent))
-	  {
-		  ::GlobalOpenReport(Sent.c_str(), "Russian synthesis:");
-	  }
-	  Doc->m_bBusy = false;
+	CSemanticStrView& RusStr = *((CSemanticStrView*)Doc->GetView());
 
-	  return TCL_OK;
+	std::string Sent;
+	if (GetSemBuilder().SyntRusSentence(Sent))
+	{
+		::GlobalOpenReport(Sent.c_str(), "Russian synthesis:");
+	}
+	Doc->m_bBusy = false;
+
+	return TCL_OK;
 
 }
 
 
 
-int ClearSavedSentences (ClientData clienData, 
-			   Tcl_Interp* interp, 
-			   int argc, char* argv[])
+int ClearSavedSentences(ClientData clienData,
+	Tcl_Interp* interp,
+	int argc, char* argv[])
 {
-	  CSemanticStrDoc* Doc = FindDoc<CSemanticStrDoc>(argv[1], GetSemanticStructureTemplate());
-	  if (Doc->m_bBusy) return TCL_OK;
-	  CSemanticStrView& RusStr = *((CSemanticStrView*)Doc->GetView());
-	  GetSemBuilder().ClearSavedSentences();
-	  return TCL_OK;
+	CSemanticStrDoc* Doc = FindDoc<CSemanticStrDoc>(argv[1], GetSemanticStructureTemplate());
+	if (Doc->m_bBusy) return TCL_OK;
+	CSemanticStrView& RusStr = *((CSemanticStrView*)Doc->GetView());
+	GetSemBuilder().ClearSavedSentences();
+	return TCL_OK;
 
 }
 
-int SaveSentence (ClientData clienData, 
-			   Tcl_Interp* interp, 
-			   int argc, char* argv[])
+int SaveSentence(ClientData clienData,
+	Tcl_Interp* interp,
+	int argc, char* argv[])
 {
-	  CSemanticStrDoc* Doc = FindDoc<CSemanticStrDoc>(argv[1], GetSemanticStructureTemplate());
-	  if (Doc->m_bBusy) return TCL_OK;
-	  CSemanticStrView& RusStr = *((CSemanticStrView*)Doc->GetView());
-	  GetSemBuilder().SaveThisSentence();
-	  return TCL_OK;
+	CSemanticStrDoc* Doc = FindDoc<CSemanticStrDoc>(argv[1], GetSemanticStructureTemplate());
+	if (Doc->m_bBusy) return TCL_OK;
+	CSemanticStrView& RusStr = *((CSemanticStrView*)Doc->GetView());
+	GetSemBuilder().SaveThisSentence();
+	return TCL_OK;
 
 }
 
@@ -599,9 +511,9 @@ int SaveSentence (ClientData clienData,
 
 
 
-int PasteClipboard (ClientData clienData, 
-			   Tcl_Interp* interp, 
-			   int argc, char* argv[])
+int PasteClipboard(ClientData clienData,
+	Tcl_Interp* interp,
+	int argc, char* argv[])
 
 {
 	FindDoc<CSemanticStrDoc>(argv[1], GetSemanticStructureTemplate())->GetView()->PasteClipboard();
@@ -614,13 +526,15 @@ int ShowMessageMicrosoftWindows(ClientData clienData,
 	Tcl_Interp* interp,
 	int argc, char* argv[])
 {
-	AfxMessageBox(_U16(argv[1]));
+	std::string m = argv[1];
+	m = convert_to_utf8(m, morphRussian);
+	AfxMessageBox(_U16(m.c_str()));
 	return 1;
 }
 
-int Update    (ClientData clienData, 
-			   Tcl_Interp* interp, 
-			   int argc, char* argv[])
+int Update(ClientData clienData,
+	Tcl_Interp* interp,
+	int argc, char* argv[])
 
 {
 	return TCL_OK;
@@ -640,30 +554,30 @@ void CSemanticStrView::OpenRossDocIfNeeded(DictTypeEnum RossType)
 			((CRossDevApp*)AfxGetApp())->m_OpenRossDocReadOnly = false;
 		};
 	}
-	catch(...)
+	catch (...)
 	{
 		CString Mess = CString("Cannot open ") + path.c_str();
-		AfxMessageBox (Mess);
+		AfxMessageBox(Mess);
 	}
 }
 
 
-void  CSemanticStrView::OpenAllRosses() 
+void  CSemanticStrView::OpenAllRosses()
 {
 	try {
-		for (int i =0; i < NoneRoss; i++)
+		for (int i = 0; i < NoneRoss; i++)
 		{
 			OpenRossDocIfNeeded((DictTypeEnum)i);
 		}
 	}
 	catch (...)
 	{
-		AfxMessageBox (_T("Cannot open some semantic dictionary."));
+		AfxMessageBox(_T("Cannot open some semantic dictionary."));
 		return;
 	};
 };
 
-	// семантических словарей 
+// семантических словарей 
 
 
 

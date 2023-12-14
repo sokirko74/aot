@@ -39,7 +39,7 @@ public:
 		};
 	}
 
-	inline int InitializeTcl() {
+	inline void InitializeTcl() {
 		TclInterp = Tcl_CreateInterp();
 		if (TclInterp == NULL)
 		{
@@ -65,7 +65,7 @@ public:
 		}
 	};
 
-	inline int InitializeTk() {
+	inline void InitializeTk() {
 		RunTcl(Format("set tk_library \"%s/Bin/Lib/tk%d.%d\"", GetRmlVariable().c_str(), TclMajor, TclMinor));
 
 		if (Tk_Init(TclInterp) != TCL_OK) {

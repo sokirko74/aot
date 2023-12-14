@@ -393,7 +393,7 @@ public:
 
     virtual void EraseRelation(int RelNo, const char *cause) = 0;
 
-    virtual void GetColorAndWidthOfRelation(int RelNo, float &Width, std::string &Color) = 0;
+    virtual void GetColorAndWidthOfRelation(int RelNo, float &Width, std::string &Color) const = 0;
 
 
     // выдает все узлы из клаузы ClauseNo, в которые не входит ни одного СемО из другого узла этой же клаузы
@@ -573,7 +573,7 @@ public:
                  const std::string &DomStr, BYTE LeafId, BYTE BracketLeafId) const;
 
     // перевод  словарную интерпретацию в строковое представление
-    std::string InterpToStr(std::vector<CDictUnitInterp>::const_iterator I) const;
+    std::string InterpToStr(const CDictUnitInterp& i) const;
 
     // перевод  интерпретацию открытого словосочетания в строковое представление
     std::string OpenCollocInterpToStr(const COpenCollocInterp &I) const;
@@ -638,10 +638,10 @@ public:
     std::string GetTxtGraph();
 
     // перевод графа в TCL-представление
-    std::string GetTclGraph(bool ShowUnusedValencies, bool UseIsTop);
+    std::string GetBaseTclGraph(bool ShowUnusedValencies, bool UseIsTop) const;
 
     // выдает отношения, которые не нужно упорядочивать в дерево (они не являются основными)
-    std::string GetOtherRelations();
+    std::string GetOtherRelations() const;
 
     // печатает все словарные интерпретации  узла
     std::vector<std::string> GetNodeDictInterps(size_t nodeIndex) const;

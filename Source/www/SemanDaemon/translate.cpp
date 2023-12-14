@@ -25,7 +25,7 @@ void TSemanHttpServer::Load() {
 
 
 std::string TSemanHttpServer::Translate(const std::string& russian, const std::string &po) {
-	std::string eng = SemBuilder.TranslateRussianText(russian, po, LogMessage); 
+	std::string eng = SemBuilder.TranslateRussianText(russian, po); 
 	return Format("{\"translation\": \"%s\"}", eng.c_str());
 }
 

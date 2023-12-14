@@ -88,6 +88,12 @@ TEST_CASE("test_empty") {
 
 }
 
+TEST_CASE("test_one_char") {
+	rus.LoadStringToGraphan("d");
+	CHECK(1 == rus.GetUnits().size());
+
+}
+
 TEST_CASE("test_zero_char") {
 	std::string s = "\x0\n";
 	std::string path = std::tmpnam(nullptr);

@@ -73,8 +73,8 @@ public:
 	// ++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 	void	BuildUnits();
-	uint16_t	GetUnitsSize() const { return (uint16_t)m_Units.size();	};
-	const std::vector<CStructEntry>& GetEntries();
+	uint16_t	GetUnitsSize() const;
+	const std::vector<CStructEntry>& GetEntries() const;
 
 	bool	ClearUnits();
 	void	ClearUnit(uint16_t UnitNo);

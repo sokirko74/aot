@@ -840,7 +840,7 @@ void CEngSemStructure::ApplyALG_compl_obj(int iEngNode)
 	rRelToVerb.m_RusRel = -1;
 
 	if( !bUseTo )
-		m_Nodes[iNodeVerb].m_bNotUseTo = true;
+		m_Nodes[iNodeVerb].SetInfinitiveWoTo();
 
 	rRelToVerb.m_bInterpreted = false;
 	rRelToVerb.m_Type = NotBetweenClauses;
@@ -865,7 +865,7 @@ void CEngSemStructure::ApplyALG_compl_obj(int iEngNode)
 		if( !bUseTo )
 		{
 			m_Relations[outRels[i]].m_SynReal.m_Preps.clear();
-			m_Nodes[iNode].m_bNotUseTo = true;
+			m_Nodes[iNode].SetInfinitiveWoTo();
 		}
 	}
 

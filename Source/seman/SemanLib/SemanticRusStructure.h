@@ -2,9 +2,11 @@
 
 #include "SemanticStructure.h"
 #include "SemanticWeight.h"
+#include "sem_options.h"
 #include "rus_sem_word.h"
 #include "rus_sem_relation.h"
 #include "time_phrases.h"
+#include "sem_options.h"
 #include "synan/SynCommonLib/RelationsIterator.h"
 
 #include <stack>
@@ -268,22 +270,6 @@ enum DirectEnum {
     Indifferent
 };
 
-struct CRossInterpAndLemma : public CRossInterp {
-    std::string m_Lemma;
-
-    CRossInterpAndLemma() {
-        m_DictType = NoneRoss;
-        m_UnitNo = ErrUnitNo;
-    };
-
-    bool operator==(const CRossInterpAndLemma &X) const {
-        return (X.m_DictType == m_DictType)
-               && (X.m_UnitNo == m_UnitNo)
-               && (X.m_Lemma == m_Lemma);
-    };
-
-};
-
 
 class CRusSemStructure;
 
@@ -496,18 +482,18 @@ class CRusSemStructure :
         public CSemanticStructure,
         public CMyTimeSpanHolder,
         public CLexVariant {
+
+    CSemOptions m_UserOpts;
     void CreateSemNodesBySynttaxRelations();
     void CreateSimilarInfinitives();
     std::vector<CTimeNodeHypot> BuildTimeHypots(long node_no) const;
     void CreateOneTimeNode(const CTimeNodeHypot& h);
-
+    
 public:
     // входное СинП одного предложения
     const CSentence *m_piSent;
     // номер варианта комбинации клаузы
     long m_ClauseVariantsCombinationNo;
-    // номер варианта дерева, который заказал пользователь
-    long m_UserTreeVariantNo;
 
     // множество наденных множеств гипотез о словосочетаниях для каждой клаузы
     std::vector<CSemCollocHypVectorVector> m_ClauseSetCollocHyps;
@@ -520,12 +506,8 @@ public:
     long m_MemSaveRelationCount;
     size_t m_SentenceCount;
     std::map<std::pair<int, CRusSemNode>, int> m_PriorNounNodes2Distance;
-    // максимально разрешенное кол-во вариантов деревьев
-    long m_PanicTreeVariantCount;
     // множество всех слабых синтаксических отношений (которые можно изменять на семантике)
     StringVector m_WeakSynRels;
-    // запрещенные  лексические варианты (устанавливаются пользователем)
-    std::vector<CRossInterpAndLemma> m_UserProhibitedLexVars;
     // число клаузных(морфологических) вариантов
     long m_ClauseCombinationVariantsCount;
     // определяет, в каком режиме нужно запускать межклаузные правила, если
@@ -552,6 +534,7 @@ public:
 
     void EraseNode(int NodeNo);
 
+    void SetOptions(const CSemOptions& s);
 
     // перечень всех СемО
     const CSemRelation *GetRelation(int RelNo) const;
@@ -564,7 +547,7 @@ public:
 
     void AddRelation(const CRusSemRelation &R);
 
-    void GetColorAndWidthOfRelation(int RelNo, float &Width, std::string &Color);
+    void GetColorAndWidthOfRelation(int RelNo, float &Width, std::string &Color) const override;
 
     // перечень всех дополнительных отношений, найденных в предложении
     const CSemRelation *GetDopRelation(int RelNo) const;
@@ -610,11 +593,12 @@ public:
     std::vector<CSemanClauseRule> m_ClauseRules;
 
 
+
     CRusSemStructure();
 
     //=====================   Основные функции
     // основная функция построения предложения
-    long FindSituations(size_t SentNo, long user_clause_var_no = -1);
+    long FindSituations(size_t SentNo);
 
     // построение узлов по синтаксическому анализу и чтение СинО (интерпретация синтаксиса)
     void BuildSemNodesBySyntax();
@@ -854,7 +838,7 @@ public:
     bool ClauseHasNegationInVerb(long ClauseNo) const;
 
     // проверяет  клаузу на пустоту
-    bool IsEmptyClause(long ClauseNo);
+    bool IsEmptyClause(long ClauseNo) const;
 
     // удаляет пустые клаузы
     void DeleteEmptyClauses();
@@ -1168,7 +1152,7 @@ public:
     long GetMiscSemAgreeCount(long Tag) const;
 
     // удаляет запрещенные пользователем лексический интерпретации
-    void DelProhibitedInterps(std::string UnitStr, CRusSemNode &N) const;
+    void DelProhibitedInterps(CRusSemNode &N) const;
 
 
     // =====    обработка узла с леммой "САМ"
@@ -1397,7 +1381,7 @@ public:
     // проверяет, что между узлами входящими в это отношение нет другой связи, кроме RelNo
     bool dfs_to_test_unique_relation(size_t NodeNo, size_t RelNo);
 
-    std::string GetClauseTreeForTcl();
+    std::string GetClauseTreeForTcl() const;
 
     // получает SF1 узла NodeNo
     std::vector<uint64_t> GetSemFetsOfFirstValency(long NodeNo);
@@ -1544,8 +1528,6 @@ public:
 
     void ConvertVSE2_toOperator();
 
-    void ProcessAllowableLexVars(std::string LexVarsStr);
-
     // ищет такой же клаузный вариант,что уже был
     bool FindEqualClauseVariant();
 
@@ -1634,6 +1616,8 @@ public:
     bool CanBeDeleted(long NodeNo) const;
 
     COutputRelation GetOutputRelation(const CRusSemRelation& r) const;
+
+    std::string GetTclGraph() const;
 };
 
 extern bool HasReflexiveSuffix(const std::string &s);

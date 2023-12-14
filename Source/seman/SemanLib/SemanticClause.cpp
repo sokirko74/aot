@@ -62,7 +62,7 @@ long CRusSemStructure::GetClauseRelationCount() {
 	return Result;
 };
 
-bool CRusSemStructure::IsEmptyClause(long ClauseNo)
+bool CRusSemStructure::IsEmptyClause(long ClauseNo) const
 {
 	for (long i = 0; i < m_Nodes.size(); i++)
 		if (IsInClause(i, ClauseNo))
@@ -2315,7 +2315,6 @@ void CRusSemStructure::ApplyClauseRules(long GapSize)
 
 CRusSemStructure::CRusSemStructure()
 {
-	m_UserTreeVariantNo = -1;
 	m_SentenceCount = 0;
 	m_ClauseConnectionType = ProminentClauseRules;
 	// наверно, он ушел
@@ -2394,67 +2393,6 @@ CRusSemStructure::CRusSemStructure()
 
 
 
-std::string    CRusSemStructure::GetClauseProperiesStr(long ClauseNo) const
-{
-	std::string Res = "Свойства:\n";
-	if (m_Clauses[ClauseNo].m_bQuestion)
-	{
-		Res += "Вопросительная клауза\n";
-	};
-	return Res;
-};
-
-std::string    CRusSemStructure::GetClauseTreeForTcl()
-{
-	//установка дерева клауз
-	std::string Res = "$GT($main,clause_graph) delete nodes\1";
-
-	for (long i = 0; i < m_Clauses.size(); i++)
-	{
-		Res += Format("set clause_nds(%i) [$GT($main,clause_graph) create node]\1", i);
-		std::string name;
-		if (IsEmptyClause(i))
-			name = "_empty_";
-		else
-			if (m_Clauses[i].m_BeginNodeNo == m_Clauses[i].m_EndNodeNo - 1)
-				name = GetNodeStr(m_Clauses[i].m_BeginNodeNo, 20);
-			else
-				if (m_Clauses[i].m_BeginNodeNo + 6 >= m_Clauses[i].m_EndNodeNo)
-					for (long k = m_Clauses[i].m_BeginNodeNo; k < m_Clauses[i].m_EndNodeNo; k++)
-						name += GetNodeStr(k, 20) + " ";
-				else
-				{
-					name += GetNodeStr(m_Clauses[i].m_BeginNodeNo, 20) + " ";
-					name += GetNodeStr(m_Clauses[i].m_BeginNodeNo + 1, 20) + " .... ";
-					name += GetNodeStr(m_Clauses[i].m_EndNodeNo - 2, 20) + " ";
-					name += GetNodeStr(m_Clauses[i].m_EndNodeNo - 1, 20);
-				};
-
-		if (m_Clauses[i].m_bQuestion)
-			name += "?";
-		name += "         ";
-		name = "         " + name;
-
-		Res += Format("$GT($main,clause_graph) set $clause_nds(%i) -label \"%s\" -type oval -x 0 -y 0\1", i, name.c_str());
-
-		Res += Format("$GT($main,clause_graph) set $clause_nds(%i)  .props \"%s\"\1", i, GetClauseProperiesStr(i).c_str());
-
-	};
-
-	for (long i = 0; i < m_Clauses.size(); i++)
-		if (m_Clauses[i].m_HostClause != -1)
-		{
-			Res += Format("set edge [$GT($main,clause_graph) create edge $clause_nds(%i) $clause_nds(%i)]\1", m_Clauses[i].m_HostClause, i);
-
-			if (m_Clauses[i].m_ClauseRuleNo != -1)
-			{
-				std::string name = m_ClauseRules[m_Clauses[i].m_ClauseRuleNo].m_Name;
-				Res += Format("$GT($main,clause_graph) set $edge -label \"%s\"\1", name.c_str());
-			};
-		};
-
-	return Res;
-};
 
 long	CRusSemStructure::GetClauseFirstWordNo(long ClauseNo) const
 {

@@ -68,11 +68,6 @@ void	CRusSemStructure::AddRelation(const CRusSemRelation& R)
 	m_Nodes[R.m_TargetNodeNo].m_IncomRelsCount++;
 };
 
-void	CRusSemStructure::GetColorAndWidthOfRelation(int RelNo, float& Width, std::string& Color) 
-{
-	Width = 1;
-	Color  = m_Relations[RelNo].m_bSemFetAgree ? "blue" : "darkgreen";
-}
 // перечень всех дополнительных отношений, найденных в предложении
 const CSemRelation*	CRusSemStructure::GetDopRelation(int RelNo) const 
 {
@@ -551,92 +546,22 @@ bool	CRusSemStructure::IsParenthesis (long NodeNo) const
 
 void CRusSemStructure::CopyDopRelationsExceptAnaphor()
 {
-
-	for(int i = 0 ; i < m_DopRelations.size() ; i++ )
-		if (    (m_DopRelations[i].m_SyntacticRelation != "anaphora_relation")
-			 && (m_DopRelations[i].m_SyntacticRelation != "ModalCopul") 
+	for(auto& r: m_DopRelations)
+		if (    (r.m_SyntacticRelation != "anaphora_relation")
+			 && (r.m_SyntacticRelation != "ModalCopul") 
 		   )
 		{
-			AddRelation(m_DopRelations[i]);
-			m_Relations[m_Relations.size() - 1].m_bDopRelation = true;
+			AddRelation(r);
+			m_Relations.back().m_bDopRelation = true;
 		}		
 	
 }
 
-/*
-   функция разбирает строчку, в которой записан список разрешенных лексических
-   вариантов, напрмер
-	(1) { {"Росс:дом 1" 0} {"Росс:дом 2" 1}}
-   В этом списке стоят две интерпретации 
-	1)  статья из РОССа дом 1 
-	2)  статья из РОССа дом 2 
-*/
-void  CRusSemStructure::ProcessAllowableLexVars (std::string LexVarsStr)
-{
-	m_UserProhibitedLexVars.clear();
-	if (LexVarsStr.length() == 0) return;
 
-	StringVector InterpsAndValue;
-	long start = 0;
-	long OpenBracketCount  = 0;
-	long CloseBracketCount  = 0;
-	for (long i=0; i < LexVarsStr.length(); i++)
-	{
-		if (LexVarsStr[i] == '{') OpenBracketCount++;
-		if (LexVarsStr[i] == '}') CloseBracketCount++;
-		if ( (OpenBracketCount == 2) && (CloseBracketCount == 2))
-		{
-		   while  ((start < LexVarsStr.length()) && (LexVarsStr[start] == ' ')) start++;
-		   std::string s = LexVarsStr.substr(start+1, i - start - 1);
-		   Trim(s);	
-           InterpsAndValue.push_back(s);
-		   start = i+1;
-		   OpenBracketCount  = 0;
-		   CloseBracketCount  = 0;
-		};
-	};
-			
-	for (long i=0; i < InterpsAndValue.size(); i++)
-	{
-		int pos = InterpsAndValue[i].find (" ");
-		if (pos == string::npos) continue;
-		CRossInterpAndLemma I;
-		I.m_Lemma = InterpsAndValue[i].substr(0, pos);
-		Trim(I.m_Lemma);
-		InterpsAndValue[i].erase(0, pos+1);
+void CRusSemStructure::SetOptions(const CSemOptions& o) {
+	m_UserOpts = o;
+}
 
-		pos = InterpsAndValue[i].find_last_of (" ");
-		if (pos == string::npos) continue;
-		long State = atoi ( InterpsAndValue[i].substr(pos).c_str());
-		if (State != 0) continue;
-		std::string s = InterpsAndValue[i].substr(0, pos);
-		Trim(s);
-		if (s.length() == 0) continue;
-		if (s[0] == '{') s.erase(0,1);
-		if (s.length() == 0) continue;
-		if (s[s.length()-1] == '}') s.erase(s.length()-1);
-
-		pos = s.find (":");
-		if (pos == string::npos) continue;
-		std::string DictStr = s.substr (0, pos);
-		
-		I.m_DictType = m_pData->GetTypeByStr(DictStr);
-		if (I.m_DictType == NoneRoss) continue;
-
-		std::string UnitStr = s.substr (pos+1);
-		Trim(UnitStr);
-		if ( !isdigit((unsigned char)UnitStr[UnitStr.length() - 1])) continue;
-		int MeanNum =  UnitStr[UnitStr.length() - 1] - '0';
-		UnitStr.erase(UnitStr.length() - 1);
-		Trim(UnitStr);
-		I.m_UnitNo = GetRossHolder(I.m_DictType)->LocateUnit(UnitStr.c_str(), MeanNum);
-		if (I.m_UnitNo == ErrUnitNo) continue;
-		m_UserProhibitedLexVars.push_back(I);
-
-	};
-	
-	
-};
 
 
 CRelSet CRusSemStructure::GetIncomingRelations (long NodeNo, bool UseUse) const 

@@ -36,7 +36,7 @@ TEST_CASE("fix_case") {
 
 std::string translate(std::string s)
 {
-	return SemBuilder.TranslateRussianText(s, "общ", nullptr);
+	return SemBuilder.TranslateRussianText(s);
 }
 
 TEST_CASE("translate_name") {

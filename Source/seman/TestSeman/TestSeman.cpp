@@ -2,8 +2,6 @@
 #include "morph_dict/common/argparse.h"
 #include "seman/SemanLib/VisualGraph.h"
 
-#include <plog/Initializers/RollingFileInitializer.h>
-#include <plog/Initializers/ConsoleInitializer.h>
 
 
 extern void (*GlobalErrorMessage)(const std::string &);
@@ -11,36 +9,6 @@ extern void (*GlobalErrorMessage)(const std::string &);
 void MyGlobalErrorMessage(const std::string &s) {
     throw CExpc(s);
 
-}
-
-class MyFormatter
-{
-public:
-    static plog::util::nstring header()
-    {
-        return plog::util::nstring();
-    }
-
-    static plog::util::nstring format(const plog::Record& record)
-    {
-        plog::util::nostringstream ss;
-        ss << std::setfill(PLOG_NSTR(' ')) << std::setw(5) << std::left << severityToString(record.getSeverity()) << PLOG_NSTR(" ");
-        ss << PLOG_NSTR("[") << record.getFunc() << PLOG_NSTR("@") << record.getLine() << PLOG_NSTR("] ");
-        ss << record.getMessage() << PLOG_NSTR("\n");
-        auto mess = ss.str();
-        if (record.getSeverity() != plog::Severity::verbose) {
-            std::cerr << mess << "\n";
-        }
-        return mess;
-    }
-};
-
-
-void init_plog_seman(plog::Severity severity, std::string filename) {
-    if (std::filesystem::exists(filename)) {
-        std::filesystem::remove(filename);
-    }
-    plog::init<MyFormatter>(severity, filename.c_str());
 }
 
 
@@ -167,11 +135,10 @@ void initArgParser(int argc, const char **argv, ArgumentParser& parser) {
 nlohmann::json processText(CSemStructureBuilder& SemBuilder, bool printVisual, bool printTranslation, std::string inputText) {
     try {
         if (printTranslation) {
-            return SemBuilder.TranslateRussianText(inputText, "общ", nullptr);
+            return SemBuilder.TranslateRussianText(inputText, CommonDomain);
         }
         else {
-            std::string dummy;
-            SemBuilder.FindSituations(inputText, 0, "общ", 20000, -1, "", dummy);
+            SemBuilder.FindSituations(inputText);
             if (printVisual) {
                 return PrintRelationsAsToJavascript(SemBuilder);
             }

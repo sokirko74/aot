@@ -17,9 +17,18 @@ part_of_speech_t GetOnePOS(part_of_speech_mask_t poses)
 void CEngSemNode::Init () 
 {
 	RusNode = -1;
-	m_bNotUseTo = false;
+	m_bInfinitiveWithoutTo = false;
 	m_Article = UnknownArticle;
 };
+
+
+bool CEngSemNode::GetInfinitiveWoTo() const {
+	return m_bInfinitiveWithoutTo;
+}
+
+void CEngSemNode::SetInfinitiveWoTo() {
+	m_bInfinitiveWithoutTo = true;
+}
 
 CEngSemNode::CEngSemNode() : CSemNode() 
 {

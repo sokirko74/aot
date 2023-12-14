@@ -19,6 +19,7 @@ public:
 	CStructEntry(std::string entry_str="", int _MeanNum = 0);
 	
 	const std::string& GetEntryStr() const;
+	std::string GetEntryAndMeanNum() const;
 	void SetEntryStr(const std::string& s);
 
 	const std::string& GetAuthorStr() const;

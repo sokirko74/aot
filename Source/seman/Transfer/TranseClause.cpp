@@ -2,17 +2,6 @@
 /////////////////////////////////////////////////////////////////////////////
 // Перевод клаузы + некоторые английские алгоритмы
 
-// IsSubConj()
-// GetClauseRelType()
-// TranslateClauseRels()
-
-// ClauseRelRule_Participle()
-// ClauseRelRule_Kakoj()
-// ClauseRelRule_SubConj()
-// ClauseRelRule_Kak()
-// ClauseRelRule_ChtoKtoAsConjWords()
-// ClauseRelRule_Kotoryj()
-
 #include "StdAfx.h"
 
 const int AntecWordsCount = 8;
@@ -173,8 +162,7 @@ void CEngSemStructure::TranslateClauseRels()
 		}
 	}
 }
-/////////////////////////////////////////////////////////////////////////////
-// ClauseRelRule_Participle()
+
 // Возьми документ, лежащий на столе
 
 void CEngSemStructure::ClauseRelRule_Participle(int iRel)
@@ -227,8 +215,6 @@ void CEngSemStructure::ClauseRelRule_Participle(int iRel)
 	m_Relations.push_back(newRel);
 }
 
-/////////////////////////////////////////////////////////////////////////////
-// ClauseRelRule_Kakoj()
 
 void CEngSemStructure::ClauseRelRule_Kakoj(int iRel)
 {
@@ -257,10 +243,6 @@ void CEngSemStructure::ClauseRelRule_Kakoj(int iRel)
 		}
 	}
 }
-
-/////////////////////////////////////////////////////////////////////////////
-// ClauseRelRule_SubConj()
-
 
 void CEngSemStructure::ClauseRelRule_SubConj(int iRelNum)
 {

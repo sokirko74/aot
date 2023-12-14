@@ -443,7 +443,7 @@ CLexVariant CRusSemStructure::BuildTheVariant(long ClauseNo)
 		PrintRelations();
 
 
-		if (m_PanicTreeVariantCount > 0)
+		if (m_UserOpts.m_PanicTreeVariantCount > 0)
 		{
 			V.AllRelationsCount = m_Relations.size();
 			V.TreeVariantCount = GetTreeByConnectedComponents(ClauseNo, V.m_BestValue);
@@ -1034,7 +1034,7 @@ void CRusSemStructure::InitClauseVariantCombination(const std::vector<size_t>& c
 
 
 
-long CRusSemStructure::FindSituations(size_t SentNo, long user_clause_var_no)
+long CRusSemStructure::FindSituations(size_t SentNo)
 {
 	ClearTimers();
 	StartTimer("All time", 0);
@@ -1079,8 +1079,8 @@ long CRusSemStructure::FindSituations(size_t SentNo, long user_clause_var_no)
 	{
 		m_ClauseVariantsCombinationNo = i;
 
-		if (user_clause_var_no != -1) {
-			if (user_clause_var_no == m_ClauseVariantsCombinationNo) {
+		if (m_UserOpts.m_ClauseVariantsCombinationIndex != -1) {
+			if (m_UserOpts.m_ClauseVariantsCombinationIndex == m_ClauseVariantsCombinationNo) {
 				best_clause_var = clause_var;
 				best_clause_var_no = m_ClauseVariantsCombinationNo;
 				break;
@@ -1152,7 +1152,7 @@ long CRusSemStructure::FindSituations(size_t SentNo, long user_clause_var_no)
 
 	S = Format("==========\n Sentence weight: %i\n", min_weight);
 	m_ClausePropertiesProtocol += S;
-	S = Format("UserProhibitedLexVars.size : %i\n", m_UserProhibitedLexVars.size());
+	S = Format("UserProhibitedLexVars.size : %i\n", m_UserOpts.m_ProhibitedLexVars.size());
 	m_ClausePropertiesProtocol += S;
 	S = Format("WordsPerSecond =  %10.0f\n", WordsPerSecond);
 	if (bTooSlow)

@@ -217,7 +217,11 @@ void TRoss::WriteUnitCorteges(uint16_t unit_no, const TCortegeContainer& cortege
 
 }
 
-const std::vector<CStructEntry>& TRoss::GetEntries()
+uint16_t	TRoss::GetUnitsSize() const { 
+	return (uint16_t)m_Units.size(); 
+};
+
+const std::vector<CStructEntry>& TRoss::GetEntries() const 
 {
 	return m_Units;
 };

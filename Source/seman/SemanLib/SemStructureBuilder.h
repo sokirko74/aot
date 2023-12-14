@@ -20,10 +20,9 @@ public:
 
     bool FindSituationsForNextSentence();
 
-    bool FindSituations(std::string text, long UserTreeVariantNo, std::string PO, long PanicTreeVariantCount,
-                        long UserClauseVariantsCombinationNo, std::string AllowableLexVars, std::string &Graph);
+    void FindSituations(std::string text, CSemOptions options=CSemOptions());
 
-    bool TranslateToEnglish(std::string &Graph);
+    void TranslateToEnglish(CSemOptions options = CSemOptions());
 
     bool BuildSentence(std::string &Sentence);
 
@@ -33,13 +32,12 @@ public:
 
     void ClearSavedSentences(void);
 
-    std::string Answer();
-
     long GetScrollMax() const;
 
     long GetScrollCurrent() const;
 
-    std::string TranslateRussianText(const std::string &russian, const std::string &po, void(*logger)(const char *));
+    std::string TranslateRussianText(const std::string &russian, const std::string &po);
 
 };
 
+extern void init_plog_seman(plog::Severity severity, std::string filename);

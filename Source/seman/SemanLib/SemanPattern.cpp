@@ -291,6 +291,14 @@ bool CRusSemStructure::CheckPatternReverseGramFetLine(CSemPattern& P, CSynRealiz
 	std::string SynFetStr = P.GetSynFetStr(SynRealization.m_CortegeNo);
 	const TCortege& C = P.GetGramCorteges()[SynRealization.m_CortegeNo];
 
+	if (m_Nodes[P.m_SourceNo].m_PrepWordNo != -1) {
+		// во фразе "у Ивана и Марьи" предлог "у" вешается к узлу МНА, для которого потом ищется хозяин.
+		//  Этот хозяин не может находиться между МНА и предлогом "у"
+		auto w = m_Nodes[NodeNo].GetMinWordNo();
+		if (m_Nodes[P.m_SourceNo].m_PrepWordNo <= w && w <= m_Nodes[P.m_SourceNo].GetMinWordNo()) {
+			return false;
+		}
+	}
 	if (m_Nodes[P.m_SourceNo].m_bFullGleiche
 		|| HasRichPOS(P.m_SourceNo, ADV)
 		)

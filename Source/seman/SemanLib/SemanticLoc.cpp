@@ -117,7 +117,7 @@ std::string    GetPO (const CDictionary* Ross, uint16_t UnitNo, long POFieldNo)
 		 )
 			return Ross->GetDomItemStr(i, 0);
 
-   return std::string("общ");
+   return CommonDomain;
 };
 
 struct  CLocHostHypot {
@@ -247,8 +247,8 @@ long  CRusSemStructure :: GetLocInterp(std::string UnitStr, bool& NegativeForm) 
 		 };
   std::string PO = GetPO(GetRoss(LocRoss), UnitNo, GetRossHolder(LocRoss)->POFieldNo);
   if (UnitNo != ErrUnitNo)
-	   if (   (PO == "общ") 
-		   || (m_PO == PO) 
+	   if (   (PO == CommonDomain) 
+		   || (m_UserOpts.m_Domain == PO)
 		  ) 
 		 return UnitNo;
 	   

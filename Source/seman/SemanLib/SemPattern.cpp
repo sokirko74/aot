@@ -90,11 +90,13 @@ bool  CSemPattern::HasSemFet(const std::string& SemFet) const
 
 void CSemPattern::TracePattern () const
 {
-	LOGV << m_PatternValency.m_RelationStr;
+	stringstream ss;
+	ss << m_PatternValency.m_RelationStr << ";";
 	for (auto& g: m_GramCorteges)
 	{
-		LOGV << m_pRossDoc->GetRoss()->WriteToString(g);
+		ss << m_pRossDoc->GetRoss()->WriteToString(g) << ";";
 	};
+	LOGV << ss.str();
 };
 
 bool CSemPattern::LoadSemFromDict()

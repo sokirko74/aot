@@ -122,9 +122,8 @@ void InitError()
 
 extern LRESULT CALLBACK NodeWindowFunc(HWND, UINT, WPARAM, LPARAM);
 extern int SaveToRossdev(ClientData clienData, Tcl_Interp* interp, int argc, char* argv[]);
-//extern int GetNewNode(ClientData clienData, Tcl_Interp* interp, int argc, char* argv[]);
 extern int Update(ClientData clienData, Tcl_Interp* interp, int argc, char* argv[]);
-extern int FindSituations(ClientData clienData, Tcl_Interp* interp, int argc, char* argv[]);
+extern int FindSituationsTcl(ClientData clienData, Tcl_Interp* interp, int argc, char* argv[]);
 extern int TranslateToEnglish(ClientData clienData, Tcl_Interp* interp, int argc, char* argv[]);
 
 extern int PasteClipboard(ClientData clienData, Tcl_Interp* interp, int argc, char* argv[]);
@@ -133,7 +132,6 @@ extern int SyntRusSentence(ClientData clienData, Tcl_Interp* interp, int argc, c
 
 extern int SaveSentence(ClientData clienData, Tcl_Interp* interp, int argc, char* argv[]);
 extern int ClearSavedSentences(ClientData clienData, Tcl_Interp* interp, int argc, char* argv[]);
-extern int AnswerBySavedSentences(ClientData clienData, Tcl_Interp* interp, int argc, char* argv[]);
 
 extern int CreateSynStr(ClientData clienData, Tcl_Interp* interp, int argc, char* argv[]);
 extern int GetOtherRelations(ClientData clienData, Tcl_Interp* interp, int argc, char* argv[]);
@@ -141,13 +139,15 @@ extern int ShowArticle(ClientData clienData, Tcl_Interp* interp, int argc, char*
 extern int ShowMessageMicrosoftWindows(ClientData clienData, Tcl_Interp* interp, int argc, char* argv[]);
 
 void CRossDevApp::CreateTclCommand(char* name, Tcl_CmdProc proc) {
-	Tcl_CreateCommand(m_TclInterp.TclInterp, name, proc, (ClientData)NULL, (Tcl_CmdDeleteProc*)NULL);
+	auto ret = Tcl_CreateCommand(m_TclInterp.TclInterp, name, proc, (ClientData)NULL, (Tcl_CmdDeleteProc*)NULL);
+
 
 }
 
 BOOL CRossDevApp::InitInstance()
 {
 	m_OnlyRoss = false;
+	init_plog_seman(plog::verbose, "rossdev.log");
 
 	try {
 		Tcl_SetServiceMode(TCL_SERVICE_ALL);
@@ -289,9 +289,8 @@ BOOL CRossDevApp::InitInstance()
 	try {
 		SetTimer(NULL, 42, 10, TclTimerProc);
 		CreateTclCommand("SaveToRossdev", SaveToRossdev);
-		//CreateTclCommand("GetNewNode", GetNewNode);
 		CreateTclCommand("Update", Update);
-		CreateTclCommand("FindSituations", FindSituations);
+		CreateTclCommand("FindSituationsTcl", FindSituationsTcl);
 		CreateTclCommand("TranslateToEnglish", TranslateToEnglish);
 		CreateTclCommand("PasteClipboard", PasteClipboard);
 		CreateTclCommand("ShowMessageMicrosoftWindows", ShowMessageMicrosoftWindows);
@@ -300,7 +299,6 @@ BOOL CRossDevApp::InitInstance()
 
 		CreateTclCommand("SaveSentence", SaveSentence);
 		CreateTclCommand("ClearSavedSentences", ClearSavedSentences);
-		CreateTclCommand("AnswerBySavedSentences", AnswerBySavedSentences);
 
 		CreateTclCommand("CreateSynStr", CreateSynStr);
 		CreateTclCommand("GetOtherRelations", GetOtherRelations);

@@ -253,7 +253,6 @@ std::string CEngSemStructure::GetCortegeStr(DictTypeEnum type, const TCortege& c
 		}
 		strRes += GetItemStr(cortege.GetItem(i), type);
 		strRes += " ";
-		i++;
 	}
 	Trim(strRes);
 	return strRes;

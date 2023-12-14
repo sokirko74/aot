@@ -277,15 +277,16 @@ std::string  CSemanticStructure::GetNodeStr(const CSemNode& N, size_t MaxLength)
 			S = S + GetInterfaceWordStr(&N, i) + std::string(" ");
 
 	Trim(S);
-	size_t l = S.length();
-	if (l > MaxLength)
+	if (S.length() > MaxLength)
 	{
-		S = S.substr(0, MaxLength / 2) + std::string("...") + S.substr(l - MaxLength / 2);
+		auto w = utf8_to_wstring(S);
+		S = wstring_to_utf8(w.substr(0, 10)) + 
+			std::string("...") + 
+			wstring_to_utf8(w.substr(w.length() - 10));
 	};
-	for (size_t i = 0; i < N.m_RelOperators.size(); i++)
+	for (auto& o: N.m_RelOperators)
 	{
-		std::string Q = Format(" (%s)", N.m_RelOperators[i].c_str());
-		S += Q;
+		S += Format(" (%s)", o.c_str());
 	};
 
 	if (N.m_NodeType == MNA)
@@ -325,27 +326,34 @@ std::string  CSemanticStructure::GetNodeLemStr(size_t NodeNo) const
 
 void CSemanticStructure::PrintNodes() const
 {
-	LOGV << "Nodes:";
-
+	std::stringstream ss;
+	ss << "\n";
 	for (size_t i = 0; i < GetNodesSize(); i++)
 	{
-		LOGV << GetNodeStr1(i);
+		ss << i << "; " << GetNodeStr1(i) << "; ";
 
-		LOGV << " GF = " << GetNodePosesStr(i) << " " << 
-			m_pData->GetRusGramTab()->GrammemsToStr(GetNode(i).GetGrammems());
+		ss << " GF=" << GetNodePosesStr(i) << " " << 
+			m_pData->GetRusGramTab()->GrammemsToStr(GetNode(i).GetGrammems()) << "; ";
+		const CSemNode& n = GetNode(i);
+		ss << Format(" ClauseNo=%i; ", n.m_ClauseNo);
+		if (n.GetType() == LocRoss) ss <<" geo;";
+		if (n.m_bReached) ss <<" reached;";
+		if (n.m_bToDelete) ss << " to_delete;";
+		ss << " TagId=" << n.m_Tag << ";";
+		if (n.IsWordContainer()) {
+			ss << " (MinWordNo=" << n.GetMinWordNo() << " MaxWordNo=" <<
+				n.GetMaxWordNo() << ";";
+		}
+		if (n.m_bToDelete) ss << " to_delete;";
+		ss << " SF = "  << GetSemFetsInOneStr(n.m_NodeSemFets) << ";";
+		auto interp = n.GetInterp();
+		if (interp != nullptr) {
+			ss << " " << InterpToStr(*interp) << ";";
+		}
+		ss << "\n";
 
-		std::string Q = Format(" ClauseNo = %i ", GetNode(i).m_ClauseNo);
-		LOGV << Q;
-		if (GetNode(i).GetType() == LocRoss) LOGV <<" geo";
-		if (GetNode(i).m_bReached) LOGV <<" reached";
-		if (GetNode(i).m_bToDelete) LOGV << " to_delete";
-		LOGV << " TagId=" << GetNode(i).m_Tag;
-		if (GetNode(i).IsWordContainer())
-			LOGV.printf(" (MinWordNo=%i, MaxWordNo=%i)", GetNode(i).GetMinWordNo(), GetNode(i).GetMaxWordNo());
-		if (GetNode(i).m_bToDelete) LOGV << " to_delete";
-		LOGV << " SF = "  << GetSemFetsInOneStr(GetNode(i).m_NodeSemFets);
 	};
-
+	LOGV << ss.str();
 
 };
 

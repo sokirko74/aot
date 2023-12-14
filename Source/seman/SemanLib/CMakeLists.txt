@@ -14,6 +14,8 @@ add_library(SemanLib
         SemanHypotGraph.cpp
         SemanPattern.cpp
         "answers.cpp"
+        sem_options.cpp
+        sem_options.h
         SemanticClause.cpp
         SemanticColloc.cpp
         SemanticCommon.cpp
@@ -64,7 +66,7 @@ add_library(SemanLib
         "dict_type.h" 
         "dict_type.cpp" 
         "rus_sem_relation.cpp" "rus_sem_relation.h" "sem_relation.cpp" "sem_relation.h" 
-        "syn_realization.h" "syn_realization.cpp" "time_phrases.h")
+        "syn_realization.h" "syn_realization.cpp" "time_phrases.h" "sem_tcl.cpp")
 
 target_link_libraries(SemanLib
     SynanLib

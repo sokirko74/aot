@@ -30,8 +30,6 @@ set GT_options(walker_Sibling) {100}
 set GT_options(walker_Subtree) {32}
 
 set GT($main,tree_variant_props) "no properties"
-set globalAllLexVars {{test "РОСС:zzz" 1 }}
-set  CurrentNumber 0 
 set po  общ
 set globalLastWasSeman 0
 set LastSentence ""
@@ -157,8 +155,6 @@ proc initialize_graphic { main } {
 	set  ClearMemoBtn [button $main.controls.clearMemoBtn -text Clear -command onClearMemo -state normal]
 	place $ClearMemoBtn -x 55 -y 30 -height 20
 
-	set  AnswerBtn [button $main.controls.answerBtn -text Answer -command onAnswer -state normal]
-	place $AnswerBtn -x 101 -y 30 -height 20
 
 	set  RusSynthesisBtn [button $main.controls.rusSynthesisBtn -text RusSynt -command onRusSynthesis -state normal]
 	place $RusSynthesisBtn -x 157 -y 30 -height 20
@@ -217,11 +213,11 @@ proc initialize_graphic { main } {
 		-command {SetClauseGraphType}
 	place $main.switches.clause_graph_type -x 70 -y 95 
 
-	radiobutton $main.switches.lex_var_graph_type -text "lexvars" -variable graph_type  -relief flat \
-		-value lex_var_graph_type \
-		-command {SetLexVarType}
-	place $main.switches.lex_var_graph_type -x 70 -y 115 
+	place [message $main.switches.titleProhibited -text "Prohibited" -width 60 ] -x 0 -y 140
+	set prohibited [entry $main.switches.prohibited -width 20]
+	place $prohibited -x 70 -y 140
 
+        
 
 	set GT($main,Menu) [menu $GT($main,canvas).menu -tearoff 0]
 	set GT($main,ControlsMenu) [menu $main.controls.menu -tearoff 0]
@@ -505,7 +501,8 @@ proc onSynan {} {
 
 
 proc onBuild {} {
- global main GT CurrentNumber  PositionVar po globalLastWasSeman graph_type globalAllLexVars LastSentence
+
+ global main GT PositionVar po globalLastWasSeman graph_type LastSentence
 
 
  SetMainGraphType
@@ -518,6 +515,7 @@ proc onBuild {} {
   
  set text [$main.controls.mainEntry get 0.0 1000.0]
 
+ set prohibited [$main.switches.prohibited get]
 
  set position [$main.switches.positionEntry get]
  set panic_var_count [$main.switches.panic_var_countEntry get]
@@ -527,13 +525,9 @@ proc onBuild {} {
   set clauseVarNo [expr $clauseVarNo - 1]
  }
  
- if {$LastSentence != $text}	{
-   set globalAllLexVars {}
+ FindSituationsTcl $main $text $position $po $panic_var_count  $clauseVarNo $prohibited
 
- }
- FindSituations $main $text $CurrentNumber  0 $position $po $panic_var_count  $clauseVarNo $clauseVarNo $globalAllLexVars
-
- set graph_type main_graph_type
+  set graph_type main_graph_type
  $GT($main,canvas) configure -background  "white"
 
  set GT($main,main_graph) [graph]
@@ -599,11 +593,6 @@ proc onSaveSentence {} {
 proc onClearMemo {} {
  global GT main
  ClearMemo $main
-}
-
-proc onAnswer {} {
- global GT main
- AnswerBySavedSentences $main
 }
 
 
@@ -855,8 +844,6 @@ proc GT::remove_bends { editor } {
 proc SetMainGraphType {} {
   global GT main globalLastWasSeman
 
-  delete_lexical_variants $main
-
   if (!$globalLastWasSeman) return
 
   $GT($main,graph) delete nodes
@@ -872,8 +859,6 @@ proc SetMainGraphType {} {
 proc SetClauseGraphType {} {
   global GT globalLastWasSeman
   global main
-
-  delete_lexical_variants $main
 
   if (!$globalLastWasSeman) return
 
@@ -912,163 +897,5 @@ proc  ShowArticleTrigger {}  {
 
 
 
-proc update_globalAllLexVars { editor } {
-
-    global GT globalAllLexVars LastSentence 
-	
-    set graph $GT($editor,graph)
-	set text [$editor.controls.mainEntry get 0.0 1000.0]
-    
-	if { $LastSentence != $text || $globalAllLexVars == {} }	{
-		
-		
-		set LastSentence $text
-		set AllLexVars  {}
-		#получаем все интерпретации
-		foreach node [$graph nodes] {
-			set CurrLexVar  [$graph get $node .dict_interp]
-			set CurrList  [split $CurrLexVar  \n]
-			#берем только омонимы (последний элемент списка всегда пуст)
-			
-			if {[llength $CurrList] > 2} {
-			
-				set lemma [$graph get $node .lemma]
-				if {$lemma != ""} {
-					set m {}
-					lappend m $lemma
-					lappend m $CurrList
-					lappend AllLexVars $m
-				}
-			}
-	   }
-	   
-	   #не включаем  пустые списки
-	   set globalAllLexVars {}
-	   foreach x_pos $AllLexVars {
-			
-			set lemma [lindex $x_pos 0]
-			set interp_list [lindex $x_pos 1]
-
-			# формируем тройку 
-			foreach interp $interp_list {
-				if {$interp != ""} {
-					set m {}
-					lappend m $lemma
-					# в начале интепретации стоит плюс или минус, который надо стереть
-					set interp [lreplace $interp 0 0]
-					lappend m $interp
-					lappend m 1
-					lappend globalAllLexVars $m
-				}
-			}
-	   }
-	   
-	}
-
-
-
-};
-
-proc create_lexvars_checkboxs { editor} {
-
-    global GT globalAllLexVars 
-
-    set i 1
-	set line_no 1
-	set column_no 1
-	set last_lemma ""
-    foreach x_pos $globalAllLexVars {
-		 set name  "chk$i"
-		 set text_name  "text$i"
-		 set lemma_name  "lemma$i"
-		 set GT($name) [lindex $x_pos 2] 
- 		 set label  [lindex $x_pos 1]
-		 set lemma  [lindex $x_pos 0]
-		 set x [expr $column_no * 190 - 160]
-		 if {$lemma != $last_lemma} {
- 			 message $editor.$lemma_name  -text $lemma -width 180 -background grey
-			 set y [expr 65 + $line_no * 20]
-			 place $editor.$lemma_name -x $x -y $y  
-			 incr line_no 1
-			 set last_lemma $lemma
-		 };
-
-
-		 checkbutton $editor.$name -text " "  -variable GT($name)  -background grey
-		 set y [expr 60 + $line_no * 20]
-		 place $editor.$name -x $x -y $y -width 60 
-		 
- 		 message $editor.$text_name  -text $label -width 180 -background grey
-		 set y [expr 65 + $line_no * 20]
-		 set x_mess [expr $x + 40] 
-		 place $editor.$text_name -x $x_mess -y $y  
-		 
-
-		 incr i 1
-		 incr line_no 1
-		 if {$line_no == 15} {
-		    set line_no 1
-			incr column_no 1
-			
-		 }
-		 
-	}
-}
-
-proc delete_lexical_variants { editor} {
-
-  global GT globalAllLexVars 
-
-  
- catch {
-
-    set i 1
-    #сохраняем значения, которые содержат checkboх, в	globalAllLexVars
-    foreach x_pos $globalAllLexVars {
-     
-	 set name  "chk$i"
-	 set text_name  "text$i"
-	 set lemma_name  "lemma$i"
-
-	 if {$GT($name) == 0} {
-	    set x_pos [lreplace $x_pos 2 2 0]
-	 } else {
-		set x_pos [lreplace $x_pos 2 2 1]
-	 };
-	 
-	 set q [expr $i - 1]
-     set globalAllLexVars [lreplace $globalAllLexVars $q $q $x_pos]
-
-	 incr i 1
-
-	 destroy  $editor.$name
-	 destroy  $editor.$text_name
-	 destroy  $editor.$lemma_name
-   }
-	
-
-   
-  }
-}
-
-
-
-proc SetLexVarType {} {
-  global GT  LastSentence 
-  global main
-
-
-  
-  SetMainGraphType
-
-    
-  update_globalAllLexVars $main
-
-  $GT($main,graph) delete nodes
-  $GT($main,graph) draw 
-
-  create_lexvars_checkboxs $main
-  $GT($main,canvas) configure -background  grey
-}
 
 

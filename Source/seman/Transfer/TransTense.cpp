@@ -453,7 +453,7 @@ void	CEngSemStructure::BuildAuxiliaryVerbs()
 		m_Nodes[NodeNo].m_RelOperators.clear();
 
 		MainWord.SetTense(AuxVerb.m_MainTense, "BuildAuxiliaryVerbs");
-		m_Nodes[NodeNo].m_bNotUseTo = true;
+		m_Nodes[NodeNo].SetInfinitiveWoTo();
 
 		// ставим узел перед главным словом
 		newNode.m_Words[0].m_WordNo = m_Nodes[NodeNo].GetMinWordNo();

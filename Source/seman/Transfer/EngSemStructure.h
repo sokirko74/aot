@@ -53,6 +53,7 @@ extern std::string ArticleStringByType(ArticleEnum t);
 class CEngSemNode : public CSemNode
 {
 	ArticleEnum				m_Article;
+	bool				m_bInfinitiveWithoutTo;
 	std::vector<ArticleCauseEnum>	m_ArticleCauseHistory;
 
 public:
@@ -65,8 +66,6 @@ public:
 
 	std::vector<CSemPattern> m_CopulPatterns;
 
-
-	bool				m_bNotUseTo;
 
 	void SetGrammemsRich(uint64_t g);
 	uint64_t GetGrammemsRich() const;
@@ -88,6 +87,9 @@ public:
 	ArticleEnum GetArticle() const;
 	ArticleCauseEnum  GetLastArticleCause() const;
 	std::string GetArticleCauseHistory() const;
+
+	bool GetInfinitiveWoTo() const;
+	void SetInfinitiveWoTo();
 };
 
 
@@ -207,7 +209,7 @@ public:
 	virtual int					GetRelationsSize() const { return m_Relations.size(); };
 	virtual void				EraseRelation(int RelNo, const char* cause) { m_Relations.erase(m_Relations.begin() + RelNo); };
 
-	virtual void GetColorAndWidthOfRelation(int RelNo, float& Width, std::string& Color);
+	void GetColorAndWidthOfRelation(int RelNo, float& Width, std::string& Color) const override;
 
 	//===========    работа с дополнительными семантическими отношениями 
 	std::vector<CEngSemRelation>		m_DopRelations;
@@ -582,6 +584,7 @@ public:
 	// Переводит наречия "по-английски", "по-хорошему"...
 	void TranslateAdverbAdjectiveRule(int EngNodeNo);
 
+	std::string GetTclGraph() const;
 };
 
 

@@ -1,5 +1,8 @@
 #include "stdafx.h"
 #include "SemStructureBuilder.h"
+#include <plog/Initializers/RollingFileInitializer.h>
+#include <plog/Initializers/ConsoleInitializer.h>
+
 
 CSemStructureBuilder::CSemStructureBuilder() : m_RusStr(), m_EngStr(m_RusStr) 
 {
@@ -36,104 +39,59 @@ bool CSemStructureBuilder::FindSituationsForNextSentence()
 	return true;
 }
 
-bool  CSemStructureBuilder::FindSituations(std::string utf8text, long UserTreeVariantNo, std::string PO, long PanicTreeVariantCount, long UserClauseVariantsCombinationNo, std::string AllowableLexVars, std::string& Graph)
+
+void  CSemStructureBuilder::FindSituations(std::string utf8text, CSemOptions opts)
 {
-	try {
-		
-		m_RusStr.m_ClauseCombinationVariantsCount = 0;
-		m_CurrentSentence = 0;
-		m_RusStr.m_PO = PO;
-		Graph = "";
-		m_RusStr.m_PanicTreeVariantCount = PanicTreeVariantCount;
-		m_RusStr.m_UserTreeVariantNo = UserTreeVariantNo;
-				
-
-
-		m_RusStr.ProcessAllowableLexVars(AllowableLexVars.c_str());
-
-		if (!m_RusStr.TryTestTree(utf8text))
-		{
-			Trim(utf8text);
-			
-			if (!utf8text.empty())
-			{
-				if (!m_RusStr.m_pData->MakeSyntaxStr(utf8text.c_str(), m_GlobalSpan))
-				{
-					ErrorMessage("Syntax has crushed");
-					return false;
-				};
-				m_GlobalSpan.StartTimer("Semantics",0);
-				m_RusStr.FindSituations(m_CurrentSentence, UserClauseVariantsCombinationNo);
-				m_GlobalSpan.EndTimer("Semantics");
-				if (m_RusStr.m_bShouldBeStopped) return true;
-			}	
-			else
-			{
-				m_RusStr.m_Relations.clear();
-				m_RusStr.m_Nodes.clear();
-			}
-
-		};
-		if (m_bShouldBuildTclGraph) 
-		{
-			Graph =  m_RusStr.GetTclGraph (false, true);
-			Graph += "if { [catch SetLayout] != 0 } {  $GT($main,graph) draw  }\1";
-			Graph += m_RusStr.GetOtherRelations ();
-			Graph += m_RusStr.GetClauseTreeForTcl();
-		}
-		std::ofstream outp;
-		outp.open("graph_debug.txt");
-		auto d = Graph;
-		std::replace(d.begin(), d.end(), '\1', '\n');
-		outp << d;
-		outp.close();
-
-		m_RusStr.CopyDopRelationsExceptAnaphor();
-		m_CurrentSentence ++;
-
-		return true;
-	}
-	catch (...)
+	m_RusStr.SetOptions(opts);
+	m_RusStr.m_ClauseCombinationVariantsCount = 0;
+	m_CurrentSentence = 0;
+	
+	if (!m_RusStr.TryTestTree(utf8text))
 	{
-		ErrorMessage("General error");
-		return false;
+		Trim(utf8text);
+			
+		if (!utf8text.empty())
+		{
+			if (!m_RusStr.m_pData->MakeSyntaxStr(utf8text.c_str(), m_GlobalSpan))
+			{
+				throw CExpc("Syntax has crushed");
+			};
+			m_GlobalSpan.StartTimer("Semantics",0);
+			m_RusStr.FindSituations(m_CurrentSentence);
+			m_GlobalSpan.EndTimer("Semantics");
+			if (m_RusStr.m_bShouldBeStopped) return;
+		}	
+		else
+		{
+			m_RusStr.m_Relations.clear();
+			m_RusStr.m_Nodes.clear();
+		}
+
 	};
+
+
+	m_RusStr.CopyDopRelationsExceptAnaphor();
+	m_CurrentSentence ++;
 }
 
 
 
-bool CSemStructureBuilder::TranslateToEnglish(std::string& Graph)
+void CSemStructureBuilder::TranslateToEnglish(CSemOptions)
 {
-	try 
-	{
-		Graph = "";
-		m_GlobalSpan.StartTimer("Transfer",0);
-		m_EngStr.m_pData->InitializeIndices();
-		
-		m_EngStr.TranslateToEnglish();
-		m_GlobalSpan.EndTimer("Transfer");
-        if (m_bShouldBuildTclGraph) 
-		{
-			Graph =  m_EngStr.GetTclGraph (false, true);
-			Graph += "if { [catch SetLayout] != 0 } {  $GT($main,graph) draw  }\1";
-			Graph += m_EngStr.GetOtherRelations ();
-			
-		}
-		
-		return true;
-	}
-	catch (...)
-	{
-		return false;
-	};
+	m_GlobalSpan.StartTimer("Transfer",0);
+	m_EngStr.m_pData->InitializeIndices();
+	m_EngStr.TranslateToEnglish();
+	m_GlobalSpan.EndTimer("Transfer");
 }
 
 
-std::string CSemStructureBuilder::TranslateRussianText(const std::string& russian, const std::string& po, void(*logger)(const char*)) {
+std::string CSemStructureBuilder::TranslateRussianText(const std::string& russian, const std::string& po) {
 	std::string graphStr;
 	try {
-		if (logger) logger(Format("  FindSituations (po=%s) %s\n", po.c_str(), russian.c_str()).c_str());
-		FindSituations(russian.c_str(), 0, po.c_str(), 20000, -1, "", graphStr);
+		LOGI << "FindSituations " << russian;
+		CSemOptions opts;
+		opts.m_Domain = po;
+		FindSituations(russian, opts);
 	}
 	catch (CExpc c) {
 		throw;
@@ -149,28 +107,26 @@ std::string CSemStructureBuilder::TranslateRussianText(const std::string& russia
 	try {
 		std::string res;
 		for (;;) {
-			if (logger) logger("  TranslateToEnglish\n");
-			if (!TranslateToEnglish(graphStr)) {
-				if (logger) logger("Error in TranslateToEnglish\n");
-				return "Unexpected Error";
-			}
+			LOGI << "TranslateToEnglish";
+			TranslateToEnglish();
 
-			if (logger) logger("  BuildSentence\n");
+			LOGI<< "BuildSentence";
 			std::string TranslatedSent;
 			if (!BuildSentence(TranslatedSent))
 			{
-				if (logger) logger("Error in Synthesis\n");
+				LOGE << "Error in Synthesis";
 				return "Unexpected Error";
 			}
 			res += TranslatedSent;
 
-			if (logger) logger("  FindSituationsForNextSentence\n");
+			LOGI << "FindSituationsForNextSentence";
 			if (!FindSituationsForNextSentence()) break;
 		}
 		//остаются недопереведенные слова
 		return convert_to_utf8(res.c_str(), morphRussian);
 	}
 	catch (CExpc c) {
+		LOGE << c.what();
 		throw;
 	}
 	catch (...)
@@ -207,16 +163,6 @@ void  CSemStructureBuilder::ClearSavedSentences(void)
 	m_SavedSentences.clear();
 }
 
-std::string  CSemStructureBuilder::Answer()
-{
-	std::string Result;
-
-	if (!m_RusStr.SemanticAnswer(Result, m_SavedSentences))
-		Result = "I do not know";
-		
-	return Result;
-}
-
 
 long CSemStructureBuilder::GetScrollMax() const
 {
@@ -226,5 +172,36 @@ long CSemStructureBuilder::GetScrollMax() const
 long  CSemStructureBuilder::GetScrollCurrent() const
 {
 	return m_RusStr.m_ClauseVariantsCombinationNo;
+}
+
+
+class MyFormatter
+{
+public:
+	static plog::util::nstring header()
+	{
+		return plog::util::nstring();
+	}
+
+	static plog::util::nstring format(const plog::Record& record)
+	{
+		plog::util::nostringstream ss;
+		ss << std::setfill(PLOG_NSTR(' ')) << std::setw(5) << std::left << severityToString(record.getSeverity()) << PLOG_NSTR(" ");
+		ss << PLOG_NSTR("[") << record.getFunc() << PLOG_NSTR("@") << record.getLine() << PLOG_NSTR("] ");
+		ss << record.getMessage() << PLOG_NSTR("\n");
+		auto mess = ss.str();
+		if (record.getSeverity() != plog::Severity::verbose) {
+			std::cerr << mess << "\n";
+		}
+		return mess;
+	}
+};
+
+
+void init_plog_seman(plog::Severity severity, std::string filename) {
+	if (std::filesystem::exists(filename)) {
+		std::filesystem::remove(filename);
+	}
+	plog::init<MyFormatter>(severity, filename.c_str());
 }
 

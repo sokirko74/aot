@@ -604,7 +604,7 @@ void CRusSemStructure::GetTree(long Tag, TreeAndValueVector& VarAndVals)
 	size_t VariantCount = Variants.size();
 	EndTimer("Shalimov's graph");
 
-	if (Variants.size() > m_PanicTreeVariantCount * 100)
+	if (Variants.size() > m_UserOpts.m_PanicTreeVariantCount * 100)
 	{
 		VarAndVals.resize(Variants.size());
 		VarAndVals[0].second.SetPanic();
@@ -679,7 +679,7 @@ void CRusSemStructure::GetTree(long Tag, TreeAndValueVector& VarAndVals)
 
 	VarAndVals.resize(GoodVariantCount);
 
-	if (GoodVariantCount > m_PanicTreeVariantCount)
+	if (GoodVariantCount > m_UserOpts.m_PanicTreeVariantCount)
 	{
 		VarAndVals[0].second.SetPanic();
 		return;
@@ -757,9 +757,9 @@ long CRusSemStructure::SetBestVariant(const std::vector<TreeAndValueVector>& Var
 	size_t varIndex = 0;
 	{
 		size_t varRatingIndex = 0;
-		if (m_UserTreeVariantNo < WeightAndPositions.size() && m_UserTreeVariantNo >= 0) {
-			varRatingIndex = m_UserTreeVariantNo;
-			LOGV << "set user tree variant position=" <<  m_UserTreeVariantNo;
+		if (m_UserOpts.m_TreeVariantIndex < WeightAndPositions.size() && m_UserOpts.m_TreeVariantIndex >= 0) {
+			varRatingIndex = m_UserOpts.m_TreeVariantIndex;
+			LOGV << "set user tree variant position=" <<  m_UserOpts.m_TreeVariantIndex;
 		}
 		{
 			auto weight = WeightAndPositions[varRatingIndex].first;

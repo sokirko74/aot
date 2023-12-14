@@ -282,7 +282,7 @@ void CEngSemStructure::ApplyInvitatoryRule(int iEngNode)
 		else
 			m_Nodes[iEngNode].DelRelOperator(strHard);
 		m_Nodes[iEngNode].m_Words[m_Nodes[iEngNode].m_MainWordNo].SetTense(present_inf_tn,"ApplyInvitatoryRule");
-		m_Nodes[iEngNode].m_bNotUseTo = true;
+		m_Nodes[iEngNode].SetInfinitiveWoTo();
 
 		CEngSemRelation newRel(CValency("Invitatory",A_C),iEngNode,iNewNode,"");
 		newRel.m_Position = "begin";
@@ -309,7 +309,7 @@ void CEngSemStructure::ApplyInvitatoryRule(int iEngNode)
 	else
 		m_Nodes[iEngNode].DelRelOperator(strHard);
 	m_Nodes[iEngNode].m_Words[m_Nodes[iEngNode].m_MainWordNo].SetTense(present_inf_tn,"ApplyInvitatoryRule");
-	m_Nodes[iEngNode].m_bNotUseTo = true;
+	m_Nodes[iEngNode].SetInfinitiveWoTo();
 
 	CEngSemRelation newRel(CValency("Invitatory",A_C),iNewNode,iEngNode,"");
 	m_Relations.push_back(newRel);

@@ -919,7 +919,7 @@ bool CSemanticsHolder::BuildColloc(std::string ContentFieldStr, int CollocUnitNo
 					F = GetRossHolder(CollocRoss)->GetDomItemStrWrapper(Cort.GetItem(2));
 					long PlaceNo2 = F[1] - '0' - 1;
 					std::string SynGrp = GetRossHolder(CollocRoss)->GetDomItemStrWrapper(Cort.GetItem(0));
-					LOGV << SynGrp;
+					//LOGV << SynGrp;
 					if ((PlaceNo1 >= C.Items.size())
 						|| (PlaceNo2 >= C.Items.size())
 						)

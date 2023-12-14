@@ -276,7 +276,7 @@ void CRusSemStructure::InitInterps(CRusSemWord &W, bool PassiveForm, long Clause
         GetThesInterps(UnitStr, W, m_pData->GetThes(LocThes), LocRoss, N);
 
         /*запустим эту функцию перед статьями заглушками*/
-        DelProhibitedInterps(UnitStr, N);
+        DelProhibitedInterps(N);
 
         if (N.GetInterps().empty())
             if (bHasSuffixFemine
@@ -307,7 +307,7 @@ void CRusSemStructure::InitInterps(CRusSemWord &W, bool PassiveForm, long Clause
 
 
             }
-        DelProhibitedInterps(UnitStr, N);
+        DelProhibitedInterps(N);
 
     }
     catch (std::exception& e) {
@@ -521,18 +521,18 @@ long CRusSemStructure::FindNodeBySyntaxGroupNo(long SyntaxGroupNo) const {
 };
 
 
-void CRusSemStructure::DelProhibitedInterps(std::string UnitStr, CRusSemNode &N) const {
-    MakeUpperUtf8(UnitStr);
-    for (long i = 0; i < N.GetInterps().size(); i++) {
-        CRossInterpAndLemma M;
-        M.m_DictType = N.GetInterps()[i].m_DictType;
-        M.m_UnitNo = N.GetInterps()[i].m_UnitNo;
-        M.m_Lemma = UnitStr;
-        if (_find(m_UserProhibitedLexVars, M)) {
-            N.DeleteInterp(i);
-            i--;
-        };
-    };
+void CRusSemStructure::DelProhibitedInterps(CRusSemNode &N) const {
+    for (auto& bad : m_UserOpts.m_ProhibitedLexVars) {
+        const auto& interps = N.GetInterps();
+        for (long i = 0; i < interps.size(); i++) {
+            const auto& interp = interps[i];
+            const auto& e = GetRoss(interp.m_DictType)->GetEntries()[interp.m_UnitNo].GetEntryAndMeanNum();
+            if (bad == e) {
+                N.DeleteInterp(i);
+                break;
+            }
+        }
+    }
 };
 
 bool CRusSemStructure::HasAuxiliaryPOS(std::string lemma) const {

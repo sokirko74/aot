@@ -231,7 +231,7 @@ std::string CEngSemStructure::GetMorphologyOfNode(long NodeNo) const
 		Result += "ArticleHistory  = " + m_Nodes[NodeNo].GetArticleCauseHistory();
 	};
 
-	Result += "\nNotUseTo  = " + std::string(m_Nodes[NodeNo].m_bNotUseTo ? "yes" : "no") + "\n";
+	Result += "\nNotUseTo  = " + std::string(m_Nodes[NodeNo].GetInfinitiveWoTo() ? "yes" : "no") + "\n";
 
 
 	return Result;
@@ -452,7 +452,7 @@ std::string CEngSemStructure::GetInterfaceWordStr(const CSemNode* pNode, int Wor
 	return L;
 };
 
-void CEngSemStructure::GetColorAndWidthOfRelation(int RelNo, float& Width, std::string& Color)
+void CEngSemStructure::GetColorAndWidthOfRelation(int RelNo, float& Width, std::string& Color) const
 {
 	if (m_Nodes[m_Relations[RelNo].m_SourceNodeNo].m_ClauseNo !=
 		m_Nodes[m_Relations[RelNo].m_TargetNodeNo].m_ClauseNo)
@@ -476,7 +476,14 @@ void CEngSemStructure::GetColorAndWidthOfRelation(int RelNo, float& Width, std::
 	}
 }
 
+std::string CEngSemStructure::GetTclGraph() const 
+{
+	std::string s = GetBaseTclGraph(false, true);
+	s += "if { [catch SetLayout] != 0 } {  $GT($main,graph) draw  }\1";
+	s += GetOtherRelations();
+	return s;
 
+}
 
 
 bool CEngSemStructure::TranslateToEnglish()

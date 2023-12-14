@@ -20,6 +20,10 @@ const std::string& CStructEntry::GetEntryStr() const {
 	return m_EntryStr;
 }
 
+std::string CStructEntry::GetEntryAndMeanNum() const {
+	return Format("%s%i", GetEntryStr().c_str(), m_MeanNum);
+}
+
 void CStructEntry::SetEntryStr(const std::string& s)  {
 	m_EntryStr = s;
 	if (m_EntryStr.length() >= EntryStrSize) {

@@ -240,7 +240,7 @@ void CEngVerbTense::make_string()
 	*/
 	if (     is_infinitive(m_pVerbNode->GetTense())
 		 && !S.IsInfinitivePatternWithoutTo(m_VerbNodeNo)
-		 && !m_pVerbNode->m_bNotUseTo
+		 && !m_pVerbNode->GetInfinitiveWoTo()
 	  )
 	res  += " to ";
 

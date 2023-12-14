@@ -983,14 +983,16 @@ void CGraphmatFile::DealIdents() {
 		auto pair_it = m_pDicts->m_Idents.equal_range(m_Tokens[i].GetTokenUpper());
 		size_t max_len = 0;
 		for (auto it = pair_it.first; it != pair_it.second; ++it) {
-			bool good = true;
-			for (size_t k = 1; k < it->second.m_tokens.size(); ++k) {
+			size_t count_checked = 1;
+			for (size_t k = 1; k < it->second.m_tokens.size() && i+k < GetUnits().size(); ++k) {
 				if (m_Tokens[k + i].GetTokenUpper() != it->second.m_tokens[k].GetTokenUpper()) {
-					good = false;
 					break;
 				}
+				else {
+					++count_checked;
+				}
 			}
-			if (good && it->second.m_tokens.size() > max_len) {
+			if (count_checked == it->second.m_tokens.size() && it->second.m_tokens.size() > max_len) {
 				max_len = it->second.m_tokens.size();
 			}
 		}
