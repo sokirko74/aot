@@ -605,7 +605,7 @@ GF      = 1  СУЩ:ИГ
 SF      = 1  TIME
              PERIO
              UNIT
-ENG     = 1  сеntury 1
+ENG     = 1  century 1
 RESTR   =  свобод
 ============
 TITLE        = весь_день

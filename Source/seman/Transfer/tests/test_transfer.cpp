@@ -36,7 +36,7 @@ TEST_CASE("fix_case") {
 
 std::string translate(std::string s)
 {
-	return SemBuilder.TranslateRussianText(s);
+	return SemBuilder.TranslateRussianText(s, CommonDomain);
 }
 
 TEST_CASE("translate_name") {
@@ -64,14 +64,41 @@ TEST_CASE("test_timeross_article") {
 
 TEST_CASE("test_colloc") {
 	auto s = translate("не говоря уже о багаже");
-	CHECK(s == "Not speaking of luggage.");
+	CHECK(s == "Not to speak of luggage.");
 
 }
 
-TEST_CASE("test_article_with_of") {
+TEST_CASE("test_article_with_PP") {
 	// all article rules are adhoc: check that NP with  "of" is .GetTense()definite
 	auto s = translate("регулирование обращения");
 	CHECK(s == "The regulation of appeal.");
+
+	s = translate("тринадцать тел из числа погибших");
+	CHECK(s == "Thirteen bodies from the lost number.");
+}
+
+TEST_CASE("test_productive_prefix") {
+	auto s = translate("авиакатастрофа");
+	CHECK(s == "Aerocatastrophe.");
+}
+
+TEST_CASE("test_article_an") {
+	auto& helper = SemBuilder.m_EngStr.helper;
+	std::string s = helper.SetIndefiniteArticle("<a> unexperienced");
+	CHECK(s == "an unexperienced");
+
+	s = helper.SetIndefiniteArticle("<a> hour");
+	CHECK(s == "an hour");
+
+	s = helper.SetIndefiniteArticle("<a> such boy");
+	CHECK(s == "such a boy");
+
+	s = helper.SetIndefiniteArticle("<Quote> <a> </Quote> <Quote> ocean </Quote>");
+	CHECK(s == "<Quote> an </Quote> <Quote> ocean </Quote>");
+
+	s = "\"Он - начинающий президент\"";
+	s = translate(s);
+	CHECK(s == "\"He is an unexperienced president\".");
 
 }
 

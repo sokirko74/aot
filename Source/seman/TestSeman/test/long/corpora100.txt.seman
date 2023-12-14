@@ -102,12 +102,12 @@
     {
         "comments": "",
         "input": "Президент выслушал вопрос журналиста и пообещал ответить на него в ближайшее время.",
-        "result": "The president listened to journalist's question and promised to answer it soon."
+        "result": "The president listened to journalist's question and he promised to answer it soon."
     },
     {
         "comments": "",
         "input": "Президент выслушал вопрос журналиста и пообещал ответить ему в ближайшее время.",
-        "result": "The president listened to journalist's question and promised to answer him soon."
+        "result": "The president listened to journalist's question and he promised to answer him soon."
     },
     {
         "comments": "",
@@ -127,7 +127,7 @@
     {
         "comments": "",
         "input": "Неожиданно перед ними появилась молодая женщина , такая красивая , что они оба разом остановились и поглядели друг на друга",
-        "result": "Suddenly, a so beautiful young woman appeared in front of them that they both at once stopped and looked at each other."
+        "result": "Suddenly, a so beautiful young woman appeared in front of them that they both at once stopped and they looked at each other."
     },
     {
         "comments": "",
@@ -442,12 +442,12 @@
     {
         "comments": "",
         "input": "Этот период начинается с 19 века",
-        "result": "This period begins with the nineteenth сеntury."
+        "result": "This period begins with the nineteenth century."
     },
     {
         "comments": "",
         "input": "Этот период начинается с девятого  века",
-        "result": "This period begins with the nineth сеntury."
+        "result": "This period begins with the nineth century."
     },
     {
         "comments": "",
@@ -457,7 +457,7 @@
     {
         "comments": "",
         "input": "Его создание происходило в условиях вступления России в капитализм и было первой из \"великих реформ\", проведенных в стране Императором Александром II.",
-        "result": "His foundation happened in the condition of the entrance of Russia in the capitalism and was the first of the \"great reforms\" which were carried out by emperor Alexander II in the country."
+        "result": "His foundation happened in condition of the entrance of Russia in the capitalism and it was the first of the \"great reforms\" which were carried out by emperor Alexander II in the country."
     },
     {
         "comments": "",
@@ -617,7 +617,7 @@
     {
         "comments": "",
         "input": "В 1960-х годах исследователи начали эксперименты по соединению компьютеров друг с другом с помощью телефонных линий, используя фонды Агентства Перспективных Проектов Исследований Министерства Обороны США.",
-        "result": "In the 1960s, the investigators began experiments with uniting computers with each other using telephone lines using the funds of Advanced Research Projects Agency of the Ministry of Defence of USA."
+        "result": "In the 1960s, the investigators began experiments with uniting computers with each other using telephone lines using funds of Advanced Research Projects Agency of the Ministry of Defence of USA."
     },
     {
         "comments": "",
@@ -682,12 +682,12 @@
     {
         "comments": "",
         "input": "Следователь объясняет специалисту его права и обязанности и предупреждает об ответственности за отказ или уклонение от выполнения своих обязанностей.",
-        "result": "The coroner explains his right and duties to the specialist and warns against responsibility for refusal or the deviation of the execution of his duties."
+        "result": "The coroner explains his right and duties to the specialist and he warns against responsibility for refusal or the deviation of the execution of his duties."
     },
     {
         "comments": "",
         "input": "Возьмите меня на фирму поваром.",
-        "result": "Take me as a cook to the firm."
+        "result": "Take me to the firm as a cook."
     },
     {
         "comments": "",
@@ -727,7 +727,7 @@
     {
         "comments": "",
         "input": "Пикетчики вручили заместителю главы администрации подписанное группой партий и общественных организаций обращение, адресованное главе администрации Егорову.",
-        "result": "The pickets delivered to deputy of administration's head the appeal which the group of party and public organizations signed which was addressed to administration's head Yegorov."
+        "result": "The pickets delivered to deputy of administration's head the appeal which the group of party and public organizations signed which was addressed to administration's head Egorov."
     },
     {
         "comments": "",
@@ -757,7 +757,7 @@
     {
         "comments": "",
         "input": "К семи часам утра в пятницу с места авиакатастрофы в Черном море поднято тринадцать тел из числа погибших (одиннадцать женщин и двое мужчин).",
-        "result": "By seven o'clock in the morning on Friday, thirteen bodies are raised from the place of the aerocatastrophe in the Black Sea from the lost number ( the eleven women and two men )."
+        "result": "By seven o'clock in the morning on Friday, thirteen bodies from the lost number are raised from the place of the aerocatastrophe in the Black Sea ( the eleven women and two men )."
     },
     {
         "comments": "",

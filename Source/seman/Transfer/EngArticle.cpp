@@ -27,38 +27,27 @@ extern std::string ArticleStringByType(ArticleEnum t) {
 
 void update_article(const CSemPattern& P, CEngSemNode& N)
 {
-	try {
-		for (long i = 0; i < P.m_ArticleCorteges.size(); i++)
+	for (auto& c: P.m_ArticleCorteges)
+	{
+		std::string ArticleStr = P.m_pRossDoc->GetRoss()->GetDomItemStr(c.GetItem(0));
+		if (ArticleStr == "the|NOUN")
 		{
-			const TCortege& C = P.m_ArticleCorteges[i];
-			std::string ArticleStr = P.m_pRossDoc->GetRoss()->GetDomItemStr(C.GetItem(0));
-			if (ArticleStr != "")
+			if (N.HasPOS(eNOUN)) {
+				N.SetArticle(DefArticle, ArticleFromDict);
+			}
+		}
+		else
+			if (ArticleStr == "a|NOUN")
 			{
-				if (ArticleStr == "the|NOUN")
-				{
-					if (N.HasPOS(eNOUN)) {
-						N.SetArticle(DefArticle, ArticleFromDict);
-					}
-				}
-				else
-					if (ArticleStr == "a|NOUN")
-					{
-						if (N.HasPOS(eNOUN))
-							N.SetArticle(IndefArticle, ArticleFromDict);
-					}
-					else {
-						auto a = ArticleTypeByString(ArticleStr);
-						assert(a != UnknownArticle);
-						N.SetArticle(a, ArticleFromDict);
-					}
-
-			};
-		};
-
-	}
-	catch (...) {
-		assert(false);
-	}
+				if (N.HasPOS(eNOUN))
+					N.SetArticle(IndefArticle, ArticleFromDict);
+			}
+			else if (!ArticleStr.empty()) {
+				auto a = ArticleTypeByString(ArticleStr);
+				assert(a != UnknownArticle);
+				N.SetArticle(a, ArticleFromDict);
+			}
+	};
 }
 
 void CEngSemStructure::GetOutcomingInClauseRelations(long NodeNo, std::vector<long>& Relations) const
@@ -443,7 +432,7 @@ void  CEngSemStructure::InitArticleField()
 			if (m_Relations[OutAllRels[j]].m_SynReal.HasThePrep(UnitNo))
 				break;
 		}
-		if (j < OutAllRels.size() && m_Nodes[NodeNo].m_Words[0].GetTense() == zero_tn)
+		if (j < OutAllRels.size() && m_Nodes[NodeNo].m_Words[0].GetTense() == zero_tn && m_Nodes[NodeNo].HasGrammemRich(eSingular))
 		{
 			m_Nodes[NodeNo].SetArticle(DefArticle, DefArticleBecauseOfNominalSupplement);
 			continue;

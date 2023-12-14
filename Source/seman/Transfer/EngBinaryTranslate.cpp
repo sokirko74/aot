@@ -530,19 +530,19 @@ std::string translate_helper::an_article_before(const std::string& _str) const
 
 	while (str.size() && str[0] == ' ') str = str.substr(1);
 
-	if (str.empty()) return "a ";
+	if (str.empty()) return "a";
 
 	bool is_except = starts_with(str, except_vec);
-
-	if (tolower(str[0]) == 'a' || tolower(str[0]) == 'i' || tolower(str[0]) == 'o')
-		return "an ";
-	if (tolower((unsigned char)str[0]) == 'h' && is_except)
-		return "an ";
-	if (tolower((unsigned char)str[0]) == 'e' && !is_except)
-		return "an ";
-	if (tolower((unsigned char)str[0]) == 'u' && !is_except)
-		return "an ";
-	return "a ";
+	int lw = tolower(str[0]);
+	if (lw == 'a' || lw == 'i' || lw == 'o')
+		return "an";
+	if (lw == 'h' && is_except)
+		return "an";
+	if (lw == 'e' && !is_except)
+		return "an";
+	if (lw == 'u' && !is_except)
+		return "an";
+	return "a";
 }
 
 // проверяет, что строка s начинается с одного из префиксов starts
@@ -732,6 +732,80 @@ bool CEngSemStructure::translate_binary(long NodeNo)
 
 	return true;
 }
+
+std::string translate_helper::SetIndefiniteArticle(const std::string& str) const
+{
+	/*
+		артикли всегда надо ставить перед именной группой, кроме случаев
+		such a boy
+		all the day
+		half a day
+		half the day
+		но:
+		the half of day
+	*/
+	auto tokens = split_string(str, ' ');
+	std::vector<bool> quotes;
+	for (auto& w : tokens) {
+		quotes.push_back(w == "<Quote>" || w == "</Quote>" || w == "</Quote><Quote>");
+	}
+	auto prev_word = [&quotes](int index) {
+		--index;
+		while (index >= 0) {
+			if (!quotes[index]) {
+				return index;
+			}
+			--index;
+		}
+		return -1;
+		};
+	auto next_word = [&quotes](int index) {
+		++index;
+		while (index < quotes.size()) {
+			if (!quotes[index]) {
+				return index;
+			}
+			++index;
+		}
+		return (int)quotes.size();
+		};
+
+	for (int i = 0; i < tokens.size(); ++i) {
+		if (tokens[i] == "such") {
+			int prev = prev_word(i);
+			if (prev >= 0 && tokens[prev] == "<a>") {
+				swap(tokens[i], tokens[prev]);
+			}
+		}
+		else if (tokens[i] == "all") {
+			auto prev = prev_word(i);
+			if (prev >= 0 && tokens[prev] == "the") {
+				swap(tokens[i], tokens[prev]);
+			}
+		}
+		else if (tokens[i] == "half") {
+			auto prev = prev_word(i);
+			if (prev >= 0 && (tokens[prev] == "the" || tokens[prev] == "<a>")) {
+				int next = next_word(i);
+				if (next < tokens.size() && tokens[next] == "of") {
+					swap(tokens[i], tokens[prev]);
+				}
+			}
+		};
+	}
+	/*
+	  установка правильной формы неопределенного артикля (а/an)
+	*/
+	for (int i = 0; i < tokens.size(); ++i) {
+		if (tokens[i] == "<a>") {
+			int next = next_word(i);
+			std::string& next_word = next < tokens.size() ? tokens[next] : std::string();
+			tokens[i] = an_article_before(next_word);
+		}
+	}
+	return join_string(tokens, " ");
+};
+
 
 
 

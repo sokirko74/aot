@@ -104,7 +104,7 @@ std::string CRusSemStructure::GetNormOfParticiple(const CRusSemWord &W) const {
 uint16_t CRusSemStructure::GetInterpWithoutPrefix(CRusSemWord &W) const {
     for (auto& p : Prefixes)
         if (startswith(W.m_Lemma, p.m_Prefix)) {
-            std::string UnitStr = p.m_Prefix;
+            std::string UnitStr = W.m_Lemma.substr(p.m_Prefix.length());
             MakeLowerUtf8(UnitStr);
             uint16_t UnitNo = GetRossHolder(Ross)->LocateUnit(UnitStr.c_str(), 1);
             if (UnitNo == ErrUnitNo) continue;

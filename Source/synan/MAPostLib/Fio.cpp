@@ -15,7 +15,7 @@ struct CFIOItem {
 	FioItemTypeEnum m_fiType;
 	std::string			m_ItemStr;
 	CFIOItem(FioItemTypeEnum fiType) : m_fiType(fiType) {};
-	CFIOItem(FioItemTypeEnum fiType, std::string itemStr) : m_fiType(fiType), m_ItemStr() {};
+	CFIOItem(FioItemTypeEnum fiType, std::string itemStr) : m_fiType(fiType), m_ItemStr(itemStr) {};
 };
 
 
@@ -56,7 +56,7 @@ static bool IsPartFio(const CMAPost& C, const CFIOItem& I, const CLemWord& Word,
 		case fiOrdinal:  return pH->HasPos(NUMERAL_P)
 			&& Word.m_bFirstUpperAlpha //отбрасываем "Петр первый" вместо "Петр Первый"
 			&& !isdigit((BYTE)Word.m_strWord[0]);
-		case fiProbName:  return Word.m_Register != LowLow;
+		case fiProbName:  return Word.m_Register != LowLow && Word.m_bWord && Word.m_strWord.length()>1;
 		default:  return pH->GetLemma() == I.m_ItemStr;
 	}
 
@@ -117,7 +117,7 @@ bool CMAPost::SetFioFormat(const CFIOFormat* Format, CLineIter it)
 		int max_variant_weight = -1;
 		while (get_next_variant<CHomonym*>(Hypots, cur_variant))
 		{
-			uint64_t Grammems = rAllCases | rAllNumbers;
+			grammems_mask_t Grammems = rAllCases | rAllNumbers;
 			for (size_t i = 0; i < cur_variant.size(); ++i)
 			{
 				Grammems &= Hypots[i][cur_variant[i]]->m_iGrammems;

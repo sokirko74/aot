@@ -123,68 +123,6 @@ void CEngSynthes::find_position_for_slave_clause_components()
 
 };
 
-void SetIndefiniteArticle(std::string& str, const translate_helper& helper)
-{
-	/*
-		артикли всегда надо ставить перед именной группой, кроме случаев
-		such a boy
-		all the day
-		half a day
-		half the day
-		но:
-		the half of day
-	*/
-	StringTokenizer tok1(str.c_str(), " ");
-	StringTokenizer next_tok1(str.c_str(), " ");
-	str.erase();
-	std::string prev_word;
-	next_tok1();
-	while(tok1())
-	{
-		
-		std::string word = tok1.val();
-		if (    (  (prev_word == "<a>") && (word == "such"))
-			 || (  (prev_word == "the") && (word == "all"))
-		   )
-			  swap (word, prev_word);
-
-		if (next_tok1())
-		{
-			std::string next_word = next_tok1.val();
-			if (next_word != "of")
-			 if (    (  (prev_word == "<a>") && (word == "half"))
-				  || (  (prev_word == "the") && (word == "half"))
-				)
-				swap (word, prev_word);
-		};
-
-
-		str += prev_word;
-		str += " ";
-	    prev_word = word;
-	};
-	str += prev_word;
-
-	/*
-	  установка правильной формы неопределенного артикля (а/an)
-	*/
-	StringTokenizer tok2(str.c_str(), " ");
-	str.erase();
-	prev_word = "";
-	while(tok2())
-	{
-		std::string word = tok2.val();
-		if (prev_word == "<a>")
-		{
-			prev_word = helper.an_article_before(word);
-		};
-		str += prev_word;
-		str += " ";
-	    prev_word = word;
-	};
-	str += prev_word;
-
-};
 
 std::string CEngSynthes::BuildSentence()
 {
@@ -255,9 +193,8 @@ std::string CEngSynthes::BuildSentence()
 	if (E.m_bHasConjBut)
 		str = "But " + str;
 
-	SetIndefiniteArticle(str, helper);
+	str = helper.SetIndefiniteArticle(str); 
 	SetSpacesAndRegisterInSentence(str);
-	//SetSpacesAndRegisterInSentence(str);
 
 	E.SetLastSentencePunctuationMark(str);
 

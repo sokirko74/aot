@@ -1,5 +1,4 @@
-#ifndef EngBinaryTranslate_h
-#define EngBinaryTranslate_h
+#pragma once 
 
 #pragma warning(disable:4786)
 #include "seman/SemanLib/struct_dict_holder.h"
@@ -75,6 +74,7 @@ public:
 
 	void synthesize(CEngSemWord& EngWord) const;
 	void synthesize_by_node(CEngSemNode& Node) const;
+	std::string SetIndefiniteArticle(const std::string& str) const;
 
     void translate_id(long id, std::vector<long> &res, part_of_speech_mask_t Poses) const;
 
@@ -111,5 +111,3 @@ private:
 	translate_option_t  m_option;
 };
 
-
-#endif //INCL_GROUP_TR
