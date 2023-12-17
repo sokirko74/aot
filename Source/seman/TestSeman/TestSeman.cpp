@@ -1,3 +1,5 @@
+#include "common/test_corpus.h"
+
 #include "seman/SemanLib/SemStructureBuilder.h"
 #include "morph_dict/common/argparse.h"
 #include "seman/SemanLib/VisualGraph.h"
@@ -24,34 +26,35 @@ std::string GetGramInfo(const CRusSemStructure& semStr, part_of_speech_mask_t Po
 }
 
 
-
-nlohmann::json getNodeInfo(const CRusSemStructure& semStr, int nodeIndex) {
+void getNodeInfo(const CRusSemStructure& semStr, int nodeIndex, CJsonObject& o) {
     const CRusSemNode& Node = semStr.m_Nodes[nodeIndex];
-    nlohmann::json words = nlohmann::json::array();
-
+    CJsonObject words(o.get_doc(), rapidjson::kArrayType);
     for (auto& w : Node.m_Words) {
-        words.push_back({
-            {"word", w.GetWord()},
-            {"lemma", w.m_Lemma},
-            {"inner morph", GetGramInfo(semStr, w.m_Poses, w.GetAllGrammems())}
-            });
+        CJsonObject j(o.get_doc());
+        j.add_string_copy("word", w.GetWord());
+        j.add_string_copy("lemma", w.m_Lemma);
+        j.add_string_copy("inner_morph", GetGramInfo(semStr, w.m_Poses, w.GetAllGrammems()));
+        words.push_back(j);
     }
-    nlohmann::json res = {
-        {"words", words},
-        {"index", nodeIndex},
-        {"morph", GetGramInfo(semStr, Node.GetNodePoses(), Node.GetGrammems())},
-        {"interps", semStr.GetNodeDictInterps(nodeIndex)}
-    };
+    o.move_to_member("words", words.get_value());
+    o.add_int("index", nodeIndex);
+    o.add_string_copy("morph", GetGramInfo(semStr, Node.GetNodePoses(), Node.GetGrammems()));
+    CJsonObject interps(o.get_doc(), rapidjson::kArrayType);
+    for (auto& w : semStr.GetNodeDictInterps(nodeIndex)) {
+        rapidjson::Value j;
+        j.SetString(w.c_str(), w.length(), o.get_allocator());
+        interps.push_back(j);
+    }
+    o.move_to_member("interps", interps.get_value());
     if (Node.m_PrepWordNo >= 0) {
-        res["preposition"] = semStr.m_piSent->m_Words[Node.m_PrepWordNo].m_strWord;
+        o.add_string_copy("preposition", semStr.m_piSent->m_Words[Node.m_PrepWordNo].m_strWord);
     }
     if (!Node.m_AntecedentStr.empty()) {
-        res["anteceden"] = Node.m_AntecedentStr;
+        o.add_string_copy("antecedent", Node.m_AntecedentStr);
     }
     if (Node.m_Words.empty() || Node.m_Words[0].GetWord() != semStr.GetNodeStr1(nodeIndex)) {
-        res["node_str"] = semStr.GetNodeStr1(nodeIndex);
+        o.add_string_copy("node_str", semStr.GetNodeStr1(nodeIndex));
     }
-    return res;
 };
 
 struct LessRelation {
@@ -65,58 +68,50 @@ struct LessRelation {
     }
 };
 
-nlohmann::json getRelations(const CRusSemStructure& semStr, const std::vector<CRusSemRelation>& rels) {
-    nlohmann::json result = nlohmann::json::array();
-
+void getRelations(const CRusSemStructure& semStr, const std::vector<CRusSemRelation>& rels, CJsonObject& o) {
     auto sortedRels = rels;
     sort(sortedRels.begin(), sortedRels.end(), LessRelation(semStr));
-    for (auto& r : sortedRels) {
-        auto o = semStr.GetOutputRelation(r);
-        nlohmann::json rel = {
-            {   "name",  o.sem_rel },
-            {   "target", {
-                    {"words", o.trg},
-                }
-            },
-            {   "source", {
-                    {"words", o.src},
-                }
-            },
-            {    "syntax_rel", o.syn_rel }
-        };
-        result.push_back(rel);
+    for (auto& i : sortedRels) {
+        auto r = semStr.GetOutputRelation(i);
+        CJsonObject j(o.get_doc());
+        j.add_string_copy("name", r.sem_rel);
+        j.add_string_copy("source", r.src);
+        j.add_string_copy("target", r.trg);
+        j.add_string_copy("syntax_rel", r.syn_rel);
+        o.push_back(j.get_value());
     }
-    return result;
 }
 
-nlohmann::json getNodes(const CRusSemStructure& semStr) {
-    auto r = nlohmann::json::array();
+void getNodes(const CRusSemStructure& semStr, CJsonObject& o) {
     for (int i = 0; i < semStr.m_Nodes.size(); i++) {
-        r.push_back(getNodeInfo(semStr, i));
+        CJsonObject j(o.get_doc());
+        getNodeInfo(semStr, i, j);
+        o.push_back(j);
     }
-    return r;
 }
 
-nlohmann::json PrintRelationsToText(const CRusSemStructure& semStr) {
-    nlohmann::json result = {
-        {"nodes", getNodes(semStr)},
-        {"relations", getRelations(semStr, semStr.m_Relations)},
-        {"aux relations", getRelations(semStr, semStr.m_DopRelations)}
-    };
-    return result;
+void SemStructureForText(const CRusSemStructure& semStr, CJsonObject& o) {
+    CJsonObject nodes(o.get_doc(), rapidjson::kArrayType);
+    getNodes(semStr, nodes);
+    o.move_to_member("nodes", nodes.get_value());
+
+    CJsonObject rels(o.get_doc(), rapidjson::kArrayType);
+    getRelations(semStr, semStr.m_Relations, rels);
+    o.move_to_member("relations", rels.get_value());
+
+
+    CJsonObject aux_rels(o.get_doc(), rapidjson::kArrayType);
+    getRelations(semStr, semStr.m_DopRelations, aux_rels);
+    o.move_to_member("aux_relations", aux_rels.get_value());
 }
 
 
-nlohmann::json PrintRelationsAsToJavascript(const CSemStructureBuilder& SemBuilder) {
+std::string PrintRelationsAsToJavascript(const CSemStructureBuilder& SemBuilder) {
     std::string r;
     CVisualSemGraph graph;
     graph.InitFromSemantics(SemBuilder);
     graph.SetGraphLayout();
-    nlohmann::json result = {
-        {"java_script_data", graph.GetResultStr()}
-    };
-    ConvertToUtfRecursive(result, morphRussian);
-    return result;
+    return graph.GetResultStr();
 }
 
 
@@ -132,23 +127,26 @@ void initArgParser(int argc, const char **argv, ArgumentParser& parser) {
 }
 
 
-nlohmann::json processText(CSemStructureBuilder& SemBuilder, bool printVisual, bool printTranslation, std::string inputText) {
+void processText(CSemStructureBuilder& SemBuilder, bool printVisual, bool printTranslation, std::string inputText, CJsonObject& o) {
     try {
         if (printTranslation) {
-            return SemBuilder.TranslateRussianText(inputText, CommonDomain);
+            o.add_string_copy("result", SemBuilder.TranslateRussianText(inputText, CommonDomain));
         }
         else {
             SemBuilder.FindSituations(inputText);
             if (printVisual) {
-                return PrintRelationsAsToJavascript(SemBuilder);
+                auto res = PrintRelationsAsToJavascript(SemBuilder);
+                o.add_string_copy("result", res);
             }
             else {
-                return PrintRelationsToText(SemBuilder.m_RusStr);
+                CJsonObject res(o.get_doc());
+                SemStructureForText(SemBuilder.m_RusStr, res);
+                o.move_to_member("result", res.get_value());
             }
         }
 
     }
-    catch (CExpc e) {
+    catch (std::exception& e) {
         PLOGE << "an exception occurred: " << e.what();
         throw;
     }
@@ -161,27 +159,31 @@ nlohmann::json processText(CSemStructureBuilder& SemBuilder, bool printVisual, b
 
 void processOneFile(CSemStructureBuilder& SemBuilder, bool printVisual, bool printTranslation, string inputFile, string outputFile) {
     PLOGI << "process " << inputFile;
-    CTestCaseBase base;
     std::ifstream inp(inputFile);
     if (!inp.good()) {
         throw CExpc("cannot read %s", inputFile.c_str());
     }
+    rapidjson::Document d;
+    CTestCaseBase base(d);
     base.read_test_cases(inp);
     size_t cnt = 0;
-    for (auto& t : base.TestCases) {
-        if (t.Text.length() > 1050) {
-            PLOGD << "skip the sentence of " << t.Text.length() << " chars (too long)\n";
+    CJsonObject new_array(d, rapidjson::kArrayType);
+    for (auto& t : base.TestCases.get_value().GetArray()) {
+        std::string text = t["input"].GetString();
+        CJsonObject j (t, d);
+        if (text.length() > 1050) {
+            PLOGD << "skip the sentence of " << text.length() << " chars (too long)\n";
             continue;
         }
-        if (t.Text.empty()) {
+        if (text.empty()) {
             continue;
         }
         cnt += 1;
-        t.Result = processText(SemBuilder, printVisual, printTranslation, t.Text);
+        processText(SemBuilder, printVisual, printTranslation, text, j);
+        new_array.push_back(j);
     }
     PLOGI << "processed " << cnt << " sentences";
-    std::ofstream outp(outputFile, std::ios::binary);
-    base.write_test_cases(outp);
+    new_array.dump_rapidjson_pretty(outputFile, 4);
 
 }
 

@@ -1,249 +1,217 @@
 [
     {
-        "comments": "",
         "input": "Мама мыла раму.",
+        "comments": "",
         "result": {
-            "aux relations": [],
             "nodes": [
                 {
+                    "words": [
+                        {
+                            "word": "МАМА",
+                            "lemma": "МАМА",
+                            "inner_morph": "С од,жр,им,ед,"
+                        }
+                    ],
                     "index": 0,
+                    "morph": "С од,жр,им,ед,",
                     "interps": [
                         " +  RML_THES_OMNI: @ModelId3 1"
-                    ],
-                    "morph": "С од,жр,им,ед,",
-                    "words": [
-                        {
-                            "inner morph": "С од,жр,им,ед,",
-                            "lemma": "МАМА",
-                            "word": "МАМА"
-                        }
                     ]
                 },
                 {
+                    "words": [
+                        {
+                            "word": "МЫЛА",
+                            "lemma": "МЫТЬ",
+                            "inner_morph": "Г дст,пе,нс,прш,жр,ед,"
+                        }
+                    ],
                     "index": 1,
+                    "morph": "Г дст,пе,нс,прш,жр,ед,",
                     "interps": [
                         " +  ROSS: +ПЕР_ГЛАГ 1"
-                    ],
-                    "morph": "Г дст,пе,нс,прш,жр,ед,",
-                    "words": [
-                        {
-                            "inner morph": "Г дст,пе,нс,прш,жр,ед,",
-                            "lemma": "МЫТЬ",
-                            "word": "МЫЛА"
-                        }
                     ]
                 },
                 {
-                    "index": 2,
-                    "interps": [
-                        " +  ROSS: +СУЩЕСТВ_неодуш 1"
-                    ],
-                    "morph": "С но,жр,вн,ед,",
                     "words": [
                         {
-                            "inner morph": "С но,жр,вн,ед,",
+                            "word": "РАМУ",
                             "lemma": "РАМА",
-                            "word": "РАМУ"
+                            "inner_morph": "С но,жр,вн,ед,"
                         }
+                    ],
+                    "index": 2,
+                    "morph": "С но,жр,вн,ед,",
+                    "interps": [
+                        " +  ROSS: +СУЩЕСТВ_неодуш 1"
                     ]
                 }
             ],
             "relations": [
                 {
                     "name": "SUB",
-                    "source": {
-                        "words": "МЫЛА"
-                    },
-                    "syntax_rel": "подл",
-                    "target": {
-                        "words": "МАМА"
-                    }
+                    "source": "МЫЛА",
+                    "target": "МАМА",
+                    "syntax_rel": "подл"
                 },
                 {
                     "name": "OBJ",
-                    "source": {
-                        "words": "МЫЛА"
-                    },
-                    "syntax_rel": "п_доп",
-                    "target": {
-                        "words": "РАМУ"
-                    }
+                    "source": "МЫЛА",
+                    "target": "РАМУ",
+                    "syntax_rel": "п_доп"
                 }
-            ]
+            ],
+            "aux_relations": []
         }
     },
     {
-        "comments": "",
         "input": "Во вторник я вышел во двор, который я не любил.",
+        "comments": "",
         "result": {
-            "aux relations": [],
             "nodes": [
                 {
+                    "words": [
+                        {
+                            "word": "ВТОРНИК",
+                            "lemma": "ВТОРНИК",
+                            "inner_morph": "С но,мр,вн,ед,"
+                        }
+                    ],
                     "index": 0,
+                    "morph": "С но,мр,вн,ед,",
                     "interps": [
                         " + TimeRoss: в_пятницу1 (ItemNo=2) (LexFetNo=1) (m_PrepNoInArticle=1)",
                         " +  RML_THES_OMNI: @ModelId3 1"
                     ],
-                    "morph": "С но,мр,вн,ед,",
-                    "preposition": "Во",
-                    "words": [
-                        {
-                            "inner morph": "С но,мр,вн,ед,",
-                            "lemma": "ВТОРНИК",
-                            "word": "ВТОРНИК"
-                        }
-                    ]
+                    "preposition": "Во"
                 },
                 {
+                    "words": [
+                        {
+                            "word": "Я",
+                            "lemma": "Я",
+                            "inner_morph": "МС 1л,им,ед,"
+                        }
+                    ],
                     "index": 1,
+                    "morph": "МС 1л,им,ед,",
                     "interps": [
                         " +  ROSS: я 1"
-                    ],
-                    "morph": "МС 1л,им,ед,",
-                    "words": [
-                        {
-                            "inner morph": "МС 1л,им,ед,",
-                            "lemma": "Я",
-                            "word": "Я"
-                        }
                     ]
                 },
                 {
+                    "words": [
+                        {
+                            "word": "ВЫШЕЛ",
+                            "lemma": "ВЫЙТИ",
+                            "inner_morph": "Г дст,нп,св,прш,мр,ед,"
+                        }
+                    ],
                     "index": 2,
+                    "morph": "Г дст,нп,св,прш,мр,ед,",
                     "interps": [
                         " +  ROSS: выходить 1",
                         " -  ROSS: выходить 2"
-                    ],
-                    "morph": "Г дст,нп,св,прш,мр,ед,",
-                    "words": [
-                        {
-                            "inner morph": "Г дст,нп,св,прш,мр,ед,",
-                            "lemma": "ВЫЙТИ",
-                            "word": "ВЫШЕЛ"
-                        }
                     ]
                 },
                 {
+                    "words": [
+                        {
+                            "word": "ДВОР",
+                            "lemma": "ДВОР",
+                            "inner_morph": "С но,мр,вн,ед,"
+                        }
+                    ],
                     "index": 3,
+                    "morph": "С мр,вн,ед,",
                     "interps": [
                         " +  RML_THES_LOC: @ModelId3 1"
                     ],
-                    "morph": "С мр,вн,ед,",
-                    "preposition": "во",
-                    "words": [
-                        {
-                            "inner morph": "С но,мр,вн,ед,",
-                            "lemma": "ДВОР",
-                            "word": "ДВОР"
-                        }
-                    ]
+                    "preposition": "во"
                 },
                 {
+                    "words": [
+                        {
+                            "word": "КОТОРЫЙ",
+                            "lemma": "КОТОРЫЙ",
+                            "inner_morph": "МС-П но,од,мр,вн,им,ед,"
+                        }
+                    ],
                     "index": 4,
+                    "morph": "МС-П но,мр,вн,рд,ед,",
                     "interps": [
                         " +  ROSS: который 1"
-                    ],
-                    "morph": "МС-П но,мр,вн,рд,ед,",
-                    "words": [
-                        {
-                            "inner morph": "МС-П но,од,мр,вн,им,ед,",
-                            "lemma": "КОТОРЫЙ",
-                            "word": "КОТОРЫЙ"
-                        }
                     ]
                 },
                 {
+                    "words": [
+                        {
+                            "word": "Я",
+                            "lemma": "Я",
+                            "inner_morph": "МС 1л,им,ед,"
+                        }
+                    ],
                     "index": 5,
+                    "morph": "МС 1л,им,ед,",
                     "interps": [
                         " +  ROSS: я 1"
-                    ],
-                    "morph": "МС 1л,им,ед,",
-                    "words": [
-                        {
-                            "inner morph": "МС 1л,им,ед,",
-                            "lemma": "Я",
-                            "word": "Я"
-                        }
                     ]
                 },
                 {
+                    "words": [
+                        {
+                            "word": "ЛЮБИЛ",
+                            "lemma": "ЛЮБИТЬ",
+                            "inner_morph": "Г дст,пе,нс,прш,мр,ед,"
+                        }
+                    ],
                     "index": 6,
+                    "morph": "Г дст,пе,нс,прш,мр,ед,",
                     "interps": [
                         " +  ROSS: любить 1"
                     ],
-                    "morph": "Г дст,пе,нс,прш,мр,ед,",
-                    "node_str": "ЛЮБИЛ (НЕ)",
-                    "words": [
-                        {
-                            "inner morph": "Г дст,пе,нс,прш,мр,ед,",
-                            "lemma": "ЛЮБИТЬ",
-                            "word": "ЛЮБИЛ"
-                        }
-                    ]
+                    "node_str": "ЛЮБИЛ (НЕ)"
                 }
             ],
             "relations": [
                 {
                     "name": "SUB",
-                    "source": {
-                        "words": "ВЫШЕЛ"
-                    },
-                    "syntax_rel": "подл",
-                    "target": {
-                        "words": "Я"
-                    }
+                    "source": "ВЫШЕЛ",
+                    "target": "Я",
+                    "syntax_rel": "подл"
                 },
                 {
                     "name": "TRG-PNT",
-                    "source": {
-                        "words": "ВЫШЕЛ"
-                    },
-                    "syntax_rel": "",
-                    "target": {
-                        "words": "ДВОР"
-                    }
+                    "source": "ВЫШЕЛ",
+                    "target": "ДВОР",
+                    "syntax_rel": ""
                 },
                 {
                     "name": "TIME",
-                    "source": {
-                        "words": "ВЫШЕЛ"
-                    },
-                    "syntax_rel": "",
-                    "target": {
-                        "words": "ВТОРНИК"
-                    }
+                    "source": "ВЫШЕЛ",
+                    "target": "ВТОРНИК",
+                    "syntax_rel": ""
                 },
                 {
                     "name": "SUB",
-                    "source": {
-                        "words": "ЛЮБИЛ (НЕ)"
-                    },
-                    "syntax_rel": "подл",
-                    "target": {
-                        "words": "Я"
-                    }
+                    "source": "ЛЮБИЛ (НЕ)",
+                    "target": "Я",
+                    "syntax_rel": "подл"
                 },
                 {
                     "name": "CONTEN",
-                    "source": {
-                        "words": "ЛЮБИЛ (НЕ)"
-                    },
-                    "syntax_rel": "п_доп",
-                    "target": {
-                        "words": "КОТОРЫЙ"
-                    }
+                    "source": "ЛЮБИЛ (НЕ)",
+                    "target": "КОТОРЫЙ",
+                    "syntax_rel": "п_доп"
                 },
                 {
                     "name": "THESAME",
-                    "source": {
-                        "words": "КОТОРЫЙ"
-                    },
-                    "syntax_rel": "",
-                    "target": {
-                        "words": "ДВОР"
-                    }
+                    "source": "КОТОРЫЙ",
+                    "target": "ДВОР",
+                    "syntax_rel": ""
                 }
-            ]
+            ],
+            "aux_relations": []
         }
     }
 ]

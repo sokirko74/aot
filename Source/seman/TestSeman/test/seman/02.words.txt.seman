@@ -1,26 +1,26 @@
 [
     {
-        "comments": "// интерпретация из omni тезауруса",
         "input": "компания",
+        "comments": "// интерпретация из omni тезауруса",
         "result": {
-            "aux relations": [],
             "nodes": [
                 {
-                    "index": 0,
-                    "interps": [
-                        " +  RML_THES_OMNI: @ModelId3 1"
-                    ],
-                    "morph": "С но,жр,им,ед,",
                     "words": [
                         {
-                            "inner morph": "С но,жр,им,ед,",
+                            "word": "КОМПАНИЯ",
                             "lemma": "КОМПАНИЯ",
-                            "word": "КОМПАНИЯ"
+                            "inner_morph": "С но,жр,им,ед,"
                         }
+                    ],
+                    "index": 0,
+                    "morph": "С но,жр,им,ед,",
+                    "interps": [
+                        " +  RML_THES_OMNI: @ModelId3 1"
                     ]
                 }
             ],
-            "relations": []
+            "relations": [],
+            "aux_relations": []
         }
     }
 ]

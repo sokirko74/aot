@@ -450,7 +450,7 @@ void CWorkGrammar::SavePrecompiled() const {
         i.ToJsonObject(o);
         items.push_back(o);
     };
-    out_js.add_member("grammar_items", items.get_value());
+    out_js.move_to_member("grammar_items", items.get_value());
 
     CJsonObject rules(d, rapidjson::kArrayType);
     for (auto& r : m_PrecompiledEncodedRules) {
@@ -458,7 +458,7 @@ void CWorkGrammar::SavePrecompiled() const {
         r.ToJsonObject(o);
         rules.push_back(o);
     }
-    out_js.add_member("rules", rules.get_value());
+    out_js.move_to_member("rules", rules.get_value());
 
     std::string path = MakeFName(m_RootGrammarPath, "grammar_precompiled");
     LOGI << "save to " << path;

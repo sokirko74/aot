@@ -1473,7 +1473,7 @@
     },
     {
         "input": "- Вы, наверно, сыщик?",
-        "comments": "// ",
+        "comments": "//",
         "result": [
             {
                 "analytical": [],
@@ -4815,7 +4815,7 @@
     },
     {
         "input": "В процессе изучения были выявлены",
-        "comments": "// format_for_oborots должен быть запускаться всегда ",
+        "comments": "// format_for_oborots должен быть запускаться всегда",
         "result": [
             {
                 "analytical": [

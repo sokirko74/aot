@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include "synan/SynCommonLib/RelationsIterator.h"
 #include "../SynanLib/SyntaxHolder.h"
-#include "morph_dict/common/util_classes.h"
+#include "common/test_corpus.h"
 #include "morph_dict/common/argparse.h"
 #include <filesystem>
 
@@ -20,7 +20,7 @@ void GetAnanlytForms(const CSentence &Sentence, CJsonObject& out) {
             arr.push_back(s);
         }
     }
-    out.add_member("analytical", arr.get_value());
+    out.move_to_member("analytical", arr.get_value());
 }
 
 
@@ -85,15 +85,15 @@ void GetGroups(const CSentence &Sentence, const CAgramtab &A, CJsonObject& out) 
                 }
             }
             CJsonObject o(out.get_doc());
-            o.add_member("syn_units", syn_units.get_value());
-            o.add_member("groups", groups.get_value());
+            o.move_to_member("syn_units", syn_units.get_value());
+            o.move_to_member("groups", groups.get_value());
             o.add_string_copy("clause_type", clauseType);
             good_synvars.push_back(o.get_value());
         }
-        clause.add_member("good_synvars", good_synvars.get_value());
+        clause.move_to_member("good_synvars", good_synvars.get_value());
         arr.push_back(clause);
     }
-    out.add_member("groups", arr.get_value());
+    out.move_to_member("groups", arr.get_value());
 }
 
 std::string GetNodeGrmStr(const CSentence &Sentence, const CRelationsIterator &RelIt, int GroupNo, int WordNo, std::string &Lemma) {
@@ -136,7 +136,7 @@ void GetRelations(const CSentence &Sentence, CJsonObject& out) {
 
         rels.push_back(o);
     }
-    out.add_member("relations", rels.get_value());
+    out.move_to_member("relations", rels.get_value());
 }
 
 void GetThesaurusTerms(const CSentence& Sentence, CJsonObject& out) {
@@ -154,22 +154,21 @@ void GetThesaurusTerms(const CSentence& Sentence, CJsonObject& out) {
             
         }
     }
-    out.add_member("terms", terms.get_value());
+    out.move_to_member("terms", terms.get_value());
 }
 
-void GetResultBySyntax(const CSentencesCollection& SC, CJsonObject& out) {
-    CJsonObject sents(out.get_doc(), rapidjson::kArrayType);
+void GetResultBySyntax(const CSentencesCollection& SC, CJsonObject& sents) {
     const CAgramtab& A = *SC.GetOpt()->GetGramTab();
     for (size_t nSent = 0; nSent < SC.m_vectorSents.size(); nSent++) {
         const CSentence &Sentence = *SC.m_vectorSents[nSent];
-        CJsonObject sent(out.get_doc());
+        CJsonObject sent(sents.get_doc());
         GetAnanlytForms(Sentence, sent);
         GetGroups(Sentence, A, sent);
         GetRelations(Sentence, sent);
         GetThesaurusTerms(Sentence, sent);
         sents.push_back(sent.get_value());
     }
-    out.add_member("result",sents.get_value());
+    
 };
 
 
@@ -217,24 +216,23 @@ int main(int argc, const char** argv) {
         }
         for (auto& p : file_pairs) {
             std::cerr << p.first << "\n";
-            CTestCaseBase base;
+            rapidjson::Document d;
+            CTestCaseBase base(d);
             std::ifstream inp(p.first);
             base.read_test_cases(inp);
-            rapidjson::Document d;
-            CJsonObject cases(d, rapidjson::kArrayType);
 
-            for (auto& t : base.TestCases) {
-                if (!t.Text.empty()) {
-                    H.GetSentencesFromSynAn(t.Text, false);
-                    CJsonObject j(d);
-                    j.add_string("input",  t.Text);
-                    j.add_string("comments", t.Comment);
-                    GetResultBySyntax(H.m_Synan, j);
-                    cases.push_back(j.get_value());
+            for (auto& t : base.TestCases.get_value().GetArray()) {
+                std::string text = t["input"].GetString();
+                if (!text.empty()) {
+                    H.GetSentencesFromSynAn(text, false);
+                    CJsonObject sents(d, rapidjson::kArrayType);
+                    GetResultBySyntax(H.m_Synan, sents);
+                    t.AddMember("result", sents.get_value(), d.GetAllocator());
                 }
             }
-            PLOGD <<  "write output file " << p.second;
-            cases.dump_rapidjson_pretty(p.second, 4);
+            LOGD <<  "write output file " << p.second;
+            std::ofstream outp(p.second);
+            base.write_test_cases(outp);
         }
     }
     catch (std::exception& e) {

@@ -7,6 +7,8 @@ set(my_SOURCES
         gra_descr.h
         http_server.h
         cortege.cpp
+        test_corpus.h
+        test_corpus.cpp
 )
 
 if (COMPILE_WITH_HTTP)

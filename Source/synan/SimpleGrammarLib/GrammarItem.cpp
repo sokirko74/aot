@@ -296,7 +296,7 @@ void CGrammarItem::ToJsonObject(CJsonObject& o) const
 	o.add_string("source", m_Source);
 	CJsonObject morph(o.get_doc());
 	m_MorphPattern.ToJsonObject(morph);
-	o.add_member("morph", morph.get_value());
+	o.move_to_member("morph", morph.get_value());
 	o.add_bool("root", m_bGrammarRoot);
 	o.add_bool("syn_main", m_bSynMain);
 	o.add_bool("hom", m_bCanHaveManyHomonyms);
@@ -305,7 +305,7 @@ void CGrammarItem::ToJsonObject(CJsonObject& o) const
 	CJsonObject attrs(o.get_doc());
 	for (auto& [key, val] : m_Attributes)
 		attrs.add_string(key.c_str(), val);
-	o.add_member("attrs", attrs.get_value());
+	o.move_to_member("attrs", attrs.get_value());
 }
 
 
