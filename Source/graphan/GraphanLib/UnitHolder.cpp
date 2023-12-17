@@ -364,6 +364,7 @@ void	CUnitHolder::MakeOneWord(size_t start_token_no, size_t end_token_no)
 	{
 		m_Tokens.erase(m_Tokens.begin() + start_token_no + 1, m_Tokens.begin() + end_token_no);
 	}
+	GetUnit(start_token_no).DelDes(ORoman); // c++
 };
 
 

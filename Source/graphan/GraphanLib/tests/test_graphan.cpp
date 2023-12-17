@@ -46,6 +46,21 @@ TEST_CASE("test_numbers") {
 
 }
 
+TEST_CASE("test_roman_number") {
+	rus.LoadStringToGraphan("XII");
+	CHECK(rus.GetUnits()[0].HasDes(ORoman));
+
+	rus.LoadStringToGraphan("I-го");
+	CHECK(rus.GetUnits()[0].HasDes(ORoman));
+
+	rus.LoadStringToGraphan("iiid");
+	CHECK(!rus.GetUnits()[0].HasDes(ORoman));
+
+	rus.LoadStringToGraphan("c++");
+	CHECK(!rus.GetUnits()[0].HasDes(ORoman));
+
+}
+
 TEST_CASE("test_spaced") {
 	auto s = "з а к о н";
 	rus.LoadStringToGraphan(s);
@@ -205,6 +220,23 @@ TEST_CASE("test_names") {
 	
 }
 
+void check_abbr(CGraphmatFile& g, std::string s, bool check_value = true) {
+	g.LoadStringToGraphan(s);
+	auto m = Format("abbreviation \"%s\" is not recognized", s.c_str());
+	for (size_t i = 0; i + 1 < g.GetUnits().size(); ++i) {
+		CHECK_MESSAGE(!g.GetUnits()[i].HasDes(OAbbr2), m);
+	}
+	CHECK_MESSAGE(g.GetUnits()[0].HasDes(OAbbr1) == check_value, m);
+	CHECK_MESSAGE(g.GetUnits().back().HasDes(OAbbr2) == check_value, m);
+}
+
+TEST_CASE("test_abbr") {
+	check_abbr(rus, "см. Аффф");
+	check_abbr(ger, "1. Januar");
+	check_abbr(ger, "Q.", false);
+	check_abbr(ger, "Dr . L . Fleck", true);
+}
+
 void check_oborot(std::string s) {
 	rus.LoadStringToGraphan(s);
 	auto m = Format("oborot \"%s\" is not recognized", s.c_str());
@@ -272,6 +304,7 @@ TEST_CASE("test_english") {
 	eng.LoadStringToGraphan(s);
 	CHECK(6 == eng.GetUnits().size());
 	auto res = eng.GetUnits().back().GetGraphematicalLine();
+	eng.WriteGraphMat("test.gra");
 	CHECK(".\t29 1\t PUN CS? SENT_END" == res);
 }
 

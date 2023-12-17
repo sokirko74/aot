@@ -426,119 +426,77 @@ void CWorkGrammar::CheckCoherence() const {
 };
 
 
-inline size_t get_size_in_bytes(const CPrecompiledWorkRule &t) {
-    return get_size_in_bytes(t.m_LeftPart)
-           + get_size_in_bytes(t.m_MetaGroupIndexNo)
-           + get_size_in_bytes(t.m_SynMainItemNo);
+void  CPrecompiledWorkRule::ToJsonObject(CJsonObject& b) const
+{
+    b.add_int("left", m_LeftPart);
+    b.add_int("syn_main", m_SynMainItemNo);
 };
 
-inline size_t save_to_bytes(const CPrecompiledWorkRule &t, BYTE *buf) {
-    buf += save_to_bytes(t.m_LeftPart, buf);
-    buf += save_to_bytes(t.m_MetaGroupIndexNo, buf);
-    buf += save_to_bytes(t.m_SynMainItemNo, buf);
-    return get_size_in_bytes(t);
-};
-
-inline size_t restore_from_bytes(CPrecompiledWorkRule &t, const BYTE *buf) {
-    buf += restore_from_bytes(t.m_LeftPart, buf);
-    buf += restore_from_bytes(t.m_MetaGroupIndexNo, buf);
-    buf += restore_from_bytes(t.m_SynMainItemNo, buf);
-    return get_size_in_bytes(t);
+void CPrecompiledWorkRule::FromJsonObject(const rapidjson::Value& inj)
+{
+    m_LeftPart = inj["left"].GetInt();
+    m_SynMainItemNo = inj["syn_main"].GetInt();
 };
 
 
 void CWorkGrammar::SavePrecompiled() const {
+    rapidjson::Document d;
+    CJsonObject out_js(d);
+    out_js.add_int("language", m_Language);
 
-    std::string PrecompiledFile = MakeFName(m_RootGrammarPath, "grammar_precompiled");
-    LOGI << "save to " << PrecompiledFile;
-
-    FILE *fp = fopen(PrecompiledFile.c_str(), "wb");
-    if (!fp) {
-        throw CExpc("Cannot write " + PrecompiledFile);
-    };
-    fprintf(fp, "%i\n", (int) m_Language);
-    fprintf(fp, "%zi\n", m_UniqueGrammarItems.size());
-
+    CJsonObject items(d, rapidjson::kArrayType);
     for (auto& i : m_UniqueGrammarItems) {
-        {
-            // checking
-            std::string q = i.toString().c_str();
-            CGrammarItem i1;
-            bool b = i1.fromString(q);
-            assert (b);
-            assert (i1 == i);
-        }
-        fprintf(fp, "%s", i.toString().c_str());
+        CJsonObject o(d);
+        i.ToJsonObject(o);
+        items.push_back(o);
     };
+    out_js.add_member("grammar_items", items.get_value());
 
-    fprintf(fp, "%zi\n", m_PrecompiledEncodedRules.size());
-    WriteVectorInner(fp, m_PrecompiledEncodedRules);
+    CJsonObject rules(d, rapidjson::kArrayType);
+    for (auto& r : m_PrecompiledEncodedRules) {
+        CJsonObject o(d);
+        r.ToJsonObject(o);
+        rules.push_back(o);
+    }
+    out_js.add_member("rules", rules.get_value());
 
-    fclose(fp);
-
-    m_TrieHolder.Save(m_RootGrammarPath);
+    std::string path = MakeFName(m_RootGrammarPath, "grammar_precompiled");
+    LOGI << "save to " << path;
+    std::ofstream outp(path);
+    if (!outp.good()) {
+        throw CExpc("Cannot write " + path);
+    };
+    outp << out_js.dump_rapidjson_pretty();
+    outp.close();
 };
 
 
 void CWorkGrammar::LoadFromPrecompiled() {
-    time_t t1;
-    time(&t1);
-    std::string PrecompiledFile = MakeFName(m_RootGrammarPath, "grammar_precompiled");
-    LOGI << "loading from precompiled grammar " << PrecompiledFile;
-    FILE *fp = fopen(PrecompiledFile.c_str(), "rb");
-    if (!fp) {
-        throw CExpc("Cannot open %s", PrecompiledFile.c_str());
+    std::string path = MakeFName(m_RootGrammarPath, "grammar_precompiled");
+    std::ifstream inp(path);
+    LOGI << "loading from precompiled grammar " << path;
+    if (!inp.good()) {
+        throw CExpc("Cannot open %s", path.c_str());
     };
 
-    int Lang;
-    fscanf(fp, "%i\n", &Lang);
-    m_Language = (MorphLanguageEnum) Lang;
-
-    int Count;
-    fscanf(fp, "%i\n", &Count);
-
+    rapidjson::Document doc;
+    rapidjson::IStreamWrapper isw(inp);
+    doc.ParseStream(isw);
+    inp.close();
+    m_Language = (MorphLanguageEnum)doc["language"].GetInt();
     m_UniqueGrammarItems.clear();
-    for (size_t i = 0; i < Count; i++) {
-        std::string OneRecord;
-        for (size_t LineNo = 0; LineNo < 7; LineNo++) {
-            char buffer[1024];
-            if (!fgets(buffer, 1024, fp)) {
-                throw CExpc("Cannot read %s", PrecompiledFile.c_str());
-            };
-            OneRecord += buffer;
-        };
-
-        CGrammarItem I;
-        bool b = I.fromString(OneRecord);
-        if (!b) {
-            throw CExpc("Cannot read %s in %s", PrecompiledFile.c_str(), OneRecord.c_str());
-        };
-        m_UniqueGrammarItems.push_back(I);
-
-    };
-
-    {
-        char buffer[256];
-        if (!fgets(buffer, 256, fp)) {
-            throw CExpc("cannot read size for PrecompiledEncodedRules");
-        }
-        Count = atoi(buffer);
-    };
+    for (auto& a : doc["grammar_items"].GetArray()) {
+        CGrammarItem i;
+        i.FromJsonObject(a);
+        m_UniqueGrammarItems.push_back(i);
+    }   
     m_PrecompiledEncodedRules.clear();
-    ReadVectorInner(fp, m_PrecompiledEncodedRules, Count);
+    for (auto& a : doc["rules"].GetArray()) {
+        CPrecompiledWorkRule r;
+        r.FromJsonObject(a);
+        m_PrecompiledEncodedRules.push_back(r);
+    }
 
-    fclose(fp);
-
-    CreateAutomatSymbolInformation();
-
-    assert (!m_AutomatSymbolInformation.empty());
-    if (!m_TrieHolder.Load(&m_AutomatSymbolInformation, m_RootGrammarPath)) {
-        throw CExpc("Cannot load automat");
-    };
-
-    time_t t2;
-    time(&t2);
-    LOGV << "Seconds = " << t2 - t1;
 };
 
 // adding a new root non-terminal "NewRoot" and a special 
@@ -615,6 +573,12 @@ void CWorkGrammar::LoadGrammarForGLR(bool bUsePrecompiledAutomat) {
 
         size_t SaveSize = m_UniqueGrammarItems.size();
         LoadFromPrecompiled();
+        CreateAutomatSymbolInformation();
+        assert(!m_AutomatSymbolInformation.empty());
+        if (!m_TrieHolder.Load(&m_AutomatSymbolInformation, m_RootGrammarPath)) {
+            throw CExpc("Cannot load automat");
+        };
+
         if (SaveSize != m_UniqueGrammarItems.size()) {
             std::ostringstream ss;
             ss << "Number of Symbols in the precompiled  version = " << m_UniqueGrammarItems.size()
@@ -673,6 +637,7 @@ void CWorkGrammar::CreatePrecompiledGrammar() {
 
     LoadGrammarForGLR(false);
     SavePrecompiled();
+    m_TrieHolder.Save(m_RootGrammarPath);
     m_GLRTable.ConvertAndSaveGLRTable(MakeFName(m_RootGrammarPath, "table"));
 
     fs::current_path(save_curent_dir);

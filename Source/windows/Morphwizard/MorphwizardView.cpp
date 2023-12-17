@@ -81,7 +81,7 @@ void CMorphwizardView::DoDataExchange(CDataExchange* pDX)
 	DDX_Control(pDX, IDC_PREDICT_WHAT, m_PredictWhat);
 	DDX_Control(pDX, IDC_FIND_WHAT, m_FindWhat);
 	DDX_Control(pDX, IDC_STATUS, m_StatusCtrl);
-	DDX_Text(pDX, IDC_STATUS, m_Status);
+	DDX_Text(pDX, IDC_STATUS, m_AuxDescriptors);
 	DDX_Text(pDX, IDC_MINIMAL_FREQUENCE, m_MinimalFrequence);
 	DDX_Check(pDX, IDC_ONLY_MAIN_PART_OF_SPEECHES, m_bOnlyMainPartOfSpeeches);
 	DDX_Control(pDX, IDC_FOUND_LIST2, m_FoundList);

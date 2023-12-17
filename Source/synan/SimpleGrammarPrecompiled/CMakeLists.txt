@@ -12,4 +12,3 @@ if (BUILD_DICTS)
     add_dependencies (SimpleGrammarPrecompiled MorphDicts)
 endif()
 
-add_subdirectory(tests)

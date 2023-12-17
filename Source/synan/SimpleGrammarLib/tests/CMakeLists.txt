@@ -10,8 +10,8 @@ target_link_libraries(${PROJECT_NAME}
 
 
 add_test(
-        NAME SimpleGrammarTest 
-        COMMAND test_simple_grammar
-        WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}
+    NAME SimpleGrammarTest 
+    COMMAND test_simple_grammar
+    WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}
 )
 

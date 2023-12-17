@@ -128,8 +128,9 @@ struct CWorkRule {
 
 struct CPrecompiledWorkRule {
     uint32_t m_LeftPart;
-    uint32_t m_MetaGroupIndexNo;
     uint32_t m_SynMainItemNo;
+    void ToJsonObject(CJsonObject& b) const;
+    void FromJsonObject(const rapidjson::Value& inj);
 };
 
 
@@ -165,6 +166,11 @@ struct CFoundEntity {
 
 
 class CWorkGrammar {
+    void SavePrecompiled() const;
+
+    void LoadFromPrecompiled();
+
+
 public:
     MorphLanguageEnum m_Language;
     std::vector<CGrammarItem> m_UniqueGrammarItems;
@@ -249,10 +255,6 @@ public:
     void BuildAutomat(std::set<CWorkRule> &EncodedRules);
 
     void IsValid() const;
-
-    void SavePrecompiled() const;
-
-    void LoadFromPrecompiled();
 
     void ConvertToPrecompiled(const std::set<CWorkRule> &EncodedRules);
 

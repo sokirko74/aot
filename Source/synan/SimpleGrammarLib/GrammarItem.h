@@ -13,25 +13,22 @@ struct CTokenListFile
 };
 
 
-const char ConcatenationMark = ',';
-const char OptionalMark = '?';
-const char DisjunctionMark = '|';
-
 struct CGrammarItem 
 {
-	bool		  m_bMeta;
-	Descriptors   m_TokenType;
-	std::string	  m_ItemStrId;
-	std::string				m_Token;
-	CAncodePattern		m_MorphPattern;
+	bool m_bMeta;
+	Descriptors  m_TokenType;
+	std::string	 m_ItemStrId;
+	std::string	 m_Token;
+	CAncodePattern m_MorphPattern;
 	
 	std::map<std::string, std::string> m_Attributes;
-	std::string				m_Source; 
+	std::string m_Source; 
 
 	//  an index in CWorkGrammar m_TokenListFiles
 	//  by deafult is -1
 	CTokenListFile*		m_pListFile;
 
+	uint64_t m_GraphemDescrs;
 
 	//  m_bGrammarRoot  is valid only in Work grammars
 	bool				m_bGrammarRoot;
@@ -61,7 +58,7 @@ struct CGrammarItem
 
 	void	AddAttribute(std::string Name, std::string Value, MorphLanguageEnum Language, std::string& ErrorStr, const std::string& SourceFileName);
 	void	CopyNonEmptyWorkAttributesFrom(const CGrammarItem& Item);
-	std::string	toString() const;
-	bool	fromString(std::string& Result);
+	void	ToJsonObject(CJsonObject& o) const;
+	void	FromJsonObject(const rapidjson::Value& inj);
 	bool	HasAnyOfWorkingAttributes() const;
 };

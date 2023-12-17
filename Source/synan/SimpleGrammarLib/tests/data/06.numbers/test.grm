@@ -1,0 +1,6 @@
+[main] -> [NUMBER root] | [ROMAN root];
+
+
+[NUMBER] -> [TOKEN type="DC"];
+
+[ROMAN] ->  [TOKEN graphem="ROMAN"];

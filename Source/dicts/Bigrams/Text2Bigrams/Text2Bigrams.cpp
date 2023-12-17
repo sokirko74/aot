@@ -1,4 +1,5 @@
 #include "graphan/GraphanLib/GraphmatFile.h"
+#include "graphan/GraphanLib/graline.h"
 #include "MergeFiles.h"
 
 #include <string>
@@ -69,37 +70,42 @@ void RemoveTempFiles(std::vector<std::string> AllTempFiles)
 
 
 typedef std::list<std::vector<std::string> > interp_t;
-bool IsBigramToken(const CGraLine& L)
+
+bool IsBigramToken(const CGraLine& L, bool bOnlyWords)
 {
+	if (bOnlyWords) {
+		L.Is
+	}
 	return !L.IsNotPrint()  && !L.IsSoft();
 };
 
-interp_t GetTokensBySentences(CGraphmatFile& Graphan)
+interp_t GetTokensBySentences(CGraphmatFile& Graphan, bool bOnlyWords)
 {
-	interp_t Result;
-	size_t TokensCount = Graphan.GetEntries().size();
-	std::vector<std::string> tokens;
-	for (size_t LineNo=1; LineNo < TokensCount; LineNo++)
+	interp_t result;
+	size_t TokensCount = Graphan.GetUnits().size();
+	
+	for (size_t i = 0; i < TokensCount; ++i)
 	{
-		tokens.clear();
-		size_t LineNoEnd=LineNo;
-		for (; LineNoEnd < TokensCount; LineNoEnd++)
+		std::vector<std::string> sentence;
+		size_t k = i;
+		for (; k < TokensCount; ++k)
 		{
-			if (IsBigramToken(Graphan.GetUnit(LineNoEnd)) )
+			if (IsBigramToken(Graphan.GetUnits()[k], bOnlyWords) )
 			{
-				std::string TokenStr = Graphan.GetToken(LineNoEnd);
-				assert (!TokenStr.empty());
-				tokens.push_back( TokenStr  );
+				std::string s = Graphan.GetTokenUtf8(k);
+				if (!s.empty()) {
+					sentence.push_back(s);
+				}
 			}
 
-			if (Graphan.HasDescr(LineNoEnd, OSentEnd)) 
+			if (Graphan.HasDescr(k, OSentEnd)) 
 					break;
 		}
-		Result.push_back(tokens);
-		LineNo = LineNoEnd;
+		result.push_back(sentence);
+		i = k;
 	}
 
-	return Result;
+	return result;
 };
 
 
@@ -255,7 +261,7 @@ try
 			AllFileSize += FileSize(InputFileName.c_str());
 			Graphan.LoadFileToGraphan(InputFileName);
 			size_t TokensCount = Graphan.GetEntries().size();
-			interp_t Tokens =  GetTokensBySentences(Graphan);
+			interp_t Tokens =  GetTokensBySentences(Graphan, bOnlyWords);
 
 			if (bOnlyWords)
 				Tokens = DeletePunctuationMarks(Tokens);

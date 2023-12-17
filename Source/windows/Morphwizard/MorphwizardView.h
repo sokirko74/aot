@@ -58,7 +58,7 @@ public:
 	CListCtrl			m_PredictedList;
 	CEdit				m_PredictWhat;
 	CEdit				m_StatusCtrl;
-	CString				m_Status;
+	CString				m_AuxDescriptors;
 	long				m_MinimalFrequence;
 	BOOL				m_bOnlyMainPartOfSpeeches;
 

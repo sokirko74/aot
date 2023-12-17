@@ -68,8 +68,8 @@ public:
 	void		BuildOborot (const std::string& s, int OborotNo,bool bFixedFet);
 	void		BuildOborottos ();
     
-	std::vector<CAbbrev>		m_Abbrevs;
-	bool		ReadAbbrevations();
+	std::unordered_multimap<std::string, CAbbrev> m_Abbrevs;
+	void		ReadAbbrevations();
 
     
     

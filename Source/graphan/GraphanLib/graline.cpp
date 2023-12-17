@@ -11,7 +11,7 @@
 
 
 CGraLine::CGraLine() {
-    m_Status = 0;
+    m_AuxDescriptors = 0;
     m_Descriptors = 0;
     m_TokenScreenLength = 0;
     m_InputOffset = 0;
@@ -41,8 +41,24 @@ std::string CGraLine::GetTokenUpperUtf8() const {
 };
 
 void CGraLine::SetStatus(short status) {
-    m_Status = status;
+    m_AuxDescriptors = status;
 }
+
+bool CGraLine::IsSpace() const { 
+    return (m_AuxDescriptors & stSpace) != 0; 
+};
+
+bool CGraLine::IsEOLN() const {
+    return (m_AuxDescriptors & stEOLN) != 0; 
+};
+
+bool CGraLine::IsSoft() const {
+    return IsSpace() || IsEOLN(); 
+};
+
+bool CGraLine::IsPunct() const {
+    return (m_AuxDescriptors & stPunct) != 0; 
+};
 
 const std::string& CGraLine::GetTokenUpper() const {
     return m_TokenUpper;
@@ -87,7 +103,7 @@ bool CGraLine::IsWordOrNumberOrAbbr() const {
                 | _QM (OLLE)
                 | _QM (ODigits)
                 | _QM (ONumChar)
-                | _QM (OAbbr1)
+                | _QM (OAbbr1) //  Dr
              )
             ) != 0;
 }
@@ -96,14 +112,14 @@ bool CGraLine::IsWordOrNumberOrAbbr() const {
 bool CGraLine::IsSingleSpaceToDelete() const {
     return (GetTokenLength() == 1)
            && (GetToken()[0] == ' ') // we delete only space, leaving alone tabulations
-           && (m_Status == stSpace); // this line means that there is no other meaning for this
+           && (m_AuxDescriptors == stSpace); // this line means that there is no other meaning for this
     // space, for example, it prevents to consider a converted "</p" to be deleted
 };
 
 
 void CGraLine::MakeSpaces(size_t spaces_count) {
     m_Descriptors = _QM(ODel) | _QM(OSpc);
-    m_Status = stSpace;
+    m_AuxDescriptors = stSpace;
     m_TokenScreenLength = (BYTE)spaces_count;
     m_Token = std::string(spaces_count, ' ');
     m_TokenUpper = m_Token;
@@ -120,11 +136,11 @@ bool CGraLine::IsBulletWord() const
 };
 
 bool CGraLine::IsNotPrint() const {
-    return (m_Status & stNotPrint) != 0;
+    return (m_AuxDescriptors & stNotPrint) != 0;
 };
 
 bool CGraLine::IsEnglishName() const {
-    return (m_Status & stEnglishName) != 0;
+    return (m_AuxDescriptors & stEnglishName) != 0;
 };
 
 bool  CGraLine::IsOneAlpha() const
@@ -146,39 +162,39 @@ bool  CGraLine::FirstUpper() const
 
 
 bool CGraLine::IsIdent() const {
-    return (m_Status & stIdent) != 0;
+    return (m_AuxDescriptors & stIdent) != 0;
 };;
 
 bool CGraLine::IsGrouped() const {
-    return (m_Status & stGrouped) != 0;
+    return (m_AuxDescriptors & stGrouped) != 0;
 };
 
 bool CGraLine::IsAbbreviation() const {
-    return (m_Status & stAbbreviation) != 0;
+    return (m_AuxDescriptors & stAbbreviation) != 0;
 };
 
 bool CGraLine::IsParagraphChar() const {
-    return (m_Status & stParagraphChar) != 0;
+    return (m_AuxDescriptors & stParagraphChar) != 0;
 };
 
 bool CGraLine::IsPageBreak() const {
-    return (m_Status & stPageBreak) != 0;
+    return (m_AuxDescriptors & stPageBreak) != 0;
 };
 
 bool CGraLine::IsTextAreaEnd() const {
-    return (m_Status & stTextAreaEnd) != 0;
+    return (m_AuxDescriptors & stTextAreaEnd) != 0;
 };
 
 bool CGraLine::IsParagraphTag() const {
-    return (m_Status & stParagraphTag) != 0;
+    return (m_AuxDescriptors & stParagraphTag) != 0;
 };
 
 bool CGraLine::IsKeyModifier() const {
-    return (m_Status & stKeyModifier) != 0;
+    return (m_AuxDescriptors & stKeyModifier) != 0;
 };
 
 bool CGraLine::IsElectronicAddress() const {
-    return (m_Status & stElectronicAddress) != 0;
+    return (m_AuxDescriptors & stElectronicAddress) != 0;
 };
 
 bool CGraLine::IsChar(int c) const {
@@ -207,7 +223,7 @@ bool CGraLine::IsAsterisk() const {
     return IsChar((unsigned char) '*') || IsChar(149);
 };
 
-bool CGraLine::HasSingleSpaceAfter() const { return (m_Status & stSingleSpaceAfter) > 0; };
+bool CGraLine::HasSingleSpaceAfter() const { return (m_AuxDescriptors & stSingleSpaceAfter) > 0; };
 
 
 bool CGraLine::IsString(const std::string& s) const {
@@ -229,29 +245,29 @@ bool CGraLine::IsOneOfUpperStrings(const std::vector<std::string>& v) const {
 
 
 void CGraLine::SetParagraphChar() {
-    m_Status |= stParagraphChar;
+    m_AuxDescriptors |= stParagraphChar;
 };
 
 void CGraLine::SetParagraphTag() {
-    m_Status |= stParagraphTag;
+    m_AuxDescriptors |= stParagraphTag;
 };
 
 void CGraLine::SetKeyModifier() {
-    m_Status |= stKeyModifier;
+    m_AuxDescriptors |= stKeyModifier;
 };
 
 void CGraLine::SetElectronicAddress() {
-    m_Status |= stElectronicAddress;
+    m_AuxDescriptors |= stElectronicAddress;
 };
 
 
 void CGraLine::SetSingleSpaceAfter() {
-    m_Status |= stSingleSpaceAfter;
+    m_AuxDescriptors |= stSingleSpaceAfter;
 };
 
 
 void CGraLine::SetEnglishName() {
-    m_Status |= stEnglishName;
+    m_AuxDescriptors |= stEnglishName;
 };
 
 void CGraLine::DelDes(Descriptors d) {
@@ -269,7 +285,7 @@ bool CGraLine::HasDes(Descriptors d) const {
 
 
 void CGraLine::AddStatus(uint16_t add_state) {
-    m_Status |= add_state;
+    m_AuxDescriptors |= add_state;
 };
 
 void CGraLine::AppendToken(const CGraLine &t) {
@@ -330,7 +346,7 @@ void CGraLine::SetToken(short status, const char * s, size_t len, BYTE screen_le
     m_Token = std::string(s, len);
     m_TokenUpper = m_Token;
     RmlMakeUpper(m_TokenUpper, m_Language);
-    m_Status |= status;
+    m_AuxDescriptors |= status;
     if (screen_len > 0)
         m_TokenScreenLength = screen_len;
     else if (m_TokenScreenLength == 0) {
@@ -353,6 +369,20 @@ short  CGraLine::GetOborotNo() const {
     return m_OborotNo;
 }
 
+std::string CGraLine::GetStringByDescriptors(uint64_t descriptors) {
+    std::string s;
+    for (int l = 0; l < NumberOfGraphematicalDescriptors; l++) {
+        if ((descriptors & _QM(l)) > 0)
+        {
+            if (!s.empty()) {
+                s.append(" ");
+            }
+            s.append(GetDescriptorStr((Descriptors)l));
+        };
+    }
+    return s;
+
+}
 
 std::string CGraLine::GetGraphematicalLine() const
 {
@@ -381,17 +411,9 @@ std::string CGraLine::GetGraphematicalLine() const
             };
     };
 
-    result.append(Format("\t%zu %zu\t", GetInputOffset(), GetTokenLength()));
+    result += Format("\t%zu %zu\t ", GetInputOffset(), GetTokenLength());
 
-    // write descriptors 
-    for (int l = 0; l < NumberOfGraphematicalDescriptors; l++) {
-        if ((GetDescriptors() & _QM(l)) > 0)
-        {
-            result.append(" ");
-            result.append(GetDescriptorStr((Descriptors)l));
-        };
-    }
-
+    result += GetStringByDescriptors(GetDescriptors());
     if (m_OborotNo != -1)
     {
         result.append(Format(" EXPR_NO%zu", m_OborotNo));
@@ -445,8 +467,7 @@ std::string force_to_rus(const std::string& s)
     return res;
 }
 
-void CGraLine::InitNonContextDescriptors(bool b_force_to_rus)
-{
+void CGraLine::InitWordsAndNumbers(bool b_force_to_rus) {
     bool	fl_ra = false,  /* rus alpha */
         fl_la = false,  /* lat alpha */
         fl_lw = false,  /* lower alpha */
@@ -455,65 +476,8 @@ void CGraLine::InitNonContextDescriptors(bool b_force_to_rus)
 
     BYTE first_char = (BYTE)m_Token[0];
 
-
-    if (IsSpace())
-    {
-        SetDes(ODel);
-        SetDes(OSpc);
-        return;
-    }
-
-    if (IsEOLN())
-    {
-        SetDes(ODel);
-        SetDes(OEOLN);
-        return;
-    }
-
-    if (IsIdent())
-    {
-        SetDes(ONumChar);
-        return;
-    }
-
-    if (IsElectronicAddress())
-    {
-        SetDes(OElectAddr);
-        SetDes(ONumChar);
-        return;
-    }
-
-
-    if (IsNotPrint())
-    {
-        SetDes(ODel);
-        if (IsParagraphChar())
-            SetDes(OParagraph);
-        else
-            SetDes(ONil);
-
-        return;
-    }
-
-    if (IsPunct())
-    {
-        SetDes(OPun);
-
-        int BracketClassNo = isbracket(first_char);
-
-        if (BracketClassNo)
-            SetDes((BracketClassNo == 1) ? OOpn : OCls);
-        else
-            if (first_char == cHyphenChar)
-                SetDes(OHyp);
-
-        if (m_Token.length() > 1)
-            SetDes(OPlu);
-
-        return;
-    }
     bool has_hyphen = false;
-    for (auto& c: m_Token)
+    for (auto& c : m_Token)
     {
         if (c == Apostrophe) continue;
         if (c == cHyphenChar) has_hyphen = true;
@@ -531,8 +495,8 @@ void CGraLine::InitNonContextDescriptors(bool b_force_to_rus)
         fl_decimal_number = fl_decimal_number || isdigit((BYTE)c);
 
         if ((m_Language != morphGerman)
-            || ((c!= szlig) // ignore these symbols, they are equal in uppercase an in lowercase
-                && (c!= Nu)
+            || ((c != szlig) // ignore these symbols, they are equal in uppercase an in lowercase
+                && (c != Nu)
                 )
             )
         {
@@ -574,11 +538,9 @@ void CGraLine::InitNonContextDescriptors(bool b_force_to_rus)
 
         if (fl_lw && is_uppercase(first_char))
             SetDes(OUpLw);
-
-        return;
     }
 
-    if (((BYTE)first_char == '\'') && m_Token.length()== 1)
+    if (((BYTE)first_char == '\'') && m_Token.length() == 1)
     {
         SetDes(ODel);
         SetDes(OPun);
@@ -590,7 +552,66 @@ void CGraLine::InitNonContextDescriptors(bool b_force_to_rus)
 
     if (fl_decimal_number && (fl_ra || fl_la)) SetDes(ONumChar);
 
+    {
+        size_t hyphen_index = m_Token.find("-");
+        size_t end = (hyphen_index == std::string::npos) ? m_Token.length() : hyphen_index;
+        auto end1 = m_Token.substr(0, end).find_first_not_of("ivxclIVXCL");
+        if (end1 == std::string::npos && m_Token.length() - end <= 3) {
+            //Павла I-го
+            SetDes(ORoman);
+        }
+    }
+
     if (GetDescriptors() == 0) SetDes(OUnk);
+}
+
+void CGraLine::InitNonContextDescriptors(bool b_force_to_rus)
+{
+    if (IsSpace())
+    {
+        SetDes(ODel);
+        SetDes(OSpc);
+    }
+    else if (IsEOLN())
+    {
+        SetDes(ODel);
+        SetDes(OEOLN);
+    }
+    else if (IsIdent())
+    {
+        SetDes(ONumChar);
+    }
+    else if (IsElectronicAddress())
+    {
+        SetDes(OElectAddr);
+        SetDes(ONumChar);
+    }
+    else if (IsNotPrint())
+    {
+        SetDes(ODel);
+        if (IsParagraphChar())
+            SetDes(OParagraph);
+        else
+            SetDes(ONil);
+    }
+    else if (IsPunct())
+    {
+        SetDes(OPun);
+
+        int BracketClassNo = isbracket((BYTE)m_Token[0]);
+
+        if (BracketClassNo)
+            SetDes((BracketClassNo == 1) ? OOpn : OCls);
+        else
+            if ((BYTE)m_Token[0] == cHyphenChar)
+                SetDes(OHyp);
+
+        if (m_Token.length() > 1)
+            SetDes(OPlu);
+    }
+    else {
+        InitWordsAndNumbers(b_force_to_rus);
+    }
 }
 
 MorphLanguageEnum CGraLine::GetTokenLanguage() const

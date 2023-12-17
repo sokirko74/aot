@@ -1,0 +1,6 @@
+[main] -> [RAREWORD root] | [TRUNC root];
+
+[RAREWORD] -> [TOKEN grm="-"];
+
+[TRUNC] -> [TOKEN form="*tter"];
+

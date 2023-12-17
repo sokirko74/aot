@@ -14,18 +14,14 @@
  
  
 ws			[ \t\r]+
-eng_alpha   [A-Za-z]
-rus_alpha	[ÉÖÓÊÅÍÃØÙÇÕ¨ÚÔÛÂÀÏĞÎËÄÆİß×ÑÌÈÒÜÁŞéöóêåíãøùçõ¸úôûâàïğîëäæıÿ÷ñìèòüáş]
-dig			[0-9]
 punct		[.:,?!-_]
 punct_without_dash		[.:,?!_]
 op_or		"|" 
 open_bracket "["
 close_bracket "]"
-chars	({rus_alpha}|{eng_alpha})
-name		({chars}|{dig}|[_\-])+
+chunk_name		([A-Za-z0-9_\-])+
 comments %%.*
-attrib (hom)|(type)|(filename)|(grm)|(type_grm)|(root)|(register)|(form)|(det)|(has_one_grm)|(atomic)
+attrib (hom)|(type)|(filename)|(grm)|(type_grm)|(root)|(register)|(form)|(det)|(has_one_grm)|(atomic)|(graphem)
 attrib_var \$[0-9]\.({attrib})
 include_direc "#include"
 
@@ -54,7 +50,7 @@ include_direc "#include"
 {attrib} return CHUNK_ATTR;
 {attrib_var} return CHUNK_ATTR_VARIABLE;
 {op_or}		return CHUNK_OR;
-{name}		return CHUNK_NAME;
+{chunk_name}		return CHUNK_NAME;
 {include_direc} return CHUNK_INCLUDE;
 
 ;   return CHUNK_RULE_DELIM;

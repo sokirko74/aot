@@ -6,35 +6,6 @@
 #include "GraphanDicts.h"
 
 
-#define RD_MODE    (unsigned) 'r'
-#define WR_MODE    (unsigned) 'w'
-
-FILE* MOpen(const char* FName, int Mode)
-{
-	FILE* fp;
-	while (isspace(*FName)) FName++;
-	size_t l = strlen(FName);
-	if ((l == 0) || (l > 255))
-		throw CExpc("Cannot read file %s", FName);
-
-	if (Mode == RD_MODE)
-	{
-		fp = fopen(FName, "rb");
-		if (!fp) throw CExpc("Cannot read file %s", FName);
-		else return (fp);
-	}
-
-	if (Mode == WR_MODE)
-	{
-		fp = fopen(FName, "wb");
-		if (!fp) throw CExpc("Cannot write file %s", FName);
-		else return (fp);
-		return fp;
-	}
-	return NULL;
-}
-
-
 CGraphanDicts::CGraphanDicts(MorphLanguageEnum Language)
 {
 	m_Language = Language;
@@ -69,9 +40,6 @@ void CGraphanDicts::ReadENames(std::string path)
 	};
 	inp.close();
 };
-
-
-
 
 void CGraphanDicts::ReadSpacedWords(std::string path)
 {
@@ -150,4 +118,70 @@ const std::string& CGraphanDicts::SearchSpacedWords(const char* In, BYTE& len) c
 	len = 0;
 	return empty_string;
 }
+
+bool CGraphanDicts::ReadKeyboard(std::string FileName)
+{
+	m_Keys.clear();
+	m_KeyModifiers.clear();
+	FILE* fp = fopen(FileName.c_str(), "r");
+
+	if (fp == 0) return true;
+	char s[100];
+
+	fgets(s, 100, fp);
+	rtrim(s);
+	const char* q = s + strspn(s, " \t");
+	if (strcmp(q, "[modifiers]")) return false;
+
+	bool ModifiersSect = true;
+	while (fgets(s, 100, fp))
+	{
+		rtrim(s);
+		if (s[0] == 0) continue;
+
+
+		char* q = s + strspn(s, " \t");
+		if (!strcmp(q, "[keys]"))
+		{
+			ModifiersSect = false;
+			continue;
+		};
+
+		if (ModifiersSect)
+		{
+			m_KeyModifiers.push_back(q);
+		}
+		else
+		{
+			m_Keys.push_back(q);
+		};
+	};
+	fclose(fp);
+	return true;
+};
+
+void CGraphanDicts::ReadExtensions(std::string path)
+{
+	m_Extensions.clear();
+	std::ifstream inp(path);
+	if (!inp.good()) {
+		throw CExpc("cannot open file %s", path.c_str());
+	}
+	std::string s;
+	while (std::getline(inp, s))
+	{
+		Trim(s);
+		MakeUpperUtf8(s);
+		if (s.empty()) {
+			continue;
+		}
+		if (!CheckEnglishUtf8(s)) {
+			throw CExpc("only English file extensions are enabled");
+		}
+		m_Extensions.insert(s);
+	};
+	inp.close();
+
+};
+
 

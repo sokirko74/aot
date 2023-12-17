@@ -43,6 +43,17 @@ static std::unordered_map<std::string, Descriptors> init_map_str_to_id() {
 
 const std::unordered_map<std::string, Descriptors> DesStr_To_Id = init_map_str_to_id();
 
+uint64_t parse_graphem_descriptors(const std::string& s) {
+	uint64_t r = 0;
+	for (auto& i : split_string(s, ' ')) {
+		auto it = DesStr_To_Id.find(i);
+		if (it == DesStr_To_Id.end()) {
+			throw CExpc("Bad graphematical descriptor: %s", i.c_str());
+		}
+		r |= _QM(it->second);
+	}
+	return r;
+}
 
 
 bool IsFirstMemberOfPairDesciptor(Descriptors d) 

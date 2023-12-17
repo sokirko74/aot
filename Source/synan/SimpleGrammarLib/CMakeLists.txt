@@ -55,5 +55,7 @@ add_custom_command( OUTPUT ${PROJECT_SOURCE_DIR}/chunker_lex.cpp
     VERBATIM
 )
 
+add_subdirectory(tests)
+
 
 

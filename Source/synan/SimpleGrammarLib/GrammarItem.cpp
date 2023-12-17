@@ -1,6 +1,7 @@
 #include "SimpleGrammarLib.h"
 #include "GrammarItem.h"
 #include "morph_dict/agramtab/agramtab.h"
+#include "graphan/GraphanLib/graline.h"
 
 void CGrammarItem::InitGrammarItem()
 {
@@ -11,12 +12,12 @@ void CGrammarItem::InitGrammarItem()
 	m_bMeta = true;
 	m_Source = "<empty>";
 	m_Register = AnyRegister;
-	m_pListFile = NULL;
-	//m_pListFile = m_TokenListFiles.end();
+	m_pListFile = nullptr;
 	m_Attributes.clear();
 	m_Token = "";
 	m_ItemStrId = "";
 	m_TokenType = OTHER_TOKEN_TYPE;
+	m_GraphemDescrs = 0;
 };
 
 CGrammarItem::CGrammarItem()
@@ -46,6 +47,9 @@ bool CGrammarItem::operator <(const CGrammarItem& _X1) const
 	if (m_Register != _X1.m_Register)
 		return m_Register < _X1.m_Register;
 
+	if (m_GraphemDescrs != _X1.m_GraphemDescrs)
+		return m_GraphemDescrs < _X1.m_GraphemDescrs;
+
 	return m_Attributes < _X1.m_Attributes;
 };
 
@@ -71,6 +75,7 @@ bool CGrammarItem::operator ==(const CGrammarItem& _X1) const
 	bool b = RuleItemPartialEqual(_X1)
 		&& m_MorphPattern == _X1.m_MorphPattern
 		&& m_bCanHaveManyHomonyms == _X1.m_bCanHaveManyHomonyms
+		&& m_GraphemDescrs == _X1.m_GraphemDescrs
 		&& m_Register == _X1.m_Register;
 	return b;
 };
@@ -84,6 +89,9 @@ void CGrammarItem::CopyNonEmptyWorkAttributesFrom(const CGrammarItem& Item)
 
 	if (!Item.m_bCanHaveManyHomonyms)
 		m_bCanHaveManyHomonyms = Item.m_bCanHaveManyHomonyms;
+	
+	if (Item.m_GraphemDescrs != 0)
+		m_GraphemDescrs = Item.m_GraphemDescrs;
 
 	if (Item.m_Register != AnyRegister)
 		m_Register = Item.m_Register;
@@ -109,6 +117,11 @@ std::string CGrammarItem::GetDumpString() const
 
 	if (!m_bCanHaveManyHomonyms)
 		Attributes += "hom=\"no\" ";
+
+	if (m_GraphemDescrs) {
+		auto s = CGraLine::GetStringByDescriptors(m_GraphemDescrs);
+		Attributes += Format("graphem=\"%s\" ", s.c_str());
+	}
 
 	if (m_Register != AnyRegister)
 		if (m_Register == LowLow)
@@ -143,7 +156,6 @@ static Descriptors StringToTokenType(const  std::string& t)
 	if (t == "RLE")	return ORLE;
 	if (t == "LLE")	return OLLE;
 	if (t == "DC")	return ODigits;
-	if (t == "ROMAN")	return ORoman;
 	if (t == "DSC")	return ONumChar;
 	if (t == "PUN")	return OPun;
 	return OTHER_TOKEN_TYPE;
@@ -190,6 +202,9 @@ void CGrammarItem::AddAttribute(std::string Name, std::string Value, MorphLangua
 		if (m_TokenType == OTHER_TOKEN_TYPE)
 			m_TokenType = (Language == morphRussian) ? ORLE : OLLE;
 		return;
+	}
+	else if (Name == "graphem") {
+		m_GraphemDescrs = parse_graphem_descriptors(Value);
 	}
 	else if (Name == "grm")
 	{
@@ -272,101 +287,46 @@ void CGrammarItem::AddAttribute(std::string Name, std::string Value, MorphLangua
 };
 
 
-std::string	CGrammarItem::toString() const
+void CGrammarItem::ToJsonObject(CJsonObject& o) const
 {
-	std::string Result = "[\n";
-	Result += Format("%i %s %s %i\n",
-		(int)m_bMeta,
-		m_ItemStrId.c_str(),
-		m_Token.empty() ? "null" : m_Token.c_str(),
-		(int)m_TokenType);
-
-	Result += Format("%s\x1\n", m_Source.c_str());
-
-	Result += m_MorphPattern.ToString() + "\n";
-	Result += Format("%i %i %i %i\n", m_bGrammarRoot ? 1 : 0, m_bSynMain ? 1 : 0, m_bCanHaveManyHomonyms ? 1 : 0, (int)m_Register);
-
-	for (std::map<std::string, std::string>::const_iterator i = m_Attributes.begin(); i != m_Attributes.end(); i++)
-		Result += Format(";%s %s", i->first.c_str(), i->second.c_str());
-	Result += ";\n";
-	Result += "]\n";
-
-	return Result;
+	o.add_bool("meta", m_bMeta);
+	o.add_string("item_str_id", m_ItemStrId);
+	o.add_string("token", m_Token);
+	o.add_int("token_type", m_TokenType);
+	o.add_string("source", m_Source);
+	CJsonObject morph(o.get_doc());
+	m_MorphPattern.ToJsonObject(morph);
+	o.add_member("morph", morph.get_value());
+	o.add_bool("root", m_bGrammarRoot);
+	o.add_bool("syn_main", m_bSynMain);
+	o.add_bool("hom", m_bCanHaveManyHomonyms);
+	o.add_int("register", m_Register);
+	o.add_int64("graphem", m_GraphemDescrs);
+	CJsonObject attrs(o.get_doc());
+	for (auto& [key, val] : m_Attributes)
+		attrs.add_string(key.c_str(), val);
+	o.add_member("attrs", attrs.get_value());
 }
 
 
-bool	CGrammarItem::fromString(std::string & Result)
+void CGrammarItem::FromJsonObject(const rapidjson::Value& inj)
 {
-	StringTokenizer lines(Result.c_str(), "\r\n");
-	int LineNo = 0;
-	while (lines())
-	{
-		LineNo++;
-		std::string line = lines.val();
-		if (LineNo == 1)
-			continue;
-
-		if (LineNo == 2)
-		{
-			char buff1[1024];
-			char buff2[1024];
-			int iMeta;
-			int iTokenType;
-			if (sscanf(line.c_str(), "%i %s %s %i\n", &iMeta, buff1, buff2, &iTokenType) != 4)
-				return false;
-			m_bMeta = (bool)iMeta;
-			m_TokenType = (Descriptors)iTokenType;
-			m_ItemStrId = buff1;
-			if (m_ItemStrId.empty()) return false;
-
-			m_Token = buff2;
-			if (m_Token == "null")
-				m_Token = "";
-
-		};
-		if (LineNo == 3)
-		{
-			char buff1[1024];
-			int Count = sscanf(line.c_str(), "%[^\x1]", buff1);
-			if (Count != 1) return false;
-			m_Source = buff1;
-		};
-
-		if (LineNo == 4)
-		{
-			if (!m_MorphPattern.FromString(line))
-				return false;
-		};
-		if (LineNo == 5)
-		{
-			int i1, i2, i3, i4;
-			if (sscanf(line.c_str(), "%i %i %i %i", &i1, &i2, &i3, &i4) != 4) return false;
-			m_bGrammarRoot = i1 == 1;
-			m_bSynMain = i2 == 1;
-			m_bCanHaveManyHomonyms = i3 == 1;
-			m_Register = (RegisterEnum)i4;
-		};
-
-		if (LineNo == 6)
-		{
-			m_Attributes.clear();
-			StringTokenizer pairs(line.c_str(), ";");
-			while (pairs())
-			{
-				char buff1[1024];
-				char buff2[1024];
-				std::string _pair = pairs.val();
-				sscanf(_pair.c_str(), "%s %s", buff1, buff2);
-				m_Attributes[buff1] = buff2;
-			};
-
-		};
-
-	};
-
-	if (LineNo != 7) return false;
-
-	return true;
+	m_bMeta = inj["meta"].GetBool();
+	m_ItemStrId = inj["item_str_id"].GetString();
+	m_Token = inj["token"].GetString();
+	m_TokenType = (Descriptors)inj["token_type"].GetInt();
+	m_Source = inj["source"].GetString();
+	m_MorphPattern.FromJsonObject(inj["morph"].GetObject());
+	m_bGrammarRoot = inj["root"].GetBool();
+	m_bSynMain = inj["syn_main"].GetBool();
+	m_bCanHaveManyHomonyms = inj["hom"].GetBool();
+	m_Register = (RegisterEnum)inj["register"].GetInt();
+	m_GraphemDescrs = inj["graphem"].GetInt64();
+	auto& a = inj["attrs"];
+	m_Attributes.clear();
+	for (auto& m = a.MemberBegin(); m != a.MemberEnd(); ++m) {
+		m_Attributes[m->name.GetString()] = m->value.GetString();
+	}
 }
 
 bool	CGrammarItem::HasAnyOfWorkingAttributes() const
@@ -374,6 +334,7 @@ bool	CGrammarItem::HasAnyOfWorkingAttributes() const
 	return  (!m_bCanHaveManyHomonyms
 		|| !m_MorphPattern.HasNoInfo()
 		|| (m_Register != AnyRegister)
+		|| (m_GraphemDescrs != 0)
 		);
 };
 

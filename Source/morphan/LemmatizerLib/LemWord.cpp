@@ -180,19 +180,7 @@ void CLemWord::ProcessGraphematicalDescriptors()
 
 	m_bComma = (m_strWord.length() == 1)  && (m_strWord[0] == ',');	
 	m_bDash = (m_strWord.length() == 1)  && (m_strWord[0] == '-');	
-
-	bool bRomanNumber = is_roman_number(m_strWord.c_str(), m_strWord.length() );
-	size_t hyphen_occur = m_strWord.find("-");
-	if ((hyphen_occur != std::string::npos) && (hyphen_occur!=0))
-	{
-		// "Павла I-го" 
-		// "I-го" - одно слово
-		bRomanNumber = is_roman_number(m_strWord.c_str(), hyphen_occur);
-	};
-	if (bRomanNumber)
-        m_GraDescrs |= _QM(ORoman);
-
-    m_bWord  = !bRomanNumber && (HasDes(ORLE) || HasDes(OLLE)); 
+    m_bWord  = !HasDes(ORoman) && (HasDes(ORLE) || HasDes(OLLE)); 
 
 	if (HasDes(ORLE))
 		m_TokenType = ORLE;
@@ -204,8 +192,6 @@ void CLemWord::ProcessGraphematicalDescriptors()
 		m_TokenType = ONumChar;
 	else if (HasDes(OPun))
 		m_TokenType = OPun;
-	else if (HasDes(ORoman))
-		m_TokenType = ORoman;
 	else 
 		m_TokenType = (Descriptors)OTHER_TOKEN_TYPE;
 }
@@ -495,19 +481,12 @@ int CLemWord::GetHomonymByPosesandGrammem(part_of_speech_mask_t Poses, BYTE gram
 
 std::string CLemWord :: BuildGraphemDescr ()  const
 {
-    std::string Result;
-    for (int l=0; l<NumberOfGraphematicalDescriptors;l++)     // write descriptors 
-        if ( HasDes(((Descriptors)l) )) 
-		{  
-			Result += " ";
-			Result +=  GetDescriptorStr((Descriptors)l);
-		};
+	std::string result = " " + CGraLine::GetStringByDescriptors(m_GraDescrs);
 	if (HasDes(OEXPR1) && !m_MorphHomonyms.empty()) {
-		Result += Format(" EXPR_NO%i", m_MorphHomonyms[0].m_OborotNo);
+		result += Format(" EXPR_NO%i", m_MorphHomonyms[0].m_OborotNo);
 	}
-
-	Result += " " + m_UnparsedGraphemDescriptorsStr;
-    return Result;
+	result += " " + m_UnparsedGraphemDescriptorsStr;
+    return result;
 }
 
 
@@ -592,10 +571,11 @@ bool CheckGrammems(const CLemWord& w, const CHomonym& h, const CGrammarItem& I)
 
 bool CLemWord::IsEqualToGrammarItem(const CHomonym& h, const CGrammarItem& I) const
 {
-	if (I.m_TokenType != m_TokenType) {
-		return false;
+	if (I.m_TokenType != OTHER_TOKEN_TYPE) {
+		if (I.m_TokenType != m_TokenType) {
+			return false;
+		}
 	}
-
 
 	if (!I.m_MorphPattern.HasNoInfo()) {
 		if (m_TokenType != ORLE && m_TokenType != OLLE)
@@ -661,6 +641,10 @@ void CLemWord::BuildTerminalSymbolsByWord(const std::vector<CGrammarItem>& grm_i
 			if (item.m_Register != m_Register)
 				continue;
 		};
+
+		if ((m_GraDescrs & item.m_GraphemDescrs) != item.m_GraphemDescrs) {
+			continue;
+		}
 
 		for (size_t k = 0; k < GetHomonymsCount(); ++k) {
 			auto& h = *GetHomonym(k);

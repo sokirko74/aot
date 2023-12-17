@@ -45,14 +45,14 @@ bool CAbbrevItem::operator < (const CAbbrevItem X) const
 	return m_ItemStr < X.m_ItemStr;
 };
 
-inline bool AbbrevIsEqualToString(const CAbbrevItem& X, const CStrToCompare& Str)
+inline bool AbbrevIsEqualToString(const CAbbrevItem& X, const CGraLine& token)
 {
 	switch (X.m_Type)
 	{
-	case abString: return (X.m_ItemStr.length() == Str.m_StrLen) && !strncmp(X.m_ItemStr.c_str(), Str.m_Str, Str.m_StrLen);
-	case abNumber: return (Str.m_StrLen > 0) && isdigit((BYTE)Str.m_Str[0]);
-	case abUpperCase: return (Str.m_StrLen > 0) && (is_upper_alpha((BYTE)Str.m_Str[0], Str.m_Language) || is_upper_alpha((BYTE)Str.m_Str[0], Str.m_Language));
-	case abAny: return (Str.m_StrLen > 0);
+	case abString: return X.m_ItemStr == token.GetTokenUpper();
+	case abNumber: return token.HasDes(ODigits);
+	case abUpperCase: return token.HasDes(OUp) || token.HasDes(OUpLw);
+	case abAny: return !token.IsSoft();
 	};
 	assert(false);
 	return true;
@@ -71,9 +71,9 @@ bool AbbrevIsGreaterThanString(const CAbbrevItem& X, const CStrToCompare& Str)
 };
 
 
-const char* NumberPlace = "/:D";
+std::string NumberPlace = "/:D";
 
-static bool ReadAbbrevationsFromOneFile(std::string path, std::vector<CAbbrev>& V, MorphLanguageEnum langua)
+static void ReadAbbrevationsFromOneFile(std::string path, std::unordered_multimap<std::string, CAbbrev>& V, MorphLanguageEnum langua)
 {
 	std::ifstream inp(path);
 	if (!inp.good()) {
@@ -106,17 +106,23 @@ static bool ReadAbbrevationsFromOneFile(std::string path, std::vector<CAbbrev>& 
 						item.m_Type = abAny;
 					else
 						item.m_Type = abString;
-			Abbrev.push_back(item);
+			Abbrev.m_AbbrevItems.push_back(item);
 		};
-		V.push_back(Abbrev);
+		if (Abbrev.m_AbbrevItems.empty()) {
+			throw CExpc("empty abbreviation in file %s", path.c_str());
+		}
+		auto& item0 = Abbrev.m_AbbrevItems[0];
+		if (item0.m_Type != abString && item0.m_Type != abNumber) {
+			throw CExpc("first abbreviation item must be a string or digits, file %s, abbrev=%s", 
+				path.c_str(), line.c_str());
+		}
+		V.insert({Abbrev.m_AbbrevItems[0].m_ItemStr, Abbrev});
 	};
 	inp.close();
-	return true;
 };
 
 
-
-bool CGraphanDicts::ReadAbbrevations()
+void CGraphanDicts::ReadAbbrevations()
 {
 	std::string FileName = GetRegistryString("Software\\Dialing\\Graphan\\AbbrFile");
 
@@ -129,131 +135,9 @@ bool CGraphanDicts::ReadAbbrevations()
 		ReadAbbrevationsFromOneFile(MakeFName(FileName, "ger"), m_Abbrevs, morphGerman);
 	else if (m_Language == morphRussian)
 		ReadAbbrevationsFromOneFile(MakeFName(FileName, "rus"), m_Abbrevs, morphRussian);
-
-
-
-	//  sorting in the reverse order, in orger  to larger sequences
-	// go to the top, for example:
-	// a b c
-	// a b 
-	// a
-	{
-		sort(m_Abbrevs.begin(), m_Abbrevs.end());
-		std::vector<CAbbrev>::iterator it = unique(m_Abbrevs.begin(), m_Abbrevs.end());
-		m_Abbrevs.erase(it, m_Abbrevs.end());
-		reverse(m_Abbrevs.begin(), m_Abbrevs.end());
-	}
-
-
-
-
-
-	//	FILE * fp = fopen("abbrev.log","w");
-	//	if (fp)
-	//	{
-	//		for (size_t i=0; i < m_Abbrevs.size(); i++)
-	//		{
-	//			for (CAbbrev::const_iterator it = m_Abbrevs[i].begin(); it != m_Abbrevs[i].end(); it++)
-	//			{
-	//				fprintf(fp, "%s ", it->m_ItemStr.c_str());
-	//			};
-	//			fprintf(fp, "\n");
-	//		};
-	//		fclose (fp);
-	//	}
-
-	return true;
 };
 
 
-bool CGraphanDicts::ReadKeyboard(std::string FileName)
-{
-	m_Keys.clear();
-	m_KeyModifiers.clear();
-	FILE* fp = fopen(FileName.c_str(), "r");
-
-	if (fp == 0) return true;
-	char s[100];
-
-	fgets(s, 100, fp);
-	rtrim(s);
-	const char* q = s + strspn(s, " \t");
-	if (strcmp(q, "[modifiers]")) return false;
-
-	bool ModifiersSect = true;
-	while (fgets(s, 100, fp))
-	{
-		rtrim(s);
-		if (s[0] == 0) continue;
-
-
-		char* q = s + strspn(s, " \t");
-		if (!strcmp(q, "[keys]"))
-		{
-			ModifiersSect = false;
-			continue;
-		};
-
-		if (ModifiersSect)
-		{
-			m_KeyModifiers.push_back(q);
-		}
-		else
-		{
-			m_Keys.push_back(q);
-		};
-	};
-	fclose(fp);
-	return true;
-};
-
-void CGraphanDicts::ReadExtensions(std::string path)
-{
-	m_Extensions.clear();
-	std::ifstream inp(path);
-	if (!inp.good()) {
-		throw CExpc("cannot open file %s", path.c_str());
-	}
-	std::string s;
-	while (std::getline(inp, s))
-	{
-		Trim(s);
-		MakeUpperUtf8(s);
-		if (s.empty()) {
-			continue;
-		}
-		if (!CheckEnglishUtf8(s)) {
-			throw CExpc("only English file extensions are enabled");
-		}
-		m_Extensions.insert(s);
-	};
-	inp.close();
-	
-};
-
-
-
-typedef std::vector<CAbbrev>::const_iterator abbrev_t;
-
-abbrev_t	abbrev_lower_bound(abbrev_t _First, abbrev_t _Last, const CStrToCompare& _Val)
-{
-	size_t _Count = _Last - _First;
-	for (; 0 < _Count; )
-	{
-		size_t _Count2 = _Count / 2;
-		abbrev_t _Mid = _First;
-		std::advance(_Mid, _Count2);
-		if (AbbrevIsGreaterThanString(*_Mid->begin(), _Val))
-		{
-			_Mid++;
-			_First = _Mid;
-			_Count -= _Count2 + 1;
-		}
-		else
-			_Count = _Count2;
-	}
-	return _First;
-}
 
 bool CGraphmatFile::DealAbbrev(size_t  StartPos, size_t EndPos)
 {
@@ -264,60 +148,38 @@ bool CGraphmatFile::DealAbbrev(size_t  StartPos, size_t EndPos)
 	if (GetUnits()[StartPos].IsAbbreviation()) return false;
 	if (GetUnits()[StartPos].IsSoft()) return false;
 
-	// search for the first word of the abbreviation
-	std::vector<CAbbrev>::const_iterator AbbrevIt;
-
-	CStrToCompare FirstLine(this, StartPos, false);
-
-	if (HasDescr(StartPos, ODigits))
+	const auto* first_token = &GetUnits()[StartPos].GetTokenUpper();
+	if (GetUnits()[StartPos].HasDes(ODigits)) {
+		first_token = &NumberPlace;
+	}
+	auto [start, end] = m_pDicts->m_Abbrevs.equal_range(*first_token);
+	int max_token_index = -1;
+	for (auto abbrev_it = start; abbrev_it != end; ++abbrev_it)
 	{
-		// only numbers and std::strings  can be at the beginning of an abbreviations
-		FirstLine.m_Str = NumberPlace;
-		FirstLine.m_StrLen = strlen(NumberPlace);
-	};
-
-	AbbrevIt = abbrev_lower_bound(m_pDicts->m_Abbrevs.begin(), m_pDicts->m_Abbrevs.end(), FirstLine);
-
-	if ((AbbrevIt == m_pDicts->m_Abbrevs.end())
-		|| !AbbrevIsEqualToString(*AbbrevIt->begin(), CStrToCompare(this, StartPos, false))
-		)
-		return false;
-
-	std::vector<CAbbrev>::const_iterator StartAbbrevIt = AbbrevIt;
-
-	while (AbbrevIt != m_pDicts->m_Abbrevs.end()
-		&& (*AbbrevIt->begin() == *StartAbbrevIt->begin())
-		)
-	{
-		// the first word was checked
-		size_t EndAbbrevPos = StartPos + 1;
-
-		// check current abbreviation (AbbrevIt)
-		CAbbrev::const_iterator it = AbbrevIt->begin();
-		for (it++; it != AbbrevIt->end(); it++)
+		const CAbbrev& a = abbrev_it->second;
+		size_t token_index = StartPos;
+		bool found = true;
+		for (auto& i: a.m_AbbrevItems)
 		{
-			EndAbbrevPos = PSoft(EndAbbrevPos, EndPos);
-
-			if (EndAbbrevPos == EndPos) break;
-			// saving the last hard part of the abbreviation
-
-			// checking current abbreviation item 
-			if (!AbbrevIsEqualToString(*it, CStrToCompare(this, EndAbbrevPos, it->m_Type == abUpperCase)))
+			token_index = PSoft(token_index, EndPos);
+			if (token_index == EndPos || !AbbrevIsEqualToString(i, GetUnits()[token_index])) {
+				found = false;
 				break;
-			EndAbbrevPos++;
+			}
+			token_index++;
 		};
-
-		if (it == AbbrevIt->end())
+		if (found && (int)token_index > max_token_index)
 		{
 			// found an abbreviation
-			SetDes(StartPos, OAbbr1);
-			SetDes(EndAbbrevPos - 1, OAbbr2);
-			SetState(StartPos, EndAbbrevPos, stAbbreviation);
-			return true;
+			max_token_index = token_index;
 		}
-
-		AbbrevIt++;
 	};
+	if (max_token_index != -1) {
+		SetDes(StartPos, OAbbr1);
+		SetDes(max_token_index - 1, OAbbr2);
+		SetState(StartPos, max_token_index, stAbbreviation);
+		return true;
+	}
 	return false;
 };
 

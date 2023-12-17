@@ -41,7 +41,7 @@ enum Descriptors
 	 CS_Doc     = 32, 
     
      OSentEnd  = 33,
-     ORoman   = 34,  // iniitalized in Mapost
+     ORoman   = 34,
 
 	 OEXPR1    = 35, 
 	 OEXPR2    = 36,    
@@ -68,7 +68,8 @@ extern bool IsFirstMemberOfPairDesciptor(Descriptors d);
 extern bool IsSecondMemberOfPairDesciptor(Descriptors d);
 extern Descriptors GetSecondMemberByTheFirst(Descriptors d);
 extern Descriptors GetFirstMemberByTheSecond(Descriptors d);
-const std::string& GetDescriptorStr(Descriptors d);
+extern const std::string& GetDescriptorStr(Descriptors d);
+extern uint64_t parse_graphem_descriptors(const std::string& s);
 
 // max length of the token
 const size_t CriticalTokenLength = 255;
