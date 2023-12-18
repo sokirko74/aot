@@ -31,9 +31,9 @@ DEP .
 DIST . 
 DIV . 
 DLR . 
-DPT . /:u
-DR . /:u
-ED . /:u
+DPT . /:U
+DR . /:U
+ED . /:U
 EG . 
 ELEV . 
 EQ . 
@@ -79,9 +79,9 @@ MAJ .
 MI . 
 MIL . 
 MO . 
-MR . /:u
-MRS . /:u
-MS . /:u
+MR . /:U
+MRS . /:U
+MS . /:U
 NO . 
 PCT . 
 PG . 
@@ -100,7 +100,7 @@ SQ .
 ST . 
 SW . 
 TN . 
-U . S . /:u
+U . S . /:U
 U . S . 
 WK . 
 YR . 

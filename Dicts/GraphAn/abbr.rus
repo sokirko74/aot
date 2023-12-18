@@ -4,7 +4,7 @@
 // would  be treated as one token, while Graphan module divides it into
 // two tokens. So in this file it should be written as follows:
 // Mr . 
-СМ . /:u
+СМ . /:U
 УЛ . 
 КВ . 
 ПП . 
@@ -29,5 +29,5 @@
 И Т . П . 
 И Т . Д . 
 P . Хр . 
-Т . Е . /:a
-Г . /:a
+Т . Е . /:A
+Г . /:A

@@ -16,7 +16,7 @@
 [SPNAME] -> [TITLE]? [FNAME hom="no"] [FAMILY hom="yes"]; %% Helmut Kohl
 [SPNAME] -> [TITLE]? [FNAME] 'von' [FAMILY]; %% "Gr¤fin Tita von Hardenberg"
 [SPNAME] -> [TITLE] [FNAME] [FAMILY]; %% Dr. Kai Zimmer
-[SPNAME] -> [TITLE]? [FNAME]  [TOKEN type="ROMAN"] '.'; %% "Elisabeth II."
+[SPNAME] -> [TITLE]? [FNAME]  [TOKEN graphem="ROMAN"] '.'; %% "Elisabeth II."
 
 
 
