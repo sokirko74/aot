@@ -1,7 +1,6 @@
-// demoDlg.cpp : implementation file
-//
-
 #include "StdAfx.h"
+#include "morph_dict/lemmatizer_base_lib/Lemmatizers.h"
+#include "morph_dict/agramtab/agramtab.h"
 #include "demo.h"
 #include "vector"
 #include "assert.h"

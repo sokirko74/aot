@@ -197,7 +197,7 @@ int main(int argc, const char* argv[]) {
 
     try {
         GlobalErrorMessage = MyGlobalErrorMessage;
-        PLOGI << "init dicts ... (wait one minute)";
+        PLOGI << "init dicts ... ";
         SemBuilder.InitDicts();
 
         std::vector <std::pair<std::string, std::string> > file_pairs;
@@ -214,7 +214,7 @@ int main(int argc, const char* argv[]) {
         for (auto& p : file_pairs) {
             processOneFile(SemBuilder, args.Exists("visual"), args.Exists("translate"), p.first, p.second);
         }
-        PLOGD << "normal exit\n";
+        PLOGD << "normal exit";
     }
     catch (std::exception& e) {
         PLOGE << e.what() << "\n";
