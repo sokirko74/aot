@@ -106,8 +106,9 @@ TEST_CASE ("test_D_ENGL") {
 
 			CTempArticle A3(&D);
 			A3.ReadFromDictionary(i, false, true);
-			auto s = Trim(A1.GetArticleStrUtf8());
-			CHECK(s == art_str);
+            auto a = A1.GetArticleStrUtf8();
+			Trim(a);
+			CHECK(a == art_str);
 		}
 	}
 	CHECK(count == 1);
@@ -245,7 +246,8 @@ TEST_CASE("test_val_for_or") {
 	REQUIRE(!is_null(D.GetItemIdByItemStr("OR", "D_SEM_REL")));
 	std::string art_str = "VAL     =  FOR , A1 , A2";
 	A1.ReadFromUtf8String(art_str.c_str());
-	auto test = Trim(A1.GetArticleStrUtf8());
+    auto test = A1.GetArticleStrUtf8();
+	Trim(test);
 	CHECK(art_str == test);
 
 }

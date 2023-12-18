@@ -9,11 +9,11 @@
 #include "morph_dict/common/util_classes.h"
 
 article_parse_error::article_parse_error(const std::string what_arg, int _source_line_no) :
-	std::exception(what_arg.c_str()), source_line_no(_source_line_no) {
+	std::runtime_error(what_arg.c_str()), source_line_no(_source_line_no) {
 
 }
 
-const char* article_parse_error::what() const  {
+const char* article_parse_error::what() const noexcept {
 	message = Format("%s, line no = %i", std::exception::what(), source_line_no);
 	return message.c_str();
 }

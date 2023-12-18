@@ -324,7 +324,7 @@ void CGrammarItem::FromJsonObject(const rapidjson::Value& inj)
 	m_GraphemDescrs = inj["graphem"].GetInt64();
 	auto& a = inj["attrs"];
 	m_Attributes.clear();
-	for (auto& m = a.MemberBegin(); m != a.MemberEnd(); ++m) {
+	for (auto m = a.MemberBegin(); m != a.MemberEnd(); ++m) {
 		m_Attributes[m->name.GetString()] = m->value.GetString();
 	}
 }

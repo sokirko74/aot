@@ -630,7 +630,7 @@ void CGLRParser::DumpParser(bool bShowStates) const
 	std::string s = GetDotStringOfStack(bShowStates);
 	fprintf (fp,"%s", s.c_str());
 	fclose(fp);
-	system ("dot.exe stack.dot -o stack.jpg -Tjpg");
+	int dummy = system ("dot.exe stack.dot -o stack.jpg -Tjpg");
 }
 
 /*

@@ -227,11 +227,10 @@ private:
 	// находит позицию для неглавнх компонент клаузы
 	void		find_position_for_slave_clause_components();
 	bool		lemma_is_demonstrative_pronoun (std::string Lemma) const;
-	std::vector<long> CEngSynthes::build_actant_positions(int node);
+	std::vector<long> build_actant_positions(int node);
 
 
 public:
-	CAdvPosType get_adv_pos_kind(int node_no);
 	bool IsInfinitivePatternWithoutTo (long NodeNo) const;
 	bool m_bConnected;
 

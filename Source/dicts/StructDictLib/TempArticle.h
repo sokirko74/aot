@@ -9,12 +9,12 @@
 #include "CortegeContainer.h"
 #include "../../common/cortege.h"
 
-class article_parse_error : public std::exception {
+class article_parse_error : public std::runtime_error {
 	mutable std::string message;
 public:
 	int source_line_no;
-	explicit article_parse_error(const std::string what_arg, int _source_line_no);
-	const char* what() const override;
+	explicit article_parse_error(std::string what_arg, int _source_line_no);
+	const char* what() const noexcept override;
 };
 
 class CDictionary;

@@ -334,13 +334,14 @@ void CMAPost::PronounP_Pronoun_Homonymy()
 bool CMAPost::HasParadigmOfFormAndPoses(std::string WordForm, part_of_speech_mask_t Poses) const
 {
 	std::vector<CFormInfo> Paradigms;
-	m_pRusLemmatizer->CreateParadigmCollection(false, _R(WordForm), false, false, Paradigms);
+    auto s8 =  _R(WordForm.c_str());
+	m_pRusLemmatizer->CreateParadigmCollection(false, s8, false, false, Paradigms);
 
-	for (long k = 0; k < Paradigms.size(); k++)
+	for (auto& p: Paradigms)
 	{
-		std::string AnCode = Paradigms[k].GetSrcAncode();
-		BYTE POS = m_pRusGramTab->GetPartOfSpeech(AnCode.c_str());
-		uint64_t Grams;
+		std::string AnCode = p.GetSrcAncode();
+		part_of_speech_t POS = m_pRusGramTab->GetPartOfSpeech(AnCode.c_str());
+		grammems_mask_t Grams;
 		m_pRusGramTab->GetGrammems(AnCode.c_str(), Grams);
 		if (Poses & (1 << POS))
 			return true;

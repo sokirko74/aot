@@ -5,7 +5,8 @@
 
 bool CMAPost::is_russian_numeral(std::string& word) const {
 	std::vector<CFormInfo> Paradigms;
-	m_pRusLemmatizer->CreateParadigmCollection(false, _R(word), false, false, Paradigms);
+    auto s8 = _R(word);
+	m_pRusLemmatizer->CreateParadigmCollection(false, s8, false, false, Paradigms);
 	for (auto& p : Paradigms)
 	{
 		auto form = convert_to_utf8(p.GetWordForm(0), morphRussian);
@@ -20,8 +21,8 @@ std::string CMAPost::GetSimilarNumAncode(const std::string& Lemma, const std::st
 {
 	if (Lemma.length() == 0) return "";
 	std::vector<CFormInfo> Paradigms;
-	std::string h = Lemma;
-	m_pRusLemmatizer->CreateParadigmCollection(false, _R(h), false, false, Paradigms);
+	std::string h = _R(Lemma);
+	m_pRusLemmatizer->CreateParadigmCollection(false, h, false, false, Paradigms);
 	if (Paradigms.size() == 0) return ""; // например, нету в Ё-словаре слова ЧЕТВЕРТЫЙ
 	// ищем числительное
 	long k = 0;
@@ -101,13 +102,13 @@ void CMAPost::Cifrdef()
 					W.AddDes(ORLE);
 					W.DeleteAllHomonyms();
 					CHomonym* pNew = W.AddNewHomonym();
-					std::vector<CFormInfo> Paradigms;
-					std::string TmpStr = W.m_strWord.substr(0, hyp);
-					m_pRusLemmatizer->CreateParadigmCollection(false, _R(TmpStr), false, false, Paradigms);
+					std::vector<CFormInfo> paradigms;
+					std::string s8 = _R(W.m_strWord.substr(0, hyp));
+					m_pRusLemmatizer->CreateParadigmCollection(false, s8, false, false, paradigms);
 					pNew->SetLemma(W.m_strUpperWord);
-					if (Paradigms.size() > 0) // плутония-238
+					if (!paradigms.empty()) // плутония-238
 					{
-						pNew->CopyFromFormInfo(&Paradigms[0]);
+						pNew->CopyFromFormInfo(&paradigms[0]);
 						W.m_bWord = true;
 					}
 					else
@@ -231,7 +232,8 @@ void CMAPost::Cifrdef()
 					W2.m_strUpperWord = W2.m_strWord = "№";
 					pH->SetLemma("НОМЕР");
 				}
-				m_pRusLemmatizer->CreateParadigmCollection(true, _R(pH->GetLemma()), true, false, Paradigms);
+                auto s8 = _R(pH->GetLemma());
+				m_pRusLemmatizer->CreateParadigmCollection(true, s8, true, false, Paradigms);
 				pH->m_lPradigmID = Paradigms[0].GetParadigmId();
 				pH->m_SearchStatus = DictionaryWord;
 				pH->InitAncodePattern();

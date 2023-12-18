@@ -586,7 +586,7 @@ void FindSimilarHeadings (CSList& List)
 		  ) 
 		{
 			bool IsParagraph = List[0].GetUnit(List[SentNo].m_HardGraphStartNo).IsParagraphChar();
-			auto& first = List[SentNo].FirstUnit().GetTokenUpper().substr(0, 4);
+			auto first = List[SentNo].FirstUnit().GetTokenUpper().substr(0, 4);
 			// Идем дальше по тексту и ищем похожие МЕ
 			for (long SentNo1 = SentNo; (SentNo1 <  List.size()) && (List[SentNo1].m_SimilarFieldNo == 0); SentNo1++)
 				 if  	(List[SentNo1].m_Type == List[SentNo].m_Type) 

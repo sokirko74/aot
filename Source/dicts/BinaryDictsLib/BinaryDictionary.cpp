@@ -89,7 +89,7 @@ std::unordered_set<BYTE> get_bad_labels(std::string labels_path) {
     doc.ParseStream(isw);
 
     std::unordered_set<BYTE> bad_labels;
-    for (auto& it = doc.MemberBegin(); it != doc.MemberEnd(); ++it) {
+    for (auto it = doc.MemberBegin(); it != doc.MemberEnd(); ++it) {
         auto& val = it->value;
         if (val.HasMember("norm") && !val["norm"].GetBool()) {
             BYTE id = val["rml_id"].GetInt();

@@ -104,7 +104,7 @@ void TRMLHttpServer::Initialize(std::uint16_t srvPort, DaemonLogModeEnum logMode
 
 	std::string logPath = GetRegistryString("Software\\Dialing\\Logs\\Main");
     std::string myIP = GetRegistryString("Software\\Dialing\\HttpServerIP");
-	if (!DirExists(logPath.c_str())) {
+	if (!fs::exists(logPath.c_str())) {
 		throw CExpc(Format("log dir \"%s\" does not exist; http-server must write logs to some folder\n", logPath.c_str()));
 	};
 	LogFileName = MakePath(logPath, logFile);

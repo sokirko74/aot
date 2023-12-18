@@ -1102,7 +1102,8 @@ CRusSemNode  CRusSemStructure::CreatePronounByLemma(std::string Lemma)
 {
 	const CLemmatizer* P = m_pData->GetRusLemmatizer();
 	std::vector<CFormInfo> ParadigmCollection;
-	P->CreateParadigmCollection(true, _R(Lemma), false, false, ParadigmCollection);
+    auto s8 = _R(Lemma);
+	P->CreateParadigmCollection(true, s8, false, false, ParadigmCollection);
 	assert(!ParadigmCollection.empty());
 	std::string GramCodes = ParadigmCollection[0].GetSrcAncode();
 	grammems_mask_t Grammems = m_pData->GetRusGramTab()->GetAllGrammems(GramCodes.c_str());

@@ -799,8 +799,8 @@ std::string translate_helper::SetIndefiniteArticle(const std::string& str) const
 	for (int i = 0; i < tokens.size(); ++i) {
 		if (tokens[i] == "<a>") {
 			int next = next_word(i);
-			std::string& next_word = next < tokens.size() ? tokens[next] : std::string();
-			tokens[i] = an_article_before(next_word);
+			std::string next_word_str = next < tokens.size() ? tokens[next] : std::string();
+			tokens[i] = an_article_before(next_word_str);
 		}
 	}
 	return join_string(tokens, " ");

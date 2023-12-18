@@ -525,7 +525,7 @@ bool CheckIfAllItemsFoundForDividedTermin(const CRusSemStructure& R, const CSema
 		V[i.m_ItemNo - 1] = true;
 	};
 
-	for (auto& i : V) {
+	for (const auto& i : V) {
 		if (!i)
 			return  false;
 	}

@@ -3,7 +3,8 @@
 #include "morph_dict/common/bserialize.h"
 #include "morph_dict/common/rapidjson.h"
 
-#include  <climits>
+#include <climits>
+#include <math.h>
 
 struct CBigramsWordInfo {
     std::string m_Word;

@@ -70,27 +70,27 @@ std::vector<CWordInfo> ReadWordFreqs(std::string WordFreqFileName) {
     return wordInfos;
 }
 
-void ReadBigrams(std::string BigramsFileName, std::vector<CWordInfo> &wordInfos) {
-    fprintf(stderr, "open file %s\n", BigramsFileName.c_str());
-    FILE *in_fp = fopen(BigramsFileName.c_str(), "rb");
-    if (!in_fp) {
-        throw CExpc("cannot open file %s\n", BigramsFileName.c_str());
+void ReadBigrams(std::string path, std::vector<CWordInfo> &wordInfos) {
+    fprintf(stderr, "open file %s\n", path.c_str());
+    std::ifstream inp(path);
+    if (!inp.good()) {
+        throw CExpc("cannot open file %s\n", path.c_str());
     }
-    char buffer[10000];
+    std::string line;
     size_t linesCount = 0;
-    while (fgets(buffer, 10000, in_fp)) {
+    while (std::getline(inp, line)) {
         ++linesCount;
         if ((linesCount % 100000) == 0)
             fprintf(stderr, "%zu               \r", linesCount);
-        char w1[500], w2[500];
-        size_t bigramFreq;
-        int res = sscanf(buffer, "%[^\t]\t%[^\t]\t%zu", w1, w2, &bigramFreq);
-        if (res != 3) {
-            rtrim(buffer);
-            fprintf(stderr, "%s: skip line %zu \"%s\" (scanf returned %i)\n",
-                    BigramsFileName.c_str(), linesCount, buffer, res);
+        Trim(line);
+        auto items = split_string(line, '\t');
+        if (items.size() != 3) {
+            fprintf(stderr, "%s: skip line %zu \"%s\"", path.c_str(), linesCount, line.c_str());
             continue;
         }
+        std::string w1 = items[0];
+        std::string w2 = items[1];
+        uint32_t bigramFreq = atoi(items[2].c_str());
         MakeUpperUtf8(w1);
         MakeUpperUtf8(w2);
         auto curr_it = lower_bound(wordInfos.begin(), wordInfos.end(), w1);

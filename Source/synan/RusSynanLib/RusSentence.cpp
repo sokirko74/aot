@@ -317,7 +317,8 @@ void CRusSentence::CutPrefixEksAndVize() {
 
 
         std::vector<CFormInfo> Paradigms;
-        GetOpt()->GetLemmatizer()->CreateParadigmCollection(false, _R(word), false, false, Paradigms);
+        auto s8 = _R(word);
+        GetOpt()->GetLemmatizer()->CreateParadigmCollection(false, s8, false, false, Paradigms);
 
         if (Paradigms.empty()) continue;
 

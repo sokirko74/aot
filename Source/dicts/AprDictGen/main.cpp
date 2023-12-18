@@ -1,15 +1,5 @@
 #include "dicts/BinaryDictsLib/BinaryDictionary.h"
-#include "dicts/BinaryDictsLib/BinaryDictionary.h"
-#include "morph_dict/common/util_classes.h"
 #include "morph_dict/lemmatizer_base_lib/MorphanHolder.h"
-#include <stdio.h>
-#include <fstream>
-#include <iostream>
-#include <string>
-#include <vector>
-#include <algorithm>
-
-
 
 
 int main(int argc, char **argv) {

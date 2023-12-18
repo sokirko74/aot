@@ -159,7 +159,8 @@ void CRusSyntaxOpt::InitOptionsLanguageSpecific() {
     }
 
     std::vector<CFormInfo> Paradigms;
-    GetLemmatizer()->CreateParadigmCollection(true, _R("нечего"), false, false, Paradigms);
+    std::string s8 = _R("нечего");
+    GetLemmatizer()->CreateParadigmCollection(true, s8, false, false, Paradigms);
 
     for (auto p: Paradigms) {
         BYTE POS = GetGramTab()->GetPartOfSpeech(p.GetAncode(0).c_str());

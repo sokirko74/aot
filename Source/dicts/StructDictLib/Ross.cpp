@@ -197,7 +197,8 @@ uint16_t    TRoss::InsertUnit(CStructEntry& T)
 
 uint16_t   TRoss::InsertUnit(const char* EntryStr, BYTE MeanNum)
 {
-	return TRoss::InsertUnit(CStructEntry(EntryStr, MeanNum));
+    CStructEntry u(EntryStr, MeanNum);
+	return TRoss::InsertUnit(u);
 }
 
 void TRoss::WriteUnitCorteges(uint16_t unit_no, const TCortegeContainer& corteges)
