@@ -22,7 +22,6 @@ BEGIN_MESSAGE_MAP(CMainFrame, CMDIFrameWnd)
 	//{{AFX_MSG_MAP(CMainFrame)
 	ON_WM_CREATE()
 	ON_COMMAND(ID_FILE_OPEN_BUILDCLAUSESFROMFILE, OnBuildFromFile)
-	ON_COMMAND(ID_FILE_REINITIALIZESYNTAX, OnReinitializeSyntax)
 	
 	ON_MESSAGE(ID_PROCESS_TXT_FILE, OnProcessTxtFile)
 	//}}AFX_MSG_MAP
@@ -44,12 +43,6 @@ CMainFrame::CMainFrame()
 	m_bNewDoc = TRUE;	
 }
 
-CMainFrame::~CMainFrame()
-{
-	CSyntaxHolder& Holder = ((CVisualSynanApp*)AfxGetApp())->m_SyntaxHolder;
-	Holder.ClearHolder();
-
-}
 
 int CMainFrame::OnCreate(LPCREATESTRUCT lpCreateStruct)
 {
@@ -126,17 +119,6 @@ void CMainFrame::OnBuildFromFile()
 	m_pWaitThread->CreateThread();
 }
 
-MorphLanguageEnum GlobalLanguage;
-
-void CMainFrame::OnReinitializeSyntax() 
-{	
-	CWaitCursor r;
-	CSyntaxHolder& Holder = ((CVisualSynanApp*)AfxGetApp())->m_SyntaxHolder;
-	Holder.ClearHolder();
-	Holder.LoadSyntax(GlobalLanguage);
-}
-
-
 
 
 CString CMainFrame::GetFileWithThisFilter(CString strFilter)
@@ -177,9 +159,8 @@ LRESULT CMainFrame::OnProcessTxtFile(WPARAM, LPARAM)
 
 bool CMainFrame::LoadSyntaxByLanguage(MorphLanguageEnum t) 
 {
-	GlobalLanguage = t;
-	OnReinitializeSyntax();
-	
+	((CVisualSynanApp*)::AfxGetApp())->SetLanguage(t);
+
 	int index_rus = m_wndToolBar.CommandToIndex(ID_RUSSIAN_SYNTAX);
 	int index_ger = m_wndToolBar.CommandToIndex(ID_GERMAN_SYNTAX);
 	int style = m_wndToolBar.GetButtonStyle(index_rus);

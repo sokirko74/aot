@@ -175,7 +175,7 @@ void CVisualSentences::BuildRels(CString& report)
 	try
 	{
 
-		auto& piSentCollection = ((CVisualSynanApp*)::AfxGetApp())->m_SyntaxHolder.m_Synan;
+		auto& piSentCollection = ((CVisualSynanApp*)::AfxGetApp())->GetHolder().m_Synan;
 
 		
 		for(auto& piSent: piSentCollection.m_vectorSents)

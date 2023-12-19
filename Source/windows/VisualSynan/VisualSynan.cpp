@@ -68,7 +68,20 @@ public:
 	};
 };
 
+static MorphLanguageEnum GlobalLanguage;
+static CSyntaxHolder Rus(morphRussian);
+static CSyntaxHolder Ger(morphGerman);
 
+void CVisualSynanApp::SetLanguage(MorphLanguageEnum l) {
+	GlobalLanguage = l;
+}
+
+CSyntaxHolder& CVisualSynanApp::GetHolder() {
+	if (GlobalLanguage == morphGerman)
+		return Ger;
+	else
+		return Rus;
+}
 
 
 BOOL CVisualSynanApp::InitInstance()
@@ -79,6 +92,9 @@ BOOL CVisualSynanApp::InitInstance()
 		ParseCommandLine(cmdInfo);
 		CSplashWnd::EnableSplashScreen(cmdInfo.m_bShowSplash);
 	}
+
+	GlobalLoadMorphHolder(morphGerman);
+	GlobalLoadMorphHolder(morphRussian);
 
 	CWaitThread::m_hEventKill
 		= CreateEvent(NULL, FALSE, FALSE, NULL); // auto reset, initially reset
@@ -213,9 +229,9 @@ void CVisualSynanApp::OnAppAbout()
 
 int CVisualSynanApp::ExitInstance() 
 {
+	Rus.ClearHolder();
+	Ger.ClearHolder();
 	CloseHandle(CWaitThread::m_hEventKill);
-	m_SyntaxHolder.DeleteProcessors();
-	CoUninitialize();
 	return CWinApp::ExitInstance();
 }
 

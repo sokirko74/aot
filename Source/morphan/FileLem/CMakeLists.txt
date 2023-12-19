@@ -5,5 +5,5 @@ project(FileLem)
 add_executable (FileLem FileLem.cpp)
 
 target_link_libraries(FileLem 
-    LemmatizerLib
+    LemmatizerLib SimpleGrammarLib
 )

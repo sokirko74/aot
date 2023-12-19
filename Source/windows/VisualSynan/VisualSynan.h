@@ -9,7 +9,6 @@
 class CVisualSynanApp : public CWinApp
 {
 public:
-	CSyntaxHolder	m_SyntaxHolder;
 	
 
 	virtual BOOL PreTranslateMessage(MSG* pMsg);
@@ -24,6 +23,9 @@ public:
 	virtual BOOL InitInstance();
 	virtual int ExitInstance();
 	//}}AFX_VIRTUAL
+
+	void SetLanguage(MorphLanguageEnum l);
+	CSyntaxHolder& GetHolder();
 
 // Implementation
 	//{{AFX_MSG(CVisualSynanApp)

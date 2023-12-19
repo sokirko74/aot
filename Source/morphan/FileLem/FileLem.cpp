@@ -35,8 +35,9 @@ int main(int argc, char **argv)
 		PrintUsage();
 	};
 	fprintf (stderr, "Loading dictionaries \n");
-	CLemTextCreator Holder;
-	Holder.LoadGraphanAndLemmatizer(Language);
+	GlobalLoadMorphHolder(Language);
+	CLemTextCreator Holder(Language);
+	Holder.InitGraphan();
 
 	
 	const char* FileName = argv[2];

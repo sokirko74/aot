@@ -192,12 +192,12 @@ void CChildFrame::OnKillHom()
 	CVisualSynanApp *pApp = (CVisualSynanApp *)AfxGetApp();
 
 	CDlgHom dlg(this);
-	dlg.m_type = pApp->m_SyntaxHolder.m_Synan.GetOpt()->m_KillHomonymsMode;
+	dlg.m_type = pApp->GetHolder().m_Synan.GetOpt()->m_KillHomonymsMode;
 	
 	if( dlg.DoModal() != IDOK )
 		return;
 
-	pApp->m_SyntaxHolder.m_Synan.SetKillHomonymsMode((KillHomonymsEnum)dlg.m_type);
+	pApp->GetHolder().m_Synan.SetKillHomonymsMode((KillHomonymsEnum)dlg.m_type);
 }
 
 
@@ -209,7 +209,7 @@ void CChildFrame::OnShowMessages()
 	CVisualSynanApp *pApp = (CVisualSynanApp *)AfxGetApp();
 
 	bShowMessages = !bShowMessages;
-	pApp->m_SyntaxHolder.m_Synan.put_SilentMode(!bShowMessages);
+	pApp->GetHolder().m_Synan.put_SilentMode(!bShowMessages);
 	CMenu* pMenu = GetParent()->GetParent()->GetMenu();
 	if (bShowMessages)
 	  pMenu->CheckMenuItem (ID_SHOW_MESSAGES,	MF_BYCOMMAND  | MF_CHECKED );

@@ -24,7 +24,7 @@ int main(int argc, const char* argv[])
 
 	try {			
 		CGraphmatFile Graphan;
-		Graphan.LoadDicts(args.GetLanguage();
+		Graphan.LoadDicts(args.GetLanguage());
 		auto inputFile = args.Retrieve("input-file");
 		std::cout << "Loading file " << inputFile << "\n";
 		Graphan.LoadFileToGraphan(inputFile);

@@ -6,19 +6,20 @@
 #include <vector>
 #include <algorithm>
 #include "morph_dict/lemmatizer_base_lib/MorphanHolder.h"
+#include "morph_dict/agramtab/RusGramTab.h"
 #include <utility>
 
 
 void get_id(CMorphanHolder& holder, std::string str, grammems_mask_t  grammems, DwordVector &res)
 {
 	
-    std::vector<CFormInfo> ParadigmCollection;
+    std::vector<CFormInfo> paradugms;
 
 	std::string word_s8 = convert_from_utf8(str.c_str(), holder.m_CurrentLanguage);
-	if (!holder.m_pLemmatizer->CreateParadigmCollection(false, word_s8, false, false,  ParadigmCollection))
+	if (!holder.m_pLemmatizer->CreateParadigmCollection(false, word_s8, false, false, paradugms))
 		throw CExpc("Cannot lemmatize %s by Russian lemmatizer" , str.c_str());
 
-	for(auto& p: ParadigmCollection)
+	for(auto& p: paradugms)
 	{
 		if(!p.m_bFound) continue;
 		part_of_speech_t part = holder.m_pGramTab->GetPartOfSpeech(p.GetSrcAncode().c_str());
@@ -29,7 +30,7 @@ void get_id(CMorphanHolder& holder, std::string str, grammems_mask_t  grammems, 
 		};
 		auto norm = convert_to_utf8(p.GetWordForm(0), holder.m_CurrentLanguage);
 		MakeLowerUtf8(norm);
-		if (norm != str) {
+		if (norm == str) {
 			res.push_back(p.GetParadigmId());
 		}
 		else {
@@ -83,6 +84,9 @@ int main(int argc, char ** argv)
 				}
 			}
 			in.close();
+		}
+		if (pairs.empty()) {
+			throw CExpc("empty result vector");
 		}
 		WriteVector(argv[2], pairs);
 		std::cerr << "written " << pairs.size() << " verb aspect pairs\n";

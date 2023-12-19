@@ -74,7 +74,7 @@ typedef std::list<std::vector<std::string> > interp_t;
 bool IsBigramToken(const CGraLine& L, bool bOnlyWords)
 {
 	if (bOnlyWords) {
-		L.Is
+		return L.IsWordOrNumberOrAbbr();
 	}
 	return !L.IsNotPrint()  && !L.IsSoft();
 };
@@ -260,7 +260,7 @@ try
 			fprintf (stderr,"===== [%zu/%zu] %s ===== \n",FileNo+1, Files.size(), InputFileName.c_str());
 			AllFileSize += FileSize(InputFileName.c_str());
 			Graphan.LoadFileToGraphan(InputFileName);
-			size_t TokensCount = Graphan.GetEntries().size();
+			size_t TokensCount = Graphan.GetUnits().size();
 			interp_t Tokens =  GetTokensBySentences(Graphan, bOnlyWords);
 
 			if (bOnlyWords)

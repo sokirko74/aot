@@ -78,11 +78,11 @@ static BOOL GetSentencesFromSynAn(CVisualSynanDoc& C, CString strText, BOOL bFil
 		CVisualSynanApp* A = (CVisualSynanApp*)AfxGetApp();
 		std::string s = wstring_to_utf8(std::wstring(strText));
 		
-		bool bRes = A->m_SyntaxHolder.GetSentencesFromSynAn(s.c_str(), bFile);
+		bool bRes = A->GetHolder().GetSentencesFromSynAn(s.c_str(), bFile);
 		if( !bRes )
 			return FALSE;
 			
-		bRes = C.m_VisualSentences.FillSentencesArray(A->m_SyntaxHolder.m_Synan);		
+		bRes = C.m_VisualSentences.FillSentencesArray(A->GetHolder().m_Synan);
 		CTime EndTime = CTime::GetCurrentTime();
 		CTimeSpan Span = EndTime - StartTime;
 		C.m_WorkTimeStr = Span.Format("%M min %S sec");
