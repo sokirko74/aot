@@ -1,8 +1,3 @@
-//================================================================
-// =====   windows Test Example for Dialing Lemmatizer (www.aot.ru) ==
-// =====   Author: Alexey Sokirko, sokirko@yandex.ru, 2003  =======
-//================================================================
-
 #include <stdio.h>
 #include <comdef.h>
 #include <string>
@@ -32,29 +27,19 @@ int main(int argc, char* argv[])
 		return 1;
 	}
 
-	std::string inputFile = argv[1];
-	std::cout << "Loading file " << inputFile << "\n";
-	std::ifstream inp(inputFile);
-	assert(inp.is_open());
-
-	std::ofstream outp(inputFile + ".lemma", std::ios::binary);
-	assert(outp.is_open());
-
 	// lemmatizing a word in utf8
-	std::string word;
-	while (std::getline(inp, word))
+	std::string word = "мама";
+	auto piParadigmCollection = piLemmatizer->CreateParadigmCollectionFromForm(word.c_str(), FALSE, FALSE);
+
+	for (int j = 0; j < piParadigmCollection->Count; j++)
 	{
-		auto piParadigmCollection = piLemmatizer->CreateParadigmCollectionFromForm(word.c_str(), FALSE, FALSE);
+		auto p = piParadigmCollection->Item[j];
+		std::cout << p->Norm <<  " " << p->SrcAncode <<  "\n";
+	};
+	std::cout << "\n";
+	piParadigmCollection = nullptr;
 
-		for (int j = 0; j < piParadigmCollection->Count; j++)
-		{
-			auto p = piParadigmCollection->Item[j];
-			outp << p->Norm <<  " " << p->SrcAncode <<  "\n";
-		};
-		outp << "\n";
-	}
-
-	piLemmatizer = 0;
+	piLemmatizer = nullptr;
 	::CoUninitialize();
 
 }

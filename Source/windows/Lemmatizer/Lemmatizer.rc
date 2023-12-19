@@ -30,7 +30,6 @@ IDR_COMPARADIGM         REGISTRY DISCARDABLE    "COMParadigm.rgs"
 IDR_COMPARADIGMCOLLECTION REGISTRY DISCARDABLE    "COMParadigmCollection.rgs"
 IDR_COMLEMMATIZERRUSSIAN REGISTRY DISCARDABLE    "COMLemmatizerRussian.rgs"
 IDR_COMLEMMATIZERENGLISH REGISTRY DISCARDABLE    "COMLemmatizerEnglish.rgs"
-IDR_COMPLMLINECOLLECTION REGISTRY DISCARDABLE    "COMPLMLineCollection.rgs"
 IDR_COMLEMMATIZERGERMAN REGISTRY DISCARDABLE    "COMLemmatizerGerman.rgs"
 #endif    // Russian resources
 /////////////////////////////////////////////////////////////////////////////

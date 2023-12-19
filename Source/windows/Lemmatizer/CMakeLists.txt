@@ -4,8 +4,7 @@ add_subdirectory (lemmatizer_idl)
 
 list (APPEND LIB_DEPENDS 
      LemmatizerLib
-        lemmatizer_idl
-     graphan_idl
+     lemmatizer_idl
 )
 
 add_library(${PROJECT_NAME} SHARED

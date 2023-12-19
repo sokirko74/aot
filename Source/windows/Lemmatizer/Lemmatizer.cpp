@@ -8,6 +8,7 @@
 
 #include "StdAfx.h"
 #include "lemmatizer_resource.h"
+#include "ComLemmatizers.h"       // main symbols
 #include <initguid.h>
 #include "Lemmatizer_i.h"
 

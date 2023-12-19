@@ -27,8 +27,6 @@ endmacro()
 
 if (BUILD_COM)
     message ("compile COM-objects for Microsoft Windows")
-    add_subdirectory (agramtab)
-    add_subdirectory (graphan)
     add_subdirectory (Lemmatizer)
     add_subdirectory (TestLemmatizerCOM)
 endif()
