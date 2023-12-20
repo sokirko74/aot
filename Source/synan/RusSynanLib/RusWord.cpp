@@ -15,7 +15,7 @@ bool CRusSentence::IsAdjDeclination (const CSynHomonym& H) const
 {
 	if (!H.IsMorphNoun()) return false;
 	if (H.GetLemma().length() < 3)  return false;
-	if (H.m_lPradigmID == -1) return false;
+	if (H.m_lPradigmID == UnknownParadigmId) return false;
 	std::string suffix = H.GetLemma().substr(H.GetLemma().length()-2);
 	bool bMasc = endswith(H.GetLemma(), "ИЙ") || endswith(H.GetLemma(), "ЫЙ");
 	bool bFem = endswith(H.GetLemma(), "АЯ") || endswith(H.GetLemma(), "ЯЯ");

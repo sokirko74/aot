@@ -45,10 +45,6 @@ int	CGrammemsAnalyzer::GetPerson () const
 	else
 		return 0;
 }
-int	CGrammemsAnalyzer::GetGender () const 
-{  
-	return (m_Grammems & _QM(eMasculinum)) > 0 ? 1: (m_Grammems & _QM(eFeminum)) ? 2: 3;
-}
 
 
 
@@ -434,7 +430,7 @@ bool CEngSynthes::try_simple_group(int node_no)
 			{
 
 			  const CSemWord& W = E.RusStr.GetNode(node.RusNode).GetWord(i);
-			  long ParadigmId = W.m_ParadigmId;
+              uint32_t ParadigmId = W.m_ParadigmId;
 			  std::vector<long> EngIds;
 			  helper.translate_id(ParadigmId, EngIds, W.m_Poses);
 			  if (!EngIds.empty() && !W.HasOneGrammem(rPatronymic))
@@ -1381,7 +1377,7 @@ SynthesResult::SynthesResult()
 	:pos_order(-1),
 	m_Position(""),
 	do_not_put(false),
-	m_EngParadigmId(-1),
+	m_EngParadigmId(UnknownParadigmId),
 	subject_node(-1),
 	times_visited(0),
 	is_passive_verb(false),

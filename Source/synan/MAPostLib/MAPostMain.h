@@ -38,7 +38,7 @@ struct CFixedColloc
 struct CSurnameSuffix {
 	std::string m_Suffix;
 	std::string m_GramCode;
-	int    m_ParadigmNo;
+	uint32_t  m_ParadigmNo;
 };
 
 struct CLemmaAndCodes {
@@ -112,7 +112,7 @@ protected:
 	void Rule_ExpandIndeclinableGramcodes();
 	void OtherRules();
 	
-	std::string GetNormSurnameSuffix(long ParadigmNo) const;
+	std::string GetNormSurnameSuffix(uint32_t ParadigmNo) const;
 	void Rule_QuoteMarks();
 	void Rule_ILE();
 	void Rule_KAK_MOZHNO();

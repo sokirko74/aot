@@ -2,7 +2,6 @@
 #include "SemanticRusStructure.h"
 #include "LexFuncts.h"
 
-//#pragma optimize( "", off )
 
 //#define Trace 0
 #define Trace 1

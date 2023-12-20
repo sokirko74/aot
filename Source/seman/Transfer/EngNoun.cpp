@@ -253,7 +253,7 @@ bool CEngSynthes::try_pronoun_node(int node_no)
 	
 	if (lemma_is_demonstrative_pronoun (EngWord.m_Lemma))
 	{
-		long ParadigmId = helper.GetParadigmIdByLemma(morphEnglish, EngWord.m_Lemma,  ePN_ADJ);
+        uint32_t ParadigmId = helper.GetParadigmIdByLemma(morphEnglish, EngWord.m_Lemma,  ePN_ADJ);
 		// создаем множественное число 
 		if (ParadigmId != UnknownParadigmId)
 			if  (E.m_Nodes[node_no].GetGrammemsRich() & _QM(eSingular) )
@@ -264,7 +264,7 @@ bool CEngSynthes::try_pronoun_node(int node_no)
 	else
 	if (!is_norm)
 	{
-		long ParadigmId = helper.GetParadigmIdByLemma(morphEnglish, EngWord.m_Lemma, ePN);
+        uint32_t ParadigmId = helper.GetParadigmIdByLemma(morphEnglish, EngWord.m_Lemma, ePN);
 		// не у всех местоимений есть объектная форма
 		if (ParadigmId != UnknownParadigmId)
 		 EngWord.SetWord(helper.create_form_by_id(ParadigmId, _QM(eObjectCase)));

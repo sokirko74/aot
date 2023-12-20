@@ -256,7 +256,7 @@ void BuildBinaryDict(const CMorphanHolder* rus, const CMorphanHolder* eng, std::
         BYTE d[data_length];
         for (size_t i = 2; i < items.size(); ++i) {
             int u = atoi(items[i].c_str());
-            assert(0 < u && u < 256);
+            assert(0 <= u && u < 256);
             d[i - 2] = u;
         }
         make_bin(rus, eng, r, e, d, out);

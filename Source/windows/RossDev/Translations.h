@@ -11,9 +11,9 @@
 // CTranslations dialog
 
 struct  TransLemma {
-	long ParadigmId;
+	uint32_t ParadigmId;
 	long PartOfSpeech;
-	TransLemma(long _ParadigmId, long _PartOfSpeech)
+	TransLemma(uint32_t _ParadigmId, long _PartOfSpeech)
 	{
 		ParadigmId = _ParadigmId;
 		PartOfSpeech = _PartOfSpeech;

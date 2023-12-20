@@ -548,7 +548,7 @@ bool CheckGrammems(const CLemWord& w, const CHomonym& h, const CGrammarItem& I)
 {
 
 	if (I.m_MorphPattern.m_SearchStatus == PredictedWord) {
-		if (h.m_lPradigmID != -1) return false;
+		if (h.m_lPradigmID != UnknownParadigmId) return false;
 	}
 
 	//  check pos
@@ -560,7 +560,7 @@ bool CheckGrammems(const CLemWord& w, const CHomonym& h, const CGrammarItem& I)
 
 	// German genitive ad hoc rule
 	if ((I.m_MorphPattern.m_iGrammems == _QM(gGenitiv))
-		&& h.m_lPradigmID == -1
+		&& h.m_lPradigmID == UnknownParadigmId
 		&& endswith(w.m_strUpperWord, "S")
 		)
 		return true;
@@ -597,7 +597,7 @@ bool CLemWord::IsEqualToGrammarItem(const CHomonym& h, const CGrammarItem& I) co
 	{
 		const StringSet& lemmas = I.m_pListFile->m_PossibleLemmas;
 		bool found = lemmas.find(h.GetLemma()) != lemmas.end();
-		if (!found && h.m_lPradigmID == -1) {
+		if (!found && h.m_lPradigmID == UnknownParadigmId) {
 			found = lemmas.find(m_strUpperWord) != lemmas.end();
 		}
 		if (!found)

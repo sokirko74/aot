@@ -327,8 +327,8 @@ void CRusSemStructure::ApplySubordinationCases() {
             // иностранная лексема всгда неизменяема
             if (!Target.IsILENode()) {
                 if (!Target.IsPrimitive()) continue;
-                long ParadigmId = Target.m_Words[0].m_ParadigmId;
-                if (ParadigmId == -1) continue;
+                uint32_t ParadigmId = Target.m_Words[0].m_ParadigmId;
+                if (ParadigmId == UnknownParadigmId) continue;
                 CFormInfo P;
                 if (!m_pData->GetRusLemmatizer()->CreateParadigmFromID(ParadigmId, P)) continue;
                 if (P.GetCount() != 1) continue;

@@ -12,8 +12,6 @@
 #include  "synan/SynanLib/SyntaxHolder.h"
 
 
-const long UnknownParadigmId = -1;
-
 class CStructDictHolder;
 class CRusGramTab;
 class CEngGramTab;
@@ -53,7 +51,7 @@ public:
 	void InitThesaurus(int ThesId);
 	void Init();
 
-	StringVector GetAspVerb (long ParadigmId, bool IsPerfective);
+	StringVector GetAspVerb (uint32_t ParadigmId, bool IsPerfective);
     StringVector GetAspVerb (std::string Verb, bool IsPerfective);
 	void ErrorMessage (std::string Mess);
 	bool MakeSyntaxStr(const char* text, CMyTimeSpanHolder& GlobalSpan);

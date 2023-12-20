@@ -1025,7 +1025,7 @@ void CRusSemNode::ModifyGramCodes(std::string GramCodes, int mode, const CRusGra
 CRusMorphHomonym::CRusMorphHomonym() 
 {
 	m_SynWordNo = -1;
-	m_ParadigmId = -1;
+	m_ParadigmId = UnknownParadigmId;
 };
 
 CRusMorphHomonym::CRusMorphHomonym(const CRusSemWord& X) 

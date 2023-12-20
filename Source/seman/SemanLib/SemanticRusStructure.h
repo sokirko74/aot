@@ -16,7 +16,7 @@
 class CRusMorphHomonym {
 public:
     long m_SynWordNo;
-    long m_ParadigmId;
+    uint32_t m_ParadigmId;
 
     CRusMorphHomonym();
 

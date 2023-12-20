@@ -65,16 +65,15 @@ bool CRusSemWord::IsEqualMorph(const CRusSemWord& W) 	const
 		&& (m_Poses == W.m_Poses);
 };
 
-const std::locale c_locale("C");
 
 void CRusSemWord::InitWordFeatures(const CSentence* piSent, long WordNo) {
     const CSynWord& W = piSent->m_Words[WordNo];
     SetWord(W.m_strWord);
     m_GraphDescrs = " " + W.BuildGraphemDescr() + " ";
-
-    m_IsPunct = !GetWord().empty() && std::iswpunct(GetWord()[0]);
-    m_ILE = m_GraphDescrs.find(" LLE ") != std::string::npos;
-    m_ArabicNumber = m_GraphDescrs.find("DC ") != std::string::npos;
+    m_IsPunct = W.HasDes(OPun);
+    m_ILE = W.HasDes(OLLE);
+    m_ArabicNumber = W.HasDes(ODigits);
+    m_bRomanNumber = W.HasDes(ORoman);
     if (m_ILE) SetFormGrammems(rAllCases);
     m_CharCase = W.m_Register;
 
@@ -94,23 +93,6 @@ void CRusSemWord::InitWordFeatures(const CSentence* piSent, long WordNo) {
             break;
     };
 
-    /*
-римские цифры определяются так: у них должен быть приписана графета ЦК
-и первый символ должен быть латиницей
-*/
-    
-    if (m_ArabicNumber)
-        if (std::isalpha((BYTE)GetWord()[0], c_locale)) {
-            m_bRomanNumber = true;
-            /*
-             Римские цифры могут писаться большими или маленькими буквами,
-              маленькие - по умолчанию,
-              большие - нужно  выставить.
-              Римские цифры не являются ИЛЕ, поэтому помет ББ и бб не имеют.
-            */
-            if (is_english_upper((BYTE)GetWord()[0]))
-                m_CharCase = UpUp;
-        };
 };
 
 const std::string& CRusSemWord::GetWord() const {

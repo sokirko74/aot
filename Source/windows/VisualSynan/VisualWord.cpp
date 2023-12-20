@@ -48,9 +48,9 @@ BOOL CVisualWord::Init(const CSynWord& piWord, const CSentence& piSentence)
 			pHomonym->m_strCommonGrammems = FromRMLEncode(piSentence.GetOpt()->GetGramTab()->GrammemsToStr(piHomonym.m_TypeGrammems));
 			pHomonym->m_strPOS = FromRMLEncode(piHomonym.GetPartOfSpeechStr());
 
-			
-			
-			long paradigmID = piHomonym.m_lPradigmID;
+
+
+            uint32_t paradigmID = piHomonym.m_lPradigmID;
 			pHomonym->m_strSomeDescr = "";
 			if( piHomonym.m_bOborot1 )
 			{

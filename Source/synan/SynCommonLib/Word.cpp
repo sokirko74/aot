@@ -131,7 +131,7 @@ void CSynWord::CloneHomonymForOborot(int HNum)
 		
 	}
 	if(HNum == -1 && m_Homonyms.size()>1)
-		H.m_lPradigmID = -1;
+		H.m_lPradigmID = UnknownParadigmId;
 
 	// у всех остальных омонимов помуты оборота стоять не будет
 	DeleteOborotMarks();

@@ -89,7 +89,7 @@ std::string translate_helper::create_norm_by_id(long EngId) const
 void translate_helper::synthesize(CEngSemWord& EngWord) const
 {
 	EngWord.m_ParadigmId = GetParadigmIdByLemma(morphEnglish, EngWord.m_Lemma, GetOnePOS(EngWord.m_Poses));
-	if (EngWord.m_ParadigmId == -1)
+	if (EngWord.m_ParadigmId == UnknownParadigmId)
 	{
 		EngWord.SetWord(EngWord.GetWord(), true);
 
@@ -446,7 +446,7 @@ void translate_helper::translate_id(long Id, std::vector<long>& res, part_of_spe
 //--------------------------------------------------------------------------------
 // выдает по строке все леммы из морфологического словаря нужной части речи
 // если pos=-1, тогда часть речи не проверяется
-long  translate_helper::GetParadigmIdByLemma(MorphLanguageEnum langua, std::string lemma, part_of_speech_t pos, bool bProper) const
+uint32_t  translate_helper::GetParadigmIdByLemma(MorphLanguageEnum langua, std::string lemma, part_of_speech_t pos, bool bProper) const
 {
 
 	std::vector<CFormInfo> ParadigmCollection;
@@ -470,7 +470,7 @@ long  translate_helper::GetParadigmIdByLemma(MorphLanguageEnum langua, std::stri
 	}
 	int count = ParadigmCollection.size();
 	int AgreedWithProper = -1;
-	int FirstGoodId = -1;
+	uint32_t FirstGoodId = UnknownParadigmId;
 	for (int i = 0; i < count; i++)
 	{
 		const CFormInfo& Paradigm = ParadigmCollection[i];
@@ -483,7 +483,7 @@ long  translate_helper::GetParadigmIdByLemma(MorphLanguageEnum langua, std::stri
 		if (((g & _QM(eProper)) > 0) == bProper)
 			AgreedWithProper = Paradigm.GetParadigmId();
 
-		if (FirstGoodId == -1)
+		if (FirstGoodId == UnknownParadigmId)
 			FirstGoodId = Paradigm.GetParadigmId();
 	}
 
@@ -498,9 +498,9 @@ long  translate_helper::GetParadigmIdByLemma(MorphLanguageEnum langua, std::stri
 
 grammems_mask_t  translate_helper::GetFixedGrammemsByLemma(MorphLanguageEnum langua, std::string norm, part_of_speech_t pos, bool bProper) const
 {
-	long ParadigmID = GetParadigmIdByLemma(langua, norm, pos, bProper);
+	uint32_t ParadigmID = GetParadigmIdByLemma(langua, norm, pos, bProper);
 
-	if (ParadigmID == -1)
+	if (ParadigmID == UnknownParadigmId)
 		return 0;
 
 	CFormInfo Paradigm;
@@ -680,7 +680,7 @@ bool CEngSemStructure::translate_binary(long NodeNo)
 
 	// примитивные узлы, которые интерпретированы добавочными статьями
 	const CSemWord& W = RusStr.GetNode(m_Nodes[NodeNo].RusNode).GetWord(0);
-	long ParadigmId = W.m_ParadigmId;
+    uint32_t ParadigmId = W.m_ParadigmId;
 
 	std::vector<long> EngIds;
 	helper.translate_id(ParadigmId, EngIds, W.m_Poses);
@@ -715,7 +715,7 @@ bool CEngSemStructure::translate_binary(long NodeNo)
 		m_Nodes[NodeNo].m_Words[0].m_Lemma = Lemma;
 		m_Nodes[NodeNo].m_Words[0].SetWord(Lemma);
 		m_Nodes[NodeNo].m_Words[0].m_ParadigmId = EngIds[0];
-		if (W.m_AdditParadigmId != -1)
+		if (W.m_AdditParadigmId != UnknownParadigmId)
 		{
 			helper.translate_id(W.m_AdditParadigmId, EngIds, W.m_Poses);
 			if (EngIds.size() > 0)

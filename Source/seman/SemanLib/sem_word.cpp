@@ -6,9 +6,9 @@ void CSemWord::Init()
 	m_FormGrammems = 0;
 	m_TypeGrammems = 0;
 	m_WordNo = -1;
-	m_ParadigmId = -1;
+	m_ParadigmId = UnknownParadigmId;
 	m_WordWeight = 0;
-	m_AdditParadigmId = -1;
+	m_AdditParadigmId = UnknownParadigmId;
 	m_bAdverbFromAdjective = false;
 	m_ArabicNumber = false;
 };

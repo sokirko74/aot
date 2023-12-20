@@ -208,7 +208,7 @@ void ConvertOneRusNumeralsToArabic (CRusSemStructure& R, CRusSemNode& node) {
 					{
 						node.m_Words[i].SetWord(DoubleToStr(Res));
 						node.m_Words[i].m_Lemma = "";
-						node.m_Words[i].m_ParadigmId = -1;
+						node.m_Words[i].m_ParadigmId = UnknownParadigmId;
 					};
 
 				};
@@ -237,7 +237,7 @@ void ConvertOneRusNumeralsToArabic (CRusSemStructure& R, CRusSemNode& node) {
 	if (node.m_Words[0].m_NumeralPrefix == "")
 	{
 		node.m_Words[0].m_Lemma = "";
-		node.m_Words[0].m_ParadigmId = -1;
+		node.m_Words[0].m_ParadigmId = UnknownParadigmId;
 		node.DelAllInterps();
 	};
 	node.m_Words[0].SetWord(ConvertedWord);
@@ -315,7 +315,7 @@ void CRusSemStructure::NumeralAdverbRule()
 			if (NumeralValue == -1)  continue;
 			m_Nodes[NumNodeNo].m_Words[0].m_Lemma = "";
 			m_Nodes[NumNodeNo].m_Words[0].SetWord(DoubleToStr(NumeralValue));
-			m_Nodes[NumNodeNo].m_Words[0].m_ParadigmId = -1;
+			m_Nodes[NumNodeNo].m_Words[0].m_ParadigmId = UnknownParadigmId;
 			m_Nodes[NumNodeNo].SetMainWordNo(0);
 
 

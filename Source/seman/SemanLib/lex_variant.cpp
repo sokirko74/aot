@@ -369,7 +369,7 @@ CRusSemNode CRusSemStructure::CreatePrimitiveNode(size_t WordNo) {
     };
 
     if (!HasAuxiliaryPOS(SemWord.m_Lemma)) {
-        if (SemWord.m_ParadigmId != -1) {
+        if (SemWord.m_ParadigmId != UnknownParadigmId) {
             CFormInfo Paradigm;
             bool bRes = m_pData->GetRusLemmatizer()->CreateParadigmFromID(SemWord.m_ParadigmId, Paradigm);
             assert (bRes);
@@ -407,8 +407,8 @@ CRusSemNode CRusSemStructure::CreatePrimitiveNode(size_t WordNo) {
 
     if (SemWord.m_GraphDescrs.find("#КАК_МОЖНО") != string::npos) {
         N.m_RelOperators.push_back("КАК_МОЖНО");
-        long ParadigmId = m_pData->GetAdverbWith_O_ByAdjective(SemWord.m_ParadigmId, SemWord.GetWord());
-        if (ParadigmId != -1) {
+        uint32_t ParadigmId = m_pData->GetAdverbWith_O_ByAdjective(SemWord.m_ParadigmId, SemWord.GetWord());
+        if (ParadigmId != UnknownParadigmId) {
             CFormInfo Paradigm;
             bool bRes = m_pData->GetRusLemmatizer()->CreateParadigmFromID(ParadigmId, Paradigm);
             assert (bRes);
@@ -425,7 +425,7 @@ CRusSemNode CRusSemStructure::CreatePrimitiveNode(size_t WordNo) {
         приложений типа "муж-алкоголик"
     */
 
-    if ((SemWord.m_ParadigmId == -1)
+    if ((SemWord.m_ParadigmId == UnknownParadigmId)
         && (SemWord.m_Lemma.find("-") != string::npos)
         && (SemWord.m_Poses == (1 << NOUN))
             ) {
@@ -440,7 +440,7 @@ CRusSemNode CRusSemStructure::CreatePrimitiveNode(size_t WordNo) {
     if (startswith(S, "ПО-")
         &&
         ((SemWord.m_Poses == (1 << ADV))
-         || ((SemWord.m_ParadigmId == -1)
+         || ((SemWord.m_ParadigmId == UnknownParadigmId)
              && (   endswith(S, "КИ"))
                  || endswith(S, "МУ")
              )
@@ -606,7 +606,7 @@ CRusSemNode CRusSemStructure::CreateNodeByFirmGroup(const CRelationsIterator *Re
 
 
         if (!HasAuxiliaryPOS(SemWord.m_Lemma))
-            if (SemWord.m_ParadigmId != -1) {
+            if (SemWord.m_ParadigmId != UnknownParadigmId) {
                 CFormInfo Paradigm;
                 bool bRes = m_pData->GetRusLemmatizer()->CreateParadigmFromID(SemWord.m_ParadigmId, Paradigm);
                 assert (bRes);

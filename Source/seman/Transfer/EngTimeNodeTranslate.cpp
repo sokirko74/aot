@@ -165,9 +165,9 @@ std::string CEngSemStructure::time_tr_by_ross(long RusNodeNo, std::string &brack
 		}
 
 		grammems_mask_t grammems = 0;
-		if(is_pl) grammems |= ePlural;
+		if (is_pl) grammems |= ePlural;
 
-        long ParadigmId = helper.GetParadigmIdByLemma(morphRussian, RusNode.GetWord(0).m_Lemma,  0);
+        uint32_t ParadigmId = helper.GetParadigmIdByLemma(morphRussian, RusNode.GetWord(0).m_Lemma,  0);
 		if (ParadigmId == UnknownParadigmId) return "!!!error!!!";
 		std::vector<long> Ids;
 		helper.translate_id(ParadigmId, Ids, 0);
@@ -330,7 +330,7 @@ bool  CEngSemStructure::translate_time_node ( int MainNodeNo)
 	MainNode.m_Words.resize(1);
 	MainNode.m_Words[0].SetWord(res);  
 	MainNode.m_Words[0].m_Lemma = "";
-	MainNode.m_Words[0].m_ParadigmId = -1;
+	MainNode.m_Words[0].m_ParadigmId = UnknownParadigmId;
 	MainNode.m_Words[0].SetFormGrammems(0);
 	MainNode.SetInterp(CDictUnitInterp(TimeRoss,MainArticle.m_UnitNo));
 	MainNode.m_bReached = true;  

@@ -75,7 +75,7 @@ std::string CSLFDocument::GetLemmaUtf8() const
 std::string CSLFDocument::GetBase()  const 
 {
 	std::string Lemma = GetLemmaUtf8();
-	if (m_Paradigm.m_FlexiaModelNo != UnknownParadigmNo)
+	if (m_Paradigm.m_FlexiaModelNo != UnknownFlexiaModelNo)
 	{
 		const CFlexiaModel &old_par = GetWizard()->m_FlexiaModels[m_Paradigm.m_FlexiaModelNo];
 		std::string flexia = old_par.get_first_flex();
@@ -220,7 +220,7 @@ void CSLFDocument::update_saved_paradigm()
 	m_SaveParadigm = m_Paradigm;
 	m_SaveCommonGrammems = m_CommonGrammems;	
 	m_SavePrefixes = m_Prefixes;	
-	if (m_Paradigm.m_FlexiaModelNo != UnknownParadigmNo)
+	if (m_Paradigm.m_FlexiaModelNo != UnknownFlexiaModelNo)
 		m_ParadigmComments = utf8_to_wstring(GetWizard()->m_FlexiaModels[m_Paradigm.m_FlexiaModelNo].m_Comments).c_str();
 
 	if (m_ParadigmText.GetLength() > 0)

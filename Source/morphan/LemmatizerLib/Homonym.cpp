@@ -9,9 +9,9 @@ CHomonym::CHomonym(MorphLanguageEnum l)
 	SetLanguage(l);
 	m_iCmpnLen = 0;
 	m_bCmplLem = false;
-	m_lPradigmID = -1;
-	m_bDelete = false;
-	m_bRussianOdin = false;
+    m_lPradigmID = UnknownParadigmId;
+    m_bDelete = false;
+    m_bRussianOdin = false;
 
 	m_bOborot1 = false;
 	m_bOborot2 = false;
@@ -105,7 +105,7 @@ void CHomonym::DeleteOborotMarks()
 void  CHomonym::SetPredictedWord(std::string gram_codes, std::string common_gram_codes)
 {
     CAncodePattern::SetPredictedWord(gram_codes, common_gram_codes);
-    m_lPradigmID = -1;
+    m_lPradigmID = UnknownParadigmId;
 }
 
 bool CHomonym::operator < (const CHomonym& hom) const

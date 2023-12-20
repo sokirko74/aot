@@ -10,12 +10,12 @@ static void GetMaxSimilarWordForm (const CRusSemStructure& R, CRusSemWord& Word,
 	CFormInfo Paradigm;
 	//  calculating piParadigm by Lemma and poses from NodeNo
 	{
-		long ParadigmId = R.m_pData->GetFirstParadigmId(morphRussian, Word.m_Lemma, Word.m_Poses);
+		uint32_t ParadigmId = R.m_pData->GetFirstParadigmId(morphRussian, Word.m_Lemma, Word.m_Poses);
 
-		if ((ParadigmId == -1) && (Word.m_Poses != 0))
+		if ((ParadigmId == UnknownParadigmId) && (Word.m_Poses != 0))
 			ParadigmId = R.m_pData->GetFirstParadigmId(morphRussian, Word.m_Lemma, 0);
 
-		if (ParadigmId == -1)
+		if (ParadigmId == UnknownParadigmId)
 			return;
 
 		R.m_pData->GetRusLemmatizer()->CreateParadigmFromID(ParadigmId, Paradigm);

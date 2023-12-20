@@ -9,7 +9,6 @@ struct CGrammemsAnalyzer {
 	int			GetNumber () const;
 	void		SetNumber (int num); 
 	int			GetPerson () const;
-  	int			GetGender () const;
 };
     
 
@@ -38,7 +37,7 @@ struct SynthesResult  : public CGrammemsAnalyzer{
 	// истина, если  этот узел не надо класть в выходню строку
 	bool			do_not_put; 
 	// ParadigmId того слова, которое содержится в m_WordForms (assert (m_WordForms.sizE() == 1) )
-	long			m_EngParadigmId;
+	uint32_t		m_EngParadigmId;
 
 	
 	// предлог, который нужно поставить перед словом

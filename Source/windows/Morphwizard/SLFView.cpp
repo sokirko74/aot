@@ -521,7 +521,7 @@ void CSLFView::OnBnClickedChangeParadigm()
 	std::string Lemma = GetDocument()->GetLemmaUtf8();
 
 	const CFlexiaModel& new_par = GetWizard()->m_FlexiaModels[ParadigmNo];
-	if (GetDocument()->m_Paradigm.m_FlexiaModelNo != UnknownParadigmNo)
+	if (GetDocument()->m_Paradigm.m_FlexiaModelNo != UnknownFlexiaModelNo)
 	{
 		const CFlexiaModel& old_par = GetWizard()->m_FlexiaModels[GetDocument()->m_Paradigm.m_FlexiaModelNo];
 
@@ -534,7 +534,7 @@ void CSLFView::OnBnClickedChangeParadigm()
 			return;
 		};
 	};
-	GetWizard()->change_prd_info(GetDocument()->m_Paradigm, Lemma, ParadigmNo, UnknownParadigmNo, true);
+	GetWizard()->change_prd_info(GetDocument()->m_Paradigm, Lemma, ParadigmNo, UnknownFlexiaModelNo, true);
 	auto paradigm = GetWizard()->mrd_to_slf(Lemma.c_str(), new_par, GetDocument()->m_Paradigm.m_AccentModelNo, GetDocument()->m_Paradigm.m_AuxAccent, 50);
 	GetDocument()->m_ParadigmText = utf8_to_wstring(paradigm).c_str();
 	UpdateData(FALSE);

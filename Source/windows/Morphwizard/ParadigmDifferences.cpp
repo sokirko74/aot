@@ -10,8 +10,8 @@ IMPLEMENT_DYNCREATE(CParadigmDifferences, CFormView)
 CParadigmDifferences::CParadigmDifferences()
     : CFormView(CParadigmDifferences::IDD)
     , m_Results(_T(""))
-    , m_Paradigm1(-1)
-    , m_Paradigm2(-1)
+    , m_Paradigm1(UnknownFlexiaModelNO)
+    , m_Paradigm2(UnknownFlexiaModelNO)
 {
 }
 

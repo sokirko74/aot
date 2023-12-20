@@ -25,7 +25,7 @@ public:
 	bool m_bInOb;
 	
 	
-	long m_lPradigmID;
+	uint32_t m_lPradigmID;
 	
 	bool m_bSmallNumber;
 	size_t  m_iCmpnLen;

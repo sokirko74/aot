@@ -21,9 +21,9 @@ public:
     std::string m_Lemma;
     std::string m_GramCodes;
     // номер парадигмы в морф. словаре
-    long m_ParadigmId;
+    uint32_t m_ParadigmId;
     // добавочный номер парадигмы в морф. словаре (для приложений типа "муж-алкоголик")
-    long m_AdditParadigmId;
+    uint32_t m_AdditParadigmId;
     // части речи, которые приписаны слову
     part_of_speech_mask_t m_Poses;
     // номер слова в синтаксическом представлении

@@ -13,7 +13,7 @@
 class CRusSyntaxOpt :  public CSyntaxOpt
 {
 public:
-	long m_lPradigmID_NECHEGO;
+	uint32_t m_lPradigmID_NECHEGO;
 	std::string m_Gramcode_NECHEGO;
 
     std::string m_MasSingNomNounGramCode;

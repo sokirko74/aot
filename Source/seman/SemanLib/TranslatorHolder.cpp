@@ -109,7 +109,7 @@ void CTranslatorHolder::Init() {
 }
 
 
-StringVector CTranslatorHolder::GetAspVerb(long ParadigmId, bool IsPerfective) {
+StringVector CTranslatorHolder::GetAspVerb(uint32_t ParadigmId, bool IsPerfective) {
 
     std::vector<uint32_t> ids;
 

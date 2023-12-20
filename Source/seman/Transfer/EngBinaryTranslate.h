@@ -80,7 +80,7 @@ public:
 
 	void transliterate(CEngSemWord& EngWord);
 	
-	long GetParadigmIdByLemma(MorphLanguageEnum langua,  std::string str, part_of_speech_t pos, bool bProper=false) const;
+	uint32_t GetParadigmIdByLemma(MorphLanguageEnum langua,  std::string str, part_of_speech_t pos, bool bProper=false) const;
 	grammems_mask_t GetFixedGrammemsByLemma(MorphLanguageEnum langua, std::string str, part_of_speech_t pos, bool bProper) const;
 
 	const CStructDictHolder* GetRossHolder (DictTypeEnum type) const;

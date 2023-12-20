@@ -21,7 +21,7 @@ long CEngVerbTense::GetPersonGrammemsIfCan(CEngSemNode& EngNode)
 	// синтезировать можно сколько угодно раз, здесь   мы синтезируем 
 	// для того, чтобы вытащить граммемы  лица
     S.helper.synthesize(EngWord);
-	if (EngWord.m_ParadigmId == -1) 
+	if (EngWord.m_ParadigmId == UnknownParadigmId)
 	{
 		// для имен, которых нет в английской морфологии (например, "МАША") будем возвращать
 		// третье лицо
@@ -257,7 +257,7 @@ void CEngVerbTense::make_string()
 			res += Word;
 	}
 	else 
-		if(m_pVerbMainWord->m_ParadigmId != -1)
+		if(m_pVerbMainWord->m_ParadigmId != UnknownParadigmId)
 			if (!m_pVerbMainWord->m_bMorphologicalPassiveForm)
 			  res += S.helper.create_form_by_id(m_pVerbMainWord->m_ParadigmId, grammems);
 			else

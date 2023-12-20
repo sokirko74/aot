@@ -134,11 +134,6 @@ interp_t DeletePunctuationMarks(const interp_t& Tokens)
 
 std::vector<std::string> AllTempFiles;
 
-void  termination_handler(int signum)
-{
-	RemoveTempFiles(AllTempFiles);
-	exit(1);
-};
 
 //======================================================
 int BuildBigrams(int argc, char* argv[])
@@ -246,13 +241,6 @@ try
 		fclose(fp);
 	}
 
-		#ifndef  WIN32
-			//  we should close the socket if user aborts the program (presses Ctrl-c)
-			typedef void (*sighandler_t) (int);
-			sighandler_t oldHandler;
-			oldHandler = signal(SIGINT, termination_handler);
-		#endif
-
 		BigramsType Bigrams;
 		for (size_t FileNo=0;FileNo < Files.size(); FileNo++)
 		{
@@ -273,7 +261,7 @@ try
 				{
 					std::string  s1 = (*it)[LineNo];
 					MakeUpperUtf8(s1);
-					std::map<std::string,size_t>::iterator freq_it  = WordFreqs.find(s1);
+					auto freq_it  = WordFreqs.find(s1);
 					if (freq_it == WordFreqs.end())
 						WordFreqs[s1] = 1;
 					else
@@ -288,7 +276,7 @@ try
 							std::string  s2 = (*it)[k];
 							MakeUpperUtf8(s2);
 							auto p = std::make_pair(s1, s2);
-							BigramsType::iterator it = Bigrams.find(p);
+							auto it = Bigrams.find(p);
 							if (it != Bigrams.end())
 								it->second++;
 							else
@@ -320,10 +308,6 @@ try
 		m.Merge();
 		std::string  UniteCommand;
 		RemoveTempFiles(AllTempFiles);
-
-		#ifndef  WIN32
-			signal(SIGINT, oldHandler);
-		#endif
 
 		std::string WFFileName = MakeFName(OutputFile, "wrd_freq");
 		fprintf (stderr,"Writing word frequences %s\n", WFFileName.c_str());
