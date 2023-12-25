@@ -1,15 +1,16 @@
 #include "JVisualSynAnParamBuilder.h"
 #include "SynanDmn.h"
 
-#include "synan/SynanLib/SyntaxHolder.h"
-#include "morph_dict/lemmatizer_base_lib/MorphanHolder.h"
 #include "common/BigramsReader.h"
 #include "morph_dict/common/json.h"
 
+TSynanHttpServer::TSynanHttpServer() :
+    TRMLHttpServer(),
+    RussianSyntaxHolder(morphRussian),
+    GermanSyntaxHolder(morphGerman)
+{
 
-CSyntaxHolder RussianSyntaxHolder;
-CSyntaxHolder GermanSyntaxHolder;
-CMorphanHolder EnglishMorphHolder;
+}
 
 
 std::string TSynanHttpServer::ProcessBigrams(TDaemonParsedRequest &request) {
@@ -29,24 +30,12 @@ std::string TSynanHttpServer::ProcessBigrams(TDaemonParsedRequest &request) {
     return GetConnectedWords(wordForm, minBigramsFreq, directBigrams, sortMode, request.Langua);
 }
 
-const CMorphanHolder *GetMorphHolder(MorphLanguageEnum l) {
-    switch (l) {
-        case morphRussian:
-            return &RussianSyntaxHolder;
-        case morphGerman:
-            return &GermanSyntaxHolder;
-        case morphEnglish:
-            return &EnglishMorphHolder;
-        default:
-            return 0;
-    }
-}
 
 std::string TSynanHttpServer::ProcessMorphology(TDaemonParsedRequest &request) {
     bool withParadigms = evhttp_find_header(&request.headers, "withparadigms") != nullptr;
-    const CMorphanHolder *Holder = GetMorphHolder(request.Langua);
+    const CMorphanHolder &h  = GetMHolder(request.Langua);
     std::string wordForm = request.Query;
-    return Holder->LemmatizeJson(wordForm, withParadigms);
+    return h.LemmatizeJson(wordForm, withParadigms);
 };
 
 
@@ -60,38 +49,32 @@ std::string TSynanHttpServer::ProcessSyntax(TDaemonParsedRequest &request) {
 
 
 void TSynanHttpServer::LoadSynan(bool loadBigrams) {
-    TRMLHttpServer::LogMessage("Loading Russian Syntax\n");
-    RussianSyntaxHolder.LoadSyntax(morphRussian);
+    LOGI <<"Loading Russian Syntax";
+    RussianSyntaxHolder.LoadSyntax();
 
-    TRMLHttpServer::LogMessage("Loading German Syntax\n");
-    GermanSyntaxHolder.LoadSyntax(morphGerman);
+    LOGI <<"Loading German Syntax";
+    GermanSyntaxHolder.LoadSyntax();
 
-    TRMLHttpServer::LogMessage("Loading English Morphology\n");
+    LOGI <<"Loading English Morphology";
     EnglishMorphHolder.LoadMorphology(morphEnglish);
 
     if (loadBigrams) {
-        std::string fileName = GetRmlVariable() + "/Dicts/Bigrams/bigrams.txt";
-        if (!FileExists(fileName.c_str()))
-            throw CExpc(Format("cannot find bigrams file: %s", fileName));
-        if (!InitializeBigrams(fileName))
-            throw CExpc(Format("cannot init bigrams"));
+        auto path = fs::path(GetRmlVariable()) / "Dicts" / "Bigrams";
+        if (!fs::exists(path))
+            throw CExpc(Format("cannot find bigrams directory: %s", path.string().c_str()));
+        InitializeBigrams(path.string())
     }
 };
 
 std::string TSynanHttpServer::OnParsedRequest(TDaemonParsedRequest &req) {
-    try {
-        if (req.Action == "morph") {
-            return ProcessMorphology(req);
-        } else if (req.Action == "bigrams") {
-            return ProcessBigrams(req);
-        } else if (req.Action == "syntax") {
-            return ProcessSyntax(req);
-        } else {
-            throw CExpc("unknown action");
-        }
-    }
-    catch (nlohmann::json::exception &e) {
-        throw CExpc(e.what());
+    if (req.Action == "morph") {
+        return ProcessMorphology(req);
+    } else if (req.Action == "bigrams") {
+        return ProcessBigrams(req);
+    } else if (req.Action == "syntax") {
+        return ProcessSyntax(req);
+    } else {
+        throw CExpc("unknown action");
     }
 
 }

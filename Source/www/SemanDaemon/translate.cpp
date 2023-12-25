@@ -6,19 +6,19 @@
 
 void TSemanHttpServer::Load() {
 	try {
-		LogMessage("Init Preseman\n");
+		LOGI << "Init Preseman";
 		SemBuilder.m_RusStr.m_pData->Init();
 
-		LogMessage("Init Seman\n");
+        LOGI << "Init Seman";
 		SemBuilder.m_RusStr.m_pData->Initialize();
 
-		LogMessage("InitializeIndices\n");
+        LOGI << "InitializeIndices";
 		SemBuilder.m_RusStr.m_pData->InitializeIndices();
 
 	} 
 	catch (...)
 	{
-		LogMessage(Format("Error in Constructor: %s\n",(const char*)SemBuilder.m_RusStr.m_pData->m_LastError.c_str()).c_str());
+        LOGE << Format("Error in Constructor: %s\n",(const char*)SemBuilder.m_RusStr.m_pData->m_LastError.c_str()).c_str();
 		throw;
 	}
 }
@@ -32,17 +32,17 @@ std::string TSemanHttpServer::Translate(const std::string& russian, const std::s
 std::string TSemanHttpServer::BuildRusGraph(const std::string& russian, const std::string &po)
 {
 	try {
-		LogMessage(Format("Build Graph: &%s", russian.c_str()).c_str());
+		LOGI << "Build Graph: " << russian;
 		
 		std::string res;
-		std::string graphStr;
-		if (!SemBuilder.FindSituations(russian.c_str(), 0, po.c_str(), 20000, -1, "", graphStr)) {
-			throw CExpc("Error in SemBuilder\n");
-		}
-		CVisualSemGraph Graph;
-		Graph.InitFromSemantics(SemBuilder);
-		Graph.SetGraphLayout();
-		return Graph.GetResultStr();
+        CSemOptions opts;
+        opts.m_Domain = po;
+        opts.m_PanicTreeVariantCount = 20000;
+		SemBuilder.FindSituations(russian, opts);
+		CVisualSemGraph graph;
+		graph.InitFromSemantics(SemBuilder);
+		graph.SetGraphLayout();
+		return graph.GetResultStr();
 	}
 	catch (CExpc c) {
 		throw;

@@ -11,4 +11,4 @@ add_executable (Text2Bigrams
 target_link_libraries(Text2Bigrams
     GraphanLib
 )
-add_subdirectory (testing)
+add_subdirectory (tests)

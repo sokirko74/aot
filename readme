@@ -16,7 +16,10 @@ Russian website (Russian documents) is www.aot.ru.
 More detail about Morphology dicts is here: Docs/Morph_UNIX.txt
 
 ==============  Prerequisites    ========================
-0.   Install cmake (at least 3.5) from https://cmake.org/download/ and gzip (cygwin)
+0.   Install cmake (at least 3.24),
+
+0.1  Install zlib1g zlib1g-dev
+     sudo apt-get install zlib1g zlib1g-dev
  
 1.  g++ 9.0 or higher or  Microsoft Visual Studio 2019 
 

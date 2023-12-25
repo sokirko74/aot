@@ -76,12 +76,12 @@ CBigrams::~CBigrams() {
 }
 
 
-bool CBigrams::Initialize(std::string BigramsFileName) {
+bool CBigrams::Initialize(std::string path) {
     m_Word2Infos.clear();
     m_CorpusSize = 0;
 
-    std::string IndexFile = MakeFName(BigramsFileName, "wrd_idx");
-    fprintf(stderr, "load %s into memory\n", IndexFile.c_str());
+    std::string IndexFile = fs::path(path) / "bigrams.txt.wrd_idx";
+    LOGI << "load " << IndexFile;
     FILE *fp = fopen(IndexFile.c_str(), "r");
     if (!fp) {
         fprintf(stderr, "Cannot open %s", IndexFile.c_str());
@@ -107,8 +107,8 @@ bool CBigrams::Initialize(std::string BigramsFileName) {
     fclose(fp);
     if (m_Bigrams) fclose(m_Bigrams);
 
-    std::string Bin1File = MakeFName(BigramsFileName, "bin1");
-    fprintf(stderr, "  open %s \n", Bin1File.c_str());
+    std::string Bin1File = fs::path(path) / "bigrams.txt.bin1";
+    LOGI << "  open " <<  Bin1File;
     m_Bigrams = fopen(Bin1File.c_str(), "rb");
     if (!m_Bigrams) {
         fprintf(stderr, "Cannot open file %s", Bin1File.c_str());
@@ -117,8 +117,8 @@ bool CBigrams::Initialize(std::string BigramsFileName) {
 
 
     if (m_BigramsRev) fclose(m_BigramsRev);
-    std::string Bin2File = MakeFName(BigramsFileName, "bin2");
-    fprintf(stderr, "  open %s \n", Bin2File.c_str());
+    std::string Bin2File = fs::path(path) / "bigrams.txt.bin2";
+    LOGI << "  open " <<  Bin2File;
     m_BigramsRev = fopen(Bin2File.c_str(), "rb");
     if (!m_BigramsRev) {
         fprintf(stderr, "Cannot open file %s", Bin2File.c_str());

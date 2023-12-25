@@ -4,7 +4,9 @@
 #include "morph_dict/common/argparse.h"
 
 void initArgParser(int argc, const char **argv, ArgumentParser& parser) {
-	parser.AddArgument("--logmode", "log mode (quiet, normal or debug)", true);
+    parser.AddArgument("--host", "0.0.0.0 or other ip");
+    parser.AddArgument("--port", "17018");
+    parser.AddArgument("--log-level", "log level", true);
 	parser.AddOption("--skipbigrams");
 	parser.Parse(argc, argv);
 }
@@ -12,36 +14,28 @@ void initArgParser(int argc, const char **argv, ArgumentParser& parser) {
 int	main(int argc, const char **argv) {
 	ArgumentParser args;
 	initArgParser(argc, argv, args);
-	DaemonLogModeEnum logMode = dlmNormal;
-	if (args.Exists("logmode")) {
-		logMode = ParseDaemonLogMode(args.Retrieve("logmode"));
-	}
+    auto log_path = GetLogPath("seman_dmn.log");
+    init_plog(args.GetLogLevel(), log_path);
 	bool skipBigrams = args.Exists("skipbigrams");
 
 	TSynanHttpServer Server;
 	try {
+        GlobalLoadMorphHolder(morphRussian);
+        GlobalLoadMorphHolder(morphGerman);
+        GlobalLoadMorphHolder(morphEnglish);
 		DealWithLockFile("SynanDaemon.lck");
-		const char* portKey = "Software\\Dialing\\Synan\\HttpPort";
-
-		if (!CanGetRegistryString(portKey)) {
-			throw CExpc(Format("  Cannot find the registry key %s\n", portKey));
-		};
-
-		int port = atoi(GetRegistryString(portKey).c_str());
-
-		Server.Initialize(port, logMode, "synan_dmn.log");
-	
+		Server.Initialize(args.Retrieve("host"), atoi(args.Retrieve("port").c_str()));
 		Server.LoadSynan(!skipBigrams);
 		Server.Start();
 	}
-	catch (CExpc c)
+	catch (std::exception& c)
 	{
-		std::cerr << c.what() << "\n";
+		LOGE << c.what() << "\n";
 		return 1;
 	}
 	catch(...)
 	{
-		std::cerr << "General exception\n";
+        LOGE << "General exception";
 		return 1;
 	};
 	return 0;

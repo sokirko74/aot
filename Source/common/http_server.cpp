@@ -10,8 +10,6 @@
 #include <sys/signal.h>	
 #endif
 
-DaemonLogModeEnum TRMLHttpServer::LogMode;
-std::string TRMLHttpServer::LogFileName;
 
 #ifdef WIN32
 void InitSocketsWindows() {
@@ -47,16 +45,6 @@ bool InitSockets() {
 	return true;
 }
 
-DaemonLogModeEnum ParseDaemonLogMode(std::string strMode) {
-	if (strMode == "quiet")
-		return dlmQuiet;
-	if (strMode == "normal")
-		return dlmNormal;
-	if (strMode == "debug")
-		return dlmDebug;
-	throw CExpc("bad daemon log mode, could be quiet, normal or debug");
-}
-
 int GetPID() {
 #ifdef WIN32
 	return _getpid();
@@ -65,32 +53,8 @@ int GetPID() {
 #endif
 }
 
-bool CheckFileAppendRights(const char* fileName) {
-	try {
-		FILE *fp = fopen(fileName, "a");
-		fclose(fp);
-		return true;
-	}
-	catch (...) {
-		return false;
-	}
-}
-
-void TRMLHttpServer::LogMessage(const char* t) {
-	try {
-		struct tm today = RmlGetCurrentTime();
-		char tmpbuf[255];
-		FILE *fp = fopen(TRMLHttpServer::LogFileName.c_str(), "a");
-		strftime(tmpbuf, 255, "%d%B%Y %H:%M:%S", &today);
-		fprintf(fp, "%s > %s\n", tmpbuf, t);
-		fclose(fp);
-	}
-	catch (...) {
-	};
-}
-
 void  termination_handler(int signum) {
-	TRMLHttpServer::LogMessage("termination_handler daemon");
+	LOGI << "termination_handler daemon";
 	exit(1);
 };
 
@@ -98,23 +62,10 @@ void  termination_handler(int signum) {
 TRMLHttpServer::TRMLHttpServer() : Server(nullptr, nullptr) {
 };
 
-void TRMLHttpServer::Initialize(std::uint16_t srvPort, DaemonLogModeEnum logMode, const std::string logFile) {
-	LogMode = logMode;
-    SrvPort = srvPort;
-
-	std::string logPath = GetRegistryString("Software\\Dialing\\Logs\\Main");
-    std::string myIP = GetRegistryString("Software\\Dialing\\HttpServerIP");
-	if (!fs::exists(logPath.c_str())) {
-		throw CExpc(Format("log dir \"%s\" does not exist; http-server must write logs to some folder\n", logPath.c_str()));
-	};
-	LogFileName = MakePath(logPath, logFile);
-	if (!CheckFileAppendRights(LogFileName.c_str())) {
-		throw CExpc(Format("Cannot write to log file \"%s\" \n", LogFileName.c_str()));
-	}
-	LogMessage(Format("initialize daemon at port %s:%i", myIP.c_str(), SrvPort).c_str());
-
+void TRMLHttpServer::Initialize(std::string host, uint16_t port) {
+	LOGI << "initialize daemon at " << host << ":" << port;
 	InitSockets();
-	Server = TInnerServer(evhttp_start(myIP.c_str(), SrvPort), &evhttp_free);
+	Server = TInnerServer(evhttp_start(host.c_str(), port), &evhttp_free);
 	if (!Server) {
 		throw CExpc("Failed to create http server.");
 	}
@@ -130,8 +81,7 @@ static void OnHttpRequestStatic(evhttp_request *req, void* httpServer) {
 }
 
 void TRMLHttpServer::Start() {
-	LogMessage("run message loop for daemon, start listen socket");
-	std::cerr << "start listen socket at port " << SrvPort << "\n";
+	LOGI<< "run message loop for daemon, start listen socket";
 	evhttp_set_gencb(Server.get(), OnHttpRequestStatic, this);
 	if (event_dispatch() == -1)	{
 		throw CExpc ("Failed to run message loop.");
@@ -150,9 +100,7 @@ void TRMLHttpServer::OnHttpRequest(evhttp_request *req) {
 		return;
 
 	const char* uri = evhttp_request_get_uri(req);
-	if (LogMode != dlmQuiet) {
-		LogMessage(uri);
-	}
+    LOGI << uri;
 	struct evkeyvalq headers {}; // zero initialized with {}
 	auto r = evhttp_parse_query(uri, &headers);
 	try {
@@ -174,7 +122,6 @@ void TRMLHttpServer::OnHttpRequest(evhttp_request *req) {
 		if (query == nullptr) {
 			throw CExpc("cannot find query");
 		}
-		//std::string inputQuery = convert_from_utf8(query, langua);
         std::string inputQuery = query;
 		Trim(inputQuery);
 		if (inputQuery.empty()) {
@@ -185,21 +132,8 @@ void TRMLHttpServer::OnHttpRequest(evhttp_request *req) {
 		evbuffer_add_printf(outBuf, result.c_str());
 		SendReply(req, HTTP_OK, outBuf);
 	}
-	catch (CExpc e) {
-		std::string error = Format("Error: %s, Request: %s\n", e.what().c_str(), uri);
-		TRMLHttpServer::LogMessage(error.c_str());
-		SendReply(req, HTTP_BADREQUEST, nullptr);
-		return;
-	}
-	catch (std::invalid_argument& e) {
-		std::string error = Format("Error: std::string to number conversion failed, Request: %s\n", uri);
-		TRMLHttpServer::LogMessage(error.c_str());
-		SendReply(req, HTTP_BADREQUEST, nullptr);
-		return;
-	}
 	catch (std::exception& e) {
-		std::string error = Format("Error: %s, Request: %s\n", e.what(), uri);
-		TRMLHttpServer::LogMessage(error.c_str());
+        LOGE << "Error: " << e.what() << " Request: "  << uri;
 		SendReply(req, HTTP_BADREQUEST, nullptr);
 		return;
 	}
@@ -210,7 +144,7 @@ void DealWithLockFile(const std::string fileName) {
 	std::string LockFileName = MakePath(GetRmlVariable(), fileName);
 
 	if (FileExists(LockFileName.c_str())) {
-		std::cerr << "possible port conflicts..., removing " << LockFileName << "\n";
+		LOGI << "possible port conflicts..., removing " << LockFileName;
 		remove(LockFileName.c_str());
 	}
 	FILE* fp = fopen(LockFileName.c_str(), "w");
@@ -219,4 +153,21 @@ void DealWithLockFile(const std::string fileName) {
 	};
 	fprintf(fp, "%i", GetPID());
 	fclose(fp);
+}
+
+std::string GetLogPath(std::string filename) {
+    std::string logPath = GetRegistryString("Software\\Dialing\\Logs\\Main");
+
+    if (!fs::exists(logPath.c_str())) {
+        throw CExpc(Format("log directory \"%s\" does not exist, please create it", logPath.c_str()));
+    };
+    auto path = fs::path(logPath) / filename;
+    try {
+        FILE *fp = fopen(path.c_str(), "a");
+        fclose(fp);
+    }
+    catch (...) {
+        throw CExpc("cannot append to log file %s", path.c_str());
+    }
+    return path.string();
 }

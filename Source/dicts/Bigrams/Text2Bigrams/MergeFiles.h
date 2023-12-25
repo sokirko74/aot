@@ -1,5 +1,7 @@
 #include <vector>
 #include <fstream>
+#include <zlib.h>
+#include "morph_dict/common/utilit.h"
 
 class MergeSortedFiles
 {
@@ -11,7 +13,7 @@ public:
 
 protected:
 	std::vector<std::ifstream*> InputFiles;
-	std::ofstream OutputFile;
+    gzFile OutputFile;
 	bool  ReadLine(size_t fileNo, std::string& line);
 	void Close();
 };

@@ -1,13 +1,21 @@
 #include "common/http_server.h"
+#include "synan/SynanLib/SyntaxHolder.h"
+#include "morph_dict/lemmatizer_base_lib/MorphanHolder.h"
 
 class TSynanHttpServer : public TRMLHttpServer {
-	std::string ProcessMorphology(TDaemonParsedRequest& request);
-	std::string ProcessBigrams(TDaemonParsedRequest& request);
-	std::string ProcessSyntax(TDaemonParsedRequest& request);
+    CSyntaxHolder RussianSyntaxHolder;
+    CSyntaxHolder GermanSyntaxHolder;
+    CMorphanHolder EnglishMorphHolder;
+
+    std::string ProcessMorphology(TDaemonParsedRequest& request);
+    std::string ProcessBigrams(TDaemonParsedRequest& request);
+    std::string ProcessSyntax(TDaemonParsedRequest& request);
+
+
 public:
-	TSynanHttpServer() : TRMLHttpServer() {};
+	TSynanHttpServer();
 	virtual ~TSynanHttpServer() {};
 	std::string OnParsedRequest(TDaemonParsedRequest&) override;
-	static void LoadSynan(bool loadBigrams);
+	void LoadSynan(bool loadBigrams);
 };
 

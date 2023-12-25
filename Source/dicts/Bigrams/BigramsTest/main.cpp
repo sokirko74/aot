@@ -5,7 +5,7 @@
 
 void initArgParser(int argc, const char **argv, ArgumentParser& parser) {
     parser.AddOption("--help");
-    parser.AddArgument("--bigrams", "bigrams file with indices");
+    parser.AddArgument("--data-folder", "directory with  indexed files");
     parser.AddArgument("--input-word", "input file in utf8");
     parser.AddArgument("--language", "language");
     parser.AddArgument("--output", "output");
@@ -17,19 +17,25 @@ int main(int argc, const char **argv) {
     ArgumentParser args;
     initArgParser(argc, argv, args);
 
-    std::string fileName = args.Retrieve("bigrams");
-    if (!FileExists(fileName.c_str()))
-        throw CExpc(Format("cannot find bigrams file: %s", fileName));
-    if (!InitializeBigrams(fileName))
-        throw CExpc(Format("cannot init bigrams"));
+    std::string path = args.Retrieve("data-folder");
+    try {
+        if (!fs::exists(path))
+            throw CExpc(Format("cannot find directory: %s", path.c_str()));
+        InitializeBigrams(path);
 
-    MorphLanguageEnum  language = args.GetLanguage();
-    bool direct  = ! args.Exists("indirect");
-    std::string word = convert_from_utf8(args.Retrieve("input-word").c_str(), language);
-    MakeUpperUtf8(word);
-    std::string result = GetConnectedWords(word, 0, direct, "SortByBigramsFreq", language );
-    args.GetOutputStream() << result << "\n";
+        MorphLanguageEnum  language = args.GetLanguage();
+        bool direct  = ! args.Exists("indirect");
+        std::string word = convert_from_utf8(args.Retrieve("input-word").c_str(), language);
+        MakeUpperUtf8(word);
+        std::string result = GetConnectedWords(word, 0, direct, "SortByBigramsFreq", language );
+        args.GetOutputStream() << result << "\n";
+    }
+    catch (std::exception& a) {
+        std::cerr << a.what();
+        return 1;
+    }
     return 0;
+
 }
 
 

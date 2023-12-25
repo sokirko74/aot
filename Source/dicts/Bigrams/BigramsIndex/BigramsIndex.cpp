@@ -1,14 +1,15 @@
 // BigramsIndex.cpp : Defines the entry point for the console application.
 //
 
-#include <climits>
-
-#include "morph_dict/common/utilit.h"
 #include "common/BigramsReader.h"
+#include <zlib.h>
+
+#include <climits>
+#include "morph_dict/common/utilit.h"
 
 void PrintUsageAndExit() {
     fprintf(stderr, "BigramsIndex,  creates word-index for bigrams file\n");
-    fprintf(stderr, "Usage: Bigrams <bigram-file> \n");
+    fprintf(stderr, "Usage: Bigrams <input_folder> \n");
     exit(1);
 
 };
@@ -72,13 +73,15 @@ std::vector<CWordInfo> ReadWordFreqs(std::string WordFreqFileName) {
 
 void ReadBigrams(std::string path, std::vector<CWordInfo> &wordInfos) {
     fprintf(stderr, "open file %s\n", path.c_str());
-    std::ifstream inp(path);
-    if (!inp.good()) {
+    gzFile file = gzopen(path.c_str(), "rb");
+    if(!file) {
         throw CExpc("cannot open file %s\n", path.c_str());
     }
     std::string line;
     size_t linesCount = 0;
-    while (std::getline(inp, line)) {
+    char buffer[1024];
+    while (gzgets(file, buffer, sizeof(buffer)) != nullptr) {
+        line = buffer;
         ++linesCount;
         if ((linesCount % 100000) == 0)
             fprintf(stderr, "%zu               \r", linesCount);
@@ -107,6 +110,8 @@ void ReadBigrams(std::string path, std::vector<CWordInfo> &wordInfos) {
         wordInfos[word1].m_Bigrams1.push_back({(uint32_t)word2, (uint32_t)bigramFreq});
         wordInfos[word2].m_Bigrams2.push_back({(uint32_t)word1, (uint32_t)bigramFreq});
     }
+    gzclose(file);
+
     fprintf(stderr, "read %zu bigrams\n", linesCount);
 }
 
@@ -137,10 +142,13 @@ int main(int argc, char *argv[]) {
 
     if (argc != 2)
         PrintUsageAndExit();
-
-
-    std::string BigramsFileName = argv[1];
-    std::string WordFreqFileName = MakeFName(BigramsFileName, "wrd_freq");
+    auto folder = fs::path(argv[1]);
+    if (!fs::exists(folder)) {
+        std::cerr << "folder " << folder << " does not exist!";
+        return 1;
+    }
+    std::string BigramsFileName = (folder / "bigrams.txt.gz").string();
+    std::string WordFreqFileName = (folder / "unigrams.txt").string();
 
     try {
         std::vector<CWordInfo> wordInfos = ReadWordFreqs(WordFreqFileName);

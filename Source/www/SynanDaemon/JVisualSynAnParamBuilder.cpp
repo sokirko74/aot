@@ -19,15 +19,13 @@ public:
 
 		return false;
 	}
-
-	nlohmann::json ToJson() const {
-		auto result = nlohmann::json::object();
-		result["start"] = m_W1;
-		result["last"] = m_W2;
-		result["isGroup"] = m_IsGroup;
-		result["isSubj"] = m_IsSubj;
-		result["descr"] = m_strDescr;
-		return result;
+дщ
+	void ToJson (CJsonObject& o) const {
+		o.add_int("start", m_W1);
+        o.add_int("last", m_W2);
+        o.add_bool("isGroup", m_IsGroup);
+        o.add_bool("isSubj", m_IsSubj);
+        o.add_string("descr", m_strDescr);
 	}
 
 };
@@ -43,7 +41,6 @@ public:
 
 class JVisualSynAnParamBuilder
 {
-	nlohmann::json WriteWords(const CSentence& piSent, long StartWord, long LastWord);
 	void GetTopClauses(const CSentence& piSent, std::vector<long>& topClauses);
 	void AddVariants(std::vector<SSynVariant2Groups>& synVariants, long iClause, const CSentence& piSent);
 	void AddOneVariant(std::vector<SSynVariant2Groups>& synVariants, const CMorphVariant& piVar, const CSentence& piSent, const CClause& Clause);
@@ -52,13 +49,13 @@ class JVisualSynAnParamBuilder
 	void MultTwoVariants(SSynVariant2Groups& var1, SSynVariant2Groups& var2, SSynVariant2Groups& res);
 	void AddHomonym(std::vector<SSynVariant2Groups>& synVariants, const CSynUnit& Unit);
 	void AddGroup(std::vector<SSynVariant2Groups>& synVariants, const CGroup& piGroup);
-	nlohmann::json WriteVariant(const SSynVariant2Groups& var);
-
+    void WriteWords(const CSentence& piSent, long StartWord, long LastWord, CJsonObject& words);
+    void WriteVariant(const SSynVariant2Groups& var, CJsonObject& o);
 public:
 	const CSyntaxHolder* m_pSyntaxHolder;
 	JVisualSynAnParamBuilder(const CSyntaxHolder* pSyntaxHolder);
 	virtual ~JVisualSynAnParamBuilder();
-	nlohmann::json BuildJson(const CSentence& piSent);
+	void BuildJson(const CSentence& piSent, CJsonObject& o);
 };
 
 JVisualSynAnParamBuilder::JVisualSynAnParamBuilder(const CSyntaxHolder* pSyntaxHolder)
@@ -71,20 +68,23 @@ JVisualSynAnParamBuilder::~JVisualSynAnParamBuilder()
 }
 
 
-nlohmann::json JVisualSynAnParamBuilder::WriteWords(const CSentence& piSent, long StartWord, long LastWord)
+void JVisualSynAnParamBuilder::WriteWords(const CSentence& piSent, long StartWord, long LastWord, CJsonObject& words)
 {
-	auto result = nlohmann::json::array();
 	for(int i = StartWord ; i <= LastWord ; i++ ) {
 		const CSynWord& W = piSent.m_Words[i];
-		auto word = nlohmann::json::object();
-		word["str"] = W.m_strWord;
-		word["homonyms"] = nlohmann::json::array();
-		for(auto& h : W.m_Homonyms)	{			
-			word["homonyms"].push_back(h.m_strLemma);
+        CJsonObject word(words.get_doc());
+        word.add_string("str",  W.m_strWord);
+
+        CJsonObject homs(words.get_doc(), rapidjson::kArrayType);
+		for(auto& h : W.m_Homonyms)	{
+            rapidjson::Value hom;
+            hom.SetString(h.GetLemma().c_str(), h.GetLemma().length());
+            homs.push_back(hom);
 		}
-		result.push_back(word);
+        word.move_to_member("homonyms", homs.get_value());
+		words.push_back(word);
 	}
-	return result;
+
 }
 
 void JVisualSynAnParamBuilder::GetTopClauses(const CSentence& piSent, std::vector<long>& topClauses)
@@ -231,73 +231,72 @@ void JVisualSynAnParamBuilder::MultVariants(std::vector<SSynVariant2Groups>& syn
 		synVariants1 = resVars;
 }
 
-nlohmann::json JVisualSynAnParamBuilder::WriteVariant(const SSynVariant2Groups& var) {
-	auto result = nlohmann::json::object();
-	result["units"] = nlohmann::json::array();
+void JVisualSynAnParamBuilder::WriteVariant(const SSynVariant2Groups& var, CJsonObject& o) {
+
+    CJsonObject units(o.get_doc(), rapidjson::kArrayType);
 	for(auto& u : var.m_SynUnits) {
-		auto unit = nlohmann::json::object();
-		unit["homNo"] = u.m_iHomonymNum;
+        CJsonObject unit(o.get_doc());
+		unit.add_int("homNo",  u.m_iHomonymNum);
 		std::string  grammems = u.GetGrammemsByAncodes();
 		if (grammems.empty())
-			grammems = m_pSyntaxHolder->m_pGramTab->GrammemsToStr(u.m_iGrammems);
-		unit["grm"] += u.GetPartOfSpeechStr() + " " + grammems;
-		result["units"].push_back(unit);
+			grammems = GetMHolder(m_pSyntaxHolder->m_LemText.GetDictLanguage()).m_pGramTab->GrammemsToStr(u.m_iGrammems);
+		unit.add_string_copy("grm",  u.GetPartOfSpeechStr() + " " + grammems);
+		units.push_back(unit.get_value());
 	}
+    o.move_to_member("units", units.get_value());
 
-	result["groups"] = nlohmann::json::array();
+    CJsonObject groups(o.get_doc(), rapidjson::kArrayType);
 	for (auto& group : var.m_Groups) {
-		result["groups"].push_back(group.ToJson());
+        CJsonObject g(o.get_doc());
+		group.ToJson(g);
+        groups.push_back(g.get_value());
 	}
-	return result;
+    o.move_to_member("groups", groups.get_value());
 }
 
-nlohmann::json JVisualSynAnParamBuilder::BuildJson(const CSentence& piSent) {
-	try {
-		std::vector<long> topClauses;
-		GetTopClauses(piSent, topClauses);
-		auto result = nlohmann::json::array();
-		for(long i = 0; i < topClauses.size() ; i++ ) {
-			const CClause& C = 	piSent.m_Clauses[topClauses[i]];
-			auto clause = nlohmann::json::object();
-			clause["words"] = WriteWords(piSent, C.m_iFirstWord, C.m_iLastWord);
+void JVisualSynAnParamBuilder::BuildJson(const CSentence& piSent, CJsonObject& o) {
+    std::vector<long> topClauses;
+    GetTopClauses(piSent, topClauses);auto result = nlohmann::json::array();
+    for(long i = 0; i < topClauses.size() ; i++ ) {
+        const CClause& C = 	piSent.m_Clauses[topClauses[i]];
+        CJsonObject clause(o.get_doc());
+        CJsonObject words(o.get_doc(), rapidjson::kArrayType);
+        WriteWords(piSent, C.m_iFirstWord, C.m_iLastWord, words);
+        clause.move_to_member("words",  words.get_value());
 
-			std::vector<SSynVariant2Groups> synVariants;
-			AddVariants(synVariants, topClauses[i],  piSent);
-			clause["variants"] = nlohmann::json::array();
-			for(auto& v : synVariants) {
-				std::vector<SGroup>& G =  v.m_Groups;
-				for(auto& g : v.m_Groups)	{
-					g.m_W1 -= C.m_iFirstWord;
-					g.m_W2 -= C.m_iFirstWord;
-				};
-				sort(v.m_Groups.begin(), v.m_Groups.end());
-				clause["variants"].push_back(WriteVariant(v));
-			}
-			result.push_back(clause);
-		}
-		return result;
-	}
-	catch (CExpc c) {
-		throw;
-	}
-	catch (...)	{
-		throw CExpc("an exception in JVisualSynAnParamBuilder occurred!");
-	};
-	
+        std::vector<SSynVariant2Groups> synVariants;
+        AddVariants(synVariants, topClauses[i],  piSent);
+        CJsonObject variants(o.get_doc(), rapidjson::kArrayType);
+        for(auto& v : synVariants) {
+            std::vector<SGroup>& G =  v.m_Groups;
+            for(auto& g : v.m_Groups)	{
+                g.m_W1 -= C.m_iFirstWord;
+                g.m_W2 -= C.m_iFirstWord;
+            };
+            sort(v.m_Groups.begin(), v.m_Groups.end());
+            CJsonObject var(o.get_doc());
+            WriteVariant(v, var);
+            variants.push_back(var.get_value());
+        }
+        clause.move_to_member("variants", variants.get_value());
+        o.push_back(clause.get_value());
+    }
 }
 
 std::string BuildJson(CSyntaxHolder* pSyntaxHolder, const std::string& query) {
 	if (!pSyntaxHolder->GetSentencesFromSynAn(query, false)) {
 		throw CExpc("Synan has crushed\n");
 	};
-
 	JVisualSynAnParamBuilder builder(pSyntaxHolder);
-	auto result = nlohmann::json::array();
+    rapidjson::Document d;
+    CJsonObject sents(d, rapidjson::kArrayType);
 	for (auto& s : pSyntaxHolder->m_Synan.m_vectorSents) {
-		result.push_back(builder.BuildJson(*s));
+
+        CJsonObject o(d, rapidjson::kArrayType);
+        builder.BuildJson(*s, o);
+        sents.push_back(o.get_value());
 	}
-	ConvertToUtfRecursive(result, pSyntaxHolder->m_CurrentLanguage);
-	return result.dump();
+	return sents.dump_rapidjson();
 	
 }
 

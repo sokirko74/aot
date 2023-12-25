@@ -1,4 +1,6 @@
 #include "MergeFiles.h"
+
+#include "morph_dict/common/utilit.h"
 #include <assert.h>
 #include <queue>
 #include <string>
@@ -11,8 +13,10 @@ MergeSortedFiles::MergeSortedFiles(std::vector<std::string> filenames, std::stri
         assert(inp->is_open());
         InputFiles.push_back(inp);
     }
-    OutputFile.open(outputFile, std::ios::binary|std::ios::out);
-    assert(OutputFile.is_open());
+    OutputFile = gzopen(outputFile.c_str(), "wb");
+    if (!OutputFile) {
+        throw CExpc("cannot write to %s", outputFile.c_str());
+    }
 
 }
 
@@ -22,10 +26,12 @@ void MergeSortedFiles::Close() {
         delete f;
     }
     InputFiles.clear();
-    if (OutputFile.is_open()) {
-        OutputFile.close();
+    if (OutputFile != nullptr) {
+        gzclose(OutputFile);
+        OutputFile = nullptr;
     }
 }
+
 
 MergeSortedFiles::~MergeSortedFiles() {
     Close();
@@ -73,7 +79,8 @@ void  MergeSortedFiles::Merge()
         if (ReadLine(top.FileNo, line)) {
             pq.push({ top.FileNo, line });
         }
-        OutputFile << top.Line << "\n";
+        gzputs(OutputFile, top.Line.c_str());
+        gzputs(OutputFile, "\n");
     }
     Close();
 }

@@ -5,17 +5,16 @@
 
 
 void initArgParser(int argc, const char **argv, ArgumentParser& parser) {
-	parser.AddArgument("--logmode", "log mode (quiet, normal or debug)", true);
-	parser.Parse(argc, argv);
+    parser.AddArgument("--log-level", "log level", true);
+
+    parser.Parse(argc, argv);
 }
 
 int	main(int argc, const char **argv) {
 	ArgumentParser args;
 	initArgParser(argc, argv, args);
-	DaemonLogModeEnum logMode = dlmNormal;
-	if (args.Exists("logmode")) {
-		logMode = ParseDaemonLogMode(args.Retrieve("logmode"));
-	}
+    auto log_path = GetLogPath("seman_dmn.log");
+    init_plog(args.GetLogLevel(), log_path);
 	TSemanHttpServer Server;
 	try {
 		DealWithLockFile("SemanDaemon.lck");
@@ -24,22 +23,20 @@ int	main(int argc, const char **argv) {
 		if (!CanGetRegistryString(portKey)) {
 			throw CExpc(Format("  Cannot find the registry key %s\n", portKey));
 		};
-
 		int port = atoi(GetRegistryString(portKey).c_str());
-
-		Server.Initialize(port, logMode, "seman_dmn.log");
+		Server.Initialize(port);
 	
 		Server.Load();
 		Server.Start();
 	}
-	catch (CExpc c)
+	catch (std::exception& c)
 	{
-		std::cerr << c.what() << "\n";
+		LOGE << c.what();
 		return 1;
 	}
 	catch(...)
 	{
-		std::cerr << "General exception\n";
+		LOGE << "General exception";
 		return 1;
 	};
 	return 0;

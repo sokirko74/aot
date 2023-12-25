@@ -26,6 +26,8 @@ list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}/cmake")
 
 include_directories(morph_dict/contrib/plog)
 
+include_directories(morph_dict/contrib/libzip/lib)
+
 
 if(CMAKE_BUILD_TYPE MATCHES "Debug")
     message ("compile debug")
