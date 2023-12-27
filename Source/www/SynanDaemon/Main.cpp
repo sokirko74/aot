@@ -14,8 +14,8 @@ void initArgParser(int argc, const char **argv, ArgumentParser& parser) {
 int	main(int argc, const char **argv) {
 	ArgumentParser args;
 	initArgParser(argc, argv, args);
-    auto log_path = GetLogPath("seman_dmn.log");
-    init_plog(args.GetLogLevel(), log_path);
+    auto log_path = GetLogPath("synan_dmn.log");
+    init_plog(args.GetLogLevel(), log_path, false);
 	bool skipBigrams = args.Exists("skipbigrams");
 
 	TSynanHttpServer Server;

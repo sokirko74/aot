@@ -34,7 +34,7 @@ int main(int argc, const char **argv) {
     ArgumentParser args;
     initArgParser(argc, argv, args);
     MorphLanguageEnum  language = args.GetLanguage();
-    init_plog(args.GetLogLevel(), "mapost_test.log", false, language);
+    init_plog(args.GetLogLevel(), "mapost_test.log");
     GlobalLoadMorphHolder(language);
     CSyntaxHolder H(language);
     try {

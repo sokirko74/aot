@@ -4,9 +4,11 @@
 #include "morph_dict/common/argparse.h"
 
 
-void initArgParser(int argc, const char **argv, ArgumentParser& parser) {
-    parser.AddArgument("--log-level", "log level", true);
 
+void initArgParser(int argc, const char **argv, ArgumentParser& parser) {
+    parser.AddArgument("--host", "0.0.0.0 or other ip");
+    parser.AddArgument("--port", "17019");
+    parser.AddArgument("--log-level", "log level", true);
     parser.Parse(argc, argv);
 }
 
@@ -14,18 +16,13 @@ int	main(int argc, const char **argv) {
 	ArgumentParser args;
 	initArgParser(argc, argv, args);
     auto log_path = GetLogPath("seman_dmn.log");
-    init_plog(args.GetLogLevel(), log_path);
+    init_plog(args.GetLogLevel(), log_path, false);
 	TSemanHttpServer Server;
 	try {
 		DealWithLockFile("SemanDaemon.lck");
-		const char* portKey = "Software\\Dialing\\Seman\\HttpPort";
-
-		if (!CanGetRegistryString(portKey)) {
-			throw CExpc(Format("  Cannot find the registry key %s\n", portKey));
-		};
-		int port = atoi(GetRegistryString(portKey).c_str());
-		Server.Initialize(port);
-	
+        GlobalLoadMorphHolder(morphRussian);
+        GlobalLoadMorphHolder(morphEnglish);
+        Server.Initialize(args.Retrieve("host"), atoi(args.Retrieve("port").c_str()));
 		Server.Load();
 		Server.Start();
 	}

@@ -1,6 +1,5 @@
 #include "JVisualSynAnParamBuilder.h"
 #include "synan/SynanLib/SyntaxHolder.h"
-#include "morph_dict/common/json.h"
 
 struct SGroup
 {
@@ -19,7 +18,7 @@ public:
 
 		return false;
 	}
-дщ
+
 	void ToJson (CJsonObject& o) const {
 		o.add_int("start", m_W1);
         o.add_int("last", m_W2);
@@ -256,7 +255,7 @@ void JVisualSynAnParamBuilder::WriteVariant(const SSynVariant2Groups& var, CJson
 
 void JVisualSynAnParamBuilder::BuildJson(const CSentence& piSent, CJsonObject& o) {
     std::vector<long> topClauses;
-    GetTopClauses(piSent, topClauses);auto result = nlohmann::json::array();
+    GetTopClauses(piSent, topClauses);
     for(long i = 0; i < topClauses.size() ; i++ ) {
         const CClause& C = 	piSent.m_Clauses[topClauses[i]];
         CJsonObject clause(o.get_doc());

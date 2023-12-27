@@ -1,7 +1,5 @@
 #include "seman/SemanLib/VisualGraph.h"
 #include "translate.h"
-
-#include "morph_dict/common/json.h"
 #include <assert.h>
 
 void TSemanHttpServer::Load() {
@@ -54,27 +52,21 @@ std::string TSemanHttpServer::BuildRusGraph(const std::string& russian, const st
 };
 
 std::string TSemanHttpServer::OnParsedRequest(TDaemonParsedRequest& req) {
-	try {
-		auto topic = evhttp_find_header(&req.headers, "topic");
-		if (topic == nullptr) {
-			throw CExpc("cannot find topic");
-		}
-		if (req.Query.length() > 150) {
-			req.Query = req.Query.substr(0, 150) + " ...";
-		}
-		if (req.Action == "graph") {
-			return BuildRusGraph(req.Query, topic);
-		}
-		else if (req.Action == "translate") {
-			return Translate(req.Query, topic);
-		}
-		else {
-			throw CExpc("unknown action");
-		}
-	}
-	catch (nlohmann::json::exception& e) {
-		throw CExpc(e.what());
-	}
-
+    auto topic = evhttp_find_header(&req.headers, "topic");
+    if (topic == nullptr) {
+        throw CExpc("cannot find topic");
+    }
+    if (req.Query.length() > 150) {
+        req.Query = req.Query.substr(0, 150) + " ...";
+    }
+    if (req.Action == "graph") {
+        return BuildRusGraph(req.Query, topic);
+    }
+    else if (req.Action == "translate") {
+        return Translate(req.Query, topic);
+    }
+    else {
+        throw CExpc("unknown action");
+    }
 }
 

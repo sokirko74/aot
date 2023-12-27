@@ -63,7 +63,7 @@ std::vector<CWordInfo> ReadWordFreqs(std::string WordFreqFileName) {
         MakeUpperUtf8(I.m_WordStr);
         if (!wordInfos.empty())
             if (!(wordInfos.back() < w)) {
-                throw CExpc("Wrong  position  for word \"%s\" is found\n", w);
+                throw CExpc("Wrong  position  for word \"%s\" is found, the input file is not sorted\n", w);
             }
         wordInfos.push_back(I);
     }

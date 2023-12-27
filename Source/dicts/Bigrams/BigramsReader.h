@@ -28,4 +28,4 @@ inline size_t restore_from_bytes(CBigramInfo& i, const BYTE* buf)
 
 
 extern std::string GetConnectedWords(std::string Word, int MinBigramsFreq, bool bDirectFile, std::string sortMode, MorphLanguageEnum langua);
-extern bool InitializeBigrams(std::string FileName);
+extern void InitializeBigrams(std::string FileName);

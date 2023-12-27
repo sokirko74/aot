@@ -1,5 +1,4 @@
 #include "VisualGraph.h"
-#include "morph_dict/common/json.h"
 #include <assert.h>
 
 const size_t NodeHeight = 60;
@@ -54,33 +53,36 @@ std::vector<int> CVisualSemGraph::GetParents(int NodeNo) const {
 }
 
 std::string CVisualSemGraph::GetResultStr() const {
-    auto result = nlohmann::json::object();
-    result["nodes"] = nlohmann::json::array();
+    rapidjson::Document d;
+    CJsonObject result(d);
+    CJsonObject nodes(d, rapidjson::kArrayType);
     for (const auto &n : m_Nodes) {
-        result["nodes"].push_back({
-                                          {"x",     n.m_x + 20},
-                                          {"y",     n.m_y + 20},
-                                          {"label", n.m_Label},
-                                          {"morph", n.m_Morphology}
-                                  });
+        CJsonObject j(d);
+        j.add_int("x", n.m_x + 20);
+        j.add_int("y", n.m_y + 20);
+        j.add_string("label", n.m_Label);
+        j.add_string("morph", n.m_Morphology);
+        nodes.push_back(j);
     }
-    result["edges"] = nlohmann::json::array();
+    result.move_to_member("nodes", nodes.get_value());
+
+    CJsonObject edges(d, rapidjson::kArrayType);
     for (const auto &r : m_Relations) {
-        result["edges"].push_back({
-                                          {"source", r.m_SourceNodeNo},
-                                          {"target", r.m_TargetNodeNo},
-                                          {"label",  r.m_RelationStr}
-                                  });
+        CJsonObject e(d);
+        e.add_int("source", r.m_SourceNodeNo);
+        e.add_int("target", r.m_TargetNodeNo);
+        e.add_string("label",  r.m_RelationStr);
+        edges.push_back(e);
     }
     for (const auto &r : m_DopRelations) {
-        result["edges"].push_back({
-                                          {"source", r.m_SourceNodeNo},
-                                          {"target", r.m_TargetNodeNo},
-                                          {"label",  r.m_RelationStr}
-                                  });
+        CJsonObject e(d);
+        e.add_int("source", r.m_SourceNodeNo);
+        e.add_int("target", r.m_TargetNodeNo);
+        e.add_string("label",  r.m_RelationStr);
+        edges.push_back(e);
     }
-    ConvertToUtfRecursive(result, morphRussian);
-    return result.dump();
+    result.move_to_member("edges", edges.get_value());
+    return result.dump_rapidjson();
 }
 
 int CVisualSemGraph::GetLeavesCount(int Root) const {

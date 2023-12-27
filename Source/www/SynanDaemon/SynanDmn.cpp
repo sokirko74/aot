@@ -2,7 +2,6 @@
 #include "SynanDmn.h"
 
 #include "common/BigramsReader.h"
-#include "morph_dict/common/json.h"
 
 TSynanHttpServer::TSynanHttpServer() :
     TRMLHttpServer(),
@@ -25,8 +24,6 @@ std::string TSynanHttpServer::ProcessBigrams(TDaemonParsedRequest &request) {
         throw CExpc("sortMode is not specified");
     }
     std::string wordForm = request.Query;
-    wordForm = convert_from_utf8(wordForm.c_str(), request.Langua);
-
     return GetConnectedWords(wordForm, minBigramsFreq, directBigrams, sortMode, request.Langua);
 }
 
@@ -62,7 +59,7 @@ void TSynanHttpServer::LoadSynan(bool loadBigrams) {
         auto path = fs::path(GetRmlVariable()) / "Dicts" / "Bigrams";
         if (!fs::exists(path))
             throw CExpc(Format("cannot find bigrams directory: %s", path.string().c_str()));
-        InitializeBigrams(path.string())
+        InitializeBigrams(path.string());
     }
 };
 

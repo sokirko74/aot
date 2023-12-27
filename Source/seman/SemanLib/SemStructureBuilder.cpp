@@ -190,9 +190,9 @@ public:
 		ss << PLOG_NSTR("[") << record.getFunc() << PLOG_NSTR("@") << record.getLine() << PLOG_NSTR("] ");
 		ss << record.getMessage() << PLOG_NSTR("\n");
 		auto mess = ss.str();
-		if (record.getSeverity() != plog::Severity::verbose) {
-			std::cerr << mess << "\n";
-		}
+		//if (record.getSeverity() != plog::Severity::verbose) {
+		//	std::cerr << mess << "\n";
+		//}
 		return mess;
 	}
 };

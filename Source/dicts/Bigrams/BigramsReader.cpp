@@ -43,7 +43,7 @@ public:
 
     ~CBigrams();
 
-    bool Initialize(std::string BigramsFileName);
+    void Initialize(std::string BigramsFileName);
 
     std::vector<CBigramAndFreq> GetBigrams(std::string Word, int MinBigramsFreq, bool bDirectFile, size_t &WordFreq);
 };
@@ -76,7 +76,7 @@ CBigrams::~CBigrams() {
 }
 
 
-bool CBigrams::Initialize(std::string path) {
+void CBigrams::Initialize(std::string path) {
     m_Word2Infos.clear();
     m_CorpusSize = 0;
 
@@ -84,8 +84,7 @@ bool CBigrams::Initialize(std::string path) {
     LOGI << "load " << IndexFile;
     FILE *fp = fopen(IndexFile.c_str(), "r");
     if (!fp) {
-        fprintf(stderr, "Cannot open %s", IndexFile.c_str());
-        return false;
+        throw CExpc("Cannot open %s", IndexFile.c_str());
     }
     char buffer[1000];
     while (fgets(buffer, 1000, fp)) {
@@ -95,12 +94,10 @@ bool CBigrams::Initialize(std::string path) {
                    &I.m_Freq,
                    &I.m_FileOffset1, &I.m_FileLen1,
                    &I.m_FileOffset2, &I.m_FileLen2) != 6) {
-            fprintf(stderr, "Bad format in  %s", IndexFile.c_str());
             fclose(fp);
-            return false;
+            throw CExpc ("Bad format in  %s, line %s", IndexFile.c_str(), word);
         }
         I.m_Word = word;
-
         m_Word2Infos.push_back(I);
         m_CorpusSize += I.m_Freq;
     }
@@ -111,8 +108,7 @@ bool CBigrams::Initialize(std::string path) {
     LOGI << "  open " <<  Bin1File;
     m_Bigrams = fopen(Bin1File.c_str(), "rb");
     if (!m_Bigrams) {
-        fprintf(stderr, "Cannot open file %s", Bin1File.c_str());
-        return false;
+        throw CExpc ("Cannot open file %s", Bin1File.c_str());
     }
 
 
@@ -121,11 +117,8 @@ bool CBigrams::Initialize(std::string path) {
     LOGI << "  open " <<  Bin2File;
     m_BigramsRev = fopen(Bin2File.c_str(), "rb");
     if (!m_BigramsRev) {
-        fprintf(stderr, "Cannot open file %s", Bin2File.c_str());
-        return false;
+        throw CExpc("Cannot open file %s", Bin2File.c_str());
     }
-
-    return true;
 }
 
 std::vector<CBigramAndFreq> CBigrams::GetBigrams(std::string Word, int MinBigramsFreq, bool bDirectFile, size_t &WordFreq) {
@@ -135,7 +128,7 @@ std::vector<CBigramAndFreq> CBigrams::GetBigrams(std::string Word, int MinBigram
     if (!m_BigramsRev) return Result;
     MakeUpperUtf8(Word);
     // find word in the index
-    std::vector<CBigramsWordInfo>::const_iterator it = lower_bound(m_Word2Infos.begin(), m_Word2Infos.end(), Word,
+    auto it = lower_bound(m_Word2Infos.begin(), m_Word2Infos.end(), Word,
                                                               IsLessBigramsWordInfo());
     if (it == m_Word2Infos.end()) return Result;
     if (it->m_Word != Word) return Result;
@@ -211,9 +204,9 @@ std::string GetConnectedWords(std::string Word, int MinBigramsFreq, bool bDirect
     std::vector<CBigramLine> table;
     for (auto &b : GlobalBigrams.GetBigrams(Word, MinBigramsFreq, bDirectFile, WordFreq)) {
         CBigramLine l;
-        l.m_Word1 = convert_to_utf8(Word, langua);
+        l.m_Word1 = Word;
         l.m_WordFreq1 = WordFreq;
-        l.m_Word2 = convert_to_utf8(b.m_Word, langua);
+        l.m_Word2 = b.m_Word;
         l.m_WordFreq2 = b.m_WordFreq;
         if (!bDirectFile) {
             l.m_Word1.swap(l.m_Word2);
@@ -249,6 +242,6 @@ std::string GetConnectedWords(std::string Word, int MinBigramsFreq, bool bDirect
     return result.dump_rapidjson();
 }
 
-bool InitializeBigrams(std::string FileName) {
-    return GlobalBigrams.Initialize(FileName);
+void InitializeBigrams(std::string path) {
+     GlobalBigrams.Initialize(path);
 }
