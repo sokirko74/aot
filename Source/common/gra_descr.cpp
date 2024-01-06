@@ -1,6 +1,6 @@
 #include "morph_dict/common/util_classes.h"
 #include "gra_descr.h"
-
+#include <unordered_map>
 
 const std::string DesArray[NumberOfGraphematicalDescriptors] = {
     	     "dummy",

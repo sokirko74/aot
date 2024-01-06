@@ -199,8 +199,8 @@ public:
 
 
 void init_plog_seman(plog::Severity severity, std::string filename) {
-	if (std::filesystem::exists(filename)) {
-		std::filesystem::remove(filename);
+	if (fs::exists(filename)) {
+		fs::remove(filename);
 	}
 	plog::init<MyFormatter>(severity, filename.c_str());
 }

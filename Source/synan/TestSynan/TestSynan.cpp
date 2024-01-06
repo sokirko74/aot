@@ -203,8 +203,8 @@ int main(int argc, const char** argv) {
             for (auto filename : file_names) {
                 auto outputFilename = filename + ".synan";
                 if (args.Exists("output-folder")) {
-                    auto base_name = std::filesystem::path(outputFilename).filename();
-                    auto p = std::filesystem::path(args.Retrieve("output-folder")) / base_name;
+                    auto base_name = fs::path(outputFilename).filename();
+                    auto p = fs::path(args.Retrieve("output-folder")) / base_name;
                     //PLOGD <<  "set output file " << p;
                     outputFilename = p.string();
                 }
