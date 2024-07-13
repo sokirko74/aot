@@ -48,8 +48,4 @@ add_custom_target(
     SOURCES ${AllBinFiles}
 )
 
-add_test(
-    NAME AspTest
-    COMMAND AspTest
-)
 

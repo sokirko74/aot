@@ -13,7 +13,7 @@ add_library(MAPostLib
 
 
 if (BUILD_DICTS)
-    add_dependencies (MAPostLib MorphDicts TrigramData)
+    add_dependencies (MAPostLib MorphDicts)
 endif()
 
 

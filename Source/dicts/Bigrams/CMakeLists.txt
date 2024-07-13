@@ -29,12 +29,12 @@ add_test(
 
 add_test(
         NAME Bigrams.3.Test
-        COMMAND BigramsTest --data-folder ${CMAKE_CURRENT_BINARY_DIR}/test_data --input-word father --language English --output ${CMAKE_CURRENT_BINARY_DIR}/test/output.txt
+        COMMAND BigramsTest --data-folder ${CMAKE_CURRENT_BINARY_DIR}/test_data --input-word father --language English --output ${CMAKE_CURRENT_BINARY_DIR}/output.txt
 )
 
 add_test(
         NAME Bigrams.4.Compare
-        COMMAND ${CMAKE_COMMAND} -E compare_files  ${CMAKE_CURRENT_BINARY_DIR}/test_data/output.canon  ${CMAKE_CURRENT_BINARY_DIR}/test/output.txt
+        COMMAND ${CMAKE_COMMAND} -E compare_files  ${CMAKE_CURRENT_BINARY_DIR}/test_data/output.canon  ${CMAKE_CURRENT_BINARY_DIR}/output.txt
 )
 
 add_subdirectory (Text2Bigrams)
