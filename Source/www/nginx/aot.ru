@@ -34,6 +34,12 @@
     listen 80 ; 
 }
 
+
+# ATTENTTION! You cannot switch this site to https, because the used javascript would issue an error 
+#  morph.js:59 Mixed Content: The page at 'https://aot.ru/demo/morph.html' was loaded over HTTPS, but requested an insecu>
+#  morph_request @ morph.js:59
+# so you have to implement https in all web servers (ddc, SynanDaemon, SemanDaemon)
+
 #server {
 #  server_name www.aot.ru
 #  listen 443 ssl;
