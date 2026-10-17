@@ -14,7 +14,7 @@ logging.basicConfig(filename=os.path.join(RML, 'logs', "ddc_search.log"),
                     level=logging.INFO, format='%(asctime)s %(message)s')
 
 DDC_SERVER_ADDRESS_HOST = "127.0.0.1"
-DDC_SERVER_ADDRESS_PORT = 8080
+DDC_SERVER_ADDRESS_PORT = 17000
 DDC_CORPUS_NAME = "server"
 DDC_TEXT_ENCODING = 'windows-1251'
 HITS_PER_PAGE = 10
