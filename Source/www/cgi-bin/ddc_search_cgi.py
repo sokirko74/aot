@@ -13,7 +13,7 @@ RML = os.path.join(os.path.dirname(__file__), "../../..")
 logging.basicConfig(filename=os.path.join(RML, 'logs', "ddc_search.log"),
                     level=logging.INFO, format='%(asctime)s %(message)s')
 
-DDC_SERVER_ADDRESS_HOST = "63.250.59.227"
+DDC_SERVER_ADDRESS_HOST = "109.252.75.122"
 DDC_SERVER_ADDRESS_PORT = 8080
 DDC_CORPUS_NAME = "server"
 DDC_TEXT_ENCODING = 'windows-1251'
