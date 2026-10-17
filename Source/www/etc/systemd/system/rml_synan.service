@@ -1,0 +1,16 @@
+[Unit]
+Description=RML seman daemon
+After=network.target
+StartLimitIntervalSec=0
+[Service]
+Type=simple
+User=sokirko
+Restart=on-failure
+RestartSec=5s
+Environment="RML=/home/sokirko/RML"
+ExecStart=/home/sokirko/RML/Bin/SynanDaemon --host localhost --port 17017
+
+
+
+[Install]
+WantedBy=multi-user.target
