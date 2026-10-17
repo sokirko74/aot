@@ -1,9 +1,6 @@
-﻿export var SynanDaemonUrl = 'http://localhost:17017?dummy=1';
-export var SemanDaemonUrl = 'http://localhost:17018?dummy=1';
-
-//export var SynanDaemonUrl = 'http://63.250.59.227:8080?dummy=1';
-//export var SemanDaemonUrl = 'http://63.250.59.227:8081?dummy=1';
-
+﻿# these locations are proxied with nginx to convert https to http
+export var SynanDaemonUrl = 'https://aot.ru/synan-daemon?dummy=1';
+export var SemanDaemonUrl = 'https://aot.ru/seman-daemon?dummy=1';
 
 
 export const TableBorderStyle  = '1px solid black';
