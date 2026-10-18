@@ -1,0 +1,14 @@
+[Unit]
+Description=AutoSSH Tunnel for DDC in aot.ru
+After=network.online.target
+Wants=network.online.target
+
+[Service]
+User=sokirko
+Environment="AUTOSSH_GATETIME=0"
+ExecStart=/usr/bin/autossh -M 0 -o "ServerAliveInterval 30" -o "ServerAliveCountMax 3" -N -R 17000:localhost:17000 kamatera
+Restart=always
+RestartSec=10
+
+[Install]
+WantedBy=multi-user.target
