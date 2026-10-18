@@ -1,4 +1,4 @@
-﻿# these locations are proxied with nginx to convert https to http
+﻿//these locations are proxied with nginx to convert https to http
 export var SynanDaemonUrl = 'https://aot.ru/synan-daemon?dummy=1';
 export var SemanDaemonUrl = 'https://aot.ru/seman-daemon?dummy=1';
 
