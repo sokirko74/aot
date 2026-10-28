@@ -22,6 +22,10 @@ ENDIF()
 
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}/cmake")
 
+# Qt6 is required for the cross-platform GUI (gui/morphwizard).
+# If Qt is installed in a non-standard place, set CMAKE_PREFIX_PATH, e.g. -DCMAKE_PREFIX_PATH=C:/Qt/6.8.0/msvc2022_64
+find_package(Qt6 REQUIRED COMPONENTS Widgets)
+message ("use Qt6 " ${Qt6_VERSION})
 
 
 include_directories(morph_dict/contrib/plog)
@@ -56,6 +60,7 @@ add_subdirectory (graphan)
 add_subdirectory (morphan)
 add_subdirectory (synan)
 add_subdirectory (seman)
+add_subdirectory (gui)
 
 IF (MSVC)
     add_subdirectory (windows)
