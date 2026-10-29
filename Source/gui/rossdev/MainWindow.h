@@ -29,6 +29,8 @@ public:
     void openReport(const QString& text, const QString& title);
     // opens the hierarchy of Ross (opens Ross itself, if it is not open)
     void openHierarchy(CHierarchyEnum type);
+    // there is only one window of the semantic analysis, since the analysis is shared
+    void openSemanticWindow();
     // are there articles or pockets with units of the dictionary
     bool hasWindowsWithUnitNos(const RossDictionary* dict) const;
     void refreshWordLists();

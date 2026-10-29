@@ -1,6 +1,7 @@
 #include "MainWindow.h"
 #include "ArticleWindow.h"
 #include "HierarchyWindow.h"
+#include "SemanticWindow.h"
 #include "RossDictionary.h"
 #include "WordListWindow.h"
 
@@ -68,6 +69,9 @@ MainWindow::MainWindow() {
     auto hierarchyMenu = menuBar()->addMenu("&Hierarchies");
     hierarchyMenu->addAction("Semantic &relations", this, [this]() { openHierarchy(SemRel); });
     hierarchyMenu->addAction("Semantic &features", this, [this]() { openHierarchy(SemFet); });
+
+    auto analysisMenu = menuBar()->addMenu("&Analysis");
+    analysisMenu->addAction("&Semantic analysis and translation", QKeySequence(Qt::CTRL | Qt::Key_T), this, &MainWindow::openSemanticWindow);
 
     auto windowMenu = menuBar()->addMenu("&Window");
     auto tabbed = windowMenu->addAction("&Tabs");
@@ -294,6 +298,14 @@ void MainWindow::openHierarchy(CHierarchyEnum type) {
         }
     }
     addSubWindow(new HierarchyWindow(dict, type, m_MdiArea));
+}
+
+void MainWindow::openSemanticWindow() {
+    if (auto w = windows<SemanticWindow>(); !w.empty()) {
+        m_MdiArea->setActiveSubWindow(qobject_cast<QMdiSubWindow*>(w[0]->parentWidget()));
+        return;
+    }
+    addSubWindow(new SemanticWindow(m_MdiArea));
 }
 
 void MainWindow::openPocket(const std::vector<PocketItem>& items, const QString& title) {

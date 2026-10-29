@@ -1172,6 +1172,14 @@ long CRusSemStructure::FindSituations(size_t SentNo)
 
 bool CRusSemStructure::GetSyntaxTreeByText(std::string utf8text, int ClauseVarNo, std::string& Graph)
 {
+	if (!BuildSyntaxNodesByText(utf8text, ClauseVarNo))
+		return false;
+	Graph = GetTclSyntaxGraph();
+	return true;
+}
+
+bool CRusSemStructure::BuildSyntaxNodesByText(std::string utf8text, int ClauseVarNo)
+{
 	try
 	{
 		CMyTimeSpanHolder			GlobalSpan;
@@ -1190,8 +1198,6 @@ bool CRusSemStructure::GetSyntaxTreeByText(std::string utf8text, int ClauseVarNo
 		BuildSemNodesBySyntax();
 		m_TimeStatictics = Format("Sentence length: %i\n ClauseCombinationVariantsCount: %i\n",
 			m_piSent->m_Words.size(), m_ClauseCombinationVariantsCount);
-
-		Graph = GetTclSyntaxGraph();
 
 		return true;
 	}

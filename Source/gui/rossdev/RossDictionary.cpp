@@ -167,6 +167,8 @@ RossDevCore& RossDevCore::instance() {
 void RossDevCore::init() {
     // presemantic dictionaries: morphology, syntax, aspect and bilingual dictionaries
     rossesHolder()->Init();
+    // the same as CSemStructureBuilder::InitDicts
+    m_SemBuilder->m_RusStr.m_pData->GetSynan()->SetKillHomonymsMode(CoverageKillHomonyms);
 }
 
 RossDictionary* RossDevCore::findDictionary(DictTypeEnum type) const {

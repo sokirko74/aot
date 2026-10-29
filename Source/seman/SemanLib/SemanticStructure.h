@@ -8,6 +8,7 @@
 #include "morph_dict/agramtab/RusGramTab.h"
 #include "morph_dict/agramtab/EngGramTab.h"
 #include "sem_word.h"
+#include "SemGraph.h"
 
 typedef std::vector<long> VectorLong;
 
@@ -648,6 +649,12 @@ public:
 
     // выдает TCL-представление для синтаксических отношений
     std::string GetTclSyntaxGraph();
+
+    // the graph of the structure for a viewer: nodes, relations, lexical functions and additional relations
+    void GetGraph(CSemGraph &G) const;
+
+    // the graph of syntax relations for a viewer
+    void GetSyntaxGraph(CSemGraph &G) const;
 
     // выдает ошибку
     void ErrorMessage(std::string Mess) const { m_pData->ErrorMessage(Mess); };

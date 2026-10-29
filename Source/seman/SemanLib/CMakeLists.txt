@@ -66,7 +66,7 @@ add_library(SemanLib
         "dict_type.h" 
         "dict_type.cpp" 
         "rus_sem_relation.cpp" "rus_sem_relation.h" "sem_relation.cpp" "sem_relation.h" 
-        "syn_realization.h" "syn_realization.cpp" "time_phrases.h" "sem_tcl.cpp")
+        "syn_realization.h" "syn_realization.cpp" "time_phrases.h" "sem_tcl.cpp" "SemGraph.h" "sem_graph.cpp")
 
 target_link_libraries(SemanLib
     SynanLib

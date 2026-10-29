@@ -1383,6 +1383,9 @@ public:
 
     std::string GetClauseTreeForTcl() const;
 
+    // the tree of clauses for a viewer
+    void GetClauseGraph(CSemGraph &G) const;
+
     // получает SF1 узла NodeNo
     std::vector<uint64_t> GetSemFetsOfFirstValency(long NodeNo);
 
@@ -1608,6 +1611,9 @@ public:
     bool HasAuxiliaryPOS(std::string Lemma) const;
 
     bool GetSyntaxTreeByText(std::string utf8text, int ClauseVarNo, std::string &Graph);
+
+    // builds nodes and syntax relations of the first sentence without the semantic analysis
+    bool BuildSyntaxNodesByText(std::string utf8text, int ClauseVarNo);
 
     bool SetLemmasToReplace(std::string LemmasToReplace);
 

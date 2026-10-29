@@ -6,13 +6,21 @@
 #include <QMessageBox>
 #include <QStandardPaths>
 #include <QStatusBar>
+#include <QThread>
 #include <clocale>
 
 // defined in morph_dict/common/utilit.cpp, used by ErrorMessage
 extern void (*GlobalErrorMessage)(const std::string&);
 
 static void showErrorMessage(const std::string& s) {
-    QMessageBox::critical(QApplication::activeWindow(), "RossDev", QString::fromUtf8(s.c_str()).trimmed());
+    auto show = [s]() { QMessageBox::critical(QApplication::activeWindow(), "RossDev", QString::fromUtf8(s.c_str()).trimmed()); };
+    // the semantic analysis runs in a thread
+    if (QThread::currentThread() == qApp->thread()) {
+        show();
+    }
+    else {
+        QMetaObject::invokeMethod(qApp, show, Qt::BlockingQueuedConnection);
+    }
 }
 
 int main(int argc, char* argv[]) {

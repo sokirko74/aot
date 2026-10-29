@@ -23,6 +23,10 @@ add_executable (${PROJECT_NAME}
         Dialogs.h
         HierarchyWindow.cpp
         HierarchyWindow.h
+        SemGraphView.cpp
+        SemGraphView.h
+        SemanticWindow.cpp
+        SemanticWindow.h
 )
 
 set_target_properties(${PROJECT_NAME} PROPERTIES
