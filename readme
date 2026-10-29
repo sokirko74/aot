@@ -53,7 +53,7 @@ More detail about Morphology dicts is here: Docs/Morph_UNIX.txt
   
 4. To compile COM-objects you need to run Visual Studio as administrator.
 
-5. To run Windows GUI Rossdev.exe and MorphWizard you must set Russian everywhere in Region Setting.
+5. To run Windows GUI Rossdev.exe you must set Russian everywhere in Region Setting.
 
 6. git clone git@github.com/aot.git --recursive RML
 
@@ -69,7 +69,7 @@ More detail about Morphology dicts is here: Docs/Morph_UNIX.txt
   cmake ..
    // or with debug 
    // cmake .. -DCMAKE_BUILD_TYPE=Debug 
-   // or to compile MorphWizard or Rossdev
+   // or to compile Rossdev
    // cmake .. -A Win32
   make
   make DESTDIR=$RML install
