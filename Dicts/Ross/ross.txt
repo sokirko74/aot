@@ -409,6 +409,12 @@ COMM    =  трехтактный переводим как  three-phase
 ENUMBER(2)=  3
 ENUMBER(3)=  2
 ============
+TITLE        = _semantic_weight_components
+SENSE       = 1
+AUTHOR       = user
+REDACT       = alex
+TIME_CREATE       = 22/9/4 17:55:37
+============
 TITLE        = _weak_syn_rel
 SENSE       = 1
 AUTHOR       = user
@@ -554,12 +560,6 @@ ISA     =  ANIM ORG
            SITUAT PROC
            SITUAT AUTHORIT
            EMPL GEOGR
-============
-TITLE        = _semantic_weight_components
-SENSE       = 1
-AUTHOR       = user
-REDACT       = alex
-TIME_CREATE       = 22/9/4 17:55:37
 ============
 TITLE        = абзац
 SENSE       = 1
@@ -9225,37 +9225,6 @@ GF3     = 1  ОБСТ_ГР : с+Р
           2  ОБСТ_ГР : из+Р
 ENG     =  exclusion 1
 ============
-TITLE        = выделить
-SENSE       = 1
-TIME_CREATE       = 18/1/1 13:49:49
-EXM     =  правительство выделило церкви 0,45 гектара
-           восстановление разрушенных домов
-CAT     = 1  LABL.SIT
-GF      = 1  ГЛ:ГГ
-SF      = 1  FIN
-VAL     =  AGENT , A1 , C
-           OBJ , A2 , C
-           ADR , A3 , C
-           AIM , A4 , C
-           SRC , A5 , C
-GF1     = 1  подл : И
-SF1     = 1  ANIM
-          2  STAT
-          3  ORG
-GF2     = 1  к_доп : Д
-SF2     = 1  LOK
-          2  ORG
-          3  ANIM          
-GF3     = 1  п_доп : В
-          2  к_доп : для+Р
-GF4     = 1  к_доп : на+В
-SF4     = 1  SITUAT
-GF5     = 1  к_доп : из+Р
-SF5     = 1  COLLEC
-AUX     =  PART ( A2 , A5 )
-ENG     =  allot 1
-           pick_out 1
-============
 TITLE        = выделение
 SENSE       = 1
 TIME_CREATE       = 18/1/1 13:49:49
@@ -9287,6 +9256,37 @@ AUX     =  PART ( A2 , A5 )
 ENG     =  allotment 1
            picking_out 1
 ESF2(1) = 1  FIN
+============
+TITLE        = выделить
+SENSE       = 1
+TIME_CREATE       = 18/1/1 13:49:49
+EXM     =  правительство выделило церкви 0,45 гектара
+           восстановление разрушенных домов
+CAT     = 1  LABL.SIT
+GF      = 1  ГЛ:ГГ
+SF      = 1  FIN
+VAL     =  AGENT , A1 , C
+           OBJ , A2 , C
+           ADR , A3 , C
+           AIM , A4 , C
+           SRC , A5 , C
+GF1     = 1  подл : И
+SF1     = 1  ANIM
+          2  STAT
+          3  ORG
+GF2     = 1  к_доп : Д
+SF2     = 1  LOK
+          2  ORG
+          3  ANIM
+GF3     = 1  п_доп : В
+          2  к_доп : для+Р
+GF4     = 1  к_доп : на+В
+SF4     = 1  SITUAT
+GF5     = 1  к_доп : из+Р
+SF5     = 1  COLLEC
+AUX     =  PART ( A2 , A5 )
+ENG     =  allot 1
+           pick_out 1
 ============
 TITLE        = выделять
 SENSE       = 1
@@ -24649,8 +24649,8 @@ ENG     =  command 1
 ============
 TITLE        = команда
 SENSE       = 2
-REDACT       = boris
-TIME_CREATE       = 18/1/1 13:49:56
+REDACT       = alex
+TIME_CREATE       = 29/10/26 15:26:19
 CAT     = 1  LABL
 GF      = 1  СУЩ:ИГ
 SF      = 1  COLLEC
@@ -50260,8 +50260,8 @@ SF2     = 1  ANIM
           2  ABSTR
           3  SOC
           4  SITUAT
-AUX     =  ADR ( A2 , A1 )		  
-ENG     =   prescribed 2
+AUX     =  ADR ( A2 , A1 )
+ENG     =  prescribed 2
 ============
 TITLE        = положительный
 SENSE       = 1
