@@ -1,5 +1,6 @@
 #include "MainWindow.h"
 #include "ArticleWindow.h"
+#include "HierarchyWindow.h"
 #include "RossDictionary.h"
 #include "WordListWindow.h"
 
@@ -64,6 +65,10 @@ MainWindow::MainWindow() {
         }
     });
 
+    auto hierarchyMenu = menuBar()->addMenu("&Hierarchies");
+    hierarchyMenu->addAction("Semantic &relations", this, [this]() { openHierarchy(SemRel); });
+    hierarchyMenu->addAction("Semantic &features", this, [this]() { openHierarchy(SemFet); });
+
     auto windowMenu = menuBar()->addMenu("&Window");
     auto tabbed = windowMenu->addAction("&Tabs");
     tabbed->setCheckable(true);
@@ -115,6 +120,9 @@ RossDictionary* MainWindow::currentDictionary() const {
         return w->dictionary();
     }
     if (auto w = qobject_cast<ArticleWindow*>(sub->widget())) {
+        return w->dictionary();
+    }
+    if (auto w = qobject_cast<HierarchyWindow*>(sub->widget())) {
         return w->dictionary();
     }
     return nullptr;
@@ -256,8 +264,36 @@ void MainWindow::onArticleSaved(RossDictionary* dict, uint16_t unitNo) {
     if (auto w = wordList(dict)) {
         w->update();
     }
+    CHierarchyEnum type;
+    if (isHierarchyEntry(dict, unitNo, type)) {
+        for (auto h : windows<HierarchyWindow>()) {
+            if (h->dictionary() == dict && h->hierarchyType() == type) {
+                h->refresh();
+            }
+        }
+    }
     statusBar()->showMessage(QString("The article %1 is written to %2 (in memory, save the dictionary to write it to disk)")
         .arg(fromUtf8(dict->GetEntryStrUtf8(unitNo)), dict->dictName()), 10000);
+}
+
+void MainWindow::openHierarchy(CHierarchyEnum type) {
+    RossDictionary* dict = RossDevCore::instance().findDictionary(Ross);
+    if (!dict) {
+        dict = openDictionary(QFile::decodeName(GetRossPath(Ross).c_str()));
+        if (!dict) {
+            return;
+        }
+    }
+    for (auto sub : m_MdiArea->subWindowList()) {
+        if (auto h = qobject_cast<HierarchyWindow*>(sub->widget())) {
+            if (h->dictionary() == dict && h->hierarchyType() == type) {
+                h->refresh();
+                m_MdiArea->setActiveSubWindow(sub);
+                return;
+            }
+        }
+    }
+    addSubWindow(new HierarchyWindow(dict, type, m_MdiArea));
 }
 
 void MainWindow::openPocket(const std::vector<PocketItem>& items, const QString& title) {
@@ -284,6 +320,11 @@ bool MainWindow::hasWindowsWithUnitNos(const RossDictionary* dict) const {
     }
     for (auto p : windows<PocketWindow>()) {
         if (p->contains(dict)) {
+            return true;
+        }
+    }
+    for (auto h : windows<HierarchyWindow>()) {
+        if (h->dictionary() == dict) {
             return true;
         }
     }
@@ -328,7 +369,7 @@ void MainWindow::onSave() {
 
 bool MainWindow::closeDictionary(RossDictionary* dict, WordListWindow*) {
     if (hasWindowsWithUnitNos(dict)) {
-        QMessageBox::warning(this, "RossDev", "Close all articles and entry lists of this dictionary!");
+        QMessageBox::warning(this, "RossDev", "Close all articles, entry lists and hierarchies of this dictionary!");
         return false;
     }
     if (dict->isModified()) {

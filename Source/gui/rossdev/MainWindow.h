@@ -2,6 +2,8 @@
 
 #include "Dialogs.h"
 
+#include "seman/SemanLib/HierarchyHolder.h"
+
 #include <QMainWindow>
 
 #include <vector>
@@ -25,6 +27,8 @@ public:
     void openArticle(RossDictionary* dict, uint16_t unitNo);
     void openPocket(const std::vector<PocketItem>& items, const QString& title);
     void openReport(const QString& text, const QString& title);
+    // opens the hierarchy of Ross (opens Ross itself, if it is not open)
+    void openHierarchy(CHierarchyEnum type);
     // are there articles or pockets with units of the dictionary
     bool hasWindowsWithUnitNos(const RossDictionary* dict) const;
     void refreshWordLists();

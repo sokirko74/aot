@@ -1,6 +1,7 @@
 #include "ArticleWindow.h"
 #include "RossDictionary.h"
 #include "MainWindow.h"
+#include "HierarchyWindow.h"
 
 #include <QCloseEvent>
 #include <QComboBox>
@@ -462,6 +463,19 @@ bool ArticleWindow::isModified() {
 bool ArticleWindow::saveArticle() {
     if (!markout()) {
         return false;
+    }
+    CHierarchyEnum hierarchyType;
+    if (isHierarchyEntry(m_Dict, m_UnitNo, hierarchyType)) {
+        HierarchyGraph graph;
+        graph.read(m_Dict, m_Article);
+        if (!graph.m_Errors.isEmpty()) {
+            QMessageBox::critical(this, "RossDev", "The hierarchy is wrong:\n" + graph.m_Errors.join("\n"));
+            return false;
+        }
+        if (!graph.m_Warnings.isEmpty()
+            && QMessageBox::question(this, "RossDev", graph.m_Warnings.join("\n") + "\n\nSave the hierarchy?") != QMessageBox::Yes) {
+            return false;
+        }
     }
     try {
         m_Article.WriteToDictionary();

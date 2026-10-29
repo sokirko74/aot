@@ -5,6 +5,11 @@
 
 enum CHierarchyEnum {SemRel, SemFet};
 
+// the entry of Ross that contains the hierarchy
+inline const char* GetHierarchyEntryName(CHierarchyEnum type) {
+	return (type == SemFet) ? "_иерархСХ" : "_иерархСО";
+}
+
 class CStringRelation {
 public:
 	std::string	m_Source;

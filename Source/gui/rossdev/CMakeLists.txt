@@ -21,6 +21,8 @@ add_executable (${PROJECT_NAME}
         NewArticleWizard.h
         Dialogs.cpp
         Dialogs.h
+        HierarchyWindow.cpp
+        HierarchyWindow.h
 )
 
 set_target_properties(${PROJECT_NAME} PROPERTIES

@@ -87,7 +87,7 @@ CHierarchyHolder::~CHierarchyHolder()
 void CHierarchyHolder::WriteToRoss(std::string Entry)
 {
 
-	std::string EntryName = (m_Type == SemFet) ? "_иерархСХ" : "_иерархСО";
+	std::string EntryName = GetHierarchyEntryName(m_Type);
 	uint16_t UnitNo = GetRoss()->LocateUnit(EntryName.c_str(), 1);
 	if (UnitNo != ErrUnitNo)
 		GetRoss()->DelUnit(UnitNo);
@@ -140,7 +140,7 @@ void CHierarchyHolder::ReadFromRoss(bool WithoutView)
 	// TODO: add loading code here
 	Nodes.clear();
 	Relations.clear();
-	std::string EntryName = (m_Type == SemFet) ? "_иерархСХ" : "_иерархСО";
+	std::string EntryName = GetHierarchyEntryName(m_Type);
 	uint16_t UnitNo = GetRoss()->LocateUnit(EntryName.c_str(), 1);
 	if (UnitNo == ErrUnitNo) {
 		ErrorMessage(Format("cannot read %s", convert_to_utf8(EntryName, morphRussian).c_str()));
@@ -169,9 +169,19 @@ void CHierarchyHolder::ReadFromRoss(bool WithoutView)
 		};
 		if ((C.m_FieldNo == RelFieldNo) && !C.is_null(0) && !C.is_null(1)
 			)
-			CreateRelation(FindNodeByName(m_pRossDoc->GetDomItemStrWrapper(C.GetItem(0)).c_str()),
-				FindNodeByName(m_pRossDoc->GetDomItemStrWrapper(C.GetItem(1)).c_str()),
-				true, WithoutView);
+		{
+			const std::string& Source = m_pRossDoc->GetDomItemStrWrapper(C.GetItem(0));
+			const std::string& Target = m_pRossDoc->GetDomItemStrWrapper(C.GetItem(1));
+			size_t node1 = FindNodeByName(Source.c_str());
+			size_t node2 = FindNodeByName(Target.c_str());
+			// ISA can be written before NODE or refer to a missing node
+			if ((node1 == Nodes.size()) || (node2 == Nodes.size()))
+			{
+				LOGE << "skip ISA " << Source << " " << Target << " in " << EntryName << ", no such NODE";
+				continue;
+			}
+			CreateRelation(node1, node2, true, WithoutView);
+		};
 	};
 
 }
