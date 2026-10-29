@@ -638,17 +638,8 @@ public:
     // перевод графа в текстовое представление
     std::string GetTxtGraph();
 
-    // перевод графа в TCL-представление
-    std::string GetBaseTclGraph(bool ShowUnusedValencies, bool UseIsTop) const;
-
-    // выдает отношения, которые не нужно упорядочивать в дерево (они не являются основными)
-    std::string GetOtherRelations() const;
-
     // печатает все словарные интерпретации  узла
     std::vector<std::string> GetNodeDictInterps(size_t nodeIndex) const;
-
-    // выдает TCL-представление для синтаксических отношений
-    std::string GetTclSyntaxGraph();
 
     // the graph of the structure for a viewer: nodes, relations, lexical functions and additional relations
     void GetGraph(CSemGraph &G) const;

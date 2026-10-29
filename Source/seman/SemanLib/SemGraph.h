@@ -6,7 +6,7 @@
 #include <string>
 #include <vector>
 
-// a graph of a semantic (or syntax) structure for a viewer, it replaces the Tcl representation (sem_tcl.cpp)
+// a graph of a semantic (or syntax) structure for a viewer
 
 struct CSemGraphAttr {
 	// "Morphology", "Valencies"...

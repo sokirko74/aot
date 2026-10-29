@@ -31,13 +31,4 @@ if (BUILD_COM)
     add_subdirectory (TestLemmatizerCOM)
 endif()
 
-if(BUILD_WINDOWS_GUI)
-	        
-    if(${CMAKE_SIZEOF_VOID_P} EQUAL 4)
-        message ("BUILD_WINDOWS_GUI=1")
-
-        #must be compiled 32bit, since we have only 32-bit tcl80.lib
-        add_subdirectory (RossDev)
-    endif()
-endif()
 

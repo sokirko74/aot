@@ -1381,8 +1381,6 @@ public:
     // проверяет, что между узлами входящими в это отношение нет другой связи, кроме RelNo
     bool dfs_to_test_unique_relation(size_t NodeNo, size_t RelNo);
 
-    std::string GetClauseTreeForTcl() const;
-
     // the tree of clauses for a viewer
     void GetClauseGraph(CSemGraph &G) const;
 
@@ -1610,8 +1608,6 @@ public:
 
     bool HasAuxiliaryPOS(std::string Lemma) const;
 
-    bool GetSyntaxTreeByText(std::string utf8text, int ClauseVarNo, std::string &Graph);
-
     // builds nodes and syntax relations of the first sentence without the semantic analysis
     bool BuildSyntaxNodesByText(std::string utf8text, int ClauseVarNo);
 
@@ -1622,8 +1618,6 @@ public:
     bool CanBeDeleted(long NodeNo) const;
 
     COutputRelation GetOutputRelation(const CRusSemRelation& r) const;
-
-    std::string GetTclGraph() const;
 };
 
 extern bool HasReflexiveSuffix(const std::string &s);

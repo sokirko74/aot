@@ -9,7 +9,6 @@ CSemStructureBuilder::CSemStructureBuilder() : m_RusStr(), m_EngStr(m_RusStr)
 	m_RusStr.m_pData = new CSemanticsHolder();
 	m_EngStr.m_pData = m_RusStr.m_pData;  
 	m_CurrentSentence = 0;
-	m_bShouldBuildTclGraph = true;
 }
 
 CSemStructureBuilder::~CSemStructureBuilder()
@@ -22,7 +21,6 @@ void CSemStructureBuilder::InitDicts() {
 	m_RusStr.m_pData->Init();
 	m_RusStr.m_pData->Initialize();
 	m_RusStr.m_pData->InitializeIndices();
-	m_bShouldBuildTclGraph = false;
 	m_RusStr.m_pData->GetSynan()->SetKillHomonymsMode(CoverageKillHomonyms);
 
 }

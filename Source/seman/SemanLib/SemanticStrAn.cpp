@@ -1170,13 +1170,6 @@ long CRusSemStructure::FindSituations(size_t SentNo)
 
 
 
-bool CRusSemStructure::GetSyntaxTreeByText(std::string utf8text, int ClauseVarNo, std::string& Graph)
-{
-	if (!BuildSyntaxNodesByText(utf8text, ClauseVarNo))
-		return false;
-	Graph = GetTclSyntaxGraph();
-	return true;
-}
 
 bool CRusSemStructure::BuildSyntaxNodesByText(std::string utf8text, int ClauseVarNo)
 {

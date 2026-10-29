@@ -476,14 +476,6 @@ void CEngSemStructure::GetColorAndWidthOfRelation(int RelNo, float& Width, std::
 	}
 }
 
-std::string CEngSemStructure::GetTclGraph() const 
-{
-	std::string s = GetBaseTclGraph(false, true);
-	s += "if { [catch SetLayout] != 0 } {  $GT($main,graph) draw  }\1";
-	s += GetOtherRelations();
-	return s;
-
-}
 
 
 bool CEngSemStructure::TranslateToEnglish()

@@ -1,7 +1,23 @@
 #include "stdafx.h"
 #include "SemanticRusStructure.h"
 
-// the graph for a viewer, the same information as in the Tcl representation (sem_tcl.cpp)
+// the graph for a viewer (rossdev)
+
+void	CRusSemStructure::GetColorAndWidthOfRelation(int RelNo, float& Width, std::string& Color) const
+{
+	Width = 1;
+	Color = m_Relations[RelNo].m_bSemFetAgree ? "blue" : "darkgreen";
+}
+
+std::string    CRusSemStructure::GetClauseProperiesStr(long ClauseNo) const
+{
+	std::string Res = "Свойства:\n";
+	if (m_Clauses[ClauseNo].m_bQuestion)
+	{
+		Res += "Вопросительная клауза\n";
+	};
+	return Res;
+};
 
 static void AddAttr(std::vector<CSemGraphAttr>& attrs, const std::string& title, const std::string& value)
 {
@@ -88,7 +104,7 @@ void CSemanticStructure::GetGraph(CSemGraph& G) const
 		}
 		AddAttr(V.m_Attrs, "Other properties", Props);
 
-		// the same priority as in the Tcl version: the last color wins
+		// the last color wins
 		if ((N.GetType() == LocRoss)
 			|| ((N.m_Colloc.m_CollocSource == ThesType) && (N.m_Colloc.GetThesInterp().m_ThesaurusId == LocThes)))
 			V.m_Color = "lightgreen";
@@ -160,7 +176,7 @@ void CSemanticStructure::GetGraph(CSemGraph& G) const
 		G.m_Edges.push_back(E);
 	}
 
-	// the same as GetOtherRelations
+	// lexical functions and additional relations that do not coincide with main relations
 	for (auto& l : GetLexFuncts())
 		if ((l.m_SourceNodeNo != l.m_TargetNodeNo)
 			&& (FindFirstRelation(l.m_SourceNodeNo, l.m_TargetNodeNo) == -1)

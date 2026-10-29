@@ -453,39 +453,6 @@ std::vector<std::string> CSemanticStructure::GetNodeDictInterps(size_t nodeIndex
 
 
 
-std::string CSemanticStructure::GetTclSyntaxGraph()
-{
-	// уничтожение графа 
-	std::string Res = "";
-	Res += "$GT($main,graph) delete nodes\1";
-
-	Res += Format("$main.switches.resultText configure -text \"%s\"\1", m_ClausePropertiesProtocol.c_str());
-	Res += Format("set GT($main,tree_variant_props) \"%s\"\1", m_WeightProtocol.c_str());
-	Res += Format("set GT($main,statistics) \"%s\"\1", m_TimeStatictics.c_str());
-	Res += Format("set GT($main,variants_statistics) \"%s\"\1", m_ClauseVariantsStatistics.c_str());
-
-
-	for (size_t i = 0; i < GetNodesSize(); i++)
-	{
-		Res += Format("set nds(%i) [$GT($main,graph) create node]\1", i);
-		Res += Format("$GT($main,graph) set $nds(%i) -label \"%s\" -type rectangle -x 0 -y 0\1", i, GetNodeStr(i, 30).c_str());
-		std::string Grammems = m_pData->GetRusGramTab()->GrammemsToStr(GetNode(i).GetGrammems());
-		Res += Format("$GT($main,graph) set $nds(%i)  .grammems \"%s\"\1", i, Grammems.c_str());
-		Res += Format("$GT($main,graph) set $nds(%i)  .lemmas \"%s\"\1", i, GetNodeLemStr(i).c_str());
-	};
-
-	for (size_t i = 0; i < GetSynRels().size(); i++)
-	{
-		Res += Format("set edge [$GT($main,graph) create edge $nds(%i) $nds(%i)]\1", GetSynRels()[i].m_SourceNodeNo, GetSynRels()[i].m_TargetNodeNo);
-		Res += Format("$GT($main,graph) set $edge -label \"%s\"\1", GetSynRels()[i].m_SynRelName.c_str());
-
-		std::string Color = !GetSynRels()[i].m_SynRelName.empty() ? "blue" : "darkgreen";
-		Res += Format("$GT($main,graph) configure $edge graphics -fill %s \1", Color.c_str());
-	};
-
-	return Res;
-
-};
 
 
 
@@ -1019,40 +986,6 @@ void CSemanticStructure::DelRelsToDelete(const char* cause)
 };
 
 
-std::string CSemanticStructure::GetOtherRelations() const
-{
-	std::string Res = "";
-	for (long i = 0; i < GetLexFuncts().size(); i++)
-		if (GetLexFuncts()[i].m_SourceNodeNo != GetLexFuncts()[i].m_TargetNodeNo)
-			if ((FindFirstRelation(GetLexFuncts()[i].m_SourceNodeNo, GetLexFuncts()[i].m_TargetNodeNo) == -1)
-				&& (FindFirstRelation(GetLexFuncts()[i].m_TargetNodeNo, GetLexFuncts()[i].m_SourceNodeNo) == -1)
-
-				)
-			{
-				Res += Format("set edge [$GT($main,graph) create edge $nds(%i) $nds(%i)]\1", GetLexFuncts()[i].m_SourceNodeNo, GetLexFuncts()[i].m_TargetNodeNo);
-				Res += Format("$GT($main,graph) set $edge -label \"%s\"\1", GetLexFuncts()[i].m_LexFunctName.c_str());
-				Res += Format("$GT($main,graph) configure $edge graphics -fill blue -width 1.0 -stipple gray50\1");
-			};
-
-	for (long i = 0; i < GetDopRelationsSize(); i++)
-		if (GetDopRelation(i)->m_SourceNodeNo != GetDopRelation(i)->m_TargetNodeNo)
-			if ((FindFirstRelation(GetDopRelation(i)->m_SourceNodeNo, GetDopRelation(i)->m_TargetNodeNo) == -1)
-				&& (FindFirstRelation(GetDopRelation(i)->m_TargetNodeNo, GetDopRelation(i)->m_SourceNodeNo) == -1)
-
-				)
-			{
-				Res += Format("set edge [$GT($main,graph) create edge $nds(%i) $nds(%i)]\1", GetDopRelation(i)->m_SourceNodeNo, GetDopRelation(i)->m_TargetNodeNo);
-				Res += Format("$GT($main,graph) set $edge -label \"%s\"\1", GetDopRelation(i)->m_Valency.m_RelationStr.c_str());
-				Res += Format("$GT($main,graph) configure $edge graphics -fill blue -width 1.0 -stipple gray50\1");
-				Res += Format("$GT($main,graph) set $edge .sem_fets \"%s\"\1", GetSemFetsInOneStr(GetDopRelation(i)->m_SemFets).c_str());
-
-			};
-
-
-
-	return Res;
-
-};
 
 
 bool CSemanticsHolder::InitializeIndices()

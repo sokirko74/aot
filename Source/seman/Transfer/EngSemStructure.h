@@ -584,7 +584,6 @@ public:
 	// Переводит наречия "по-английски", "по-хорошему"...
 	void TranslateAdverbAdjectiveRule(int EngNodeNo);
 
-	std::string GetTclGraph() const;
 };
 
 
