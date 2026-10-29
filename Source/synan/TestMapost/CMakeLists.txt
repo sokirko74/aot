@@ -29,6 +29,8 @@ macro (TestMapostMacro lang test_directory)
             NAME Mapost_${lang}_${base_name}_cmp 
             COMMAND ${CMAKE_COMMAND} -E compare_files  ${test_directory_in_project}/${base_name}.mapost ${input_file}.mapost
         )
+        # the comparison must not run before the test that writes the file (ctest -j)
+        set_tests_properties(Mapost_${lang}_${base_name}_cmp PROPERTIES DEPENDS Mapost_${lang})
     endforeach()
 endmacro()
 

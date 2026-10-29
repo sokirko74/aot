@@ -25,6 +25,8 @@ macro (TestSynanMacro lang test_directory)
             NAME Synan_${lang}_${base_name}_cmp
             COMMAND ${CMAKE_COMMAND} -E compare_files ${canon} ${res}
         )
+        # the comparison must not run before the test that writes the file (ctest -j)
+        set_tests_properties(Synan_${lang}_${base_name}_cmp PROPERTIES DEPENDS Synan_${lang})
     endforeach(input_file)
 
 endmacro(TestSynanMacro)

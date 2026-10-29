@@ -26,6 +26,8 @@ macro (TestSemanMacro lang test_directory mode)
             NAME Seman_${lang}_${base_name}_cmp 
             COMMAND ${CMAKE_COMMAND} -E compare_files  ${test_directory_in_project}/${base_name}.seman ${input_file}.seman
         )
+        # the comparison must not run before the test that writes the file (ctest -j)
+        set_tests_properties(Seman_${lang}_${base_name}_cmp PROPERTIES DEPENDS Seman_${lang}__${test_name})
     endforeach()
 
 endmacro()
