@@ -39,7 +39,5 @@ if(BUILD_WINDOWS_GUI)
         #must be compiled 32bit, since we have only 32-bit tcl80.lib
         add_subdirectory (RossDev)
     endif()
-
-    add_subdirectory (VisualSynan)
 endif()
 
