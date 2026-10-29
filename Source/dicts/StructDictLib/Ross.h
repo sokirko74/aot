@@ -160,6 +160,8 @@ public:
 	
 	CDictionary();
 	void LoadAndExportDict(std::string fileName, std::string folder);
+	// writes all entries in the text format (ross.txt), the inverse of ImportFromTextFile
+	void ExportToTextFile(std::string fileName);
 	void ImportFromTextFile(std::string fileName);
 
 	bool		IsEmptyArticle(uint16_t UnitNo) const;

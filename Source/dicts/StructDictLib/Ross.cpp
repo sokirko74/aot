@@ -936,6 +936,11 @@ void CDictionary::LoadAndExportDict(std::string folder, std::string fileName)
 	{
 		throw CExpc("Cannot load dictionary from %s", folder.c_str());
 	};
+	ExportToTextFile(fileName);
+}
+
+void CDictionary::ExportToTextFile(std::string fileName)
+{
 	std::ofstream outf(fileName, std::ios::binary);
 	if (!outf.is_open())
 	{
