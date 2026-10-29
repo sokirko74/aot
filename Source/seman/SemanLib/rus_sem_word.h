@@ -15,8 +15,6 @@ public:
     // знаки препинаия, которые стоят в тексте после этого слова
     std::string m_PostPuncts;
     std::string m_GraphDescrs;
-    //  лемма прилагательного превосходной степени, которая была заменена на положительную степень
-    std::string m_SupAdjLemma;
     bool m_bRomanNumber;
     long m_SynWordNo;
 

@@ -28,8 +28,7 @@ index -- индекс афикса.
 
 enum AFIX_KIND
     {	DERIV_SUFFIX	= 0,
-	DERIV_PREFIX	= 1,
-	DERIV_SUP_ADJ	= 2
+	DERIV_PREFIX	= 1
     } ;
 
 

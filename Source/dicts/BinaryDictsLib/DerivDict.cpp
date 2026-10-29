@@ -80,9 +80,6 @@ bool CDerivDictonary::Load(int TypeDict)
 	try {
 
 		std::string Path;
-		if (TypeDict == DERIV_SUP_ADJ)
-			Path = GetRegistryString("Software\\Dialing\\RUSSIAN_DERIV_DICT\\SupAdjDictPath");
-		else
 		if (TypeDict == DERIV_PREFIX)
 			Path = GetRegistryString("Software\\Dialing\\RUSSIAN_DERIV_DICT\\PrefixDictPath");
 		else
