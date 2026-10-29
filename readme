@@ -51,8 +51,6 @@ More detail about Morphology dicts is here: Docs/Morph_UNIX.txt
    or
    sudo apt install libevent-dev
   
-4. To compile COM-objects you need to run Visual Studio as administrator.
-
 6. git clone git@github.com/aot.git --recursive RML
 
 7. nder Windows follow  https://learn.microsoft.com/en-us/cpp/build/cmake-projects-in-visual-studio?view=msvc-170

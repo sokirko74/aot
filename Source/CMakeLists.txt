@@ -62,10 +62,6 @@ add_subdirectory (synan)
 add_subdirectory (seman)
 add_subdirectory (gui)
 
-IF (MSVC)
-    add_subdirectory (windows)
-ENDIF()
-
 if(BUILD_HTTP_SERVERS)
     add_subdirectory (www)
 endif()
