@@ -585,6 +585,11 @@ void SlfEditor::onChangeParadigm() {
         return;
     }
 
+    if (!m_Paradigm.m_NextParts.empty()) {
+        errorMessage(this, "A word with several parts can be changed only by its text.");
+        return;
+    }
+
     size_t ParadigmNo;
     if (isdigit((BYTE)s[0])) {
         ParadigmNo = atoi(s.c_str());

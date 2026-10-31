@@ -552,7 +552,6 @@ void WizardView::onPredict() {
         m_PredictedList->setRowCount((int)m_PredictedParadigms.size());
         for (size_t i = 0; i < m_PredictedParadigms.size(); i++) {
             const CPredictSuffix& S = m_PredictedParadigms[i];
-            const CFlexiaModel& P = m_Wizard->m_FlexiaModels[S.m_FlexiaModelNo];
             auto set = [this, i](TLemmPredictSortEnum column, const QString& s) {
                 m_PredictedList->setItem((int)i, (int)column, new QTableWidgetItem(s));
             };
@@ -563,7 +562,7 @@ void WizardView::onPredict() {
             set(TLemmPredictSortEnum::Index, QString::number(i));
             set(TLemmPredictSortEnum::Paradigm, QString::number(S.m_FlexiaModelNo));
             set(TLemmPredictSortEnum::LemmaPrefix, fromUtf8(S.m_PrefixSetStr));
-            set(TLemmPredictSortEnum::FormsCount, QString::number(P.m_Flexia.size()));
+            set(TLemmPredictSortEnum::FormsCount, QString::number(S.getFormsCount()));
         }
         onFind();
         m_PredictWhat->setFocus();
@@ -607,7 +606,8 @@ void WizardView::onAdd() {
         }
         else {
             size_t ind = rows.front().row();
-            auto slf = m_Wizard->create_slf_for_lemm(m_LemmaToPredict, m_PredictedParadigms[ind].m_FlexiaModelNo, 50);
+            const CPredictSuffix& predicted = m_PredictedParadigms[ind];
+            auto slf = m_Wizard->create_slf_for_lemm(m_LemmaToPredict, predicted.m_FlexiaModelNo, 50, predicted.m_NextFlexiaModels);
             editor->m_ParadigmText = fromUtf8(slf);
             editor->m_CommonGrammems = fromUtf8(m_Wizard->get_grammem_string(m_PredictedParadigms[ind].m_SourceCommonAncode));
             qsizetype i = predict_what.indexOf('|');
