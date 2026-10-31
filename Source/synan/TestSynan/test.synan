@@ -1,0 +1,342 @@
+[
+    {
+        "comments": "",
+        "input": "Это, наверно, что-то очень важное.",
+        "result": [
+            {
+                "analytical": [],
+                "groups": [
+                    {
+                        "good_synvars": [
+                            {
+                                "clause_type": "ВВОД",
+                                "groups": [],
+                                "syn_units": [
+                                    {
+                                        "lemma": ",",
+                                        "modified_grammems": "",
+                                        "morph_info": " "
+                                    },
+                                    {
+                                        "lemma": "НАВЕРНО",
+                                        "modified_grammems": "",
+                                        "morph_info": "ВВОДН ; "
+                                    }
+                                ]
+                            }
+                        ],
+                        "last": 2,
+                        "start": 1,
+                        "words": ", наверно"
+                    },
+                    {
+                        "good_synvars": [
+                            {
+                                "clause_type": "ТИРЕ",
+                                "groups": [
+                                    {
+                                        "type": "НАР_ПРИЛ",
+                                        "words": "очень важное"
+                                    }
+                                ],
+                                "syn_units": [
+                                    {
+                                        "lemma": "ЭТОТ",
+                                        "modified_grammems": "но,од,ср,вн,им,ед,",
+                                        "morph_info": "МС-П но,од,ср,им,ед,; но,од,ср,вн,ед,; "
+                                    },
+                                    {
+                                        "lemma": ",",
+                                        "modified_grammems": "",
+                                        "morph_info": " "
+                                    },
+                                    {
+                                        "lemma": "ЧТО-ТО",
+                                        "modified_grammems": "ср,вн,им,ед,",
+                                        "morph_info": "МС ср,им,ед,; ср,вн,ед,; "
+                                    },
+                                    {
+                                        "lemma": "-",
+                                        "modified_grammems": "",
+                                        "morph_info": " "
+                                    },
+                                    {
+                                        "lemma": "ОЧЕНЬ",
+                                        "modified_grammems": "",
+                                        "morph_info": "Н ; "
+                                    },
+                                    {
+                                        "lemma": "ВАЖНЫЙ",
+                                        "modified_grammems": "но,од,ср,вн,им,ед,",
+                                        "morph_info": "П но,од,ср,им,ед,; но,од,ср,вн,ед,; "
+                                    },
+                                    {
+                                        "lemma": ".",
+                                        "modified_grammems": "",
+                                        "morph_info": " "
+                                    }
+                                ]
+                            },
+                            {
+                                "clause_type": "ТИРЕ",
+                                "groups": [
+                                    {
+                                        "type": "НАР_ПРИЛ",
+                                        "words": "очень важное"
+                                    }
+                                ],
+                                "syn_units": [
+                                    {
+                                        "lemma": "ЭТОТ",
+                                        "modified_grammems": "но,од,ср,вн,им,ед,",
+                                        "morph_info": "МС-П но,од,ср,им,ед,; но,од,ср,вн,ед,; "
+                                    },
+                                    {
+                                        "lemma": ",",
+                                        "modified_grammems": "",
+                                        "morph_info": " "
+                                    },
+                                    {
+                                        "lemma": "ЧТО-ТО",
+                                        "modified_grammems": "ср,вн,им,ед,",
+                                        "morph_info": "МС ср,им,ед,; ср,вн,ед,; "
+                                    },
+                                    {
+                                        "lemma": "-",
+                                        "modified_grammems": "",
+                                        "morph_info": " "
+                                    },
+                                    {
+                                        "lemma": "ОЧЕНЬ",
+                                        "modified_grammems": "",
+                                        "morph_info": "Н ; "
+                                    },
+                                    {
+                                        "lemma": "ВАЖНЫЙ",
+                                        "modified_grammems": "но,од,ср,вн,им,ед,",
+                                        "morph_info": "П но,од,ср,им,ед,; но,од,ср,вн,ед,; "
+                                    },
+                                    {
+                                        "lemma": ".",
+                                        "modified_grammems": "",
+                                        "morph_info": " "
+                                    }
+                                ]
+                            },
+                            {
+                                "clause_type": "ТИРЕ",
+                                "groups": [
+                                    {
+                                        "type": "НАР_ПРИЛ",
+                                        "words": "очень важное"
+                                    }
+                                ],
+                                "syn_units": [
+                                    {
+                                        "lemma": "ЭТО",
+                                        "modified_grammems": "ср,вн,им,ед,",
+                                        "morph_info": "МС ср,им,ед,; ср,вн,ед,; "
+                                    },
+                                    {
+                                        "lemma": ",",
+                                        "modified_grammems": "",
+                                        "morph_info": " "
+                                    },
+                                    {
+                                        "lemma": "ЧТО-ТО",
+                                        "modified_grammems": "ср,вн,им,ед,",
+                                        "morph_info": "МС ср,им,ед,; ср,вн,ед,; "
+                                    },
+                                    {
+                                        "lemma": "-",
+                                        "modified_grammems": "",
+                                        "morph_info": " "
+                                    },
+                                    {
+                                        "lemma": "ОЧЕНЬ",
+                                        "modified_grammems": "",
+                                        "morph_info": "Н ; "
+                                    },
+                                    {
+                                        "lemma": "ВАЖНЫЙ",
+                                        "modified_grammems": "но,од,ср,вн,им,ед,",
+                                        "morph_info": "П но,од,ср,им,ед,; но,од,ср,вн,ед,; "
+                                    },
+                                    {
+                                        "lemma": ".",
+                                        "modified_grammems": "",
+                                        "morph_info": " "
+                                    }
+                                ]
+                            },
+                            {
+                                "clause_type": "ТИРЕ",
+                                "groups": [
+                                    {
+                                        "type": "НАР_ПРИЛ",
+                                        "words": "очень важное"
+                                    }
+                                ],
+                                "syn_units": [
+                                    {
+                                        "lemma": "ЭТО",
+                                        "modified_grammems": "ср,вн,им,ед,",
+                                        "morph_info": "МС ср,им,ед,; ср,вн,ед,; "
+                                    },
+                                    {
+                                        "lemma": ",",
+                                        "modified_grammems": "",
+                                        "morph_info": " "
+                                    },
+                                    {
+                                        "lemma": "ЧТО-ТО",
+                                        "modified_grammems": "ср,вн,им,ед,",
+                                        "morph_info": "МС ср,им,ед,; ср,вн,ед,; "
+                                    },
+                                    {
+                                        "lemma": "-",
+                                        "modified_grammems": "",
+                                        "morph_info": " "
+                                    },
+                                    {
+                                        "lemma": "ОЧЕНЬ",
+                                        "modified_grammems": "",
+                                        "morph_info": "Н ; "
+                                    },
+                                    {
+                                        "lemma": "ВАЖНЫЙ",
+                                        "modified_grammems": "но,од,ср,вн,им,ед,",
+                                        "morph_info": "П но,од,ср,им,ед,; но,од,ср,вн,ед,; "
+                                    },
+                                    {
+                                        "lemma": ".",
+                                        "modified_grammems": "",
+                                        "morph_info": " "
+                                    }
+                                ]
+                            },
+                            {
+                                "clause_type": "ТИРЕ",
+                                "groups": [
+                                    {
+                                        "type": "НАР_ПРИЛ",
+                                        "words": "очень важное"
+                                    }
+                                ],
+                                "syn_units": [
+                                    {
+                                        "lemma": "ЭТО",
+                                        "modified_grammems": "",
+                                        "morph_info": "ЧАСТ ; "
+                                    },
+                                    {
+                                        "lemma": ",",
+                                        "modified_grammems": "",
+                                        "morph_info": " "
+                                    },
+                                    {
+                                        "lemma": "ЧТО-ТО",
+                                        "modified_grammems": "ср,вн,им,ед,",
+                                        "morph_info": "МС ср,им,ед,; ср,вн,ед,; "
+                                    },
+                                    {
+                                        "lemma": "-",
+                                        "modified_grammems": "",
+                                        "morph_info": " "
+                                    },
+                                    {
+                                        "lemma": "ОЧЕНЬ",
+                                        "modified_grammems": "",
+                                        "morph_info": "Н ; "
+                                    },
+                                    {
+                                        "lemma": "ВАЖНЫЙ",
+                                        "modified_grammems": "но,од,ср,вн,им,ед,",
+                                        "morph_info": "П но,од,ср,им,ед,; но,од,ср,вн,ед,; "
+                                    },
+                                    {
+                                        "lemma": ".",
+                                        "modified_grammems": "",
+                                        "morph_info": " "
+                                    }
+                                ]
+                            },
+                            {
+                                "clause_type": "ТИРЕ",
+                                "groups": [
+                                    {
+                                        "type": "НАР_ПРИЛ",
+                                        "words": "очень важное"
+                                    }
+                                ],
+                                "syn_units": [
+                                    {
+                                        "lemma": "ЭТО",
+                                        "modified_grammems": "",
+                                        "morph_info": "ЧАСТ ; "
+                                    },
+                                    {
+                                        "lemma": ",",
+                                        "modified_grammems": "",
+                                        "morph_info": " "
+                                    },
+                                    {
+                                        "lemma": "ЧТО-ТО",
+                                        "modified_grammems": "ср,вн,им,ед,",
+                                        "morph_info": "МС ср,им,ед,; ср,вн,ед,; "
+                                    },
+                                    {
+                                        "lemma": "-",
+                                        "modified_grammems": "",
+                                        "morph_info": " "
+                                    },
+                                    {
+                                        "lemma": "ОЧЕНЬ",
+                                        "modified_grammems": "",
+                                        "morph_info": "Н ; "
+                                    },
+                                    {
+                                        "lemma": "ВАЖНЫЙ",
+                                        "modified_grammems": "но,од,ср,вн,им,ед,",
+                                        "morph_info": "П но,од,ср,им,ед,; но,од,ср,вн,ед,; "
+                                    },
+                                    {
+                                        "lemma": ".",
+                                        "modified_grammems": "",
+                                        "morph_info": " "
+                                    }
+                                ]
+                            }
+                        ],
+                        "last": 8,
+                        "start": 0,
+                        "words": "Это , наверно , что-то - очень важное ."
+                    }
+                ],
+                "relations": [
+                    {
+                        "gramrel": "кач,но,од,ср,вн,им,ед,",
+                        "name": "НАР_ПРИЛ",
+                        "src": "важное",
+                        "src_grm": "кач,но,од,ср,вн,им,ед,",
+                        "src_lemma": "ВАЖНЫЙ",
+                        "trg": "очень",
+                        "trg_grm": "",
+                        "trg_lemma": "ОЧЕНЬ"
+                    },
+                    {
+                        "gramrel": "",
+                        "name": "ВВОДН_КЛАУЗА",
+                        "src": "-",
+                        "src_grm": "",
+                        "src_lemma": "-",
+                        "trg": "наверно",
+                        "trg_grm": "",
+                        "trg_lemma": "НАВЕРНО"
+                    }
+                ],
+                "terms": []
+            }
+        ]
+    }
+]

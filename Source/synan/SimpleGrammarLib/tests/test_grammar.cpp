@@ -9,7 +9,7 @@ CGraphmatFile graphan;
 CLemmatizedText lemmatize_text(std::string s) {
 	graphan.LoadStringToGraphan(s);
 	CLemmatizedText t(morphGerman);
-	t.CreateFromTokemized(&graphan);
+	t.CreateFromTokenized(&graphan);
 	t.SaveToFile("test_text.lem");
 	return t;
 }

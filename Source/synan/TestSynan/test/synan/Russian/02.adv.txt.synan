@@ -376,6 +376,37 @@
                                 "syn_units": [
                                     {
                                         "lemma": "УЖ",
+                                        "morph_info": "ЧАСТ ; ",
+                                        "modified_grammems": ""
+                                    },
+                                    {
+                                        "lemma": "ОЧЕНЬ",
+                                        "morph_info": "Н ; ",
+                                        "modified_grammems": ""
+                                    },
+                                    {
+                                        "lemma": "ЖЕ",
+                                        "morph_info": "ЧАСТ ; ",
+                                        "modified_grammems": ""
+                                    },
+                                    {
+                                        "lemma": "МНОГО",
+                                        "morph_info": "ПРЕДК нст,; ",
+                                        "modified_grammems": "нст,"
+                                    }
+                                ],
+                                "groups": [
+                                    {
+                                        "type": "НАР_НАР_ЧИСЛ",
+                                        "words": "уж очень же много"
+                                    }
+                                ],
+                                "clause_type": "ПРЕДК"
+                            },
+                            {
+                                "syn_units": [
+                                    {
+                                        "lemma": "УЖ",
                                         "morph_info": "Н ; ",
                                         "modified_grammems": ""
                                     },
@@ -426,39 +457,8 @@
                                     },
                                     {
                                         "lemma": "МНОГО",
-                                        "morph_info": "ПРЕДК нст,; ",
-                                        "modified_grammems": "нст,"
-                                    }
-                                ],
-                                "groups": [
-                                    {
-                                        "type": "НАР_НАР_ЧИСЛ",
-                                        "words": "уж очень же много"
-                                    }
-                                ],
-                                "clause_type": "ПРЕДК"
-                            },
-                            {
-                                "syn_units": [
-                                    {
-                                        "lemma": "УЖ",
-                                        "morph_info": "ЧАСТ ; ",
-                                        "modified_grammems": ""
-                                    },
-                                    {
-                                        "lemma": "ОЧЕНЬ",
-                                        "morph_info": "Н ; ",
-                                        "modified_grammems": ""
-                                    },
-                                    {
-                                        "lemma": "ЖЕ",
-                                        "morph_info": "ЧАСТ ; ",
-                                        "modified_grammems": ""
-                                    },
-                                    {
-                                        "lemma": "МНОГО",
-                                        "morph_info": "Н ; ",
-                                        "modified_grammems": ""
+                                        "morph_info": "ЧИСЛ им,; вн,; ",
+                                        "modified_grammems": "вн,им,"
                                     }
                                 ],
                                 "groups": [
@@ -488,8 +488,8 @@
                                     },
                                     {
                                         "lemma": "МНОГО",
-                                        "morph_info": "ЧИСЛ им,; вн,; ",
-                                        "modified_grammems": "вн,им,"
+                                        "morph_info": "Н ; ",
+                                        "modified_grammems": ""
                                     }
                                 ],
                                 "groups": [
@@ -504,6 +504,16 @@
                     }
                 ],
                 "relations": [
+                    {
+                        "src": "много",
+                        "trg": "уж",
+                        "name": "НАР_НАР_ЧИСЛ",
+                        "gramrel": "нст,",
+                        "src_lemma": "МНОГО",
+                        "src_grm": "нст,",
+                        "trg_lemma": "УЖ",
+                        "trg_grm": ""
+                    },
                     {
                         "src": "много",
                         "trg": "очень",
@@ -522,16 +532,6 @@
                         "src_lemma": "МНОГО",
                         "src_grm": "нст,",
                         "trg_lemma": "ЖЕ",
-                        "trg_grm": ""
-                    },
-                    {
-                        "src": "много",
-                        "trg": "уж",
-                        "name": "НАР_ПРЕДИК",
-                        "gramrel": "нст,",
-                        "src_lemma": "МНОГО",
-                        "src_grm": "нст,",
-                        "trg_lemma": "УЖ",
                         "trg_grm": ""
                     }
                 ],
@@ -633,8 +633,8 @@
                                     },
                                     {
                                         "lemma": "ЗЛО",
-                                        "morph_info": "Н ; ",
-                                        "modified_grammems": ""
+                                        "morph_info": "С ср,им,ед,; ср,вн,ед,; ",
+                                        "modified_grammems": "ср,вн,им,ед,"
                                     }
                                 ],
                                 "groups": [],
@@ -654,8 +654,8 @@
                                     },
                                     {
                                         "lemma": "ЗЛО",
-                                        "morph_info": "С ср,им,ед,; ср,вн,ед,; ",
-                                        "modified_grammems": "ср,вн,им,ед,"
+                                        "morph_info": "Н ; ",
+                                        "modified_grammems": ""
                                     }
                                 ],
                                 "groups": [],
@@ -685,71 +685,8 @@
                                 "syn_units": [
                                     {
                                         "lemma": "ОТЧЕГО",
-                                        "morph_info": "СОЮЗ ; ",
-                                        "modified_grammems": ""
-                                    },
-                                    {
-                                        "lemma": "И",
-                                        "morph_info": "СОЮЗ ; ",
-                                        "modified_grammems": ""
-                                    },
-                                    {
-                                        "lemma": "ЗЛО",
-                                        "morph_info": "Н ; ",
-                                        "modified_grammems": ""
-                                    }
-                                ],
-                                "groups": [],
-                                "clause_type": "EMPTY"
-                            },
-                            {
-                                "syn_units": [
-                                    {
-                                        "lemma": "ОТЧЕГО",
-                                        "morph_info": "СОЮЗ ; ",
-                                        "modified_grammems": ""
-                                    },
-                                    {
-                                        "lemma": "И",
-                                        "morph_info": "СОЮЗ ; ",
-                                        "modified_grammems": ""
-                                    },
-                                    {
-                                        "lemma": "ЗЛО",
-                                        "morph_info": "С ср,им,ед,; ср,вн,ед,; ",
-                                        "modified_grammems": "ср,вн,им,ед,"
-                                    }
-                                ],
-                                "groups": [],
-                                "clause_type": "EMPTY"
-                            },
-                            {
-                                "syn_units": [
-                                    {
-                                        "lemma": "ОТЧИЙ",
-                                        "morph_info": "П но,од,мр,рд,ед,; од,мр,вн,ед,; но,од,ср,рд,ед,; ",
-                                        "modified_grammems": "но,од,ср,мр,вн,рд,ед,"
-                                    },
-                                    {
-                                        "lemma": "И",
-                                        "morph_info": "СОЮЗ ; ",
-                                        "modified_grammems": ""
-                                    },
-                                    {
-                                        "lemma": "ЗЛО",
-                                        "morph_info": "Н ; ",
-                                        "modified_grammems": ""
-                                    }
-                                ],
-                                "groups": [],
-                                "clause_type": "EMPTY"
-                            },
-                            {
-                                "syn_units": [
-                                    {
-                                        "lemma": "ОТЧИЙ",
-                                        "morph_info": "П но,од,мр,рд,ед,; од,мр,вн,ед,; но,од,ср,рд,ед,; ",
-                                        "modified_grammems": "но,од,ср,мр,вн,рд,ед,"
+                                        "morph_info": "Н вопр,; ",
+                                        "modified_grammems": "вопр,"
                                     },
                                     {
                                         "lemma": "И",
@@ -789,9 +726,9 @@
                             {
                                 "syn_units": [
                                     {
-                                        "lemma": "ОТЧЕГО",
-                                        "morph_info": "Н вопр,; ",
-                                        "modified_grammems": "вопр,"
+                                        "lemma": "ОТЧИЙ",
+                                        "morph_info": "П но,од,мр,рд,ед,; од,мр,вн,ед,; но,од,ср,рд,ед,; ",
+                                        "modified_grammems": "но,од,ср,мр,вн,рд,ед,"
                                     },
                                     {
                                         "lemma": "И",
@@ -802,6 +739,69 @@
                                         "lemma": "ЗЛО",
                                         "morph_info": "С ср,им,ед,; ср,вн,ед,; ",
                                         "modified_grammems": "ср,вн,им,ед,"
+                                    }
+                                ],
+                                "groups": [],
+                                "clause_type": "EMPTY"
+                            },
+                            {
+                                "syn_units": [
+                                    {
+                                        "lemma": "ОТЧИЙ",
+                                        "morph_info": "П но,од,мр,рд,ед,; од,мр,вн,ед,; но,од,ср,рд,ед,; ",
+                                        "modified_grammems": "но,од,ср,мр,вн,рд,ед,"
+                                    },
+                                    {
+                                        "lemma": "И",
+                                        "morph_info": "СОЮЗ ; ",
+                                        "modified_grammems": ""
+                                    },
+                                    {
+                                        "lemma": "ЗЛО",
+                                        "morph_info": "Н ; ",
+                                        "modified_grammems": ""
+                                    }
+                                ],
+                                "groups": [],
+                                "clause_type": "EMPTY"
+                            },
+                            {
+                                "syn_units": [
+                                    {
+                                        "lemma": "ОТЧЕГО",
+                                        "morph_info": "СОЮЗ ; ",
+                                        "modified_grammems": ""
+                                    },
+                                    {
+                                        "lemma": "И",
+                                        "morph_info": "СОЮЗ ; ",
+                                        "modified_grammems": ""
+                                    },
+                                    {
+                                        "lemma": "ЗЛО",
+                                        "morph_info": "С ср,им,ед,; ср,вн,ед,; ",
+                                        "modified_grammems": "ср,вн,им,ед,"
+                                    }
+                                ],
+                                "groups": [],
+                                "clause_type": "EMPTY"
+                            },
+                            {
+                                "syn_units": [
+                                    {
+                                        "lemma": "ОТЧЕГО",
+                                        "morph_info": "СОЮЗ ; ",
+                                        "modified_grammems": ""
+                                    },
+                                    {
+                                        "lemma": "И",
+                                        "morph_info": "СОЮЗ ; ",
+                                        "modified_grammems": ""
+                                    },
+                                    {
+                                        "lemma": "ЗЛО",
+                                        "morph_info": "Н ; ",
+                                        "modified_grammems": ""
                                     }
                                 ],
                                 "groups": [],

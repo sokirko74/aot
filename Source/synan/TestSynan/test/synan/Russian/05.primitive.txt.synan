@@ -240,9 +240,9 @@
                                         "modified_grammems": ""
                                     },
                                     {
-                                        "lemma": "ЛЕСА",
-                                        "morph_info": "С жр,вн,ед,; жр,вн,ед,; ",
-                                        "modified_grammems": "жр,вн,ед,"
+                                        "lemma": "ЛЕС",
+                                        "morph_info": "С 2,мр,рд,ед,; мр,дт,ед,; 2,мр,пр,ед,; ",
+                                        "modified_grammems": "2,мр,пр,ед,"
                                     }
                                 ],
                                 "groups": [
@@ -261,9 +261,9 @@
                                         "modified_grammems": ""
                                     },
                                     {
-                                        "lemma": "ЛЕС",
-                                        "morph_info": "С 2,мр,рд,ед,; мр,дт,ед,; 2,мр,пр,ед,; ",
-                                        "modified_grammems": "2,мр,пр,ед,"
+                                        "lemma": "ЛЕСА",
+                                        "morph_info": "С жр,вн,ед,; жр,вн,ед,; ",
+                                        "modified_grammems": "жр,вн,ед,"
                                     }
                                 ],
                                 "groups": [
@@ -282,11 +282,11 @@
                         "src": "в",
                         "trg": "лесу",
                         "name": "ПГ",
-                        "gramrel": "вн,",
+                        "gramrel": "пр,",
                         "src_lemma": "В",
                         "src_grm": "",
-                        "trg_lemma": "ЛЕСА",
-                        "trg_grm": "но,жр,вн,ед,"
+                        "trg_lemma": "ЛЕС",
+                        "trg_grm": "2,но,мр,пр,ед,"
                     }
                 ],
                 "terms": []

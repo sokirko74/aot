@@ -205,22 +205,6 @@
                                         "modified_grammems": "рд,мн,"
                                     },
                                     {
-                                        "lemma": "МАЛО",
-                                        "morph_info": "ПРЕДК нст,; ",
-                                        "modified_grammems": "нст,"
-                                    }
-                                ],
-                                "groups": [],
-                                "clause_type": "ПРЕДК"
-                            },
-                            {
-                                "syn_units": [
-                                    {
-                                        "lemma": "ДЕНЬГИ",
-                                        "morph_info": "С рд,мн,; ",
-                                        "modified_grammems": "рд,мн,"
-                                    },
-                                    {
                                         "lemma": "МАЛЫЙ",
                                         "morph_info": "КР_ПРИЛ но,од,ср,ед,; ",
                                         "modified_grammems": "но,од,ср,ед,"
@@ -238,8 +222,24 @@
                                     },
                                     {
                                         "lemma": "МАЛО",
-                                        "morph_info": "Н ; ",
-                                        "modified_grammems": ""
+                                        "morph_info": "ПРЕДК нст,; ",
+                                        "modified_grammems": "нст,"
+                                    }
+                                ],
+                                "groups": [],
+                                "clause_type": "ПРЕДК"
+                            },
+                            {
+                                "syn_units": [
+                                    {
+                                        "lemma": "ДЕНЬГИ",
+                                        "morph_info": "С рд,мн,; ",
+                                        "modified_grammems": "рд,мн,"
+                                    },
+                                    {
+                                        "lemma": "МАЛО",
+                                        "morph_info": "ЧИСЛ им,; вн,; ",
+                                        "modified_grammems": "вн,им,"
                                     }
                                 ],
                                 "groups": [],
@@ -254,8 +254,8 @@
                                     },
                                     {
                                         "lemma": "МАЛО",
-                                        "morph_info": "ЧИСЛ им,; вн,; ",
-                                        "modified_grammems": "вн,им,"
+                                        "morph_info": "Н ; ",
+                                        "modified_grammems": ""
                                     }
                                 ],
                                 "groups": [],

@@ -341,7 +341,7 @@
                         {
                             "word": "ДУХУ",
                             "lemma": "ДУХ",
-                            "inner_morph": "С од,мр,дт,ед,"
+                            "inner_morph": "С но,мр,дт,ед,"
                         }
                     ],
                     "index": 1,
@@ -397,15 +397,15 @@
             ],
             "relations": [
                 {
-                    "name": "THEME",
-                    "source": "СКАЗАТЬ",
-                    "target": "ЭТОМ",
-                    "syntax_rel": "к_доп"
-                },
-                {
                     "name": "ADR",
                     "source": "СКАЗАТЬ",
                     "target": "ЕМУ",
+                    "syntax_rel": "к_доп"
+                },
+                {
+                    "name": "THEME",
+                    "source": "СКАЗАТЬ",
+                    "target": "ЭТОМ",
                     "syntax_rel": "к_доп"
                 },
                 {

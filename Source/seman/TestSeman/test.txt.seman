@@ -1,0 +1,161 @@
+[
+    {
+        "input": "$200 тыс.",
+        "comments": "",
+        "result": {
+            "nodes": [
+                {
+                    "words": [
+                        {
+                            "word": "200000",
+                            "lemma": "",
+                            "inner_morph": "ЧИСЛ аббр,0,но,"
+                        }
+                    ],
+                    "index": 0,
+                    "morph": "ЧИСЛ аббр,0,",
+                    "interps": []
+                },
+                {
+                    "words": [
+                        {
+                            "word": "ДОЛЛ",
+                            "lemma": "ДОЛЛАР",
+                            "inner_morph": "С аббр,0,но,мр,пр,тв,вн,дт,рд,им,ед,мн,"
+                        }
+                    ],
+                    "index": 1,
+                    "morph": "С аббр,0,но,мр,пр,тв,вн,дт,рд,им,ед,мн,",
+                    "interps": [
+                        " +  RML_THES_FIN: 177731 1"
+                    ]
+                }
+            ],
+            "relations": [
+                {
+                    "name": "QUANTIT",
+                    "source": "ДОЛЛ",
+                    "target": "200000",
+                    "syntax_rel": "ЧИСЛ_СУЩ"
+                }
+            ],
+            "aux_relations": []
+        }
+    },
+    {
+        "input": "два",
+        "comments": "",
+        "result": {
+            "nodes": [
+                {
+                    "words": [
+                        {
+                            "word": "2",
+                            "lemma": "",
+                            "inner_morph": "ЧИСЛ ср,мр,вн,им,"
+                        }
+                    ],
+                    "index": 0,
+                    "morph": "ЧИСЛ ср,мр,вн,им,",
+                    "interps": []
+                }
+            ],
+            "relations": [],
+            "aux_relations": []
+        }
+    },
+    {
+        "input": "больше",
+        "comments": "",
+        "result": {
+            "nodes": [
+                {
+                    "words": [
+                        {
+                            "word": "БОЛЬШЕ",
+                            "lemma": "БОЛЬШОЙ",
+                            "inner_morph": "П кач,сравн,но,од,"
+                        }
+                    ],
+                    "index": 0,
+                    "morph": "П кач,сравн,но,од,",
+                    "interps": [
+                        " +  ROSS: большой 1"
+                    ]
+                }
+            ],
+            "relations": [],
+            "aux_relations": []
+        }
+    },
+    {
+        "input": "оба",
+        "comments": "",
+        "result": {
+            "nodes": [
+                {
+                    "words": [
+                        {
+                            "word": "ОБА",
+                            "lemma": "ОБА",
+                            "inner_morph": "ЧИСЛ ср,мр,вн,им,"
+                        }
+                    ],
+                    "index": 0,
+                    "morph": "ЧИСЛ ср,мр,вн,им,",
+                    "interps": [
+                        " +  ROSS: оба 1"
+                    ]
+                }
+            ],
+            "relations": [],
+            "aux_relations": []
+        }
+    },
+    {
+        "input": "несколько",
+        "comments": "",
+        "result": {
+            "nodes": [
+                {
+                    "words": [
+                        {
+                            "word": "НЕСКОЛЬКО",
+                            "lemma": "НЕСКОЛЬКО",
+                            "inner_morph": "ЧИСЛ вн,им,"
+                        }
+                    ],
+                    "index": 0,
+                    "morph": "ЧИСЛ вн,им,",
+                    "interps": [
+                        " +  ROSS: несколько 2"
+                    ]
+                }
+            ],
+            "relations": [],
+            "aux_relations": []
+        }
+    },
+    {
+        "input": "2000",
+        "comments": "",
+        "result": {
+            "nodes": [
+                {
+                    "words": [
+                        {
+                            "word": "2000",
+                            "lemma": "2000",
+                            "inner_morph": "ЧИСЛ ср,жр,мр,пр,тв,вн,дт,рд,им,"
+                        }
+                    ],
+                    "index": 0,
+                    "morph": "ЧИСЛ ср,жр,мр,пр,тв,вн,дт,рд,им,",
+                    "interps": []
+                }
+            ],
+            "relations": [],
+            "aux_relations": []
+        }
+    }
+]

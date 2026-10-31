@@ -1,0 +1,73 @@
+﻿VERB  [CLemmatizer::LoadDictionariesFromPath@225] load /home/sokirko/proj/RML/Dicts/Morph/Russian/
+VERB  [CLemmatizer::LoadDictionariesFromPath@229] load literature statistics /home/sokirko/proj/RML/Dicts/Morph/Russian/l
+VERB  [CLemmatizer::ReadOptions@206] load /home/sokirko/proj/RML/Dicts/Morph/Russian/morph.options
+VERB  [CLemmatizer::LoadDictionariesFromPath@238] load /home/sokirko/proj/RML/Dicts/Morph/Russian/npredict.bin
+VERB  [CSentence::TraceClauses@39] no_type(0 2) (на день) 
+VERB  [CSentence::TraceClauses@39] no_type(0 2) (на день) 
+VERB  [CRusSentence::BuildClauses@573] BuildAnalyticalVerbForms
+VERB  [CRusSentence::BuildClauses@577] TryToAddComparativeTypeToClause
+VERB  [CRusSentence::BuildClauses@580] TryToRebuildDashInClause
+VERB  [CSentence::TraceClauses@39] no_type(0 2) (на день) 
+VERB  [CSentence::TraceClauses@39] no_type(0 2) (на день) 
+VERB  [CRusSentence::BuildClauses@585] RunSyntaxInClause(RulesBeforeSimClauses)
+VERB  [CClause::BuildSynVariants@597] BuildSynVariants found 2 variants for no_type(0 2) (на день)
+VERB  [CFormatCaller::try_and_step_forward@74] ПРИЛ_СУЩ (1, 2) (один, день) (но,од,мр,вн,им,ед, , но,мр,вн,им,ед,) мр,вн,им,ед, is created
+VERB  [CFormatCaller::try_and_step_forward@74] ПГ (0, 2) (на, день) ( , но,мр,вн,ед,) вн, is created
+VERB  [CClause::BuildGroupsAndSynVariants@685] m_iWeight = 3
+VERB  [CFormatCaller::try_and_step_forward@74] ЧИСЛ_СУЩ (1, 2) (один, день) (мр,вн,им, , но,мр,вн,им,ед,) мр,вн,им, is created
+VERB  [CFormatCaller::try_and_step_forward@74] ПГ (0, 2) (на, день) ( , но,мр,вн,им,ед,) вн, is created
+VERB  [CClause::BuildGroupsAndSynVariants@685] m_iWeight = 3
+VERB  [CRusSentence::BuildClauses@589] DeleteMarkedHomonymsWithClauses
+VERB  [CRusSentence::BuildClauses@592] InitWordsInTermins
+VERB  [CRusSentence::BuildClauses@599] OneRunOfClauseRules(m_vectorPrimitiveRules)
+VERB  [CSentence::TraceClauses@39] no_type(0 2) (на день) 
+VERB  [CRusSentence::BuildClauses@603] RunSyntaxInClause(RulesAfterSimClauses)
+VERB  [CRusSentence::BuildClauses@607] OneRunOfClauseRules(m_vectorMainEncloseRules)
+VERB  [CSentence::TraceClauses@39] no_type(0 2) (на день) 
+VERB  [CRusSentence::BuildClauses@611] RunSyntaxInClause(GroupRulesForClause)
+VERB  [CRusSentence::BuildClauses@614] OneRunOfClauseRules(m_vectorDisruptRules)
+VERB  [CSentence::TraceClauses@39] no_type(0 2) (на день) 
+VERB  [CRusSentence::BuildClauses@619] RunSyntaxInClause(AllRules)
+VERB  [CFormatCaller::try_and_step_forward@74] ПРИЛ_СУЩ (1, 2) (один, день) (но,мр,вн,ед, , но,мр,вн,ед,) мр,вн,ед, is created
+VERB  [CFormatCaller::try_and_step_forward@74] ПГ (0, 2) (на, день) ( , но,мр,вн,ед,) вн, is created
+VERB  [CFormatCaller::try_and_step_forward@74] ПГ (0, 1) (на, один) ( , мр,вн,) вн, is created
+VERB  [CRusSentence::BuildClauses@624] RunSyntaxInClause(GroupRulesForClause)
+VERB  [CRusSentence::BuildClauses@627] BuildClauseRelations()
+VERB  [CRusSentence::BuildClauses@631] RecalculateRelationsCoordinates()
+VERB  [CRusSentence::BuildClauses@636] AddWeightForSynVariantsInClauses()
+VERB  [CRusSentence::BuildClauses@667] KillHomonymsInAllSentence
+VERB  [CClause::KillHomonymsCoverage@38] KillHomonymsCoverage left only 1 from 2 synvariants in no_type(0 2) (на день)
+VERB  [CClause::DeleteHomonym@1089] Delete homonym "ОДИН" from Word "один"(Only 2 homonyms left)(InOborot=false)
+VERB  [CRusSentence::BuildClauses@707] goto  BuildInitialClausesLabel
+VERB  [CSentence::TraceClauses@39] no_type(0 2) (на день) 
+VERB  [CSentence::TraceClauses@39] no_type(0 2) (на день) 
+VERB  [CSentence::TraceClauses@39] no_type(0 2) (на день) 
+VERB  [CRusSentence::BuildClauses@573] BuildAnalyticalVerbForms
+VERB  [CRusSentence::BuildClauses@577] TryToAddComparativeTypeToClause
+VERB  [CRusSentence::BuildClauses@580] TryToRebuildDashInClause
+VERB  [CSentence::TraceClauses@39] no_type(0 2) (на день) 
+VERB  [CSentence::TraceClauses@39] no_type(0 2) (на день) 
+VERB  [CRusSentence::BuildClauses@585] RunSyntaxInClause(RulesBeforeSimClauses)
+VERB  [CClause::BuildSynVariants@597] BuildSynVariants found 1 variants for no_type(0 2) (на день)
+VERB  [CFormatCaller::try_and_step_forward@74] ПРИЛ_СУЩ (1, 2) (один, день) (но,од,мр,вн,им,ед, , но,мр,вн,им,ед,) мр,вн,им,ед, is created
+VERB  [CFormatCaller::try_and_step_forward@74] ПГ (0, 2) (на, день) ( , но,мр,вн,ед,) вн, is created
+VERB  [CClause::BuildGroupsAndSynVariants@685] m_iWeight = 3
+VERB  [CRusSentence::BuildClauses@589] DeleteMarkedHomonymsWithClauses
+VERB  [CRusSentence::BuildClauses@592] InitWordsInTermins
+VERB  [CRusSentence::BuildClauses@599] OneRunOfClauseRules(m_vectorPrimitiveRules)
+VERB  [CSentence::TraceClauses@39] no_type(0 2) (на день) 
+VERB  [CRusSentence::BuildClauses@603] RunSyntaxInClause(RulesAfterSimClauses)
+VERB  [CRusSentence::BuildClauses@607] OneRunOfClauseRules(m_vectorMainEncloseRules)
+VERB  [CSentence::TraceClauses@39] no_type(0 2) (на день) 
+VERB  [CRusSentence::BuildClauses@611] RunSyntaxInClause(GroupRulesForClause)
+VERB  [CRusSentence::BuildClauses@614] OneRunOfClauseRules(m_vectorDisruptRules)
+VERB  [CSentence::TraceClauses@39] no_type(0 2) (на день) 
+VERB  [CRusSentence::BuildClauses@619] RunSyntaxInClause(AllRules)
+VERB  [CFormatCaller::try_and_step_forward@74] ПРИЛ_СУЩ (1, 2) (один, день) (но,мр,вн,ед, , но,мр,вн,ед,) мр,вн,ед, is created
+VERB  [CFormatCaller::try_and_step_forward@74] ПГ (0, 2) (на, день) ( , но,мр,вн,ед,) вн, is created
+VERB  [CRusSentence::BuildClauses@624] RunSyntaxInClause(GroupRulesForClause)
+VERB  [CRusSentence::BuildClauses@627] BuildClauseRelations()
+VERB  [CRusSentence::BuildClauses@631] RecalculateRelationsCoordinates()
+VERB  [CRusSentence::BuildClauses@636] AddWeightForSynVariantsInClauses()
+VERB  [CRusSentence::BuildClauses@667] KillHomonymsInAllSentence
+VERB  [CClause::KillHomonymsCoverage@38] KillHomonymsCoverage left only 1 from 1 synvariants in no_type(0 2) (на день)

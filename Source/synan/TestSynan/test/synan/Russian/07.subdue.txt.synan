@@ -85,13 +85,13 @@
                                         "modified_grammems": "дст,прш,ср,ед,"
                                     },
                                     {
-                                        "lemma": "ХОРОШО",
-                                        "morph_info": "ПРЕДК сравн,нст,; ",
-                                        "modified_grammems": "сравн,нст,"
+                                        "lemma": "ХОРОШИЙ",
+                                        "morph_info": "П сравн,но,од,; ",
+                                        "modified_grammems": "сравн,но,од,"
                                     }
                                 ],
                                 "groups": [],
-                                "clause_type": "ПРЕДК"
+                                "clause_type": "СРАВН"
                             },
                             {
                                 "syn_units": [
@@ -106,13 +106,13 @@
                                         "modified_grammems": "дст,прш,ср,ед,"
                                     },
                                     {
-                                        "lemma": "ХОРОШИЙ",
-                                        "morph_info": "П сравн,но,од,; ",
-                                        "modified_grammems": "сравн,но,од,"
+                                        "lemma": "ХОРОШО",
+                                        "morph_info": "ПРЕДК сравн,нст,; ",
+                                        "modified_grammems": "сравн,нст,"
                                     }
                                 ],
                                 "groups": [],
-                                "clause_type": "СРАВН"
+                                "clause_type": "ПРЕДК"
                             }
                         ]
                     }
@@ -262,9 +262,9 @@
                             {
                                 "syn_units": [
                                     {
-                                        "lemma": "СЛАТЬ",
-                                        "morph_info": "Г дст,пвл,2л,ед,; ",
-                                        "modified_grammems": "дст,пвл,2л,ед,"
+                                        "lemma": "ИДТИ",
+                                        "morph_info": "Г дст,прш,мн,; ",
+                                        "modified_grammems": "дст,прш,мн,"
                                     },
                                     {
                                         "lemma": "ПОЧТА",
@@ -278,9 +278,9 @@
                             {
                                 "syn_units": [
                                     {
-                                        "lemma": "ИДТИ",
-                                        "morph_info": "Г дст,прш,мн,; ",
-                                        "modified_grammems": "дст,прш,мн,"
+                                        "lemma": "СЛАТЬ",
+                                        "morph_info": "Г дст,пвл,2л,ед,; ",
+                                        "modified_grammems": "дст,пвл,2л,ед,"
                                     },
                                     {
                                         "lemma": "ПОЧТА",
@@ -314,9 +314,9 @@
                             {
                                 "syn_units": [
                                     {
-                                        "lemma": "СЛАТЬ",
-                                        "morph_info": "Г дст,пвл,2л,ед,; ",
-                                        "modified_grammems": "дст,пвл,2л,ед,"
+                                        "lemma": "ИДТИ",
+                                        "morph_info": "Г дст,прш,мн,; ",
+                                        "modified_grammems": "дст,прш,мн,"
                                     },
                                     {
                                         "lemma": "ПОЛЕ",
@@ -330,9 +330,9 @@
                             {
                                 "syn_units": [
                                     {
-                                        "lemma": "ИДТИ",
-                                        "morph_info": "Г дст,прш,мн,; ",
-                                        "modified_grammems": "дст,прш,мн,"
+                                        "lemma": "СЛАТЬ",
+                                        "morph_info": "Г дст,пвл,2л,ед,; ",
+                                        "modified_grammems": "дст,пвл,2л,ед,"
                                     },
                                     {
                                         "lemma": "ПОЛЕ",
@@ -371,22 +371,6 @@
                                         "modified_grammems": "дст,"
                                     },
                                     {
-                                        "lemma": "НОЧЬЮ",
-                                        "morph_info": "Н ; ",
-                                        "modified_grammems": ""
-                                    }
-                                ],
-                                "groups": [],
-                                "clause_type": "ИНФ"
-                            },
-                            {
-                                "syn_units": [
-                                    {
-                                        "lemma": "БЕЖАТЬ",
-                                        "morph_info": "ИНФИНИТИВ дст,; ",
-                                        "modified_grammems": "дст,"
-                                    },
-                                    {
                                         "lemma": "НОЧЬ",
                                         "morph_info": "С жр,тв,ед,; ",
                                         "modified_grammems": "жр,тв,ед,"
@@ -422,6 +406,22 @@
                                         "lemma": "НОЧЬ",
                                         "morph_info": "С жр,тв,ед,; ",
                                         "modified_grammems": "жр,тв,ед,"
+                                    }
+                                ],
+                                "groups": [],
+                                "clause_type": "ИНФ"
+                            },
+                            {
+                                "syn_units": [
+                                    {
+                                        "lemma": "БЕЖАТЬ",
+                                        "morph_info": "ИНФИНИТИВ дст,; ",
+                                        "modified_grammems": "дст,"
+                                    },
+                                    {
+                                        "lemma": "НОЧЬЮ",
+                                        "morph_info": "Н ; ",
+                                        "modified_grammems": ""
                                     }
                                 ],
                                 "groups": [],
@@ -455,9 +455,9 @@
                                         "modified_grammems": "дст,"
                                     },
                                     {
-                                        "lemma": "ДНЕМ",
-                                        "morph_info": "Н ; ",
-                                        "modified_grammems": ""
+                                        "lemma": "ДЕНЬ",
+                                        "morph_info": "С мр,тв,ед,; ",
+                                        "modified_grammems": "мр,тв,ед,"
                                     }
                                 ],
                                 "groups": [],
@@ -471,9 +471,9 @@
                                         "modified_grammems": "дст,"
                                     },
                                     {
-                                        "lemma": "ДЕНЬ",
-                                        "morph_info": "С мр,тв,ед,; ",
-                                        "modified_grammems": "мр,тв,ед,"
+                                        "lemma": "ДНЕМ",
+                                        "morph_info": "Н ; ",
+                                        "modified_grammems": ""
                                     }
                                 ],
                                 "groups": [],
@@ -512,51 +512,6 @@
                                         "modified_grammems": "дст,прш,мр,ед,"
                                     },
                                     {
-                                        "lemma": "ОНО",
-                                        "morph_info": "МС 3л,ср,рд,ед,; 3л,ср,вн,ед,; ",
-                                        "modified_grammems": "3л,ср,вн,рд,ед,"
-                                    },
-                                    {
-                                        "lemma": "ВЕЛИКИЙ",
-                                        "morph_info": "П но,од,мр,тв,ед,; но,од,ср,тв,ед,; но,од,дт,мн,; ",
-                                        "modified_grammems": "но,од,мр,тв,ед,"
-                                    },
-                                    {
-                                        "lemma": "УЧИТЕЛЬ",
-                                        "morph_info": "С мр,тв,ед,; ",
-                                        "modified_grammems": "мр,тв,ед,"
-                                    },
-                                    {
-                                        "lemma": ".",
-                                        "morph_info": " ",
-                                        "modified_grammems": ""
-                                    }
-                                ],
-                                "groups": [
-                                    {
-                                        "type": "ПРЯМ_ДОП",
-                                        "words": "считал его"
-                                    },
-                                    {
-                                        "type": "ПРИЛ_СУЩ",
-                                        "words": "великим учителем"
-                                    }
-                                ],
-                                "clause_type": "ГЛ_ЛИЧН"
-                            },
-                            {
-                                "syn_units": [
-                                    {
-                                        "lemma": "Я",
-                                        "morph_info": "МС 1л,им,ед,; ",
-                                        "modified_grammems": "1л,им,ед,"
-                                    },
-                                    {
-                                        "lemma": "СЧИТАТЬ",
-                                        "morph_info": "Г дст,прш,мр,ед,; ",
-                                        "modified_grammems": "дст,прш,мр,ед,"
-                                    },
-                                    {
                                         "lemma": "ОН",
                                         "morph_info": "МС 3л,мр,рд,ед,; 3л,мр,вн,ед,; ",
                                         "modified_grammems": "3л,мр,вн,рд,ед,"
@@ -757,6 +712,51 @@
                                     {
                                         "type": "ПРИЛ_СУЩ",
                                         "words": "его великим учителем"
+                                    }
+                                ],
+                                "clause_type": "ГЛ_ЛИЧН"
+                            },
+                            {
+                                "syn_units": [
+                                    {
+                                        "lemma": "Я",
+                                        "morph_info": "МС 1л,им,ед,; ",
+                                        "modified_grammems": "1л,им,ед,"
+                                    },
+                                    {
+                                        "lemma": "СЧИТАТЬ",
+                                        "morph_info": "Г дст,прш,мр,ед,; ",
+                                        "modified_grammems": "дст,прш,мр,ед,"
+                                    },
+                                    {
+                                        "lemma": "ОНО",
+                                        "morph_info": "МС 3л,ср,рд,ед,; 3л,ср,вн,ед,; ",
+                                        "modified_grammems": "3л,ср,вн,рд,ед,"
+                                    },
+                                    {
+                                        "lemma": "ВЕЛИКИЙ",
+                                        "morph_info": "П но,од,мр,тв,ед,; но,од,ср,тв,ед,; но,од,дт,мн,; ",
+                                        "modified_grammems": "но,од,мр,тв,ед,"
+                                    },
+                                    {
+                                        "lemma": "УЧИТЕЛЬ",
+                                        "morph_info": "С мр,тв,ед,; ",
+                                        "modified_grammems": "мр,тв,ед,"
+                                    },
+                                    {
+                                        "lemma": ".",
+                                        "morph_info": " ",
+                                        "modified_grammems": ""
+                                    }
+                                ],
+                                "groups": [
+                                    {
+                                        "type": "ПРЯМ_ДОП",
+                                        "words": "считал его"
+                                    },
+                                    {
+                                        "type": "ПРИЛ_СУЩ",
+                                        "words": "великим учителем"
                                     }
                                 ],
                                 "clause_type": "ГЛ_ЛИЧН"
@@ -779,11 +779,11 @@
                         "src": "считал",
                         "trg": "его",
                         "name": "ПРЯМ_ДОП",
-                        "gramrel": "дст,пе,св,прш,мр,ед,",
+                        "gramrel": "дст,пе,нс,прш,мр,ед,",
                         "src_lemma": "СЧИТАТЬ",
-                        "src_grm": "дст,пе,св,прш,мр,ед,",
-                        "trg_lemma": "ОНО",
-                        "trg_grm": "3л,ср,вн,рд,ед,"
+                        "src_grm": "дст,пе,нс,прш,мр,ед,",
+                        "trg_lemma": "ОН",
+                        "trg_grm": "3л,мр,вн,рд,ед,"
                     },
                     {
                         "src": "считал",
@@ -791,7 +791,7 @@
                         "name": "ПОДЛ",
                         "gramrel": "",
                         "src_lemma": "СЧИТАТЬ",
-                        "src_grm": "дст,пе,св,прш,мр,ед,",
+                        "src_grm": "дст,пе,нс,прш,мр,ед,",
                         "trg_lemma": "Я",
                         "trg_grm": "1л,им,ед,"
                     }
@@ -820,9 +820,9 @@
                                         "modified_grammems": ""
                                     },
                                     {
-                                        "lemma": "ОНО",
-                                        "morph_info": "МС 3л,ср,рд,ед,; 3л,ср,вн,ед,; ",
-                                        "modified_grammems": "3л,ср,вн,ед,"
+                                        "lemma": "ОН",
+                                        "morph_info": "МС 3л,мр,рд,ед,; 3л,мр,вн,ед,; ",
+                                        "modified_grammems": "3л,мр,вн,ед,"
                                     }
                                 ],
                                 "groups": [
@@ -841,9 +841,9 @@
                                         "modified_grammems": ""
                                     },
                                     {
-                                        "lemma": "ОН",
-                                        "morph_info": "МС 3л,мр,рд,ед,; 3л,мр,вн,ед,; ",
-                                        "modified_grammems": "3л,мр,вн,ед,"
+                                        "lemma": "ОНО",
+                                        "morph_info": "МС 3л,ср,рд,ед,; 3л,ср,вн,ед,; ",
+                                        "modified_grammems": "3л,ср,вн,ед,"
                                     }
                                 ],
                                 "groups": [
@@ -874,9 +874,9 @@
                                         "modified_grammems": ""
                                     },
                                     {
-                                        "lemma": "ОНО",
-                                        "morph_info": "МС 3л,ср,тв,ед,; ",
-                                        "modified_grammems": "3л,ср,тв,ед,"
+                                        "lemma": "ОН",
+                                        "morph_info": "МС 3л,мр,тв,ед,; ",
+                                        "modified_grammems": "3л,мр,тв,ед,"
                                     }
                                 ],
                                 "groups": [
@@ -900,9 +900,9 @@
                                         "modified_grammems": ""
                                     },
                                     {
-                                        "lemma": "ОН",
-                                        "morph_info": "МС 3л,мр,тв,ед,; ",
-                                        "modified_grammems": "3л,мр,тв,ед,"
+                                        "lemma": "ОНО",
+                                        "morph_info": "МС 3л,ср,тв,ед,; ",
+                                        "modified_grammems": "3л,ср,тв,ед,"
                                     }
                                 ],
                                 "groups": [
@@ -920,27 +920,6 @@
                         "last": 7,
                         "words": "; над им",
                         "good_synvars": [
-                            {
-                                "syn_units": [
-                                    {
-                                        "lemma": ";",
-                                        "morph_info": " ",
-                                        "modified_grammems": ""
-                                    },
-                                    {
-                                        "lemma": "НАД",
-                                        "morph_info": "ПРЕДЛ ; ",
-                                        "modified_grammems": ""
-                                    },
-                                    {
-                                        "lemma": "ОНО",
-                                        "morph_info": "МС 3л,ср,тв,ед,; ",
-                                        "modified_grammems": "3л,ср,тв,ед,"
-                                    }
-                                ],
-                                "groups": [],
-                                "clause_type": "EMPTY"
-                            },
                             {
                                 "syn_units": [
                                     {
@@ -996,6 +975,27 @@
                                         "modified_grammems": ""
                                     },
                                     {
+                                        "lemma": "ОНО",
+                                        "morph_info": "МС 3л,ср,тв,ед,; ",
+                                        "modified_grammems": "3л,ср,тв,ед,"
+                                    }
+                                ],
+                                "groups": [],
+                                "clause_type": "EMPTY"
+                            },
+                            {
+                                "syn_units": [
+                                    {
+                                        "lemma": ";",
+                                        "morph_info": " ",
+                                        "modified_grammems": ""
+                                    },
+                                    {
+                                        "lemma": "НАД",
+                                        "morph_info": "ПРЕДЛ ; ",
+                                        "modified_grammems": ""
+                                    },
+                                    {
                                         "lemma": "ИМЯ",
                                         "morph_info": "С ср,рд,ед,; ",
                                         "modified_grammems": "ср,рд,ед,"
@@ -1020,7 +1020,49 @@
                                     },
                                     {
                                         "lemma": "ОКОЛО",
-                                        "morph_info": "Н ; ",
+                                        "morph_info": "ПРЕДЛ ; ",
+                                        "modified_grammems": ""
+                                    },
+                                    {
+                                        "lemma": "ОН",
+                                        "morph_info": "МС 3л,мр,рд,ед,; 3л,мр,вн,ед,; ",
+                                        "modified_grammems": "3л,мр,вн,рд,ед,"
+                                    }
+                                ],
+                                "groups": [],
+                                "clause_type": "EMPTY"
+                            },
+                            {
+                                "syn_units": [
+                                    {
+                                        "lemma": ";",
+                                        "morph_info": " ",
+                                        "modified_grammems": ""
+                                    },
+                                    {
+                                        "lemma": "ОКОЛО",
+                                        "morph_info": "ПРЕДЛ ; ",
+                                        "modified_grammems": ""
+                                    },
+                                    {
+                                        "lemma": "ЕГО",
+                                        "morph_info": "МС-П 0,но,од,ср,жр,мр,зв,пр,тв,вн,дт,рд,им,ед,мн,; ",
+                                        "modified_grammems": "0,но,од,ср,жр,мр,зв,пр,тв,вн,дт,рд,им,ед,мн,"
+                                    }
+                                ],
+                                "groups": [],
+                                "clause_type": "EMPTY"
+                            },
+                            {
+                                "syn_units": [
+                                    {
+                                        "lemma": ";",
+                                        "morph_info": " ",
+                                        "modified_grammems": ""
+                                    },
+                                    {
+                                        "lemma": "ОКОЛО",
+                                        "morph_info": "ПРЕДЛ ; ",
                                         "modified_grammems": ""
                                     },
                                     {
@@ -1083,55 +1125,13 @@
                                     },
                                     {
                                         "lemma": "ОКОЛО",
-                                        "morph_info": "ПРЕДЛ ; ",
+                                        "morph_info": "Н ; ",
                                         "modified_grammems": ""
                                     },
                                     {
                                         "lemma": "ОНО",
                                         "morph_info": "МС 3л,ср,рд,ед,; 3л,ср,вн,ед,; ",
                                         "modified_grammems": "3л,ср,вн,рд,ед,"
-                                    }
-                                ],
-                                "groups": [],
-                                "clause_type": "EMPTY"
-                            },
-                            {
-                                "syn_units": [
-                                    {
-                                        "lemma": ";",
-                                        "morph_info": " ",
-                                        "modified_grammems": ""
-                                    },
-                                    {
-                                        "lemma": "ОКОЛО",
-                                        "morph_info": "ПРЕДЛ ; ",
-                                        "modified_grammems": ""
-                                    },
-                                    {
-                                        "lemma": "ОН",
-                                        "morph_info": "МС 3л,мр,рд,ед,; 3л,мр,вн,ед,; ",
-                                        "modified_grammems": "3л,мр,вн,рд,ед,"
-                                    }
-                                ],
-                                "groups": [],
-                                "clause_type": "EMPTY"
-                            },
-                            {
-                                "syn_units": [
-                                    {
-                                        "lemma": ";",
-                                        "morph_info": " ",
-                                        "modified_grammems": ""
-                                    },
-                                    {
-                                        "lemma": "ОКОЛО",
-                                        "morph_info": "ПРЕДЛ ; ",
-                                        "modified_grammems": ""
-                                    },
-                                    {
-                                        "lemma": "ЕГО",
-                                        "morph_info": "МС-П 0,но,од,ср,жр,мр,зв,пр,тв,вн,дт,рд,им,ед,мн,; ",
-                                        "modified_grammems": "0,но,од,ср,жр,мр,зв,пр,тв,вн,дт,рд,им,ед,мн,"
                                     }
                                 ],
                                 "groups": [],
@@ -1148,8 +1148,8 @@
                         "gramrel": "вн,",
                         "src_lemma": "В",
                         "src_grm": "",
-                        "trg_lemma": "ОНО",
-                        "trg_grm": "3л,ср,вн,ед,"
+                        "trg_lemma": "ОН",
+                        "trg_grm": "3л,мр,вн,ед,"
                     },
                     {
                         "src": "над",
@@ -1158,8 +1158,8 @@
                         "gramrel": "тв,",
                         "src_lemma": "НАД",
                         "src_grm": "",
-                        "trg_lemma": "ОНО",
-                        "trg_grm": "3л,ср,тв,ед,"
+                        "trg_lemma": "ОН",
+                        "trg_grm": "3л,мр,тв,ед,"
                     }
                 ],
                 "terms": []
@@ -1551,78 +1551,6 @@
                                     },
                                     {
                                         "lemma": "ДА",
-                                        "morph_info": "ПРЕДК 0,; ",
-                                        "modified_grammems": "0,"
-                                    },
-                                    {
-                                        "lemma": "ЕЩЕ",
-                                        "morph_info": "Н ; ",
-                                        "modified_grammems": ""
-                                    },
-                                    {
-                                        "lemma": "СТЕКЛО",
-                                        "morph_info": "С ср,рд,ед,; ср,им,мн,; ср,вн,мн,; ",
-                                        "modified_grammems": "ср,вн,рд,им,ед,мн,"
-                                    },
-                                    {
-                                        "lemma": "ЗАКЛЕИТЬ",
-                                        "morph_info": "ИНФИНИТИВ дст,; ",
-                                        "modified_grammems": "дст,"
-                                    },
-                                    {
-                                        "lemma": ".",
-                                        "morph_info": " ",
-                                        "modified_grammems": ""
-                                    }
-                                ],
-                                "groups": [],
-                                "clause_type": "ПРЕДК"
-                            },
-                            {
-                                "syn_units": [
-                                    {
-                                        "lemma": ",",
-                                        "morph_info": " ",
-                                        "modified_grammems": ""
-                                    },
-                                    {
-                                        "lemma": "ДА",
-                                        "morph_info": "ПРЕДК 0,; ",
-                                        "modified_grammems": "0,"
-                                    },
-                                    {
-                                        "lemma": "ЕЩЕ",
-                                        "morph_info": "ЧАСТ ; ",
-                                        "modified_grammems": ""
-                                    },
-                                    {
-                                        "lemma": "СТЕКЛО",
-                                        "morph_info": "С ср,рд,ед,; ср,им,мн,; ср,вн,мн,; ",
-                                        "modified_grammems": "ср,вн,рд,им,ед,мн,"
-                                    },
-                                    {
-                                        "lemma": "ЗАКЛЕИТЬ",
-                                        "morph_info": "ИНФИНИТИВ дст,; ",
-                                        "modified_grammems": "дст,"
-                                    },
-                                    {
-                                        "lemma": ".",
-                                        "morph_info": " ",
-                                        "modified_grammems": ""
-                                    }
-                                ],
-                                "groups": [],
-                                "clause_type": "ПРЕДК"
-                            },
-                            {
-                                "syn_units": [
-                                    {
-                                        "lemma": ",",
-                                        "morph_info": " ",
-                                        "modified_grammems": ""
-                                    },
-                                    {
-                                        "lemma": "ДА",
                                         "morph_info": "ЧАСТ ; ",
                                         "modified_grammems": ""
                                     },
@@ -1762,6 +1690,78 @@
                                 ],
                                 "groups": [],
                                 "clause_type": "ГЛ_ЛИЧН"
+                            },
+                            {
+                                "syn_units": [
+                                    {
+                                        "lemma": ",",
+                                        "morph_info": " ",
+                                        "modified_grammems": ""
+                                    },
+                                    {
+                                        "lemma": "ДА",
+                                        "morph_info": "ПРЕДК 0,; ",
+                                        "modified_grammems": "0,"
+                                    },
+                                    {
+                                        "lemma": "ЕЩЕ",
+                                        "morph_info": "Н ; ",
+                                        "modified_grammems": ""
+                                    },
+                                    {
+                                        "lemma": "СТЕКЛО",
+                                        "morph_info": "С ср,рд,ед,; ср,им,мн,; ср,вн,мн,; ",
+                                        "modified_grammems": "ср,вн,рд,им,ед,мн,"
+                                    },
+                                    {
+                                        "lemma": "ЗАКЛЕИТЬ",
+                                        "morph_info": "ИНФИНИТИВ дст,; ",
+                                        "modified_grammems": "дст,"
+                                    },
+                                    {
+                                        "lemma": ".",
+                                        "morph_info": " ",
+                                        "modified_grammems": ""
+                                    }
+                                ],
+                                "groups": [],
+                                "clause_type": "ПРЕДК"
+                            },
+                            {
+                                "syn_units": [
+                                    {
+                                        "lemma": ",",
+                                        "morph_info": " ",
+                                        "modified_grammems": ""
+                                    },
+                                    {
+                                        "lemma": "ДА",
+                                        "morph_info": "ПРЕДК 0,; ",
+                                        "modified_grammems": "0,"
+                                    },
+                                    {
+                                        "lemma": "ЕЩЕ",
+                                        "morph_info": "ЧАСТ ; ",
+                                        "modified_grammems": ""
+                                    },
+                                    {
+                                        "lemma": "СТЕКЛО",
+                                        "morph_info": "С ср,рд,ед,; ср,им,мн,; ср,вн,мн,; ",
+                                        "modified_grammems": "ср,вн,рд,им,ед,мн,"
+                                    },
+                                    {
+                                        "lemma": "ЗАКЛЕИТЬ",
+                                        "morph_info": "ИНФИНИТИВ дст,; ",
+                                        "modified_grammems": "дст,"
+                                    },
+                                    {
+                                        "lemma": ".",
+                                        "morph_info": " ",
+                                        "modified_grammems": ""
+                                    }
+                                ],
+                                "groups": [],
+                                "clause_type": "ПРЕДК"
                             }
                         ]
                     }
@@ -2032,12 +2032,12 @@
                                     {
                                         "lemma": "ОБЕСЦВЕТИТЬ",
                                         "morph_info": "ПРИЧАСТИЕ стр,но,од,прш,мр,им,ед,; стр,но,прш,мр,вн,ед,; ",
-                                        "modified_grammems": "стр,но,од,прш,мр,им,ед,"
+                                        "modified_grammems": "стр,но,од,прш,мр,вн,им,ед,"
                                     },
                                     {
                                         "lemma": "ГОРОДСКОЙ",
-                                        "morph_info": "С мр,им,ед,; ",
-                                        "modified_grammems": "мр,им,ед,"
+                                        "morph_info": "П но,од,мр,им,ед,; но,мр,вн,ед,; но,од,жр,рд,ед,; но,од,жр,дт,ед,; но,од,жр,тв,ед,; но,од,жр,пр,ед,; ",
+                                        "modified_grammems": "но,од,жр,тв,ед,"
                                     },
                                     {
                                         "lemma": "ОДЕЖДА",
@@ -2055,12 +2055,16 @@
                                         "words": "молодой парень"
                                     },
                                     {
-                                        "type": "ПРИЛ_СУЩ",
-                                        "words": "обесцвеченный городской"
+                                        "type": "ПРИЛОЖЕНИЕ",
+                                        "words": "хозяин , молодой парень"
                                     },
                                     {
-                                        "type": "ОДНОР_ИГ",
-                                        "words": "хозяин , молодой парень , обесцвеченный городской"
+                                        "type": "ПРИЛ_СУЩ",
+                                        "words": "городской одеждой"
+                                    },
+                                    {
+                                        "type": "ИНСТР_ДОП",
+                                        "words": "обесцвеченный городской одеждой"
                                     }
                                 ],
                                 "clause_type": "КР_ПРЧ"
@@ -2120,6 +2124,94 @@
                                     {
                                         "lemma": "ОБЕСЦВЕТИТЬ",
                                         "morph_info": "ПРИЧАСТИЕ стр,но,од,прш,мр,им,ед,; стр,но,прш,мр,вн,ед,; ",
+                                        "modified_grammems": "стр,но,од,прш,мр,им,ед,"
+                                    },
+                                    {
+                                        "lemma": "ГОРОДСКОЙ",
+                                        "morph_info": "С мр,им,ед,; ",
+                                        "modified_grammems": "мр,им,ед,"
+                                    },
+                                    {
+                                        "lemma": "ОДЕЖДА",
+                                        "morph_info": "С жр,тв,ед,; ",
+                                        "modified_grammems": "жр,тв,ед,"
+                                    }
+                                ],
+                                "groups": [
+                                    {
+                                        "type": "ОДНОР_ПРИЛ",
+                                        "words": "Пожилой , широкоплечий"
+                                    },
+                                    {
+                                        "type": "ПРИЛ_СУЩ",
+                                        "words": "молодой парень"
+                                    },
+                                    {
+                                        "type": "ПРИЛ_СУЩ",
+                                        "words": "обесцвеченный городской"
+                                    },
+                                    {
+                                        "type": "ОДНОР_ИГ",
+                                        "words": "хозяин , молодой парень , обесцвеченный городской"
+                                    }
+                                ],
+                                "clause_type": "КР_ПРЧ"
+                            },
+                            {
+                                "syn_units": [
+                                    {
+                                        "lemma": "ПОЖИЛОЙ",
+                                        "morph_info": "П но,од,мр,им,ед,; но,мр,вн,ед,; но,од,жр,рд,ед,; но,од,жр,дт,ед,; но,од,жр,тв,ед,; но,од,жр,пр,ед,; ",
+                                        "modified_grammems": "но,од,жр,мр,пр,тв,вн,дт,рд,им,ед,"
+                                    },
+                                    {
+                                        "lemma": ",",
+                                        "morph_info": " ",
+                                        "modified_grammems": ""
+                                    },
+                                    {
+                                        "lemma": "ШИРОКОПЛЕЧИЙ",
+                                        "morph_info": "П но,од,мр,им,ед,; но,мр,вн,ед,; ",
+                                        "modified_grammems": "но,од,мр,вн,им,ед,"
+                                    },
+                                    {
+                                        "lemma": ",",
+                                        "morph_info": " ",
+                                        "modified_grammems": ""
+                                    },
+                                    {
+                                        "lemma": "ВИДИМО",
+                                        "morph_info": "Н ; ",
+                                        "modified_grammems": ""
+                                    },
+                                    {
+                                        "lemma": "ХОЗЯИН",
+                                        "morph_info": "С мр,им,ед,; ",
+                                        "modified_grammems": "мр,им,ед,"
+                                    },
+                                    {
+                                        "lemma": ",",
+                                        "morph_info": " ",
+                                        "modified_grammems": ""
+                                    },
+                                    {
+                                        "lemma": "МОЛОДОЙ",
+                                        "morph_info": "П но,од,мр,им,ед,; но,мр,вн,ед,; но,од,жр,рд,ед,; но,од,жр,дт,ед,; но,од,жр,тв,ед,; но,од,жр,пр,ед,; ",
+                                        "modified_grammems": "но,од,мр,им,ед,"
+                                    },
+                                    {
+                                        "lemma": "ПАРЕНЬ",
+                                        "morph_info": "С мр,им,ед,; ",
+                                        "modified_grammems": "мр,им,ед,"
+                                    },
+                                    {
+                                        "lemma": ",",
+                                        "morph_info": " ",
+                                        "modified_grammems": ""
+                                    },
+                                    {
+                                        "lemma": "ОБЕСЦВЕТИТЬ",
+                                        "morph_info": "ПРИЧАСТИЕ стр,но,од,прш,мр,им,ед,; стр,но,прш,мр,вн,ед,; ",
                                         "modified_grammems": "стр,но,од,прш,мр,вн,им,ед,"
                                     },
                                     {
@@ -2155,7 +2247,7 @@
                                         "words": "обесцвеченный городской одеждой"
                                     }
                                 ],
-                                "clause_type": "КР_ПРЧ"
+                                "clause_type": "EMPTY"
                             },
                             {
                                 "syn_units": [
@@ -2244,98 +2336,6 @@
                                     }
                                 ],
                                 "clause_type": "EMPTY"
-                            },
-                            {
-                                "syn_units": [
-                                    {
-                                        "lemma": "ПОЖИЛОЙ",
-                                        "morph_info": "П но,од,мр,им,ед,; но,мр,вн,ед,; но,од,жр,рд,ед,; но,од,жр,дт,ед,; но,од,жр,тв,ед,; но,од,жр,пр,ед,; ",
-                                        "modified_grammems": "но,од,жр,мр,пр,тв,вн,дт,рд,им,ед,"
-                                    },
-                                    {
-                                        "lemma": ",",
-                                        "morph_info": " ",
-                                        "modified_grammems": ""
-                                    },
-                                    {
-                                        "lemma": "ШИРОКОПЛЕЧИЙ",
-                                        "morph_info": "П но,од,мр,им,ед,; но,мр,вн,ед,; ",
-                                        "modified_grammems": "но,од,мр,вн,им,ед,"
-                                    },
-                                    {
-                                        "lemma": ",",
-                                        "morph_info": " ",
-                                        "modified_grammems": ""
-                                    },
-                                    {
-                                        "lemma": "ВИДИМО",
-                                        "morph_info": "Н ; ",
-                                        "modified_grammems": ""
-                                    },
-                                    {
-                                        "lemma": "ХОЗЯИН",
-                                        "morph_info": "С мр,им,ед,; ",
-                                        "modified_grammems": "мр,им,ед,"
-                                    },
-                                    {
-                                        "lemma": ",",
-                                        "morph_info": " ",
-                                        "modified_grammems": ""
-                                    },
-                                    {
-                                        "lemma": "МОЛОДОЙ",
-                                        "morph_info": "П но,од,мр,им,ед,; но,мр,вн,ед,; но,од,жр,рд,ед,; но,од,жр,дт,ед,; но,од,жр,тв,ед,; но,од,жр,пр,ед,; ",
-                                        "modified_grammems": "но,од,мр,им,ед,"
-                                    },
-                                    {
-                                        "lemma": "ПАРЕНЬ",
-                                        "morph_info": "С мр,им,ед,; ",
-                                        "modified_grammems": "мр,им,ед,"
-                                    },
-                                    {
-                                        "lemma": ",",
-                                        "morph_info": " ",
-                                        "modified_grammems": ""
-                                    },
-                                    {
-                                        "lemma": "ОБЕСЦВЕТИТЬ",
-                                        "morph_info": "ПРИЧАСТИЕ стр,но,од,прш,мр,им,ед,; стр,но,прш,мр,вн,ед,; ",
-                                        "modified_grammems": "стр,но,од,прш,мр,вн,им,ед,"
-                                    },
-                                    {
-                                        "lemma": "ГОРОДСКОЙ",
-                                        "morph_info": "П но,од,мр,им,ед,; но,мр,вн,ед,; но,од,жр,рд,ед,; но,од,жр,дт,ед,; но,од,жр,тв,ед,; но,од,жр,пр,ед,; ",
-                                        "modified_grammems": "но,од,жр,тв,ед,"
-                                    },
-                                    {
-                                        "lemma": "ОДЕЖДА",
-                                        "morph_info": "С жр,тв,ед,; ",
-                                        "modified_grammems": "жр,тв,ед,"
-                                    }
-                                ],
-                                "groups": [
-                                    {
-                                        "type": "ОДНОР_ПРИЛ",
-                                        "words": "Пожилой , широкоплечий"
-                                    },
-                                    {
-                                        "type": "ПРИЛ_СУЩ",
-                                        "words": "молодой парень"
-                                    },
-                                    {
-                                        "type": "ПРИЛОЖЕНИЕ",
-                                        "words": "хозяин , молодой парень"
-                                    },
-                                    {
-                                        "type": "ПРИЛ_СУЩ",
-                                        "words": "городской одеждой"
-                                    },
-                                    {
-                                        "type": "ИНСТР_ДОП",
-                                        "words": "обесцвеченный городской одеждой"
-                                    }
-                                ],
-                                "clause_type": "EMPTY"
                             }
                         ]
                     }
@@ -2352,14 +2352,34 @@
                         "trg_grm": "кач,но,од,мр,им,ед,"
                     },
                     {
-                        "src": "городской",
-                        "trg": "обесцвеченный",
+                        "src": "одеждой",
+                        "trg": "городской",
                         "name": "ПРИЛ_СУЩ",
-                        "gramrel": "мр,им,ед,",
-                        "src_lemma": "ГОРОДСКОЙ",
+                        "gramrel": "жр,тв,ед,",
+                        "src_lemma": "ОДЕЖДА",
+                        "src_grm": "но,жр,тв,ед,",
+                        "trg_lemma": "ГОРОДСКОЙ",
+                        "trg_grm": "но,од,жр,тв,ед,"
+                    },
+                    {
+                        "src": "обесцвеченный",
+                        "trg": "одеждой",
+                        "name": "ИНСТР_ДОП",
+                        "gramrel": "стр,пе,св,но,од,прш,мр,вн,им,ед,",
+                        "src_lemma": "ОБЕСЦВЕТИТЬ",
+                        "src_grm": "стр,пе,св,но,од,прш,мр,вн,им,ед,",
+                        "trg_lemma": "ОДЕЖДА",
+                        "trg_grm": "но,жр,тв,ед,"
+                    },
+                    {
+                        "src": "хозяин",
+                        "trg": "парень",
+                        "name": "ПРИЛОЖЕНИЕ",
+                        "gramrel": "од,мр,им,ед,",
+                        "src_lemma": "ХОЗЯИН",
                         "src_grm": "од,мр,им,ед,",
-                        "trg_lemma": "ОБЕСЦВЕТИТЬ",
-                        "trg_grm": "стр,пе,св,но,од,прш,мр,им,ед,"
+                        "trg_lemma": "ПАРЕНЬ",
+                        "trg_grm": "од,мр,им,ед,"
                     },
                     {
                         "src": ",",
@@ -2380,46 +2400,6 @@
                         "src_grm": "",
                         "trg_lemma": "ШИРОКОПЛЕЧИЙ",
                         "trg_grm": "но,од,мр,вн,им,ед,"
-                    },
-                    {
-                        "src": ",",
-                        "trg": "хозяин",
-                        "name": "ОДНОР_ИГ",
-                        "gramrel": "мр,им,ед,",
-                        "src_lemma": ",",
-                        "src_grm": "",
-                        "trg_lemma": "ХОЗЯИН",
-                        "trg_grm": "од,мр,им,ед,"
-                    },
-                    {
-                        "src": ",",
-                        "trg": "парень",
-                        "name": "ОДНОР_ИГ",
-                        "gramrel": "мр,им,ед,",
-                        "src_lemma": ",",
-                        "src_grm": "",
-                        "trg_lemma": "ПАРЕНЬ",
-                        "trg_grm": "од,мр,им,ед,"
-                    },
-                    {
-                        "src": ",",
-                        "trg": ",",
-                        "name": "ОДНОР_ИГ",
-                        "gramrel": "мр,им,ед,",
-                        "src_lemma": ",",
-                        "src_grm": "",
-                        "trg_lemma": ",",
-                        "trg_grm": ""
-                    },
-                    {
-                        "src": ",",
-                        "trg": "городской",
-                        "name": "ОДНОР_ИГ",
-                        "gramrel": "мр,им,ед,",
-                        "src_lemma": ",",
-                        "src_grm": "",
-                        "trg_lemma": "ГОРОДСКОЙ",
-                        "trg_grm": "од,мр,им,ед,"
                     }
                 ],
                 "terms": []

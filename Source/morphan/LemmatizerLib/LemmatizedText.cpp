@@ -11,7 +11,7 @@ CLemmatizedText::CLemmatizedText(MorphLanguageEnum l)
 };
 
 
-void CLemmatizedText::CreateFromTokemized(const CGraphmatFile* Gr)
+void CLemmatizedText::CreateFromTokenized(const CGraphmatFile* Gr)
 {
 	auto lemmatizer = GetMHolder(m_Language).m_pLemmatizer;
 

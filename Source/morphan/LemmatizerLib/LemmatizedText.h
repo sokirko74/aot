@@ -20,7 +20,7 @@ public:
 
 	MorphLanguageEnum GetDictLanguage() const;
 	bool SaveToFile(std::string filename) const;
-	void CreateFromTokemized(const CGraphmatFile* piGraphmatFile);
+	void CreateFromTokenized(const CGraphmatFile* piGraphmatFile);
 	
 };
 

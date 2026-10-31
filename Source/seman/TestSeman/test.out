@@ -1,0 +1,142 @@
+[
+    {
+        "comments": "",
+        "input": "Я считал его великим учителем.",
+        "result": {
+            "aux relations": [],
+            "nodes": [
+                {
+                    "index": 0,
+                    "interps": [
+                        " +  ROSS: я 1"
+                    ],
+                    "morph": "МС 1л,им,ед,",
+                    "words": [
+                        {
+                            "inner morph": "МС 1л,им,ед,",
+                            "lemma": "Я",
+                            "word": "Я"
+                        }
+                    ]
+                },
+                {
+                    "index": 1,
+                    "interps": [
+                        " +  ROSS: считать 1",
+                        " -  ROSS: считать 2",
+                        " -  ROSS: считать 3"
+                    ],
+                    "morph": "Г дст,пе,нс,прш,мр,ед,",
+                    "words": [
+                        {
+                            "inner morph": "Г дст,пе,нс,прш,мр,ед,",
+                            "lemma": "СЧИТАТЬ",
+                            "word": "СЧИТАЛ"
+                        }
+                    ]
+                },
+                {
+                    "index": 2,
+                    "interps": [
+                        " +  ROSS: он 1"
+                    ],
+                    "morph": "МС од,3л,мр,вн,ед,",
+                    "words": [
+                        {
+                            "inner morph": "МС 3л,мр,вн,рд,ед,",
+                            "lemma": "ОН",
+                            "word": "ЕГО"
+                        }
+                    ]
+                },
+                {
+                    "index": 3,
+                    "interps": [
+                        " +  ROSS: +ПРИЛ 1"
+                    ],
+                    "morph": "П но,мр,тв,ед,",
+                    "words": [
+                        {
+                            "inner morph": "П но,од,мр,тв,ед,",
+                            "lemma": "ВЕЛИКИЙ",
+                            "word": "ВЕЛИКИМ"
+                        }
+                    ]
+                },
+                {
+                    "index": 4,
+                    "interps": [
+                        " +  ROSS: учитель 1"
+                    ],
+                    "morph": "С од,мр,тв,ед,",
+                    "words": [
+                        {
+                            "inner morph": "С од,мр,тв,ед,",
+                            "lemma": "УЧИТЕЛЬ",
+                            "word": "УЧИТЕЛЕМ"
+                        }
+                    ]
+                },
+                {
+                    "index": 5,
+                    "interps": [],
+                    "morph": "",
+                    "node_str": "Copul5",
+                    "words": []
+                }
+            ],
+            "relations": [
+                {
+                    "name": "PROPERT",
+                    "source": {
+                        "words": "УЧИТЕЛЕМ"
+                    },
+                    "syntax_rel": "ПРИЛ_СУЩ",
+                    "target": {
+                        "words": "ВЕЛИКИМ"
+                    }
+                },
+                {
+                    "name": "SUB",
+                    "source": {
+                        "words": "СЧИТАЛ"
+                    },
+                    "syntax_rel": "подл",
+                    "target": {
+                        "words": "Я"
+                    }
+                },
+                {
+                    "name": "CONTEN",
+                    "source": {
+                        "words": "СЧИТАЛ"
+                    },
+                    "syntax_rel": "",
+                    "target": {
+                        "words": "Copul5"
+                    }
+                },
+                {
+                    "name": "F-ACT",
+                    "source": {
+                        "words": "Copul5"
+                    },
+                    "syntax_rel": "к_доп",
+                    "target": {
+                        "words": "ЕГО"
+                    }
+                },
+                {
+                    "name": "S-ACT",
+                    "source": {
+                        "words": "Copul5"
+                    },
+                    "syntax_rel": "к_доп",
+                    "target": {
+                        "words": "УЧИТЕЛЕМ"
+                    }
+                }
+            ]
+        }
+    }
+]

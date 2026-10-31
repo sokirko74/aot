@@ -103,7 +103,7 @@ bool CLemTextCreator::BuildLemText(std::string str, bool bFile, int& CountOfWord
 
 		ProcessHyphenWords(lemmatizer, &m_Graphan);
 
-		m_LemText.CreateFromTokemized(&m_Graphan);
+		m_LemText.CreateFromTokenized(&m_Graphan);
 
 		IF_PLOG(plog::debug)
 		{
