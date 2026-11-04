@@ -1,3 +1,0 @@
-project(EngObor)
-ConvertStructDict(EngObor)
-

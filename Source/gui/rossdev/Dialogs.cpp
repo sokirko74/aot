@@ -2,7 +2,7 @@
 #include "MainWindow.h"
 #include "RossDictionary.h"
 
-#include "dicts/StructDictLib/TempArticle.h"
+#include "morph_dict/dicts/StructDictLib/TempArticle.h"
 
 #include <QApplication>
 #include <QDialogButtonBox>

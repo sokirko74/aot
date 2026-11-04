@@ -1,12 +1,8 @@
 declare_cmake_min_version()
 
 set(my_SOURCES
-        gra_descr.cpp
         Chunk.h
-        cortege.h
-        gra_descr.h
         http_server.h
-        cortege.cpp
         test_corpus.h
         test_corpus.cpp
 )

@@ -1,7 +1,7 @@
 #pragma once
 
 #include "dict_type.h"
-#include "dicts/StructDictLib/StructDictConsts.h"
+#include "morph_dict/dicts/StructDictLib/StructDictConsts.h"
 
 #include <string>
 #include <vector>

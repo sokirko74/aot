@@ -24,9 +24,6 @@ endmacro(CompileSimpleGrammar)
 
 
 
-add_subdirectory (Obor)
-add_subdirectory (GerObor)
-add_subdirectory (EngObor)
 add_subdirectory (Aoss)
 add_subdirectory (Ross)
 add_subdirectory (Collocs)

@@ -10,3 +10,7 @@ add_library(RmlThesLib
         ThesOborots.cpp
         Thesaurus.cpp
  )
+
+target_link_libraries(RmlThesLib
+    StructDictLib
+)

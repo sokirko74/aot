@@ -1,5 +1,5 @@
 #include "stdafx.h"
-#include "dicts/StructDictLib/TempArticle.h"
+#include "morph_dict/dicts/StructDictLib/TempArticle.h"
 #include "SemanticsHolder.h"
 
 

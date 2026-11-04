@@ -1,7 +1,7 @@
 #pragma once
 
 #include "morph_dict/common/utilit.h"
-#include "dicts/StructDictLib/TempArticle.h"
+#include "morph_dict/dicts/StructDictLib/TempArticle.h"
 
 #include <QPlainTextEdit>
 #include <QSyntaxHighlighter>

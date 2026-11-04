@@ -7,7 +7,7 @@
 #include  "RusSentence.h"
 #include  "RusThesaurus.h"
 #include  "RusOborot.h"
-#include  "dicts/StructDictLib/TempArticle.h"
+#include  "morph_dict/dicts/StructDictLib/TempArticle.h"
 
 
 const int rSyntaxGroupTypesCount = 48;

@@ -1,6 +1,6 @@
 #include "morph_dict/common/utilit.h"
-#include "dicts/StructDictLib/Ross.h"
-#include "dicts/StructDictLib/TempArticle.h"
+#include "morph_dict/dicts/StructDictLib/Ross.h"
+#include "morph_dict/dicts/StructDictLib/TempArticle.h"
 #include "morph_dict/common/argparse.h"
 #include "seman/SemanLib/SemanticRusStructure.h"
 #include "seman/SemanLib/SemStructureBuilder.h"

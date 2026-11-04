@@ -1,5 +1,5 @@
-#include "graphan/GraphanLib/GraphmatFile.h"
-#include "graphan/GraphanLib/graline.h"
+#include "morph_dict/graphan/GraphanLib/GraphmatFile.h"
+#include "morph_dict/graphan/GraphanLib/graline.h"
 #include "MergeFiles.h"
 
 #include <string>

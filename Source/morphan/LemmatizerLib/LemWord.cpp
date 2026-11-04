@@ -1,5 +1,5 @@
 #include "LemWord.h"
-#include "common/gra_descr.h"
+#include "morph_dict/common/gra_descr.h"
 #include "morph_dict/agramtab/RusGramTab.h"
 #include "morph_dict/agramtab/GerGramTab.h"
 #include "morph_dict/agramtab/agramtab.h"

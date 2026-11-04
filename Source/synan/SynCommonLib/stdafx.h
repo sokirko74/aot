@@ -18,7 +18,7 @@
 #include "morphan/LemmatizerLib/LemmatizedText.h"
 
 #include "morph_dict/agramtab/agramtab.h"
-#include "dicts/StructDictLib/Ross.h"
+#include "morph_dict/dicts/StructDictLib/Ross.h"
 
 
 #include <functional>

@@ -45,6 +45,7 @@ add_library(Transfer
 add_subdirectory(tests)
 
 target_link_libraries(Transfer
+    RmlThesLib
     aot_common
 )
 

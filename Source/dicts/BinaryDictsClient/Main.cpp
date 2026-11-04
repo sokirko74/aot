@@ -1,6 +1,6 @@
 #include "morph_dict/common/utilit.h"
 #include "morph_dict/lemmatizer_base_lib/MorphanHolder.h"
-#include  "dicts/StructDictLib/StructDictConsts.h"
+#include  "morph_dict/dicts/StructDictLib/StructDictConsts.h"
 #include  "dicts/BinaryDictsLib/AspPairDict.h"
 #include  "dicts/BinaryDictsLib/FreqDict.h"
 #include  "dicts/BinaryDictsLib/DerivDict.h"

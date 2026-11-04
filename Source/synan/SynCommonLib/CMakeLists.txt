@@ -32,6 +32,7 @@ add_library(SynCommonLib
  "LemmaList.h" "LemmaList.cpp" "SynHomonym.cpp" "SynHomonym.h")
 
 target_link_libraries(SynCommonLib
+    RmlThesLib
     LemmatizerLib
     GerPostMorph
     MAPostLib

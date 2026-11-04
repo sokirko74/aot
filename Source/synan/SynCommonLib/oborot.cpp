@@ -3,7 +3,7 @@
 // ==========  Copyright by Dmitry Pankratov, Igor Nozhov, Alexey Sokirko
 
 #include "stdafx.h"
-#include "../../common/cortege.h"
+#include "morph_dict/common/cortege.h"
 #include "oborot.h"
 #include "SyntaxInit.h"
 

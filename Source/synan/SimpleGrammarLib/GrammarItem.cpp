@@ -1,7 +1,7 @@
 #include "SimpleGrammarLib.h"
 #include "GrammarItem.h"
 #include "morph_dict/agramtab/agramtab.h"
-#include "graphan/GraphanLib/graline.h"
+#include "morph_dict/graphan/GraphanLib/graline.h"
 
 void CGrammarItem::InitGrammarItem()
 {
