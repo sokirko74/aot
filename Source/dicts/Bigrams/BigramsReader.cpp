@@ -144,7 +144,7 @@ std::vector<CBigramAndFreq> CBigrams::GetBigrams(std::string Word, int MinBigram
     size_t size = bDirectFile ? WordInfo.m_FileLen1 : WordInfo.m_FileLen2;
     FILE *big_fp = bDirectFile ? m_Bigrams : m_BigramsRev;
 
-    if (fseek(big_fp, fpos, SEEK_SET)) {
+    if (!fseek64(big_fp, fpos, SEEK_SET)) {
         return Result;
     }
     std::vector<CBigramInfo > Bigrams;
