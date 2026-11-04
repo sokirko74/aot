@@ -1,9 +1,9 @@
 #include "../BinaryDictionary.h"
 #include "../SetOfWordPairs.h"
-#include "morph_dict/lemmatizer_base_lib/MorphanHolder.h"
+#include "nlp_base/lemmatizer_base_lib/MorphanHolder.h"
 
 #define DOCTEST_CONFIG_IMPLEMENT
-#include "morph_dict/contrib/doctest/doctest.h"
+#include "nlp_base/contrib/doctest/doctest.h"
 
 
 

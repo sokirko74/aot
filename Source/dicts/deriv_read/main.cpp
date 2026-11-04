@@ -5,8 +5,8 @@
 #include <vector>
 #include <set>
 #include <algorithm>
-#include "morph_dict/common/util_classes.h"
-#include "morph_dict/lemmatizer_base_lib/MorphanHolder.h"
+#include "nlp_base/common/util_classes.h"
+#include "nlp_base/lemmatizer_base_lib/MorphanHolder.h"
 
 
 static const char *default_path_suff = "troiki_suff";

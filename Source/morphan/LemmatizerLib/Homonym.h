@@ -1,6 +1,6 @@
 #pragma once 
 
-#include "morph_dict/lemmatizer_base_lib/AncodePattern.h"
+#include "nlp_base/lemmatizer_base_lib/AncodePattern.h"
 #include "synan/SimpleGrammarLib/InputSymbol.h"
 
 

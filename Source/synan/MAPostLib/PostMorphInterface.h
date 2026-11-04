@@ -2,7 +2,7 @@
 
 #include <vector>
 #include <string>
-#include "morph_dict/common/utilit.h"
+#include "nlp_base/common/utilit.h"
 #include "morphan/LemmatizerLib/LemmatizedText.h"
 
 using namespace std;

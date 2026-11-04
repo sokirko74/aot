@@ -5,7 +5,7 @@
 *.automat
 *.grammar_precompiled
 *.morph
-# built from Source/morph_dict (nlp_base) data
+# built from Source/nlp_base data
 Dicts/GraphAn/
 Dicts/Obor/
 Dicts/GerObor/

@@ -1,7 +1,7 @@
 #ifndef CHUNK_PARSER_H
 #define CHUNK_PARSER_H
 
-#include "morph_dict/common/utilit.h"
+#include "nlp_base/common/utilit.h"
 #include <list>
 
 #define YYDEBUG 1

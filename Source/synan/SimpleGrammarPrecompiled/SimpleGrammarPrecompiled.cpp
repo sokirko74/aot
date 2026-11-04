@@ -1,6 +1,6 @@
 #include "synan/SimpleGrammarLib/SimpleGrammar.h"
-#include "morph_dict/lemmatizer_base_lib/MorphanHolder.h"
-#include "morph_dict/common/argparse.h"
+#include "nlp_base/lemmatizer_base_lib/MorphanHolder.h"
+#include "nlp_base/common/argparse.h"
 
 
 void initArgParser(int argc, const char **argv, ArgumentParser& parser) {

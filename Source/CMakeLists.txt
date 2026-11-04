@@ -28,9 +28,9 @@ find_package(Qt6 REQUIRED COMPONENTS Widgets)
 message ("use Qt6 " ${Qt6_VERSION})
 
 
-include_directories(morph_dict/contrib/plog)
+include_directories(nlp_base/contrib/plog)
 
-include_directories(morph_dict/contrib/libzip/lib)
+include_directories(nlp_base/contrib/libzip/lib)
 
 
 if(CMAKE_BUILD_TYPE MATCHES "Debug")
@@ -54,7 +54,7 @@ endif()
 
 
 add_subdirectory (common)
-add_subdirectory (morph_dict)
+add_subdirectory (nlp_base)
 add_subdirectory (dicts)
 add_subdirectory (morphan)
 add_subdirectory (synan)

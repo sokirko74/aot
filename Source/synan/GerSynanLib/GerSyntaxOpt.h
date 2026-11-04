@@ -10,7 +10,7 @@
 
 
 #include "GerSynan.h"
-#include "morph_dict/agramtab/GerGramTab.h"
+#include "nlp_base/agramtab/GerGramTab.h"
 #include "GerOborot.h"
 #include "synan/SynCommonLib/SyntaxInit.h"
 

@@ -1,6 +1,6 @@
 #include  "SimpleGrammarLib.h"
 #include "SimpleGrammar.h"
-#include "morph_dict/agramtab/GerGramTab.h"
+#include "nlp_base/agramtab/GerGramTab.h"
 
 
 struct CInputSentence 

@@ -2,7 +2,7 @@
 #include  "GLRTable.h"
 #include  "LR-items.h"
 #include  "SimpleGrammar.h"
-#include "morph_dict/common/bserialize.h"
+#include "nlp_base/common/bserialize.h"
 
 
 

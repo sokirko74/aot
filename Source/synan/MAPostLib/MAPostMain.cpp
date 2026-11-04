@@ -3,8 +3,8 @@
 // ==========  Copyright by Dmitry Pankratov, Alexey Sokirko (1999-2002)
 
 #include "MAPostMain.h"
-#include "morph_dict/common/utilit.h"
-#include "morph_dict/agramtab/RusGramTab.h"
+#include "nlp_base/common/utilit.h"
+#include "nlp_base/agramtab/RusGramTab.h"
 
 void CMAPost::RunRules()
 {

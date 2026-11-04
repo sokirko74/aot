@@ -4,7 +4,7 @@
 
 #include "StdRmlThes.h"
 #include "Thesaurus.h"
-#include "morph_dict/common/utilit.h"
+#include "nlp_base/common/utilit.h"
 
 bool CThesaurus::LoadModelRelations(std::string Buff, CInnerModel &M) {
     StringTokenizer Line(Buff.c_str(), ";");

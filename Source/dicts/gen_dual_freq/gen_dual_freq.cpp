@@ -10,10 +10,10 @@
 #include <ctime>
 #include <algorithm>
 
-#include "morph_dict/common/util_classes.h"
+#include "nlp_base/common/util_classes.h"
 #include "../FreqDictionary/ParadigmPairFreq.h"
-#include "morph_dict/agramtab/eng_consts.h"
-#include "morph_dict/lemmatizer_base_lib/MorphanHolder.h"
+#include "nlp_base/agramtab/eng_consts.h"
+#include "nlp_base/lemmatizer_base_lib/MorphanHolder.h"
 
 CMorphologyHolder MorphHolderRus;
 

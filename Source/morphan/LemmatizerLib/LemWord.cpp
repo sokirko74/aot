@@ -1,9 +1,9 @@
 #include "LemWord.h"
-#include "morph_dict/common/gra_descr.h"
-#include "morph_dict/agramtab/RusGramTab.h"
-#include "morph_dict/agramtab/GerGramTab.h"
-#include "morph_dict/agramtab/agramtab.h"
-#include "morph_dict/lemmatizer_base_lib/Lemmatizers.h"
+#include "nlp_base/common/gra_descr.h"
+#include "nlp_base/agramtab/RusGramTab.h"
+#include "nlp_base/agramtab/GerGramTab.h"
+#include "nlp_base/agramtab/agramtab.h"
+#include "nlp_base/lemmatizer_base_lib/Lemmatizers.h"
 
 
 CLemWord::CLemWord(MorphLanguageEnum l)

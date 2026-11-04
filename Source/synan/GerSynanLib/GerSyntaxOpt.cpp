@@ -2,7 +2,7 @@
 #include  "GerSentence.h"
 #include  "GerSyntaxOpt.h"
 #include  "GerThesaurus.h"
-#include  "morph_dict/dicts/StructDictLib/TempArticle.h"
+#include  "nlp_base/dicts/StructDictLib/TempArticle.h"
 #include "synan/SimpleGrammarLib/SimpleGrammar.h"
 
 

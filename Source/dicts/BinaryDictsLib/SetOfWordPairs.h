@@ -3,7 +3,7 @@
 #ifndef __SETOFWORDPAIRS_H_
 #define __SETOFWORDPAIRS_H_
 
-#include "morph_dict/common/utilit.h"
+#include "nlp_base/common/utilit.h"
 
 
 /////////////////////////////////////////////////////////////////////////////

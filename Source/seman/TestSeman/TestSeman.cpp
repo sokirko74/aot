@@ -1,7 +1,7 @@
 #include "common/test_corpus.h"
 
 #include "seman/SemanLib/SemStructureBuilder.h"
-#include "morph_dict/common/argparse.h"
+#include "nlp_base/common/argparse.h"
 #include "seman/SemanLib/VisualGraph.h"
 
 

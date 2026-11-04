@@ -1,5 +1,5 @@
-#include "morph_dict/common/utilit.h"
-#include "morph_dict/lemmatizer_base_lib/MorphanHolder.h"
+#include "nlp_base/common/utilit.h"
+#include "nlp_base/lemmatizer_base_lib/MorphanHolder.h"
 #include  "dicts/BinaryDictsLib/AspPairDict.h"
 
 #include <iostream>
@@ -7,7 +7,7 @@
 #include <set>
 
 #define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN
-#include "morph_dict/contrib/doctest/doctest.h"
+#include "nlp_base/contrib/doctest/doctest.h"
 
 TEST_CASE("test_one_pair")
 {

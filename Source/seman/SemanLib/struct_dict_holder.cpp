@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "struct_dict_holder.h"
-#include "morph_dict/common/utilit.h"
+#include "nlp_base/common/utilit.h"
 
 CStructDictHolder::CStructDictHolder(DictTypeEnum dictType)
 {

@@ -6,7 +6,7 @@
 #define CHUNK_NODE_H
 
 
-#include "morph_dict/common/utilit.h"
+#include "nlp_base/common/utilit.h"
 #include "list"
 #include "SimpleGrammar.h"
 

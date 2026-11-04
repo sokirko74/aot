@@ -1,12 +1,12 @@
 #pragma once
 #pragma warning (disable : 4786)
 
-#include "morph_dict/common/utilit.h"
+#include "nlp_base/common/utilit.h"
 #include "struct_dict_holder.h"
 #include "SemanticsHolder.h"
 #include "SemPattern.h"
-#include "morph_dict/agramtab/RusGramTab.h"
-#include "morph_dict/agramtab/EngGramTab.h"
+#include "nlp_base/agramtab/RusGramTab.h"
+#include "nlp_base/agramtab/EngGramTab.h"
 #include "sem_word.h"
 #include "SemGraph.h"
 

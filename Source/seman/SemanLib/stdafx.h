@@ -1,10 +1,10 @@
 #pragma once
 
 
-#include "morph_dict/common/utilit.h"
-#include "morph_dict/common/util_classes.h"
-#include  "morph_dict/dicts/StructDictLib/Ross.h"
-#include  "morph_dict/dicts/StructDictLib/StructDictConsts.h"
-#include "morph_dict/graphan/GraphanLib/GraphanDicts.h"
-#include "morph_dict/agramtab/RusGramTab.h"
-#include "morph_dict/agramtab/EngGramTab.h"
+#include "nlp_base/common/utilit.h"
+#include "nlp_base/common/util_classes.h"
+#include  "nlp_base/dicts/StructDictLib/Ross.h"
+#include  "nlp_base/dicts/StructDictLib/StructDictConsts.h"
+#include "nlp_base/graphan/GraphanLib/GraphanDicts.h"
+#include "nlp_base/agramtab/RusGramTab.h"
+#include "nlp_base/agramtab/EngGramTab.h"

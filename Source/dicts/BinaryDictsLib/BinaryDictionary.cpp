@@ -1,15 +1,15 @@
 #include "BinaryDictionary.h"
-#include "morph_dict/common/utilit.h"
+#include "nlp_base/common/utilit.h"
 #include "SetOfWordPairs.h"
-#include "morph_dict/common/bserialize.h"
+#include "nlp_base/common/bserialize.h"
 #include "fstream"
 
-#include "morph_dict/common/rapidjson.h"
-#include "morph_dict/agramtab/RusGramTab.h"
-#include "morph_dict/agramtab/EngGramTab.h"
-#include "morph_dict/lemmatizer_base_lib/MorphanHolder.h"
-#include "morph_dict/lemmatizer_base_lib/Paradigm.h"
-#include "morph_dict/lemmatizer_base_lib/Lemmatizers.h"
+#include "nlp_base/common/rapidjson.h"
+#include "nlp_base/agramtab/RusGramTab.h"
+#include "nlp_base/agramtab/EngGramTab.h"
+#include "nlp_base/lemmatizer_base_lib/MorphanHolder.h"
+#include "nlp_base/lemmatizer_base_lib/Paradigm.h"
+#include "nlp_base/lemmatizer_base_lib/Lemmatizers.h"
 
 
 inline size_t get_size_in_bytes(const WordPair &t) {

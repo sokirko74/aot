@@ -1,6 +1,6 @@
 #include "common/http_server.h"
 #include "synan/SynanLib/SyntaxHolder.h"
-#include "morph_dict/lemmatizer_base_lib/MorphanHolder.h"
+#include "nlp_base/lemmatizer_base_lib/MorphanHolder.h"
 
 class TSynanHttpServer : public TRMLHttpServer {
     CSyntaxHolder RussianSyntaxHolder;

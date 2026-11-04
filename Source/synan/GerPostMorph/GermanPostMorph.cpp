@@ -1,5 +1,5 @@
 #include "GermanPostMorph.h"
-#include "morph_dict/lemmatizer_base_lib/MorphanHolder.h"
+#include "nlp_base/lemmatizer_base_lib/MorphanHolder.h"
 
 CPostMorphInteface* NewGermanPostMorph()
 {

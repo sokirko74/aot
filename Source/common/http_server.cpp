@@ -1,6 +1,6 @@
 #include "http_server.h"
 
-#include "morph_dict/common/utilit.h"
+#include "nlp_base/common/utilit.h"
 
 #ifdef WIN32
 #include <process.h>

@@ -5,7 +5,7 @@
 #include <zlib.h>
 
 #include <climits>
-#include "morph_dict/common/utilit.h"
+#include "nlp_base/common/utilit.h"
 
 void PrintUsageAndExit() {
     fprintf(stderr, "BigramsIndex,  creates word-index for bigrams file\n");

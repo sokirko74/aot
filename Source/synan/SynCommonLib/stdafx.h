@@ -9,16 +9,16 @@
 
 #pragma warning (disable : 4267)
 
-#include "morph_dict/common/util_classes.h"
+#include "nlp_base/common/util_classes.h"
 
 #define MAX_WORD_LEN                    100
 
 #pragma warning (disable : 4786)
-#include "morph_dict/lemmatizer_base_lib/Lemmatizers.h"
+#include "nlp_base/lemmatizer_base_lib/Lemmatizers.h"
 #include "morphan/LemmatizerLib/LemmatizedText.h"
 
-#include "morph_dict/agramtab/agramtab.h"
-#include "morph_dict/dicts/StructDictLib/Ross.h"
+#include "nlp_base/agramtab/agramtab.h"
+#include "nlp_base/dicts/StructDictLib/Ross.h"
 
 
 #include <functional>

@@ -1,10 +1,10 @@
-#include "morph_dict/graphan/GraphanLib/GraphmatFile.h"
-#include "morph_dict/graphan/GraphanLib/graline.h"
+#include "nlp_base/graphan/GraphanLib/GraphmatFile.h"
+#include "nlp_base/graphan/GraphanLib/graline.h"
 #include "MergeFiles.h"
 
 #include <string>
 #include <list>
-#include "morph_dict/common/argparse.h"
+#include "nlp_base/common/argparse.h"
 
 
 typedef std::map<std::pair<std::string,std::string>, size_t> BigramsType;

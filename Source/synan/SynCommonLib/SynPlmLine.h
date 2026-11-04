@@ -10,8 +10,8 @@
 #include <string.h>
 #include "Period.h"
 #include "oborot.h"
-#include "morph_dict/common/utilit.h"
-#include "morph_dict/lemmatizer_base_lib/AncodePattern.h"
+#include "nlp_base/common/utilit.h"
+#include "nlp_base/lemmatizer_base_lib/AncodePattern.h"
 
 
 

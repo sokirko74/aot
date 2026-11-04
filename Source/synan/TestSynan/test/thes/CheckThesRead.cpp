@@ -1,6 +1,6 @@
 #include "synan/SynCommonLib/ThesaurusForSyntax.h"
-#include "morph_dict/agramtab/RusGramTab.h"
-#include "morph_dict/agramtab/EngGramTab.h"
+#include "nlp_base/agramtab/RusGramTab.h"
+#include "nlp_base/agramtab/EngGramTab.h"
 #include <fstream>
 
 #undef NDEBUG  // enable asserts

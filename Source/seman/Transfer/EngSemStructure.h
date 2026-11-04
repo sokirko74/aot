@@ -3,7 +3,7 @@
 
 
 #include "seman/SemanLib/SemanticStructure.h"
-#include "morph_dict/agramtab/EngGramTab.h"
+#include "nlp_base/agramtab/EngGramTab.h"
 #include "eng_word.h"
 #include "EngBinaryTranslate.h"
 

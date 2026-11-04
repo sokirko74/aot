@@ -26,12 +26,12 @@
 #include <locale.h>
 #include <malloc.h>
 
-#include "morph_dict/common/utilit.h"
-#include "morph_dict/agramtab/RusGramTab.h"
-#include "morph_dict/agramtab/EngGramTab.h"
-#include "morph_dict/agramtab/GerGramTab.h"
-#include "morph_dict/lemmatizer_base_lib/Lemmatizers.h"
-#include "morph_dict/lemmatizer_base_lib/Paradigm.h"
+#include "nlp_base/common/utilit.h"
+#include "nlp_base/agramtab/RusGramTab.h"
+#include "nlp_base/agramtab/EngGramTab.h"
+#include "nlp_base/agramtab/GerGramTab.h"
+#include "nlp_base/lemmatizer_base_lib/Lemmatizers.h"
+#include "nlp_base/lemmatizer_base_lib/Paradigm.h"
 
 //jni infrastructure stuff
 static jclass setClazz=0;

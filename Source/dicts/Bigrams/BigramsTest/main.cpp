@@ -1,5 +1,5 @@
-#include "morph_dict/common/util_classes.h"
-#include "morph_dict/common/argparse.h"
+#include "nlp_base/common/util_classes.h"
+#include "nlp_base/common/argparse.h"
 #include "common/BigramsReader.h"
 
 

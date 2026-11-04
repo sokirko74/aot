@@ -6,7 +6,7 @@
 #pragma warning(disable:4530)
 
 
-#include "morph_dict/common/utilit.h"
+#include "nlp_base/common/utilit.h"
 
 
 

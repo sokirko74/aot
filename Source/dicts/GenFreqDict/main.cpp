@@ -7,10 +7,10 @@
 #include <vector>
 #include <ctime>
 #include <set>
-#include "morph_dict/common/util_classes.h"
-#include "morph_dict/agramtab/EngGramTab.h"
-#include "morph_dict/agramtab/RusGramTab.h"
-#include "morph_dict/lemmatizer_base_lib/MorphanHolder.h"
+#include "nlp_base/common/util_classes.h"
+#include "nlp_base/agramtab/EngGramTab.h"
+#include "nlp_base/agramtab/RusGramTab.h"
+#include "nlp_base/lemmatizer_base_lib/MorphanHolder.h"
 #include "dicts/BinaryDictsLib/BinaryDictionary.h"
 
 CMorphanHolder MorphHolderRus;

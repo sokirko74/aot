@@ -1,6 +1,6 @@
 #pragma once
 
-#include "morph_dict/lemmatizer_base_lib/MorphanHolder.h"
+#include "nlp_base/lemmatizer_base_lib/MorphanHolder.h"
 
 #include <QWidget>
 #include <memory>

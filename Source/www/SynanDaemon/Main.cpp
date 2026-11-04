@@ -1,7 +1,7 @@
 #include "SynanDmn.h"
 
-#include "morph_dict/common/utilit.h"
-#include "morph_dict/common/argparse.h"
+#include "nlp_base/common/utilit.h"
+#include "nlp_base/common/argparse.h"
 
 void initArgParser(int argc, const char **argv, ArgumentParser& parser) {
     parser.AddArgument("--host", "0.0.0.0 or other ip");

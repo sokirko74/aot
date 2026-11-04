@@ -2,7 +2,7 @@
 #include "RossDictionary.h"
 
 #include "dicts/BinaryDictsLib/SetOfWordPairs.h"
-#include "morph_dict/agramtab/RusGramTab.h"
+#include "nlp_base/agramtab/RusGramTab.h"
 
 #include <QFormLayout>
 #include <QLabel>

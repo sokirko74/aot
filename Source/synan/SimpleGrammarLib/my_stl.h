@@ -1,3 +1,3 @@
-#include "morph_dict/common/utilit.h"
+#include "nlp_base/common/utilit.h"
 using namespace std;
 #include <iostream>

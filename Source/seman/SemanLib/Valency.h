@@ -1,8 +1,8 @@
 #pragma once 
 
-#include "morph_dict/common/utilit.h"
-#include "morph_dict/common/cortege.h"
-#include "morph_dict/dicts/StructDictLib/StructDictConsts.h"
+#include "nlp_base/common/utilit.h"
+#include "nlp_base/common/cortege.h"
+#include "nlp_base/dicts/StructDictLib/StructDictConsts.h"
 
 enum Valency_Direction { A_C, C_A};
 

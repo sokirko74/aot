@@ -1,6 +1,6 @@
 #include "MergeFiles.h"
 
-#include "morph_dict/common/utilit.h"
+#include "nlp_base/common/utilit.h"
 #include <assert.h>
 #include <queue>
 #include <string>

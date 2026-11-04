@@ -2,7 +2,7 @@
 #include "synan/SynCommonLib/RelationsIterator.h"
 #include "../SynanLib/SyntaxHolder.h"
 #include "common/test_corpus.h"
-#include "morph_dict/common/argparse.h"
+#include "nlp_base/common/argparse.h"
 #include <filesystem>
 
 void GetAnanlytForms(const CSentence &Sentence, CJsonObject& out) {

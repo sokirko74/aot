@@ -2,7 +2,7 @@
 // ==========  Dialing Syntax Analysis (www.aot.ru)
 // ==========  Copyright by Dmitry Pankratov, Igor Nozhov, Alexey Sokirko
 
-#include "morph_dict/lemmatizer_base_lib/rus_numerals.h"
+#include "nlp_base/lemmatizer_base_lib/rus_numerals.h"
 #include "RusFormatCaller.h"
 
 

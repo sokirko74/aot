@@ -1,8 +1,8 @@
 // FreqDict.cpp : Implementation of CFreqDict
 #include "stdafx.h"
-#include "morph_dict/common/utilit.h"
+#include "nlp_base/common/utilit.h"
 #include "FreqDict.h"
-#include "morph_dict/common/bserialize.h"
+#include "nlp_base/common/bserialize.h"
 /////////////////////////////////////////////////////////////////////////////
 // CFreqDict
 

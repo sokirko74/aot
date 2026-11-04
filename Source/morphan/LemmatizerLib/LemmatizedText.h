@@ -5,8 +5,8 @@
 #pragma once
 #pragma warning (disable : 4786)
 
-#include "morph_dict/graphan/GraphanLib/GraphmatFile.h"
-#include "morph_dict/lemmatizer_base_lib/Lemmatizers.h"
+#include "nlp_base/graphan/GraphanLib/GraphmatFile.h"
+#include "nlp_base/lemmatizer_base_lib/Lemmatizers.h"
 #include "LemWord.h"
 
 

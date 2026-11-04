@@ -19,7 +19,7 @@ The English  lexicon is based upon Wordnet.
 Website: www.aot.ru, https://github.com/sokirko74/aot
 
 
-Contents of the morphology sources (Source/morph_dict)
+Contents of the morphology sources (Source/nlp_base)
 
 1.	The main morphological  library (lemmatizer_base_lib).
 2.	Library for grammatical codes (agramtab).
@@ -74,7 +74,7 @@ any more, now a dictionary is a JSON file in UTF-8.  One file contains one
 morphological dictionary for one natural language.
 	The usual place for this file is
 
-	$RML/Source/morph_dict/data/<Language>/morphs.json,
+	$RML/Source/nlp_base/data/<Language>/morphs.json,
 
 where <Language> can be "English", "Russian" or "German".  The same folder
 contains:
@@ -90,7 +90,7 @@ contains:
 
 	The binary dictionaries are created by morph_gen:
 
-	cd $RML/Source/morph_dict/data/Russian
+	cd $RML/Source/nlp_base/data/Russian
 	morph_gen --input project.mwz --output-folder $RML/Dicts/Morph/Russian --postfix-len 5 --min-freq 3
 
 
@@ -111,9 +111,9 @@ the ancode and an example word.
 	In dictionaries we use ancodes to refer to a  morphological pattern.
 
 	Here is the list of all gramtab-files:
-	* Russian - $RML/Source/morph_dict/data/Russian/gramtab.json
-	* German  - $RML/Source/morph_dict/data/German/gramtab.json
-	* English - $RML/Source/morph_dict/data/English/gramtab.json
+	* Russian - $RML/Source/nlp_base/data/Russian/gramtab.json
+	* German  - $RML/Source/nlp_base/data/German/gramtab.json
+	* English - $RML/Source/nlp_base/data/English/gramtab.json
 	They are copied to $RML/Dicts/Morph/<Language>/gramtab.json during the
 compilation.
 

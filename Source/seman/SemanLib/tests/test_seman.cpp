@@ -1,7 +1,7 @@
 #include "seman/SemanLib/SemStructureBuilder.h"
 
 #define DOCTEST_CONFIG_IMPLEMENT
-#include "morph_dict/contrib/doctest/doctest.h"
+#include "nlp_base/contrib/doctest/doctest.h"
 
 CSemStructureBuilder SemBuilder;
 

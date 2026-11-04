@@ -7,7 +7,7 @@
 #include "ThesaurusForSyntax.h"
 #include "SyntaxInit.h"
 #include "dicts/RmlThesLib/RmlThesConsts.h"
-#include "morph_dict/agramtab/EngGramTab.h"
+#include "nlp_base/agramtab/EngGramTab.h"
 
 EThesType GetThesTypeByStr(const std::string& strDBName)
 {

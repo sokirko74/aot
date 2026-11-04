@@ -1,6 +1,6 @@
 #pragma once
 
-#include "morph_dict/common/utilit.h"
+#include "nlp_base/common/utilit.h"
 
 class CLemmaList {
     part_of_speech_mask_t m_Poses; // ignored in  CLemmaList::has_lemma

@@ -6,14 +6,14 @@
 #pragma once
 
 
-#include "morph_dict/common/util_classes.h"
+#include "nlp_base/common/util_classes.h"
 #include "PostMorphInterface.h"
 #include "morphan/LemmatizerLib/LemWord.h"
 
 
 #include "morphan/LemmatizerLib/LemmatizedText.h"
-#include "morph_dict/lemmatizer_base_lib/Lemmatizers.h"
-#include "morph_dict/agramtab/RusGramTab.h"
+#include "nlp_base/lemmatizer_base_lib/Lemmatizers.h"
+#include "nlp_base/agramtab/RusGramTab.h"
 #include "list"
 
 struct CFixedColloc

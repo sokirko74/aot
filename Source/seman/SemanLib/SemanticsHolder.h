@@ -1,7 +1,7 @@
 #pragma once 
 
 #include "AllRossesHolder.h"
-#include "morph_dict/agramtab/GramInfo.h"
+#include "nlp_base/agramtab/GramInfo.h"
 #include "sem_relation.h"
 
 

@@ -2,7 +2,7 @@
 #include <streambuf>
 
 #define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN
-#include "morph_dict/contrib/doctest/doctest.h"
+#include "nlp_base/contrib/doctest/doctest.h"
 
 TEST_CASE("test_merge_files")
 {

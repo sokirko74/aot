@@ -3,9 +3,9 @@
 // ==========  Copyright by Alexey Sokirko (2000-2002)
 #pragma once 
 
-#include "morph_dict/common/utilit.h"
-#include "morph_dict/agramtab/agramtab.h"
-#include "morph_dict/dicts/StructDictLib/Ross.h"
+#include "nlp_base/common/utilit.h"
+#include "nlp_base/agramtab/agramtab.h"
+#include "nlp_base/dicts/StructDictLib/Ross.h"
 #include "Models.h"
 #include <map>       
 

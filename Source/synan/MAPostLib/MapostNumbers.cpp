@@ -1,6 +1,6 @@
 #include "MAPostMain.h"
-#include "morph_dict/lemmatizer_base_lib/rus_numerals.h"
-#include "morph_dict/agramtab/agramtab.h"
+#include "nlp_base/lemmatizer_base_lib/rus_numerals.h"
+#include "nlp_base/agramtab/agramtab.h"
 
 
 bool CMAPost::is_russian_numeral(std::string& word) const {

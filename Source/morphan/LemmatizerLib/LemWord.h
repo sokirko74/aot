@@ -1,7 +1,7 @@
 #pragma once 
 
 #include "Homonym.h"
-#include "morph_dict/graphan/GraphanLib/graline.h"
+#include "nlp_base/graphan/GraphanLib/graline.h"
 #include "synan/SimpleGrammarLib/GrammarItem.h"
 #include "synan/SimpleGrammarLib/InputSymbol.h"
 

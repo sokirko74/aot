@@ -2,7 +2,7 @@
 #include  "GLR.h"
 #include  "LR-items.h"
 #include  "SimpleGrammar.h"
-#include "morph_dict/lemmatizer_base_lib/MorphanHolder.h"
+#include "nlp_base/lemmatizer_base_lib/MorphanHolder.h"
 
 
 

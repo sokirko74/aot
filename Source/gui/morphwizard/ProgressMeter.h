@@ -1,6 +1,6 @@
 #pragma once
 
-#include "morph_dict/morph_wizard/wizard.h"
+#include "nlp_base/morph_wizard/wizard.h"
 
 #include <memory>
 

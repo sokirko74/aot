@@ -1,6 +1,6 @@
 #pragma once
 
-#include "morph_dict/agramtab/EngGramTab.h"
+#include "nlp_base/agramtab/EngGramTab.h"
 #include "../SynCommonLib/SyntaxInit.h"
 
 class CEngSyntaxOpt :	public CSyntaxOpt

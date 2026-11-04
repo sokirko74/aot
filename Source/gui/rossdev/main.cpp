@@ -9,7 +9,7 @@
 #include <QThread>
 #include <clocale>
 
-// defined in morph_dict/common/utilit.cpp, used by ErrorMessage
+// defined in nlp_base/common/utilit.cpp, used by ErrorMessage
 extern void (*GlobalErrorMessage)(const std::string&);
 
 static void showErrorMessage(const std::string& s) {

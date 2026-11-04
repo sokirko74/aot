@@ -1,5 +1,5 @@
 #include "dicts/BinaryDictsLib/BinaryDictionary.h"
-#include "morph_dict/lemmatizer_base_lib/MorphanHolder.h"
+#include "nlp_base/lemmatizer_base_lib/MorphanHolder.h"
 
 
 int main(int argc, char **argv) {

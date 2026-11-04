@@ -70,7 +70,7 @@ void CGerSentence::BuildTrennbarePraefixe()
 					if (	MainWord.m_Homonyms[j].HasPos(gVER)	)
 					{
 						std::string  NewWord = Praefix+MainWord.m_strWord;
-						// checking, if morph_dict has such a verb
+						// checking, if nlp_base has such a verb
 						std::vector<CFormInfo> Paradigms;
 						GetOpt()->GetLemmatizer()->CreateParadigmCollection(false,NewWord, true, false, Paradigms);
 						if (Paradigms.empty()) continue;
@@ -616,7 +616,7 @@ This function uniting sequences lik e
 	 Theis function transfers all appropriate homonyms from the last verb to the first. Note
 	 that it can more than one, for example:
 		"gefallen ist"
-	After it it builds morph_dict of the last verb and deletes all other words which the
+	After it it builds nlp_base of the last verb and deletes all other words which the
 	analytical form contais.
 */
 void UnitNormalCompactAnalyticalForms(CGerSentence &C, int StartWordNo, int LastWordNo)

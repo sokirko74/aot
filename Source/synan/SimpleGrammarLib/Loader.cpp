@@ -1,8 +1,8 @@
 #include  "SimpleGrammarLib.h"
 #include "SimpleGrammar.h"
-#include "morph_dict/common/bserialize.h"
-#include "morph_dict/common/rapidjson.h"
-#include "morph_dict/agramtab/agramtab.h"
+#include "nlp_base/common/bserialize.h"
+#include "nlp_base/common/rapidjson.h"
+#include "nlp_base/agramtab/agramtab.h"
 
 #include <time.h>
 #include <sys/stat.h>

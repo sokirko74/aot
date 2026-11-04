@@ -1,4 +1,4 @@
-[submodule "Source/morph_dict"]
-	path = Source/morph_dict
+[submodule "Source/nlp_base"]
+	path = Source/nlp_base
 	url = https://github.com/sokirko74/nlp_base
         update = merge 
