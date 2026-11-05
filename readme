@@ -16,49 +16,46 @@ Russian website (Russian documents) is www.aot.ru.
 More detail about Morphology dicts is here: Docs/Morph_UNIX.txt
 
 ==============  Prerequisites    ========================
-0.   Install cmake (at least 3.24),
+0.  On Debian/Ubuntu install everything needed for the build with
+        sudo apt install build-essential cmake git zlib1g-dev flex bison qt6-base-dev
 
-0.1  Install zlib1g zlib1g-dev
-     sudo apt-get install zlib1g zlib1g-dev
- 
-1.  g++ 9.0 or higher or  Microsoft Visual Studio 2019 
+    A fresh Ubuntu has no compiler, and the cmake package does not pull it in;
+    cmake then fails with "No CMAKE_CXX_COMPILER could be found".
+    CMake picks the compiler once, on the first configure (-DCMAKE_CXX_COMPILER,
+    else $CXX, else c++ from PATH, i.e. g++ on Ubuntu), and stores it in
+    build/CMakeCache.txt. After installing or changing the compiler remove the
+    build directory (or CMakeCache.txt and CMakeFiles/) and run cmake again.
 
-2. You need flex and bison to build projects after Morphology (Synan and Seman)
-    sudo apt install flex bison
+1.  cmake 3.24 or higher; g++ 9.0 or higher or Microsoft Visual Studio 2019
 
-2.2  For Windows install cygwin (wget, gzip) and add cygwin bin to PATH
+2.  zlib (zlib1g-dev)
 
-2.3 For windows I used flex and bison from https://sourceforge.net/projects/winflexbison/?source=typ_redirect
+3.  flex and bison: needed by the projects after Morphology (Synan and Seman)
+
+3.1 For Windows install cygwin (wget, gzip) and add cygwin bin to PATH
+
+3.2 For windows I used flex and bison from https://sourceforge.net/projects/winflexbison/?source=typ_redirect
      mkdir RML/external
      mkdir RML/external/winflex
      cd RML/external/winflex
      wget https://sourceforge.net/projects/winflexbison/files/win_flex_bison-2.5.24.zip/download
      unzip win_flex_bison-2.5.24.zip
    or build it from sources https://github.com/lexxmark/winflexbison
-    
 
+4.  Qt6 (Widgets): the GUI programs (Source/gui: morphwizard, morphgui, rossdev, visualsynan)
+        sudo apt install qt6-base-dev
+    Under Windows install Qt6 (https://www.qt.io/download) and give cmake its path, e.g.
+        cmake .. -DCMAKE_PREFIX_PATH=C:/Qt/6.8.0/msvc2022_64
 
-3. To compile HTTP-daemons please install libevent 
-        https://github.com/libevent/libevent:
-   6.1. download source archive from  https://libevent.org/ , for example 
-   6.2  wget https://github.com/libevent/libevent/releases/download/release-2.1.12-stable/c
-   6.3  tar xfz libevent-2.1.12-stable.tar.gz
-   6.4  mv libevent-2.1.12-stable/libevent-2.1.12-stable $RML/Source/contrib/libevent
-   6.5  cd $RML/Source/contrib/libevent
-   6.6  ./configure --disable-openssl
-   6.7  make & sudo make install
+5.  The HTTP daemons (SynanDaemon, SemanDaemon; BUILD_HTTP_SERVERS) use cpp-httplib,
+    which is bundled in Source/nlp_base/contrib/httplib: nothing to install.
 
-   or
-   sudo apt install libevent-dev
-  
 6. git clone git@github.com/aot.git --recursive RML
 
 7. nder Windows follow  https://learn.microsoft.com/en-us/cpp/build/cmake-projects-in-visual-studio?view=msvc-170
 
 =================   Compilation under Linux =======================
   export RML=/home/sokirko/RML
-  export CXX=/usr/bin/g++
-  export CC=/usr/bin/gcc
   cd $RML
   mkdir build
   cd build
