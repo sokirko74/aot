@@ -1,7 +1,7 @@
 #include "http_server.h"
 
 #include "nlp_base/common/utilit.h"
-#include "../contrib/httplib/httplib.h"
+#include "nlp_base/contrib/httplib/httplib.h"
 
 #include <csignal>
 
