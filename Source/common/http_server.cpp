@@ -1,51 +1,18 @@
 #include "http_server.h"
 
 #include "nlp_base/common/utilit.h"
+#include "../contrib/httplib/httplib.h"
+
+#include <csignal>
 
 #ifdef WIN32
 #include <process.h>
-#include <signal.h>
-#pragma comment(lib, "Ws2_32.lib")
 #else
-#include <sys/signal.h>	
+#include <unistd.h>
 #endif
 
 
-#ifdef WIN32
-void InitSocketsWindows() {
-
-	uint16_t wVersionRequested;
-	WSADATA wsaData;
-	int err;
-
-	/* Use the MAKEWORD(lowbyte, highbyte) macro declared in Windef.h */
-	wVersionRequested = MAKEWORD(2, 2);
-
-	err = WSAStartup(wVersionRequested, &wsaData);
-	if (err != 0) {
-		/* Tell the user that we could not find a usable */
-		/* Winsock DLL.                                  */
-		printf("WSAStartup failed with error: %d\n", err);
-		exit(1);
-	}
-}
-#endif
-
-bool InitSockets() {
-
-#ifdef WIN32
-	InitSocketsWindows();
-#endif
-
-	if (!event_init()) {
-		std::cerr << "Failed to init libevent." << std::endl;
-		return false;
-	}
-
-	return true;
-}
-
-int GetPID() {
+static int GetPID() {
 #ifdef WIN32
 	return _getpid();
 #else
@@ -53,92 +20,90 @@ int GetPID() {
 #endif
 }
 
-void  termination_handler(int signum) {
+static void termination_handler(int signum) {
 	LOGI << "termination_handler daemon";
 	exit(1);
 };
 
 
-TRMLHttpServer::TRMLHttpServer() : Server(nullptr, nullptr) {
+bool TDaemonParsedRequest::HasParam(const char* name) const {
+	return Request.has_param(name);
+}
+
+std::string TDaemonParsedRequest::GetParam(const char* name) const {
+	if (!Request.has_param(name)) {
+		throw CExpc(Format("cannot find %s", name));
+	}
+	return Request.get_param_value(name);
+}
+
+
+TRMLHttpServer::TRMLHttpServer() : Server(std::make_unique<httplib::Server>()) {
 };
+
+TRMLHttpServer::~TRMLHttpServer() = default;
 
 void TRMLHttpServer::Initialize(std::string host, uint16_t port) {
 	LOGI << "initialize daemon at " << host << ":" << port;
-	InitSockets();
-	Server = TInnerServer(evhttp_start(host.c_str(), port), &evhttp_free);
-	if (!Server) {
-		throw CExpc("Failed to create http server.");
+	Host = host;
+	Port = port;
+	auto handler = [this](const httplib::Request& req, httplib::Response& res) {
+		OnHttpRequest(req, res);
+	};
+	Server->Get("/.*", handler);
+	Server->Post("/.*", handler);
+	if (!Server->bind_to_port(Host, Port)) {
+		throw CExpc(Format("Failed to bind http server to %s:%i", Host.c_str(), Port));
 	}
-
-	evhttp_set_default_content_type(Server.get(), "application/json; charset=utf8");
 	if (signal(SIGTERM, termination_handler) == SIG_IGN)
 		signal(SIGTERM, SIG_IGN);
 };
 
 
-static void OnHttpRequestStatic(evhttp_request *req, void* httpServer) {
-	static_cast<TRMLHttpServer*>(httpServer)->OnHttpRequest(req);
-}
-
-void TRMLHttpServer::Start() {
-	LOGI<< "run message loop for daemon, start listen socket";
-	evhttp_set_gencb(Server.get(), OnHttpRequestStatic, this);
-	if (event_dispatch() == -1)	{
-		throw CExpc ("Failed to run message loop.");
-	}
-}
-
-void SendReply(evhttp_request *req, int status, struct evbuffer* response) {
-	evhttp_add_header(evhttp_request_get_output_headers(req),
-		"Access-Control-Allow-Origin", "*");
-	evhttp_send_reply(req, status, "", response);
-}
-
-void TRMLHttpServer::OnHttpRequest(evhttp_request *req) {
-	auto *outBuf = evhttp_request_get_output_buffer(req);
-	if (!outBuf)
-		return;
-
-	const char* uri = evhttp_request_get_uri(req);
-    LOGI << uri;
-	struct evkeyvalq headers {}; // zero initialized with {}
-	auto r = evhttp_parse_query(uri, &headers);
+void TRMLHttpServer::OnHttpRequest(const httplib::Request& req, httplib::Response& res) {
+	res.set_header("Access-Control-Allow-Origin", "*");
+	LOGI << req.target;
 	try {
-		auto action = evhttp_find_header(&headers, "action");
-		if (action == nullptr) {
+		if (!req.has_param("action")) {
 			throw CExpc("cannot find action");
 		}
-
-		auto languaStr = evhttp_find_header(&headers, "langua");
-		if (languaStr == nullptr) {
+		if (!req.has_param("langua")) {
 			throw CExpc("cannot find language (langua argument)");
 		}
+		std::string languaStr = req.get_param_value("langua");
 		MorphLanguageEnum langua;
 		if (!GetLanguageByString(languaStr, langua)) {
-			throw CExpc(Format("unsupported language: %s", languaStr));
+			throw CExpc(Format("unsupported language: %s", languaStr.c_str()));
 		}
-
-		auto query = evhttp_find_header(&headers, "query");
-		if (query == nullptr) {
+		if (!req.has_param("query")) {
 			throw CExpc("cannot find query");
 		}
-        std::string inputQuery = query;
+		std::string inputQuery = req.get_param_value("query");
 		Trim(inputQuery);
 		if (inputQuery.empty()) {
 			throw CExpc("Empty input query");
 		};
-		TDaemonParsedRequest parsedRequest{ req, uri, headers, action, langua, inputQuery};
-		auto result = OnParsedRequest(parsedRequest);
-		evbuffer_add_printf(outBuf, result.c_str());
-		SendReply(req, HTTP_OK, outBuf);
+		TDaemonParsedRequest parsedRequest{ req, req.get_param_value("action"), langua, inputQuery };
+		std::string result;
+		{
+			std::lock_guard<std::mutex> lock(RequestMutex);
+			result = OnParsedRequest(parsedRequest);
+		}
+		res.set_content(result, "application/json; charset=utf8");
 	}
 	catch (std::exception& e) {
-        LOGE << "Error: " << e.what() << " Request: "  << uri;
-		SendReply(req, HTTP_BADREQUEST, nullptr);
-		return;
+		LOGE << "Error: " << e.what() << " Request: " << req.target;
+		res.status = httplib::StatusCode::BadRequest_400;
 	}
+}
 
-};
+
+void TRMLHttpServer::Start() {
+	LOGI << "run message loop for daemon, start listen socket";
+	if (!Server->listen_after_bind()) {
+		throw CExpc("Failed to run http server.");
+	}
+}
 
 void DealWithLockFile(const std::string fileName) {
 	std::string LockFileName = MakePath(GetRmlVariable(), fileName);

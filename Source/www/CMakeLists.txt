@@ -1,9 +1,7 @@
 declare_cmake_min_version()
 
-list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}")
-find_package(Libevent REQUIRED)
-message ("LIBEVENT_INCLUDE =  ${LIBEVENT_INCLUDE_DIR}" )
-message ("LIBEVENT_LIBRARY =  ${LIBEVENT_LIBRARY}" )
+# http servers use the header-only cpp-httplib (Source/contrib/httplib)
+find_package(Threads REQUIRED)
 
 if ($JAVA_INCLUDES)  # not tested under cmake
     add_subdirectory (www/JNIMorphAPI)

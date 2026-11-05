@@ -10,7 +10,7 @@ add_executable (SemanDaemon
 
 target_link_libraries(SemanDaemon
     SemanLib
-    event
+    Threads::Threads
 )
 
 install (TARGETS SemanDaemon

@@ -52,10 +52,7 @@ std::string TSemanHttpServer::BuildRusGraph(const std::string& russian, const st
 };
 
 std::string TSemanHttpServer::OnParsedRequest(TDaemonParsedRequest& req) {
-    auto topic = evhttp_find_header(&req.headers, "topic");
-    if (topic == nullptr) {
-        throw CExpc("cannot find topic");
-    }
+    std::string topic = req.GetParam("topic");
     if (req.Query.length() > 150) {
         req.Query = req.Query.substr(0, 150) + " ...";
     }

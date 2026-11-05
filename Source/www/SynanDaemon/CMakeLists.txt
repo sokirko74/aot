@@ -11,9 +11,8 @@ add_executable (SynanDaemon
 
 target_link_libraries(SynanDaemon 
     SynanLib
-    event
+    Threads::Threads
     BigramsLib
-    #Libevent
 )
 
 message ("install to " ${INSTALL_BIN_FOLDER})

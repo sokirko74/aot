@@ -13,23 +13,16 @@ TSynanHttpServer::TSynanHttpServer() :
 
 
 std::string TSynanHttpServer::ProcessBigrams(TDaemonParsedRequest &request) {
-    auto str = evhttp_find_header(&request.headers, "minBigramsFreq");
-    if (!str) {
-        throw CExpc("minBigramsFreq is not specified");
-    }
-    int minBigramsFreq = std::stoi(str);
-    bool directBigrams = evhttp_find_header(&request.headers, "direct") != nullptr;
-    auto sortMode = evhttp_find_header(&request.headers, "sortMode");
-    if (!sortMode) {
-        throw CExpc("sortMode is not specified");
-    }
+    int minBigramsFreq = std::stoi(request.GetParam("minBigramsFreq"));
+    bool directBigrams = request.HasParam("direct");
+    std::string sortMode = request.GetParam("sortMode");
     std::string wordForm = request.Query;
     return GetConnectedWords(wordForm, minBigramsFreq, directBigrams, sortMode, request.Langua);
 }
 
 
 std::string TSynanHttpServer::ProcessMorphology(TDaemonParsedRequest &request) {
-    bool withParadigms = evhttp_find_header(&request.headers, "withparadigms") != nullptr;
+    bool withParadigms = request.HasParam("withparadigms");
     const CMorphanHolder &h  = GetMHolder(request.Langua);
     std::string wordForm = request.Query;
     return h.LemmatizeJson(wordForm, withParadigms);

@@ -9,7 +9,7 @@ endmacro(declare_cmake_min_version)
 declare_cmake_min_version()
 
 set(BUILD_DICTS 1)  # build dicts by default, disable it in CMakeLists.my if you want
-set(BUILD_HTTP_SERVERS 0) # do not build http-servers by default  (you need to make libevent to build it)
+set(BUILD_HTTP_SERVERS 0) # do not build http-servers by default  (SynanDaemon, SemanDaemon; cpp-httplib is in Source/contrib/httplib)
 set(DICTS_FOLDER  ${PROJECT_SOURCE_DIR}/Dicts )
 
 if (EXISTS  ${CMAKE_CURRENT_SOURCE_DIR}/CMakeLists.my)
