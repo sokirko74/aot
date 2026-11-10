@@ -100,8 +100,9 @@
 
 <p>
 	Для того, чтобы  искать внутри произведений одного автора, нужно в конце запроса написать
-	#has_field[author,s], где s -  имя автора,  например: <br> <br>
-	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	<b> время #has_field[author,Августин Аврелий]</b> <br> <br>
+	#has_field[author,'s'], где s -  имя автора в одинарных кавычках или /регулярное выражение/,  например: <br> <br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	<b> время #has_field[author,'Лев Николаевич Толстой']</b> <br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	<b> время #has_field[author,/Толстой/]</b> <br> <br>
 	Список всех авторов смотри здесь: <a  href="authors.html">Cписок авторов</a>
 </p>
 
