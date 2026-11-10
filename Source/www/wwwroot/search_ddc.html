@@ -92,16 +92,14 @@
 
 <table width="540" border="0" cellspacing="0" cellpadding="3">
 
-<form method="POST" action="../cgi-bin/ddc_search_cgi.py">
-	<tr> <input type="text"  size="36" name="search_text"> &nbsp;
-         <input type="submit" value="Search" name="New"> &nbsp;
+	<tr><td><form id="search_form">
+         <input type="text"  size="36" name="q" id="search_text"> &nbsp;
+         <input type="submit" value="Search"> &nbsp;
          <a  href="/concor.html">Помощь</a>
-	</tr>
-	<tr>
-	<!--result_text-->
-	</tr>
-</form>
+	</form></td></tr>
+	<tr><td id="ddc_result"></td></tr>
 </table>
+<script type="module" src="search_ddc.js"></script>
 
                         <p>&nbsp;</p>
                         <p>&nbsp;</p></td>

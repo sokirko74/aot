@@ -22,6 +22,16 @@
         proxy_set_header X-Real-IP $remote_addr;
     }
 
+    # ddc3 search (search_ddc.html + search_ddc.js): only run_query of the ddc server, GET, at most 99 hits,
+    # the ddc server is on migalka, 127.0.0.1:17000 here is the autossh tunnel
+    location = /ddc-daemon/run_query {
+        limit_except GET { deny all; }
+        if ($arg_limit !~ "^[0-9]{1,2}$")  { return 400; }
+        if ($arg_timeout !~ "^[0-9]{0,2}$") { return 400; }
+        proxy_pass http://127.0.0.1:17000/run_query;
+        proxy_read_timeout 60s;
+    }
+
 
 
     location /cgi-bin/ { 
