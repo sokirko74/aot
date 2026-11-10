@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-"""CGI: search in a ddc3 corpus (HTTP protocol, see ddc3/doc/ddc_proto.md, command run_query).
+"""CGI: search in a ddc3 corpus (HTTP protocol, see ddc3/doc/ddc_protocol.md, command run_query).
 
 Parameters (GET or POST): search_text (a ddc query), start_hit_no (the first hit, from 0).
 """
@@ -71,7 +71,10 @@ def hit_title(meta):
 
 
 def result_html(query, answer, start):
-    s = "<br/><br/> Предложения {}-{} из {}".format(start + 1, answer['end_'], answer['nhits_'])
+    nhits = "{:,}".format(answer['nhits_']).replace(',', '&nbsp;')
+    if answer.get('nhits_estimated_'):
+        nhits = "примерно " + nhits   # EstimateHitsCount in the opt-file of the corpus
+    s = "<br/><br/> Предложения {}-{} из {}".format(start + 1, answer['end_'], nhits)
     for hit in answer['hits_']:
         s += "<h4>" + hit_title(hit.get('meta_', {})) + "</h4>\n"
         s += " ".join(tokens_to_html(part) for part in hit['ctx_']) + "\n"
