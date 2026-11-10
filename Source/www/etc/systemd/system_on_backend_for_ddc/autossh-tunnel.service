@@ -1,0 +1,21 @@
+# /etc/systemd/system/autossh-tunnel.service on migalka (the ddc backend, no static address):
+# reverse tunnel to kamatera (the aot.ru frontend), through hetzner (ProxyJump in ~/.ssh/config of sokirko)
+#   -R 2222:localhost:22     ssh of migalka from kamatera
+#   -R 17000:localhost:17000 the ddc server (ddc-flibusta.service), nginx of aot.ru proxies /ddc-daemon/run_query to it
+# ExitOnForwardFailure: if a port is still held by a dead session on kamatera, ssh exits and autossh retries
+[Unit]
+Description=AutoSSH Reverse Tunnel to Kamatera (Ports 2222, 17000)
+After=network.target network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=sokirko
+Environment="AUTOSSH_GATETIME=0"
+Environment="AUTOSSH_POLL=60"
+ExecStart=/usr/bin/autossh -M 0 -N -o ExitOnForwardFailure=yes -o ServerAliveInterval=30 -o ServerAliveCountMax=3 -R 2222:localhost:22 -R 17000:localhost:17000 kamatera
+Restart=always
+RestartSec=10
+
+[Install]
+WantedBy=multi-user.target

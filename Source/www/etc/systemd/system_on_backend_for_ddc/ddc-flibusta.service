@@ -1,0 +1,22 @@
+# /etc/systemd/system/ddc-flibusta.service on migalka: the ddc3 server of the Flibusta corpus
+# (root 127.0.0.1:17000, leaves 17001-17004), the index on the SSD, see ddc3/scripts/flibusta
+#   sudo cp ddc-flibusta.service /etc/systemd/system/ && sudo systemctl daemon-reload
+#   sudo systemctl enable --now ddc-flibusta.service
+# a lock file left by a reboot or a crash would stop "start", therefore it is removed before
+[Unit]
+Description=ddc3 server: Flibusta (127.0.0.1:17000)
+After=network.target
+
+[Service]
+Type=simple
+User=sokirko
+WorkingDirectory=/home/sokirko/flibusta/ddc_r14
+Environment="DDC3=/home/sokirko/proj/ddc3"
+ExecStartPre=/bin/rm -f ddc_local_corpora.ddc_lck ddc_local_corpora.ddc_wait
+ExecStart=/home/sokirko/proj/ddc3/build/src/ddc_daemon/ddc_daemon --no-fork -l ddc_local_corpora.cfg -s ddc_server.cfg start
+Restart=on-failure
+RestartSec=10
+TimeoutStopSec=30
+
+[Install]
+WantedBy=multi-user.target
