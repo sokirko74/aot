@@ -10,7 +10,7 @@ After=network.target
 [Service]
 Type=simple
 User=sokirko
-WorkingDirectory=/home/sokirko/flibusta/ddc_r14
+WorkingDirectory=/home/sokirko/flibusta/ddc_r14m
 Environment="DDC3=/home/sokirko/proj/ddc3"
 ExecStartPre=/bin/rm -f ddc_local_corpora.ddc_lck ddc_local_corpora.ddc_wait
 ExecStart=/home/sokirko/proj/ddc3/build/src/ddc_daemon/ddc_daemon --no-fork -l ddc_local_corpora.cfg -s ddc_server.cfg start
