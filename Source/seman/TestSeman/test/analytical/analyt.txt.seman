@@ -78,5 +78,15 @@
         "input": "он знал, что будет скучать по ней",
         "comments": "",
         "result": "He knew what would miss it."
+    },
+    {
+        "input": "он оделся по-морски",
+        "comments": "",
+        "result": "He dressed himself in naval fashion."
+    },
+    {
+        "input": "он говорил по-абакански",
+        "comments": "",
+        "result": "He spoke abakanskiy."
     }
 ]

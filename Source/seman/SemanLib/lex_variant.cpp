@@ -435,30 +435,15 @@ CRusSemNode CRusSemStructure::CreatePrimitiveNode(size_t WordNo) {
     };
 
 
-    std::string S = SemWord.GetWord();
-    //  создаем интерпретацию для наречий типа "по-английски", "по-человечески"
-    if (startswith(S, "ПО-")
-        &&
-        ((SemWord.m_Poses == (1 << ADV))
-         || ((SemWord.m_ParadigmId == UnknownParadigmId)
-             && (   endswith(S, "КИ"))
-                 || endswith(S, "МУ")
-             )
-         )
-        )
-    {
-        const size_t prefix_len = std::string("ПО-").length();
-        if (endswith(S, "КИ")) {
-            // "по-солдатски"
-            SemWord.m_Lemma = S.substr(prefix_len) + "Й";
-            SemWord.m_ParadigmId = m_pData->GetFirstParadigmId(morphRussian, SemWord.m_Lemma, 1 << ADJ_FULL);
-        } else {
-            // "по-хорошему"
-            SemWord.m_ParadigmId = m_pData->GetFirstParadigmIdAndLemma(morphRussian, S.substr(prefix_len), 1 << ADJ_FULL,
-                                                                       SemWord.m_Lemma);
-        };
-        SemWord.m_bAdverbFromAdjective = true;
-
+    //  an adverb derived from an adjective ("по-английски" -> "английский", "по-хорошему" -> "хороший"),
+    //  the adjective is found by CMAPost::Rule_AdverbFromAdjectives
+    if (H.m_AdjectiveParadigmId != UnknownParadigmId) {
+        CFormInfo P;
+        if (m_pData->GetRusLemmatizer()->CreateParadigmFromID(H.m_AdjectiveParadigmId, P)) {
+            SemWord.m_ParadigmId = H.m_AdjectiveParadigmId;
+            SemWord.m_Lemma = convert_to_utf8(P.GetWordForm(0), morphRussian);
+            SemWord.m_bAdverbFromAdjective = true;
+        }
     };
 
 

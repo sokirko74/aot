@@ -10,6 +10,7 @@ CHomonym::CHomonym(MorphLanguageEnum l)
 	m_iCmpnLen = 0;
 	m_bCmplLem = false;
     m_lPradigmID = UnknownParadigmId;
+    m_AdjectiveParadigmId = UnknownParadigmId;
     m_bDelete = false;
     m_bRussianOdin = false;
 

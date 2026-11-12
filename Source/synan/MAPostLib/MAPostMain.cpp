@@ -1290,31 +1290,59 @@ void CMAPost::Rule_Abbreviation()
 
 
 /*
-	программа ищет  последовательности типа "по-восточному", "по-ковбойски", ("по" + форма прилагательного)
-	объединяет их в одно слово, если еще этого не сделала морфология,
-	говорит, что это наречие.
+	the paradigm of an adjective (ADJ_FULL): the paradigm of the lemma (bLemma) or a paradigm with this form
 */
+uint32_t CMAPost::GetAdjectiveParadigmId(std::string WordForm, bool bLemma) const
+{
+	std::vector<CFormInfo> Paradigms;
+	auto s8 = _R(WordForm.c_str());
+	m_pRusLemmatizer->CreateParadigmCollection(bLemma, s8, false, false, Paradigms);
+	for (auto& p : Paradigms)
+		if (m_pRusGramTab->GetPartOfSpeech(p.GetAncode(0).c_str()) == ADJ_FULL)
+			return p.GetParadigmId();
+	return UnknownParadigmId;
+}
 
-
+/*
+	Adverbs derived from adjectives: "по-английски", "по-морски" (the lemma of the adjective in -ий/-ой without -й),
+	"по-восточному", "по-лисьи" (a form of the adjective).
+	A predicted word gets the only homonym ADV. The adverb (predicted or from the dictionary) gets the paradigm of
+	the adjective (CHomonym::m_AdjectiveParadigmId), which is used by the semantics and the translation
+	("speak English", "in the Eastern fashion").
+*/
 void CMAPost::Rule_AdverbFromAdjectives()
 {
+	const std::string prefix = "ПО-";
 	for (CLineIter it = m_Words.begin(); it != m_Words.end(); it++)
 	{
 		CLemWord& W = *it;
 		if (!W.HasDes(ORLE)) continue;
-		if (!W.IsPredicted()) continue;
-		const std::string prefix = "ПО-";
 		if (!startswith(W.m_strUpperWord, prefix)) continue;
-		if (!HasParadigmOfFormAndPoses(W.m_strUpperWord.substr(prefix.length()), (1 << ADJ_FULL) | (1 << ADJ_SHORT)))
-			continue;
-		W.DeleteAllHomonyms();
-		CHomonym* pNew = W.AddNewHomonym();
-		pNew->SetLemma(it->m_strUpperWord);
-		std::string NewGramCode;
-		m_pRusGramTab->GetGramCodeByGrammemsAndPartofSpeechIfCan(ADV, 0, NewGramCode);
-		pNew->SetPredictedWord(NewGramCode);
-	}
+		std::string rest = W.m_strUpperWord.substr(prefix.length());
+		uint32_t AdjectiveParadigmId = UnknownParadigmId;
+		if (endswith(rest, "СКИ") || endswith(rest, "ЦКИ")) {
+			std::string stem = rest.substr(0, rest.length() - std::string("И").length());
+			AdjectiveParadigmId = GetAdjectiveParadigmId(stem + "ИЙ", true);
+			if (AdjectiveParadigmId == UnknownParadigmId)
+				AdjectiveParadigmId = GetAdjectiveParadigmId(stem + "ОЙ", true);
+		}
+		// "по-восточному", "по-лисьи": a form of the adjective
+		if (AdjectiveParadigmId == UnknownParadigmId)
+			AdjectiveParadigmId = GetAdjectiveParadigmId(rest, false);
+		if (AdjectiveParadigmId == UnknownParadigmId) continue;
 
+		if (W.IsPredicted()) {
+			W.DeleteAllHomonyms();
+			CHomonym* pNew = W.AddNewHomonym();
+			pNew->SetLemma(W.m_strUpperWord);
+			std::string NewGramCode;
+			m_pRusGramTab->GetGramCodeByGrammemsAndPartofSpeechIfCan(ADV, 0, NewGramCode);
+			pNew->SetPredictedWord(NewGramCode);
+		}
+		for (int i = 0; i < W.GetHomonymsCount(); i++)
+			if (W.GetHomonym(i)->HasPos(ADV))
+				W.GetHomonym(i)->m_AdjectiveParadigmId = AdjectiveParadigmId;
+	}
 };
 
 /*

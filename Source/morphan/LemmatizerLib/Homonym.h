@@ -26,7 +26,11 @@ public:
 	
 	
 	uint32_t m_lPradigmID;
-	
+
+	// the paradigm of the adjective an adverb is derived from ("по-английски" -> "английский",
+	// "по-хорошему" -> "хороший"), set by CMAPost::Rule_AdverbFromAdjectives
+	uint32_t m_AdjectiveParadigmId;
+
 	bool m_bSmallNumber;
 	size_t  m_iCmpnLen;
 	bool m_bCmplLem;	

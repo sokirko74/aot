@@ -128,6 +128,7 @@ protected:
 	void Rule_Abbreviation();
 	// по-восточному
 	void Rule_AdverbFromAdjectives();
+	uint32_t GetAdjectiveParadigmId(std::string WordForm, bool bLemma) const;
 	CLineIter AddCollocation(CLineIter start_it, CLineIter end_it, CLineIter main_it, bool HasEndtSent,  int CollocNo);
 	void Rule_FilterProperName();
 	void Rule_ChangePatronymicLemmas();
