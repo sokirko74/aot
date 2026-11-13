@@ -599,6 +599,12 @@ void CMAPost::SemiNouns()
 				std::string GramCodes;
 
 				bool SingularGenitivFound = false;
+				// the word without the prefix may have the plural itself ("Москвы" is also nom. pl.), add a code once
+				auto add_code = [&GramCodes](const std::string& code) {
+					for (size_t k = 0; k + 1 < GramCodes.length(); k += 2)
+						if (GramCodes.compare(k, 2, code) == 0) return;
+					GramCodes += code;
+				};
 				for (int i = 0; i < pH->GetGramCodes().length(); i += 2)
 					if (pH->GetGramCodes()[i] != '?')
 					{
@@ -611,22 +617,22 @@ void CMAPost::SemiNouns()
 
 							std::string NewGramCode;
 							if (m_pRusGramTab->GetGramCodeByGrammemsAndPartofSpeechIfCan(POS, Grammems, NewGramCode))
-								GramCodes += NewGramCode;
+								add_code(NewGramCode);
 
 							if (Grammems & _QM(rGenitiv))
 							{
 								uint64_t Gram = Grammems & ~_QM(rGenitiv);
 								// добавляем винительный  и именительный мн. числа, если нашли родительный
 								if (m_pRusGramTab->GetGramCodeByGrammemsAndPartofSpeechIfCan(POS, Gram | _QM(rNominativ), NewGramCode))
-									GramCodes += NewGramCode;
+									add_code(NewGramCode);
 
 								if (m_pRusGramTab->GetGramCodeByGrammemsAndPartofSpeechIfCan(POS, Gram | _QM(rAccusativ), NewGramCode))
-									GramCodes += NewGramCode;
+									add_code(NewGramCode);
 
 							}
 						}
 						else
-							GramCodes += pH->GetGramCodes().substr(i, 2);
+							add_code(pH->GetGramCodes().substr(i, 2));
 
 					};
 
