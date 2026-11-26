@@ -3,6 +3,7 @@
 // ==========  Copyright by Dmitry Pankratov, Alexey Sokirko (1999-2002)
 
 #include "MAPostMain.h"
+#include <set>
 #include "nlp_base/common/utilit.h"
 #include "nlp_base/agramtab/RusGramTab.h"
 
@@ -48,6 +49,8 @@ void CMAPost::RunRules()
 		Rule_UZHE();
 
 		Rule_DO();
+
+		Rule_KAK();
 
 		Rule_Ideclinable();
 
@@ -704,6 +707,43 @@ void CMAPost::Rule_DO()
 		CLineIter next_it = NextNotSpace(it);
 		if (next_it == m_Words.end()) continue;
 		if (next_it->HasDes(ODigits) || next_it->GetHomonymByGrammem(rGenitiv) != -1)
+		{
+			W.KillHomonymOfPartOfSpeech(NOUN);
+		}
+	};
+};
+
+
+/*
+	"как" and "какой" are also the genitive plural and the instrumental singular of the childish noun "кака". The noun
+	is removed from "какой" always and from "как" unless a number or a word of quantity is before it ("много как").
+*/
+void CMAPost::Rule_KAK()
+{
+	static const std::set<std::string> quantity = { "МНОГО", "МАЛО", "НЕМНОГО", "НЕМАЛО", "НЕСКОЛЬКО", "СКОЛЬКО",
+		"СТОЛЬКО", "СКОЛЬКО-НИБУДЬ", "МНОЖЕСТВО", "МАССА", "КУЧА" };
+	for (CLineIter it = m_Words.begin(); it != m_Words.end(); it++)
+	{
+		CLemWord& W = *it;
+		if (!W.HasDes(ORLE)) continue;
+		if (W.m_strUpperWord != "КАК" && W.m_strUpperWord != "КАКОЙ") continue;
+		if (!W.HasPos(NOUN)) continue;
+		if (W.m_strUpperWord == "КАКОЙ")
+		{
+			W.KillHomonymOfPartOfSpeech(NOUN);
+			continue;
+		}
+
+		bool quantity_before = false;
+		if (it != m_Words.begin())
+		{
+			CLineIter prev_it = it;
+			prev_it--;
+			prev_it = BackSpaces(prev_it);
+			quantity_before = prev_it->HasDes(ODigits) || prev_it->GetHomonymByPOS(NUMERAL) != -1
+				|| quantity.find(prev_it->m_strUpperWord) != quantity.end();
+		}
+		if (!quantity_before)
 		{
 			W.KillHomonymOfPartOfSpeech(NOUN);
 		}

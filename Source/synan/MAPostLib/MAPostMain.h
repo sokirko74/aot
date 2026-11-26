@@ -107,6 +107,7 @@ protected:
 	void SemiNouns();
 	void Rule_UZHE();
 	void Rule_DO();
+	void Rule_KAK();
 	void Rule_Ideclinable();
 	void Rule_DeadPlurals();
 	void Rule_RelationalAdjective();
