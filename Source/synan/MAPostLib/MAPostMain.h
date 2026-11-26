@@ -106,6 +106,7 @@ protected:
 	void SemiAdjectives();
 	void SemiNouns();
 	void Rule_UZHE();
+	void Rule_DO();
 	void Rule_Ideclinable();
 	void Rule_DeadPlurals();
 	void Rule_RelationalAdjective();

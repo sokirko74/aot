@@ -47,6 +47,8 @@ void CMAPost::RunRules()
 
 		Rule_UZHE();
 
+		Rule_DO();
+
 		Rule_Ideclinable();
 
 		Rule_DeadPlurals();
@@ -684,6 +686,29 @@ void CMAPost::Rule_UZHE()
 
 };
 
+
+
+/*
+	"до" is a preposition with the genitive and a noun, the musical note ("нота до", "до мажор", "в до миноре").
+	If the next word can be a genitive or is a number ("до 1960-го года", "до 5 лет"), the note is removed.
+*/
+void CMAPost::Rule_DO()
+{
+	for (CLineIter it = m_Words.begin(); it != m_Words.end(); it++)
+	{
+		CLemWord& W = *it;
+		if (!W.HasDes(ORLE)) continue;
+		if (W.m_strUpperWord != "ДО") continue;
+		if (!W.HasPos(NOUN) || !W.HasPos(PREP)) continue;
+
+		CLineIter next_it = NextNotSpace(it);
+		if (next_it == m_Words.end()) continue;
+		if (next_it->HasDes(ODigits) || next_it->GetHomonymByGrammem(rGenitiv) != -1)
+		{
+			W.KillHomonymOfPartOfSpeech(NOUN);
+		}
+	};
+};
 
 
 bool  CMAPost::NounHasObviousPluralContext(CLineIter it)
